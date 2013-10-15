@@ -2,7 +2,6 @@
 *.acr
 *.alg
 *.aux
-*.bak
 *.bbl
 *.blg
 *.dvi
@@ -28,6 +27,7 @@
 *.ps
 *.snm
 *.synctex.gz
+*.tex.bak
 *.toc
 *.vrb
 *.xdy
