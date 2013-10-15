@@ -1,0 +1,60 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Hausaufgaben zum 21. Oktober}
+\maketitle
+\section{} %1
+	\subsection{} %a
+		\subsubsection{} %i
+		Die Zielfunktion muss in Standardform maximiert werden. Um dies zu erreichen, wird mit $-1$ multipliziert. Die erste Nebenbedingung wird auf gleiche Weise umgeformt. Die dritte Nebenbedingung wird durch zwei Bedingungen ersetzt.
+		
+		\begin{alignat*}{5}
+		\text{maximiere} -& 2x_{1} &-& x_{2} &+& x_{3} &-& 2x_{4} && \\
+		\multicolumn{10}{l}{\text{unter den Nebenbedingungen}} && \\
+		& 3x_{1} &+& x_{2} &-& x_{3} && &\leq & -2 \\
+		-& 7x_{1} &-& x_{2} && &+& x_{4} &\leq &\, 3 \\
+		& && x_{2} &+& x_{3} &-& x_{4} &\leq &\, 7 \\
+		& &-& x_{2} &-& x_{3} &+& x_{4} &\leq & -7 \\
+		\multicolumn{8}{r}{$x_{1}, x_{2}, x_{3}, x_{4}$} \,&\geq &\, 0
+		\end{alignat*}
+		\subsubsection{} %ii
+		Die erste Nebenbedingung wird mit $-1$ multipliziert. Auch wird die dritte Nebenbedingung durch zwei Bedingungen ersetzt. Da $x_{1}$ in der Nichtnegativitätsbedingung fehlt, werden zwei Variablen $x_{1}^{'}, x_{1}^{''}$ erzeugt, die je den positiven bzw. negativen Teil von $x_{1}$ darstellen.
+		\begin{alignat*}{6}
+		\text{maximiere}\; & 2x_{1}^{'} &-& 2x_{1}^{''} &+& x_{2} &-& x_{3} &+& 2x_{4} && \\
+		\multicolumn{12}{l}{\text{unter den Nebenbedingungen}} && \\
+		& 3x_{1}^{'} &-& 3x_{1}^{''} &+& x_{2} &-& x_{3} && &\leq & -2 \\
+		-& 7x_{1}^{'} &+& 7x_{1}^{''} &-& x_{2} && &+& x_{4} &\leq &\, 3 \\
+		& && && x_{2} &+& x_{3} &-& x_{4} &\leq &\, 7 \\
+		& && &-& x_{2} &-& x_{3} &+& x_{4} &\leq & -7 \\
+		& && && && && x_{4} &\leq & 9 \\
+		\multicolumn{10}{r}{$x_{1}^{'}, x_{1}^{''}, x_{2}, x_{3}, x_{4}$} \,&\geq &\, 0
+		\end{alignat*}
+	\subsection{} %b
+\section{} %2
+\end{document}
