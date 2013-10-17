@@ -33,11 +33,11 @@
 	\subsection{} %a
 	\subsection{} %b
 		\subsubsection{} %i
-		Zu zeigen: für beliebige $b > 1$ gilt: $\log_{b}(n) \in \theta (\log_{2}n)$\\
+		Zu zeigen: für beliebige $b > 1$ gilt: $\log_{b}(n) \in \mathcal{\theta} (\log_{2}n)$\\
 		Dies ist durch die Logarithmusgesetze einfach zu zeigen. $\log_{b}(n)$ kann demnach auch als $\frac{\log_{2}(n)}{\log_{2}(b)}$ dargestellt werden. Dabei geht dieser Term asymptotisch gegen $\log_{2}(n)$, da $\log_{2}(b)$ eine Konstante ist und daher nicht beachtet werden muss. Damit ist die Aussage gezeigt, dass $\log_{b}(n)$ für $b > 1$ asymptotisch genau so schnell wächst wie $\log_{2}(n)$.
 		\subsubsection{} %ii
-		Behauptung: $f \in O(g) \Rightarrow g \in \omega (f)$\\
-		Diese Behauptung gilt nicht. Dies kann mithilfe der Definition der Landau-Symbole erklärt werden. $f \in O(g)$ besagt, dass $f$ maximal so schnell wie $g$ wächst. Dabei ist auch der Fall enthalten, dass $f$ und $g$ gleich schnell wachsen.
+		Behauptung: $f \in \mathcal{O}(g) \Rightarrow g \in \omega (f)$\\
+		Diese Behauptung gilt nicht. Dies kann mithilfe der Definition der Landau-Symbole erklärt werden. $f \in \mathcal{O}(g)$ besagt, dass $f$ maximal so schnell wie $g$ wächst. Dabei ist auch der Fall enthalten, dass $f$ und $g$ gleich schnell wachsen.
 		
 		Der zweite Teil der Behauptung erfordert jedoch, dass $g$ in jedem Fall schneller als $f$ wächst. Dies steht aber im Widerspruch zu dem ersten Teil der Behauptung. Damit ist die Behauptung widerlegt. 
 		\subsubsection{} %iii
