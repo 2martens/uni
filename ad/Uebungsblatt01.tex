@@ -56,6 +56,22 @@
 	& X^{16} &\cdot & X^{16} &=& X^{32} \\
 	& X^{32} &\cdot & X^{32} &=& X^{64}
 	\end{alignat*}
-	Auf eben gezeigte Weise kann man $X^{64}$ mit nur $6$ Multiplikationen ausrechnen.
+	Auf eben gezeigte Weise kann man $X^{64}$ mit nur $6$ Multiplikationen ausrechnen. Interessanterweise gilt $2^{6} = 64$. Müsste man nun eine andere 2-Potenz ausrechnen, dann wäre das Ergebnis ebenso schnell klar. Da im allgemeinen Fall $n$ aber irgendeine Zahl sein kann, ist es sinnvoll sich zum Beispiel $74$ anzusehen. Im Fall von $74$ würde es so weiter gehen:
+	\begin{alignat*}{3}
+	& X^{64} &\cdot & X^{8} &=& X^{72} \\
+	& X^{72} &\cdot & X^{2} &=& X^{74}
+	\end{alignat*}
+	Demnach würden bei $74$ acht Multiplikationen benötigt.
+	
+	Daraus kann die allgemeine Formel für die Anzahl der Multiplikationen $F(n)$ gebildet werden:\\
+	\begin{alignat*}{2}
+	F(n) &=& \begin{cases}
+  0,  & \text{wenn } n = 1\\
+  \lceil F(\frac{n}{2}) \rceil + 1, & \text{wenn } n > 1
+		\end{cases}
+	\end{alignat*}
+	Diese rekursive Formel könnte auch als Schleife dargestellt werden. Durch die Halbierung von n bei jedem Durchgang hat die Funktion eine logarithmische Laufzeit. Die Addition ist dabei irrelevant, wenn man sich das asymptotische Verhalten ansieht.
+	
+	Damit ist die Behauptung, dass $\mathcal{O}(\log n)$ Multiplikationen ausreichen um $X^{n}$ zu berechnen, gezeigt.
 	\subsection{} %c
 \end{document}
