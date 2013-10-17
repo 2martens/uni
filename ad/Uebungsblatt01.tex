@@ -47,5 +47,15 @@
 \section{} %3
 	\subsection{} %a
 	\subsection{} %b
+	$X^{64}$ kann geschickter berechnet werden, wenn man die Ergebnisse von vorigen Multiplikationen speichert. Damit lässt sich $X^{64}$ auf diese Weise berechnen:\\
+	\begin{alignat*}{3}
+	& X &\cdot & X &=& X^{2} \\
+	& X^{2} &\cdot & X^{2} &=& X^{4} \\
+	& X^{4} &\cdot & X^{4} &=& X^{8} \\
+	& X^{8} &\cdot & X^{8} &=& X^{16} \\
+	& X^{16} &\cdot & X^{16} &=& X^{32} \\
+	& X^{32} &\cdot & X^{32} &=& X^{64}
+	\end{alignat*}
+	Auf eben gezeigte Weise kann man $X^{64}$ mit nur $6$ Multiplikationen ausrechnen.
 	\subsection{} %c
 \end{document}
