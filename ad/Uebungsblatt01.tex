@@ -105,7 +105,90 @@
 	
 \section{} %3
 	\subsection{} %a
-	
+		\underline{Behauptung:} Die Formel
+		\begin{alignat*}{2}
+			\begin{pmatrix}
+		 		F_{n} \\
+		 		F_{n+1}
+			\end{pmatrix} &=& \begin{pmatrix}
+		 		0 & 1 \\
+			 	1 & 1
+			\end{pmatrix}^{n} \cdot \begin{pmatrix}
+			 	F_{0} \\
+				F_{1}
+			\end{pmatrix} 	
+		\end{alignat*}
+		gilt für $n \geq 0$.\\
+		\underline{Induktionsanfang:}\\
+		\begin{alignat*}{2}
+			\begin{pmatrix}
+				F_{0} \\
+				F_{1}
+			\end{pmatrix} &=& \begin{pmatrix}
+				0 & 1 \\
+			 	1 & 1
+			\end{pmatrix}^{0} \cdot \begin{pmatrix}
+			 	F_{0} \\
+				F_{1}
+			\end{pmatrix} \\
+			&=& \begin{pmatrix}
+				1 & 0 \\
+			 	0 & 1
+			\end{pmatrix} \cdot \begin{pmatrix}
+			 	F_{0} \\
+				F_{1}
+			\end{pmatrix} \\
+			&=& \begin{pmatrix}
+			 	F_{0} \\
+				F_{1}
+			\end{pmatrix}
+		\end{alignat*}\\
+		\underline{Induktionsannahme:} Die Behauptung gilt für ein beliebig fest gewähltes $n$.\\
+		\underline{Zu zeigen:} 
+		\begin{alignat*}{2}
+			\begin{pmatrix}
+		 		F_{n+1} \\
+		 		F_{n+2}
+			\end{pmatrix} &=& \begin{pmatrix}
+		 		0 & 1 \\
+			 	1 & 1
+			\end{pmatrix}^{n+1} \cdot \begin{pmatrix}
+			 	F_{0} \\
+				F_{1}
+			\end{pmatrix} 
+		\end{alignat*}
+		\underline{Induktionsschritt:}
+		\begin{alignat*}{2}
+			\begin{pmatrix}
+		 		F_{n+1} \\
+		 		F_{n+2}
+			\end{pmatrix} &=& \begin{pmatrix}
+		 		0 & 1 \\
+			 	1 & 1
+			\end{pmatrix} \cdot \begin{pmatrix}
+			 	F_{n} \\
+				F_{n+1}
+			\end{pmatrix} \\
+			\intertext{Anwenden der Induktionsannahme}
+			&=& \begin{pmatrix}
+		 		0 & 1 \\
+			 	1 & 1
+			\end{pmatrix} \cdot \begin{pmatrix}
+		 		0 & 1 \\
+			 	1 & 1
+			\end{pmatrix}^{n} \cdot \begin{pmatrix}
+			 	F_{0} \\
+				F_{1}
+			\end{pmatrix} \\
+			&=& \begin{pmatrix}
+		 		0 & 1 \\
+			 	1 & 1
+			\end{pmatrix}^{n+1} \cdot \begin{pmatrix}
+			 	F_{0} \\
+				F_{1}
+			\end{pmatrix}
+		\end{alignat*}
+		Nach dem Induktionsprinzip folgt aus dem Induktionsanfang und dem Induktionsschritt die Behauptung.		
 	\subsection{} %b
 	$X^{64}$ kann geschickter berechnet werden, wenn man die Ergebnisse von vorigen Multiplikationen speichert. Damit lässt sich $X^{64}$ auf diese Weise berechnen:\\
 	\begin{alignat*}{3}
