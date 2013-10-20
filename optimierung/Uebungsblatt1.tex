@@ -56,6 +56,29 @@
 		\multicolumn{10}{r}{$x_{1}^{'}, x_{1}^{''}, x_{2}, x_{3}, x_{4}$} \,&\geq &\, 0
 		\end{alignat*}
 	\subsection{} %b
+	
+	\begin{tikzpicture}[>=stealth]
+	\begin{axis}[
+		ymin=0,ymax=7,
+		x=1em,
+		y=1em,
+		axis x line=middle,
+		axis y line=middle,
+		axis line style=->,
+		xlabel={$x_{1}$},
+		ylabel={$x_{2}$},
+		xmin=0,xmax=7
+	]
+
+	\addplot[no marks, black, -] expression[domain=2:6,samples=100]{1.5*x - 3} node[pos=0.65,anchor=north]{};
+	\addplot[no marks, black, -] expression[domain=0:6,samples=100]{-1*x + 6} node[pos=0.65,anchor=north]{};
+	\addplot[no marks, black, -] expression[domain=0:6,samples=100]{0.33333*x + 3} node[pos=0.65,anchor=north]{};
+	\addplot[no marks, black, -] expression[domain=0:7,samples=100]{-0.4*x + 4.6} node[pos=0.65,anchor=north]{};
+	%\node at (axis cs: 2.75,-3) {f};
+	%\node at (axis cs: 1.75,-2.5) {A};
+	%\draw[>=stealth] (axis cs:1,0) -- (axis cs:1,-6) node [pos=0.65,anchor=north]{};
+	\end{axis}
+	\end{tikzpicture}
 \section{} %2
 	\subsection{} %a
 	Pauls Diätproblem:\\
