@@ -1,0 +1,139 @@
+%
+% Nuetzliche Makros und Einstellungen fuer GDB
+%
+% von Kristof Hamann, teilweise basierend auf Aufgabenzettel vergangener Jahre
+%
+% Changelog:
+%
+% v1.2:
+% 2009-11-27 KH: Makro \wert angepasst (Schriftart)
+%
+% v1.1:
+% 2009-11-11 KH: Neues Makro \SF
+% 2009-11-11 KH: Makro \wert angepasst (Anführungszeichen)
+%
+% v1.0:
+% 2009-11-09 KH: Erste Version der Makro-Sammlung
+\usepackage{ulsy}
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{vsis-gdb}[2009/11/27 v1.2 Nuetzliche Makros fuer GDB]
+
+% Gestricheltes Unterstreichen, z.B. für Relationales Datenbankmodell (Fremdschlüssel)
+\RequirePackage[normalem]{ulem}
+\def\dashuline{\bgroup
+  \ifdim\ULdepth=\maxdimen  % Set depth based on font, if not set already
+   \settodepth\ULdepth{(j}\advance\ULdepth.4pt\fi
+  \markoverwith{\kern.1em
+  \vtop{\kern\ULdepth \hrule width .3em}%
+  \kern.1em}\ULon}
+\def\soliduline{\bgroup \markoverwith{\hbox
+ {\vtop{\kern.3ex\hrule width.2em}}}\ULon}
+
+% Operatoren der relationalen Algebra
+\newcommand*{\projektion}[1]{\pi_{#1}}
+\newcommand*{\selektion}[1]{\sigma_{#1}}
+\newcommand*{\symdiff}{\triangleright}
+\newcommand*{\natverbund}{\bowtie}
+\newcommand*{\verbund}[1]{\raisebox{-1ex}{\(\stackrel{\textrm{\large$\natverbund$}}{_{#1}}\)}}
+\newcommand*{\wert}[1]{\mathrm{``#1``}}
+\newcommand*{\SF}{\textup{SF}}
+
+% textsubscript
+\newcommand{\ts}{\textsubscript}
+
+
+% TikZ fuer Grafiken, wie ER-Diagramme
+\RequirePackage{tikz}
+\usetikzlibrary{arrows,positioning,calc,fit,shapes}
+% the vsis blue color
+% RGB value / 255
+\definecolor{vsisBlue}{rgb}{0.596078,0.7176471,0.937254922}
+\definecolor{arrowBlue}{rgb}{0.15294117,0.31372549,0.7725490196}
+
+\tikzset{
+% Layout fuer ER-Diagramme
+  er-element/.style={
+    draw,
+    fill=white,
+    top color=white,
+    bottom color=vsisBlue,
+    minimum width=2cm,
+    minimum height=0.8cm,
+  },
+  entity/.style={
+    er-element,
+    rectangle,
+  },
+  weakentity/.style={
+    er-element,
+    rectangle,
+    double distance=1pt 
+  },
+  relationship/.style={
+    er-element,
+    diamond,
+    aspect=2,
+    inner sep=2pt,
+    font=\footnotesize,
+  },
+   weakrelationship/.style={
+    er-element,
+    diamond,
+    aspect=2,
+    inner sep=2pt,
+    double distance=1pt,
+    font=\footnotesize,
+  },
+  multivalentattribut/.style={
+    er-element,
+    ellipse,
+    inner sep=0,
+    double distance=1pt,
+    font=\footnotesize,
+  },
+  attribut/.style={
+    er-element,
+    ellipse,
+    inner sep=0,
+    font=\footnotesize,
+  },
+  erbt/.style={
+    draw,
+    >=open triangle 45,
+    ->,
+  },
+% Layout fuer referenzgraphen
+  refGraph/.style={
+    draw,
+    fill=white,
+    minimum width=2cm,
+    minimum height=0.8cm,
+  },
+  tabelle/.style={ 
+    refGraph,
+    rectangle,
+  },
+}
+
+% Layouts fuer Grafiken
+\tikzset{
+  smalll/.style={
+    font=\scriptsize,
+    align=left,
+  },
+  smallr/.style={
+    font=\scriptsize,
+    align=right,
+  },
+}
+
+
+
+
+
+
+\RequirePackage[utf8]{inputenc}
+
+\RequirePackage{vsis-gdb} % Nuetzliche Makros fuer GDB
+\RequirePackage{booktabs} % Linien für Tabellen
