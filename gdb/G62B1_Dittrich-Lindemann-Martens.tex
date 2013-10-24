@@ -19,14 +19,69 @@
 
 \section{Miniwelt}
 	\subsection{} %a
+		Anhand der Beschreibung der Miniwelt werden folgende Objekttypen benötigt, die jeweils explizite oder implizite Funktionalitäten haben.
+		
+		\begin{itemize}
+			\item	Mitglieder: können sich am System anmelden und müssen daher identifizierbar sein (Name, EMail, Passwort)
+			\item	Tippspielgemeinschaften: haben einen Namen und einen Gründer, der ein Mitglied ist
+			\item	Wettbewerbe: werden einer Tippspielgemeinschaft zugeordnet
+			\item	Begegnungen: werden einem Wettbewerb zugeordnet, beinhalten die Info wer gegen wen spielt und was für ein Ergebnis herauskommt
+			\item	Tipps: werden einem Mitspieler und einer Begegnung zugeordnet und enthalten den eigentlichen Tipp
+			\item	Punkte: werden einem Mitspieler und einer Tippspielgemeinschaft zugeordnet und enthalten die Punkte des Mitspielers in der Gemeinschaft
+		\end{itemize}
+		Ergänzend zu den genannten Objekttypen, die je eine Tabelle im konzeptuellen Schema ausmachen, gibt es noch eine Tabelle, die Mitglieder den Tippspielgemeinschaften zuordnet.
+		
+		Folgende Vorgänge müssen durch die Anwendung abgebildet werden:
+		\begin{itemize}
+			\item	Anmeldung bei Anwendung
+			\item	Registrierung bei Anwendung
+			\item	Gründen einer Tippspielgemeinschaft
+			\item	Erstellen eines Wettbewerbs für eine Gemeinschaft
+			\item	Erstellen von Begegnungen für einen Wettbewerb
+			\item	Eintragen von Ergebnissen für eine Begegnung
+			\item	Hinzufügen von Mitspielern zu einer Gemeinschaft
+			\item	Entfernen von Mitspielern aus einer Gemeinschaft
+			\item	Tipp auf eine Begegnung in einem Wettbewerb in einer Gemeinschaft, der der Mitspieler angehörig ist, abgeben
+			\item	Betrachten des Punktestandes innerhalb einer Gemeinschaft
+			\item	Ergebnisse von Begegnungen ansehen
+		\end{itemize}
+		Das Errechnen der Punkte erfolgt im gleichen Atemzug wie das Eintragen von Ergebnissen und geschieht ohne Zutun des Bedieners.
 	\subsection{} %b
-
+		Zunächst werden die Anforderungen an die Anwendung erfasst, um dann die in der Vorlesung genannten allgemeinen Anforderungen an Datenbanksysteme anhand des hier beschriebenen Beispiels zu diskutieren.
+		
+		\begin{itemize}
+			\item	Die Anwendung muss als Mehrbenutzersystem konzipiert werden und gleichzeitige Anfragen von unterschiedlichen Nutzern bearbeiten können. 
+			\item	Ebenso muss die Anwendung bei jeder Anfrage darauf achten nur die Inhalte zurückzugeben, auf die der anfragende Benutzer Zugriff hat. So sollte ein Benutzer nur Tipps in einer Gemeinschaft abgeben können, wenn er Teil dieser Gemeinschaft ist.
+			\item	Nachdem die Ergebnisse einer Begegnung eingetragen worden sind, darf kein Mitspieler mehr Tipps setzen oder vorhandene ändern können.
+			\item	Sobald Ergebnisse eingetragen wurden, kann die Begegnung nicht mehr gelöscht werden, da sie bereits stattgefunden hat.
+			\item	Der Gründer einer Tippspielgemeinschaft kann nicht aus eben jener Gemeinschaft austreten.
+			\item	Die Punkte dürfen nur automatisch durch die Anwendung berechnet werden. Ein manuelles Verändern darf nicht möglich sein (weder vom betreffenden Mitspieler noch vom Gründer der Gemeinschaft).
+			\item	Wenn der Browser vor dem Abschließen einer Aktion geschlossen wird, darf nichts verändert werden.
+		\end{itemize}
+		
+		Diese Anforderungen sind zum einen Teil anwendungsspezifisch und zum anderen Teil allgemein für jede Anwendung mit persistenten Daten wichtig. 
+		
+		Da die Anforderungen an die Anwendung nun bekannt sind, werden die Anforderungen an Datenbanksysteme nun an diesem Beispiel diskutiert.
+		
+		So müssen Datenbanksysteme einen Schutz vor inkonsistenten Daten bieten. So wird eine Transaktion erst dann zur Persistierung freigegeben, wenn sie komplett erfolgreich durchlief. Sollte der Browser während einer Transaktion geschlossen werden, wird sie nicht abgeschlossen und damit nicht persistiert.
+		Außerdem müssen gleichzeitige Anfragen problemlos bearbeitet werden, solange sie nicht im Konflikt stehen. Eine Abfrage von Ergebnissen einer Begegnung steht beispielsweise nicht im Konflikt mit dem Hinzufügen eines Mitspielers in eine Gemeinschaft oder dem Registrieren eines neuen Mitglieds. Um Konflikte zu vermeiden ist eine weitgehende Isolierung im Datenbanksystem von Nöten.
+		Die Rechteverwaltung hängt von der Implementation ab. Die oben angewandte Methode benutzt einen Anwendungszugang zur Datenbank, womit die Zugriffskontrolle auf die Anwendung übergeht. Theoretisch wäre auch ein Datenbankzugang pro Benutzer denkbar, der dann eben nur entsprechende Rechte hätte. Allerdings wäre dies ein unnötiger Datenbankzugang, der zudem auch nur das konzeptuelle Schema berücksichtigt. So könnte ein Nutzer entweder alle Punkte aller Mitglieder ansehen oder keine. Die externe Anwendungssicht auf die Daten umfasst hingegen eine logische Sicht, die auf das Fallbeispiel zugeschnitten ist. Daher sind die Zugriffskontrollen des Datenbanksystems viel zu vage, um sinnvoll für das Beispiel geeignet zu sein. Deswegen muss die Zugriffskontrolle hier auf Seiten der Anwendung stattfinden, die dann nur erlaubte Anfragen an das Datenbanksystem sendet.
+		
+		
 \section{Transaktionen}
 
 
 \section{Warm-Up MySQL}
 	\subsection{} %a
+		Es wurde eine Tabelle mit dem Namen \texttt{user} in der Datenbank \texttt{gdb\textunderscore gruppe062} angelegt, die drei Felder (id, name, passwort) hat. Anschließend wurde ein Nutzer in diese Tabelle eingetragen mit den Werten (1 für id, "`gdbNutzer"' für name und "`geheim"' für passwort).
 	\subsection{} %b
+		Zunächst wurde die Zeile mit dem eben angelegten Nutzer komplett ausgelesen und anschließend die user-Tabelle gelöscht.
 	\subsection{} %c
-	
+		Die MySQL-Architektur hat einen ähnlichen Aufbau wie die ANSI-SPARC Architektur. Das Dateisystem entspricht der internen Ebene. Die Speicherengines repräsentieren diese interne Ebene gegenüber der konzeptuellen Ebene und abstrahieren die tatsächliche Speicherung der Daten. 
+		
+		Damit stellen die Engines auch das Zugriffssystem dar, denn sie definieren eine klare API (SQL). Die Metadatenverwaltung findet sich bei den Verwaltungsdiensten und -tools. Der Verbindungspool ist eine spezifische Implementation für Mehrbenutzersysteme, sodass mehrere Verbindungen gleichzeitig mit der Datenbank verbunden sein können. Auf dieser Ebene findet auch die Authentifizierung statt.
+		
+		Über den Verbindungspool, welcher die technische Schnittstelle zu externen Anwendungen darstellt, gelangen die Anfragen zu einer Zwischenebene, die die Anfragen parsed, optimiert und gegebenenfalls bereits gecachte Daten zurückgibt. Diese Ebene ist dafür zuständig die Datenbankzugriffe so effizient und schnell wie möglich zu gestalten.
+		
+		Das Datensystem lässt sich in der ANSI-SPARC Form nicht auf der Abbildung wiederfinden.
 \end{document}
