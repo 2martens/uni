@@ -144,7 +144,7 @@ Stephan Niendorf (6242417)}
 			x_{5} \,&=&\, 6 \,&-&\, x_{1} \,&-&\, 5x_{2} \,&-&\, 3x_{3} \\
 			x_{6} \,&=&\, 4 \,&+&\, x_{1} \,&-&\, 3x_{2} \,&-&\, 3x_{3} \\
 			x_{7} \,&=&\, 2 \,&-&\, x_{1} \,&+&\, x_{2} \,&-&\, 3x_{3} \\ \cline{1 - 9}
-			z &=& &-& 5x_{1} \,&+&\, 11x_{2} \,&-&\, 5x_{3}
+			z \,&=&\, &-& 5x_{1} \,&+&\, 11x_{2} \,&-&\, 5x_{3}
 		\end{alignat*}
 		
 		\underline{1. Iteration}:
@@ -175,7 +175,7 @@ Stephan Niendorf (6242417)}
 			x_{5} \,&=&\, \frac{8}{3} \,&-&\, \frac{8}{3}x_{1} \,&-&\, \frac{29}{3}x_{3} \,&+&\, \frac{5}{3}x_{4} \\
 			x_{6} \,&=&\, 2 && \,&-&\, 7x_{3} \,&+&\, x_{4} \\
 			x_{7} \,&=&\, \frac{8}{3} \,&-&\, \frac{2}{3}x_{1} \,&-&\, \frac{5}{3}x_{3} \,&-&\, \frac{1}{3}x_{4} \\ \cline{1 - 9}
-			z &=& \frac{22}{3} \,&-&\, \frac{4}{3}x_{1} \,&+&\, \frac{29}{3}x_{3} \,&-&\, \frac{11}{3}x_{4}
+			z \,&=&\, \frac{22}{3} \,&-&\, \frac{4}{3}x_{1} \,&+&\, \frac{29}{3}x_{3} \,&-&\, \frac{11}{3}x_{4}
 		\end{alignat*}
 		
 		\underline{2. Iteration}:
@@ -207,7 +207,7 @@ Stephan Niendorf (6242417)}
 			x_{2} \,&=&\, \frac{30}{29} \,&-&\, \frac{1}{29}x_{1} \,&-&\, \frac{1}{29}x_{4} \,&-&\, \frac{4}{29}x_{5} \\
 			x_{6} \,&=&\, \frac{2}{29} \,&+&\, \frac{56}{29}x_{1} \,&-&\, \frac{6}{29}x_{4} \,&+&\, \frac{21}{29}x_{5} \\
 			x_{7} \,&=&\, \frac{64}{29} \,&-&\, \frac{6}{29}x_{1} \,&-&\, \frac{18}{29}x_{4} \,&+&\, \frac{5}{29}x_{5} \\ \cline{1 - 9}
-			z &=& 10 \,&+&\, \frac{4}{3}x_{1} \,&-&\, 2x_{4} \,&-&\, x_{5}
+			z \,&=&\, 10 \,&+&\, \frac{4}{3}x_{1} \,&-&\, 2x_{4} \,&-&\, x_{5}
 		\end{alignat*}
 		
 		\underline{3. Iteration}:
@@ -239,7 +239,7 @@ Stephan Niendorf (6242417)}
 			x_{2} \,&=&\, 1 \,&-&\, \frac{13}{232}x_{4} \,&-&\, \frac{1}{8}x_{5} \,&+&\, \frac{1}{8}x_{3} \\
 			x_{6} \,&=&\, 2 \,&+&\, x_{4} && \,&-&\, 7x_{3} \\
 			x_{7} \,&=&\, 2 \,&-&\, \frac{3}{4}x_{4} \,&+&\, \frac{1}{4}x_{5} \,&+&\, \frac{3}{4}x_{3} \\ \cline{1 - 9}
-			z &=& \frac{34}{3} \,&-&\, \frac{7}{6}x_{4} \,&-&\, \frac{3}{2}x_{5} \,&-&\, \frac{29}{6}x_{3}
+			z \,&=&\, \frac{34}{3} \,&-&\, \frac{7}{6}x_{4} \,&-&\, \frac{3}{2}x_{5} \,&-&\, \frac{29}{6}x_{3}
 		\end{alignat*}
 		
 		Dieses Tableau liefert die optimale Lösung $x_{1} = 1, x_{2} = 1, x_{3} = 0$ mit $z = \frac{34}{3}$.
@@ -260,5 +260,116 @@ Stephan Niendorf (6242417)}
 		\[
 			x_{1} = 1, x_{2} = 1, x_{3} = 0, x_{4} = 0, x_{5} = 0, x_{6} = 2, x_{7} = 2 \text{ mit } z = \frac{34}{3} = 11\frac{1}{3}
 		\]
+		%
+		% 2 startet hier
+		%
+		%
 \section{} %2
+	\textbf{Aufgabe:} Lösen Sie das folgende LP-Problem mit dem Simplexverfahren:
+	\begin{alignat*}{5}
+		\text{maximiere}\; & x_{1} &-& 9x_{2} &-& 11x_{3} &+& 3x_{4} && \\
+		\multicolumn{10}{l}{\text{unter den Nebenbedingungen}} && \\
+		\;& x_{1} &+& x_{2} &+& 3x_{3} &+& x_{4} &\leq & 3 \\
+		\;-& x_{1} &-& 3x_{2} &-& 7x_{3} &+& x_{4} &\leq & 1 \\
+		\multicolumn{8}{r}{$x_{1}, x_{2}, x_{3}, x_{4}$} \,&\geq &\, 0
+	\end{alignat*}
+	
+	\textbf{Lösung.}
+	
+	\underline{Starttableau}:
+	\begin{alignat*}{6}
+		x_{5} \,&=&\, 3 \,&-&\, x_{1} \,&-&\, x_{2} \,&-&\, 3x_{3} \,&-&\, x_{4} \\
+		x_{6} \,&=&\, 1 \,&+&\, x_{1} \,&+&\, 3x_{2} \,&+&\, 7x_{3}  \,&-&\, x_{4} \\ \cline{1 - 11}
+		z \,&=&\, && x_{1} \,&-&\, 9x_{2} \,&-&\, 11x_{3} \,&+&\, 3x_{4}
+	\end{alignat*}
+	
+	\underline{1. Iteration}:
+		
+	Eingangsvariable: $x_{4}$\\
+	Ausgangsvariable: $x_{6}$
+		
+	Es folgt
+	\begin{alignat*}{2}
+		x_{4} &=&& 1 + x_{1} + 3x_{2} + 7x_{3} - x_{6} \\
+		x_{5} &=&& 3 - x_{1} - x_{2} - 3x_{3} - \left(1 + x_{1} + 3x_{2} + 7x_{3} - x_{6}\right) \\
+		&=&& 3 - x_{1} - x_{2} - 3x_{3} - 1 - x_{1} - 3x_{2} - 7x_{3} + x_{6} \\
+		&=&& 2 - 2x_{1} - 4x_{2} - 10x_{3} + x_{6} \\
+		z &=&& x_{1} - 9x_{2} - 11x_{3} + 3\left(1 + x_{1} + 3x_{2} + 7x_{3} - x_{6}\right) \\
+		&=&& x_{1} - 9x_{2} - 11x_{3} + 3 + 3x_{1} + 9x_{2} + 21x_{3} - 3x_{6} \\
+		&=&& 3 + 4x_{1} + 10x_{3} - 3x_{6}
+	\end{alignat*}
+		
+	\underline{Ergebnis der 1. Iteration}:
+	\begin{alignat*}{6}
+			x_{4} \,&=&\, 1 \,&+&\, x_{1} \,&+&\, 3x_{2} \,&+&\, 7x_{3} \,&-&\, x_{6} \\
+			x_{5} \,&=&\, 2 \,&-&\, 2x_{1} \,&-&\, 4x_{2} \,&-&\, 10x_{3} \,&+&\, x_{6} \\ \cline{1 - 11}
+			z \,&=&\, 3 \,&+&\, 4x_{1} && \,&+&\, 10x_{3} \,&-&\, 3x_{6}
+	\end{alignat*}
+		
+	\underline{2. Iteration}:
+	
+	Eingangsvariable: $x_{3}$ \\
+	Ausgangsvariable: $x_{5}$
+		
+	Es folgt
+	\begin{alignat*}{2}
+		10x_{3} &=&& 2 - 2x_{1} - 4x_{2} + x_{6} - x_{5} \\
+		x_{3} &=&& \frac{1}{5} - \frac{1}{5}x_{1} - \frac{2}{5}x_{2}  + \frac{1}{10}x_{6} - \frac{1}{10}x_{5} \\
+		x_{4} &=&& 1 + x_{1} + 3x_{2} + 7\left(\frac{1}{5} - \frac{1}{5}x_{1} - \frac{2}{5}x_{2}  + \frac{1}{10}x_{6} - \frac{1}{10}x_{5}\right) - x_{6} \\
+		&=&& 1 + x_{1} + 3x_{2} + \frac{7}{5} - \frac{7}{5}x_{1} - \frac{14}{5}x_{2} + \frac{7}{10}x_{6} - \frac{7}{10}x_{5} - x_{6}  \\
+		&=&& \frac{12}{5} - \frac{2}{5}x_{1} + \frac{1}{5}x_{2} - \frac{3}{10}x_{6} - \frac{7}{10}x_{5} \\
+		z &=&& 3 + 4x_{1} + 10\left(\frac{1}{5} - \frac{1}{5}x_{1} - \frac{2}{5}x_{2}  + \frac{1}{10}x_{6} - \frac{1}{10}x_{5}\right) - 3x_{6} \\
+		&=&& 3 + 4x_{1} + 2 - 2x_{1} - 4x_{2} + x_{6} - x_{5} - 3x_{6} \\
+		&=&& 5 + 2x_{1} - 4x_{2} - 2x_{6} - x_{5}
+	\end{alignat*}
+		
+	\underline{Ergebnis der 2. Iteration}:
+	\begin{alignat*}{6}
+		x_{3} \,&=&\, \frac{1}{5} \,&-&\, \frac{1}{5}x_{1} \,&-&\, \frac{2}{5}x_{2}  \,&+&\, \frac{1}{10}x_{6} \,&-&\, \frac{1}{10}x_{5} \\
+		x_{4} \,&=&\, \frac{12}{5} \,&-&\, \frac{2}{5}x_{1} \,&+&\, \frac{1}{5}x_{2} \,&-&\, \frac{3}{10}x_{6} \,&-&\, \frac{7}{10}x_{5} \\ \cline{1 - 11}
+		z \,&=&\, 5 \,&+&\, 2x_{1} \,&-&\, 4x_{2} \,&-&\, 2x_{6} \,&-&\, x_{5}
+	\end{alignat*}
+		
+	\underline{3. Iteration}:
+		
+	Eingangsvariable: $x_{1}$\\
+	Ausgangsvariable: $x_{3}$
+		
+	Es folgt
+	\begin{alignat*}{2}
+		\frac{1}{5}x_{1} &=&& \frac{1}{5} - \frac{2}{5}x_{2} + \frac{1}{10}x_{6} - \frac{1}{10}x_{5} - x_{3} \\
+		x_{1} &=&& 1 - 2x_{2} + \frac{1}{2}x_{6} - \frac{1}{2}x_{5} - 5x_{3} \\
+		x_{4} &=&& \frac{12}{5} - \frac{2}{5}\left(1 - 2x_{2} + \frac{1}{2}x_{6} - \frac{1}{2}x_{5} - 5x_{3}\right) + \frac{1}{5}x_{2} - \frac{3}{10}x_{6} - \frac{7}{10}x_{5} \\
+		&=&& \frac{12}{5} - \frac{2}{5} + \frac{4}{5}x_{2} - \frac{1}{5}x_{6} + \frac{1}{5}x_{5} + 2x_{3} + \frac{1}{5}x_{2} - \frac{3}{10}x_{6} - \frac{7}{10}x_{5} \\
+		&=&& 2 + x_{2} - \frac{1}{2}x_{6} - \frac{1}{2}x_{5} + 2x_{3} \\
+		z &=&& 5 + 2\left(1 - 2x_{2} + \frac{1}{2}x_{6} - \frac{1}{2}x_{5} - 5x_{3}\right) - 4x_{2} - 2x_{6} - x_{5} \\
+		&=&& 5 + 2 - 4x_{2} + x_{6} - x_{5} - 10x_{3} - 4x_{2} - 2x_{6} - x_{5} \\
+		&=&& 7 - 8x_{2} - x_{6} - 2x_{5} - 10x_{3}
+	\end{alignat*}
+		
+	\underline{Ergebnis der 3. Iteration}:
+	\begin{alignat*}{6}
+		x_{1} \,&=&\, 1 \,&-&\, 2x_{2} \,&+&\, \frac{1}{2}x_{6} \,&-&\, \frac{1}{2}x_{5} \,&-&\, 5x_{3} \\
+		x_{4} \,&=&\, 2 \,&+&\, x_{2} \,&-&\, \frac{1}{2}x_{6} \,&-&\, \frac{1}{2}x_{5} \,&+&\, 2x_{3} \\ \cline{1 - 11}
+		z \,&=&\, 7 \,&-&\, 8x_{2} \,&-&\, x_{6} \,&-&\, 2x_{5} \,&-&\, 10x_{3}
+	\end{alignat*}
+		
+	Dieses Tableau liefert die optimale Lösung $x_{1} = 1, x_{2} = 0, x_{3} = 0$ mit $z = 7$.
+		
+	\underline{Startlösung ("`zulässige Basislösung am Anfang"')}:
+	\[
+		x_{1} = 0, x_{2} = 0, x_{3} = 0, x_{4} = 2, x_{5} = 3, x_{6} = 1 \text{ mit } z = 0
+	\]
+	\underline{Zulässige Basislösung nach der 1. Iteration}:
+	\[
+		x_{1} = 0, x_{2} = \frac{2}{3}, x_{3} = 0, x_{4} = 1, x_{5} = 2, x_{6} = 0 \text{ mit } z = 3
+	\]
+	\underline{Zulässige Basislösung nach der 2. Iteration}:
+	\[
+		x_{1} = 0, x_{2} = 0, x_{3} = \frac{1}{5}, x_{4} = \frac{12}{5}, x_{5} = 0, x_{6} = 2 \text{ mit } z = 5
+	\]
+	\underline{Zulässige Basislösung nach der 3. Iteration}:
+	\[
+		x_{1} = 1, x_{2} = 0, x_{3} = 0, x_{4} = 2, x_{5} = 0, x_{6} = 0 \text{ mit } z = 7
+	\]
 \end{document}
