@@ -6,11 +6,11 @@ Abgebende: Jim 2martens, 2noack, 0giebel
 |#
 
 ; 1.1
-
+; degrees ist eine positive Zahl in Grad
 (define (degreeToRadian degrees)
   (/ (* degrees pi) 180)
   )
-
+; radians ist eine Zahl in Bogenmaß
 (define (radianToDegree radians)
   (/ (* radians 180) pi)
   )
@@ -29,11 +29,14 @@ Abgebende: Jim 2martens, 2noack, 0giebel
   )
 
 ; 1.3
+; nauticMiles ist eine positive Zahl in nautischen Meilen
 (define (nmToKM nauticMiles)
   (* nauticMiles 1.852)
   )
 
 ; 2.1
+; breiteA laengeA breiteB laengeB alle in Grad angegeben
+; westliche Länge und südliche Breite negativ angeben
 (define (distanzAB breiteA laengeA breiteB laengeB)
   ; Parameter in Radiant umrechnen
   (define breiteARad (degreeToRadian breiteA))
@@ -56,12 +59,21 @@ Abgebende: Jim 2martens, 2noack, 0giebel
           )
        )
     )
+  (define dG (acos cosDG))
   ; umrechen in Kilometer
   (nmToKM
    ; ermitteln der Entfernung in Seemeilen
    (* 60
       ; umwandeln in Grad
-      (radianToDegree cosDG)
+      (radianToDegree dG)
       )
    )
   )
+
+; ausrechnen der Entfernung von Oslo und Hongkong
+(display "Entfernung Oslo - Hongkong (in km): ") 
+(distanzAB 59.93 10.75 22.2 114.1)
+(display "Entfernung San Francisco - Honolulu (in km): ")
+(distanzAB 37.75 -122.45 21.32 -157.83)
+(display "Entfernung Osterinsel - Lima (in km): ")
+(distanzAB -27.1 -109.4 -12.1 -77.05)
