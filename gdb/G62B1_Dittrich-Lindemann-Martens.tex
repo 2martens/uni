@@ -14,9 +14,24 @@
 
 \section{Informationssysteme}
 	\subsection{} %a
+	Ein Informationssystem zeichnen sich durch Kommunikationsbeziehungen zwischen Menschen und Maschine aus. Rechnergestützte Informationssysteme beinhalten automatisierte Anwendungssysteme, welche zur Beschaffung, Speicherung, Veränderung und Veranschaulichung von Informationen genutzt werden.
+	
+	Die Informationen dienen dazu zielorientiertes Wissen zu generieren. Dieses Wissen dient dann wiederum zur Vorbereitung und Durchführung von Handlungen und Entscheidungen. Somit werden Informationssysteme beispielsweise genutzt um Arbeitsabläufe im Unternehmen zu organisieren und unterstützen.
 	\subsection{} %b
+	Legt man die 3-Schicht-Architektur eines Datenbankmanagementsystems (DBMS), mit der Sicht-Ebene, logischen Ebene und physischen Ebene zu Grunde, so kann man generell Datenunabhängigkeit als die Immunität der einzelnen Schichten auf Änderungen innerhalb der nächsten tieferen Schicht beschreiben. Um im Folgenden den Unterschied zwischen der logischen und physischen Datenunabhängigkeit leichter verdeutlichen zu können folgendes Szenario:
+	
+	Es gebe eine Anwendung zum Verwalten von Immobilien für Immobilienmakler. Dabei gibt es 2 Sichten auf die Daten (Sicht-Ebene). Einmal die "`Chefsicht"' auf alle Daten und die "`Verkäufersicht"' auf nur ein Teil der Daten. Alle Immobilen werden in einer Tabelle gespeichert (logische Ebene) und es werden verschiedene Indexstrukturen und Algorithmen für die Optimierung von Abfragen verwendet (physische Ebene).
+	
+	Die physische Datenunabhängigkeit bezieht sich auf die beiden unteren Ebenen (logische- und physische-Ebene). Wird beispielsweise der Speicherort einzelner Daten aus optimierungstechnischen Gründen geändert, hat dies kein Einfluss auf das festgelegte Schema. Die beiden Ebenen sind also voneinander entkoppelt. 
+	
+	Die logische Datenunabhängigkeit bezieht sich auf die beiden oberen Schichten (Sicht-und logische-Ebene). Kommt es zu einer Änderung im Schema, beispielsweise es wird ein Attribut in der Tabelle hinzugefügt, hat dies im Idealfall keinen Einfluss auf die einzelnen Sichten. In der Praxis ist dies nicht immer ganz so leicht umsetzbar. Aber die logische Datenunabhängigkeit hat große Vorteile, so muss im besten Fall nichts an der Anwendung geändert werden wenn es zu einer Änderung am Schema kommt. 
 	\subsection{} %c
-
+	Informationssysteme werden zum Beispiel im öffentlichen Nahverkehr verwendet, um den Informationsbedarf von Passagieren bezüglich Fahrplanauskunft oder anderen Informationsinhalten zu befriedigen. Steht ein Passagier an einer Bushaltestelle werden ihm beispielsweise mit Hilfe geeigneter Informations- und Kommunikationstechnik mögliche Verspätungen oder die Ankunftszeit des nächsten Busses auf einem Bildschirm angezeigt. Hierfür reicht es nicht statische Daten in einer Datenbank abzulegen, sondern es werden dynamische Informationen über den derzeitigen Aufenthaltsort der einzelnen Busse benötigt. Dies geschieht in der Praxis mit modernen Sende- und Empfangseinheiten.   
+	
+	 Auch im Gesundheitswesen kommen Informationssysteme zum Einsatz, um Patienteninformationen zu verwalten und am richtigen Ort zur richtigen Zeit zur Verfügung zu stellen. Zum einen werden bei der Ankunft von Patienten im Krankenhaus neue Daten über deren derzeitigen Gemütszustand erhoben, zum anderen ist es besonders wichtig für einen behandelnden Arzt Einsicht in die Patientenakte zu haben, um über mögliche Vorerkrankungen informiert zu sein. 
+	 Es ist vorstellbar, dass aus der Patientenakte die wichtigsten Informationen automatisiert zusammengefasst und in geeigneter Form kompakt dem Arzt dargestellt werden. An diesem Beispiel wird sehr gut die Kommunikationsbeziehung zwischen Mensch und Maschine deutlich. 
+	 
+	 Ein weiteres Anwendungsbeispiel ist die intelligente Routenplanung im Logistikwesen. Der Ölpreis steigt seit Jahren und es wird dadurch immer wichtiger Treibstoff einzusparen. Hierbei kommen nicht nur mathematische Optimierungsverfahren zum Einsatz, um eine möglichst kurze Strecke zu berechnen, sondern auch beispielsweise die Bewertung aktueller Verkehrsinformationen um Staus oder Sperrungen mit in die Routenplanung einzubeziehen. Hierfür kommen natürlich wieder Informationssysteme zum Einsatz. Auch interessant ist der Einsatz bei der Live-Planung wobei Routen geändert werden können, um zusätzliche Aufträge mit in die geplante Route zu integrieren.
 \section{Miniwelt}
 	\subsection{} %a
 		Anhand der Beschreibung der Miniwelt werden folgende Objekttypen benötigt, die jeweils explizite oder implizite Funktionalitäten haben.
@@ -64,12 +79,34 @@
 		Da die Anforderungen an die Anwendung nun bekannt sind, werden die Anforderungen an Datenbanksysteme nun an diesem Beispiel diskutiert.
 		
 		So müssen Datenbanksysteme einen Schutz vor inkonsistenten Daten bieten. So wird eine Transaktion erst dann zur Persistierung freigegeben, wenn sie komplett erfolgreich durchlief. Sollte der Browser während einer Transaktion geschlossen werden, wird sie nicht abgeschlossen und damit nicht persistiert.
+		
 		Außerdem müssen gleichzeitige Anfragen problemlos bearbeitet werden, solange sie nicht im Konflikt stehen. Eine Abfrage von Ergebnissen einer Begegnung steht beispielsweise nicht im Konflikt mit dem Hinzufügen eines Mitspielers in eine Gemeinschaft oder dem Registrieren eines neuen Mitglieds. Um Konflikte zu vermeiden ist eine weitgehende Isolierung im Datenbanksystem von Nöten.
-		Die Rechteverwaltung hängt von der Implementation ab. Die oben angewandte Methode benutzt einen Anwendungszugang zur Datenbank, womit die Zugriffskontrolle auf die Anwendung übergeht. Theoretisch wäre auch ein Datenbankzugang pro Benutzer denkbar, der dann eben nur entsprechende Rechte hätte. Allerdings wäre dies ein unnötiger Datenbankzugang, der zudem auch nur das konzeptuelle Schema berücksichtigt. So könnte ein Nutzer entweder alle Punkte aller Mitglieder ansehen oder keine. Die externe Anwendungssicht auf die Daten umfasst hingegen eine logische Sicht, die auf das Fallbeispiel zugeschnitten ist. Daher sind die Zugriffskontrollen des Datenbanksystems viel zu vage, um sinnvoll für das Beispiel geeignet zu sein. Deswegen muss die Zugriffskontrolle hier auf Seiten der Anwendung stattfinden, die dann nur erlaubte Anfragen an das Datenbanksystem sendet.
+		
+		Die Rechteverwaltung hängt von der Implementation ab. Die oben angewandte Methode benutzt einen Anwendungszugang zur Datenbank, womit die Zugriffskontrolle auf die Anwendung übergeht. Theoretisch wäre auch ein Datenbankzugang pro Benutzer denkbar, der dann eben nur entsprechende Rechte hätte. Allerdings wäre dies ein unnötiger Datenbankzugang, der zudem auch nur das konzeptuelle Schema berücksichtigt. So könnte ein Nutzer entweder alle Punkte aller Mitglieder ansehen oder keine. 
+		
+		Die externe Anwendungssicht auf die Daten umfasst hingegen eine logische Sicht, die auf das Fallbeispiel zugeschnitten ist. Daher sind die Zugriffskontrollen des Datenbanksystems viel zu vage, um sinnvoll für das Beispiel geeignet zu sein. Deswegen muss die Zugriffskontrolle hier auf Seiten der Anwendung stattfinden, die dann nur erlaubte Anfragen an das Datenbanksystem sendet.
 		
 		
 \section{Transaktionen}
-
+	Zunächst betrachten wir den Stromausfall zum Zeitpunkt A. Daraus ergeben sich mehrere Fälle.
+	
+	\begin{itemize}
+		\item	Es gibt kein Datenbanksystem und die Daten wurden nicht auf die Platte geschrieben. In diesem Fall hat der Ausfall keine negativen Folgen, da die Daten sich in einem konsistenten Zustand befinden.
+		\item	Es gibt ein Datenbanksystem und die Daten wurden nicht auf die Platte geschrieben. In diesem Fall hat der Ausfall ebenfalls keine negativen Folgen, da die Transaktion ohnehin nicht beendet war und damit keine Veränderungen hätten vorgenommen werden dürfen.
+		\item	Es gibt kein Datenbanksystem und die Daten wurden auf die Platte geschrieben. In diesem Fall befinden sich die Daten in einem inkonsistenten Zustand, da zwar der Saldo bei dem einen Konto verringert, bei dem anderen aber nicht erhöht wurde. Da es kein DBS gibt, kann dieser inkonsistente Zustand nicht leicht behoben werden.
+		\item	Es gibt ein Datenbanksystem und die Daten wurden auf die Platte geschrieben. In diesem Fall kann das DBS aufgrund von Logs nachvollziehen, dass die Transaktion noch nicht beendet war und wird die Veränderung an dem Saldo von Konto 5 rückgängig machen.
+	\end{itemize}
+	
+	Anschließend betrachten wir den Stromausfall zum Zeitpunkt B.
+	
+	\begin{itemize}
+		 \item	Es gibt kein DBS und die geänderten Zustände von Konto 5 und 7 wurden auf die Platte geschrieben. In diesem Fall befinden sich beide Daten in einem konsistenten Zustand und es muss lediglich noch der Kontostand von Konto 5 ausgegeben werden.
+		 \item	Es gibt ein DBS und die geänderten Zustände von Konto 5 und 7 wurden auf die Platte geschrieben. In diesem Fall befinden sich die Daten in einem konsistenten Zustand aber das DBS wird die Änderungen rückabwickeln, da die Transaktion nicht beendet wurde.
+		 \item	Es gibt kein DBS und nur die Änderungen an Konto 7 sind persistiert. In diesem Fall befinden sich die Daten in einem inkonsistenten Zustand, da die Änderung an Konto 5 verloren gegangen ist.
+		 \item	Es gibt ein DBS und nur die Änderungen an Konto 7 sind peristiert. In diesem Fall befinden sich die Daten in einem inkonsistenten Zustand, aber das DBS wird die Änderungen an Konto 7 rückabwickeln und die Daten wieder in einen konsistenten Zustand bringen.
+	\end{itemize}
+	
+	Zusammenfassend kann gesagt werden, dass es bei einem Datenbanksystem zu jedem Zeitpunkt immer nur konsistente Daten gibt.  Bei einem reinen Dateisystem können die Daten hingegen inkonsistent zurückgelassen werden.
 
 \section{Warm-Up MySQL}
 	\subsection{} %a
