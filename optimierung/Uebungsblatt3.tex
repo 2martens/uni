@@ -1,0 +1,366 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+% some matrix magic
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jan Branitz (6326955), Jim Martens (6420323),\\
+Stephan Niendorf (6242417)}
+\title{Hausaufgaben zum 4. November}
+\maketitle
+\section{} %1
+	\subsection{} %a
+		\textbf{Aufgabe:} Lösen Sie das folgende LP-Problem mit dem Simplexverfahren:
+		\begin{alignat*}{3}
+			\text{maximiere}\; & x_{1} &+& 2x_{2} && \\
+			\multicolumn{6}{l}{\text{unter den Nebenbedingungen}} && \\
+			\;-& 4x_{1} &+& x_{2} &\leq & 1 \\
+			\;-& x_{1} &+& x_{2} &\leq & 2 \\
+			\;& \frac{1}{2}x_{1} &-& x_{2} &\leq & 1 \\
+			\multicolumn{4}{r}{$x_{1}, x_{2}$} \,&\geq &\, 0
+		\end{alignat*}
+		
+		\textbf{Lösung.}
+		
+		\underline{Starttableau}:
+		\begin{alignat*}{4}
+			x_{3} \,&=&\, 1 \,&+&\, 4x_{1} \,&-&\, x_{2} \\
+			x_{4} \,&=&\, 2 \,&+&\, x_{1} \,&-&\, x_{2} \\
+			x_{5} \,&=&\, 1 \,&-&\, \frac{1}{2}x_{1} \,&+&\, x_{2} \\ \cline{1 - 9}
+			z &=& && x_{1} \,&+&\, 2x_{2}
+		\end{alignat*}
+		
+		\underline{1. Iteration}:
+		
+		Eingangsvariable: $x_{2}$\\
+		Ausgangsvariable: $x_{3}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			x_{2} \,&=&&\, 1 + 4x_{1} - x_{3} \\
+			x_{4} \,&=&&\, 2 + x_{1} - \left(1 + 4x_{1} - x_{3}\right) \\			
+			&=&&\, 2 + x_{1} - 1 - 4x_{1} + x_{3} \\
+			&=&&\, 1 - 3x_{1} + x_{3} \\
+			x_{5} \,&=&&\, 1 - \frac{1}{2}x_{1} + \left(1 + 4x_{1} - x_{3}\right) \\
+			&=&&\, 1 - \frac{1}{2}x_{1} + 1 + 4x_{1} - x_{3} \\
+			&=&&\, 2 + \frac{7}{2}x_{1} - x_{3}  \\
+			z \,&=&&\, x_{1} + 2\left(1 + 4x_{1} - x_{3}\right) \\
+			&=&&\, x_{1} + 2 + 8x_{1} - 2x_{3} \\
+			&=&&\, 2 + 9x_{1} - 2x_{3}
+		\end{alignat*}
+		
+		\underline{Ergebnis der 1. Iteration}:
+		\begin{alignat*}{4}
+			x_{2} \,&=&\, 1 \,&+&\, 4x_{1} \,&-&\, x_{3} \\
+			x_{4} \,&=&\, 1 \,&-&\, 3x_{1} \,&+&\, x_{3} \\
+			x_{5} \,&=&\, 2 \,&+&\, \frac{7}{2}x_{1} \,&-&\, x_{3} \\ \cline{1 - 9}
+			z &=& 2 \,&+&\, 9x_{1} &-& 2x_{3}
+		\end{alignat*}
+		
+		\underline{2. Iteration}:
+		
+		Eingangsvariable: $x_{1}$ \\
+		Ausgangsvariable: $x_{4}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			3x_{1} &=&& 1 + x_{3} - x_{4} \\
+			x_{1} &=&& \frac{1}{3} + \frac{1}{3}x_{3} - \frac{1}{3}x_{4} \\
+			x_{2} &=&& 1 + 4\left(\frac{1}{3} + \frac{1}{3}x_{3} - \frac{1}{3}x_{4}\right) - x_{3} \\
+			&=&& 1 + \frac{4}{3} + \frac{4}{3}x_{3} - \frac{4}{3}x_{4} \\
+			&=&& \frac{7}{3} + \frac{4}{3}x_{3} - \frac{4}{3}x_{4} \\
+			x_{5} &=&& 3 + \frac{7}{2}\left(\frac{1}{3} + \frac{1}{3}x_{3} - \frac{1}{3}x_{4}\right) - x_{3} \\
+			&=&& 3 + \frac{7}{6} + \frac{7}{6}x_{3} - \frac{7}{6}x_{4} - x_{3} \\
+			&=&& \frac{13}{6} + \frac{1}{6}x_{3} - \frac{7}{6}x_{4} \\
+			z &=&& 2 + 9\left(\frac{1}{3} + \frac{1}{3}x_{3} - \frac{1}{3}x_{4}\right) - 2x_{3} \\
+			&=&& 2 + 3 + 3x_{3} - 3x_{4} - 2x_{3} \\
+			&=&& 5 + x_{3} - 3x_{4}
+		\end{alignat*}
+		
+		\underline{Ergebnis der 2. Iteration}:
+		\begin{alignat*}{4}
+			x_{1} \,&=&\, \frac{1}{3} \,&+&\, \frac{1}{3}x_{3} \,&-&\, \frac{1}{3}x_{4}  \\
+			x_{2} \,&=&\, \frac{7}{3} \,&+&\, \frac{4}{3}x_{3} \,&-&\, \frac{4}{3}x_{4} \\
+			x_{5} \,&=&\, \frac{13}{6} \,&+&\, \frac{1}{6}x_{3} \,&-&\, \frac{7}{6}x_{4} \\ \cline{1 - 7}
+			z &=& 5 \,&+&\, x_{3} \,&-&\, 3x_{4}
+		\end{alignat*}
+		
+		\underline{3. Iteration}:
+		
+		Eingangsvariable: $x_{3}$ \\
+		Ausgangsvariable: keine vorhanden
+		
+		Es gibt keine optimale Lösung, da es keine Basisvariable gibt, die $x_{3}$ beschränkt. Damit ist dieses Problem unbeschränkt.
+		
+		\underline{Startlösung ("`zulässige Basislösung am Anfang"')}:
+		\[
+			x_{1} = 0, x_{2} = 0, x_{3} = 1, x_{4} = 2, x_{5} = 1 \text{ mit } z = 0
+		\]
+		\underline{Zulässige Basislösung nach der 1. Iteration}:
+		\[
+			x_{1} = 0, x_{2} = 1, x_{3} = 0, x_{4} = 1, x_{5} = 2 \text{ mit } z = 2
+		\]
+		\underline{Zulässige Basislösung nach der 2. Iteration}:
+		\[
+			x_{1} = \frac{1}{3}, x_{2} = \frac{7}{3}, x_{3} = 0, x_{4} = 0, x_{5} = \frac{13}{6} \text{ mit } z = 5
+		\]
+		
+		Ermittlung einer Halbgeraden des $\mathbb{R}^{2}$:
+		
+		\begin{alignat*}{2}
+			x_{3} &=& t \\
+			x_{4} &=& 0 \\
+			x_{1} &=& \frac{1}{3} + \frac{1}{3}t \\
+			x_{2} &=& \frac{7}{3} + \frac{4}{3}t \\
+			x_{5} &=& \frac{13}{6} + \frac{1}{6}t \\
+			z &=& 5 + t \\
+			t &\geq & 0
+		\end{alignat*}
+		
+		Daraus ergibt sich in Parameterform: 
+		\begin{alignat*}{2}
+			(x_{1}, x_{2}) &=& \left(\frac{1}{3} + \frac{1}{3}t, \frac{7}{3} + \frac{4}{3}t\right) \\
+			&=& \left(\frac{1}{3}, \frac{7}{3}\right) + t\left(\frac{1}{3}, \frac{4}{3}\right)
+		\end{alignat*}
+		\begin{alignat*}{2}
+			(x_{3}, x_{2}) &=& \left(t, \frac{7}{3} + \frac{4}{3}t\right) \\
+			&=& \left(0, \frac{7}{3}\right) + t\left(1, \frac{4}{3}\right)
+		\end{alignat*}
+		
+		Da in diesem Fall $x_{1}$ eine Basisvariable ist und somit nicht gleich $t$ ist, stellt $t$ eine beliebige positive Konstante dar. Daher verändert sich auch die Gerade je nach Wahl von $t$. Deswegen ist es nicht möglich genau eine Halbgerade zu finden, auf der die Zielfunktion beliebig große Werte annimmt.
+	\subsection{} %b
+		Durch Umstellen der Nebenbedingungen des Problems aus a nach $x_{2}$ ergibt sich:
+		\begin{alignat*}{3}
+			x_{2} &\leq & 4x_{1} &+& 1 \\
+			x_{2} &\leq & x_{1} &+& 2 \\
+			x_{2} &\geq & \frac{1}{2}x_{1} &-& 1
+		\end{alignat*}
+		Daraus lässt sich die Fläche aller gültigen Werte zeichnen.	
+	
+		\begin{tikzpicture}[>=stealth]
+			\begin{axis}[
+				ymin=0,ymax=7,
+				x=1cm,
+				y=1cm,
+				axis x line=middle,
+				axis y line=middle,
+				axis line style=->,
+				xlabel={$x_{1}$},
+				ylabel={$x_{2}$},
+				xmin=0,xmax=7
+			]
+
+			\addplot[no marks, black, -] expression[domain=0:6,samples=100]{4*x + 1} node[pos=0.65,anchor=north]{};
+			\addplot[no marks, black, -] expression[domain=0:6,samples=100]{1*x + 2} node[pos=0.65,anchor=north]{};
+			\addplot[no marks, black, -] expression[domain=0:6,samples=100]{0.5*x - 1} node[pos=0.65,anchor=north]{};
+			\addplot[no marks, black, -] expression[domain=0:6,samples=100]{1.333333333333333*x + 2.33333333333333333} node[pos=0.65,anchor=north]{};
+			%\node at (axis cs: 2.5,4.5) {(2.25,3.75)};
+			%\node at (axis cs: 6,2) {z};
+			%\draw[>=stealth] (axis cs:1,0) -- (axis cs:1,-6) node [pos=0.65,anchor=north]{};
+			\end{axis}
+		\end{tikzpicture}\\
+\section{} %2
+	\subsection{} %a
+		\textbf{Aufgabe:} Lösen Sie das folgende LP-Hilfsproblem mit dem Simplexverfahren:
+		\begin{alignat*}{5}
+			\text{maximiere}\; -& x_{0} && && && && \\
+			\multicolumn{10}{l}{\text{unter den Nebenbedingungen}} && \\
+			\; & &-& x_{1} &-& x_{2} &-& x_{0} &\leq & -4 \\
+			\; &&& x_{1} &+& 2x_{2} &-& x_{0} &\leq & 2 \\
+			\; &&-&x_{1} &+& x_{2} &-& x_{0} &\leq & 1 \\
+			\multicolumn{8}{r}{$x_{0}, x_{1}, x_{2}$} \,&\geq &\, 0
+		\end{alignat*}
+		
+		\textbf{Lösung.}
+		
+		\underline{Starttableau}:
+		\begin{alignat*}{5}
+			x_{3} \,&=&\, -4 \,&-&\, x_{1} \,&+&\, x_{2} \,&+&\, x_{0} \\
+			x_{4} \,&=&\, 2 \,&-&\, x_{1} \,&-&\, 2x_{2} \,&+&\, x_{0} \\
+			x_{5} \,&=&\, 1 \,&+&\, x_{1} \,&-&\, x_{2} \,&+&\, x_{0} \\ \cline{1 - 9}
+			w &=& && && \,&-&\, x_{0}
+		\end{alignat*}
+		
+		Umwandeln in ein zulässiges Tableau:
+				
+		Eingangsvariable: $x_{0}$\\
+		Ausgangsvariable: $x_{3}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			-x_{0} \,&=&&\, -4 - x_{1} + x_{2} - x_{3} \\
+			x_{0} \,&=&&\, 4 + x_{1} - x_{2} + x_{3} \\			
+			x_{4} \,&=&&\, 2 - x_{1} - 2x_{2} + \left(4 + x_{1} - x_{2} + x_{3}\right) \\			
+			&=&&\, 2 - x_{1} - 2x_{2} + 4 + x_{1} - x_{2} + x_{3} \\
+			&=&&\, 6 - 3x_{2} + x_{3} \\
+			x_{5} \,&=&&\, 1 + x_{1} - x_{2} + \left(4 + x_{1} - x_{2} + x_{3}\right) \\
+			&=&&\, 1 + x_{1} - x_{2} + 4 + x_{1} - x_{2} + x_{3} \\
+			&=&&\, 5 + 2x_{1} - 2x_{2} + x_{3} \\
+			w \,&=&&\, -\left(4 + x_{1} - x_{2} + x_{3}\right) \\
+			&=&&\, -4 - x_{1} + x_{2} - x_{3} \\
+		\end{alignat*}
+		
+		\underline{Ergebnis des Umwandelns}:
+		\begin{alignat*}{5}
+			x_{0} \,&=&\, 4 \,&+&\, x_{1} \,&-&\, x_{2} \,&+&\, x_{3} \\
+			x_{4} \,&=&\, 6 \,&& &-&\, 3x_{2} \,&+&\, x_{3} \\
+			x_{5} \,&=&\, 5 \,&+&\, 2x_{1} \,&-&\, 2x_{2} \,&+&\, x_{3} \\ \cline{1 - 9}
+			w &=& -2 \,&-&\, x_{1} \,&+&\, x_{2} \,&-&\, x_{3}
+		\end{alignat*}
+		
+		\underline{1. Iteration}:
+		
+		Eingangsvariable: $x_{2}$ \\
+		Ausgangsvariable: $x_{4}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			3x_{2} &=&& 6 + x_{3} - x_{4} \\
+			x_{2} &=&& 2 + \frac{1}{3}x_{3} - \frac{1}{3}x_{4} \\
+			x_{0} &=&& 4 + x_{1} - \left(2 + \frac{1}{3}x_{3} - \frac{1}{3}x_{4}\right) + x_{3} \\
+			&=&& 4 + x_{1} - 2 - \frac{1}{3}x_{3} + \frac{1}{3}x_{4} + x_{3}\\
+			&=&& 2 + x_{1} + \frac{2}{3}x_{3} + \frac{1}{3}x_{4} \\
+			x_{5} &=&& 5 + 2x_{1} - 2\left(2 + \frac{1}{3}x_{3} - \frac{1}{3}x_{4}\right) + x_{3} \\
+			&=&& 5 + 2x_{1} - 4 - \frac{2}{3}x_{3} + \frac{2}{3}x_{4} + x_{3} \\
+			&=&& 1 + 2x_{1} + \frac{1}{3}x_{3} + \frac{2}{3}x_{4} \\
+			w &=&& -2 - x_{1} + \left(2 + \frac{1}{3}x_{3} - \frac{1}{3}x_{4}\right) - x_{3} \\
+			&=&& -2 - x_{1} + 2 + \frac{1}{3}x_{3} - \frac{1}{3}x_{4} + x_{3} \\
+			&=&& 0 - x_{1} + \frac{4}{3}x_{3} - \frac{1}{3}x_{4}
+		\end{alignat*}
+		
+		\underline{Ergebnis der 1. Iteration}:
+		\begin{alignat*}{5}
+			x_{2} \,&=&\, 2 \,&& &+&\, \frac{1}{3}x_{3} \,&-&\, \frac{1}{3}x_{4}  \\
+			x_{0} \,&=&\, 2 \,&+&\, x_{1} \,&+&\, \frac{2}{3}x_{3} \,&+&\, \frac{1}{3}x_{4} \\
+			x_{5} \,&=&\, 1 \,&+&\, 2x_{1} \,&+&\, \frac{1}{3}x_{3} \,&+&\, \frac{2}{3}x_{4} \\ \cline{1 - 9}
+			w &=& 0 \,&-&\, x_{1} \,&+&\, \frac{4}{3}x_{3} \,&-&\, \frac{1}{3}x_{4}
+		\end{alignat*}
+		
+		Da das Hilfsproblem keine optimale Lösung besitzt, besitzt das ursprüngliche Problem keine zulässige Lösung und ist damit unlösbar.
+		
+	\subsection{} %b
+		\textbf{Aufgabe:} Lösen Sie das folgende LP-Hilfsproblem mit dem Simplexverfahren:
+		\begin{alignat*}{5}
+			\text{maximiere}\; -& x_{0} && && && && \\
+			\multicolumn{10}{l}{\text{unter den Nebenbedingungen}} && \\
+			\; & && x_{1} &-& x_{2} &-& x_{0} &\leq & 8 \\
+			\; & &-& x_{1} &-& x_{2} &-& x_{0} &\leq & -3 \\
+			\; & &-& x_{1} &+& 4x_{2} &-& x_{0} &\leq & 2 \\
+			\multicolumn{8}{r}{$x_{0}, x_{1}, x_{2}$} \,&\geq &\, 0
+		\end{alignat*}
+		
+		\textbf{Lösung.}
+		
+		\underline{Starttableau}:
+		\begin{alignat*}{5}
+			x_{3} \,&=&\, 9 \,&-&\, x_{1} \,&+&\, x_{2} \,&+&\, x_{0} \\
+			x_{4} \,&=&\, -3 \,&+&\, x_{1} \,&+&\, x_{2} \,&+&\, x_{0} \\
+			x_{5} \,&=&\, 2 \,&+&\, x_{1} \,&-&\, 4x_{2} \,&+&\, x_{0} \\ \cline{1 - 9}
+			w &=& && && \,&-&\, x_{0}
+		\end{alignat*}
+		
+		Umwandeln in ein zulässiges Tableau:
+				
+		Eingangsvariable: $x_{0}$\\
+		Ausgangsvariable: $x_{4}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			-x_{0} \,&=&&\, -3 + x_{1} + x_{2} - x_{4} \\
+			x_{0} \,&=&&\, 3 - x_{1} - x_{2} + x_{4} \\			
+			x_{3} \,&=&&\, 9 - x_{1} + x_{2} + \left(3 - x_{1} - x_{2} + x_{4}\right) \\			
+			&=&&\, 9 - x_{1} + x_{2} + 3 - x_{1} - x_{2} + x_{4} \\
+			&=&&\, 12 - 2x_{1} + x_{4} \\
+			x_{5} \,&=&&\, 2 + x_{1} - 4x_{2} + \left(3 - x_{1} - x_{2} + x_{4}\right) \\
+			&=&&\, 2 + x_{1} - 4x_{2} + 3 - x_{1} - x_{2} + x_{4} \\
+			&=&&\, 5 - 5x_{2} + x_{4} \\
+			w \,&=&&\, -\left(3 - x_{1} - x_{2} + x_{4}\right) \\
+			&=&&\, -3 + x_{1} + x_{2} - x_{4} \\
+		\end{alignat*}
+		
+		\underline{Ergebnis des Umwandelns}:
+		\begin{alignat*}{5}
+			x_{0} \,&=&\, 3 \,&-&\, x_{1} \,&-&\, x_{2} \,&+&\, x_{4} \\
+			x_{3} \,&=&\, 12 \,&-&\, 2x_{1} \,&& &+&\, x_{4} \\
+			x_{5} \,&=&\, 5 \,&& &-&\, 5x_{2} \,&+&\, x_{4} \\ \cline{1 - 9}
+			w &=& -3 \,&+&\, x_{1} \,&+&\, x_{2} \,&-&\, x_{4}
+		\end{alignat*}
+		
+		\underline{1. Iteration}:
+		
+		Eingangsvariable: $x_{1}$ \\
+		Ausgangsvariable: $x_{0}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			x_{1} &=&& 3 - x_{2} + x_{4} - x_{0} \\
+			x_{3} &=&& 12 - 2\left(3 - x_{2} + x_{4} - x_{0}\right) + x_{4} \\
+			&=&& 12 - 6 + 2x_{2} - 2x_{4} + 2x_{0} + x_{4} \\
+			&=&& 6 + 2x_{2} - x_{4} + 2x_{0} \\
+			x_{5} &=&& 5 - 5x_{2} + x_{4} \\
+			w &=&& -3 + \left(3 - x_{2} + x_{4} - x_{0}\right) + x_{2} - x_{4} \\
+			&=&& -3 + 3 - x_{2} + x_{4} - x_{0} + x_{2} - x_{4} \\
+			&=&& - x_{0}
+		\end{alignat*}
+		
+		\underline{Ergebnis der 1. Iteration}:
+		\begin{alignat*}{5}
+			x_{1} \,&=&\, 3 \,&-&\, x_{2} \,&+&\, x_{4} \,&-&\, x_{0}  \\
+			x_{3} \,&=&\, 6 \,&+&\, 2x_{2} \,&-&\, x_{4} \,&+&\, 2x_{0} \\
+			x_{5} \,&=&\, 5 \,&-&\, 5x_{2} \,&-&\, x_{4} \,&& \\ \cline{1 - 9}
+			w &=& && && &-& x_{0} 
+		\end{alignat*}
+		
+		Das Tableau ist optimal. Als optimale Lösung des Hilfsproblem erhält man:
+		\[
+			x_{0} =0, x_{1} = 3, x_{2} = 0
+		\]
+		
+		Als zulässige Lösung für das ursprüngliche Problem ergibt sich:
+		\[
+			x_{1} = 3, x_{2} = 0
+		\]
+		
+		Die ursprüngliche Zielfunktion lautet $z = x_{1} + 3x_{2}$. Setzt man für $x_{1}$ die rechte Seite der Gleichung im obigen Tableau ein, erhält man:
+		
+		\[
+			z = 3 - x_{2} + x_{4} + 3x_{2} = 3 + 2x_{2} + x_{4}
+		\]
+		
+		Daraus ergibt sich dieses Starttableau:
+		
+		\begin{alignat*}{4}
+			x_{1} \,&=&\, 3 \,&-&\, x_{2} \,&+&\, x_{4} \\
+			x_{3} \,&=&\, 6 \,&+&\, 2x_{2} \,&-&\, x_{4} \\
+			x_{5} \,&=&\, 5 \,&-&\, 5x_{2} \,&-&\, x_{4} \\ \cline{1 - 7}
+			z \,&=&\, 3 \,&+&\, 2x_{2} \,&+&\, x_{4}
+		\end{alignat*}
+		
+\end{document}
