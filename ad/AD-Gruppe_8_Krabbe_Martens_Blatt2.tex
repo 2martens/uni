@@ -33,9 +33,20 @@
 \maketitle
 \section{} %1
 	\subsection{} %a
+		In Level $l$ liegen maximal $k^{l}$ Knoten. Dies ist in einem vollen Baum auf jeder Ebene gegeben.
 	\subsection{} %b
+		Ein voller Baum der Tiefe $l$ hat auf der untersten Ebene $k^{l}$ Knoten. Daraus ergibt sich diese Summe:
+		\[
+			\sum\limits_{i=0}^{l} k^{i}
+		\]
+		Dies gilt da in einem vollen Baum die Anzahl Knoten in einer Ebene immer einer Potenz von $k$ entsprechen.
 	\subsection{} %c
+		Ein vollständiger Baum der Tiefe $l$ gleicht bis auf die letzte Ebene einem vollen Baum. In der letzten Ebene $l$ kommen maximal $k^{l} - 1$ Knoten vor, damit es ein vollständiger Baum, aber kein voller Baum ist. Daraus ergibt sich diese leicht abgewandelte Formel:
+		\[
+			\sum\limits_{i=0}^{l-1} \left(k^{i}\right) + c : 1 \leq c < k^{l}
+		\]
 	\subsection{} %d
+		Jeder Knoten hat genau ein Elternknoten mit dem er über eine Kante verbunden ist. Einzige Ausnahme ist der Wurzelknoten, der kein Elternelement hat und damit auch keine Kante, die mit einem solchen verbunden sein könnte. Daher gibt es genau $n-1$ Kanten.
 \section{} %2
 	\subsection{} %a
 	\subsection{} %b
@@ -44,6 +55,21 @@
 	\subsection{} %e
 \section{} %3
 	\subsection{} %a
+		\begin{alignat*}{2}
+			f(x) &=& x \cdot \frac{\ln(n)}{\ln(x)} \\
+			&=& \frac{x}{\ln(x)} \cdot \ln(n) \\
+			f'(x) &=& \left(\frac{x}{\ln(x)} \cdot \ln(n)\right)' \\
+			&=& \left(\frac{x}{\ln(x)}\right)' \cdot \ln(n) \\
+			&=& \frac{\ln(x) - 1}{\ln^{2}(x)} \cdot \ln(n) \\
+			\intertext{Einsetzen von $e$ für $x$}
+			f'(e) &=& \frac{\ln(e) - 1}{\ln^{2}(e)} \cdot \ln(n) \\
+			&=& \frac{1 - 1}{1^{2}} \cdot \ln(n) \\
+			&=& 0 \\
+			\intertext{Da $f'(x)$ offensichtlich nur eine Nullstelle hat, haben wir hiermit die einzige Extremstelle von $f$ gefunden.}
+			f(e) &=& \frac{e}{\ln(e)} \cdot \ln(n) \\
+			&=& e \cdot \ln(n)
+		\end{alignat*}
+		Das Ergebnis der letzten Gleichung ist somit das Minima von $f$. Als weitere Absicherung kann das asymptotische Wachstum betrachtet werden. Für einen kleineren Wert als $e$, ist $\ln(x)$ kleiner als $1$. Das Teilen von $x$ durch diesen Wert geringer als $1$ sorgt dafür, dass das Ergebnis größer als $x$ ist. Lässt man $x$ gegen $1$ laufen, läuft der Bruch gegen unendlich. Auf der anderen Seite kann man $x$ gegen unendlich gehen lassen, dann läuft der Bruch auch gegen unendlich, da eine lineare Funktion schneller wächst, als eine logarithmische. Der konstante Faktor am Ende kann dabei außer Acht gelassen werden.
 	\subsection{} %b
 	\subsection{} %c
 	\subsection{} %d
@@ -51,8 +77,65 @@
 	\subsection{} %f
 \section{} %4
 	\subsection{} %a
+		merge (2 2 5 7 9, 1 2 4 8)  \\
+		1 $\circ$ merge (2 2 5 7 9, 2 4 8) \\
+		1 2 $\circ$ merge (2 5 7 9, 2 4 8) \\
+		1 2 2 $\circ$ merge (5 7 9, 2 4 8) \\
+		1 2 2 2 $\circ$ merge (5 7 9, 4 8) \\
+		1 2 2 2 4 $\circ$ merge (5 7 9, 8) \\
+		1 2 2 2 4 5 $\circ$ merge (7 9, 8) \\
+		1 2 2 2 4 5 7 $\circ$ merge (9, 8) \\
+		1 2 2 2 4 5 7 8 $\circ$ merge (9, []) \\
+		1 2 2 2 4 5 7 8 9  
 	\subsection{} %b
+		Input 6 7 8 3 4 2 9 1 \\
+		Rekursiv in einzelne Ziffern zerlegt und dann zusammengefügt: \\
+		\begin{tikzpicture}
+			\tikzset{
+    			position label/.style={
+					below = 3pt,
+					text height = 1.5ex,
+					text depth = 1ex
+				},
+				brace/.style={
+					decoration={brace, mirror},
+					decorate
+				}
+			}
+
+			\node [position label] (a1) at (0,0) {$6$};
+			\node [position label] (a2) at (0.5,0) {$7$};
+			\node [position label] (a3) at (1,0) {$8$};
+			\node [position label] (a4) at (1.5,0) {$3$};
+			\node [position label] (a5) at (2,0) {$4$};
+			\node [position label] (a6) at (2.5,0) {$2$};
+			\node [position label] (a7) at (3,0) {$9$};
+			\node [position label] (a8) at (3.5,0) {$1$};
+
+			\draw [brace] (a1.south) -- (a2.south);
+			\draw [brace] (a3.south) -- (a4.south);
+			\draw [brace] (a5.south) -- (a6.south);
+			\draw [brace] (a7.south) -- (a8.south);
+			
+			\node [position label] (b1) at (0.25,-0.7) {$67$};
+			\node [position label] (b2) at (1.25,-0.7) {$38$};
+			\node [position label] (b3) at (2.25,-0.7) {$24$};
+			\node [position label] (b4) at (3.25,-0.7) {$19$};
+			
+			\draw [brace,decoration={raise=4ex}] (a1.south) -- (a4.south);
+			\draw [brace,decoration={raise=4ex}] (a5.south) -- (a8.south);
+			
+			\node [position label] (c1) at (0.75,-1.4) {$3678$};
+			\node [position label] (c2) at (2.75,-1.4) {$1249$};
+			
+			\draw [brace,decoration={raise=8ex}] (a1.south) -- (a8.south);	
+			
+			\node [position label] (d1) at (1.75,-2.1) {$12346789$};
+		\end{tikzpicture}
 	\subsection{} %c
+		Eine Möglichkeit eine absteigende Sortierung zu erreichen, ist das Umkehren von $x[1] \leq y[1]$ zu $x[1] \geq y[1]$.
+		
+		Eine andere Möglichkeit ist das Vertauschen der Fälle in der \texttt{if}-Abfrage. Dabei bleibt die Bedingung der Abfrage gleich, allerdings wird statt dem ersten Element von $x$ das erste Element von $y$ genommen. Im \texttt{else}-Fall wird dann dementsprechend das erste Element von $x$ genommen.
 \section{} %5
 	\subsection{} %a
 	\subsection{} %b
