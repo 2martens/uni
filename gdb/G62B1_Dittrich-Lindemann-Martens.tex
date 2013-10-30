@@ -88,23 +88,29 @@
 		
 		
 \section{Transaktionen}
-	Zunächst betrachten wir den Stromausfall zum Zeitpunkt A. Daraus ergeben sich mehrere Fälle.
+	Zunächst betrachten wir den Stromausfall zum Zeitpunkt A. Daraus ergeben sich mehrere Fälle. Die ersten beiden Fälle betrachten immer ein Datenbanksystem, die letzten beiden immer ein Dateisystem.
 	
 	\begin{itemize}
-		\item	Es gibt kein Datenbanksystem und die Daten wurden nicht auf die Platte geschrieben. In diesem Fall hat der Ausfall keine negativen Folgen, da die Daten sich in einem konsistenten Zustand befinden.
-		\item	Es gibt ein Datenbanksystem und die Daten wurden nicht auf die Platte geschrieben. In diesem Fall hat der Ausfall ebenfalls keine negativen Folgen, da die Transaktion ohnehin nicht beendet war und damit keine Veränderungen hätten vorgenommen werden dürfen.
-		\item	Es gibt kein Datenbanksystem und die Daten wurden auf die Platte geschrieben. In diesem Fall befinden sich die Daten in einem inkonsistenten Zustand, da zwar der Saldo bei dem einen Konto verringert, bei dem anderen aber nicht erhöht wurde. Da es kein DBS gibt, kann dieser inkonsistente Zustand nicht leicht behoben werden.
-		\item	Es gibt ein Datenbanksystem und die Daten wurden auf die Platte geschrieben. In diesem Fall kann das DBS aufgrund von Logs nachvollziehen, dass die Transaktion noch nicht beendet war und wird die Veränderung an dem Saldo von Konto 5 rückgängig machen.
+		\item Das System hat die Änderung am Konto mit der ID 5 nicht persistent gespeichert. Sie bleibt also im Hauptspeicher, bzw. wird daraus gelöscht bei dem Stromausfall. Somit wird die Überweisung nicht durchgeführt und es herrscht der Ausgangszustand.
+
+		\item Das System hat die Änderungen am Konto mit der ID 5 persistent gespeichert. Die Daten werden auf die Festplatte geschrieben. Es gibt nach der Abbuchung der 1000 Euro einen Stromausfall. Das System "`merkt"' sich diesen Zeitpunkt. Nach erneutem Start des Systems wird der letzte bekannte Zustand rekonstruiert und danach in den Ausgangszustand zurück versetzt.
+		
+		\item Das System hat die Änderung am Konto mit der ID 5 noch nicht persistent gespeichert. Sie bleibt also im Hauptspeicher, bzw. wird daraus gelöscht bei dem Stromausfall. Somit wird die Überweisung nicht durchgeführt und es herrscht der Ausgangszustand.
+		
+		\item Das System hat die Änderung am Konto mit der ID 5 persistent gespeichert. Also die Daten bereits auf die Festplatte geschrieben. Somit werden 1000 Euro vom Konto mit der ID 5 abgebucht. Da aber kein Datenbanksystem verwendet wird, gibt es keinen Wiederaufnahmepunkt, an welchem das System wiedereinsteigen könnte. Somit werden keine 1000 Euro dem Konto mit der ID 7 gutgeschrieben und das Geld ist weg.
 	\end{itemize}
 	
-	Anschließend betrachten wir den Stromausfall zum Zeitpunkt B.
-	
+	Anschließend betrachten wir den Stromausfall B.
+
 	\begin{itemize}
-		 \item	Es gibt kein DBS und die geänderten Zustände von Konto 5 und 7 wurden auf die Platte geschrieben. In diesem Fall befinden sich beide Daten in einem konsistenten Zustand und es muss lediglich noch der Kontostand von Konto 5 ausgegeben werden.
-		 \item	Es gibt ein DBS und die geänderten Zustände von Konto 5 und 7 wurden auf die Platte geschrieben. In diesem Fall befinden sich die Daten in einem konsistenten Zustand aber das DBS wird die Änderungen rückabwickeln, da die Transaktion nicht beendet wurde.
-		 \item	Es gibt kein DBS und nur die Änderungen an Konto 7 sind persistiert. In diesem Fall befinden sich die Daten in einem inkonsistenten Zustand, da die Änderung an Konto 5 verloren gegangen ist.
-		 \item	Es gibt ein DBS und nur die Änderungen an Konto 7 sind peristiert. In diesem Fall befinden sich die Daten in einem inkonsistenten Zustand, aber das DBS wird die Änderungen an Konto 7 rückabwickeln und die Daten wieder in einen konsistenten Zustand bringen.
-	\end{itemize}
+		\item Das System hat die Änderung an beiden Konten nicht persistent gespeichert. Sie bleibt also im Hauptspeicher; bzw. wird daraus gelöscht bei dem Stromausfall. Somit wird die Überweisung nicht durchgeführt und es herrscht der Ausgangszustand. Es gibt aber eine falsche Meldung  dem Clienten gegenüber für den Kontostand des Kontos mit der ID 7.
+		
+		\item Das System hat die Änderungen an beiden Konten persistent gespeichert. Die Daten werden auf die Festplatte geschrieben. Es gibt nach der Überweisung einen Stromausfall. Jedoch wurde der Print Vorgang für das Konto mir der ID 5 nicht abgeschlossen. Dieser würde eine benutzerdefinierte Meldung an den Clienten zurückgeben. Da der Komplette Vorgang noch nicht abgeschlossen war werden beide Konten wieder in ihren Ausgangszustand zurück versetzt. Es gibt somit aber eine falsche Meldung dem Clienten gegenüber für den Kontostand des Kontos mit der ID 7.
+		
+		\item Das System hat die Änderungen an beiden Konten nicht persistent gespeichert. Sie bleibt also im Hauptspeicher, bzw. wird daraus gelöscht bei dem Stromausfall. Somit wird die Überweisung nicht durchgeführt und es herrscht der Ausgangszustand. Es gibt somit aber eine falsche Meldung dem Clienten gegenüber für den Kontostand des Kontos mit der ID 7.
+		
+		\item Das System hat die Änderungen an beiden Konten persistent gespeichert. Somit werden an beiden Konten die richtigen Aktionen durchgeführt. Das Konto mit der ID 5 wird mit 1000 Euro belastet und das Konto mit der ID 7 werden 1000 Euro gutgeschrieben. Jedoch gibt es vor dem Printbefehl für das Konto mit der ID 5 den Stromausfall. Der letzte Zustand kann nicht wiederhergestellt werden und somit fehlt dieser Print Befehl und der Client bekommt den falschen Kontostand für dieses Konto angezeigt. 
+	\end{itemize}	
 	
 	Zusammenfassend kann gesagt werden, dass es bei einem Datenbanksystem zu jedem Zeitpunkt immer nur konsistente Daten gibt.  Bei einem reinen Dateisystem können die Daten hingegen inkonsistent zurückgelassen werden.
 
