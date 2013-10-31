@@ -2,7 +2,7 @@
 
 #|
 SE 3 Funktional Blatt 1
-Abgebende: Jim 2martens, 2noack, 0giebel
+Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
 |#
 
 ; 1.1
