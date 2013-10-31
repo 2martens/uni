@@ -34,29 +34,29 @@
 \section{} %1
 	\subsection{} %a
 	$\frac{1}{n} \prec 1$, da man immer eine Konstante $c$ finden kann, für die ab einem $n$ alle weiteren Funktionswerte von $\frac{1}{n}$ unter $c \cdot \mathcal{O}(1)$ liegen.
-	
+
 	$1 \prec \log\log n$, da der Logarithmus schneller wächst als eine konstante Funktion und jeder Logarithmus langsamer wächst als eine polynomielle Funktion. Der doppelte Logarithmus wächst noch langsamer als der einfache Logarithmus.
-	
+
 	$\log\log n \prec \log n$, da der einfache Logarithmus schneller wächst als der doppelte Logarithmus.
-	
+
 	$\log n \asymp \log(n^{3})$, da sich die beiden nur um einen konstanten Faktor $3$ unterscheiden.
-	
+
 	$\log(n^{3}) \prec \log(n^{\log n})$, da $\frac{\log n \cdot \log n}{3 \cdot \log n}$ gegen unendlich geht.
-	
+
 	$\log(n^{\log n}) \prec n^{0.01}$, da jeder Logarithmus langsamer wächst als eine polynomielle Funktion.
-	
+
 	$n^{0.01} \prec \sqrt{n}$, da $\frac{n^{0.5}}{n^{0.01}}$ nach dem Kürzen gegen unendlich geht.
-	
+
 	$\sqrt{n} \prec n \cdot \log n$, da $\frac{n \cdot \log n}{n^{0.5}}$ nach dem Kürzen gegen unendlich geht.
-	
+
 	$n \cdot \log n \prec n^{8}$, da $\frac{n^{8}}{n \cdot \log n}$ nach dem Kürzen gegen unendlich geht, weil jeder Logarithmus langsamer wächst als jede polynomielle Funktion.
-	
+
 	$n^{8} \prec 2^{n}$, da jede Exponentialfunktion schneller wächst als jede polynomielle Funktion.
-	
+
 	$2^{n} \prec 8^{n}$, da $8 > 2$, womit $8^{n}$ klar ersichtlich schneller wächst als $2^{n}$.
-	
+
 	$8^{n} \prec n!$, da $\frac{n \cdot (n-1) \cdot ... \cdot 3 \cdot 2 \cdot 1}{8 \cdot 8 \cdot ... \cdot 8 \cdot 8 \cdot 8}$ ganz offensichtlich gegen unendlich geht.
-	
+
 	$n! \prec n^{n}$, da $\frac{n \cdot n \cdot n \cdot ... \cdot n \cdot n}{n \cdot (n-1) \cdot (n-2) \cdot ... \cdot 2 \cdot 1}$ ebenfalls gegen unendlich geht.
 	\subsection{} %b
 		\subsubsection{} %i
@@ -65,8 +65,8 @@
 		\subsubsection{} %ii
 		Behauptung: $f \in \mathcal{O}(g) \Rightarrow g \in \omega (f)$\\
 		Diese Behauptung gilt nicht. Dies kann mithilfe der Definition der Landau-Symbole erklärt werden. $f \in \mathcal{O}(g)$ besagt, dass $f$ maximal so schnell wie $g$ wächst. Dabei ist auch der Fall enthalten, dass $f$ und $g$ gleich schnell wachsen.
-		
-		Der zweite Teil der Behauptung erfordert jedoch, dass $g$ in jedem Fall schneller als $f$ wächst. Dies steht aber im Widerspruch zu dem ersten Teil der Behauptung. Damit ist die Behauptung widerlegt. 
+
+		Der zweite Teil der Behauptung erfordert jedoch, dass $g$ in jedem Fall schneller als $f$ wächst. Dies steht aber im Widerspruch zu dem ersten Teil der Behauptung. Damit ist die Behauptung widerlegt.
 		\subsubsection{} %iii
 		Behauptung: $f_{c}(n) \in \theta(n) \Leftrightarrow c = 1$.\\
 		Dies ist einfach zu zeigen:\\
@@ -74,7 +74,7 @@
 		\sum\limits_{i=0}^{n} 1^{i} &=& 1 + 1 + 1 + ... + 1 = n + 1
 		\end{alignat*}
 		Denn für $c=1$ werden einfach $n+1$ Einsen aufsummiert. Die Summe $n+1$ wächst asymptotisch genau so schnell wie $n$, da die Konstante $1$ vernachlässigt werden kann.
-		
+
 \section{} %2
 	\subsection{} %a
 	\underline{Behauptung:} $F_{n} \geq 2^{0.5n} : \forall n \geq 6$\\
@@ -103,7 +103,7 @@
 		\end{alignat*}
 		Damit ist die Behauptung sowohl für den Induktionsanfang als auch für ein beliebiges $n$ gezeigt.
 	\subsection{} %b
-	
+
 \section{} %3
 	\subsection{} %a
 		\underline{Behauptung:} Die Formel
@@ -117,7 +117,7 @@
 			\end{pmatrix}^{n} \cdot \begin{pmatrix}
 			 	F_{0} \\
 				F_{1}
-			\end{pmatrix} 	
+			\end{pmatrix}
 		\end{alignat*}
 		gilt für $n \geq 0$.\\
 		\underline{Induktionsanfang:}\\
@@ -145,7 +145,7 @@
 			\end{pmatrix}
 		\end{alignat*}\\
 		\underline{Induktionsannahme:} Die Behauptung gilt für ein beliebig fest gewähltes $n$.\\
-		\underline{Zu zeigen:} 
+		\underline{Zu zeigen:}
 		\begin{alignat*}{2}
 			\begin{pmatrix}
 		 		F_{n+1} \\
@@ -156,7 +156,7 @@
 			\end{pmatrix}^{n+1} \cdot \begin{pmatrix}
 			 	F_{0} \\
 				F_{1}
-			\end{pmatrix} 
+			\end{pmatrix}
 		\end{alignat*}
 		\underline{Induktionsschritt:}
 		\begin{alignat*}{2}
@@ -189,7 +189,7 @@
 				F_{1}
 			\end{pmatrix}
 		\end{alignat*}
-		Nach dem Induktionsprinzip folgt aus dem Induktionsanfang und dem Induktionsschritt die Behauptung.		
+		Nach dem Induktionsprinzip folgt aus dem Induktionsanfang und dem Induktionsschritt die Behauptung.
 	\subsection{} %b
 	$X^{64}$ kann geschickter berechnet werden, wenn man die Ergebnisse von vorigen Multiplikationen speichert. Damit lässt sich $X^{64}$ auf diese Weise berechnen:\\
 	\begin{alignat*}{3}
@@ -206,7 +206,7 @@
 	& X^{72} &\cdot & X^{2} &=& X^{74}
 	\end{alignat*}
 	Demnach würden bei $74$ acht Multiplikationen benötigt.
-	
+
 	Daraus kann die allgemeine Formel für die Anzahl der Multiplikationen $F(n)$ gebildet werden:\\
 	\begin{alignat*}{2}
 	F(n) &=& \begin{cases}
@@ -215,9 +215,9 @@
 		\end{cases}
 	\end{alignat*}
 	Diese rekursive Formel könnte auch als Schleife dargestellt werden. Durch die Halbierung von n bei jedem Durchgang hat die Funktion eine logarithmische Laufzeit. Die Addition ist dabei irrelevant, wenn man sich das asymptotische Verhalten ansieht.
-	
+
 	Damit ist die Behauptung, dass $\mathcal{O}(\log n)$ Multiplikationen ausreichen um $X^{n}$ zu berechnen, gezeigt.
 	\subsection{} %c
-	
+
 	In 3b haben wir gezeigt, dass sich $X^{n}$ in $\mathcal{O}(\log n)$ Multiplikationen ausgerechnen lässt. Daraus lässt sich schließen, dass sich auch die 2x2 Matrix in $\star$ in logarithmischer Zeit errechnen lässt. Eine weitere Multiplikation macht dann auch keinen Unterschied mehr. Daher lässt sich $\star$ in logarithmischer Zeit lösen. Da jeder Logarithmus langsamer wächst und damit schneller ist als eine Potenzfunktion, ist das Matrizen-Verfahren damit echt schneller als das in der Vorlesung vorgestellte Verfahren.
 \end{document}
