@@ -5,6 +5,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{bytefield}
 \usepackage{paralist}
 \usepackage{gauss}
 \usepackage{pgfplots}
@@ -38,22 +39,42 @@ Jim Martens (6420323)}
 	\subsection{} %b
 		Ein voller Baum der Tiefe $l$ hat auf der untersten Ebene $k^{l}$ Knoten. Daraus ergibt sich diese Summe:
 		\[
-			\sum\limits_{i=0}^{l} k^{i}
+			\sum\limits_{i=0}^{l} k^{i} = k^{l+1} - 1
 		\]
 		Dies gilt da in einem vollen Baum die Anzahl Knoten in einer Ebene immer einer Potenz von $k$ entsprechen.
 	\subsection{} %c
 		Ein vollständiger Baum der Tiefe $l$ gleicht bis auf die letzte Ebene einem vollen Baum. In der letzten Ebene $l$ kommen maximal $k^{l} - 1$ Knoten vor, damit es ein vollständiger Baum, aber kein voller Baum ist. Daraus ergibt sich diese leicht abgewandelte Formel:
-		\[
-			\sum\limits_{i=0}^{l-1} \left(k^{i}\right) + c : 1 \leq c < k^{l}
-		\]
+		\begin{alignat*}{2}
+			\sum\limits_{i=0}^{l-1} \left(k^{i}\right) + c &:& 1 \leq c < k^{l}
+		\end{alignat*}
 	\subsection{} %d
 		Jeder Knoten hat genau ein Elternknoten mit dem er über eine Kante verbunden ist. Einzige Ausnahme ist der Wurzelknoten, der kein Elternelement hat und damit auch keine Kante, die mit einem solchen verbunden sein könnte. Daher gibt es genau $n-1$ Kanten.
 \section{} %2
 	\subsection{} %a
+		Laufzeit von Order1:
+		\[
+			T(n) = 2T\left(\frac{n-1}{2}\right) + n^{0}
+		\]
 	\subsection{} %b
 	\subsection{} %c
+		Order1: NAOEIFMRLUSGARTH \\
+		Order2: IEOFARMLNGSAUTRH \\
+		Order3: IEFORLMAGASTHRUN
 	\subsection{} %d
+		T = \begin{bytefield}{10}
+				\bitbox{1}{T}
+				\bitbox{1}{E}
+				\bitbox{1}{E}
+				\bitbox{1}{O}
+				\bitbox{1}{Y}
+				\bitbox{1}{R}
+				\bitbox{1}{E}
+				\bitbox{1}{L}
+				\bitbox{1}{V}
+				\bitbox{1}{L}
+		\end{bytefield}
 	\subsection{} %e
+		ALGORITHMSAREFUN
 \section{} %3
 	\subsection{} %a
 		\begin{alignat*}{2}
@@ -87,7 +108,7 @@ Jim Martens (6420323)}
 		1 2 2 2 4 5 $\circ$ merge (7 9, 8) \\
 		1 2 2 2 4 5 7 $\circ$ merge (9, 8) \\
 		1 2 2 2 4 5 7 8 $\circ$ merge (9, []) \\
-		1 2 2 2 4 5 7 8 9  
+		1 2 2 2 4 5 7 8 9
 	\subsection{} %b
 		Input 6 7 8 3 4 2 9 1 \\
 		Rekursiv in einzelne Ziffern zerlegt und dann zusammengefügt: \\
@@ -117,25 +138,25 @@ Jim Martens (6420323)}
 			\draw [brace] (a3.south) -- (a4.south);
 			\draw [brace] (a5.south) -- (a6.south);
 			\draw [brace] (a7.south) -- (a8.south);
-			
+
 			\node [position label] (b1) at (0.25,-0.7) {$67$};
 			\node [position label] (b2) at (1.25,-0.7) {$38$};
 			\node [position label] (b3) at (2.25,-0.7) {$24$};
 			\node [position label] (b4) at (3.25,-0.7) {$19$};
-			
+
 			\draw [brace,decoration={raise=4ex}] (a1.south) -- (a4.south);
 			\draw [brace,decoration={raise=4ex}] (a5.south) -- (a8.south);
-			
+
 			\node [position label] (c1) at (0.75,-1.4) {$3678$};
 			\node [position label] (c2) at (2.75,-1.4) {$1249$};
-			
-			\draw [brace,decoration={raise=8ex}] (a1.south) -- (a8.south);	
-			
+
+			\draw [brace,decoration={raise=8ex}] (a1.south) -- (a8.south);
+
 			\node [position label] (d1) at (1.75,-2.1) {$12346789$};
 		\end{tikzpicture}
 	\subsection{} %c
 		Eine Möglichkeit eine absteigende Sortierung zu erreichen, ist das Umkehren von $x[1] \leq y[1]$ zu $x[1] \geq y[1]$.
-		
+
 		Eine andere Möglichkeit ist das Vertauschen der Fälle in der \texttt{if}-Abfrage. Dabei bleibt die Bedingung der Abfrage gleich, allerdings wird statt dem ersten Element von $x$ das erste Element von $y$ genommen. Im \texttt{else}-Fall wird dann dementsprechend das erste Element von $x$ genommen.
 \section{} %5
 	\subsection{} %a
