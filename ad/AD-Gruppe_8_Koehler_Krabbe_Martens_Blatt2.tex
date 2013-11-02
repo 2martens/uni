@@ -93,6 +93,21 @@ Jim Martens (6420323)}
 		\end{alignat*}
 		Das Ergebnis der letzten Gleichung ist somit das Minima von $f$. Als weitere Absicherung kann das asymptotische Wachstum betrachtet werden. Für einen kleineren Wert als $e$, ist $\ln(x)$ kleiner als $1$. Das Teilen von $x$ durch diesen Wert geringer als $1$ sorgt dafür, dass das Ergebnis größer als $x$ ist. Lässt man $x$ gegen $1$ laufen, läuft der Bruch gegen unendlich. Auf der anderen Seite kann man $x$ gegen unendlich gehen lassen, dann läuft der Bruch auch gegen unendlich, da eine lineare Funktion schneller wächst, als eine logarithmische. Der konstante Faktor am Ende kann dabei außer Acht gelassen werden.
 	\subsection{} %b
+		Die beste Wahl für $k^{*}$ ist $e$. Es werden im worst-case bei der Heap-Größe $n=10^{l}$ mit $l \in \{1,...,9\}$ diese Anzahl an Schritten benötigt.
+		
+		\begin{tabular}{c|c|c}
+			$l$ & $k = 3$ & $k = 2$ \\
+			\hline
+			1 & 7 & 7 \\
+			2 & 13 & 14 \\
+			3 & 19 & 20 \\
+			4 & 26 & 27 \\
+			5 & 32 & 34 \\
+			6 & 38 & 40 \\
+			7 & 45 & 47 \\ 
+			8 & 51 & 54 \\
+			9 & 57 & 60
+		\end{tabular}
 	\subsection{} %c
 	\subsection{} %d
 	\subsection{} %e
