@@ -195,5 +195,31 @@ Jim Martens (6420323)}
 		Eine andere Möglichkeit ist das Vertauschen der Fälle in der \texttt{if}-Abfrage. Dabei bleibt die Bedingung der Abfrage gleich, allerdings wird statt dem ersten Element von $x$ das erste Element von $y$ genommen. Im \texttt{else}-Fall wird dann dementsprechend das erste Element von $x$ genommen.
 \section{} %5
 	\subsection{} %a
+		Man benutzt einen Stack als Zwischenspeicher und einen Stack als die eigentliche Queue. Soll ein Element in die Queue eingefügt werden, wird jedes Element des Hauptstacks nach und nach entfernt und auf den Speicherstack geschrieben. Dann wird das hinzuzufügende Element in den Hauptstack geschrieben. Danach werden nach und nach alle Elemente aus dem Speicherstack entfernt und auf den Hauptstack geschrieben. So sind in dem Hauptstack die Elemente in der Reihenfolge gespeichert, in der sie ausgelesen werden sollen (FIFO-Prinzip). Soll nun ein Element aus der Queue entfernt werden, wird einfach die pop-Operation an dem Hauptstack aufgerufen, womit das Element, das zuerst eingefügt wurde, entfernt wird, wie es bei einer Queue der Fall ist.
+		
+		\begin{verbatim}
+			function ENQUEUE(e):
+			    if Hauptstack.isEmpty():
+			        Hauptstack.push(e);
+			    else:
+			        for element in Hauptstack:
+			            Speicherstack.push(element);
+			            Hauptstack.pop();
+			        end for
+			        Hauptstack.push(e);
+			        for element in Speicherstack:
+			            Hauptstack.push(element);
+			            Speicherstack.pop();
+			        end for
+			    end if
+			end function
+			
+			function DEQUEUE():
+			    Hauptstack.pop();
+			end function
+		\end{verbatim}
+		
+		Im worst-case ist die Laufzeit von \textsc{Dequeue} $\theta(1)$. Die worst-case Laufzeit von \textsc{Enqueue} ist bei $k$ Elementen $2k+1$. 
 	\subsection{} %b
+		Die worst-case Laufzeit von $n$ \textsc{Enqueue}-Operationen beträgt $n \cdot (2n+1) = 2n^{2} + n$. Die amortisierte Laufzeit beträgt dann $\frac{n(2n+1)}{n} = 2n+1$. Dabei muss beachtet werden, dass bei weniger \textsc{Enqueue}- und mehr \textsc{Dequeue}-Operationen dementsprechend auch das Ergebnis weniger groß ausfällt.
 \end{document}
