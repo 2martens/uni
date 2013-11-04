@@ -149,10 +149,10 @@ Stephan Niendorf (6242417)}
 			(x_{1}, x_{2}) &=& \left(\frac{1}{3} + \frac{1}{3}t, \frac{7}{3} + \frac{4}{3}t\right) \\
 			&=& \left(\frac{1}{3}, \frac{7}{3}\right) + t\left(\frac{1}{3}, \frac{4}{3}\right)
 		\end{alignat*}
-		\begin{alignat*}{2}
-			(x_{3}, x_{2}) &=& \left(t, \frac{7}{3} + \frac{4}{3}t\right) \\
-			&=& \left(0, \frac{7}{3}\right) + t\left(1, \frac{4}{3}\right)
-		\end{alignat*}
+		%\begin{alignat*}{2}
+		%	(x_{3}, x_{2}) &=& \left(t, \frac{7}{3} + \frac{4}{3}t\right) \\
+		%	&=& \left(0, \frac{7}{3}\right) + t\left(1, \frac{4}{3}\right)
+		%\end{alignat*}
 		
 		Da in diesem Fall $x_{1}$ eine Basisvariable ist und somit nicht gleich $t$ ist, stellt $t$ eine beliebige positive Konstante dar. Daher verändert sich auch die Gerade je nach Wahl von $t$. Deswegen ist es nicht möglich genau eine Halbgerade zu finden, auf der die Zielfunktion beliebig große Werte annimmt.
 	\subsection{} %b
@@ -180,7 +180,7 @@ Stephan Niendorf (6242417)}
 			\addplot[no marks, black, -] expression[domain=0:6,samples=100]{4*x + 1} node[pos=0.65,anchor=north]{};
 			\addplot[no marks, black, -] expression[domain=0:6,samples=100]{1*x + 2} node[pos=0.65,anchor=north]{};
 			\addplot[no marks, black, -] expression[domain=0:6,samples=100]{0.5*x - 1} node[pos=0.65,anchor=north]{};
-			\addplot[no marks, black, -] expression[domain=0:6,samples=100]{1.333333333333333*x + 2.33333333333333333} node[pos=0.65,anchor=north]{};
+			%\addplot[no marks, black, -] expression[domain=0:6,samples=100]{1.333333333333333*x + 2.33333333333333333} node[pos=0.65,anchor=north]{};
 			%\node at (axis cs: 2.5,4.5) {(2.25,3.75)};
 			%\node at (axis cs: 6,2) {z};
 			%\draw[>=stealth] (axis cs:1,0) -- (axis cs:1,-6) node [pos=0.65,anchor=north]{};
