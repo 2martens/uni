@@ -1,0 +1,547 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+% some matrix magic
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jan Branitz (6326955), Jim Martens (6420323),\\
+Stephan Niendorf (6242417)}
+\title{Hausaufgaben zum 11. November}
+\maketitle
+\section{} %1
+	\subsection{} %a
+		\subsubsection{} %i
+			Regel vom größten Koeffizienten:
+			
+				\textbf{Aufgabe:} Lösen Sie das folgende LP-Problem mit dem Simplexverfahren:
+		\begin{alignat*}{3}
+			\text{maximiere}\; & 2x_{1} \,&+&\, x_{2} && \\
+			\multicolumn{6}{l}{\text{unter den Nebenbedingungen}} && \\
+			\;& x_{1} \,&+&\, x_{2} \,&\leq & 9 \\
+			\;& x_{1} \,&& &\leq & 2 \\
+			\;& &&\, x_{2} \,&\leq & 8 \\
+			\multicolumn{4}{r}{$x_{1}, x_{2}$} \,&\geq &\, 0
+		\end{alignat*}
+		
+		\textbf{Lösung.}
+		
+		\underline{Starttableau}:
+		\begin{alignat*}{4}
+			x_{3} \,&=&\, 9 \,&-&\, x_{1} \,&-&\, x_{2} \\
+			x_{4} \,&=&\, 2 \,&-&\, x_{1} && \\
+			x_{5} \,&=&\, 8 \,&& &-&\, x_{2} \\ \cline{1 - 7}
+			z &=& &&\, 2x_{1} \,&+&\, x_{2}
+		\end{alignat*}
+		
+		\underline{1. Iteration}:
+		
+		Eingangsvariable: $x_{1}$\\
+		Ausgangsvariable: $x_{4}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			x_{1} \,&=&&\, 2 - x_{4} \\
+			x_{3} \,&=&&\, 9 - \left(2 - x_{4}\right) - x_{2} \\
+			&=&&\, 9 - 2 + x_{4} - x_{2} \\
+			&=&&\, 7 - x_{2} + x_{4} \\
+			x_{5} \,&=&&\, 8 - x_{2} \\
+			z \,&=&&\, 2\left(2 - x_{4}\right) + x_{2} \\
+			&=&&\, 4 - 2x_{4} + x_{2} \\
+			&=&&\, 4 + x_{2} - 2x_{4}
+		\end{alignat*}
+		
+		\underline{Ergebnis der 1. Iteration}:
+		\begin{alignat*}{4}
+			x_{1} \,&=&\, 2 \,&& &-&\, x_{4} \\
+			x_{3} \,&=&\, 7 \,&-&\, x_{2} \,&+&\, x_{4} \\
+			x_{5} \,&=&\, 8 \,&-&\, x_{2} \,&& \\ \cline{1 - 7}
+			z &=& 4 \,&+&\, x_{2} \,&-&\, 2x_{4}
+		\end{alignat*}
+		
+		\underline{2. Iteration}:
+		
+		Eingangsvariable: $x_{2}$ \\
+		Ausgangsvariable: $x_{3}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			x_{2} \,&=&&\, 7 + x_{4} - x_{3} \\
+			x_{1} \,&=&&\, 2 - x_{4}\\
+			x_{5} \,&=&&\, 8 - \left(7 + x_{4} - x_{3}\right) \\
+			&=&&\, 8 - 7 - x_{4} + x_{3} \\
+			&=&&\, 1 - x_{4} + x_{3} \\
+			z \,&=&&\, 4 + \left(7 + x_{4} - x_{3}\right) - 2x_{4} \\
+			&=&&\, 4 + 7 + x_{4} - x_{3} - 2x_{4} \\
+			&=&&\, 11 - x_{4} - x_{3} 
+		\end{alignat*}
+		
+		\underline{Ergebnis der 2. Iteration}:
+		\begin{alignat*}{4}
+			x_{2} \,&=&\, 7 \,&+&\, x_{4} \,&-&\, x_{3} \\
+			x_{1} \,&=&\, 2 \,&-&\, x_{4} \,&& \\
+			x_{5} \,&=&\, 1 \,&-&\, x_{4} \,&+&\, x_{3} \\ \cline{1 - 7}
+			z &=& 11 \,&-&\, x_{4} \,&-&\, x_{3}
+		\end{alignat*}
+		Dieses Tableau liefert die optimale Lösung $x_{1} = 2, x_{2} = 7$ mit $z = 11$.
+		
+		\underline{Startlösung ("`zulässige Basislösung am Anfang"')}:
+		\[
+			x_{1} = 0, x_{2} = 0, x_{3} = 9, x_{4} = 2, x_{5} = 8 \text{ mit } z = 0
+		\]
+		\underline{Zulässige Basislösung nach der 1. Iteration}:
+		\[
+			x_{1} = 2, x_{2} = 0, x_{3} = 7, x_{4} = 0, x_{5} = 8 \text{ mit } z = 4
+		\]
+		\underline{Zulässige Basislösung nach der 2. Iteration}:
+		\[
+			x_{1} = 2, x_{2} = 7, x_{3} = 0, x_{4} = 0, x_{5} = 1 \text{ mit } z = 11
+		\]				
+				
+			Regel vom größten Zuwachs:
+			
+			\textbf{Aufgabe:} Lösen Sie das folgende LP-Problem mit dem Simplexverfahren:
+		\begin{alignat*}{3}
+			\text{maximiere}\; & 2x_{1} \,&+&\, x_{2} && \\
+			\multicolumn{6}{l}{\text{unter den Nebenbedingungen}} && \\
+			\;& x_{1} \,&+&\, x_{2} \,&\leq & 9 \\
+			\;& x_{1} \,&& &\leq & 2 \\
+			\;& &&\, x_{2} \,&\leq & 8 \\
+			\multicolumn{4}{r}{$x_{1}, x_{2}$} \,&\geq &\, 0
+		\end{alignat*}
+		
+		\textbf{Lösung.}
+		
+		\underline{Starttableau}:
+		\begin{alignat*}{4}
+			x_{3} \,&=&\, 9 \,&-&\, x_{1} \,&-&\, x_{2} \\
+			x_{4} \,&=&\, 2 \,&-&\, x_{1} && \\
+			x_{5} \,&=&\, 8 \,&& &-&\, x_{2} \\ \cline{1 - 7}
+			z &=& &&\, 2x_{1} \,&+&\, x_{2}
+		\end{alignat*}
+		
+		\underline{1. Iteration}:
+		
+		Eingangsvariable: $x_{2}$\\
+		Ausgangsvariable: $x_{5}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			x_{2} \,&=&&\, 8 - x_{5} \\
+			x_{3} \,&=&&\, 9 - x_{1} - \left(8 - x_{5}\right) \\
+			&=&&\, 9 - x_{1} - 8 + x_{5} \\
+			&=&&\, 1 - x_{1} + x_{5} \\
+			x_{4} \,&=&&\, 2 - x_{1} \\
+			z \,&=&&\, 2x_{1} + \left(8 - x_{5}\right) \\
+			&=&&\, 2x_{1} + 8 - x_{5} \\
+			&=&&\, 8 + 2x_{1} - x_{5}
+		\end{alignat*}
+		
+		\underline{Ergebnis der 1. Iteration}:
+		\begin{alignat*}{4}
+			x_{2} \,&=&\, 8 \,&& &-&\, x_{5} \\
+			x_{3} \,&=&\, 1 \,&-&\, x_{1} \,&+&\, x_{5} \\
+			x_{4} \,&=&\, 2 \,&-&\, x_{1} \,&& \\ \cline{1 - 7}
+			z &=& 8 \,&+&\, 2x_{1} \,&-&\, x_{5}
+		\end{alignat*}
+		
+		\underline{2. Iteration}:
+		
+		Eingangsvariable: $x_{1}$ \\
+		Ausgangsvariable: $x_{3}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			x_{1} \,&=&&\, 1 + x_{5} - x_{3} \\
+			x_{2} \,&=&&\, 8 - x_{5}\\
+			x_{4} \,&=&&\, 2 - \left(1 + x_{5} - x_{3}\right) \\
+			&=&&\, 2 - 1 - x_{5} + x_{3} \\
+			&=&&\, 1 - x_{5} + x_{3} \\
+			z \,&=&&\, 8 + 2\left(1 + x_{5} - x_{3}\right) - x_{5} \\
+			&=&&\, 8 + 2 + 2x_{5} - 2x_{3} - x_{5} \\
+			&=&&\, 10 + x_{5} - 2x_{3} 
+		\end{alignat*}
+		
+		\underline{Ergebnis der 2. Iteration}:
+		\begin{alignat*}{4}
+			x_{1} \,&=&\, 1 \,&+&\, x_{5} \,&-&\, x_{3} \\
+			x_{2} \,&=&\, 8 \,&-&\, x_{5} \,&& \\
+			x_{4} \,&=&\, 1 \,&-&\, x_{5} \,&+&\, x_{3} \\ \cline{1 - 7}
+			z &=& 10 \,&+&\, x_{5} \,&-&\, 2x_{3}
+		\end{alignat*}
+		
+		\underline{3. Iteration}:
+		
+		Eingangsvariable: $x_{5}$ \\
+		Ausgangsvariable: $x_{4}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			x_{5} \,&=&&\, 1 + x_{3} - x_{4} \\
+			x_{1} \,&=&&\, 1 + \left(1 + x_{3} - x_{4}\right) - x_{3} \\
+			&=&&\, 1 + 1 + x_{3} - x_{4} - x_{3} \\
+			&=&&\, 2 - x_{4} \\
+			x_{2} \,&=&&\, 8 - \left(1 + x_{3} - x_{4}\right) \\
+			&=&&\, 8 - 1 - x_{3} + x_{4} \\
+			&=&&\, 7 - x_{3} + x_{4} \\
+			z \,&=&&\, 10 + \left(1 + x_{3} - x_{4}\right) - 2x_{3} \\
+			&=&&\, 10 + 1 + x_{3} - x_{4} - 2x_{3} \\
+			&=&&\, 11 - x_{3} - x_{4} 
+		\end{alignat*}
+		
+		\underline{Ergebnis der 3. Iteration}:
+		\begin{alignat*}{4}
+			x_{5} \,&=&\, 1 \,&+&\, x_{3} \,&-&\, x_{4} \\
+			x_{1} \,&=&\, 2 \,&& &-&\, x_{4} \\
+			x_{2} \,&=&\, 7 \,&-&\, x_{3} \,&+&\, x_{4} \\ \cline{1 - 7}
+			z &=& 11 \,&-&\, x_{3} \,&-&\, x_{4}
+		\end{alignat*}
+		Dieses Tableau liefert die optimale Lösung $x_{1} = 2, x_{2} = 7$ mit $z = 11$.
+		
+		\underline{Startlösung ("`zulässige Basislösung am Anfang"')}:
+		\[
+			x_{1} = 0, x_{2} = 0, x_{3} = 9, x_{4} = 2, x_{5} = 8 \text{ mit } z = 0
+		\]
+		\underline{Zulässige Basislösung nach der 1. Iteration}:
+		\[
+			x_{1} = 0, x_{2} = 8, x_{3} = 1, x_{4} = 2, x_{5} = 0 \text{ mit } z = 8
+		\]
+		\underline{Zulässige Basislösung nach der 2. Iteration}:
+		\[
+			x_{1} = 1, x_{2} = 8, x_{3} = 0, x_{4} = 1, x_{5} = 0 \text{ mit } z = 10
+		\]
+		\underline{Zulässige Basislösung nach der 3. Iteration}:
+		\[
+			x_{1} = 2, x_{2} = 7, x_{3} = 0, x_{4} = 0, x_{5} = 1 \text{ mit } z = 11
+		\]
+		
+		Die Regel vom größten Koeffizienten schneidet besser ab und ist eine Iteration früher fertig.
+		\subsubsection{} %ii
+			
+			\begin{tikzpicture}[>=stealth]
+				\begin{axis}[
+					ymin=0,ymax=10,
+					x=1cm,
+					y=1cm,
+					axis x line=middle,
+					axis y line=middle,
+					axis line style=->,
+					xlabel={$x_{1}$},
+					ylabel={$x_{2}$},
+					xmin=0,xmax=4
+				]
+
+				\addplot[no marks, black, -] expression[domain=0:3,samples=100]{-1*x + 9} node[pos=0.65,anchor=north]{};
+				\addplot[no marks, black, -] expression[domain=0:3,samples=100]{8} node[pos=0.65,anchor=north]{};
+				\node at (axis cs: 0.25,8.25) {P};
+				\node at (axis cs: 1,8.25) {Q};
+				\node at (axis cs: 2.25,7.25) {R};
+				\node at (axis cs: 2.25,0.25) {S};
+				\node at (axis cs: 0.25,0.25) {T};
+				\draw[>=stealth] (axis cs:2,0) -- (axis cs:2,10) node [pos=0.65,anchor=north]{};
+				\end{axis}
+			\end{tikzpicture}
+			
+			Bei der Regel des größten Koeffizienten wurden die Eckpunkte in der Reihenfolge T, S und R durchlaufen. Bei der Regel des größten Zuwachses wurden die Eckpunkte in der Reihenfolge T, P, Q und R durchlaufen.
+	\subsection{} %b
+		\subsubsection{} %i
+			Regel vom größten Koeffizienten:
+			
+				\textbf{Aufgabe:} Lösen Sie das folgende LP-Problem mit dem Simplexverfahren:
+		\begin{alignat*}{3}
+			\text{maximiere}\; & x_{1} \,&+&\, 2x_{2} && \\
+			\multicolumn{6}{l}{\text{unter den Nebenbedingungen}} && \\
+			\;& x_{1} \,&+&\, 4x_{2} \,&\leq & 4 \\
+			\multicolumn{4}{r}{$x_{1}, x_{2}$} \,&\geq &\, 0
+		\end{alignat*}
+		
+		\textbf{Lösung.}
+		
+		\underline{Starttableau}:
+		\begin{alignat*}{4}
+			x_{3} \,&=&\, 4 \,&-&\, x_{1} \,&-&\, 4x_{2} \\ \cline{1 - 7}
+			z &=& &&\, x_{1} \,&+&\, 4x_{2}
+		\end{alignat*}
+		
+		\underline{1. Iteration}:
+		
+		Eingangsvariable: $x_{2}$\\
+		Ausgangsvariable: $x_{3}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			4x_{2} \,&=&&\, 4 - x_{1}  - x_{3} \\
+			x_{2} \,&=&&\, 1 - \frac{1}{4}x_{1} - \frac{1}{4}x_{3} \\
+			z \,&=&&\, x_{1} + 4\left(1 - \frac{1}{4}x_{1} - \frac{1}{4}x_{3}\right) \\
+			&=&&\, x_{1} + 4 - x_{1} - x_{3} \\
+			&=&&\, 4 - x_{3}
+		\end{alignat*}
+		
+		\underline{Ergebnis der 1. Iteration}:
+		\begin{alignat*}{4}
+			x_{2} \,&=&\, 1 \,&-&\, \frac{1}{4}x_{1} &-&\, \frac{1}{4}x_{3} \\ \cline{1 - 7}
+			z &=& 4 \,&& &-&\, x_{3}
+		\end{alignat*}
+		
+		Dieses Tableau liefert die optimale Lösung $x_{1} = 0, x_{2} = 1$ mit $z = 4$.
+		
+		\underline{Startlösung ("`zulässige Basislösung am Anfang"')}:
+		\[
+			x_{1} = 0, x_{2} = 0, x_{3} = 4 \text{ mit } z = 0
+		\]
+		\underline{Zulässige Basislösung nach der 1. Iteration}:
+		\[
+			x_{1} = 0, x_{2} = 1, x_{3} = 0 \text{ mit } z = 4
+		\]			
+				
+			Regel vom größten Zuwachs:
+			
+			\textbf{Aufgabe:} Lösen Sie das folgende LP-Problem mit dem Simplexverfahren:
+		\begin{alignat*}{3}
+			\text{maximiere}\; & x_{1} \,&+&\, 2x_{2} && \\
+			\multicolumn{6}{l}{\text{unter den Nebenbedingungen}} && \\
+			\;& x_{1} \,&+&\, 4x_{2} \,&\leq & 4 \\
+			\multicolumn{4}{r}{$x_{1}, x_{2}$} \,&\geq &\, 0
+		\end{alignat*}
+		
+		\textbf{Lösung.}
+		
+		\underline{Starttableau}:
+		\begin{alignat*}{4}
+			x_{3} \,&=&\, 4 \,&-&\, x_{1} \,&-&\, 4x_{2} \\ \cline{1 - 7}
+			z &=& &&\, x_{1} \,&+&\, 4x_{2}
+		\end{alignat*}
+		
+		\underline{1. Iteration}:
+		
+		Eingangsvariable: $x_{1}$\\
+		Ausgangsvariable: $x_{3}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			x_{1} \,&=&&\, 4 - 4x_{2}  - x_{3} \\
+			z \,&=&&\, \left(4 - 4x_{2}  - x_{3}\right) + 4x_{2} \\
+			&=&&\, 4 - 4x_{2}  - x_{3} + 4x_{2} \\
+			&=&&\, 4 - x_{3}
+		\end{alignat*}
+		
+		\underline{Ergebnis der 1. Iteration}:
+		\begin{alignat*}{4}
+			x_{1} \,&=&\, 4 \,&-&\, 4x_{2} \,&-&\, x_{3} \\ \cline{1 - 7}
+			z &=& 4 \,&& &-&\, x_{3}
+		\end{alignat*}
+		
+		Dieses Tableau liefert die optimale Lösung $x_{1} = 4, x_{2} = 0$ mit $z = 4$.
+		
+		\underline{Startlösung ("`zulässige Basislösung am Anfang"')}:
+		\[
+			x_{1} = 0, x_{2} = 0, x_{3} = 4 \text{ mit } z = 0
+		\]
+		\underline{Zulässige Basislösung nach der 1. Iteration}:
+		\[
+			x_{1} = 4, x_{2} = 0, x_{3} = 0 \text{ mit } z = 4
+		\]
+		
+		Beide Regeln sind nach der gleichen Anzahl Iterationen fertig, womit es keine bessere Regel gibt.		
+		
+		\subsubsection{} %ii
+		
+			\begin{tikzpicture}[>=stealth]
+				\begin{axis}[
+					ymin=0,ymax=2,
+					x=1cm,
+					y=1cm,
+					axis x line=middle,
+					axis y line=middle,
+					axis line style=->,
+					xlabel={$x_{1}$},
+					ylabel={$x_{2}$},
+					xmin=0,xmax=5
+				]
+
+				\addplot[no marks, black, -] expression[domain=0:4,samples=100]{-0.25*x + 1} node[pos=0.65,anchor=north]{};
+				%\addplot[no marks, black, -] expression[domain=0:3,samples=100]{8} node[pos=0.65,anchor=north]{};
+				\node at (axis cs: 0.25,1.25) {P};
+				\node at (axis cs: 4.25,0.25) {Q};
+				\node at (axis cs: 0.25,0.25) {R};
+				\end{axis}
+			\end{tikzpicture}
+			
+			Bei der Regel mit dem größten Koeffizienten wurden die Eckpunkte in der Reihenfolge R und P durchlaufen. Bei der Regel mit dem größten Zuwachs wurden die Eckpunkte in der Reihenfolge R und Q durchlaufen.
+\section{} %2
+		
+		\textbf{Aufgabe:} Lösen Sie das folgende LP-Problem mit dem Simplexverfahren:
+		\begin{alignat*}{4}
+			\text{maximiere}\; & 8x_{1} \,&-&\, x_{2} \,&+&\, 2x_{3} && \\
+			\multicolumn{8}{l}{\text{unter den Nebenbedingungen}} && \\
+			\;& x_{1} \,&& && &\leq & 2 \\
+			\;& 2x_{1} \,&+&\, 3x_{2} \,&-&\, x_{3} \,&\leq & 4 \\
+			\;& 3x_{1} \,&-&\, 4x_{2} \,&+&\, 2x_{3} \,&\leq & 6 \\
+			\multicolumn{6}{r}{$x_{1}, x_{2}, x_{3}$} \,&\geq &\, 0
+		\end{alignat*}
+		
+		\textbf{Lösung.}
+		
+		\underline{Starttableau}:
+		\begin{alignat*}{5}
+			x_{4} \,&=&\, 2 \,&-&\, x_{1} && && \\
+			x_{5} \,&=&\, 4 \,&-&\, 2x_{1} \,&-&\, 3x_{2} \,&+&\, x_{3} \\
+			x_{6} \,&=&\, 6 \,&-&\, 3x_{1} \,&+&\, 4x_{2} \,&-&\, 2x_{3} \\ \cline{1 - 9}
+			z &=& &&\, 8x_{1} \,&-&\, x_{2} \,&+&\, 2x_{3}
+		\end{alignat*}
+		
+		\underline{1. Iteration}:
+		
+		Eingangsvariable: $x_{1}$\\
+		Ausgangsvariable: $x_{4}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			x_{1} \,&=&&\, 2 - x_{4} \\
+			x_{5} \,&=&&\, 4 - 2\left(2 - x_{4}\right) - 3x_{2} + x_{3} \\
+			&=&&\, 4 - 4 + 2x_{4} - 3x_{2} + x_{3} \\
+			&=&&\, - 3x_{2} + x_{3} + 2x_{4} \\
+			x_{6} \,&=&&\, 6 - 3\left(2 - x_{4}\right) + 4x_{2} - 2x_{3} \\
+			&=&&\, 6 - 6 + 3x_{4} + 4x_{2} - 2x_{3} \\
+			&=&&\, 4x_{2} - 2x_{3} + 3x_{4} \\
+			z \,&=&&\, 8\left(2 - x_{4}\right) - x_{2} + 2x_{3} \\
+			&=&&\, 16 - 8x_{4} - x_{2} + 2x_{3} \\
+			&=&&\, 16 - x_{2} + 2x_{3} - 8x_{4}
+		\end{alignat*}
+		
+		\underline{Ergebnis der 1. Iteration}:
+		\begin{alignat*}{5}
+			x_{1} \,&=&\, 2 \,&&  && &-&\, x_{4} \\
+			x_{5} \,&=&\, 0 \,&-&\, 3x_{2} \,&+&\, x_{3} \,&+&\, 2x_{4} \\
+			x_{6} \,&=&\, 0 \,&+&\, 4x_{2} \,&-&\, 2x_{3} \,&+&\, 3x_{4} \\ \cline{1 - 9}
+			z &=& 16 \,&-&\, x_{2} \,&+&\, 2x_{3} \,&-&\, 8x_{4}
+		\end{alignat*}
+		
+		\underline{2. Iteration}:
+		
+		Eingangsvariable: $x_{3}$ \\
+		Ausgangsvariable: $x_{6}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			2x_{3} \,&=&&\, 4x_{2} + 3x_{4} - x_{6} \\
+			x_{3} \,&=&&\, 2x_{2} + \frac{3}{2}x_{4} - \frac{1}{2}x_{6} \\
+			x_{1} \,&=&&\, 2 - x_{4}\\
+			x_{5} \,&=&&\, - 3x_{2} + \left(2x_{2} + \frac{3}{2}x_{4} - \frac{1}{2}x_{6}\right) + 2x_{4} \\
+			&=&&\, - 3x_{2} + 2x_{2} + \frac{3}{2}x_{4} - \frac{1}{2}x_{6} + 2x_{4} \\
+			&=&&\, - x_{2} + \frac{7}{2}x_{4} - \frac{1}{2}x_{6} \\
+			z \,&=&&\, 16 - x_{2} + 2\left(2x_{2} + \frac{3}{2}x_{4} - \frac{1}{2}x_{6}\right) - 8x_{4} \\
+			&=&&\, 16 - x_{2} + 4x_{2} + 3x_{4} - x_{6} - 8x_{4} \\
+			&=&&\, 16 + 3x_{2} - 5x_{4} - x_{6} 
+		\end{alignat*}
+		
+		\underline{Ergebnis der 2. Iteration}:
+		\begin{alignat*}{5}
+			x_{3} \,&=&\, 0 \,&+&\, 2x_{2} \,&+&\, \frac{3}{2}x_{4} \,&-&\, \frac{1}{2}x_{6} \\
+			x_{1} \,&=&\, 2 \,&& &-&\, x_{4} && \\
+			x_{5} \,&=&\, 0 \,&-&\, x_{2} \,&+&\, \frac{7}{2}x_{4} \,&-&\, \frac{1}{2}x_{6} \\ \cline{1 - 9}
+			z &=& 16 \,&+&\, 3x_{2} \,&-&\, 5x_{4} \,&-&\, x_{6}
+		\end{alignat*}
+		
+		\underline{3. Iteration}:
+		
+		Eingangsvariable: $x_{2}$ \\
+		Ausgangsvariable: $x_{5}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			x_{2} \,&=&&\, \frac{7}{2}x_{4} - \frac{1}{2}x_{6} - x_{5} \\
+			x_{3} \,&=&&\, 2\left(\frac{7}{2}x_{4} - \frac{1}{2}x_{6} - x_{5}\right) + \frac{3}{2}x_{4} - \frac{1}{2}x_{6} \\
+			&=&&\, 7x_{4} - x_{6} - 2x_{5} + \frac{3}{2}x_{4} - \frac{1}{2}x_{6} \\
+			&=&&\, \frac{17}{2}x_{4} - \frac{3}{2}x_{6} - 2x_{5} \\
+			x_{1} \,&=&&\, 2 - x_{4} \\
+			z \,&=&&\, 16 + 3\left(\frac{7}{2}x_{4} - \frac{1}{2}x_{6} - x_{5}\right) - 5x_{4} - x_{6}  \\
+			&=&&\, 16 + \frac{21}{2}x_{4} - \frac{3}{2}x_{6} - 3x_{5} - 5x_{4} - x_{6} \\
+			&=&&\, 16 + \frac{11}{2}x_{4} - \frac{5}{2}x_{6} - 3x_{5} 
+		\end{alignat*}
+		
+		\underline{Ergebnis der 3. Iteration}:
+		\begin{alignat*}{5}
+			x_{2} \,&=&\, 0 \,&+&\, \frac{7}{2}x_{4} \,&-&\, \frac{1}{2}x_{6} \,&-&\, x_{5} \\
+			x_{3} \,&=&\, 0 \,&+&\, \frac{17}{2}x_{4} \,&-&\, \frac{3}{2}x_{6} \,&-&\, 2x_{5} \\
+			x_{1} \,&=&\, 2 \,&-&\, x_{4} && && \\ \cline{1 - 9}
+			z &=& 16 \,&+&\, \frac{11}{2}x_{4} \,&-&\, \frac{5}{2}x_{6} \,&-&\, 3x_{5}
+		\end{alignat*}
+		
+		\underline{4. Iteration}:
+		
+		Eingangsvariable: $x_{4}$ \\
+		Ausgangsvariable: $x_{1}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			x_{4} \,&=&&\, 2 - x_{1} \\
+			x_{2} \,&=&&\, \frac{7}{2}\left(2 - x_{1}\right) - \frac{1}{2}x_{6} - x_{5} \\
+			&=&&\, 7 - \frac{7}{2}x_{1} - \frac{1}{2}x_{6} - x_{5} \\
+			&=&&\, 7 - \frac{1}{2}x_{6} - x_{5} - \frac{7}{2}x_{1} \\
+			x_{3} \,&=&&\, \frac{17}{2}\left(2 - x_{1}\right) - \frac{3}{2}x_{6} - 2x_{5} \\
+			&=&&\, 17 - \frac{17}{2}x_{1} - \frac{3}{2}x_{6} - 2x_{5} \\
+			&=&&\, 17 - \frac{3}{2}x_{6} - 2x_{5} - \frac{17}{2}x_{1} \\
+			z \,&=&&\, 16 + \frac{11}{2}\left(2 - x_{1}\right) - \frac{5}{2}x_{6} - 3x_{5}  \\
+			&=&&\, 16 + 11 - \frac{11}{2}x_{1} - \frac{5}{2}x_{6} - 3x_{5} \\
+			&=&&\, 27 - \frac{5}{2}x_{6} - 3x_{5}  - \frac{11}{2}x_{1}
+		\end{alignat*}
+		
+		\underline{Ergebnis der 4. Iteration}:
+		\begin{alignat*}{5}
+			x_{4} \,&=&\, 2 \,&& && &-&\, x_{1} \\
+			x_{2} \,&=&\, 7 \,&-&\, \frac{1}{2}x_{6} \,&-&\, x_{5} \,&-&\, \frac{7}{2}x_{1} \\
+			x_{3} \,&=&\, 17 \,&-&\, \frac{3}{2}x_{6} \,&-&\, 2x_{5} \,&-&\, \frac{17}{2}x_{1} \\ \cline{1 - 9}
+			z &=& 27 \,&-&\, \frac{5}{2}x_{6} \,&-&\, 3x_{5} \,&-&\, \frac{11}{2}x_{1}
+		\end{alignat*}
+		Dieses Tableau liefert die optimale Lösung $x_{1} = 0, x_{2} = 7, x_{3} = 17$ mit $z = 27$.
+		
+		\underline{Startlösung ("`zulässige Basislösung am Anfang"')}:
+		\[
+			x_{1} = 0, x_{2} = 0, x_{3} = 0, x_{4} = 2, x_{5} = 4, x_{6} = 6  \text{ mit } z = 0
+		\]
+		\underline{Zulässige Basislösung nach der 1. Iteration}:
+		\[
+			x_{1} = 2, x_{2} = 0, x_{3} = 0, x_{4} = 0, x_{5} = 0, x_{6} = 0 \text{ mit } z = 16
+		\]
+		\underline{Zulässige Basislösung nach der 2. Iteration}:
+		\[
+			x_{1} = 2, x_{2} = 0, x_{3} = 0, x_{4} = 0, x_{5} = 0, x_{6} = 0 \text{ mit } z = 16
+		\]
+		\underline{Zulässige Basislösung nach der 3. Iteration}:
+		\[
+			x_{1} = 2, x_{2} = 0, x_{3} = 0, x_{4} = 0, x_{5} = 0, x_{6} = 0 \text{ mit } z = 16
+		\]
+		\underline{Zulässige Basislösung nach der 4. Iteration}:
+		\[
+			x_{1} = 0, x_{2} = 7, x_{3} = 17, x_{4} = 2, x_{5} = 0, x_{6} = 0 \text{ mit } z = 27
+		\]
+		Die erste Iteration ist kein degenerierter Schritt. Aber die zweite und dritte Iteration sind degenerierte Schritte, da sich die zulässige Basislösung nicht geändert hat. Die vierte Iteration ist kein degenerierter Schritt.
+
+\end{document}
