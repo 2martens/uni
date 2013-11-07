@@ -1,0 +1,70 @@
+\documentclass[ngerman]{gdb-aufgabenblatt}
+\usepackage{tikz-er2}
+\renewcommand{\Aufgabenblatt}{2}
+\renewcommand{\Ausgabedatum}{Mi. 30.10.2013}
+\renewcommand{\Abgabedatum}{Do. 14.11.2013}
+\renewcommand{\Gruppe}{Tim Dittrich, Sebastian Lindemann, Jim Martens}
+
+% define how the sections are rendered
+\def\thesection{Aufgabe \arabic{section}:}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{shadows}
+\tikzstyle{every entity} = [top color=white, bottom color=blue!30, 
+                            draw=blue!70, drop shadow]
+\tikzstyle{every weak entity} = [drop shadow={shadow xshift=.7ex, 
+                                 shadow yshift=-.7ex}]
+\tikzstyle{every attribute} = [top color=white, bottom color=blue!30, 
+                               draw=blue!70, node distance=1cm, drop shadow]
+\tikzstyle{every relationship} = [top color=white, bottom color=blue!30, 
+                            draw=blue!70, drop shadow]
+\tikzstyle{every isa} = [top color=white, bottom color=orange!50, 
+                         draw=orange!70, drop shadow]
+\begin{document}
+\section{Informationsmodellierung: Erstellung eines ER-Modells}
+	\subsection{} %a
+	\begin{tikzpicture}[node distance=1.31cm, every edge/.style={link}]
+		\node[entity] (film) {Film};
+		\node[attribute] (filmName) [above left=of film] {\key{Titel}} edge (film);
+  		\node[attribute] (filmStart) [left=of film] {ersterDrehtag} edge (film);
+  		\node[attribute] (filmEnde) [below left=of film] {letzterDrehtag} edge (film);
+		\node[relationship] (relFilmStud) [right=of film] {produziert} edge node [above left=0 and 0.2] {1} (film);		
+		\node[entity] (studio) [right=of relFilmStud] {Studio} edge node [above right=0 and 0.2] {n} (relFilmStud);
+		\node[attribute] (studName) [above=of studio] {\key{Name}} edge (studio);
+		\node[relationship] (relPersStud) [right=of studio] {leitet} edge node [above left=0 and 0.2] {n} (studio);
+		\node[entity] (pers) [below left=3cm and 2cm of relPersStud] {Person} edge node [below left=1 and 1.2] {1} (relPersStud);
+		\node[attribute] (persName) [above right=of pers] {\key{Name}} edge (pers);
+		\node[attribute] (persVName) [right=of pers] {\key{Vorname}} edge (pers);
+		\node[attribute] (persGebDat) [below right=of pers] {Geb.Datum} edge (pers);				
+		\node[isa] (isaPers) [below=of pers] {Is-a} edge[->] (pers);
+		\node[entity] (regi) [left=of isaPers] {Regisseur} edge[->] (isaPers);
+		\node[entity] (schau) [below right=of isaPers] {Schauspieler} edge[->] (isaPers);
+		\node[relationship] (relMarkSchau) [below=of schau] {hat} edge node [above right=0.2 and 0] {n} (schau);
+		\node[entity] (marken) [below=of relMarkSchau] {Markenzeichen} edge node [below right=0.3cm and 0.05cm] {m} (relMarkSchau);
+		\node[relationship] (relSchauFilmChar) [left=of relMarkSchau] {spielt} edge node [above right=0.4 and 0.9] {n} (schau) edge[bend left] node [above left=5.4 and 1.1] {m} (film);
+		\node[entity] (char) [below=of relSchauFilmChar] {Charakter} edge node [below left=0.2 and 0] {1} (relSchauFilmChar);
+		\node[attribute] (charID) [below=of char] {\key{Char.ID}} edge (char);
+		\node[attribute] (charName) [below right=of char] {Name} edge (char);
+		\node[relationship] (relFilmGenre) [below=of filmEnde] {gehört zu} edge node [above right=1.2 and 1] {4} (film);
+		\node[entity] (genre) [below=of relFilmGenre] {Genre} edge node [below left=0.3 and 0] {n} (relFilmGenre);
+		\node[attribute] (genreName) [below=of genre] {\key{Name}} edge (genre);
+		\node[relationship] (relRegFilm) [left=of pers] {führt Regie} edge node [below left=0 and 0] {n} (regi) edge node [above left=0.8 and 0.4] {1} (film);
+		\node[relationship] (relRegiGenre) [right=of genre] {präferiert} edge node [above left=0 and 0.2] {n} (genre) edge node [above right=0.2 and 0.2] {1} (regi);
+		\node[entity] (verh) [left=of char] {Verhandlung};
+		\node[attribute] (verhDatum) [above left=of verh] {Datum} edge (verh);
+		\node[attribute] (verhBudget) [left=of verh] {Budget} edge (verh);
+		\node[relationship] (relRegiStud) [left=of relSchauFilmChar] {nimmt teil} edge node [below left=0.1 and 0.1] {1} (verh) edge node [above right=1 and 0.2] {n} (regi) edge node [above right=4.4 and 1.7] {m} (studio);
+	\end{tikzpicture}
+	\subsection{} %b
+	
+\section{Informationsmodellierung: Beschreibung von ER-Modellen}
+	\subsection{} %a
+	\subsection{} %b
+	\subsection{} %c
+	\subsection{} %d
+\section{Schlüsselkandidaten}
+	\subsection{} %a
+	\subsection{} %b
+\end{document}
