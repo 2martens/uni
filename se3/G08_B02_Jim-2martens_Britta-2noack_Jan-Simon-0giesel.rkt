@@ -123,32 +123,41 @@ eval wird also mit 'peter aufgerufen; eval wertet damit das Symbol peter aus, we
 ; 3
 (define (type-of input)
   (cond ([boolean? input] 'boolean)
-        ([pair? input] 'pair)
         ([list? input] 'list)
+        ([pair? input] 'pair)
         ([symbol? input] 'symbol)
         ([number? input] 'number)
         ([char? input] 'char)
         ([string? input] 'string)
         ([vector? input] 'vector)
         ([procedure? input] 'procedure)
+        (else 'noneOfThem)
         )
   )
 
 ; Ausgaben
 (display "(type-of (+ 3 7)): ")
 (type-of (+ 3 7))
+; zu 'number, da (+ 3 7) zunächst zu 10 und damit einer number ausgewertet wird
 (display "(type-of type-of): ")
 (type-of type-of)
+; zu 'procedure, da type-of eine Funktion ist
 (display "(type-of (type-of type-of)): ")
 (type-of (type-of type-of))
+; zu 'symbol, da (type-of type-of) 'procedure zurückgibt und dies ein Symbol ist
 (display "(type-of (string-ref \"Schneewitchen_und_die_7_Zwerge\" 2)): ")
 (type-of (string-ref "Schneewitchen_und_die_7_Zwerge" 2))
+; zu 'char, da string-ref den char an der Position 2 zurückgibt
 (display "(type-of (lambda (x) x)): ")
 (type-of (lambda (x) x))
+; zu 'procedure, da lambda eine Funktion erstellt
 (define (id z) z)
 (display "(type-of (id cos)): ")
 (type-of (id cos))
+; zu 'procedure, da id den Parameter zurückgibt, welcher eine Funktion ist
 (display "(type-of '(1 2 3)): ")
 (type-of '(1 2 3))
+; zu 'list, da '(1 2 3) eine Liste ist
 (display "(type-of '()): ")
 (type-of '())
+; zu 'list, da '() eine leere Liste ist
