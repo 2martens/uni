@@ -50,13 +50,16 @@ eval wird also mit 'peter aufgerufen; eval wertet damit das Symbol peter aus, we
   (letrec (
            ; rekursive Hilfsfunktion
            (helper (λ (x)
+                     ; 0! ergibt 1
                      (cond ([= 0 x] 1)
+                           ; ansonsten ergibt sich x! aus x*(x-1)!
                            (else (* x (helper (- x 1)))
                                  )
                            )
                      )
                    )
            )
+    ; aufrufen der rekursiven Hilfsfunktion
     (helper n)
     )
   )
@@ -66,10 +69,13 @@ eval wird also mit 'peter aufgerufen; eval wertet damit das Symbol peter aus, we
   (letrec (
            ; rekursive Hilfsfunktion
            (helper (λ (x y)
+                     ; r⁰ ergibt immer 1
                      (cond ([= 0 y] 1)
+                           ; wenn y gerade ist, dann rechne (x^(y/2))² 
                            ([even? y] 
                             (sqr (expt x (/ y 2)))
                             )
+                           ; ansonsten rechne x*x^(y-1)
                            (else 
                             (* (expt x (- y 1)) x)
                             )
@@ -77,16 +83,22 @@ eval wird also mit 'peter aufgerufen; eval wertet damit das Symbol peter aus, we
                      )
                    )
            )
+    ; aufrufen der rekursiven Hilfsfunktion
     (helper r n)
     )
   )
 
 ; 2.3
+; berechnen des Limits hier aus Gründen der Optimierung
+(define limit (power 10 1000))
 (define e 
   (letrec (
            ; rekursive Hilfsfunktion
            (helper (λ (x y)
-                     (cond ([< x (/ 1 (power 10 1000))] 0)
+                     ; wenn x kleiner als 1/(10^1000) ist, breche ab
+                     (cond ([< x (/ 1 limit)] 0)
+                           ; ansonsten addiere x mit dem Ergebnis aus einem weiteren Aufruf
+                           ; der Hilfsfunktion
                            (else 
                             (+ x (helper (/ 1 (fakultaet (+ y 1))) (+ y 1) ))
                             )
@@ -94,7 +106,9 @@ eval wird also mit 'peter aufgerufen; eval wertet damit das Symbol peter aus, we
                      )
                    )
            )
-    (* (helper 1 0) (power 10 1001))
+    ; aufrufen der Hilfsfunktion und multiplizieren des Ergebnisses mit
+    ; 10^1001
+    (* (helper 1 0) 10 limit)
     )
   )
 
@@ -103,11 +117,15 @@ eval wird also mit 'peter aufgerufen; eval wertet damit das Symbol peter aus, we
   (letrec (
            ; rekursive Hilfsfunktion
            (helper (λ (x plus?)
+                     ; wenn x größer ist als 22000, breche ab
                      (cond ([> x 22000] 0)
+                           ; andernfalls fahre fort
                            (else
+                            ; und addiere 1/x
                             (cond (plus?
                                    (+ (/ 1 x) (helper (+ x 2) #f))
                                    )
+                                  ; oder -1/x mit dem Ergebnis eines weiteren Aufrufs der Hilfsfunktion
                                   (else 
                                    (+ (* -1 (/ 1 x)) (helper (+ x 2) #t))
                                    )
@@ -116,11 +134,14 @@ eval wird also mit 'peter aufgerufen; eval wertet damit das Symbol peter aus, we
                            )
                      )
                    ))
-    (* (* (helper 1 #t) 4) (power 10 1000))
+    ; aufrufen der Hilfsfunktion und anschließendes Multiplizieren mit
+    ; 4 und 10^1000
+    (* (* (helper 1 #t) 4) limit)
     )
   )
 
 ; 3
+; Typbestimmung
 (define (type-of input)
   (cond ([boolean? input] 'boolean)
         ([list? input] 'list)
