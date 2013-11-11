@@ -63,9 +63,37 @@
 	Ein Regisseur kann nicht bei zwei Filmen Regie führen, deren Drehzeiten sich überschneiden.
 \section{Informationsmodellierung: Beschreibung von ER-Modellen}
 	\subsection{} %a
+		\begin{itemize}
+			\item	Ein Student hat eine Matrikelnummer und einen Namen.
+			\item	Die Matrikelnummer ist der primäre Schlüssel von Studenten.
+			\item	Ein Student ist in genau einem Studiengang immatrikuliert.
+			\item	Ein Studiengang hat einen Namen, der auch primärer Schlüssel ist.
+			\item	Es können beliebig viele Studenten in einem Studiengang immatrikuliert sein.
+		\end{itemize}
 	\subsection{} %b
+		\begin{itemize}
+			\item	Eine Universität hat einen Namen, der auch primärer Schlüssel ist.
+			\item	Zu einer Universität gehört mindestens ein Hörsaal.
+			\item	Die Universität ist ein starker Entitytyp. Der Hörsaal ist ein schwacher Entitytyp.
+			\item	Ein Hörsaal besteht aus einem Namen und der Anzahl seiner Plätze. Dabei ist der Hörsaal nur durch die Verbindung seines Namens mit dem der Universität eindeutig identifizierbar.
+			\item	Ein Hörsaal gehört zu genau einer Universität.
+		\end{itemize}
 	\subsection{} %c
+		\begin{itemize}
+			\item	Ein Auftrag besteht aus einer Auftragsnummer und einem Datum. Die Auftragsnummer ist der primäre Schlüssel.
+			\item	Ein Ersatzteil besteht aus einem Namen, einem Automodell und einem Preis.
+			\item	Der Name und das Automodell sind zusammen der primäre Schlüssel.
+			\item	Ein Reparaturtyp besteht aus einer Art und einem Festpreis. Die Art ist der primäre Schlüssel.
+			\item	Bei einer Reparatur können beliebig viele Ersatzteile, Reparaturtypen und Aufträge zusammenkommen.
+			\item	Eine Reparatur hat eine Uhrzeit und ein Datum.
+		\end{itemize}
 	\subsection{} %d
+		\begin{itemize}
+			\item	Eine Mannschaft kann in keinem oder beliebig vielen Fußballspielen teilnehmen.
+			\item	Ein Schiedsrichter kann in keinem oder beliebig vielen Fußballspielen teilnehmen.
+			\item	In einem Stadion können keine oder beliebig viele Fußballspiele stattfinden.
+			\item	An einem Fußballspiel können keine oder beliebig viele Mannschaften teilnehmen.
+		\end{itemize}
 \section{Schlüsselkandidaten}
 	\subsection{} %a
 	\subsection{} %b
