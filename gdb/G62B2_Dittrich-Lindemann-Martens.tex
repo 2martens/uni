@@ -96,5 +96,11 @@
 		\end{itemize}
 \section{Schlüsselkandidaten}
 	\subsection{} %a
+		Ein Schlüsselkandidat muss eindeutig sein. Das bedeutet, dass über den Schlüsselkandidat eine Entität eindeutig identifizierbar sein muss. Im gegebenen Beispiel kommen demnach nur das 2. Fach, Telefonnummer und PLZ in Frage. Außerdem muss er minimal sein. Das bedeutet, dass es keinen anderen Schlüsselkandidaten mit weniger Attributen geben darf. Demnach käme die PLZ und das 2. Fach in Betracht.
+		
+		Die Attributkombination Vorname und Hausnummer ist kein Schlüsselkandidat, da es eine Frida Weiß mit Hausnummer 8 und eine Frida Müller mit Hausnummer 8 gibt. Damit gibt es zwei Entitäten mit den gleichen Werten für Vorname und Hausnummer.
 	\subsection{} %b
+		Bei einer unspezifischen Menge an Studenten kann sich jede der Attribute wiederholen. Daher eignet sich keines der Attribute als eindeutiger Schlüsselkandidat. Mögliche Beispiele sind 20 Studenten, die alle aus Fbach kommen, in der gleichen Straße wohnen und die gleiche Fächerkombi studieren. Damit haben sie die gleiche PLZ und die gleiche Vorwahl. Damit bleiben nur Vor- und Nachname, Geburtsdatum, Hausnummer und der restliche Teil der Telefonnummer als Schlüssel. Allerdings gibt es gleichzeitig zwei Geschwister aus Bheim, die außer dem Vornamen keinen Unterschied aufweisen. Schließlich gibt es einen Peter aus Aheim und einen Peter aus Cfeld. Somit ist keines der vorliegenden Attribute eindeutig als Schlüssel.
+		
+		Eine Lösungsmöglichkeit besteht in einer ID, die fortlaufend erhöht wird. Keine ID wird doppelt vergeben und einmal vergebene IDs werden nie mehr vergeben. Solch eine ID wäre immer eindeutig als Schlüssel verwendbar.
 \end{document}
