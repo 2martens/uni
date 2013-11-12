@@ -202,7 +202,7 @@ Stephan Niendorf (6242417)}
 		
 		\underline{Starttableau}:
 		\begin{alignat*}{5}
-			x_{3} \,&=&\, -4 \,&-&\, x_{1} \,&+&\, x_{2} \,&+&\, x_{0} \\
+			x_{3} \,&=&\, -4 \,&+&\, x_{1} \,&+&\, x_{2} \,&+&\, x_{0} \\
 			x_{4} \,&=&\, 2 \,&-&\, x_{1} \,&-&\, 2x_{2} \,&+&\, x_{0} \\
 			x_{5} \,&=&\, -1 \,&+&\, x_{1} \,&-&\, x_{2} \,&+&\, x_{0} \\ \cline{1 - 9}
 			w &=& && && \,&-&\, x_{0}
@@ -215,55 +215,75 @@ Stephan Niendorf (6242417)}
 		
 		Es folgt
 		\begin{alignat*}{2}
-			-x_{0} \,&=&&\, -4 - x_{1} + x_{2} - x_{3} \\
-			x_{0} \,&=&&\, 4 + x_{1} - x_{2} + x_{3} \\			
-			x_{4} \,&=&&\, 2 - x_{1} - 2x_{2} + \left(4 + x_{1} - x_{2} + x_{3}\right) \\			
-			&=&&\, 2 - x_{1} - 2x_{2} + 4 + x_{1} - x_{2} + x_{3} \\
-			&=&&\, 6 - 3x_{2} + x_{3} \\
-			x_{5} \,&=&&\, -1 + x_{1} - x_{2} + \left(4 + x_{1} - x_{2} + x_{3}\right) \\
-			&=&&\, -1 + x_{1} - x_{2} + 4 + x_{1} - x_{2} + x_{3} \\
-			&=&&\, 3 + 2x_{1} - 2x_{2} + x_{3} \\
-			w \,&=&&\, -\left(4 + x_{1} - x_{2} + x_{3}\right) \\
-			&=&&\, -4 - x_{1} + x_{2} - x_{3} \\
+			-x_{0} \,&=&&\, -4 + x_{1} + x_{2} - x_{3} \\
+			x_{0} \,&=&&\, 4 - x_{1} - x_{2} + x_{3} \\			
+			x_{4} \,&=&&\, 2 - x_{1} - 2x_{2} + \left(4 - x_{1} - x_{2} + x_{3}\right) \\			
+			&=&&\, 2 - x_{1} - 2x_{2} + 4 - x_{1} - x_{2} + x_{3} \\
+			&=&&\, 6 - 2x_{1} - 3x_{2} + x_{3} \\
+			x_{5} \,&=&&\, -1 + x_{1} - x_{2} + \left(4 - x_{1} - x_{2} + x_{3}\right) \\
+			&=&&\, -1 + x_{1} - x_{2} + 4 - x_{1} - x_{2} + x_{3} \\
+			&=&&\, 3 - 2x_{2} + x_{3} \\
+			w \,&=&&\, -\left(4 - x_{1} - x_{2} + x_{3}\right) \\
+			&=&&\, -4 + x_{1} + x_{2} - x_{3} \\
 		\end{alignat*}
 		
 		\underline{Ergebnis des Umwandelns}:
 		\begin{alignat*}{5}
-			x_{0} \,&=&\, 4 \,&+&\, x_{1} \,&-&\, x_{2} \,&+&\, x_{3} \\
-			x_{4} \,&=&\, 6 \,&& &-&\, 3x_{2} \,&+&\, x_{3} \\
-			x_{5} \,&=&\, 3 \,&+&\, 2x_{1} \,&-&\, 2x_{2} \,&+&\, x_{3} \\ \cline{1 - 9}
-			w &=& -2 \,&-&\, x_{1} \,&+&\, x_{2} \,&-&\, x_{3}
+			x_{0} \,&=&\, 4 \,&-&\, x_{1} \,&-&\, x_{2} \,&+&\, x_{3} \\
+			x_{4} \,&=&\, 6 \,&-&\, 2x_{1} \,&-&\, 3x_{2} \,&+&\, x_{3} \\
+			x_{5} \,&=&\, 3 \,&& &-&\, 2x_{2} \,&+&\, x_{3} \\ \cline{1 - 9}
+			w &=& -4 \,&+&\, x_{1} \,&+&\, x_{2} \,&-&\, x_{3}
 		\end{alignat*}
 		
 		\underline{1. Iteration}:
 		
-		Eingangsvariable: $x_{2}$ \\
-		Ausgangsvariable: $x_{5}$
+		Eingangsvariable: $x_{1}$ \\
+		Ausgangsvariable: $x_{0}$
 		
 		Es folgt
 		\begin{alignat*}{2}
-			2x_{2} &=&& 3 + 2x_{1} + x_{3} - x_{5} \\
-			x_{2} &=&& \frac{3}{2} + x_{1} + \frac{1}{2}x_{3} - \frac{1}{2}x_{5} \\
-			x_{0} &=&& 4 + x_{1} - \left(\frac{3}{2} + x_{1} + \frac{1}{2}x_{3} - \frac{1}{2}x_{5}\right) + x_{3} \\
-			&=&& 4 + x_{1} - \frac{3}{2} - x_{1} - \frac{1}{2}x_{3} + \frac{1}{2}x_{5} + x_{3}\\
-			&=&& \frac{5}{2} + \frac{1}{2}x_{3} + \frac{1}{2}x_{5} \\
-			x_{4} &=&& 6 - 3\left(\frac{3}{2} + x_{1} + \frac{1}{2}x_{3} - \frac{1}{2}x_{5}\right) + x_{3} \\
-			&=&& 6 - \frac{9}{2} - 3x_{1} + \frac{3}{2}x_{3} - \frac{3}{2}x_{5} + x_{3}\\
-			&=&& \frac{3}{2} - 3x_{1} + \frac{5}{2}x_{3} - \frac{3}{2}x_{5} \\
-			w &=&& -2 - x_{1} + \left(\frac{3}{2} + x_{1} + \frac{1}{2}x_{3} - \frac{1}{2}x_{5}\right) - x_{3} \\
-			&=&& -2 - x_{1} + \frac{3}{2} + x_{1} + \frac{1}{2}x_{3} - \frac{1}{2}x_{5} - x_{3} \\
-			&=&& \frac{1}{2} - \frac{1}{2}x_{3} - \frac{1}{2}x_{5}
+			x_{1} \,&=&&\, 4 - x_{2} + x_{3} - x_{0} \\
+			x_{4} \,&=&&\, 6 - 2\left(4 - x_{2} + x_{3} - x_{0}\right) - 3x_{2} + x_{3} \\
+			&=&&\, 6 - 8 + 2x_{2} - 2x_{3} + 2x_{0} - 3x_{2} + x_{3}\\
+			&=&&\, -2 - x_{2} - x_{3} + 2x_{0} \\
+			x_{5} \,&=&&\, 3 - 2x_{2} + x_{3} \\
+			w \,&=&&\, -4 + \left(4 - x_{2} + x_{3} - x_{0}\right) + x_{2} - x_{3} \\
+			&=&&\, -4 + 4 - x_{2} + x_{3} - x_{0} + x_{2} - x_{3} \\
+			&=&&\, 0 - x_{0}
 		\end{alignat*}
 		
 		\underline{Ergebnis der 1. Iteration}:
 		\begin{alignat*}{5}
-			x_{2} \,&=&\, \frac{3}{2} \,&+&\, x_{1} \,&+&\, \frac{1}{2}x_{3} \,&-&\, \frac{1}{2}x_{5}  \\
-			x_{0} \,&=&\, \frac{5}{2} \,&& &+&\, \frac{1}{2}x_{3} \,&+&\, \frac{1}{2}x_{5} \\
-			x_{4} \,&=&\, \frac{3}{2} \,&-&\, 3x_{1} \,&+&\, \frac{5}{2}x_{3} \,&-&\, \frac{3}{2}x_{5} \\ \cline{1 - 9}
-			w &=& \frac{1}{2} \,&& &-&\, \frac{1}{2}x_{3} \,&-&\, \frac{1}{2}x_{5}
+			x_{1} \,&=&\, 4 \,&-&\, x_{2} \,&+&\, x_{3} \,&-&\, x_{0}  \\
+			x_{4} \,&=&\, -2 \,&-&\, x_{2} \,&-&\, x_{3} \,&+&\, 2x_{0} \\
+			x_{5} \,&=&\, 3 \,&-&\, 2x_{2} \,&+&\, x_{3} \,&& \\ \cline{1 - 9}
+			w &=&  && && &-&\, x_{0}
 		\end{alignat*}
 		
-		Da das Hilfsproblem keine optimale Lösung besitzt, besitzt das ursprüngliche Problem keine zulässige Lösung und ist damit unlösbar.
+		Das Tableau ist optimal. Als optimale Lösung des Hilfsproblem erhält man:
+		\[
+			x_{0} = 0, x_{1} = 4, x_{2} = 0
+		\]
+		
+		Als zulässige Lösung für das ursprüngliche Problem ergibt sich:
+		\[
+			x_{1} = 4, x_{2} = 0
+		\]
+		
+		Die ursprüngliche Zielfunktion lautet $z = x_{1} + 3x_{2}$. Setzt man für $x_{1}$ die rechte Seite der Gleichung im obigen Tableau ein, erhält man:
+		
+		\[
+			z = 4 - x_{2} + x_{3} + 3x_{2}
+		\]
+		
+		Daraus ergibt sich dieses Starttableau:
+		
+		\begin{alignat*}{4}
+			x_{1} \,&=&\, 4 \,&-&\, x_{2} \,&+&\, x_{3} \\
+			x_{4} \,&=&\, -2 \,&-&\, x_{2} \,&-&\, x_{3} \\
+			x_{5} \,&=&\, 3 \,&-&\, 2x_{2} \,&+&\, x_{3} \\ \cline{1 - 7}
+			z \,&=&\, 4 \,&+&\, 2x_{2} \,&+&\, x_{3}
+		\end{alignat*}
 		
 	\subsection{} %b
 		\textbf{Aufgabe:} Lösen Sie das folgende LP-Hilfsproblem mit dem Simplexverfahren:
