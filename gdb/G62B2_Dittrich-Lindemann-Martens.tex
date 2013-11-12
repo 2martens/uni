@@ -73,22 +73,27 @@
 	\subsection{} %b
 		\begin{itemize}
 			\item	Eine Universität hat einen Namen, der auch primärer Schlüssel ist.
-			\item	Zu einer Universität gehört mindestens ein Hörsaal.
+			\item	Zu einer Universität gehören mindestens ein bis beliebig viele Hörsäle.
 			\item	Die Universität ist ein starker Entitytyp. Der Hörsaal ist ein schwacher Entitytyp.
-			\item	Ein Hörsaal besteht aus einem Namen und der Anzahl seiner Plätze. Dabei ist der Hörsaal nur durch die Verbindung seines Namens mit dem der Universität eindeutig identifizierbar.
-			\item	Ein Hörsaal gehört zu genau einer Universität.
+			\item	Ein Hörsaal besteht aus einem Sekundärschlüssel (Name) und der Anzahl seiner Plätze (\#Plaetze).
+			\item	Ein Hörsaal gehört zu genau einer Universität und ist existenzabhängig von dieser.
 		\end{itemize}
 	\subsection{} %c
 		\begin{itemize}
-			\item	Ein Auftrag besteht aus einer Auftragsnummer und einem Datum. Die Auftragsnummer ist der primäre Schlüssel.
+			\item	Ein Auftrag besteht aus einer Auftragsnummer und einem Datum. Die Auftragsnummer (ANR) ist der primäre Schlüssel.
 			\item	Ein Ersatzteil besteht aus einem Namen, einem Automodell und einem Preis.
-			\item	Der Name und das Automodell sind zusammen der primäre Schlüssel.
+			\item	Die Kombination Name und Automodell ist der primäre Schlüssel.
 			\item	Ein Reparaturtyp besteht aus einer Art und einem Festpreis. Die Art ist der primäre Schlüssel.
-			\item	Bei einer Reparatur können beliebig viele Ersatzteile, Reparaturtypen und Aufträge zusammenkommen.
-			\item	Eine Reparatur hat eine Uhrzeit und ein Datum.
+			\item	Zu jedem Auftrag kann es beliebig viele Ersatzteile und Reparaturtypen geben.
+			\item	Zu jedem Ersatzteil kann ess beliebig viele Aufträge und Reparaturtypen geben.
+			\item	Zu jedem Reparaturtyp kann es beliebig viele Ersatzteile und Aufträge geben.
+			\item	Die Beziehung (Relationship) Reparatur hat eine Uhrzeit und ein Datum.
 		\end{itemize}
 	\subsection{} %d
 		\begin{itemize}
+			\item	Die drei Entity-Typen besitzen keine Attribute und somit auch keinen Primärschlüssel.
+			\item	Sie werden durch die Relationship "`Fußballspiel"' in Verbindung gesetzt.
+			\item	Der Entity-Typ Mannschaft zeichnet sich durch eine reflexive Relationship aus. Daher können Mannschaften auch untereinander in Beziehung gesetzt werden.
 			\item	Eine Mannschaft kann in keinem oder beliebig vielen Fußballspielen teilnehmen.
 			\item	Ein Schiedsrichter kann in keinem oder beliebig vielen Fußballspielen teilnehmen.
 			\item	In einem Stadion können keine oder beliebig viele Fußballspiele stattfinden.
