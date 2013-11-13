@@ -1,0 +1,85 @@
+\documentclass[10pt,a4paper,oneside,english,numbers=noenddot,titlepage]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+%\def\thesection{\arabic{section})}
+%\def\thesubsection{\alph{subsection})}
+%\def\thesubsubsection{(\roman{subsubsection})}
+% some matrix magic
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\addto{\captionsenglish}{\renewcommand{\refname}{Bibliography}}
+
+\begin{document}
+\author{Jim Martens}
+\title{Outline about ``With what methods can we understand natural language to build dialog systems?''}
+%\title{Outline about "Mit welchen Methoden können wir natürliche Sprache verstehen um Dialogsysteme aufzubauen?"}
+\maketitle
+\section*{Abstract}
+	This is a placeholder for the abstract.
+\tableofcontents
+\clearpage
+
+\section{Introduction}
+	\begin{itemize}
+		\item	two kinds of natural language: spoken language and written language
+		\item	will concentrate on written language
+		\item	important method for written language: parsing
+		\item	different approaches for the kind of grammar being used
+	\end{itemize}
+\section{Evaluation of approaches}
+	\subsection{CYK, PCFG, lexicalized PCFG, DCG}
+		\begin{itemize}
+			\item	presents the context-free approach explained by Norvig and Russel\cite{Russel2010}
+		\end{itemize}
+	\subsection{Link Grammar}
+		\begin{itemize}
+			\item	presents an alternative to PCFGs; referencing Sleator here\cite{Sleator1993}
+		\end{itemize}
+	\subsection{Dependency grammar}
+		\begin{itemize}
+			\item	presents dependency grammar here, referencing Paskin\cite{Paskin2001}
+		\end{itemize}
+	\subsection{Categorial grammar}
+		\begin{itemize}
+			\item	presents categorial grammars, using Clark\cite{Clark2004} here
+		\end{itemize}
+		
+\section{Critical discussion}
+	\begin{itemize}
+		\item	compares the presented grammar approaches with each other
+	\end{itemize}
+	
+\section{Conclusion}
+	 \begin{itemize}
+	 	\item	summarizes the results of the critical discussion
+	 	\item	depending on the results: may give an advice which approach is more useful/easier etc.
+	 \end{itemize}
+
+\clearpage
+
+\bibliography{prosem-ki}
+\bibliographystyle{ieeetr}
+\addcontentsline{toc}{section}{Bibliography}
+\end{document}
