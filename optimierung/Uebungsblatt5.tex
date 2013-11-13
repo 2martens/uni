@@ -1,0 +1,230 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+% some matrix magic
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jan Branitz (6326955), Jim Martens (6420323),\\
+Stephan Niendorf (6242417)}
+\title{Hausaufgaben zum 18. November}
+\maketitle
+\section{} %1
+	\subsection{} %a
+		\begin{alignat*}{15}
+			\text{maximiere}\; & 2v_{01} \,&+&\, 3v_{02} \,&+&\, v_{03} \,&+&\, 7v_{04} && && && && && && && && && && && \\
+			\multicolumn{30}{l}{\text{unter den Nebenbedingungen}} && \\
+			\;&\, v_{01} \,&& && && && && && && && && && && && && \,&\leq &\, 2 \\
+			\;& &&\, v_{02} \,&& && && && && && && && && && && && \,&\leq &\, 3 \\
+			\;& && &&\, v_{03} \,&& && && && && && && && && && && \,&\leq &\, 1 \\
+			\;& && && &&\, v_{04} \,&& && && && && && && && && && \,&\leq &\, 7 \\
+			\;& && && && &&\, v_{16} \,&& && && && && && && && && \,&\leq &\, 5 \\
+			\;& && && && && &&\, v_{21} \,&& && && && && && && && \,&\leq &\, 4 \\
+			\;& && && && && && &&\, v_{25} \,&& && && && && && && \,&\leq &\, 4 \\
+			\;& && && && && && && &&\, v_{34} \,&& && && && && && \,&\leq &\, 4 \\
+			\;& && && && && && && && &&\, v_{35} \,&& && && && && \,&\leq &\, 3 \\
+			\;& && && && && && && && && &&\, v_{37} \,&& && && && \,&\leq &\, 2 \\
+			\;& && && && && && && && && && &&\, v_{47} \,&& && && \,&\leq &\, 3 \\
+			\;& && && && && && && && && && && &&\, v_{56} \,&& && \,&\leq &\, 2 \\
+			\;& && && && && && && && && && && && &&\, v_{57} \,&& \,&\leq &\, 8 \\
+			\;& && && && && && && && && && && && && &&\, v_{67} \,&\leq &\, 3 \\
+			\;&\, v_{01} && && && &-&\, v_{16} \,&+&\, v_{21} \,&& && && && && && && && \,&=&\, 0 \\
+			\;& &&\, v_{02} \,&& && && &-&\, v_{21} \,&-&\, v_{25} \,&& && && && && && && \,&=&\, 0 \\
+			\;& && &&\, v_{03} \,&& && && && &-&\, v_{34} \,&-&\, v_{35} \,&-&\, v_{37} \,&& && && && \,&=&\, 0 \\
+			\;& && && &&\, v_{04} \,&& && && &+&\, v_{34} \,&& && &-&\, v_{47} \,&& && && \,&=&\, 0 \\
+			\;& && && && && && &&\, v_{25} \,&& &+&\, v_{35} \,&& && &-&\, v_{56} \,&-&\, v_{57} \,&& \,&=&\, 0 \\
+			\;& && && && &&\, v_{16} \,&& && && && && && &+&\, v_{56} \,&& &-&\, v_{67} \,&=&\, 0 \\
+			\multicolumn{28}{r}{$v_{01}, v_{02}, v_{03}, v_{04}, v_{16}, v_{21}, v_{25}, v_{34}, v_{35}, v_{37}, v_{47}, v_{56}, v_{57}, v_{67}$} \,&\geq &\, 0
+		\end{alignat*}
+	\subsection{} %b
+		\begin{alignat*}{12}
+			\text{minimiere}\; & 5v_{01} \,&+&\, 4v_{02} \,&+&\, 3v_{03} \,&+&\, 3v_{16} \,&+&\, 6v_{21} \,&+&\, v_{23} \,&+&\, 5v_{24} \,&+&\, 5v_{35} \,&+&\, 3v_{45} \,&+&\, 4v_{46} \,&+&\, 2v_{56} \,&& \\
+			\multicolumn{24}{l}{\text{unter den Nebenbedingungen}} && \\
+			\;&\, v_{01} \,&+&\, v_{02} \,&+&\, v_{03} \,&& && && && && && && && \,&=&\, 6 \\
+			\;&\, v_{01} \,&& && && && && && && && && && \,&\leq &\, 3 \\
+			\;& &&\, v_{02} \,&& && && && && && && && && \,&\leq &\, 4 \\
+			\;& && &&\, v_{03} \,&& && && && && && && && \,&\leq &\, 5 \\
+			\;& && && &&\, v_{16} \,&& && && && && && && \,&\leq &\, 1 \\
+			\;& && && && &&\, v_{21} \,&& && && && && && \,&\leq &\, 6 \\
+			\;& && && && && &&\, v_{23} \,&& && && && && \,&\leq &\, 7 \\
+			\;& && && && && && &&\, v_{24} \,&& && && && \,&\leq &\, 4 \\
+			\;& && && && && && && &&\, v_{35} \,&& && && \,&\leq &\, 2 \\
+			\;& && && && && && && && &&\, v_{45} \,&& && \,&\leq &\, 4 \\
+			\;& && && && && && && && && &&\, v_{46} \,&& \,&\leq &\, 7 \\
+			\;& && && && && && && && && && &&\, v_{56} \,&\leq &\, 4 \\
+			\;&\, v_{01} && && &-&\, v_{16} \,&+&\, v_{21} \,&& && && && && && \,&=&\, 0 \\
+			\;& &&\, v_{02} \,&& && &-&\, v_{21} \,&-&\, v_{23} \,&-&\, v_{24} \,&& && && && \,&=&\, 0 \\
+			\;& && &&\, v_{03} \,&& && &+&\, v_{23} \,&& &-&\, v_{35} \,&& && && \,&=&\, 0 \\
+			\;& && && && && && &&\, v_{24} \,&& &-&\, v_{45} \,&-&\, v_{46} \,&& \,&=&\, 0 \\
+			\;& && && && && && && &&\, v_{35} \,&+&\, v_{45} \,&& &-&\, v_{56} \,&=&\, 0 \\
+			\multicolumn{22}{r}{$v_{01}, v_{02}, v_{03}, v_{16}, v_{21}, v_{23}, v_{24}, v_{35}, v_{45}, v_{46}, v_{56}$} \,&\geq &\, 0
+		\end{alignat*}
+	\subsection{} %c
+		\begin{alignat*}{5}
+			\text{minimiere}\; & c_{11}x_{11} \,&+&\, ... \,&+&\, c_{35}x_{35} \,&& && \\
+			\multicolumn{10}{l}{\text{unter den Nebenbedingungen}} \\
+			\; & x_{11} \,&+&\, ... \,&+&\, x_{35} \,&=&\, 3 && \\
+			\; & x_{11} \,&+&\, ... \,&+&\, x_{15} \,&=&\, 1 && \\
+			\; & x_{21} \,&+&\, ... \,&+&\, x_{25} \,&=&\, 1 && \\
+			\; & x_{31} \,&+&\, ... \,&+&\, x_{35} \,&=&\, 1 && \\
+			\multicolumn{6}{r}{$x_{ij}$} \,&\in &\, \{0,1\} &\;  (i = 1, 2, 3) &\; (j = 1, 2, 3, 4, 5)
+		\end{alignat*}
+\section{} %2
+		\textbf{Aufgabe:} Lösen Sie das folgende LP-Hilfsproblem mit dem Simplexverfahren:
+		\begin{alignat*}{4}
+			\text{maximiere}\; & && &-&\, x_{0} \,&& \\
+			\multicolumn{8}{l}{\text{unter den Nebenbedingungen}} \\
+			\;-&\, 2x_{1} \,&-&\, x_{2} \,&-&\, x_{0} \,&\leq &\, -3 \\
+			\;-&\, 2x_{1} \,&-&\, 2x_{2} \,&-&\, x_{0} \,&\leq &\, -5 \\
+			\;-&\, x_{1} \,&-&\, 4x_{2} \,&-&\, x_{0} \,&\leq &\, -4 \\
+			\multicolumn{6}{r}{$x_{0}, x_{1}, x_{2}$} \,&\geq &\, 0
+		\end{alignat*}
+		
+		\textbf{Lösung.}
+		
+		\underline{Starttableau}:
+		\begin{alignat*}{5}
+			x_{3} \,&=&\, -3 \,&+&\, 2x_{1} \,&+&\, x_{2} \,&+&\, x_{0} \\
+			x_{4} \,&=&\, -5 \,&+&\, 2x_{1} \,&+&\, 2x_{2} \,&+&\, x_{0} \\
+			x_{5} \,&=&\, -4 \,&+&\, x_{1} \,&+&\, 4x_{2} \,&+&\, x_{0} \\ \cline{1 - 9}
+			w &=& && && \,&-&\, x_{0}
+		\end{alignat*}
+		
+		Umwandeln in ein zulässiges Tableau:
+				
+		Eingangsvariable: $x_{0}$\\
+		Ausgangsvariable: $x_{4}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			-x_{0} \,&=&&\, -5 + 2x_{1} + 2x_{2} - x_{4} \\
+			x_{0} \,&=&&\, 5 - 2x_{1} - 2x_{2} + x_{4} \\			
+			x_{3} \,&=&&\, -3 + 2x_{1} + x_{2} + \left(5 - 2x_{1} - 2x_{2} + x_{4}\right) \\			
+			&=&&\, -3 + 2x_{1} + x_{2} + 5 - 2x_{1} - 2x_{2} + x_{4} \\
+			&=&&\, 2 - x_{2} + x_{4} \\
+			x_{5} \,&=&&\, -4 + x_{1} + 4x_{2} + \left(5 - 2x_{1} - 2x_{2} + x_{4}\right) \\
+			&=&&\, -4 + x_{1} + 4x_{2} + 5 - 2x_{1} - 2x_{2} + x_{4} \\
+			&=&&\, 1 - x_{1} + 2x_{2} + x_{4} \\
+			w \,&=&&\, -\left(5 - 2x_{1} - 2x_{2} + x_{4}\right) \\
+			&=&&\, -5 + 2x_{1} + 2x_{2} - x_{4} \\
+		\end{alignat*}
+		
+		\underline{Ergebnis des Umwandelns}:
+		\begin{alignat*}{5}
+			x_{0} \,&=&\, 5 \,&-&\, 2x_{1} \,&-&\, 2x_{2} \,&+&\, x_{4} \\
+			x_{3} \,&=&\, 2 \,&& &-&\, x_{2} \,&+&\, x_{4} \\
+			x_{5} \,&=&\, 1 \,&-&\, x_{1} \,&+&\, 2x_{2} \,&+&\, x_{4} \\ \cline{1 - 9}
+			w &=& -5 \,&+&\, 2x_{1} \,&+&\, 2x_{2} \,&-&\, x_{4}
+		\end{alignat*}
+		
+		\underline{1. Iteration}:
+		
+		Eingangsvariable: $x_{1}$ \\
+		Ausgangsvariable: $x_{5}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			x_{1} \,&=&&\, 1 + 2x_{2} + x_{4} - x_{5} \\
+			x_{0} \,&=&&\, 5 - 2\left(1 + 2x_{2} + x_{4} - x_{5}\right) - 2x_{2} + x_{4} \\
+			&=&&\, 5 - 2 - 4x_{2} - 2x_{4} + 2x_{5} - 2x_{2} + x_{4} \\
+			&=&&\, 3 - 6x_{2} - x_{4} + 2x_{5} \\
+			x_{3} \,&=&&\, 2 - x_{2} + x_{4} \\			
+			w \,&=&&\, -5 + 2\left(1 + 2x_{2} + x_{4} - x_{5}\right) + 2x_{2} - x_{4} \\
+			&=&&\, -5 + 2 + 4x_{2} + 2x_{4} - 2x_{5} + 2x_{2} - x_{4} \\
+			&=&&\, -3 + 6x_{2} + x_{4} - 2x_{5}
+		\end{alignat*}
+		
+		\underline{Ergebnis der 1. Iteration}:
+		\begin{alignat*}{5}
+			x_{1} \,&=&\, 1 \,&+&\, 2x_{2} \,&+&\, x_{4} \,&-&\, x_{5}  \\
+			x_{0} \,&=&\, 3 \,&-&\, 6x_{2} \,&-&\, x_{4} \,&+&\, 2x_{5} \\
+			x_{3} \,&=&\, 2 \,&-&\, x_{2} \,&+&\, x_{4} \,&& \\ \cline{1 - 9}
+			w &=&\, -3 \,&+&\, 6x_{2} \,&+&\, x_{4} \,&-&\, 2x_{5}
+		\end{alignat*}
+		
+		\underline{2. Iteration}:
+		
+		Eingangsvariable: $x_{2}$ \\
+		Ausgangsvariable: $x_{0}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			6x_{2} \,&=&&\, 3 - x_{4} + 2x_{5} - x_{0} \\
+			x_{2} \,&=&&\, \frac{1}{2} - \frac{1}{6}x_{4} + \frac{1}{3}x_{5} - \frac{1}{6}x_{0} \\
+			x_{1} \,&=&&\, 1 + 2\left(\frac{1}{2} - \frac{1}{6}x_{4} + \frac{1}{3}x_{5} - \frac{1}{6}x_{0}\right) + x_{4} - x_{5} \\
+			&=&&\, 1 + 1 - \frac{1}{3}x_{4} + \frac{2}{3}x_{5} - \frac{1}{3}x_{0} + x_{4} - x_{5} \\
+			&=&&\, 2 + \frac{2}{3}x_{4} - \frac{1}{3}x_{5} - \frac{1}{3}x_{0} \\
+			x_{3} \,&=&&\, 2 - \left(\frac{1}{2} - \frac{1}{6}x_{4} + \frac{1}{3}x_{5} - \frac{1}{6}x_{0}\right) + x_{4} \\		
+			&=&&\, 2 - \frac{1}{2} + \frac{1}{6}x_{4} - \frac{1}{3}x_{5} + \frac{1}{6}x_{0} + x_{4} \\
+			&=&&\, \frac{3}{2} + \frac{7}{6}x_{4} - \frac{1}{3}x_{5} + \frac{1}{6}x_{0} \\
+			w \,&=&&\, -3 + 6\left(\frac{1}{2} - \frac{1}{6}x_{4} + \frac{1}{3}x_{5} - \frac{1}{6}x_{0}\right) + x_{4} - 2x_{5} \\
+			&=&&\, -3 + 3 - x_{4} + 2x_{5} - x_{0} + x_{4} - 2x_{5} \\
+			&=&&\, 0 - x_{0}
+		\end{alignat*}
+		
+		\underline{Ergebnis der 2. Iteration}:
+		\begin{alignat*}{5}
+			x_{2} \,&=&\, \frac{1}{2} \,&-&\, \frac{1}{6}x_{4} \,&+&\, \frac{1}{3}x_{5} \,&-&\, \frac{1}{6}x_{0}  \\
+			x_{1} \,&=&\, 2 \,&+&\, \frac{2}{3}x_{4} \,&-&\,\frac{1}{3}x_{5} \,&-&\, \frac{1}{3}x_{0} \\
+			x_{3} \,&=&\, \frac{3}{2} \,&+&\, \frac{7}{6}x_{4} \,&-&\, \frac{1}{3}x_{5} \,&+&\, \frac{1}{6}x_{0} \\ \cline{1 - 9}
+			w &=& && && &-&\, x_{0}
+		\end{alignat*}
+		
+		Das Tableau ist optimal. Als optimale Lösung des Hilfsproblem erhält man:
+		\[
+			x_{0} = 0, x_{1} = 2, x_{2} = \frac{1}{2}
+		\]
+		
+		Als zulässige Lösung für das ursprüngliche Problem ergibt sich:
+		\[
+			x_{1} = 2, x_{2} = \frac{1}{2}
+		\]
+		
+		Die ursprüngliche Zielfunktion lautet $z = -3x_{1} - 5x_{2}$. Setzt man für $x_{1}$ und $x_{2}$ die rechten Seiten der Gleichungen im obigen Tableau ein, erhält man:
+		
+		\[
+			z = -\frac{17}{2} - \frac{7}{6}x_{4} - \frac{2}{3}x_{5}
+		\]
+		
+		Daraus ergibt sich dieses Starttableau:
+		
+		\begin{alignat*}{4}
+			x_{2} \,&=&\, \frac{1}{2} \,&-&\, \frac{1}{6}x_{4} \,&+&\, \frac{1}{3}x_{5} \\
+			x_{1} \,&=&\, 2 \,&+&\, \frac{2}{3}x_{4} \,&-&\, \frac{1}{3}x_{5} \\
+			x_{3} \,&=&\, \frac{3}{2} \,&+&\, \frac{7}{6}x_{4} \,&-&\, \frac{1}{3}x_{5} \\ \cline{1 - 7}
+			z \,&=&\, -\frac{17}{2} \,&-&\, \frac{7}{6}x_{4} \,&-&\, \frac{2}{3}x_{5}
+		\end{alignat*}
+		
+		Es lässt sich leicht erkennen, dass das Starttableau zugleich auch die optimale Lösung enthält. Die optimale Lösung für das Ölraffinerieproblem lautet demnach wie folgt:
+		\[
+			x_{1} = 2, x_{2} = \frac{1}{2}
+		\]
+		
+		Daraus ergibt sich durch Einsetzen in die Zielfunktion des ursprünglichen Minimierungsproblems, dass die geringsten Kosten unter Beachtung der Nebenbedingungen bei $8.5$ Euro liegen.
+\end{document}
