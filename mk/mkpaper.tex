@@ -1,0 +1,277 @@
+\documentclass[12pt,twoside,ngerman]{scrartcl}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Meta informations:
+\newcommand{\trauthor}{Jim Martens}
+\newcommand{\trtype}{Paper} %{Seminararbeit} %{Proseminararbeit}
+\newcommand{\trcourse}{Einf\"uhrung in das wissenschaftliche Arbeiten}
+\newcommand{\trtitle}{Elektronische Demokratie}
+\newcommand{\trmatrikelnummer}{6420323}
+\newcommand{\tremail}{2martens@informatik.uni-hamburg.de}
+\newcommand{\trarbeitsbereich}{}
+\newcommand{\trdate}{10.02.2014}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Languages:
+
+% Falls die Ausarbeitung in Deutsch erfolgt:
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+%\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}	 				
+\selectlanguage{ngerman}
+
+% If the thesis is written in English:
+%\usepackage[english]{babel} 						
+%\selectlanguage{english}
+%\addto{\captionsenglish}{\renewcommand{\refname}{Bibliography}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bind packages:
+\usepackage{acronym}                    % Acronyms
+\usepackage{algorithmic}								% Algorithms and Pseudocode
+\usepackage{algorithm}									% Algorithms and Pseudocode
+\usepackage{amsfonts}                   % AMS Math Packet (Fonts)
+\usepackage{amsmath}                    % AMS Math Packet
+\usepackage{amssymb}                    % Additional mathematical symbols
+\usepackage{amsthm}
+\usepackage{booktabs}                   % Nicer tables
+%\usepackage[font=small,labelfont=bf]{caption} % Numbered captions for figures
+\usepackage{color}                      % Enables defining of colors via \definecolor
+\definecolor{uhhRed}{RGB}{254,0,0}		  % Official Uni Hamburg Red
+\definecolor{uhhGrey}{RGB}{122,122,120} % Official Uni Hamburg Grey
+\usepackage{fancybox}                   % Gleichungen einrahmen
+\usepackage{fancyhdr}										% Packet for nicer headers
+%\usepackage{fancyheadings}             % Nicer numbering of headlines
+
+%\usepackage[outer=3.35cm]{geometry} 	  % Type area (size, margins...) !!!Release version
+%\usepackage[outer=2.5cm]{geometry} 		% Type area (size, margins...) !!!Print version
+%\usepackage{geometry} 									% Type area (size, margins...) !!!Proofread version
+\usepackage[outer=3.15cm]{geometry} 	  % Type area (size, margins...) !!!Draft version
+\geometry{a4paper,body={5.8in,9in}}
+
+\usepackage{graphicx}                   % Inclusion of graphics
+%\usepackage{latexsym}                  % Special symbols
+\usepackage{longtable}									% Allow tables over several parges
+\usepackage{listings}                   % Nicer source code listings
+\usepackage{multicol}										% Content of a table over several columns
+\usepackage{multirow}										% Content of a table over several rows
+\usepackage{rotating}										% Alows to rotate text and objects
+\usepackage[hang]{subfigure}            % Allows to use multiple (partial) figures in a fig
+%\usepackage[font=footnotesize,labelfont=rm]{subfig}	% Pictures in a floating environment
+\usepackage{tabularx}										% Tables with fixed width but variable rows
+\usepackage{url,xspace,boxedminipage}   % Accurate display of URLs
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configurationen:
+
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+
+\hyphenation{whe-ther} 									% Manually use: "\-" in a word: Staats\-ver\-trag
+
+%\lstloadlanguages{C}                   % Set the default language for listings
+\DeclareGraphicsExtensions{.pdf,.svg,.jpg,.png,.eps} % first try pdf, then eps, png and jpg
+\graphicspath{{./src/}} 								% Path to a folder where all pictures are located
+\pagestyle{fancy} 											% Use nicer header and footer
+
+% Redefine the environments for floating objects:
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+\renewcommand{\topfraction}{0.9} 			  %Standard: 0.7
+\renewcommand{\bottomfraction}{0.5}		  %Standard: 0.3
+\renewcommand{\textfraction}{0.1}		  	%Standard: 0.2
+\renewcommand{\floatpagefraction}{0.8} 	%Standard: 0.5
+
+% Tables with a nicer padding:
+\renewcommand{\arraystretch}{1.2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Additional 'theorem' and 'definition' blocks:
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{theorem}{Satz}[section]		% Wenn in Deutsch geschrieben wird.
+\newtheorem{axiom}{Axiom}[section] 	
+%\newtheorem{axiom}{Fakt}[chapter]			% Wenn in Deutsch geschrieben wird.
+%Usage:%\begin{axiom}[optional description]%Main part%\end{fakt}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+%Additional types of axioms:
+\newtheorem{lemma}[axiom]{Lemma}
+\newtheorem{observation}[axiom]{Observation}
+
+%Additional types of definitions:
+\theoremstyle{remark}
+%\newtheorem{remark}[definition]{Bemerkung} % Wenn in Deutsch geschrieben wird.
+\newtheorem{remark}[definition]{Remark} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Provides TODOs within the margin:
+\newcommand{\TODO}[1]{\marginpar{\emph{\small{{\bf TODO: } #1}}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abbreviations and mathematical symbols
+\newcommand{\modd}{\text{ mod }}
+\newcommand{\RS}{\mathbb{R}}
+\newcommand{\NS}{\mathbb{N}}
+\newcommand{\ZS}{\mathbb{Z}}
+\newcommand{\dnormal}{\mathit{N}}
+\newcommand{\duniform}{\mathit{U}}
+
+\newcommand{\erdos}{Erd\H{o}s}
+\newcommand{\renyi}{-R\'{e}nyi}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document:
+\begin{document}
+\renewcommand{\headheight}{14.5pt}
+
+\fancyhead{}
+\fancyhead[LE]{ \slshape \trauthor}
+\fancyhead[LO]{}
+\fancyhead[RE]{}
+\fancyhead[RO]{ \slshape \trtitle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cover Header:
+\begin{titlepage}
+	\begin{flushleft}
+		Universit\"at Hamburg\\
+		Fachbereich Informatik\\
+%		\trarbeitsbereich\\
+	\end{flushleft}
+	\vspace{3.5cm}
+	\begin{center}
+		\huge \trtitle\\
+	\end{center}
+	\vspace{3.5cm}
+	\begin{center}
+		\normalsize\trtype\\
+		[0.2cm]
+		\Large\trcourse\\
+		[1.5cm]
+		\Large \trauthor\\
+		[0.2cm]
+		\normalsize Matr.Nr. \trmatrikelnummer\\
+		[0.2cm]
+		\normalsize\tremail\\
+		[1.5cm]
+		\Large \trdate
+	\end{center}
+	\vfill
+\end{titlepage}
+
+	%backsite of cover sheet is empty!
+\thispagestyle{empty}
+\hspace{1cm}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abstract:
+
+% Abstract gives a brief summary of the main points of a paper:
+\section*{Abstract}
+	Demokratie ist eine wichtige Errungenschaft der Menschheit. In diesem Paper wird die Erweiterung von Demokratie auf das Internet kritisch diskutiert, um anschließend zu einem Fazit zu gelangen.
+
+% Lists:
+\setcounter{tocdepth}{2} 					% depth of the table of contents (for Seminars 2 is recommended)
+\tableofcontents
+\pagenumbering{arabic}
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Content:
+
+% the actual content, usually separated over a number of sections
+% each section is assigned a label, in order to be able to put a
+% crossreference to it
+
+\section{Einleitung}
+\label{sec:introduction}
+
+	Es ist so ziemlich jedem bekannt was Demokratie ist. Demokratie bezeichnet die Herrschaft des Volkes und ist die Regierungsform in vielen Ländern, wie unter anderem die USA, Kanada, Frankreich und Deutschland. In jedem dieser Länder ist sie ein wenig anders organisiert, aber ihr Markenkern ist derselbe. Durch das Aufkommen vom Internet hat sich die Bezahlkultur längst gewandelt. Viele Menschen bestellen sich Waren aus dem Internet von Firmen wie Amazon und bekommen die Waren dann an die Tür geliefert.
+	
+	Diese Form des webbasierten Bezahlens nennt sich "`E-Commerce"'. Was passiert aber, wenn die Demokratie auf eben jenes Internet erweitert wird? Dabei sind nicht losgelöste Abstimmungen gemeint, sondern die Erweiterung der Demokratie in den Staaten auf das Internet. In welcher Form kann dies geschehen? Ist es überhaupt vernünftig?
+	
+	Es gibt reichlich Fragen zu diesem Thema. Im Rahmen dieses Papers wird eine Begriffserklärung für elektronische Demokratie versucht, um dann auf Basis dieses Begriffes ein Konzept von Watson\cite{Watson2001} kritisch zu diskutieren und abschließend zu einem Fazit zu kommen.
+	
+\section{Begriffserklärung}
+\label{sec:definition}
+
+	Elektronische Demokratie ist also die irgendwie geartete Erweiterung der bestehenden analogen Demokratie auf das Internet. Aber wie läuft das eigentlich genau ab?
+	
+	Diese Frage wird zum Teil durch Watson\cite{Watson2001} geklärt. Er erläutert eine strategische Perspektive zur Einführung von elektronischer Demokratie. Diese Einführung findet in Form eines 3-Phasen-Modells statt. 
+	Die Kernpunkte seines Konzeptes sind die Bündelung der Informationen über die einzelnen Regierungen in einem Land (von der Rathausebene bis hin zur Bundesebene) auf einer zentralen Internetseite und das Verwalten aller Amtsgeschäfte aus Bürgersicht über diese Internetseite. Diese beiden Punkte spiegeln Transparenz, Zugänglichkeit und Komfort wieder.
+	
+	Kurz zusammengefasst bedeutet elektronische Demokratie also unter anderem, dass das Abwickeln der Amtsgeschäfte vereinheitlicht und damit vereinfacht wird und die Bürger alle Informationen an zentraler Stelle finden können und nicht erst zig Seiten und Amtsstellen abklappern müssen.
+	
+	Diese Sicht auf elektronische Demokratie ist mit Sicherheit nicht abschließend. Es gibt auch noch den Punkt des elektronischen Wählens, wie ihn Mohen\cite{Mohen2001} anhand einer Fallstudie aus Arizona (USA) beschreibt.
+	
+	Daran wird deutlich, dass elektronische Demokratie weit mehr ist als das, was Watson in seinem Artikel beschreibt.
+	
+\section{Kritische Diskussion}
+\label{sec:critDisc}
+
+	Die von Watson\cite{Watson2001} erläuterte strategische Perspektive klingt auf den ersten Blick sehr verlockend. Allerdings hat auch diese Idee ihre negativen Auswirkungen. In der folgenden Diskussion werden die Vor- und Nachteile von Watsons Idee gegenübergestellt. Die Pro-Argumente werden dabei aus Watsons Idee übernommen, schließlich stellt er diese Perspektive nicht vor weil sie in seinen Augen unzureichend ist, wohingegen die Contra-Argumente aus der Perspektive des Autoren dieses Papers dargelegt werden. Daraus kann jedoch nicht die Position des Autoren zu dieser Idee gefolgert werden.
+	
+	Der erste Schritt Watsons ist die Schaffung eines zentralen Portals, von wo aus die Bürger je nach Postleitzahl zu allen relevanten Stellen verlinkt werden. 
+	
+	Der Vorteil dieses zentralen Einstiegspunktes ist offensichtlich. Die Bürger müssen sich nur noch eine URL und ihre Postleitzahl merken, um alle notwendigen Informationen zu finden.
+	
+	Einen direkten Nachteil gibt es dort nicht, denn die darunter liegenden Websites der einzelnen Regierungen und staatlichen Stellen existieren weiterhin. Durch den single-point-of-entry wird jedoch das Auffinden der zuständigen Stellen erheblich erleichtert.
+	
+	Im zweiten Schritt haben die meisten Regierungen die Prinzipien von "`E-Government"' übernommen. Damit haben Bürger die Möglichkeit den Großteil ihrer Finanztransaktionen mit staatlichen Stellen über das Internet abzuwickeln. Kleine Regierungen und staatliche Stellen benutzen dabei dritte Dienstleister, um diesen Service anzubieten, wohingegen größere Regierungen und staatliche Stellen eigene Lösungen benutzen.
+	
+	Der Vorteil ist die starke Vereinfachung der Interaktion mit dem Staat. Durch die Einsparung von physischen Besuchen bei den Ämtern sparen Bürger Zeit und Kosten und das Regieren wird effizienter.
+	
+	Der Nachteil ist, dass damit viele Mitarbeiter im staatlichen Dienst ebenfalls obsolet werden. Es werden keine Mitarbeiter mehr benötigt, die Überweisungen entgegen nehmen oder vor Ort Informationen an Bürger weitergeben.
+	
+	Auf Seiten der Effizienz wird die politische Entscheidungsfindung zunehmend transparenter. Bürger können am Prozess teilhaben und herausfinden, wie zukünftige Gesetze entstehen. Dabei erfahren sie auch welche politischen Interessensgruppen, Industrievertreter, Lobbyisten und Politiker diese zukünftigen Gesetze entwerfen. Darüber hinaus können sie erfahren warum bestimmte Gruppen versuchen politische Vorteile zu bekommen.
+	
+	Für Bürger ist diese Steigerung an Transparenz ganz klar ein Vorteil. Durch einen transparenten Gesetzesfindungsprozess können einseitige Lobbyinteressen viel schwieriger durchgesetzt werden. Bürger haben zeitig die Möglichkeit zu intervenieren, wenn Gesetze nicht ihren Wünschen entsprechen. Damit wird den Bürgern effektiv auch eine Möglichkeit gegeben eine Lobby zu sein.
+	
+	Bedenkenswert sind die dafür nötigen impliziten Schritte. Dafür müssen Sitzungsprotokolle von Ausschüssen sowie die Telefonate und Schriftwechsel aller Politiker veröffentlicht werden. Dies stellt einen gravierenden Einschnitt in die Privatsphäre dar und erfordert in vielen Demokratien weitgehende Änderungen. Somit ist dieses Vorhaben trotz der hehren Ziele wohl vorerst nicht erreichbar. Gerade vor dem Hintergrund des sog. NSA-Skandals ist eine solche Transparenz des Gesetzgebungsverfahrens wohl auf absehbare Zeit unrealistisch.
+	Fairerweise muss gesagt werden, dass auch Watson auf diesen Missstand hinweist.
+	
+	Der letzte Schritt bzw. die letzte Phase ist die Errichtung einer eins-zu-eins Beziehung zwischen Staat und Bürger. Alle Bürger haben ein elektronisch verwaltetes Konto über das alle Finanz- oder sonstigen Transaktionen mit dem Staat abgewickelt werden. Eine Adressänderung wäre somit eine einzige Transaktion, die dann alle beteiligten staatlichen Stellen automatisch benachrichtigen würde.
+	Desweiteren bekommen Bürger in dieser Phase eine detaillierte Auflistung wofür ihre Zahlungen verwendet werden. So könnte eingesehen werden, wie viel der Steuern bspw. für Bildung ausgegeben werden.
+	
+	Diese Phase bietet eine weitere Vereinfachung der Interaktion mit dem Staat, was ein klarer Vorteil ist. Durch die individuelle Auflistung der Verwendung der Steuern und Abgaben für jeden Bürger wird die Bedeutung eben jener Abgaben deutlich. Es ist für jeden Bürger ersichtlich was er mit seinen Abgaben unterstützt. Damit wird die Verbindung zwischen Steuerzahlungen und Wertschaffung explizit und nachvollziehbar.
+	
+	Es gibt aber auch hier einige Bedenken. Wenn jeder Bürger alle offiziellen Tätigkeiten über ein zentrales Profil abwickelt, dann wird Identitätsdiebstahl sehr viel einfacher. Auch sind die Daten von Bürgern weitaus gefährdeter. Wenn die Datenbank mit den Daten gehackt wird, dann besteht Zugriff auf alle Daten aller Bürger, die dann meistbietend verkauft werden könnten. 
+	
+	Außerdem erlaubt dies auch für den Staat Einblicke in Sachverhalte, die ihn nichts angehen. Durch die Kombination aller staatlichen Interaktion in einem einzigen Konto, können viel leichter Profile über Personen erstellt werden. Geheimdienste hätten so auf einen Schlag alle interessanten Informationen an einem Platz.
+	
+	Der letzte Schritt in Watsons Idee umfasst eine weitere Individualisierung. So können Bürger auswählen welche Themenfelder sie interessieren und darüber auf dem Laufen gehalten werden. Wenn sich jemand für Trends in der Verwaltung von Nationalparks interessiert, könnte er sich eines elektronischen Lobbyagenten oder Lobbybots bedienen, um dieses Themengebiet zu beobachten und den politischen Prozess zu beeinflussen.
+	
+	Der Vorteil ist auch hier klar erkennbar. Bürger können sich aus der Fülle an Informationen die Bereiche herausnehmen, die für sie interessant sind und sich somit spezialisieren. Dies ermöglicht aktive Teilhabe am politischen Prozess ohne selber aktiv in der Politik zu sein. Damit ist die Integration der Bevölkerung in die Gesetzesfindung weitaus besser als vorher.
+	
+	Der Vorteil ist hier der Nachteil zugleich. Denn durch die Möglichkeit der Präferenz ist es umso leichter zu ermitteln wer sich für welche Themen interessiert. Damit können oben genannte Profile weiter verfeinert werden und in Verbindung mit anderen Daten von Bürgern zu ernsthaften Problemen führen. Geheimdienste könnten diese Informationen in Verbindung mit gespeicherten Emails dazu nutzen Bürger aufgrund ihrer politischen Partizipation zu verfolgen. 
+	
+	Wenn ein Bürger sich zum Beispiel für Außenpolitik interessiert (als Präferenz in dem zentralen Konto) und sich gleichzeitig in Gesprächen mit Freunden positiv gegenüber suspekten Staaten äußert (bspw. Iran im Falle der USA), könnten die Geheimdienste vermuten, dass dieser Bürger eventuell ein Spion des Irans (in diesem Beispiel) ist. Ein komplett unschuldiger Bürger kann somit in das Fadenkreuz von entsprechenden Diensten kommen, nur wegen politischer Partizipation und einer Meinung, die nicht der offiziellen Linie der Regierung entspricht.
+	
+	Alleine die Möglichkeit eines solchen Beispiels ist schon sehr bedenklich in einer Demokratie.
+\section{Auswertung}
+\label{sec:concl}
+
+	In der Diskussion um die Vor- und Nachteile von Watsons 3-Phasen-Konzepts ist deutlich geworden, dass es unter guten Umständen sehr helfen kann die Demokratie zu verbessern. Es ist aber auch deutlich geworden, dass eben jenes Konzept in der Lage ist die Demokratie noch weiter zu gefährden.
+	
+	Abschließend kann daher hier weder behauptet werden, dass dieses Konzept sofort umgesetzt werden sollte, noch dass es keinen weiteren Gedanken verdient. Das Konzept zeigt eine Möglichkeit der Veränderung auf, die in Teilen heute (12 Jahre später) bereits vorhanden ist. In jedem Falle kann es als Diskussionsgrundlage für Veränderungen in der Umsetzung von Demokratie dienen.
+	
+	Es ist in Zukunft unvermeidbar mehr und mehr die Demokratie auch über das Internet verfügbar zu machen. Entsprechende Änderungen müssen aber sorgsam und mit Rücksicht auf integrale Prinzipien der Demokratie durchgeführt werden.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% hier werden - zum Ende des Textes - die bibliographischen Referenzen
+% eingebunden
+%
+% Insbesondere stehen die eigentlichen Informationen in der Datei
+% ``bib.bib''
+%
+\clearpage
+\bibliography{bib}
+\bibliographystyle{ieeetr}
+\addcontentsline{toc}{section}{Literatur}% Add to the TOC
+
+\end{document}
+
+
