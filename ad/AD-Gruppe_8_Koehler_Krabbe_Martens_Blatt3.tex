@@ -1,0 +1,98 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bytefield}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{(\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+
+\begin{document}
+\author{Reinhard Köhler (6425686), Tronje Krabbe (6435002), \\
+Jim Martens (6420323)}
+\title{Hausaufgaben zum 20. November}
+\subtitle{Gruppe 8}
+\maketitle
+\section{} %1
+	\subsection{} %a
+		$11\mathbb{N}+10$
+		Auf der letzten Position liegen alle Zahlen, die um 10 größer sind, als die nächstkleinere durch 11 teilbare Zahl. Dies ist offensichtlich bei der gegebenen Hashfunktion. 
+	\subsection{} %b
+		$11\mathbb{N}+5$
+		Auf der letzten Position liegen alle Zahlen, die um 5 größer sind, als die nächstkleinere durch 11 teilbare Zahl. Dies ergibt sich aus a) dadurch, dass jetzt $k$ mit 2 multipliziert wird, womit die Wert nur noch um 5 größer sein können.
+	\subsection{} %c
+		$k.P.$
+	\subsection{} %d
+\section{} %2
+	
+\section{} %3
+	\subsection{} %a
+		Im worst-case wird $n^{2}$ Zeit benötigt, um den Median zu bestimmen. Im nächsten Schritt von Quicksort bleiben damit auf jeder Seite des Medians noch knapp $\frac{n}{2}$ Zahlen übrig.
+		Es werden daher $\log n$ Schritte benötigt, bis das Sortieren abgeschlossen ist. Auf jeder Ebene wird zum Finden des Median $\left(\frac{n}{2^{l}}\right)^{2}$ im schlimmsten Fall benötigt, wobei $l$ für den $l$-ten Schritt steht.
+		
+		Die untenstehende Summe entspricht der worst-case Schranke.
+		
+		\[
+			\sum\limits_{i=0}^{\log n} \left(\frac{n}{2^{i}}\right)^{2}
+		\]
+	\subsection{} %b
+		Diese Variante wird in der Praxis meist nicht verwendet, weil die benötigte Zeit zum Finden des Medians die Zeitersparnis beim Aufspalten bei weitem nicht rechtfertigt. Je größer die Eingabe wird und je weiter die einzelnen Zahlen auseinander liegen, desto länger dauert das Ermitteln des Medians.
+	\subsection{} %c
+\section{} %4
+	\subsection{} %a
+	\subsection{} %b
+	\subsection{} %c
+\section{} %5
+	\subsection{} %a
+		\begin{tikzpicture}[shorten >=1pt,node distance=2.8cm,on grid]
+			\node[state] (bleqc) {$b \leq c$};
+			\node[state] (aleqb) [below left=2 and 3 of bleqc] {$a \leq b$};
+			\node[state] (aleqc) [below right=2 and 3 of bleqc] {$a \leq c$};
+			\node[state] (aleqc2) [below right=of aleqb] {$a \leq c$};
+			\node[state] (aleqb2) [below right=of aleqc] {$a \leq b$};
+			\node (res1) [below left=of aleqb] {$a, b, c$};
+			\node (res2) [below left=of aleqc2] {$b, a, c$};	
+			\node (res3) [below right=of aleqc2] {$b, c, a$};
+			\node (res4) [below left=of aleqc] {$a, c, b$};
+			\node (res5) [below left=of aleqb2] {$c, a, b$};
+			\node (res6) [below right=of aleqb2] {$c, b, a$};
+			
+			\path[every node/.style={font=\scriptsize}] 
+				(bleqc) edge node [below right=0 and 0.45 of bleqc] {Nein} (aleqc)
+				(bleqc) edge node [below left=0 and 0.3 of bleqc] {Ja} (aleqb)
+				(aleqb) edge node [below left=0 and 0.3 of aleqb] {Ja} (res1)
+				(aleqb) edge node [below right=0 and 0.45 of aleqb] {Nein} (aleqc2)
+				(aleqc) edge node [below left=0 and 0.3 of aleqc] {Ja} (res4)
+				(aleqc) edge node [below right=0 and 0.45 of aleqc] {Nein} (aleqb2)
+				(aleqc2) edge node [below left=0 and 0.3 of aleqc2] {Ja} (res2)
+				(aleqc2) edge node [below right=0 and 0.45 of aleqc2] {Nein} (res3)
+				(aleqb2) edge node [below left=0 and 0.3 of aleqb2] {Ja} (res5)
+				(aleqb2) edge node [below right=0 and 0.45 of aleqb2] {Nein} (res6);
+		\end{tikzpicture}
+	\subsection{} %b
+		Wenn das Eingabearray a, b, c und d enthielte, dann hätte der Baum 24 Blätter, also $4!$. Wenn das Eingabearray alle Buchstaben von a bis z enthielte, dann hätte der Baum $26!$ Blätter.
+\end{document}
