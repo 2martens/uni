@@ -51,14 +51,11 @@ Jim Martens (6420323)}
 	
 \section{} %3
 	\subsection{} %a
-		Im worst-case wird $n^{2}$ Zeit benötigt, um den Median zu bestimmen. Im nächsten Schritt von Quicksort bleiben damit auf jeder Seite des Medians noch knapp $\frac{n}{2}$ Zahlen übrig.
-		Es werden daher $\log n$ Schritte benötigt, bis das Sortieren abgeschlossen ist. Auf jeder Ebene wird zum Finden des Median $\left(\frac{n}{2^{l}}\right)^{2}$ im schlimmsten Fall benötigt, wobei $l$ für den $l$-ten Schritt steht.
-		
-		Die untenstehende Summe entspricht der worst-case Schranke.
-		
-		\[
-			\sum\limits_{i=0}^{\log n} \left(\frac{n}{2^{i}}\right)^{2}
-		\]
+		\begin{alignat*}{2}
+			T(1) &=& 1 \\
+			T(n) &=& 2T\left(\frac{n}{2}\right) + \mathcal{O}(n^{2})
+		\end{alignat*}
+		Anhand des Mastertheorems ergibt sich, dass $\mathcal{O}(n^{2})$ eine scharfe Schranke für die worst-case Laufzeit von dieser Quicksort-Variante ist.
 	\subsection{} %b
 		Diese Variante wird in der Praxis meist nicht verwendet, weil die benötigte Zeit zum Finden des Medians die Zeitersparnis beim Aufspalten bei weitem nicht rechtfertigt. Je größer die Eingabe wird und je weiter die einzelnen Zahlen auseinander liegen, desto länger dauert das Ermitteln des Medians.
 	\subsection{} %c
