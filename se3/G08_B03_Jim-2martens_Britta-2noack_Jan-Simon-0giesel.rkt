@@ -81,7 +81,7 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
   (let ([xs (string->list text)])
     (if [empty? xs] 
         '()
-        (cons (char->schlüssel (car xs)) (buchstabiere (list->string (cdr xs))))
+        (cons (char->schlüssel (char_to_upperCase(car xs))) (buchstabiere (list->string (cdr xs))))
         )
     ))
 
@@ -138,6 +138,6 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
   (let ([xs (string->list text)])
     (if [empty? xs] 
         '()
-        (cons (char->flagge (car xs)) (buchstabiereFlagge (list->string (cdr xs))))
+        (cons (char->flagge (char_to_upperCase(car xs))) (buchstabiereFlagge (list->string (cdr xs))))
         )
     ))
