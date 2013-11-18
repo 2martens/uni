@@ -45,10 +45,33 @@ Jim Martens (6420323)}
 		$11\mathbb{N}+5$
 		Auf der letzten Position liegen alle Zahlen, die um 5 größer sind, als die nächstkleinere durch 11 teilbare Zahl. Dies ergibt sich aus a) dadurch, dass jetzt $k$ mit 2 multipliziert wird, womit die Wert nur noch um 5 größer sein können.
 	\subsection{} %c
-		$k.P.$
+		$\sqrt{11\mathbb{N}}$
+		Die gegebene Hashfunktion ist nicht eindeutig von dem Bezug des Modulo her. Da es wenig Sinn macht die Bedeutung $k^{2} + (10 \mod 11)$ anzunehmen, sind wir von der Bedeutung $(k^{2} + 10) \mod 11$ ausgegangen. In dieser zweiten Bedeutung muss $k^{2}$ also immer einem Vielfachen von $11$ entsprechen. Ein Vielfaches von $11$ wird mit $11\mathbb{N}$ ausgedrückt. Da jedoch nicht $k$ dort steht, sondern $k^{2}$ ist die Menge aller Keys $\sqrt{11\mathbb{N}}$.
 	\subsection{} %d
+		$(\log_{3}11)\mathbb{N} + \log_{3}11$
+		Die gegebene Hashfunktion ist nicht eindeutig von dem Bezug des Modulo her. Da es wenig Sinn macht die Bedeutung $3^{k}- (1 \mod 11)$ anzunehmen, sind wir von der Bedeutung $(3^{k}-1) \mod 11$ ausgegangen. In dieser zweiten Bedeutung muss $3^{k}$ einem Vielfachen von $11$ entsprechen. Der Schlüssel hierzu ist, was der Exponent von $3$ sein muss, um $11$ zu ergeben. Das Ergebnis ist $\log_{3}11$. Da $\mathbb{N}$ die $0$ mit einschließt, ergibt sich diese Menge aller Keys $(\log_{3}11)\mathbb{N} + \log_{3}11$.
 \section{} %2
+	Zu Beginn wird $n!$ mit $n^{n}$ verglichen.
+	\[
+		\frac{n \cdot n \cdot n \cdot \text{...} \cdot n \cdot n}{n \cdot (n-1) \cdot (n-2) \cdot \text{...} \cdot 2 \cdot 1}
+	\]
+	Es wird deutlich, dass $n!$ asymptotisch langsamer wächst als $n^{n}$. Anschließend vergleichen wir $n!$ mit $\left(\frac{n}{2}\right)^{\frac{n}{2}}$.
+	\[
+		\frac{n \cdot (n-1) \cdot (n-2) \cdot ... \cdot (n- \frac{n}{2}) \cdot (n - \frac{n}{2} - 1) \cdot ... \cdot 2 \cdot 1}{\frac{n}{2} \cdot \frac{n}{2} \cdot \frac{n}{2} \cdot ... \frac{n}{2} \cdot 1 \cdot ... \cdot 1 \cdot 1}
+	\]
+	Es wird deutlich, dass $n!$ asymptotisch schneller wächst als $\left(\frac{n}{2}\right)^{\frac{n}{2}}$.
 	
+	Aufgrund dieser Feststellungen wird nun der Logarithmus von $\left(\frac{n}{2}\right)^{\frac{n}{2}}$ und $n^{n}$ gebildet und mit dem von $n!$ verglichen.
+	\begin{alignat*}{2}
+		\log\left(\left(\frac{n}{2}\right)^{\frac{n}{2}}\right) &=& \frac{n}{2} \log\left(\frac{n}{2}\right) \\
+		&=& \frac{1}{2}n \log\left(\frac{1}{2}n\right) \\
+		\log(n^{n}) &=& n \log n
+	\end{alignat*}
+	Damit ist klar, dass die Logarithmen von $\left(\frac{n}{2}\right)^{\frac{n}{2}}$ und $n^{n}$ beide in $\theta(n \log n)$ sind. Aus unserem obigen Vergleich wissen wir, dass $n!$ schneller als $\left(\frac{n}{2}\right)^{\frac{n}{2}}$ und langsamer als $n^{n}$ wächst. Daraus ergibt sich:
+	\[
+		\frac{1}{2}n\log(\frac{1}{2}n) \in \theta(n \log n) \leq \log(n!) \leq n \log n \in \theta(n \log n)
+	\]
+	Da $\log(n!)$ asymptotisch sowohl schneller als auch langsamer als $n \log n$ wachsen muss, liegt $\log(n!)$ damit folgerichtig in $\theta(n \log n)$.
 \section{} %3
 	\subsection{} %a
 		\begin{alignat*}{2}
