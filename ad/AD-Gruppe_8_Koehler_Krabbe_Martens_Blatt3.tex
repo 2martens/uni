@@ -84,6 +84,28 @@ Jim Martens (6420323)}
 	\subsection{} %c
 \section{} %4
 	\subsection{} %a
+		\begin{verbatim}
+			function RANDOM(k):
+			    string bitmask = '';
+			    for (int i = 0; i < k; i++):
+			        bitmask += (string) werfeMuenze();
+			    end for
+			    
+			    if bitmask.isEmpty():
+			        return A[0];
+			    endif
+			    
+			    int index = stringToBinary(bitmask);
+			    return A[index];
+			end function
+		\end{verbatim}
+		Nach $k$-maligem Werfen einer Münze ergibt sich eine Zahl mit $k$ Bits. Die größte darstellbare Index ist damit $2^{k}$, wodurch alle Elemente des Arrays abgedeckt werden können. Da bei dem Münzwurf die $0$ und die $1$ gleich wahrscheinlich sind, ergibt sich nach $k$-maligem Werfen somit eine Gesamtwahrscheinlichkeit für den Index von $\frac{1}{2^{k}}$. Somit wird jedes Element des Arrays mit der gleichen Wahrscheinlichkeit von der Funktion zurückgegeben. Hat das Array nur ein Element, dann wird auch immer dieses Element zurückgegeben.
+		
+		Da immer $k$-Mal eine Münze geworfen wird, ist die Anzahl nötiger Münzwürfe auch immer in $\mathcal{O}(\log n)$. Dies ergibt sich so:
+		\[
+			\mathcal{O}(\log n) = \mathcal{O}(\log(2^{k})) = \mathcal{O}(k \cdot \log 2) = \mathcal{O}(k)
+		\]
+		Da $\log 2$ eine Konstante ist, ist sie bei der Betrachtung der asymptotischen Laufzeit irrelevant. Damit ist nun auch gezeigt, dass die Anzahl nötiger Wünzwürfe $\mathcal{O}(\log n)$ garantiert.
 	\subsection{} %b
 	\subsection{} %c
 \section{} %5
