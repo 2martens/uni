@@ -107,7 +107,8 @@ Jim Martens (6420323)}
 		\]
 		Da $\log 2$ eine Konstante ist, ist sie bei der Betrachtung der asymptotischen Laufzeit irrelevant. Damit ist nun auch gezeigt, dass die Anzahl nötiger Wünzwürfe $\mathcal{O}(\log n)$ garantiert.
 	\subsection{} %b
-		Die Lösung von (a) kann man sich auch als vollen binären Baum vorstellen. Es wird an jedem Knoten eine Münze geworfen, und dann entsprechend entlang des Baumes weitergegangen. Auf Ebene $k$ wurde eine Binärzahl mit Länge $k$, also innerhalb des Intervalls $[0, 2^k]$ generiert. \\
+		Die Lösung von (a) kann man sich auch als vollen binären Baum vorstellen. Es wird an jedem Knoten eine Münze geworfen, und dann entsprechend entlang des Baumes weitergegangen. Auf Ebene $k$ wurde eine Binärzahl mit Länge $k$, also innerhalb des Intervalls $[0, 2^k]$ generiert. 
+		
         Ist $n$ keine Zweierpotenz, so kann kein voller Baum mehr benutzt werden, um dieses Problem zu lösen. Es muss also ein vollständiger Baum genügen. Dieser hat immernoch eine maximale Tiefe von $(\log n)$ sowie eine Münzwurfanzahl von $\mathcal{O}(\log n)$, da maximal $\lceil (\log_2 n) \rceil$-mal geworfen werden muss. Für einige Elemente des Arrays wird allerdings ein Münzwurf weniger benötigt.
 	\subsection{} %c
 \section{} %5
