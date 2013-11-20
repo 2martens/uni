@@ -1,0 +1,191 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+% some matrix magic
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jan Branitz (6326955), Jim Martens (6420323),\\
+Stephan Niendorf (6242417)}
+\title{Hausaufgaben zum 25. November}
+\maketitle
+\section{} %1
+	\subsection{} %a
+		Das duale Problem (D):
+		\begin{alignat*}{4}
+			\text{minimiere}\; & 5y_{1} \,&+&\, 11y_{2} \,&+&\, 8y_{3} && \\
+			\multicolumn{8}{l}{\text{unter den Nebenbedingungen}} && \\
+			\;& 2y_{1} \,&+&\, 4y_{2} \,&+&\, 3y_{3} \,&\geq & 5 \\
+			\;& 3y_{1} \,&+&\, y_{2} \,&+&\, 4y_{3} \,&\geq & 4 \\
+			\;& y_{1} \,&+&\, 2y_{2} \,&+&\, 2y_{3} \,&\geq & 3 \\
+			\multicolumn{6}{r}{$y_{1}, y_{2}, y_{3}$} \,&\geq &\, 0
+		\end{alignat*}
+	\subsection{} %b
+		Eine optimale Lösung für (D) ist $(y_{1}^{*}, y_{2}^{*}, y_{3}^{*}) = (1, 0, 1)$.
+	\subsection{} %c
+		Überprüfen, ob die in (b) abgelesene Lösung auch eine zulässige Lösung von (D) ist.
+		\begin{alignat*}{2}
+			2 \cdot 1 + 4 \cdot 0 + 3 \cdot 1 &=& 5 \geq 5 \\
+			3 \cdot 1 + 1 \cdot 0 + 4 \cdot 1 &=& 7 \geq 4 \\
+			1 \cdot 1 + 2 \cdot 0 + 2 \cdot 1 &=& 3 \geq 3
+		\end{alignat*}
+		Wie leicht zu erkennen ist, sind alle drei Nebenbedingungen plus die Nichtnegativitätsbedingungen von (D) durch diese Lösung erfüllt, womit die Lösung eine zulässige Lösung von (D) ist.
+	\subsection{} %d
+		Nach dem Dualitätssatz haben die optimale Lösung des primalen Problems und die optimale Lösung des dualen Problems die gleichen Zielfunktionswerte.
+		Für das primale Problem wurde der Zielfunktionswert $13$ errechnet (siehe Skript Seite 16). Nach dem Einsetzen der in (b) ermittelten Lösung in die Zielfunktion von (D) ergibt sich:
+		\[
+			5 \cdot 1 + 11 \cdot 0 + 8 \cdot 1 = 13
+		\]
+		Da die in (b) gefundene Lösung den gleichen Zielfunktionswert hat, wie die optimale Lösung des primalen Problems, ist die gefundene Lösung nach dem Dualitätssatz die optimale Lösung von (D).
+	\subsection{} %e
+		Zum Überprüfen der komplementären Schlupfbedingungen wird die Lösung des primalen Problems in die Ungleichungen des primalen Problems eingesetzt. Ist eine Ungleichheit nicht mit Gleichheit erfüllt, dann ist die entsprechende Variable im dualen Problem gleich $0$. Wenn eine Variable im primalen Problem größer $0$ ist, dann muss die entsprechende Ungleichung im dualen Problem mit Gleichheit erfüllt sein.
+		
+		Es ergibt sich:
+		\begin{alignat*}{3}
+			2 \cdot 2 + 3 \cdot 0 + 1 \cdot 1 &=& 5 &\leq &5 \\
+			4 \cdot 2 + 1 \cdot 0 + 2 \cdot 1 &=& 10 &\leq &11 \\
+			3 \cdot 2 + 4 \cdot 0 + 2 \cdot 1 &=& 8 &\leq &8
+		\end{alignat*}
+		Die erste und dritte Ungleichung ist somit mit Gleichheit erfüllt. Die zweite Ungleichung ist nicht mit Gleichheit erfüllt. Daher muss $y_{2}^{*} = 0$ gelten. Da sowohl $x_{1}^{*}$ als auch $x_{3}^{*}$ größer $0$ sind, müssen die erste und dritte Ungleichung des dualen Problems mit Gleichheit erfüllt sein. Daraus ergibt sich:
+		\begin{alignat*}{3}
+			2 \cdot 1 + 3 \cdot 1 &=& 5 &\geq & 5\\
+			1 \cdot 1 + 2 \cdot 1 &=& 3 &\geq & 3\\
+		\end{alignat*}
+		Wie zu erkennen ist, sind die beiden betreffenden Ungleichungen mit Gleichheit erfüllt. Damit gelten die komplementären Schlupfbedingungen, womit bestätigt ist, dass die gefundenen Lösungen optimal sind.
+\section{} %2
+	\subsection{} %a
+		Bestätigen der in den Präsenzaufgaben bestimmten Lösungen als optimale Lösungen mithilfe der komplementären Schlupfbedingungen:
+		\begin{alignat*}{3}
+			1 \cdot \frac{32}{29} + 3 \cdot \frac{8}{29} + 1 \cdot \frac{30}{29} &=& \frac{86}{29} &\leq & \frac{87}{29} = 3 \\
+			-1 \cdot \frac{32}{29} + 0 \cdot \frac{8}{29} + 3 \cdot \frac{30}{29} &=& \frac{58}{29} &\leq & \frac{58}{29} = 2 \\
+			2 \cdot \frac{32}{29} - 1 \cdot \frac{8}{29} + 2 \cdot \frac{30}{29} &=& \frac{116}{29} &\leq & \frac{116}{29} = 4 \\
+			2 \cdot \frac{32}{29} + 3 \cdot \frac{8}{29} - 1 \cdot \frac{30}{29} &=& \frac{58}{29} &\leq & \frac{58}{29} = 2
+		\end{alignat*}
+		Die erste Ungleichung ist nicht mit Gleichheit erfüllt, also muss $y_{1}^{*} = 0$ gelten. Da alle drei Variablen des primalen Problems größer $0$ sind, müssen alle Ungleichungen des dualen Problems mit Gleichheit erfüllt sein.
+		\begin{alignat*}{3}
+			1 \cdot 0 - 1 \cdot 1 + 2 \cdot 1 + 2 \cdot 2 &=& 5 &\geq & 5 \\
+			3 \cdot 0 + 0 \cdot 1 - 1 \cdot 1 + 3 \cdot 2 &=& 5 &\geq & 5 \\
+			1 \cdot 0 + 3 \cdot 1 + 2 \cdot 1 - 1 \cdot 2 &=& 3 &\geq & 3
+		\end{alignat*}
+		Wie zu erkennen ist, sind alle drei Ungleichungen mit Gleichheit erfüllt.D amit gelten die komplementären Schlupfbedingungen, womit bestätigt ist, dass die gefundenen Lösungen optimal sind.
+	\subsection{} %b
+		Das duale Problem (D):
+		\begin{alignat*}{3}
+			\text{minimiere}\; & 3y_{1} \,&+&\, y_{2} && \\
+			\multicolumn{6}{l}{\text{unter den Nebenbedingungen}} && \\
+			\;& y_{1} \,&-&\, y_{2} &\geq & 1 \\ 			
+			\;& y_{1} \,&-&\, 3y_{2} &\geq & -9 \\
+			\;& 3y_{1} \,&-&\, 7y_{2} &\geq & -11 \\ 						
+			\;& y_{1} \,&+&\, y_{2} &\geq & 3 \\ 			
+			\multicolumn{4}{r}{$y_{1}, y_{2}$} \,&\geq &\, 0
+		\end{alignat*}
+		Ablesen einer optimalen Lösung ergibt: $(y_{1}^{*}, y_{2}^{*}) = (2, 1)$.
+		Durch Einsetzen der soeben ermittelten Lösung des dualen Problems in die Nebenbedingungen ergibt sich:
+		\begin{alignat*}{3}
+			1 \cdot 2 - 1 \cdot 1 = 1 &\geq & 1 \\
+			1 \cdot 2 - 3 \cdot 1 = -1 &\geq & -9 \\
+			3 \cdot 2 - 7 \cdot 1 = 2 &\geq & -11 \\
+			1 \cdot 2 + 1 \cdot 1 = 3 &\geq & 3
+		\end{alignat*}
+		Somit ist die ermittelte Lösung eine zulässige Lösung des dualen Problems.
+		\subsubsection{} %i
+			Der Zielfunktionswert für die optimale Lösung des primalen Problems ist $7$. Nach Einsetzen der ermittelten dualen Lösung in die Zielfunktion ergibt sich:
+			\[
+				3 \cdot 2 + 1 \cdot 1 = 7
+			\]
+			Da die Zielfunktionswerte übereinstimmen sind sowohl die primale Lösung als auch die duale Lösung nach Dualitätssatz für das jeweilige Problem optimal.
+		\subsubsection{} %ii
+			Einsetzen der primalen Lösung in die Nebenbedingungen des primalen Problems:
+			\begin{alignat*}{3}
+				1 \cdot 1 + 1 \cdot 0 + 3 \cdot 0 + 1 \cdot 2 &=& 3 &\leq & 3 \\
+				-1 \cdot 1 - 3 \cdot 0 - 7 \cdot 0 + 1 \cdot 2 &=& 1 &\leq & 1 
+			\end{alignat*}
+			Es sind beide Ungleichungen mit Gleichheit erfüllt. Da $x_{1}$ und $x_{4}$ größer $0$ sind, müssen die erste und vierte Ungleichung des dualen Problems mit Gleichheit erfüllt sein.
+			\begin{alignat*}{3}
+				1 \cdot 2 - 1 \cdot 1 &=& 1 &\geq & 1 \\
+				1 \cdot 2 + 1 \cdot 1 &=& 3 &\geq & 3
+			\end{alignat*}
+			Da die beiden Ungleichungen mit Gleichheit erfüllt sind, gelten die komplementären Schlupfbedingungen für die ermittelte primale und duale Lösung. Daher sind beide für das jeweilige Problem die optimale Lösung.
+	\subsection{} %c
+		Das duale Problem (D):
+		\begin{alignat*}{4}
+			\text{minimiere}\; & 5y_{1} \,&-&\, 6y_{2} \,&-&\, 10y_{3} && \\
+			\multicolumn{8}{l}{\text{unter den Nebenbedingungen}} && \\
+			\;& y_{1} \,&-&\, 3y_{2} \,&-&\, 11y_{3} \,&\geq & -1 \\
+			\;& -y_{1} \,&-&\, y_{2} \,&-&\, y_{3} \,&\geq & -1 \\
+			\multicolumn{6}{r}{$y_{1}, y_{2}, y_{3}$} \,&\geq &\, 0
+		\end{alignat*}
+		Umformen in Maximierungsproblem:
+		\begin{alignat*}{4}
+			\text{maximiere}\; & -5y_{1} \,&+&\, 6y_{2} \,&+&\, 10y_{3} && \\
+			\multicolumn{8}{l}{\text{unter den Nebenbedingungen}} && \\
+			\;& -y_{1} \,&+&\, 3y_{2} \,&+&\, 11y_{3} \,&\leq & 1 \\
+			\;& y_{1} \,&+&\, y_{2} \,&+&\, y_{3} \,&\leq & 1 \\
+			\multicolumn{6}{r}{$y_{1}, y_{2}, y_{3}$} \,&\geq &\, 0
+		\end{alignat*}
+		
+		\underline{Starttableau}:
+		\begin{alignat*}{5}
+			y_{4} \,&=&\, 1 \,&+&\, y_{1} \,&-&\, 3y_{2} \,&-&\, 11y_{3} \\
+			y_{5} \,&=&\, 1 \,&-&\, y_{1} \,&-&\, y_{2} \,&-&\, y_{3} \\ \cline{1 - 9}
+			w &=& &-&\, 5y_{1} \,&+&\, 6y_{2} \,&+&\, 10y_{3}
+		\end{alignat*}
+		
+		\underline{1. Iteration}:
+		
+		Eingangsvariable: $y_{3}$\\
+		Ausgangsvariable: $y_{4}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			3y_{2} \,&=&&\, 1 + y_{1}  - 11y_{3} - y_{4} \\
+			y_{2} \,&=&&\, \frac{1}{3} + \frac{1}{3}y_{1} - \frac{11}{3}y_{3} - \frac{1}{3}y_{4} \\
+			y_{5} \,&=&&\, 1 - y_{1} - \left(\frac{1}{3} + \frac{1}{3}y_{1} - \frac{11}{3}y_{3} - \frac{1}{3}y_{4}\right) - y_{3} \\
+			&=&&\, 1 - y_{1} - \frac{1}{3} - \frac{1}{3}y_{1} + \frac{11}{3}y_{3} + \frac{1}{3}y_{4} - y_{3} \\
+			&=&&\, \frac{2}{3} - \frac{4}{3}y_{1} + \frac{8}{3}y_{3} + \frac{1}{3}y_{4} \\
+			w \,&=&&\, -5y_{1} + 6\left(\frac{1}{3} + \frac{1}{3}y_{1} - \frac{11}{3}y_{3} - \frac{1}{3}y_{4}\right) + 10y_{3} \\
+			&=&&\, -5y_{1} + 2 + 2y_{1} - 22y_{3} - 2y_{4} + 10y_{3} \\
+			&=&&\, 2 - 3y_{1} - 12y_{3} - 2y_{4}
+		\end{alignat*}
+		
+		\underline{Ergebnis der 1. Iteration}:
+		\begin{alignat*}{5}
+			y_{2} \,&=&\, \frac{1}{3} \,&+&\, \frac{1}{3}y_{1} \,&-&\, \frac{11}{3}y_{3} \,&-&\, \frac{1}{3}y_{4} \\
+			y_{5} \,&=&\, \frac{2}{3} \,&-&\, \frac{4}{3}y_{1} \,&+&\, \frac{8}{3}y_{3} \,&+&\, \frac{1}{3}y_{4} \\ \cline{1 - 9}
+			w &=& 2 \,&-&\, 3y_{1} \,&-&\, 12y_{3} \,&-&\, 2y_{4}
+		\end{alignat*}
+		Die optimale Lösung von (D) ist damit:
+		\[
+			y_{1} = 0, y_{2} = \frac{1}{3}, y_{3} = 0
+		\]
+		Mithilfe des letzten Tableaus lässt sich die optimale Lösung des primalen Problems ablesen:
+		\[
+			x_{1} = 2, x_{2} = 0
+		\]
+\end{document}
