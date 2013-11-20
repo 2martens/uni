@@ -286,7 +286,7 @@ Stephan Niendorf (6242417)}
 		\underline{Starttableau}:
 		\begin{alignat*}{4}
 			x_{3} \,&=&\, 4 \,&-&\, x_{1} \,&-&\, 4x_{2} \\ \cline{1 - 7}
-			z &=& &&\, x_{1} \,&+&\, 4x_{2}
+			z &=& &&\, x_{1} \,&+&\, 2x_{2}
 		\end{alignat*}
 		
 		\underline{1. Iteration}:
@@ -298,18 +298,38 @@ Stephan Niendorf (6242417)}
 		\begin{alignat*}{2}
 			4x_{2} \,&=&&\, 4 - x_{1}  - x_{3} \\
 			x_{2} \,&=&&\, 1 - \frac{1}{4}x_{1} - \frac{1}{4}x_{3} \\
-			z \,&=&&\, x_{1} + 4\left(1 - \frac{1}{4}x_{1} - \frac{1}{4}x_{3}\right) \\
-			&=&&\, x_{1} + 4 - x_{1} - x_{3} \\
-			&=&&\, 4 - x_{3}
+			z \,&=&&\, x_{1} + 2\left(1 - \frac{1}{4}x_{1} - \frac{1}{4}x_{3}\right) \\
+			&=&&\, x_{1} + 2 - \frac{1}{2}x_{1} - \frac{1}{2}x_{3} \\
+			&=&&\, 2 + \frac{1}{2}x_{1} - \frac{1}{2}x_{3}
 		\end{alignat*}
 		
 		\underline{Ergebnis der 1. Iteration}:
 		\begin{alignat*}{4}
 			x_{2} \,&=&\, 1 \,&-&\, \frac{1}{4}x_{1} &-&\, \frac{1}{4}x_{3} \\ \cline{1 - 7}
-			z &=& 4 \,&& &-&\, x_{3}
+			z &=& 2 \,&+&\, \frac{1}{2}x_{1} \,&-&\, \frac{1}{2}x_{3}
 		\end{alignat*}
 		
-		Dieses Tableau liefert die optimale Lösung $x_{1} = 0, x_{2} = 1$ mit $z = 4$.
+		\underline{2. Iteration}:
+		
+		Eingangsvariable: $x_{1}$\\
+		Ausgangsvariable: $x_{2}$
+		
+		Es folgt
+		\begin{alignat*}{2}
+			\frac{1}{4}x_{1} \,&=&&\, 1 - \frac{1}{4}x_{3} - x_{2} \\
+			x_{1} \,&=&&\, 4 - x_{3} - 4x_{2} \\
+			z \,&=&&\, 2 + \frac{1}{2}\left(4 - x_{3} - 4x_{2}\right) - \frac{1}{2}x_{3} \\
+			&=&&\, 2 + 2 - \frac{1}{2}x_{3} - 2x_{2} - \frac{1}{2}x_{3} \\
+			&=&&\, 4 - x_{3} - 2x_{2}
+		\end{alignat*}
+		
+		\underline{Ergebnis der 1. Iteration}:
+		\begin{alignat*}{4}
+			x_{1} \,&=&\, 4 \,&-&\, x_{3} &-&\, 4x_{2} \\ \cline{1 - 7}
+			z &=& 4 \,&-&\, x_{3} \,&-&\, 2x_{2}
+		\end{alignat*}
+		
+		Dieses Tableau liefert die optimale Lösung $x_{1} = 4, x_{2} = 0$ mit $z = 4$.
 		
 		\underline{Startlösung ("`zulässige Basislösung am Anfang"')}:
 		\[
@@ -317,7 +337,11 @@ Stephan Niendorf (6242417)}
 		\]
 		\underline{Zulässige Basislösung nach der 1. Iteration}:
 		\[
-			x_{1} = 0, x_{2} = 1, x_{3} = 0 \text{ mit } z = 4
+			x_{1} = 0, x_{2} = 1, x_{3} = 0 \text{ mit } z = 2
+		\]
+		\underline{Zulässige Basislösung nach der 2. Iteration}:
+		\[
+			x_{1} = 4, x_{2} = 0, x_{3} = 0 \text{ mit } z = 4
 		\]			
 				
 			Regel vom größten Zuwachs:
@@ -335,7 +359,7 @@ Stephan Niendorf (6242417)}
 		\underline{Starttableau}:
 		\begin{alignat*}{4}
 			x_{3} \,&=&\, 4 \,&-&\, x_{1} \,&-&\, 4x_{2} \\ \cline{1 - 7}
-			z &=& &&\, x_{1} \,&+&\, 4x_{2}
+			z &=& &&\, x_{1} \,&+&\, 2x_{2}
 		\end{alignat*}
 		
 		\underline{1. Iteration}:
@@ -346,15 +370,15 @@ Stephan Niendorf (6242417)}
 		Es folgt
 		\begin{alignat*}{2}
 			x_{1} \,&=&&\, 4 - 4x_{2}  - x_{3} \\
-			z \,&=&&\, \left(4 - 4x_{2}  - x_{3}\right) + 4x_{2} \\
-			&=&&\, 4 - 4x_{2}  - x_{3} + 4x_{2} \\
-			&=&&\, 4 - x_{3}
+			z \,&=&&\, \left(4 - 4x_{2}  - x_{3}\right) + 2x_{2} \\
+			&=&&\, 4 - 4x_{2}  - x_{3} + 2x_{2} \\
+			&=&&\, 4 - 2x_{2} - x_{3}
 		\end{alignat*}
 		
 		\underline{Ergebnis der 1. Iteration}:
 		\begin{alignat*}{4}
 			x_{1} \,&=&\, 4 \,&-&\, 4x_{2} \,&-&\, x_{3} \\ \cline{1 - 7}
-			z &=& 4 \,&& &-&\, x_{3}
+			z &=& 4 \,&-&\, 2x_{2} \,&-&\, x_{3}
 		\end{alignat*}
 		
 		Dieses Tableau liefert die optimale Lösung $x_{1} = 4, x_{2} = 0$ mit $z = 4$.
@@ -368,7 +392,7 @@ Stephan Niendorf (6242417)}
 			x_{1} = 4, x_{2} = 0, x_{3} = 0 \text{ mit } z = 4
 		\]
 		
-		Beide Regeln sind nach der gleichen Anzahl Iterationen fertig, womit es keine bessere Regel gibt.		
+		Die Regel vom größten Zuwachs ist nach einer Iteration fertig, wobei die Regel vom größten Koeffizienten erst nach der zweiten Iteration fertig ist. Damit ist die Regel vom größten Zuwachs besser.		
 		
 		\subsubsection{} %ii
 		
@@ -393,7 +417,7 @@ Stephan Niendorf (6242417)}
 				\end{axis}
 			\end{tikzpicture}
 			
-			Bei der Regel mit dem größten Koeffizienten wurden die Eckpunkte in der Reihenfolge R und P durchlaufen. Bei der Regel mit dem größten Zuwachs wurden die Eckpunkte in der Reihenfolge R und Q durchlaufen.
+			Bei der Regel mit dem größten Koeffizienten wurden die Eckpunkte in der Reihenfolge R, P und Q durchlaufen. Bei der Regel mit dem größten Zuwachs wurden die Eckpunkte in der Reihenfolge R und Q durchlaufen.
 \section{} %2
 		
 		\textbf{Aufgabe:} Lösen Sie das folgende LP-Problem mit dem Simplexverfahren:
