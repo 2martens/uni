@@ -14,11 +14,17 @@
 %
 % v1.0:
 % 2009-11-09 KH: Erste Version der Makro-Sammlung
-\usepackage{ulsy}
+
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{vsis-gdb}[2009/11/27 v1.2 Nuetzliche Makros fuer GDB]
 
+
+\RequirePackage{ulsy}
+\RequirePackage{setspace}
+\RequirePackage[fleqn]{amsmath}
+
+\RequirePackage{latexsym} % Für Befehle wie \Join
 % Gestricheltes Unterstreichen, z.B. für Relationales Datenbankmodell (Fremdschlüssel)
 \RequirePackage[normalem]{ulem}
 \def\dashuline{\bgroup
@@ -29,6 +35,8 @@
   \kern.1em}\ULon}
 \def\soliduline{\bgroup \markoverwith{\hbox
  {\vtop{\kern.3ex\hrule width.2em}}}\ULon}
+% Umgebung für relationale Datenbankschemata
+\newenvironment{RMSchma}{\begin{raggedright}\it\doublespacing}{\end{raggedright}}
 
 % Operatoren der relationalen Algebra
 \newcommand*{\projektion}[1]{\pi_{#1}}
@@ -99,9 +107,9 @@
     font=\footnotesize,
   },
   erbt/.style={
-    draw,
-    >=open triangle 45,
-    ->,
+    isosceles triangle, isosceles triangle apex angle=60,
+    shape border rotate=-90,
+    draw, black, very thick, minimum size=3em
   },
 % Layout fuer referenzgraphen
   refGraph/.style={
@@ -127,13 +135,3 @@
     align=right,
   },
 }
-
-
-
-
-
-
-\RequirePackage[utf8]{inputenc}
-
-\RequirePackage{vsis-gdb} % Nuetzliche Makros fuer GDB
-\RequirePackage{booktabs} % Linien für Tabellen
