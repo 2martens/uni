@@ -156,3 +156,43 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
 (generiereNotmeldung "AMIRA" "AMRY" "57°46'N, 006°31'E\nNOTFALLZEIT 0640 UTC" "KENTERUNG WIR SINKEN\n9 MANN AN BORD\nSCHIFF 15 M LANG\nGRÜNER RUMPF\n")
 
 ; 3)
+; bei innerer Reduktion werden die Terme von innen nach außen reduziert
+; bei äußerer Reduktion werden die Terme von außen nach innen reduziert
+; innere Reduktion:
+; (hoch3 (* 3 (+ 1 (hoch3 2))))
+; -> (hoch3 (* 3 (+ 1 (* 2 2 2)))) ; (hoch3)
+; -> (hoch3 (* 3 (+ 1 8))) ; (*)
+; -> (hoch3 (* 3 9)) ; (+)
+; -> (hoch3 27) ; (*)
+; -> (* 27 27 27) ; (hoch3)
+; -> 19683 ; (*)
+; äußere Reduktion:
+; (* (* 3 (+ 1 (hoch3 2))) (* 3 (+ 1 (hoch3 2))) (* 3 (+ 1 (hoch3 2)))) ; (hoch3)
+; -> (* (* 3 (+ 1 (* 2 2 2))) (* 3 (+ 1 (hoch3 2))) (* 3 (+ 1 (hoch3 2)))) ; (hoch3)
+; -> (* (* 3 (+ 1 8)) (* 3 (+ 1 (hoch3 2))) (* 3 (+ 1 (hoch3 2)))) ; (*)
+; -> (* (* 3 9) (* 3 (+ 1 (hoch3 2))) (* 3 (+ 1 (hoch3 2)))) ; (+)
+; -> (* 27 (* 3 (+ 1 (hoch3 2))) (* 3 (+ 1 (hoch3 2)))) ; (*)
+; -> (* 27 (* 3 (+ 1 (* 2 2 2))) (* 3 (+ 1 (hoch3 2)))) ; (hoch3)
+; -> (* 27 (* 3 (+ 1 8)) (* 3 (+ 1 (hoch3 2)))) ; (*)
+; -> (* 27 (* 3 9) (* 3 (+ 1 (hoch3 2)))) ; (+)
+; -> (* 27 27 (* 3 (+ 1 (hoch3 2)))) ; (*)
+; -> (* 27 27 (* 3 (+ 1 (* 2 2 2)))) ; (hoch3)
+; -> (* 27 27 (* 3 (+ 1 8))) ; (*)
+; -> (* 27 27 (* 3 9)) ; (+)
+; -> (* 27 27 27) ; (*)
+; -> 19683 ; (*)
+
+; In Racket wird die strikte innere Reduktion für Funktionen angewendet.
+; Für Spezialformen wird je nach Spezialform eine andere Strategie angewendet.
+; Allgemein kann jedoch gesagt werden, dass dort von außen nach innen gegangen wird.
+
+; Wenn Alyssa das Programm benutzt, dann entsteht eine Endlosschleife, da 
+; cond aufgrund der inneren Reduktion niemals aufgerufen wird. Pro Rekursionsaufruf
+; werden zunächst alle drei Parameter ausgewertet. Ab dem fünften Rekursionsschritt
+; wird (> counter max-count) zwar zu false ausgewertet, aber erst wenn der faculty
+; Aufruf komplett ausgewertet ist, wird new-if aufgerufen. Da in jedem Rekursionsschritt 
+; faculty aufgerufen wird, entsteht eine Endlosschleife.
+
+; Anhand dieses Beispiels wird deutlich, dass zunächst die Bedingung ausgewertet werden muss
+; und abhängig von dieser dann entweder nur die then-clause oder nur die else-clause. Bei jeder Rekursion
+; muss dies passieren, da sonst die Abbruchbedingung nie zum Abbruch führt.
