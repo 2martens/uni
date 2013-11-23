@@ -1,0 +1,135 @@
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+%\usepackage{paralist}
+\useoutertheme{infolines} 
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usetheme{Berkeley}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setbeamertemplate{navigation symbols}{}
+\graphicspath{ {src/} }
+\lstset{language=PHP}
+
+\begin{document}
+\author{Jim Martens}
+\title{Warum sich ein eigenes CMS lohnt}
+
+\section{Situation}
+\begin{frame}{Situation}
+	\begin{itemize}
+		\item	Wordpress erhielt 2009 den Overall Best Open Source CMS Award
+		\item	2010 folgte Hall of Fame CMS
+		\item	gilt als eines der beliebtesten CMS weltweit
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\centering
+	Warum man dennoch ein eigenes CMS schreiben sollte?
+\end{frame}
+
+\begin{frame}[fragile]{Darum}
+	aus wp-login.php Zeile 207 ff. (etwas HTML ausgelassen, gekennzeichnet durch Kommentar)
+	\begin{lstlisting}
+		function login_footer($input_id = '') {
+		    global $interim_login;
+		    if ( ! $interim_login ): ?>
+			    <p id="backtoblog"><!-- something --></p>
+		    <?php endif; ?>
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+	\centering	
+	Warum ist der gezeigte Code nicht so toll?
+\end{frame}
+
+\begin{frame}{Deswegen}
+	\begin{itemize}
+		\item	\texttt{global} is Bad Practice
+		\begin{itemize}		
+			\item	stammt aus PHP 4 Zeiten
+			\item	nicht objektorientiert
+		\end{itemize}
+		\item	keine Trennung zwischen Businesslogik und Ausgabe
+	\end{itemize}
+\end{frame}
+
+\section{Verbesserung}
+\begin{frame}
+	\centering
+	Wie kann man es besser machen?
+\end{frame}	
+
+\begin{frame}{So kann man es besser machen}
+	\begin{itemize}
+		\item	OOP-Framework wie Symfony 2 nutzen
+		\begin{itemize}
+			\item[$\rightarrow$] klare Trennung zwischen Businesslogik und Ausgabe
+			\item[$\rightarrow$] Object-Relational Model (Doctrine)
+			\item[$\rightarrow$] Templateengine (Twig)	
+			\item[$\rightarrow$] Dependency Management (Composer)
+			\item[$\rightarrow$] einfache Konfigurierbarkeit
+			\item[$\rightarrow$] Unterstützung für Unit- und Integrationstests (PHPUnit)
+			\item[$\rightarrow$] hohe Code Coverage der Unittests
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\section{Call for Action}
+\begin{frame}
+	\centering
+	Warum erzähle ich euch das eigentlich alles?
+\end{frame}
+
+\begin{frame}{Planung}
+	\begin{itemize}
+		\item	habe bereits ein CMS auf Basis des WoltLab Community Framework (WCF) entwickelt
+		\item	das wird vsl. Januar/Februar RC-Status erreichen (Betaseite: beta.plugins-zum-selberbauen.de)
+		\item	nächstes Projekt: WCF-Funktionen mit Symfony mergen
+		\begin{itemize}
+			\item	ACP, Paketsystem, einfache Installation
+			\item	Mehrsprachigkeit, User und Benutzergruppen
+			\item	flexibles Stilsystem, Event Listener
+		\end{itemize}
+		\item	und dann, ja dann: CMS mit Symfony und WCF-Erweiterungen
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\centering
+	Warum interessiert euch das?
+\end{frame}
+
+\begin{frame}{Anforderungsprofil}
+	\begin{itemize}
+		\item	praktische Erfahrung sammeln mit OOP-Entwicklung
+		\item	Voraussetzungen: PHP-Kenntnis (>= 5.3), OOP-Kenntnis, Bereitschaft sich einzuarbeiten, Coding-Standards einhalten
+		\item	Git als VCS (github.com/frmwrk123/symfony-wcf)
+		\item	Lizenz: LGPL
+		\item	keine Zeitvorgabe - it's done when it's done
+	\end{itemize}
+\end{frame}
+
+\section{Fertig}
+\begin{frame}{Ich habe fertig}
+	\centering
+	Vielen Dank für Eure Aufmerksamkeit!
+\end{frame}
+
+
+\section{Quellen}
+\begin{frame}{Quellen}
+	\begin{itemize}	
+		\item	http://webdesign.about.com/b/2010/11/22/wordpress-wins-best-cms-award.html
+		\item	http://wordpress.org/news/2009/11/wordpress-wins-cms-award/
+	\end{itemize}
+\end{frame}
+
+\end{document}
