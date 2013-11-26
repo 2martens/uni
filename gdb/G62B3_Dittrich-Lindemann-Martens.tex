@@ -64,4 +64,102 @@
 	Film(\underline{Titel}, \dashuline{Regisseur $\rightarrow$ Regisseur.Name}, Zusammenfassung, 1. Drehtag, 
 	letzter Drehtag, Genre1, Genre2, Genre3, Genre4)\\
 	Rolle(\dashuline{Charakter $\rightarrow$ Charakter.CID, Schauspieler $\rightarrow$ Schauspieler.Name, Film $\rightarrow$ Film.Titel}, Drehbeginn, Drehende, Gage)
+	
+\section{Relationale Algebra und SQL}
+	\subsection{} %a
+		\subsubsection{} %i
+			Nachname des Rennfahrers, der im Malaysia GP den ersten Platz belegte.
+			
+			\begin{tabular}{c}
+				Nachname \\
+				\hline
+				Vettel \\
+				\hline
+			\end{tabular}
+		\subsubsection{} %ii
+			Vor- und Nachname aller Rennfahrer, die in einem Rennstall angestellt sind, der weniger als 350 Budget hat.
+			
+			\begin{tabular}{c|c}
+				Vorname & Nachname \\
+				\hline
+				Lewis & Hamilton \\
+				Jenson & Button \\
+				Kimi & Räikkonen \\
+				\hline
+			\end{tabular}
+		\subsubsection{} %iii
+			Name der Rennställe, deren Fahrer im Australien GP eine Platzierung haben.
+			
+			\begin{tabular}{c}
+				Name \\
+				\hline
+				RedBull \\
+				Ferrari \\
+				McLaren \\
+				\hline
+			\end{tabular}
+	\subsection{} %b
+		\subsubsection{} %i
+			\[
+				\pi_{Rennstall.Name}(\sigma_{Geburt >= 1985}(Rennfahrer) \underset{RSID=Rennstall}{\bowtie} Rennstall) 
+			\]
+			
+			\begin{tabular}{c}
+				Name \\
+				\hline
+				RedBull \\
+				McLaren \\
+				\hline
+			\end{tabular}
+		\subsubsection{} %ii
+			$\pi_{Vorname, Nachname, Geburt}(\pi_{RID}(\sigma_{Name='Australien GP'}(Rennort) \bowtie Platzierung) \bowtie $\\$ Rennfahrer \underset{Rennstall=RSID}{\bowtie} (\sigma_{Name='McLaren'}(Rennstall)))$
+			
+			\begin{tabular}{c|c|c}
+				Vorname & Nachname & Geburt \\
+				\hline
+				Lewis & Hamilton & 1985-01-07 \\
+				Jenson & Button & 1980-01-19 \\
+				\hline
+			\end{tabular}
+		\subsubsection{} %iii
+			$Rennfahrer - (Rennfahrer \bowtie (\pi_{RID}(Platzierung)))$
+			
+			\begin{tabular}{c|c|c|c|c|c}
+				RID & Vorname & Nachname & Geburt & Wohnort & Rennstall \\
+				\hline
+				44 & Kimi & Räikkönen & 1979-10-17 & Espoo (Finnland) & 34 \\
+				\hline
+			\end{tabular}
+		\subsubsection{} %iv
+			$\pi_{Vorname, Nachname}(\sigma_{Rennstall = 31}(Rennfahrer) - (\sigma_{Nachname='Button'}(Rennfahrer)))$
+			
+			\begin{tabular}{c|c}
+				Vorname & Nachname \\
+				\hline
+				Lewis & Hamilton \\
+				\hline
+			\end{tabular}
+	\subsection{} %c
+		\subsubsection{} %i
+			\begin{verbatim}
+			    SELECT fahrer.Vorname, fahrer.Nachname, fahrer.Geburt
+			    FROM   Platzierung platz,
+			           Rennort ort,
+			           Rennfahrer fahrer
+			    WHERE  platz.OID = ort.OID
+			    AND    platz.RID = fahrer.RID
+			    AND    ort.Name = 'Australien GP'
+			    AND    fahrer.Rennstall = 31
+			\end{verbatim}
+		\subsubsection{} %ii
+			\begin{verbatim}
+			    SELECT Vorname, Nachname
+			    FROM   Rennfahrer
+			    WHERE  Rennstall = 31
+			    AND    Nachname <> 'Button'
+			\end{verbatim}
+
+\section{Algebraische Optimierung}
+	\subsection{} %a
+	\subsection{} %b
 \end{document}
