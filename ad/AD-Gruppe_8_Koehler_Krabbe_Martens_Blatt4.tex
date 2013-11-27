@@ -39,9 +39,86 @@ Jim Martens (6420323)}
 \maketitle
 \section{} %1
 	\subsection{} %a
+		Der Algorithmus funktioniert nicht weiterhin. Dies wird anhand dieses Gegenbeispiels deutlich:
+		
+		\begin{verbatim}
+		    A = [0,1,4,8,10,13]
+		    value = 1
+		    low = 0
+		    high = 5
+		    // erster Schleifendurchlauf 0 < 5, daher Rumpf ausführen
+		    mid = (0 + 5) / 2 = 2
+		    // A[2] = 4 > value
+		    high = 2 - 1 = 1
+		    // zweiter Schleifendurchlauf 0 < 1, daher Rumpf ausführen
+		    mid = (0 + 1) / 2 = 0
+		    // A[0] = 0 < value
+		    low = 0 + 1 = 1
+		    // dritter Schleifendurchlauf 1 = 1, daher Rumpf nicht ausführen
+		    return not_found
+		\end{verbatim}
+		
+		Obwohl das Element vorhanden ist, wird zurückgegeben, dass es nicht vorhanden sei. Da es ein Gegenbeispiel gibt, funktioniert der Algorithmus nach der Änderung von \texttt{while (low <= high)} zu \texttt{while (low < high)} nicht mehr.
 	\subsection{} %b
+		\begin{verbatim}
+		    BinarySearch(A[0..N-1], value) {
+		        low = N - 1
+		        high = 0
+		        while (high <= low) {
+		            // invariants: value > A[i] for all i < low
+		                           value < A[i] for all i > high
+		            mid = (low + high) / 2
+		            if (A[mid] > value)
+		                high = mid + 1
+		            else if (A[mid] < value)
+		                low = mid - 1
+		            else
+		                return mid
+		        }
+		        return not_found
+		    }
+		\end{verbatim}
 	\subsection{} %c
+		\textbf{Formaler Beweis:} Wir müssen beweisen, dass die while-Schleife endet. Angenommen wir befinden uns in Iteration $i$ der while-Schleife.
+		\begin{itemize}
+			\item	Zu Beginn der while-Schleife haben wir \texttt{high $\leq$ low} (andernfalls hätten wir die while-Schleife nicht betreten).
+			\item	Nach dem Ausdruck \texttt{mid = (low + high) / 2} gilt \texttt{high $\leq$ mid $\leq$ low}.
+			\item	Entweder die Schleife wird durch die Rückgabe von \texttt{mid} beendet, womit wir fertig wären.
+			\item	Oder sie befindet sich in einer der ersten beiden Fälle des if-Statements. Entweder high wird um mindestens eins erhöht oder low wird um mindestens eins verkleinert, wodurch sich in jedem Schleifendurchlauf die Differenz von \texttt{low - high} um mindestens eins verringert.
+			\item	Damit gilt \texttt{low - high < 0} nach maximal $n$ Iterationen der while-Schleife und die Schleife terminiert.
+		\end{itemize}
 	\subsection{} %d
+		\textbf{Beweis der Korrektheit:}
+		
+		Offensichtlich gibt der Algorithmus ein korrektes Ergebnis zurück, wenn \texttt{mid} zurückgegeben wird, da dann \texttt{A[mid] $=$ value} gilt.
+		
+		Zu zeigen: Wenn der Algorithmus \texttt{not\_found} zurückgibt, dann kommt \texttt{value} tatsächlich nicht in dem Array vor.
+		
+		Wir werden dies nun durch die Gegenposition beweisen: Wir müssen zeigen, dass wenn \texttt{value} im Array vorkommt, der Algorithmus \texttt{mid} zurückgibt.
+		
+		\textbf{Erster Schritt:} Es ist einfach zu sehen, dass die folgenden Invarianten immer gelten:
+		\begin{itemize}
+			\item	\texttt{value > A[i] for all i < low (strict inequality!)}
+			\item	\texttt{value < A[i] for all i > high (strict inequality!)}
+		\end{itemize}
+		
+		\textbf{Zweiter Schritt:} Annahme, dass \texttt{value} im Array vorkommt.
+		\begin{itemize}
+			\item	Bereits bekannt: Invarianten sind wahr. Das bedeutet zu keinem Zeitpunkt im Algorithmus kann sich das Element, das wir suchen, links von \texttt{high} oder rechts von \texttt{low} befinden.
+			\item	Der einzige Weg, wie wir theoretisch das gesuchte Element "`verpassen"' könnten, wäre, dass \texttt{high = mid + 1} oder \texttt{low = mid - 1} zu der Situation führen, dass \texttt{high > low} gilt bevor wir das gesuchte Element gefunden haben (weil wir dann die Schleife verlassen).
+			\begin{itemize}
+				\item	Durch die Konstruktion des Algorithmus haben wir immer \texttt{high $\leq$ mid $\leq$ low} nachdem \texttt{mid = (low + high) / 2} ausgeführt wurde.
+				\item	Solange \texttt{low $\geq$ high + 2} gilt, haben wir immer \texttt{high < mid < low}.
+				In dieser Situation, \texttt{mid - 1 $\geq$ high} und \texttt{mid + 1 $\leq$ low}, haben wir immer noch \texttt{high $\leq$ low} nachdem entweder \texttt{high = mid + 1} oder \texttt{low = mid - 1} ausgeführt wurden, sodass die while-Schleife ein weiteres Mal betreten wird.
+
+				Es gibt zwei kritische Fälle, in denen wir die Schleife verlassen könnten:
+				\begin{itemize}
+					\item	\texttt{low = high}. Aber dann gilt auch \texttt{mid = high}. Nach der Annahme, dass \texttt{value} im Array ist, muss \texttt{A[high] = value} gelten. Durch die Rückgabe von \texttt{mid} wird demnach genau der richtige Index zurückgegeben.
+					\item	\texttt{low = high + 1}. In diesem Fall gilt \texttt{mid = high}. Nun gilt entweder \texttt{A[high] = A[mid] = value}, wodurch durch Rückgabe von \texttt{mid} das richtige Ergebnis zurückgegeben würde, oder es gilt \texttt{A[high] = A[mid] > value}, wodurch \texttt{high} um eins erhöht würde, was beim nächsten Schleifendurchlauf im Fall \texttt{low = high} enden würde. In dem Fall wird das korrekte Ergebnis zurückgegeben, wie bereits gezeigt wurde.
+				\end{itemize}
+			\end{itemize}
+			\item	Dies zeigt, dass wenn \texttt{value} im Array vorhanden ist, der Algorithmus immer damit endet \texttt{mid} zurückzugeben.
+		\end{itemize}
 \section{} %2
 	\subsection{} %a
 		\subsubsection{} %i
