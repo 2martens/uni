@@ -1,0 +1,212 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+% some matrix magic
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jan Branitz (6326955), Jim Martens (6420323),\\
+Stephan Niendorf (6242417)}
+\title{Hausaufgaben zum 2. Dezember}
+\maketitle
+\section{} %1
+	\subsection{} %a
+		LP-Problem (P):
+		
+		\begin{alignat*}{4}
+			\text{maximiere}\; & 3x_{1} \,&+&\, x_{2} \,&+&\, 2x_{3} && \\
+			\multicolumn{8}{l}{\text{unter den Nebenbedingungen}} && \\
+			\;& x_{1} \,&+&\, x_{2} \,&+&\, 3x_{3} \,&\leq & 30 \\
+			\;& 2x_{1} \,&+&\, 2x_{2} \,&+&\, 5x_{3} \,&\leq & 24 \\
+			\;& 4x_{1} \,&+&\, x_{2} \,&+&\, 2x_{3} \,&\leq & 36 \\
+			\multicolumn{6}{r}{$x_{1}, x_{2}, x_{3}$} \,&\geq &\, 0
+		\end{alignat*}
+		Duales Problem (D):
+		\begin{alignat*}{4}
+			\text{minimiere}\; & 30y_{1} \,&+&\, 24y_{2} \,&+&\, 36y_{3} && \\
+			\multicolumn{8}{l}{\text{unter den Nebenbedingungen}} && \\
+			\;& y_{1} \,&+&\, 2y_{2} \,&+&\, 4y_{3} \,&\geq & 3 \\
+			\;& y_{1} \,&+&\, 2y_{2} \,&+&\, y_{3} \,&\geq & 1 \\
+			\;& 3y_{1} \,&+&\, 5y_{2} \,&+&\, 2y_{3} \,&\geq & 2 \\
+			\multicolumn{6}{r}{$y_{1}, y_{2}, y_{3}$} \,&\geq &\, 0
+		\end{alignat*}
+		
+		Durch Einsetzen von $x_{1}^{*}, x_{2}^{*}, x_{3}^{*}$ in die erste Ungleichung von P ergibt sich:
+		\begin{alignat*}{2}
+			1 \cdot \frac{33}{4} + 1 \cdot 0 + 3 \cdot \frac{3}{2} &\leq & 30 \\
+			\frac{33}{4} + \frac{18}{4} &\leq & 30 \\
+			\frac{51}{4} &\leq & \frac{120}{4}
+		\end{alignat*}
+		Die erste Ungleichung ist nicht mit Gleichheit erfüllt, somit muss $y_{1}^{*} = 0$ gelten.
+		
+		Einsetzen in die zweite Ungleichung ergibt:
+		\begin{alignat*}{2}
+			2 \cdot \frac{33}{4} + 2 \cdot 0 + 5 \cdot \frac{3}{2} &\leq & 24 \\
+			\frac{33}{2} + \frac{15}{2} &\leq & 24 \\
+			\frac{48}{2} &\leq & \frac{48}{2}
+		\end{alignat*}
+		Die zweite Ungleichung ist mit Gleichheit erfüllt, woraus sich keine Schlüsse ziehen lassen.
+		
+		Einsetzen in die dritte Ungleichung ergibt:
+		\begin{alignat*}{2}
+			4 \cdot \frac{33}{4} + 1 \cdot 0 + 2 \cdot \frac{3}{2} &\leq & 36 \\
+			33 + 3 &\leq & 36 \\
+			36 &\leq & 36
+		\end{alignat*}
+		Auch die dritte Ungleichung ist mit Gleichheit erfüllt. Da $x_{1}^{*}$ und $x_{3}^{*}$ größer als $0$ sind, müssen die erste und dritte Ungleichung von D mit Gleichheit erfüllt sein.
+		
+		Unter Berücksichtigung von $y_{1}^{*} = 0$ ergibt sich daraus:
+		\begin{alignat*}{2}
+			I \;& 2y_{2} + 4y_{3} &=& 3 \\
+			II \;& 2y_{2} + y_{3} &=& 1 \\
+			I - II \;& 3y_{3} &=& 2 \\
+			& y_{3} &=& \frac{2}{3} \\
+			\intertext{Einsetzen von $y_{3}$ in $II$}
+			II \;& 2y_{2} + \frac{2}{3} &=& 1 \\
+			& 2y_{2} &=& \frac{1}{3} \\
+			& y_{2} &=& \frac{1}{6}
+		\end{alignat*}
+		Demnach sind $y_{1}^{*} = 0, y_{2}^{*} = \frac{1}{6}, y_{3}^{*} = \frac{2}{3}$ eindeutig bestimmte Zahlen, die zusammen mit den x-Werten die komplementären Schlupfbedingungen erfüllen. Auffallend ist, dass dies die gleichen Werte sind, die bereits im ersten Beispiel auf Skript Seite 63 herauskamen. Da dort bereits überprüft wurde, ob die Zahlen eine zulässige Lösung von D sind und dies bestätigt wurde, kann diese Überprüfung hier ausgelassen werden.
+		
+		Demnach ist $x_{1}^{*} = \frac{33}{4}, x_{2}^{*} = 0, x_{3}^{*} = \frac{3}{2}$ ebenso eine optimale Lösung für das LP-Problem.
+	\subsection{} %b
+		Zum Überprüfen der vorgeschlagenen Lösung werden die Werte zunächst in die Ungleichungen des LP-Problems eingesetzt.
+		
+		Erste Ungleichung:
+		\begin{alignat*}{2}
+			5 + 2 &\leq & 7 \\
+			7 &\leq & 7
+		\end{alignat*}
+		
+		Zweite Ungleichung:
+		\begin{alignat*}{2}
+			2 + 6 &\leq & 8 \\
+			8 &\leq & 8
+		\end{alignat*}
+		
+		Dritte Ungleichung:
+		\begin{alignat*}{2}
+			2 \cdot 5 + 2 &\leq & 12 \\
+			12 &\leq & 12
+		\end{alignat*}
+		
+		Da alle der Ungleichungen mit Gleichheit erfüllt sind, können keine Rückschlüsse auf y-Werte gezogen werden. Da alle x-Werte größer als 0 sind, müssen alle drei Ungleichungen von D mit Gleichheit erfüllt sein.
+		
+		Das duale Problem:
+		\begin{alignat*}{4}
+			\text{minimiere}\; & 7y_{1} \,&+&\, 8y_{2} \,&+&\, 12y_{3} && \\
+			\multicolumn{8}{l}{\text{unter den Nebenbedingungen}} && \\
+			\;& y_{1} \,&& &+&\, 2y_{3} \,&\geq & 2 \\
+			\;& y_{1} \,&+&\, y_{2} \,&+&\, y_{3} \,&\geq & 3 \\
+			\;& &&\, y_{2} && &\geq & 2 \\
+			\multicolumn{6}{r}{$y_{1}, y_{2}, y_{3}$} \,&\geq &\, 0
+		\end{alignat*}
+		
+		Aus der dritten Ungleichung lässt sich ablesen, dass $y_{2}^{*} = 2$ gilt. Es ergibt sich das folgende LGS:
+		\begin{alignat*}{2}
+			I \;& y_{1} + 2y_{3} &=& 2 \\
+			II \;& y_{1} + 2 + y_{3} &=& 3 \\
+			\;& y_{1} + y_{3} &=& 1 \\
+			I - II \;& y_{3} &=& 1 \\
+			\intertext{Einsetzen von $y_{3}$ in $I$}
+			I \;& y_{1} + 2 \cdot 1 &=& 2 \\
+			\;& y_{1} &=& 0
+		\end{alignat*}
+		
+		Es ergeben sich somit die eindeutig bestimmten Zahlen $y_{1}^{*} = 0, y_{2}^{*} = 2, y_{3}^{*} = 1$. Diese Zahlen erfüllen zusammen mit der vorgeschlagenen Lösung die komplementären Schlupfbedingungen.
+		Schließlich muss noch geprüft werden, ob diese Zahlen auch eine zulässige Lösung des dualen Problems sind. Dafür werden diese eingesetzt:
+
+		Erste Ungleichung:
+		\begin{alignat*}{2}
+			2 \cdot 1 &\geq & 2 \\
+			2 &\geq & 2
+		\end{alignat*}
+		
+		Zweite Ungleichung:
+		\begin{alignat*}{2}
+			2 + 1 &\geq & 3 \\
+			3 &\geq & 3
+		\end{alignat*}
+		
+		Dritte Ungleichung:
+		\begin{alignat*}{2}
+			2 &\geq & 2
+		\end{alignat*}
+		
+		Da alle drei Ungleichungen mit den herausgefundenen Zahlen gültig sind, stellen die gefundenen Zahlen eine zulässige Lösung des dualen Problems dar.
+\section{} %2
+	Zunächst wird das eigentliche LP-Problem noch einmal aufgestellt:
+	\begin{alignat*}{7}
+		\text{maximiere}\; & 8x_{1} &+& 3x_{2} &+& 6x_{3} &+& 3x_{4} &+& 9x_{5} &+& 5x_{6} &&  \\
+		\multicolumn{14}{l}{\text{unter den Nebenbedingungen}} && \\
+		& x_{1} &+& x_{2} && && && && &\leq &\, 400 \\
+		& && && x_{3} &+& x_{4} && && &\leq &\, 480 \\
+		& && && && && x_{5} &+& x_{6} &\leq &\, 230 \\
+		& x_{1} && &+& x_{3} && &+& x_{5} && &\leq &\, 420 \\
+		& && x_{2} && &+& x_{4} && &+& x_{6} &\leq &\, 250 \\
+		\multicolumn{12}{r}{$x_{1}, x_{2}, x_{3}, x_{4}, x_{5}, x_{6}$} \,&\geq &\, 0
+	\end{alignat*}
+	Die vorgeschlagene Lösung ist $x_{1}^{*} = 400, x_{2}^{*} = 0, x_{3}^{*} = 10, x_{4}^{*} = 30, x_{5}^{*} = 10, x_{6}^{*} = 220$.
+	
+	Es ist offensichtlich, dass die erste Ungleichung mit Gleichheit erfüllt ist. Die zweite Ungleichung ist ebenso offensichtlich nicht mit Gleichheit erfüllt ($10 + 30 = 40 < 480$). Die dritte Ungleichung ist mit Gleichheit erfüllt ($10 + 220 = 230$).
+	
+	Die vierte Ungleichung ist ebenso mit Gleichheit erfüllt ($400 + 10 + 10 = 420$), wie die fünfte Ungleichung ($0 + 30 + 220 = 250$).
+	
+	Daraus lässt sich schließen, dass $y_{2}^{*} = 0$ gelten muss. Ebenso müssen die erste, dritte, vierte, fünfte und sechste Ungleichung des dualen Problems mit Gleichheit erfüllt sein, da die entsprechenden Werte des primalen Problems größer $0$ sind.
+	
+	Das duale Problem:
+	\begin{alignat*}{6}
+		\text{minimiere}\; & 400y_{1} &+& 480y_{2} &+& 230y_{3} &+& 420y_{4} &+& 250y_{5} &&  \\
+		\multicolumn{12}{l}{\text{unter den Nebenbedingungen}} && \\
+		& y_{1} && && &+& y_{4} && &\geq &\, 8 \\
+		& y_{1} && && && &+& y_{5} &\geq &\, 3 \\
+		& && y_{2} && &+& y_{4} && &\geq &\, 6 \\
+		& && y_{2} && && && y_{5} &\geq &\, 3 \\
+		& && && y_{3} &+& y_{4} && &\geq &\, 9 \\
+		& && && y_{3} && &+& y_{5} &\geq &\, 5 \\		
+		\multicolumn{10}{r}{$y_{1}, y_{2}, y_{3}, y_{4}, y_{5}$} \,&\geq &\, 0
+	\end{alignat*}
+	
+	Unter der Berücksichtigung, dass $y_{2}^{*} = 0$ gilt und alle außer die zweite Ungleichung mit Gleichheit erfüllt sein müssen, ergibt sich direkt $y_{4}^{*} = 6$ und $y_{5}^{*} = 3$.
+	
+	Aufgrund dieser Werte lassen sich die restlichen Werte leicht errechnen:
+	\begin{alignat*}{2}
+		y_{1} + 6 &=& 8 \\
+		y_{1} &=& 2 \\
+		\intertext{Fünfte Ungleichung}
+		y_{3} + 6 &=& 9 \\
+		y_{3} &=& 3 \\
+		\intertext{Sechste Ungleichung}
+		y_{3} + 3 &=& 5 \\
+		y_{3} &=& 2
+	\end{alignat*}
+	Bei dem Errechnen von $y_{3}$ ergibt sich ein Widerspruch, denn $y_{3}$ kann nicht sowohl 2 als auch 3 sein. Eine Alternative gibt es hier nicht, da sowohl die fünfte als auch die sechste Ungleichung mit Gleichheit erfüllt sein müssen.
+	
+	Da es somit keine eindeutig bestimmbaren Zahlen $y_{i}^{*}$ mit $i = \{1,2,3,4,5\}$ gibt, die zusammen mit der vorgeschlagenen Lösung die komplementären Schlupfbedingungen erfüllen, entspricht die vorgeschlagene Lösung nicht der optimalen Strategie.
+\end{document}
