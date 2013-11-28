@@ -122,17 +122,78 @@ Jim Martens (6420323)}
 \section{} %2
 	\subsection{} %a
 		\subsubsection{} %i
+			In einem Graph ohne Kanten kann jeder Knoten gleich gefärbt sein. Dies gilt, weil die Bedingung $c_{k}(i= \neq c_{k}(j)$ nur gilt, wenn $i$ und $j$ mit einer Kante verbunden sind, was in solch einem Graphen nicht gegeben ist. Daher ist hier nichts zu zeigen.
 		\subsubsection{} %ii
+			Wenn ein Graph k-färbbar ist, dann kann man auch eine weitere Farbe in die Abbildung $c_{k}$ hinzunehmen ohne sie zu benutzen. Dies gilt da $c_{k}$ nicht surjektiv sein muss.
 		\subsubsection{} %iii
+			Man nehme einen k-färbbaren Graphen. Nun kann man solange weitere Farben hinzufügen, bis n Farben in der Abbildung vorkommen. Diese müssen jedoch nicht benutzt werden. Daher ist jeder Graph n-färbbar.
 	\subsection{} %b
 		\subsubsection{} %i
+			Wenn ein Graph 2-färbbar ist, dann gibt es keine Zyklen ungerader Länge. Bei einem Zyklus gerader Länge kann jeder zweiter Knoten die gleiche Farbe haben, ohne mit einem Knoten verbunden zu sein, der die gleiche Farbe hat.
+			
+			Alle Knoten mit einer Farbe kann man als eine Untermenge einer Abbildung eines bipartiten Graphen verstehen.
 		\subsubsection{} %ii
+			\begin{verbatim}
+			    IST_2FAERBUNG(G) {
+			        // todo: make this algorithm
+			    }
+			\end{verbatim}
 		\subsubsection{} %iii
+			Es gibt 2 verschiedene 2-Färbungen, sofern man unterschiedliche Farben nicht als Unterschied ansieht. Pro 2 Farben gibt es genau 2 verschiedene Färbungen.
 	\subsection{} %c
+		Bei einer beliebigen Landkarten, überführt in einen Graphen, werden mindestens so viele Farben benötigt, wie der kürzeste Zyklus ist.
 		\subsubsection{} %i
+			\begin{tikzpicture}
+				\node (altona) {A};
+				\node (eimsbuettel) [above right=of altona] {E};
+				\node (nord) [right=of eimsbuettel] {N};
+				\node (wandsbek) [right=of nord] {W};
+				\node (mitte) [below=of eimsbuettel] {M};
+				\node (harburg) [below left=of mitte] {H};
+				\node (bergedorf) [below right=of mitte] {B};
+				
+				\path[every node/.style={font=\scriptsize}] 
+					(altona) edge (mitte)
+					(altona) edge (eimsbuettel)
+					(mitte) edge (harburg)
+					(mitte) edge (bergedorf)
+					(mitte) edge (eimsbuettel)
+					(mitte) edge (nord)
+					(mitte) edge (wandsbek)
+					(eimsbuettel) edge (nord)
+					(nord) edge (wandsbek);
+			\end{tikzpicture}
 		\subsubsection{} %ii
+			\begin{alignat*}{2}
+				c_{k}(A) &=& gelb \\
+				c_{k}(E) &=& rot \\
+				c_{k}(M) &=& blau \\
+				c_{k}(H) &=& rot \\
+				c_{k}(B) &=& rot \\
+				c_{k}(N) &=& gelb \\
+				c_{k}(W) &=& rot
+			\end{alignat*}
 		\subsubsection{} %iii
+			
 		\subsubsection{} %iv
+			\begin{tikzpicture}
+				\node (sh) {SH};
+				\node (hh) [below right=of sh] {HH};
+				\node (meck) [right=of hh] {MP};
+				\node (bremen) [below left=of hh] {B};
+				\node (nieder) [below=of hh] {N};
+				
+				\path[every node/.style={font=\scriptsize}] 
+					(sh) edge (hh)
+					(sh) edge (meck)
+					(hh) edge (nieder)
+					(bremen) edge (nieder)
+					(sh) edge (nieder)
+					(bremen) edge (sh)
+					(bremen) edge (hh);
+			\end{tikzpicture}
+			
+			In dieser konstruierten Karte (dargestellt als Graph), müssen mindestens vier Farben verwendet werden.
 \section{} %3
 	\subsection{} %a
 	\subsection{} %b
