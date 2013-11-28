@@ -10,9 +10,8 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
 ; zunächst wird (- 2 5) ausgeführt, was -3 ergibt
 ; als nächstes wird (min 2 -3) ausgeführt, was -3 ergibt
 ; dann kommt (max -3 0) mit dem Ergebnis 0
-; 2. (+ (- 2 13) 2) -> -9
-; zunächst wird (- 2 13) mit dem Ergebnis -11 ausgeführt
-; anschließend wird (+ -11 2) ausgeführt mit dem Ergebnis -9
+; 2. '(+ (- 2 13) 2) -> (+ (- 2 13) 2)
+; das Quote verzögert die Auswertung, wodurch der Ausdruck nicht ausgewertet wird
 ; 3. (cadr '(Alle Jahre wieder)) -> 'Jahre
 ; zunächst wird (cdr '(Alle Jahre wieder)) ausgeführt mit dem Ergebnis '(Jahre wieder)
 ; anschließend wird (car '(Jahre wieder)) mit dem Ergebnis 'Jahre ausgeführt
@@ -27,8 +26,9 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
 ; hier verkettet cons zwei einfache Elemente, wodurch ein Paar entsteht, welches keine Liste ist
 ; 7. (equal? (list 'Racket 'Prolog 'Java) '(Racket Prolog Java)) -> #t
 ; list erzeugt eine Liste mit den angegebenen Elementen und '(Racket Prolog Java) ist ebenfalls eine Liste mit den gleichen Elementen
-; 8. (eq? (list 'Racket 'Prolog 'Java) (cons 'Racket '(Prolog Java))) -> #t
-; list erzeugt wieder eine Liste und cons verknüpft hier ein einfaches Element mit einer Liste, wodurch wieder eine Liste entsteht
+; 8. (eq? (list 'Racket 'Prolog 'Java) (cons 'Racket '(Prolog Java))) -> #f
+; list erzeugt wieder eine Liste und cons verknüpft hier ein einfaches Element mit einer Liste, wodurch wieder eine Liste entsteht;
+; allerdings sind die beiden Listen nicht identisch, aber genau das prüft eq?
 
 ; 2)
 ; 1.
