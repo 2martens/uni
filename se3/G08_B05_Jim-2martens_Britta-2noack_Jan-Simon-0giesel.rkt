@@ -22,11 +22,8 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
 ; gewählt. Dafür wird eine Funktion randomRezessiv benötigt, die ebendies bewerkstelligt.
 
 ; randomRezessiv greift auf die Dominanzliste zurück. Dafür wird eine Zugriffsfunktion
-; key->schluessel benutzt. Zusätzlich wird eine Hilfsfunktion (randomList) benutzt, um
+; key->wert benutzt. Zusätzlich wird eine Hilfsfunktion (randomList) benutzt, um
 ; von der Liste der dominierten Merkmale ein zufälliges Merkmal auszuwählen.
-
-; Die Hilfsfunktion reverseList dient zum Umkehren der Reihenfolge der Listen-
-; elemente und wird an mehreren Stellen verwendet.
 
 ; randomSelection wählt aus gegebenen dominanten und rezessiven Merkmalen zufällig eine Liste
 ; an Merkmalen aus, die dann die vererbten Merkmale darstellen.
@@ -81,22 +78,12 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
     ))
 
 ; gibt den Wert von key in tafel zurück
-(define (key->schluessel key tafel)
+(define (key->wert key tafel)
   (cdr (assoc key tafel)))
 
 ; wählt ein zufälliges Element einer Liste aus
 (define (randomListe xs)
   (car (shuffle xs)))
-
-; kehrt die Reihenfolge einer Liste um
-(define (reverseList list)
-  (letrec ((rev (λ (xs result)
-                  (if (empty? xs)
-                      result
-                      (rev (cdr xs)
-                           (cons (car xs) result)
-                           )))))
-    (rev list '())))
 
 ; wählt zu einer gegebenen Liste an dominanten Merkmalen die rezessiven Merkmale aus
 (define (randomRezessiv dominant)
@@ -106,11 +93,11 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
                        (help 
                         (cdr xs) 
                         (cons 
-                         (randomListe (key->schluessel (car xs) dominanzliste))
+                         (randomListe (key->wert (car xs) dominanzliste))
                          result
                          ))
                        ))))
-    (reverseList (help dominant '()))))
+    (reverse (help dominant '()))))
 
 ; wählt von den gegebenen Elementen zufällig eines aus
 (define (randomElement x y)
@@ -128,7 +115,7 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
                          (select (cdr xs) (cdr ys) (cons (randomElement (car xs) (car ys)) 
                                                          result))
                          ))))
-    (reverseList (select dominant rezessiv '()))))
+    (reverse (select dominant rezessiv '()))))
 
 ; bestimmt aus den zufälligen Merkmalen des Vaters und der Mutter die sichtbaren Elemente
 ; beim Kind
@@ -136,19 +123,19 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
   (letrec ((rec (λ (xs ys result)
                   (if (empty? xs)
                       result
-                      (if (empty? (filter (λ (x) (equal? x (car ys))) (key->schluessel (car xs) dominanzliste)))
+                      (if (empty? (filter (λ (x) (equal? x (car ys))) (key->wert (car xs) dominanzliste)))
                           (rec (cdr xs) (cdr ys) (cons (car ys) result))
                           (rec (cdr xs) (cdr ys) (cons (car xs) result))
                           )))))
-    (reverseList (rec vaterMerkmale mutterMerkmale '()))))
+    (reverse (rec vaterMerkmale mutterMerkmale '()))))
 
 (require se3-bib/butterfly-module)
 
 (define (zeigeSchmetterling merkmale)
-  (show-butterfly (key->schluessel (cadr merkmale) translationlist)
-                  (key->schluessel (car merkmale) translationlist)
-                  (key->schluessel (caddr merkmale) translationlist)
-                  (key->schluessel (cadddr merkmale) translationlist)
+  (show-butterfly (key->wert (cadr merkmale) translationlist)
+                  (key->wert (car merkmale) translationlist)
+                  (key->wert (caddr merkmale) translationlist)
+                  (key->wert (cadddr merkmale) translationlist)
                   ))
 ; zeigt (in dieser Reihenfolge) den Vater, die Mutter und die Kinder
 (define (mendel vaterDominant mutterDominant anzahlKinder)
@@ -189,3 +176,51 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
 (mendel '(punkte rot gerade rhombisch) '(punkte rot gerade rhombisch) 2)
 
 ; 2)
+; überprüft, ob ein Element in einer Liste ist
+(define (in-list? element list)
+  (if (pair? (member element list))
+      #t
+      #f))
+
+; negiert ein Prädikat
+(define (not pred)
+  (if pred
+      #f
+      #t))
+
+(define erbbarliste
+  '((punkte . (punkte streifen sterne))
+    (streifen . (streifen sterne))
+    (sterne . (sterne))
+    (rot . (rot gruen blau gelb))
+    (gruen . (gruen blau gelb))
+    (blau . (blau gelb))
+    (gelb . (gelb))
+    (gerade . (gerade gekruemmt geschweift))
+    (gekruemmt . (gekruemmt geschweift))
+    (geschweift . (geschweift))
+    (rhombisch . (rhombisch hexagonal elliptisch))
+    (hexagonal . (hexagonal elliptisch))
+    (elliptisch . (elliptisch))
+    ))
+
+; überprüft, ob das Kind von den Eltern abstammen kann
+(define (testeElternschaft sichtbarVater sichtbarMutter sichtbarKind)
+  (letrec ((rec (λ (xs ys zs valid)
+               (if (or (not valid) (empty? xs))
+                   valid
+                   (rec (cdr xs)
+                     (cdr ys) 
+                     (cdr zs) 
+                     (or (in-list? (car zs) (key->wert (car xs) erbbarliste))
+                         (in-list? (car zs) (key->wert (car ys) erbbarliste))
+                     ))
+                  ))))
+    (rec sichtbarVater sichtbarMutter sichtbarKind #t)))
+
+(display "\nSind Anton und Antonia die Eltern von Toni:")
+(testeElternschaft '(sterne gruen geschweift rhombisch) '(streifen blau gekruemmt hexagonal) '(sterne rot gekruemmt rhombisch))
+(display "\nSind Anton und Antonia die Eltern von Tini:")
+(testeElternschaft '(sterne gruen geschweift rhombisch) '(streifen blau gekruemmt hexagonal) '(punkte gruen gerade rhombisch))
+(display "\nSind Anton und Antonia die Eltern von Tina:")
+(testeElternschaft '(sterne gruen geschweift rhombisch) '(streifen blau gekruemmt hexagonal) '(streifen gelb geschweift elliptisch))
