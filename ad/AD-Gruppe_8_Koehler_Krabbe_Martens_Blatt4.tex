@@ -137,16 +137,19 @@ Jim Martens (6420323)}
 			    IST_2FAERBUNG(G) {
 			        kanten = E(G)
 			        valid = true
+			        farben = new Set()
 			        foreach kante in kanten {
 			            knoten1 = kante.knoten1
 			            knoten2 = kante.knoten2
+			            farben.add(knoten1.farbe)
+			            farben.add(knoten2.farbe)
 			            if (knoten1.farbe == knoten2.farbe) {
 			                valid = false
 			                break
 			            }
 			        }
 			        
-			        return valid
+			        return (valid && (farben.getAnzahl() == 2))
 			    }
 			\end{verbatim}
 		\subsubsection{} %iii
