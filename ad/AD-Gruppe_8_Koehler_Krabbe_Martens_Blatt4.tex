@@ -268,15 +268,33 @@ Jim Martens (6420323)}
 	\subsection{} %a
         % Senken finden (alle Senken infiltrieren, dadurch werden alle Module eliminiert)
         % Algorithmus aus Vorlesung benutzen
-        Es müssen alle Module (oder Knoten) ohne eingehende Kanten eliminiert (bzw. markiert) werden, da diese andernfalls nie erreicht werden können. Zu allen anderen Knoten muss es gerichtete Pfade von einem dieser Knoten geben.
+        Es müssen alle Module (oder Knoten) ohne eingehende Kanten eliminiert (bzw. markiert) werden, da diese andernfalls nie erreicht werden können. Zu allen anderen Knoten muss es gerichtete Pfade von einem dieser Knoten geben. Ausnahmen können starke Zusammenhangskomponenten bilden. In jeder starken Zusammenhangskomponente wird daher ebenfalls ein Knoten eliminiert.
+        \newpage
         \begin{verbatim}
             function eliminiereMCP() {
+                int zaehler = 0
+
                 list infiltrierteKnoten
+                // füge alle Knoten ohne Vorgänger hinzu:
                 for-all v in Knotenmenge:
                     if v.eingehendeKanten == 0:
                         infiltriere(v)
                         infiltrierteKnoten.add(v)
                     end if
+                end for-all
+                // füge einen Knoten aus jeder
+                // starken Zusammenhangskomponente hinzu:
+                list starkZusammenhaengend = findeStarkeZusammenhangskomponenten()
+                for-all elemente in starkZusammenhaengend:
+                    for i = 0; i < elemente.length; i++
+                        if infiltrierteKnoten.contains(elemente[i]):
+                            zaehler++
+                        end if
+                        if zaehler == 0:
+                            infiltriere(elemente[0])
+                            infiltrierteKnoten.add(elemente[0])
+                        end if
+                    end for
                 end for-all
                 eliminiere(infiltrierteKnoten)
             }
