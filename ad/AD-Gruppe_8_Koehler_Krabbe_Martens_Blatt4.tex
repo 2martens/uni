@@ -231,7 +231,18 @@ Jim Martens (6420323)}
 			G_{2}: 1, 3, 4, 7, 5, 2, 6
 		\]
 	\subsection{} %d
-	\subsection{} %e
+            Für $G_1$ existiert keine topologische Sortierung, da es sich nicht um einen DAG (Directed acyclic graph) handelt. Dies erkennt man daran, dass beispielsweise ein Zyklus von 1 über 5 über 2 zurück zur 1 existiert. $\square$ \\
+            Für $G_2$ existieren topologische Sortierungen, z.B.:\\
+            \[
+                1, 3, 5, 6, 4, 7, 2
+            \]
+        \subsection{} %e
+            Wie  bereits etabliert, existieren für $G_1$ keine mit ihm konsistenten topologischen Sortierungen. Für $G_2$ allerdings existieren mehrere:\\
+          Nach Proposition 5 (Uniqueness of topological Sort) im Skript, Folie 163, ist eine topologische Sortierung nur eindeutig, wenn der dazugehörige Graph einen Hamilton-Kreis enthält. $G_2$ enthält keinen Hamilton-Kreis. Dies ist leicht zu erkennen: es gibt keinen Pfad in dem Graphen, der die Knoten $2$ \textit{und} $3$ besucht. Daher gibt es mehrere topologische Sortierungen.\\
+          Eine weitere wäre z.B.:\\
+          \[
+                1, 7, 2, 5, 6, 4, 3
+          \]
 	\subsection{} %f
 		starke Zusammenhangskomponenten von $G_{1}:$
 		\begin{alignat*}{2}
@@ -252,14 +263,21 @@ Jim Martens (6420323)}
 		\end{alignat*}
 \section{} %4
 	\subsection{} %a
-		% Senken finden (alle Senken infiltrieren, dadurch werden alle Module eliminiert)
-		% Algorithmus aus Vorlesung benutzen		
-		\begin{verbatim}
-		    function eliminiereMCP() {
-		        
-		    
-		    }
-		\end{verbatim}
+        % Senken finden (alle Senken infiltrieren, dadurch werden alle Module eliminiert)
+        % Algorithmus aus Vorlesung benutzen
+        Es müssen alle Module (oder Knoten) ohne eingehende Kanten eliminiert (bzw. markiert) werden, da diese andernfalls nie erreicht werden können. Zu allen anderen Knoten muss es gerichtete Pfade von einem dieser Knoten geben.
+        \begin{verbatim}
+            function eliminiereMCP() {
+                list infiltrierteKnoten
+                for-all v in Knotenmenge:
+                    if v.eingehendeKanten == 0:
+                        infiltriere(v)
+                        infiltrierteKnoten.add(v)
+                    end if
+                end for-all
+                eliminiere(infiltrierteKnoten)
+            }
+                \end{verbatim}
 	\subsection{} %b
 		Wenn alle Senken infiltriert werden, werden dadurch alle Module eliminiert, da alle Module direkt oder indirekt mit mindestens einer Senke verbunden sind.
 	\subsection{} %c
