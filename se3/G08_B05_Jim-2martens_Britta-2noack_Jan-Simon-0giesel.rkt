@@ -182,12 +182,6 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
       #t
       #f))
 
-; negiert ein Prädikat
-(define (not pred)
-  (if pred
-      #f
-      #t))
-
 (define erbbarliste
   '((punkte . (punkte streifen sterne))
     (streifen . (streifen sterne))
@@ -218,9 +212,9 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
                   ))))
     (rec sichtbarVater sichtbarMutter sichtbarKind #t)))
 
-(display "\nSind Anton und Antonia die Eltern von Toni:")
+(display "\nKönnen Anton und Antonia die Eltern von Toni sein:")
 (testeElternschaft '(sterne gruen geschweift rhombisch) '(streifen blau gekruemmt hexagonal) '(sterne rot gekruemmt rhombisch))
-(display "\nSind Anton und Antonia die Eltern von Tini:")
+(display "\nKönnen Anton und Antonia die Eltern von Tini sein:")
 (testeElternschaft '(sterne gruen geschweift rhombisch) '(streifen blau gekruemmt hexagonal) '(punkte gruen gerade rhombisch))
-(display "\nSind Anton und Antonia die Eltern von Tina:")
+(display "\nKönnen Anton und Antonia die Eltern von Tina sein:")
 (testeElternschaft '(sterne gruen geschweift rhombisch) '(streifen blau gekruemmt hexagonal) '(streifen gelb geschweift elliptisch))
