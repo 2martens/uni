@@ -1,0 +1,285 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+% some matrix magic
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jan Branitz (6326955), Jim Martens (6420323),\\
+Stephan Niendorf (6242417)}
+\title{Hausaufgaben zum 9. Dezember}
+\maketitle
+\section{} %1
+	\subsection{} %a
+		\begin{alignat*}{4}
+			\text{minimiere}\; & y_{1} \,&+&\, 2y_{2} \,&+&\, 3y_{3} && \\
+			\multicolumn{8}{l}{\text{unter den Nebenbedingungen}} && \\
+			\;& 2y_{1} \,&+&\, 3y_{2} \,&+&\, y_{3} \,&\geq & 5 \\
+			\;& 3y_{1} \,&+&\, y_{2} \,&+&\, y_{3} \,&\geq & -7 \\
+			\;-& y_{1} \,&+&\, 4y_{2} \,&-&\, 2y_{3} \,&\geq & 3 \\
+			\;& y_{1} \,&-&\, 2y_{2} \,&-&\, y_{3} \,&=& 1 \\
+			\multicolumn{6}{r}{$y_{2}, y_{3}$} \,&\geq &\, 0
+		\end{alignat*}
+	\subsection{} %b
+		\begin{alignat*}{9}
+			\text{maximiere}\; -& y_{1} &+& 16y_{2} &+& 5y_{3} &+& 8y_{4} &+& y_{5} &-& 4y_{6} &-& 10y_{7} &+& 9y_{8} &&  \\
+			\multicolumn{18}{l}{\text{unter den Nebenbedingungen}} && \\
+			& 2y_{1} &+& y_{2} &+& y_{3} &+& 2y_{4} &+& y_{5} &+& 4y_{6} &-& 4y_{7} &+& y_{8} &\leq &\, -2 \\
+			-& 4y_{1} &+& 5y_{2} && &+& 4y_{4} &-& 3y_{5} &-& 3y_{6} &+& 3y_{7} &+& 2y_{8} &=&\, 3 \\
+			& y_{1} &+& y_{2} &+& y_{3} &-& y_{4} &+& y_{5} && &-& 5y_{7} &+& y_{8} &=&\, 22 \\
+			\multicolumn{16}{r}{$y_{4}, y_{5}, y_{6}, y_{7}$} \,&\geq &\, 0
+		\end{alignat*}
+\section{} %2
+	\subsection{} %a
+		Das LP-Problem:
+		\begin{alignat*}{3}
+			\text{maximiere}\; & 40x_{1} \,&+&\, 70x_{2} && \\
+			\multicolumn{6}{l}{\text{unter den Nebenbedingungen}} && \\
+			\;& x_{1} \,&+&\, x_{2} \,&\leq & 100 \\
+			\;& 10x_{1} \,&+&\, 50x_{2} \,&\leq & 4000 \\
+			\multicolumn{4}{r}{$x_{1}, x_{2}$} \,&\geq &\, 0
+		\end{alignat*}
+		
+		Das duale Problem:
+		\begin{alignat*}{3}
+			\text{minimiere}\; & 100y_{1} \,&+&\, 4000y_{2} && \\
+			\multicolumn{6}{l}{\text{unter den Nebenbedingungen}} && \\
+			\;& y_{1} \,&+&\, 10y_{2} \,&\geq & 40 \\
+			\;& y_{1} \,&+&\, 50y_{2} \,&\geq & 70 \\
+			\multicolumn{4}{r}{$y_{1}, y_{2}$} \,&\geq &\, 0
+		\end{alignat*}
+
+		\subsubsection{} %i
+			\underline{Starttableau}:
+			\begin{alignat*}{4}
+				x_{3} \,&=&\, 100 \,&-&\, x_{1} \,&-&\, x_{2} \\
+				x_{4} \,&=&\, 4000 \,&-&\, 10x_{1} \,&-&\, 50x_{2} \\ \cline{1 - 7}
+				z &=& &&\, 40x_{1} \,&+&\, 70x_{2}
+			\end{alignat*}
+			
+			\underline{1. Iteration}:
+		
+			Eingangsvariable: $x_{2}$\\
+			Ausgangsvariable: $x_{4}$
+		
+			Es folgt
+			\begin{alignat*}{2}
+				50x_{2} \,&=&&\, 4000 - 10x_{1} - x_{4} \\
+				x_{2} \,&=&&\, 80 - \frac{1}{5}x_{1} - \frac{1}{50}x_{4} \\
+				x_{3} \,&=&&\, 100 - x_{1} - \left(80 - \frac{1}{5}x_{1} - \frac{1}{50}x_{4}\right) \\
+				&=&&\, 100 - x_{1} - 80 + \frac{1}{5}x_{1} + \frac{1}{50}x_{4} \\
+				&=&&\, 20 - \frac{4}{5}x_{1} + \frac{1}{50}x_{4} \\
+				z \,&=&&\, 40x_{1} + 70\left(80 - \frac{1}{5}x_{1} - \frac{1}{50}x_{4}\right) \\
+				&=&&\, 40x_{1} + 5600 - 14x_{1} - \frac{7}{5}x_{4} \\
+				&=&&\, 5600 + 26x_{1} - \frac{7}{5}x_{4}
+			\end{alignat*}
+		
+			\underline{Ergebnis der 1. Iteration}:
+			\begin{alignat*}{4}
+				x_{2} \,&=&\, 80 \,&-&\, \frac{1}{5}x_{1} \,&-&\, \frac{1}{50}x_{4} \\
+				x_{3} \,&=&\, 20 \,&-&\, \frac{4}{5}x_{1} \,&+&\, \frac{1}{50}x_{4} \\ \cline{1 - 7}
+				z &=& 5600 \,&+&\, 26x_{1} \,&-&\, \frac{7}{5}x_{4}
+			\end{alignat*}
+			
+			\underline{2. Iteration}:
+		
+			Eingangsvariable: $x_{1}$\\
+			Ausgangsvariable: $x_{3}$
+		
+			Es folgt
+			\begin{alignat*}{2}
+				\frac{4}{5}x_{1} \,&=&&\, 20 +  \frac{1}{50}x_{4} - x_{3} \\
+				x_{1} \,&=&&\, 25 + \frac{1}{40}x_{4} - \frac{5}{4}x_{3} \\
+				x_{2} \,&=&&\, 80 - \frac{1}{5}\left(25 + \frac{1}{40}x_{4} - \frac{5}{4}x_{3}\right) - \frac{1}{50}x_{4} \\
+				&=&&\, 80 - 5 + \frac{1}{200}x_{4} - \frac{1}{4}x_{3} - \frac{1}{50}x_{4} \\
+				&=&&\, 75 - \frac{3}{200}x_{4} - \frac{1}{4}x_{3} \\
+				z \,&=&&\, 5600 + 26\left(25 + \frac{1}{40}x_{4} - \frac{5}{4}x_{3}\right) - \frac{7}{5}x_{4} \\
+				&=&&\, 5600 + 650 + \frac{13}{20}x_{4} - \frac{65}{2}x_{3} - \frac{7}{5}x_{4} \\
+				&=&&\, 6250 - \frac{3}{4}x_{4} - \frac{65}{2}x_{3}
+			\end{alignat*}
+		
+			\underline{Ergebnis der 2. Iteration}:
+			\begin{alignat*}{4}
+				x_{1} \,&=&\, 25 \,&-&\, \frac{1}{40}x_{4} \,&-&\, \frac{5}{4}x_{3} \\
+				x_{2} \,&=&\, 75 \,&-&\, \frac{3}{200}x_{4} \,&-&\, \frac{1}{4}x_{3} \\ \cline{1 - 7}
+				z &=& 6250 \,&-&\, \frac{3}{4}x_{4} \,&-&\, \frac{65}{2}x_{3}
+			\end{alignat*}
+			
+			Wie hier deutlich wird, ist $x_{1}^{*} = 25, x_{2}^{*} = 75$ eine optimale Lösung des primalen Problems.
+			
+			\underline{Startlösung ("`zulässige Basislösung am Anfang"')}:
+			\[
+				x_{1} = 0, x_{2} = 0, x_{3} = 100, x_{4} = 4000 \text{ mit } z = 0
+			\]
+			\underline{Zulässige Basislösung nach der 1. Iteration}:
+			\[
+				x_{1} = 0, x_{2} = 80, x_{3} = 20, x_{4} = 0 \text{ mit } z = 5600
+			\]
+			\underline{Zulässige Basislösung nach der 2. Iteration}:
+			\[
+				x_{1} = 25, x_{2} = 75, x_{3} = 0, x_{4} = 0 \text{ mit } z = 6250
+			\]
+			
+			Durch Einsetzen von $y_{1}^{*} = 32.5$ und $y_{2}^{*} = 0.75$ in die Zielfunktion des dualen Problems ergibt sich folgendes:
+			\[
+				100 \cdot \frac{65}{2} + 4000 \cdot \frac{3}{4} = 3250 + 3000 = 6250
+			\]
+			
+			Die beiden Zielfunktionswerte stimmen überein. Nach dem Dualitätssatz folgt daraus, dass $y_{1}^{*} = 32.5, y_{2}^{*} = 0.75$ tatsächlich eine optimale Lösung für das duale Problem darstellt.
+		\subsubsection{} %ii
+			Zum Überprüfen der vorgeschlagenen Lösung werden die Werte zunächst in die Ungleichungen des LP-Problems eingesetzt.
+		
+			Erste Ungleichung:
+			\begin{alignat*}{2}
+				25 + 75 &\leq & 100 \\
+				100 &\leq & 100
+			\end{alignat*}
+		
+			Zweite Ungleichung:
+			\begin{alignat*}{2}
+				10 \cdot 25 + 50 \cdot 75 &\leq & 4000 \\
+				4000 &\leq & 4000
+			\end{alignat*}
+			
+			Da beide Ungleichungen mit Gleichheit erfüllt sind, lassen sich keine Rückschlüsse auf $y$-Werte ziehen. Da beide $x$-Werte größer als $0$ sind, müssen beide Ungleichungen im dualen Problem mit Gleichheit erfüllt sein.
+			
+			\begin{alignat*}{2}
+				I \;& y_{1} + 10y_{2} &=& 40 \\
+				II \;& y_{1} + 50y_{2} &=& 70 \\
+				II - I \;& 40y_{2} &=& 30 \\
+				\;& y_{2} &=& \frac{3}{4} \\
+				\intertext{Einsetzen von $y_{2}$ in $I$}
+				I \;& y_{1} + 10 \cdot \frac{3}{4} &=& 40 \\
+				\;& y_{1} + \frac{15}{2} &=& 40 \\
+				\;& y_{1} &=& \frac{65}{2}
+			\end{alignat*}
+			
+			Es ergeben sich somit die eindeutig bestimmten Zahlen $y_{1}^{*} = \frac{65}{2}, y_{2}^{*} = \frac{3}{4}$. Diese Zahlen erfüllen zusammen mit der vorgeschlagenen Lösung die komplementären Schlupfbedingungen.
+			Schließlich muss noch geprüft werden, ob diese Zahlen auch eine zulässige Lösung des dualen Problems sind. Dafür werden diese eingesetzt:
+
+			Erste Ungleichung:
+			\begin{alignat*}{2}
+				1 \cdot \frac{65}{2} + 10 \cdot \frac{3}{4} &\geq & 40 \\
+				40 &\geq & 40
+			\end{alignat*}
+		
+			Zweite Ungleichung:
+			\begin{alignat*}{2}
+				1 \cdot \frac{65}{2} + 50 \cdot \frac{3}{4} &\geq & 70 \\
+				70 &\geq & 70
+			\end{alignat*}
+			
+			Da alle zwei Ungleichungen mit den herausgefundenen Zahlen gültig sind, stellen die gefundenen Zahlen eine zulässige Lösung des dualen Problems dar.
+	\subsection{} %b
+		\underline{Starttableau}:
+			\begin{alignat*}{4}
+				x_{3} \,&=&\, 100 \,&-&\, x_{1} \,&-&\, x_{2} \\
+				x_{4} \,&=&\, 4000 + t \,&-&\, 10x_{1} \,&-&\, 50x_{2} \\ \cline{1 - 7}
+				z &=& &&\, 40x_{1} \,&+&\, 70x_{2}
+			\end{alignat*}
+			
+			\underline{1. Iteration}:
+			
+			\textbf{Es wird vorausgesetzt, dass $0 \leq t \leq 1000$ gilt.} Für $t=0$ gilt im Folgenden genau das Gleiche wie in 2a i). Für $t=1000$ kann eine der Ausgangsvariablen nach Belieben gewählt werden, da beide potentiellen Ausgangsvariablen $x_{2}$ gleichermaßen beschränken. Da in den meisten Fällen jedoch $t$ kleiner als $1000$ ist, wird $x_{4}$ als Ausgangsvariable gewählt.
+		
+			Eingangsvariable: $x_{2}$\\
+			Ausgangsvariable: $x_{4}$
+		
+			Es folgt
+			\begin{alignat*}{2}
+				50x_{2} \,&=&&\, 4000 + t - 10x_{1} - x_{4} \\
+				x_{2} \,&=&&\, 80 + \frac{1}{50}t - \frac{1}{5}x_{1} - \frac{1}{50}x_{4} \\
+				x_{3} \,&=&&\, 100 - x_{1} - \left(80  + \frac{1}{50}t - \frac{1}{5}x_{1} - \frac{1}{50}x_{4}\right) \\
+				&=&&\, 100 - x_{1} - 80 - \frac{1}{50}t + \frac{1}{5}x_{1} + \frac{1}{50}x_{4} \\
+				&=&&\, 20 - \frac{1}{50}t - \frac{4}{5}x_{1} + \frac{1}{50}x_{4} \\
+				z \,&=&&\, 40x_{1} + 70\left(80 + \frac{1}{50}t - \frac{1}{5}x_{1} - \frac{1}{50}x_{4}\right) \\
+				&=&&\, 40x_{1} + 5600 + \frac{7}{5}t - 14x_{1} - \frac{7}{5}x_{4} \\
+				&=&&\, 5600 + \frac{7}{5}t + 26x_{1} - \frac{7}{5}x_{4}
+			\end{alignat*}
+		
+			\underline{Ergebnis der 1. Iteration}:
+			\begin{alignat*}{4}
+				x_{2} \,&=&\, 80 + \frac{1}{50}t \,&-&\, \frac{1}{5}x_{1} \,&-&\, \frac{1}{50}x_{4} \\
+				x_{3} \,&=&\, 20 - \frac{1}{50}t \,&-&\, \frac{4}{5}x_{1} \,&+&\, \frac{1}{50}x_{4} \\ \cline{1 - 7}
+				z &=& 5600 + \frac{7}{5}t \,&+&\, 26x_{1} \,&-&\, \frac{7}{5}x_{4}
+			\end{alignat*}
+			
+			\underline{2. Iteration}:
+			
+			\textbf{Es wird vorausgesetzt, dass $t \leq 1000$ gilt.} Könnte $t$ größer sein, dann würde die Möglichkeit bestehen, dass $x_{3}$ in der Basislösung nach der ersten Iteration einen negativen Wert hat.
+		
+			Eingangsvariable: $x_{1}$\\
+			Ausgangsvariable: $x_{3}$
+		
+			Es folgt
+			\begin{alignat*}{2}
+				\frac{4}{5}x_{1} \,&=&&\, 20 - \frac{1}{50}t +  \frac{1}{50}x_{4} - x_{3} \\
+				x_{1} \,&=&&\, 25 - \frac{1}{40}t + \frac{1}{40}x_{4} - \frac{5}{4}x_{3} \\
+				x_{2} \,&=&&\, 80 + \frac{1}{50}t - \frac{1}{5}\left(25 - \frac{1}{40}t + \frac{1}{40}x_{4} - \frac{5}{4}x_{3}\right) - \frac{1}{50}x_{4} \\
+				&=&&\, 80 + \frac{1}{50}t - 5 + \frac{1}{200}t - \frac{1}{200}x_{4} - \frac{1}{4}x_{3} - \frac{1}{50}x_{4} \\
+				&=&&\, 75 + \frac{1}{40}t - \frac{1}{40}x_{4} - \frac{1}{4}x_{3} \\
+				z \,&=&&\, 5600 + \frac{7}{5}t + 26\left(25 - \frac{1}{40}t + \frac{1}{40}x_{4} - \frac{5}{4}x_{3}\right) - \frac{7}{5}x_{4} \\
+				&=&&\, 5600 + \frac{7}{5}t + 650 - \frac{13}{20}t + \frac{13}{20}x_{4} - \frac{65}{2}x_{3} - \frac{7}{5}x_{4} \\
+				&=&&\, 6250 + \frac{3}{4}t - \frac{3}{4}x_{4} - \frac{65}{2}x_{3}
+			\end{alignat*}
+		
+			\underline{Ergebnis der 2. Iteration}:
+			\begin{alignat*}{4}
+				x_{1} \,&=&\, 25 - \frac{1}{40}t \,&-&\, \frac{1}{40}x_{4} \,&-&\, \frac{5}{4}x_{3} \\
+				x_{2} \,&=&\, 75 + \frac{1}{40}t \,&-&\, \frac{1}{40}x_{4} \,&-&\, \frac{1}{4}x_{3} \\ \cline{1 - 7}
+				z &=& 6250 + \frac{3}{4}t \,&-&\, \frac{3}{4}x_{4} \,&-&\, \frac{65}{2}x_{3}
+			\end{alignat*}
+			
+			Wie hier deutlich wird, ist $x_{1}^{*} = 25, x_{2}^{*} = 75$ eine optimale Lösung des primalen Problems.
+			
+			\underline{Startlösung ("`zulässige Basislösung am Anfang"')}:
+			\[
+				x_{1} = 0, x_{2} = 0, x_{3} = 100, x_{4} = 4000 + t \text{ mit } z = 0
+			\]
+			\underline{Zulässige Basislösung nach der 1. Iteration}:
+			\[
+				x_{1} = 0, x_{2} = 80 + \frac{1}{50}t, x_{3} = 20 - \frac{1}{50}t, x_{4} = 0 \text{ mit } z = 5600 + \frac{7}{5}t
+			\]
+			\underline{Zulässige Basislösung nach der 2. Iteration}:
+			\[
+				x_{1} = 25 - \frac{1}{40}t, x_{2} = 75 + \frac{1}{40}t, x_{3} = 0, x_{4} = 0 \text{ mit } z = 6250 + \frac{3}{4}t
+			\]
+			
+			Wie im Folgenden zu sehen ist, entsprechen die Werte der optimalen Lösung den in (7.24) auf Skriptseite 67 angenommenen Werten.
+			\[
+				x_{1} = 25 - \frac{1}{40}t = 25 - \frac{25}{1000}t = 25 - 0.025t
+			\]
+			\[
+				x_{2} = 75 + \frac{1}{40}t = 75 + \frac{25}{1000}t = 75 + 0.025t
+			\]
+			Im Folgenden ist zu sehen, dass tatsächlich ein zusätzlicher Gewinn von $0.75t$ erzielt wird.
+			\[
+				z = 6250 + \frac{3}{4}t = 6250 + \frac{75}{100}t = 6250 + 0.75t
+			\]
+\end{document}
