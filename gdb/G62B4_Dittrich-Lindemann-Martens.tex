@@ -1,0 +1,123 @@
+\documentclass[ngerman]{gdb-aufgabenblatt}
+\RequirePackage[utf8]{inputenc}
+\renewcommand{\Aufgabenblatt}{3}
+\renewcommand{\Ausgabedatum}{Mi. 13.11.2013}
+\renewcommand{\Abgabedatum}{Do. 28.11.2013}
+\renewcommand{\Gruppe}{Tim Dittrich, Sebastian Lindemann, Jim Martens}
+
+% define how the sections are rendered
+\def\thesection{Aufgabe \arabic{section}:}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{shadows}
+
+\begin{document}
+\section{Relationenalgebra}
+	\subsection{} %a
+		\[
+			\pi_{Obst.Sorte}(Obst \underset{Obst.Entdecker=Person.PNR}{\bowtie}( \sigma_{Vorname='Horst'}(Person)))
+		\]
+	\subsection{} %b
+		\[
+			\pi_{Person.Vorname, Person.Nachname}(Person \underset{Person.PNR=Allergie.Person}{\bowtie} (\sigma_{Symptom='Halskratzen'}(Allergie)))
+		\]
+	\subsection{} %c
+		\[
+			\pi_{Obst.Sorte, Person.Nachname}((Person \underset{Obst.Entdecker=Person.PNR}{\bowtie} Obst) \underset{Allergie.Obst=Obst.ONR}{\bowtie} (\sigma_{Symptom='W"urgreiz'}(Allergie)))
+		\]
+		
+\section{SQL - Schemadefinition}
+	\subsection{} %a
+		\begin{verbatim}
+		    CREATE TABLE Rennstall (
+		        RSID      INT(10)      NOT NULL PRIMARY KEY,
+		        Name      VARCHAR(255) NOT NULL UNIQUE KEY,
+		        Teamchef  VARCHAR(255) DEFAULT NULL,
+		        Budget    INT(3)       NOT NULL CHECK(Budget>=0 AND Budget <= 500)
+		    );
+		    
+		    CREATE TABLE Rennfahrer (
+		        RID       INT(10)      NOT NULL PRIMARY KEY,
+		        Rennstall INT(10)      NOT NULL,
+		        Vorname   VARCHAR(255) NOT NULL,
+		        Nachname  VARCHAR(255) NOT NULL,
+		        Geburt    DATE         NOT NULL,
+		        Wohnort   VARCHAR(255) DEFAULT NULL,
+		        CONSTRAINT fk_rennstall FOREIGN KEY (Rennstall) REFERENCES Rennstall (RSID)
+		    );
+		    
+		    CREATE TABLE Rennort (
+		        OID       INT(10)      NOT NULL PRIMARY KEY,
+		        Name      VARCHAR(255) NOT NULL,
+		        Strecke   VARCHAR(255) NOT NULL
+		    );
+		    
+		    CREATE TABLE Platzierung (
+		        RID       INT(10)      NOT NULL,
+		        OID       INT(10)      NOT NULL,
+		        Platz     INT(3)       NOT NULL,
+		        CONSTRAINT pk_platzierung PRIMARY KEY (RID, OID)
+		    );
+		\end{verbatim}
+	\subsection{} %b
+		Dadurch muss beim Erstellen einer Datenbankabfrage verstärkt darauf geachtet werden, dass nach jeder einzelnen Anweisung die Integrität eingehalten wird. Demnach wird eine feste Reihenfolge vorgegeben. Zyklische Verweise verhindern damit ein irgendwie geartetes Verändern auch nur eines Bestandteils, wenn durch diese Änderung irgendeine Fremdschlüsselbedingung verletzt ist.
+		
+		Der Fremdschlüssel von Rennstall zu Rennfahrer könnte erst nach der Anlegung der Tabelle Rennfahrer erstellt werden.
+		
+		Außerdem könnten dadurch weder Rennställe noch Rennfahrer gelöscht werden. Wenn ein Rennfahrer gelöscht werden soll und er ein Star eines Rennstalles ist, dann wird die Operation sofort abgebrochen. Umgekehrt kann kein Stall gelöscht werden, da zumindest der Star des Rennstalles selber auf den Rennstall referenziert, wodurch auch solche eine Operation abgebrochen würde.
+	\subsection{} %c
+	\begin{verbatim}
+	    INSERT INTO Rennstall
+	                  (RSID, Name, Teamchef, Budget)
+	           VALUES (2, 'Red Bull', 'Christian Horner', 370),
+	                  (5, 'Ferrari', 'Stefano Domenicali', 350),
+	                  (31, 'McLaren', 'Martin Whitmarsh', 220),
+	                  (34, 'Lotus F1', 'Eric Boullier', 100);
+	    
+	    INSERT INTO Rennfahrer
+	                  (RID, Rennstall, Vorname, Nachname, Geburt, Wohnort)
+	           VALUES (4, 2, 'Sebastian', 'Vettel', 19870703, 'Kemmental (Schweiz)'),
+	                  (6, 5, 'Fernando', 'Alonso', 19810729, 'Lugano (Schweiz)'),
+	                  (8, 2, 'Marc', 'Webber', 19760827, 'Aston Clinton (UK)'),
+	                  (9, 31, 'Lewis', 'Hamilton', 19850107, 'Genf (Schweiz)'),
+	                  (20, 31, 'Jenson', 'Button', 19800119, 'Monte Carlo (Monaco)'),
+	                  (21, 5, 'Felipe', 'Massa', 19820425, 'São Paulo (Brasilien)'),
+	                  (44, 34, 'Kimi', 'Räikkönen', 19791017, 'Espoo (Finnland)');
+	                  
+	    INSERT INTO Rennort
+	                  (OID, Name, Strecke)
+	           VALUES (4, 'Australien GP', 'Albert Park Circuit'),
+	                  (15, 'Malaysia GP', 'Sepang International Circuit'),
+	                  (21, 'China GP', 'Shanghai International Circuit');
+	                  
+	    INSERT INTO Platzierung
+	                  (RID, OID, Platz)
+	           VALUES (8, 4, 6),
+	                  (4, 15, 1),
+	                  (20, 15, 17),
+	                  (4, 4, 3),
+	                  (6, 4, 2),
+	                  (8, 15, 2),
+	                  (6, 21, 1),
+	                  (9, 4, 5),
+	                  (21, 15, 5),
+	                  (20, 4, 9),
+	                  (21, 4, 4); 
+	\end{verbatim}
+	\subsection{} %d
+		
+		\begin{itemize}
+			\item \begin{verbatim}
+			    DELETE FROM Rennfahrer
+			    WHERE       Vorname LIKE 'F%';
+			\end{verbatim}	
+			\item \begin{verbatim}
+			    DROP TABLE Platzierung;
+			    DROP TABLE Rennort;
+			    DROP TABLE Rennfahrer;
+			    DROP TABLE Rennstall;
+			\end{verbatim}
+		\end{itemize}
+\end{document}
