@@ -120,4 +120,81 @@
 			    DROP TABLE Rennstall;
 			\end{verbatim}
 		\end{itemize}
+
+\section{SQL - Anfragen}
+	\subsection{} %a
+		\begin{verbatim}
+		    SELECT DISTINCT obst.Sorte
+		    FROM            Person pers,
+		                    Allergie aller,
+		                    Obst obst
+		    WHERE           pers.PNR = aller.Person
+		    AND             aller.Obst = obst.ONR
+		    AND             pers.Vorname = 'Peter'
+		    AND             pers.Nachname = 'Meyer'
+		    ORDER BY        obst.Sorte DESC;
+		\end{verbatim}
+	\subsection{} %b
+		\begin{verbatim}
+		    SELECT   pers.PNR, pers.Nachname, COUNT(aller.Obst)
+		    FROM     Person pers,
+		             Allergie aller
+		    WHERE    pers.PNR = aller.Person
+		    GROUP BY pers.PNR;
+		\end{verbatim}
+	\subsection{} %c
+		\begin{verbatim}
+		    SELECT   pers.PNR
+		    FROM     Person pers,
+		             Obst obst
+		    WHERE    pers.PNR = obst.Entdecker
+		    GROUP BY pers.PNR
+		    HAVING   COUNT(obst.ONR) > 6;
+		\end{verbatim}
+	\subsection{} %d
+		\begin{verbatim}
+		    SELECT pers.Vorname, pers.Nachname
+		    FROM   Person pers,
+		           Person entdecker,
+		           Obst obst
+		    WHERE  entdecker.PNR = obst.Entdecker
+		    AND    pers.Lieblingsobst = obst.ONR
+		    AND    entdecker.Vorname = pers.Vorname;
+		\end{verbatim}
+	\subsection{} %e
+		\begin{verbatim}
+		    SELECT   pers.PNR, pers.Vorname, pers.Nachname
+		    FROM     Person pers
+		    WHERE    pers.PNR NOT IN (SELECT obst.Entdecker
+		                              FROM   Obst obst);
+		\end{verbatim}
+
+\section{Optimierung}
+	anfänglicher Operatorbaum:\\
+	\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm,on grid]
+		\node (proj) {$\pi_{Person.PNR, Person.Vorname, Person.Nachname}$};
+		\node (sel) [below=2.0 of proj] {$\sigma_{Obst.Sorte\text{ LIKE 'K\%'}}$};		
+		\node (join) [below=2.0 of sel] {$\underset{Person.Lieblingsobst = Obst.ONR}{\bowtie}$};
+		\node (person) [below left=2.0 and 2.0 of join] {Person};
+		\node (obst) [below right=2.0 and 2.0 of join] {Obst};
+		\path (proj) edge node [right] {400} (sel)
+		      (sel) edge node [right] {2000} (join)
+		      (join) edge node [left] {2000} (person)
+		      (join) edge node [right] {25} (obst);
+	\end{tikzpicture}
+	
+	optimierter Operatorbaum:\\
+	\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm,on grid]
+		\node (proj) {$\pi_{Person.PNR, Person.Vorname, Person.Nachname}$};
+		\node (join) [below=2.0 of proj] {$\underset{Person.Lieblingsobst = Obst.ONR}{\bowtie}$};
+		\node (person) [below left=2.0 and 2.0 of join] {Person};
+		\node (sel) [below right=2.0 and 2.0 of join] {$\sigma_{Obst.Sorte\text{ LIKE 'K\%'}}$};
+		\node (obst) [below=of sel] {Obst};
+		\path (proj) edge node [right] {400} (join)
+		      (join) edge node [left] {2000} (person)
+		      (join) edge node [right] {5} (sel)
+		      (sel) edge node [right] {25} (obst);
+	\end{tikzpicture}
+	
+	Der zweite Operatorbaum ist klar performanter, da die Selektion der Obstsorte bereits vor dem Join stattfindet.
 \end{document}
