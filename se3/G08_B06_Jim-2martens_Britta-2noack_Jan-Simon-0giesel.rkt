@@ -74,21 +74,23 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
     ))
 
 ; erzeugt einen Monitor
-(define monitor (above/align
-                 "center"
-                 (overlay 
-                  (text "cout << 0x2a;" 24 "red")
-                  (rectangle 160 90 "solid" "blue")
-                  (rectangle 165 95 "solid" "gray")
-                  )
-                 (polygon
-                  (list (make-posn 0 0)
-                        (make-posn 80 0)
-                        (make-posn 55 -10)
-                        (make-posn 25 -10))
-                  "solid"
-                  "gray")
-                 ))
+(define (monitor content)
+  (above/align
+   "center"
+   (overlay 
+    (text content 24 "red")
+    (rectangle 160 90 "solid" "blue")
+    (rectangle 165 95 "solid" "gray")
+    )
+   (polygon
+    (list (make-posn 0 0)
+          (make-posn 80 0)
+          (make-posn 55 -10)
+          (make-posn 25 -10))
+    "solid"
+    "gray")
+   ))
+
 ; erzeugt ein Star Citizen Poster
 (define scPoster (overlay
                   (above
@@ -98,12 +100,16 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
                   (rectangle 200 100 "solid" "black")))
 
 ; linker Tannenbaum
-(display (tannenbaum 10))
+(display (tannenbaum 8))
 ; Monitor
-(display monitor)
+(display (monitor "cout << 0x2a;"))
 ; Abstand zwischen Monitor und Poster
 (display " ")
 ; Star Citizen Poster
 (display scPoster)
+; Abstand zwischen Monitor und Poster
+(display " ")
+; Monitor
+(display (monitor "6.12.13"))
 ; rechter Tannenbaum
-(display (tannenbaum 10))
+(display (tannenbaum 8))
