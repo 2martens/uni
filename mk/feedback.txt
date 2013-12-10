@@ -8,5 +8,7 @@ Feedback zu Vortrag Elektronische Demokratie
 * Vergleich basierend auf mehreren Quellen
 * Definition der Begriffe
 * miteinbeziehen des Publikums bei einem so populären Thema
-
-
+* mehr Strukturierung im Vortrag (eigenes Feedback) -> sonst zu schnell fertig und zu viel Ausgedachtes
+* Überblick mithilfe von unterschiedlichen Quellen zur Verfügung stellen
+* Klare Differenzierung zwischen E-Democracy und E-Government
+* sinnvolle Beispiele (was hat Star Citizen/Crowdfunding auch nur annähernd mit der vorgestellten Elektronischen Demokratie zu tun?)
