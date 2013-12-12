@@ -173,14 +173,16 @@
 	anfänglicher Operatorbaum:\\
 	\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm,on grid]
 		\node (proj) {$\pi_{Person.PNR, Person.Vorname, Person.Nachname}$};
-		\node (sel) [below=2.0 of proj] {$\sigma_{Obst.Sorte\text{ LIKE 'K\%'}}$};		
-		\node (join) [below=2.0 of sel] {$\underset{Person.Lieblingsobst = Obst.ONR}{\bowtie}$};
-		\node (person) [below left=2.0 and 2.0 of join] {Person};
-		\node (obst) [below right=2.0 and 2.0 of join] {Obst};
+		\node (sel) [below=2.0 of proj] {$\sigma_{Obst.Sorte\text{ LIKE 'K\%'}}$};
+		\node (sel2) [below=2.0 of sel] {$\sigma_{Obst.ONR=Person.Lieblingsobst}$};
+		\node (catProd) [below=2.0 of sel2] {x};
+		\node (person) [below left=2.0 and 2.0 of catProd] {Person};
+		\node (obst) [below right=2.0 and 2.0 of catProd] {Obst};
 		\path (proj) edge node [right] {400} (sel)
-		      (sel) edge node [right] {2000} (join)
-		      (join) edge node [left] {2000} (person)
-		      (join) edge node [right] {25} (obst);
+			  (sel) edge node [right] {2000} (sel2)
+		      (sel2) edge node [right] {50000} (catProd)
+		      (catProd) edge node [left] {2000} (person)
+		      (catProd) edge node [right] {25} (obst);
 	\end{tikzpicture}
 	
 	optimierter Operatorbaum:\\
@@ -196,5 +198,5 @@
 		      (sel) edge node [right] {25} (obst);
 	\end{tikzpicture}
 	
-	Der zweite Operatorbaum ist klar performanter, da die Selektion der Obstsorte bereits vor dem Join stattfindet.
+	Der zweite Operatorbaum ist klar performanter, da die Selektion der Obstsorte bereits vor dem Join stattfindet und das kartesische Produkt und die zweite Selektion zu einem Join verbunden wurde.
 \end{document}
