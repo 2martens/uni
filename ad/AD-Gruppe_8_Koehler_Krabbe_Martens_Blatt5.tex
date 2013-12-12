@@ -1,0 +1,80 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bytefield}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{(\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+
+\begin{document}
+\author{Reinhard Köhler (6425686), Tronje Krabbe (6435002), \\
+Jim Martens (6420323)}
+\title{Hausaufgaben zum 4. Dezember}
+\subtitle{Gruppe 8}
+\maketitle
+
+\section{} %1
+	Dieser folgende Pseudocode beschreibt eine leichte Abänderung, die vorzeitig abbricht, wenn sich nach einem kompletten Durchlauf aller Kanten nichts geändert hat. Nach $m$ Durchläufen hat der Algorithmus alle kürzeste Pfade mit maximal $m$ Kanten entdeckt. In einem weiteren Durchlauf wird sich dann nichts mehr ändern, da keine neuen kürzesten Pfade mehr gefunden werden können, wodurch die geänderte Variante abbricht. Um die Abbruchbedingung zu erreichen muss $m$ nicht bekannt sein, da nach $m+1$ Durchläufen die Abbruchbedingung immer gegeben ist.
+	
+	\begin{verbatim}
+	    function BellmanFord(G,s)
+	        InitializeSingleSource(G,s)
+	        for i = 1, ... |V| - 1
+	            changed = false	            
+	            for all edges (u,v) in E
+	                changedTmp = Relax(u,v)
+	                if (!changed)
+	                    changed = changedTmp
+	            if (!changed)
+	                break
+	        for all edges (u,v) in E
+	            if v.dist > u.dist + w(u,v)
+	                return false
+	        return true
+	\end{verbatim}
+\section{} %2
+	\begin{verbatim}
+	    function DAG-SP(G,s)
+	        sort vertices topologically
+	        InitializeSingleSource(G,s)
+	        for each u in V in topological sort order
+	            for each v in Adj(u)
+	                Relax(u,v)
+	\end{verbatim}
+\section{} %3
+	Wir wissen, dass der Dijkstra-Algorithmus für rein positive Kantengewichte funktioniert. Es bleibt also nur zu zeigen, dass die kürzesten Wege zu den Knoten korrekt berechnet werden, die eine Kante von dem Startknoten entfernt sind. Ferner ist bekannt, dass Dijkstra zuerst den Knoten besucht, der am billigsten zu erreichen ist. Damit geht der Algorithmus die Kante mit dem kleinsten Gewicht zu erst (einschließlich negative Gewichte). Der somit erreichte Knoten kann also gar nicht billiger zu erreichen sein, da jeder andere Pfad dorthin aus mindestens zwei Kanten besteht, die zusammen bestenfalls das gleiche Gewicht haben wie die gegangene Kante.
+	
+	Dies ist so, da die erste Kante vom Startknoten zu einem anderen Knoten minimal so klein sein kann, wie die zuerst gegangene Kante, da andernfalls die zuerst gegangene Kante nicht das geringste Gewicht gehabt hätte. Die zweite Kante muss mindestens 0 als Gewicht haben, womit nur ein gleich großes oder größeres Gesamtgewicht entstehen kann, als durch die zuerst gegangene Kante verwendet wurde.
+\section{} %4
+	\subsection{} %a
+	\subsection{} %b
+\section{} %5
+	\subsection{} %a
+	\subsection{} %b
+\section{} %6
+\end{document}
