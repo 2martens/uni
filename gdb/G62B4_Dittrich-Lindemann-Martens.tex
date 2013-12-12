@@ -58,7 +58,11 @@
 		        RID       INT(10)      NOT NULL,
 		        OID       INT(10)      NOT NULL,
 		        Platz     INT(3)       NOT NULL,
-		        CONSTRAINT pk_platzierung PRIMARY KEY (RID, OID)
+		        CONSTRAINT pk_platzierung PRIMARY KEY (RID, OID),
+		        CONSTRAINT fk_rennfahrer FOREIGN KEY (RID) 
+		        REFERENCES Rennfahrer (RID) ON DELETE CASCADE,
+		        CONSTRAINT fk_rennort FOREIGN KEY (OID) 
+		        REFERENCES Rennort (OID) ON DELETE CASCADE
 		    );
 		\end{verbatim}
 	\subsection{} %b
