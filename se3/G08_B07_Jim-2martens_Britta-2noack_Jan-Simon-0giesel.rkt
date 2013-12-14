@@ -169,8 +169,10 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
 (define trenner2
   (rectangle 10 200 "solid" "Black"))
 
+; diese Funktion wird bis 99h 59m 59s zählen und dann wieder bei 0
+; anfangen
 (define (zeigedauer t)
-  (let* ((modT (modulo t 2419200)) ; 2419200 entspricht 24h
+  (let* ((modT (modulo t 10080000)) ; 10080000 entspricht 100h
          (zustand6 (floor (/ modT 28)))
          (zustand5 (floor (/ zustand6 10)))
          (zustand4 (floor (/ zustand5 6)))
@@ -178,7 +180,7 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
          (zustand2 (floor (/ zustand3 6)))
          (zustand1 (floor (/ zustand2 10))))
     (beside
-     (zeigeSiebenSegment (key->value (modulo zustand1 6) zustandstabelle))
+     (zeigeSiebenSegment (key->value (modulo zustand1 10) zustandstabelle))
      trenner2
      (zeigeSiebenSegment (key->value (modulo zustand2 10) zustandstabelle))
      trenner
@@ -193,4 +195,3 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
 
 ; zum Animieren auskommentieren
 ; (animate zeigedauer)
-
