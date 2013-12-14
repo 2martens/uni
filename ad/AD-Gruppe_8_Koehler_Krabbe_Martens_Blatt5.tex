@@ -72,7 +72,9 @@ Jim Martens (6420323)}
 	Dies ist so, da die erste Kante vom Startknoten zu einem anderen Knoten minimal so klein sein kann, wie die zuerst gegangene Kante, da andernfalls die zuerst gegangene Kante nicht das geringste Gewicht gehabt hätte. Die zweite Kante muss mindestens 0 als Gewicht haben, womit nur ein gleich großes oder größeres Gesamtgewicht entstehen kann, als durch die zuerst gegangene Kante verwendet wurde.
 \section{} %4
 	\subsection{} %a
+		In einem Baum gibt es keine Zyklen. Daher gibt es genau einen direkten Weg (ohne Umwege mit mehrmaligem Besuchen eines Knotens) zu jedem Knoten von dem Wurzelknoten aus. Demnach müssen einfach vom Wurzelknoten aus alle Knoten besucht werden. Dabei wird ähnlich wie in der Breitensuche vorgegangen, indem zunächst alle Knoten, die direkt mit dem Wurzelknoten per Kante verbunden sind, besucht werden und anschließend alle Knoten, die zwei Kanten vom Wurzelknoten entfernt sind, etc. Dabei wird eine Variable zu Beginn auf 0 gesetzt und bei jedem Knoten wird geschaut, ob seine Entfernung zum Wurzelknoten größer ist als diese Variable. Wenn dem so ist, dann wird die Variable entsprechend angepasst. Nach einmaligem Besuchen jedes Knotens hat man damit die längste Entfernung eines Knotens von dem Wurzelknoten ermittelt.
 	\subsection{} %b
+		
 \section{} %5
 	\subsection{} %a
 	\subsection{} %b
