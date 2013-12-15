@@ -73,6 +73,28 @@ Jim Martens (6420323)}
 \section{} %4
 	\subsection{} %a
 		In einem Baum gibt es keine Zyklen. Daher gibt es genau einen direkten Weg (ohne Umwege mit mehrmaligem Besuchen eines Knotens) zu jedem Knoten von dem Wurzelknoten aus. Demnach müssen einfach vom Wurzelknoten aus alle Knoten besucht werden. Dabei wird ähnlich wie in der Breitensuche vorgegangen, indem zunächst alle Knoten, die direkt mit dem Wurzelknoten per Kante verbunden sind, besucht werden und anschließend alle Knoten, die zwei Kanten vom Wurzelknoten entfernt sind, etc. Dabei wird eine Variable zu Beginn auf 0 gesetzt und bei jedem Knoten wird geschaut, ob seine Entfernung zum Wurzelknoten größer ist als diese Variable. Wenn dem so ist, dann wird die Variable entsprechend angepasst. Nach einmaligem Besuchen jedes Knotens hat man damit die längste Entfernung eines Knotens von dem Wurzelknoten ermittelt.
+		
+		In Pseudocode sieht das dann so aus:
+		
+		\begin{verbatim}
+		    function berechneDurchmesser(G)
+		        longestPath = 0
+		        current = G.wurzel
+		        queue.enqueue(current.getChilds())
+		        while (!empty(queue))
+		            current = queue.dequeue()
+		   	        parent = current.parent
+		   	        // wähle eines von beiden, abhängig davon, 
+		   	        // ob die Länge sich auf die Kanten oder die Gewichtungen bezieht (TBD)
+		            distance = parent.getDistance() + w(parent,current)
+		            distance = parent.getDistance() + 1
+		            if (distance > longestPath)
+		                longestPath = distance
+		            
+		            childs = current.getChilds()
+		            if (!empty(childs))
+		                queue.enqueue(current.getChilds())
+		\end{verbatim}
 	\subsection{} %b
 		
 \section{} %5
