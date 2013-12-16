@@ -99,123 +99,65 @@ Stephan Niendorf (6242417)}
 		Also gilt $y^{T} = \begin{pmatrix} 0 & 0 & 0 \end{pmatrix}$.
 		
 		\textbf{2. Schritt} (Bestimmung der Eingangsspalte a und gleichzeitig der Eingangsvariablen):\\
-		Es gilt $A_{N} = \begin{pmatrix} x_{1} & x_{2} \\ 1 & -4 \\ 1 & 0 \\ 0 & 1 \end{pmatrix},\; y^{T}A_{N} = \begin{pmatrix} 0 & 0 \end{pmatrix}$ und $c_{N}^{T} = \begin{pmatrix} 2 & 3 \end{pmatrix}$. Also kommt jede Spalte von $A_{N}$ als Eingangsspalte a infrage, wir wählen $a = \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix}$; die Eingangsvariable ist $x_{1}$.
+		Es gilt $A_{N} = \begin{pmatrix} x_{1} & x_{2} \\ 1 & -4 \\ 1 & 0 \\ 0 & 1 \end{pmatrix},\; y^{T}A_{N} = \begin{pmatrix} 0 & 0 \end{pmatrix}$ und $c_{N}^{T} = \begin{pmatrix} 2 & 3 \end{pmatrix}$. Also kommt jede Spalte von $A_{N}$ als Eingangsspalte a infrage, wir wählen $a = \begin{pmatrix} -4 \\ 0 \\ 1 \end{pmatrix}$; die Eingangsvariable ist $x_{2}$.
 		
 		\textbf{3. Schritt} (Lösung von $Bd = a$):\\
 		Das Gleichungssystem $Bd = a$ lautet
 		\begin{alignat*}{3}
-			d_{1} & & &=& 1 \\
-			& d_{2} & &=& 1 \\
-			& & d_{3} &=& 0
+			d_{1} & & &=& -4 \\
+			& d_{2} & &=& 0 \\
+			& & d_{3} &=& 1
 		\end{alignat*}
-		Es folgt $d = \begin{pmatrix}1 \\ 1 \\ 0 \end{pmatrix}$.
+		Es folgt $d = \begin{pmatrix}-4 \\ 0 \\ 1 \end{pmatrix}$.
 		
 		\textbf{4. Schritt} (Bestimmung der Ausgangsvariablen):\\
-		Die Ungleichung $x_{B}^{*} - td \geq 0$ lautet $\begin{pmatrix} 2 \\ 5 \\ 8\end{pmatrix} - t \begin{pmatrix}1 \\ 1 \\ 0 \end{pmatrix} \geq \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}$. Das größte t, das dies erfüllt, ist $t = 2$; für $t = 2$ gilt $\begin{pmatrix} 2 \\ 5 \\ 8\end{pmatrix} - t \begin{pmatrix}1 \\ 1 \\ 0 \end{pmatrix} = \begin{pmatrix} 0 \\ 3 \\ 8 \end{pmatrix}$, Ausgangsvariable ist $x_{3}$.
+		Die Ungleichung $x_{B}^{*} - td \geq 0$ lautet $\begin{pmatrix} 2 \\ 5 \\ 8\end{pmatrix} - t \begin{pmatrix}-4 \\ 0 \\ 1 \end{pmatrix} \geq \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}$. Das größte t, das dies erfüllt, ist $t = 8$; für $t = 8$ gilt $\begin{pmatrix} 2 \\ 5 \\ 8\end{pmatrix} - t \begin{pmatrix}-4 \\ 0 \\ 1 \end{pmatrix} = \begin{pmatrix} 34 \\ 5 \\ 0 \end{pmatrix}$, Ausgangsvariable ist $x_{5}$.
 		
 		\textbf{5. Schritt} (Update von $x_{B}^{*}$ und $B$):\\
-		$x_{B}^{*} = \begin{pmatrix} x_{1}^{*} \\ x_{4}^{*} \\ x_{5}^{*} \end{pmatrix} = \begin{pmatrix} 2 \\ 3 \\ 8 \end{pmatrix}$ und $B = \begin{pmatrix} x_{1} & x_{4} & x_{5} \\ 1 & 0 & 0 \\ 1 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}$.
+		$x_{B}^{*} = \begin{pmatrix} x_{3}^{*} \\ x_{4}^{*} \\ x_{2}^{*} \end{pmatrix} = \begin{pmatrix} 34 \\ 5 \\ 8 \end{pmatrix}$ und $B = \begin{pmatrix} x_{3} & x_{4} & x_{2} \\ 1 & 0 & -4 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}$.
 		
 		\underline{2. Iteration}
 		
 		\textbf{1. Schritt} (Lösung von $y^{T}B = c_{B}^{T}$):\\
 		Es gilt $c_{B}^{T} = \begin{pmatrix} 2 & 0 & 0 \end{pmatrix}$. Das Gleichungssystem $y^{T}B = c_{B}^{T}$ lautet
 		\begin{alignat*}{4}
-			y_{1} &+& y_{2} && &=& 2 \\
-			&& y_{2} && &=& 0 \\
-			&& && y_{3} &=& 0
+			y_{1} && &-& 4y_{3} &=& 34 \\
+			&& y_{2} && &=& 5 \\
+			&& && y_{3} &=& 8
 		\end{alignat*}
-		Also gilt $y^{T} = \begin{pmatrix} 2 & 0 & 0 \end{pmatrix}$.
+		Also gilt $y^{T} = \begin{pmatrix} 66 & 5 & 8 \end{pmatrix}$.
 		
 		\textbf{2. Schritt} (Bestimmung der Eingangsspalte a und gleichzeitig der Eingangsvariablen):\\
-		Es gilt $A_{N} = \begin{pmatrix} x_{3} & x_{2} \\ 1 & -4 \\ 0 & 0 \\ 0 & 1 \end{pmatrix},\; y^{T}A_{N} = \begin{pmatrix} 2 & -8 \end{pmatrix}$ und $c_{N}^{T} = \begin{pmatrix} 0 & 3 \end{pmatrix}$. Also kommt nur die zweite Spalte von $A_{N}$ als Eingangsspalte a infrage, wir wählen $a = \begin{pmatrix} -4 \\ 0 \\ 1 \end{pmatrix}$; die Eingangsvariable ist $x_{2}$.
+		Es gilt $A_{N} = \begin{pmatrix} x_{1} & x_{5} \\ 1 & 0 \\ 1 & 0 \\ 0 & 1 \end{pmatrix},\; y^{T}A_{N} = \begin{pmatrix} 71 & 8 \end{pmatrix}$ und $c_{N}^{T} = \begin{pmatrix} 2 & 0 \end{pmatrix}$. Also kommt nur die erste Spalte von $A_{N}$ als Eingangsspalte a infrage, wir wählen $a = \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix}$; die Eingangsvariable ist $x_{1}$.
 		
 		\textbf{3. Schritt} (Lösung von $Bd = a$):\\
 		Das Gleichungssystem $Bd = a$ lautet
 		\begin{alignat*}{4}
-			d_{1} && && &=& -4 \\
-			d_{1} &+& d_{2} && &=& 0 \\
-			&& && d_{3} &=& 1
+			d_{1} && &-& 4d_{3} &=& 1 \\
+			&& d_{2} && &=& 1 \\
+			&& && d_{3} &=& 0
 		\end{alignat*}
-		Es folgt $d = \begin{pmatrix}-4 \\ 4 \\ 1 \end{pmatrix}$.
+		Es folgt $d = \begin{pmatrix}1 \\ 1 \\ 0 \end{pmatrix}$.
 		
 		\textbf{4. Schritt} (Bestimmung der Ausgangsvariablen):\\
-		Die Ungleichung $x_{B}^{*} - td \geq 0$ lautet $\begin{pmatrix} 2 \\ 3 \\ 8\end{pmatrix} - t \begin{pmatrix}-4 \\ 4 \\ 1 \end{pmatrix} \geq \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}$. Das größte t, das dies erfüllt, ist $t = \frac{3}{4}$; für $t = \frac{3}{4}$ gilt $\begin{pmatrix} 2 \\ 3 \\ 8\end{pmatrix} - t \begin{pmatrix}-4 \\ 4 \\ 1 \end{pmatrix} = \begin{pmatrix} 5 \\ 0 \\ \frac{29}{4} \end{pmatrix}$, Ausgangsvariable ist $x_{4}$.
+		Die Ungleichung $x_{B}^{*} - td \geq 0$ lautet $\begin{pmatrix} 34 \\ 5 \\ 8\end{pmatrix} - t \begin{pmatrix}1 \\ 1 \\ 0 \end{pmatrix} \geq \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}$. Das größte t, das dies erfüllt, ist $t = 5$; für $t = 5$ gilt $\begin{pmatrix} 34 \\ 5 \\ 8\end{pmatrix} - t \begin{pmatrix}1 \\ 1 \\ 0 \end{pmatrix} = \begin{pmatrix} 29 \\ 0 \\ 8 \end{pmatrix}$, Ausgangsvariable ist $x_{4}$.
 		
 		\textbf{5. Schritt} (Update von $x_{B}^{*}$ und $B$):\\
-		$x_{B}^{*} = \begin{pmatrix} x_{1}^{*} \\ x_{2}^{*} \\ x_{5}^{*} \end{pmatrix} = \begin{pmatrix} 5 \\ \frac{3}{4} \\ \frac{29}{4} \end{pmatrix}$ und $B = \begin{pmatrix} x_{1} & x_{2} & x_{5} \\ 1 & -4 & 0 \\ 1 & 0 & 0 \\ 0 & 1 & 1 \end{pmatrix}$.
+		$x_{B}^{*} = \begin{pmatrix} x_{3}^{*} \\ x_{1}^{*} \\ x_{2}^{*} \end{pmatrix} = \begin{pmatrix} 29 \\ 5 \\ 8 \end{pmatrix}$ und $B = \begin{pmatrix} x_{3} & x_{1} & x_{2} \\ 1 & 1 & -4 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}$.
 		
 		\underline{3. Iteration}
 		
 		\textbf{1. Schritt} (Lösung von $y^{T}B = c_{B}^{T}$):\\
-		Es gilt $c_{B}^{T} = \begin{pmatrix} 2 & 3 & 0 \end{pmatrix}$. Das Gleichungssystem $y^{T}B = c_{B}^{T}$ lautet
+		Es gilt $c_{B}^{T} = \begin{pmatrix} 0 & 2 & 3 \end{pmatrix}$. Das Gleichungssystem $y^{T}B = c_{B}^{T}$ lautet
 		\begin{alignat*}{4}
-			y_{1} &+& y_{2} && &=& 2 \\
-			-4y_{1} && &+& y_{3} &=& 3 \\
-			&& && y_{3} &=& 0
-		\end{alignat*}
-		Also gilt $y^{T} = \begin{pmatrix} -\frac{3}{4} & \frac{11}{4} & 0 \end{pmatrix}$.
-		
-		\textbf{2. Schritt} (Bestimmung der Eingangsspalte a und gleichzeitig der Eingangsvariablen):\\
-		Es gilt $A_{N} = \begin{pmatrix} x_{3} & x_{4} \\ 1 & 0 \\ 0 & 1 \\ 0 & 0 \end{pmatrix},\; y^{T}A_{N} = \begin{pmatrix} -\frac{3}{4} & \frac{11}{4} \end{pmatrix}$ und $c_{N}^{T} = \begin{pmatrix} 0 & 0 \end{pmatrix}$. Also kommt nur die erste Spalte von $A_{N}$ als Eingangsspalte a infrage, wir wählen $a = \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}$; die Eingangsvariable ist $x_{3}$.
-		
-		\textbf{3. Schritt} (Lösung von $Bd = a$):\\
-		Das Gleichungssystem $Bd = a$ lautet
-		\begin{alignat*}{4}
-			d_{1} &-& 4d_{2} && &=& 1\\
-			d_{1} && && &=& 0 \\
-			&& d_{2} &+& d_{3} &=& 0
-		\end{alignat*}
-		Es folgt $d = \begin{pmatrix} 0 \\ -\frac{1}{4} \\ \frac{1}{4} \end{pmatrix}$.
-		
-		\textbf{4. Schritt} (Bestimmung der Ausgangsvariablen):\\
-		Die Ungleichung $x_{B}^{*} - td \geq 0$ lautet $\begin{pmatrix} 5 \\ \frac{3}{4} \\ \frac{29}{4}\end{pmatrix} - t \begin{pmatrix}0 \\ -\frac{1}{4} \\ \frac{1}{4} \end{pmatrix} \geq \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}$. Das größte t, das dies erfüllt, ist $t = 3$; für $t = 3$ gilt $\begin{pmatrix} 5 \\ \frac{3}{4} \\ \frac{29}{4}\end{pmatrix} - t \begin{pmatrix} 0 \\ -\frac{1}{4} \\ \frac{1}{4} \end{pmatrix} = \begin{pmatrix} 5 \\ 0 \\ \frac{13}{2} \end{pmatrix}$, Ausgangsvariable ist $x_{2}$.
-		
-		\textbf{5. Schritt} (Update von $x_{B}^{*}$ und $B$):\\
-		$x_{B}^{*} = \begin{pmatrix} x_{1}^{*} \\ x_{3}^{*} \\ x_{5}^{*} \end{pmatrix} = \begin{pmatrix} 5 \\ 3 \\ \frac{13}{2} \end{pmatrix}$ und $B = \begin{pmatrix} x_{1} & x_{3} & x_{5} \\ 1 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix}$.
-		
-		\underline{4. Iteration}
-		
-		\textbf{1. Schritt} (Lösung von $y^{T}B = c_{B}^{T}$):\\
-		Es gilt $c_{B}^{T} = \begin{pmatrix} 2 & 0 & 0 \end{pmatrix}$. Das Gleichungssystem $y^{T}B = c_{B}^{T}$ lautet
-		\begin{alignat*}{4}
-			y_{1} &+& y_{2} && &=& 2 \\
 			y_{1} && && &=& 0 \\
-			&& && y_{3} &=& 0
-		\end{alignat*}
-		Also gilt $y^{T} = \begin{pmatrix} 0 & 2 & 0 \end{pmatrix}$.
-		
-		\textbf{2. Schritt} (Bestimmung der Eingangsspalte a und gleichzeitig der Eingangsvariablen):\\
-		Es gilt $A_{N} = \begin{pmatrix} x_{2} & x_{4} \\ -4 & 0 \\ 0 & 1 \\ 1 & 0 \end{pmatrix},\; y^{T}A_{N} = \begin{pmatrix} 0 & 2 \end{pmatrix}$ und $c_{N}^{T} = \begin{pmatrix} 3 & 0 \end{pmatrix}$. Also kommt nur die erste Spalte von $A_{N}$ als Eingangsspalte a infrage, wir wählen $a = \begin{pmatrix} -4 \\ 0 \\ 1 \end{pmatrix}$; die Eingangsvariable ist $x_{2}$.
-		
-		\textbf{3. Schritt} (Lösung von $Bd = a$):\\
-		Das Gleichungssystem $Bd = a$ lautet
-		\begin{alignat*}{4}
-			d_{1} &+& d_{2} && &=& -4\\
-			d_{1} && && &=& 0 \\
-			&& && d_{3} &=& 1
-		\end{alignat*}
-		Es folgt $d = \begin{pmatrix} 0 \\ -4 \\ 1 \end{pmatrix}$.
-		
-		\textbf{4. Schritt} (Bestimmung der Ausgangsvariablen):\\
-		Die Ungleichung $x_{B}^{*} - td \geq 0$ lautet $\begin{pmatrix} 5 \\ 3 \\ \frac{13}{2}\end{pmatrix} - t \begin{pmatrix}0 \\ -4 \\ 1 \end{pmatrix} \geq \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}$. Das größte t, das dies erfüllt, ist $t = \frac{13}{2}$; für $t = \frac{13}{2}$ gilt $\begin{pmatrix} 5 \\ 3 \\ \frac{13}{2}\end{pmatrix} - t \begin{pmatrix} 0 \\ -4 \\ 1 \end{pmatrix} = \begin{pmatrix} 5 \\ 29 \\ 0 \end{pmatrix}$, Ausgangsvariable ist $x_{5}$.
-		
-		\textbf{5. Schritt} (Update von $x_{B}^{*}$ und $B$):\\
-		$x_{B}^{*} = \begin{pmatrix} x_{1}^{*} \\ x_{3}^{*} \\ x_{2}^{*} \end{pmatrix} = \begin{pmatrix} 5 \\ 29 \\ \frac{13}{2} \end{pmatrix}$ und $B = \begin{pmatrix} x_{1} & x_{3} & x_{2} \\ 1 & 1 & -4 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix}$.
-		
-		\underline{5. Iteration}
-		
-		\textbf{1. Schritt} (Lösung von $y^{T}B = c_{B}^{T}$):\\
-		Es gilt $c_{B}^{T} = \begin{pmatrix} 2 & 0 & 3 \end{pmatrix}$. Das Gleichungssystem $y^{T}B = c_{B}^{T}$ lautet
-		\begin{alignat*}{4}
 			y_{1} &+& y_{2} && &=& 2 \\
-			y_{1} && && &=& 0 \\
 			-4y_{1} && &+& y_{3} &=& 3
 		\end{alignat*}
 		Also gilt $y^{T} = \begin{pmatrix} 0 & 2 & 3 \end{pmatrix}$.
 		
 		\textbf{2. Schritt} (Bestimmung der Eingangsspalte a und gleichzeitig der Eingangsvariablen):\\
-		Es gilt $A_{N} = \begin{pmatrix} x_{5} & x_{4} \\ 0 & 0 \\ 0 & 1 \\ 1 & 0 \end{pmatrix},\; y^{T}A_{N} = \begin{pmatrix} 3 & 2 \end{pmatrix}$ und $c_{N}^{T} = \begin{pmatrix} 0 & 0 \end{pmatrix}$. Wegen $3 \geq 0, 2 \geq 0$ ist die aktuelle Lösung optimal. Die optimale Lösung lautet $x_{1}^{*} = 5, x_{2}^{*} = \frac{13}{2}$ mit $z^{*} = 2x_{1}^{*} + 3x_{2}^{*} = \frac{59}{2}$.
+		Es gilt $A_{N} = \begin{pmatrix} x_{4} & x_{5} \\ 0 & 0 \\ 1 & 0 \\ 0 & 1 \end{pmatrix},\; y^{T}A_{N} = \begin{pmatrix} 2 & 3 \end{pmatrix}$ und $c_{N}^{T} = \begin{pmatrix} 0 & 0 \end{pmatrix}$. Wegen $2 \geq 0, 3 \geq 0$ ist die aktuelle Lösung optimal. Die optimale Lösung lautet $x_{1}^{*} = 5, x_{2}^{*} = 8$ mit $z^{*} = 2x_{1}^{*} + 3x_{2}^{*} = 34$.
 	\subsection{} %b
 		\begin{alignat*}{4}
 			\text{maximiere}\; & 3x_{1} \,&+&\, 2x_{2} \,&+&\, 2x_{3} && \\
