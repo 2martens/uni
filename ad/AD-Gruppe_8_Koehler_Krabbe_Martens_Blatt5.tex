@@ -84,10 +84,8 @@ Jim Martens (6420323)}
 		        while (!empty(queue))
 		            current = queue.dequeue()
 		   	        parent = current.parent
-		   	        // wähle eines von beiden, abhängig davon, 
-		   	        // ob die Länge sich auf die Kanten oder die Gewichtungen bezieht (TBD)
-		            distance = parent.getDistance() + w(parent,current)
-		            distance = parent.getDistance() + 1
+		   	        distance = parent.getDistance() + w(parent,current)
+		   	        current.setDistance(distance)
 		            if (distance > longestPath)
 		                longestPath = distance
 		            
