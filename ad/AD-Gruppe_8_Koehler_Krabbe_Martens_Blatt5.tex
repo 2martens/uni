@@ -103,21 +103,22 @@ Jim Martens (6420323)}
 			\node[state] (s) {s};		
 			\node[state] (a) [above right=1.5 and 1.0 of s] {A};
 			\node[state] (b) [below right=1.5 and 1.0 of s] {B};
-			\node[state] (c) [above right=0.5 and 1.0 of b] {C};
-			\node[state] (d) [below right=0.5 and 1.0 of b] {D};
-			\node[state] (e) [above right=0.5 and 1.0 of a] {E};
-			\node[state] (f) [below right=0.5 and 1.0 of a] {F};
-			\node[state] (g) [above right=0.5 and 2.0 of c] {G};
+			\node[state] (d) [above right=1.0 and 1.0 of a] {D};
+			\node[state] (c) [right=of a] {C};
+			\node[state] (f) [below right=1.0 and 1.25 of a] {F};
+			\node[state] (e) [right=1.0 of c] {E};
+			\node[state] (g) [right=of f] {G};
 			
 			\path[every node/.style={font=\scriptsize},->] 	
 				(s) edge node [above] {30} (a)
 				(s) edge node [below] {18} (b)
-				(a) edge node [above] {20} (e)
+				(a) edge node [above] {21} (c)
+				(a) edge node [above] {38} (d)
 				(a) edge node [below] {22} (f)
-				(b) edge node [above] {21} (c)
-				(b) edge node [below] {38} (d)
+				(c) edge node [right] {22} (f)
+				(c) edge node [above] {20} (e)
 				(f) edge node [above] {9} (g)
-				(c) edge node [below] {9} (g);
+				(b) edge node [left] {30} (a);
 		\end{tikzpicture}
 		
 		Da dies ein gerichteter Graph ohne Zyklen ist und auch keine negativen Kantengewichte vorkommen, kann der Dijkstra-Algorithmus angewendet werden. Da von 9 bis 17 Uhr Fahrer bezahlt werden müssen, kommen nur die Pfade in Betrachtung, die zu einer Senke führen. Senken sind D, E und G. Derjenige dieser Knoten welcher als erster vom Algorithmus gefunden wird (über den eindeutig bestimmbaren Weg), ist auch der kürzeste Pfad vom Startknoten aus, der die Bedingungen erfüllt.
@@ -140,104 +141,94 @@ Jim Martens (6420323)}
 		    d(u*) = 18
 		    S = {s, B}
 		while 2.
-		    U = {A, C, D}
+		    U = {A}
 		    for all u in U -> u = A
 		        for all pre(u) in S that are predecessors of u -> pre(u) = s
 		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
 		            d'(u, pre(u)) = 0 + 30
-		    for all u in U -> u = C
 		        for all pre(u) in S that are predecessors of u -> pre(u) = B
 		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
-		            d'(u, pre(u)) = 18 + 21
-		    for all u in U -> u = D
-		        for all pre(u) in S that are predecessors of u -> pre(u) = B
-		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
-		            d'(u, pre(u)) = 18 + 38
+		            d'(u, pre(u)) = 18 + 30
 		    u* = A
 		    d(u*) = 30
 		    S = {S, B, A}
 		while 3.
-		    U = {C, D, E, F}
-		    for all u in U -> u = C
-		        for all pre(u) in S that are predecessors of u -> pre(u) = B
-		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
-		            d'(u, pre(u)) = 18 + 21
+		    U = {D, C, F}
 		    for all u in U -> u = D
-		        for all pre(u) in S that are predecessors of u -> pre(u) = B
-		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
-		            d'(u, pre(u)) = 18 + 38
-		    for all u in U -> u = E
 		        for all pre(u) in S that are predecessors of u -> pre(u) = A
 		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
-		            d'(u, pre(u)) = 30 + 20
+		            d'(u, pre(u)) = 30 + 38
+		    for all u in U -> u = C
+		        for all pre(u) in S that are predecessors of u -> pre(u) = A
+		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
+		            d'(u, pre(u)) = 30 + 21
 		    for all u in U -> u = F
 		        for all pre(u) in S that are predecessors of u -> pre(u) = A
 		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
 		            d'(u, pre(u)) = 30 + 22
 		    u* = C
-		    d(u*) = 39
+		    d(u*) = 51
 		    S = {s, B, A, C}
 		while 4.
-		    U = {D, E, F, G}
+		    U = {D, F, E}
 		    for all u in U -> u = D
-		        for all pre(u) in S that are predecessors of u -> pre(u) = B
-		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
-		            d'(u, pre(u)) = 18 + 38
-		    for all u in U -> u = E
 		        for all pre(u) in S that are predecessors of u -> pre(u) = A
 		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
-		            d'(u, pre(u)) = 30 + 20
+		            d'(u, pre(u)) = 30 + 38
 		    for all u in U -> u = F
 		        for all pre(u) in S that are predecessors of u -> pre(u) = A
 		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
 		            d'(u, pre(u)) = 30 + 22
-		    for all u in U -> u = G
 		        for all pre(u) in S that are predecessors of u -> pre(u) = C
 		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
-		            d'(u, pre(u)) = 39 + 9
-		    u* = G
-		    d(u*) = 48
-		    S = {s, B, A, C, G}
-		while 5.
-		    U = {D, E, F}
-		    for all u in U -> u = D
-		        for all pre(u) in S that are predecessors of u -> pre(u) = B
-		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
-		            d'(u, pre(u)) = 18 + 38
+		            d'(u, pre(u)) = 51 + 22
 		    for all u in U -> u = E
-		        for all pre(u) in S that are predecessors of u -> pre(u) = A
+		        for all pre(u) in S that are predecessors of u -> pre(u) = C
 		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
-		            d'(u, pre(u)) = 30 + 20
-		    for all u in U -> u = F
-		        for all pre(u) in S that are predecessors of u -> pre(u) = A
-		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
-		            d'(u, pre(u)) = 30 + 22
-		    u* = E
-		    d(u*) = 50
-		    S = {s, B, A, C, G, E}
-		while 6.
-		    U = {D, F}
-		    for all u in U -> u = D
-		        for all pre(u) in S that are predecessors of u -> pre(u) = B
-		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
-		            d'(u, pre(u)) = 18 + 38
-		    for all u in U -> u = F
-		        for all pre(u) in S that are predecessors of u -> pre(u) = A
-		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
-		            d'(u, pre(u)) = 30 + 22
+		            d'(u, pre(u)) = 51 + 20
 		    u* = F
 		    d(u*) = 52
-		    S = {s, B, A, C, G, E, F}
-		while 7.
-		    U = {D}
+		    S = {s, B, A, C, F}
+		while 5.
+		    U = {D, E, G}
 		    for all u in U -> u = D
-		        for all pre(u) in S that are predecessors of u -> pre(u) = B
+		        for all pre(u) in S that are predecessors of u -> pre(u) = A
 		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
-		            d'(u, pre(u)) = 18 + 38
+		            d'(u, pre(u)) = 30 + 38
+		    for all u in U -> u = E
+		        for all pre(u) in S that are predecessors of u -> pre(u) = C
+		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
+		            d'(u, pre(u)) = 51 + 20
+		    for all u in U -> u = G
+		        for all pre(u) in S that are predecessors of u -> pre(u) = F
+		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
+		            d'(u, pre(u)) = 52 + 9
+		    u* = G
+		    d(u*) = 61
+		    S = {s, B, A, C, F, G}
+		while 6.
+		    U = {D, E}
+		    for all u in U -> u = D
+		        for all pre(u) in S that are predecessors of u -> pre(u) = A
+		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
+		            d'(u, pre(u)) = 30 + 38
+		    for all u in U -> u = E
+		        for all pre(u) in S that are predecessors of u -> pre(u) = C
+		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
+		            d'(u, pre(u)) = 51 + 22
 		    u* = D
-		    d(u*) = 56
-		    S = {s, B, A, C, G, E, F, D}
+		    d(u*) = 68
+		    S = {s, B, A, C, F, G, D}
+		while 7.
+		    U = {E}
+		    for all u in U -> u = E
+		        for all pre(u) in S that are predecessors of u -> pre(u) = C
+		            d'(u, pre(u)) = d(pre(u)) + w(pre(u), u)
+		            d'(u, pre(u)) = 51 + 20
+		    u* = E
+		    d(u*) = 71
+		    S = {s, B, A, C, F, G, D, E}
 		\end{verbatim}
 		
-		Wie zu sehen ist wird die Senke G zuerst erreicht. Folgt man dem Weg zu G, so ergibt sich, dass der kürzeste Pfad von s über B und C nach G führt. Weniger Kosten als 48 sind daher nicht möglich.
+		Wie zu sehen ist wird die Senke G zuerst erreicht. Folgt man dem Weg zu G, so ergibt sich, dass der kürzeste Pfad von s über A und F nach G führt. Weniger Kosten als 61 sind daher nicht möglich.
 \end{document}
