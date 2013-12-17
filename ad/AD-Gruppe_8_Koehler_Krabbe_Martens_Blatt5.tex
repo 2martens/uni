@@ -30,7 +30,7 @@
 \makeatother
 \parskip 12pt plus 1pt minus 1pt
 \parindent 0pt
-
+\usepackage{minted}
 \begin{document}
 \author{Reinhard Köhler (6425686), Tronje Krabbe (6435002), \\
 Jim Martens (6420323)}
@@ -40,32 +40,55 @@ Jim Martens (6420323)}
 
 \section{} %1
 	Dieser folgende Pseudocode beschreibt eine leichte Abänderung, die vorzeitig abbricht, wenn sich nach einem kompletten Durchlauf aller Kanten nichts geändert hat. Nach $m$ Durchläufen hat der Algorithmus alle kürzeste Pfade mit maximal $m$ Kanten entdeckt. In einem weiteren Durchlauf wird sich dann nichts mehr ändern, da keine neuen kürzesten Pfade mehr gefunden werden können, wodurch die geänderte Variante abbricht. Um die Abbruchbedingung zu erreichen muss $m$ nicht bekannt sein, da nach $m+1$ Durchläufen die Abbruchbedingung immer gegeben ist.
-	
-	\begin{verbatim}
-	    function BellmanFord(G,s)
-	        InitializeSingleSource(G,s)
-	        for i = 1, ... |V| - 1
-	            changed = false	            
-	            for all edges (u,v) in E
-	                changedTmp = Relax(u,v)
-	                if (!changed)
-	                    changed = changedTmp
-	            if (!changed)
-	                break
-	        for all edges (u,v) in E
-	            if v.dist > u.dist + w(u,v)
-	                return false
-	        return true
-	\end{verbatim}
+	\begin{minted}{python}
+function BellmanFord(G,s)
+    InitializeSingleSource(G,s)
+    for i = 1, ... |V| - 1
+        changed = false	            
+        for all edges (u,v) in E
+            changedTmp = Relax(u,v)
+            if (!changed)
+                changed = changedTmp
+        if (!changed)
+            break
+    for all edges (u,v) in E
+        if v.dist > u.dist + w(u,v)
+            return false
+    return true
+	\end{minted}
+	% \begin{verbatim}
+	%     function BellmanFord(G,s)
+	%         InitializeSingleSource(G,s)
+	%         for i = 1, ... |V| - 1
+	%             changed = false	            
+	%             for all edges (u,v) in E
+	%                 changedTmp = Relax(u,v)
+	%                 if (!changed)
+	%                     changed = changedTmp
+	%             if (!changed)
+	%                 break
+	%         for all edges (u,v) in E
+	%             if v.dist > u.dist + w(u,v)
+	%                 return false
+	%         return true
+	% \end{verbatim}
 \section{} %2
-	\begin{verbatim}
-	    function DAG-SP(G,s)
-	        sort vertices topologically
-	        InitializeSingleSource(G,s)
-	        for each u in V in topological sort order
-	            for each v in Adj(u)
-	                Relax(u,v)
-	\end{verbatim}
+	\begin{minted}{python}
+function DAG-SP(G,s)
+    sort vertices topologically
+    InitializeSingleSource(G,s)
+    for each u in V in topological sort order
+        for each v in Adj(u)
+            Relax(u,v)
+	\end{minted}
+	% \begin{verbatim}
+	%     function DAG-SP(G,s)
+	%         sort vertices topologically
+	%         InitializeSingleSource(G,s)
+	%         for each u in V in topological sort order
+	%             for each v in Adj(u)
+	%                 Relax(u,v)
+	% \end{verbatim}
 \section{} %3
 	Wir wissen, dass der Dijkstra-Algorithmus für rein positive Kantengewichte funktioniert. Es bleibt also nur zu zeigen, dass die kürzesten Wege zu den Knoten korrekt berechnet werden, die eine Kante von dem Startknoten entfernt sind. Ferner ist bekannt, dass Dijkstra zuerst den Knoten besucht, der am billigsten zu erreichen ist. Damit geht der Algorithmus die Kante mit dem kleinsten Gewicht zu erst (einschließlich negative Gewichte). Der somit erreichte Knoten kann also gar nicht billiger zu erreichen sein, da jeder andere Pfad dorthin aus mindestens zwei Kanten besteht, die zusammen bestenfalls das gleiche Gewicht haben wie die gegangene Kante.
 	
@@ -75,42 +98,71 @@ Jim Martens (6420323)}
 		In einem Baum gibt es keine Zyklen. Daher gibt es genau einen direkten Weg (ohne Umwege mit mehrmaligem Besuchen eines Knotens) zu jedem Knoten von dem Wurzelknoten aus. Demnach müssen einfach vom Wurzelknoten aus alle Knoten besucht werden. Dabei wird ähnlich wie in der Breitensuche vorgegangen, indem zunächst alle Knoten, die direkt mit dem Wurzelknoten per Kante verbunden sind, besucht werden und anschließend alle Knoten, die zwei Kanten vom Wurzelknoten entfernt sind, etc. Dabei wird eine Variable zu Beginn auf 0 gesetzt und bei jedem Knoten wird geschaut, ob seine Entfernung zum Wurzelknoten größer ist als diese Variable. Wenn dem so ist, dann wird die Variable entsprechend angepasst. Nach einmaligem Besuchen jedes Knotens hat man damit die längste Entfernung eines Knotens von dem Wurzelknoten ermittelt.
 		
 		In Pseudocode sieht das dann so aus:
-		
-		\begin{verbatim}
-		    function berechneDurchmesser(G)
-		        longestPath = 0
-		        current = G.root
-		        queue.enqueue(current.getChilds())
-		        while (!empty(queue))
-		            current = queue.dequeue()
-		   	        parent = current.parent
-		   	        distance = parent.getDistance() + w(parent,current)
-		   	        current.setDistance(distance)
-		            if (distance > longestPath)
-		                longestPath = distance
+
+		\begin{minted}{python}
+function berechneDurchmesser(G)
+    longestPath = 0
+    current = G.root
+    queue.enqueue(current.getChilds())
+    while (!empty(queue))
+        current = queue.dequeue()
+	        parent = current.parent
+	        distance = parent.getDistance() + w(parent,current)
+	        current.setDistance(distance)
+        if (distance > longestPath)
+            longestPath = distance
+        
+        childs = current.getChilds()
+        if (!empty(childs))
+            queue.enqueue(current.getChilds())
+		\end{minted}
+		% \begin{verbatim}
+		%     function berechneDurchmesser(G)
+		%         longestPath = 0
+		%         current = G.root
+		%         queue.enqueue(current.getChilds())
+		%         while (!empty(queue))
+		%             current = queue.dequeue()
+		%    	        parent = current.parent
+		%    	        distance = parent.getDistance() + w(parent,current)
+		%    	        current.setDistance(distance)
+		%             if (distance > longestPath)
+		%                 longestPath = distance
 		            
-		            childs = current.getChilds()
-		            if (!empty(childs))
-		                queue.enqueue(current.getChilds())
-		\end{verbatim}
+		%             childs = current.getChilds()
+		%             if (!empty(childs))
+		%                 queue.enqueue(current.getChilds())
+		% \end{verbatim}
 	\subsection{} %b
-		\begin{verbatim}		
-		Diam(G)
-		    longestPath = 0
-		    for each v1 in G.vertices
-		        for each v2 in G.vertices with v1 != v2
-		            find shortest path P from v1 to v2
-		            if P.length > longestPath
-		                longestPath = P.length
-		    return longestPath
-    	\end{verbatim}
+		\begin{minted}{python}
+def Durchmesser(G):
+	laengsterWeg = 0
+	for v1 in G.kanten:
+		for v2 in G.kanten with v1 != v2:
+			P = findeKuerzestenWeg(v1, v2)
+			if P.laenge() > laengsterWeg:
+				laengsterWeg = P.laenge()
+	return laengsterWeg
+		\end{minted}
+		% \begin{verbatim}		
+		% Diam(G)
+		%     longestPath = 0
+		%     for each v1 in G.vertices
+		%         for each v2 in G.vertices with v1 != v2
+		%             find shortest path P from v1 to v2
+		%             if P.length > longestPath
+		%                 longestPath = P.length
+		%     return longestPath
+  %   	\end{verbatim}
     	
     	Die Laufzeit dieses Algorithmus beträgt $\mathcal{O}(|V|^3)$.
 \section{} %5
 	\subsection{} %a
-		Man konstruiere aus der Währungsadjazenzmatrix einen vollständigen Graphen, in dem die Währungen durch Knoten repräsentiert sind und die Werte der Matrix als Kantengewichte verwendet werden. Anhand dieses Graphen kann geprüft werden, ob für einen Zyklus die multiplizierten Kantengewichte einen Wert ungleich 1 ergeben. In solch einem Fall würde es Währungsarbitrage geben.  Gibt es keinen solchen Zyklus, dann gibt es keine Währungsarbitragen in der Adjazenzmatrix.
+		Man konstruiert einen vollständigen Graphen aus der Matrix, in welchem die Knoten Währungen repräsentieren, und als Kantengewichte die Werte verwendet werden.
+		Gibt es nun in diesem Graphen einen Zyklus, in dem das Produkt aller Kantengewichte ungleich 1 ist, existiert Währungsarbitrage. Ansonsten ist dies nicht der Fall.
 	\subsection{} %b
-		Nein, da dafür negative Werte in der Adjazenzmatrix erforderlich wären. Diese würden bedeuten, dass man sein komplettes Geld bei einem Tausch verlöre und sogar Strafe zahlen müsste.
+		Nein, unsere Lösung kann nicht zu negativen Zyklen führen, denn dafür müssten negative Werte in der Matrix vorhanden sein.
+		Würden solche Zyklen existieren, bedeuteten sie, man verliere all sein Geld bei einem Tausch, und müsste außerdem eine Strafe zahlen.
 \section{} %6
 		\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm]
 			\node[state] (s) {s};		
