@@ -79,7 +79,7 @@ Jim Martens (6420323)}
 		\begin{verbatim}
 		    function berechneDurchmesser(G)
 		        longestPath = 0
-		        current = G.wurzel
+		        current = G.root
 		        queue.enqueue(current.getChilds())
 		        while (!empty(queue))
 		            current = queue.dequeue()
@@ -94,10 +94,21 @@ Jim Martens (6420323)}
 		                queue.enqueue(current.getChilds())
 		\end{verbatim}
 	\subsection{} %b
-		
+		\begin{verbatim}		
+		Diam(G)
+		    longestPath = 0
+		    for each v1 in G.vertices
+		        for each v2 in G.vertices with v1 != v2
+		            find shortest path P from v1 to v2
+		            if P.length > longestPath
+		                longestPath = P.length
+		    return longestPath
+    	\end{verbatim}
 \section{} %5
 	\subsection{} %a
+		Man konstruiere aus der Währungsadjazenzmatrix einen vollständigen Graphen, in dem die Währungen durch Knoten repräsentiert sind und die Werte der Matrix als Kantengewichte verwendet werden. Anhand dieses Graphen kann geprüft werden, ob für einen Zyklus die multiplizierten Kantengewichte einen Wert ungleich 1 ergeben. In solch einem Fall würde es Währungsarbitrage geben.  Gibt es keinen solchen Zyklus, dann gibt es keine Währungsarbitragen in der Adjazenzmatrix.
 	\subsection{} %b
+		Nein, da dafür negative Werte in der Adjazenzmatrix erforderlich wären. Diese würden bedeuten, dass man sein komplettes Geld bei einem Tausch verlöre und sogar Strafe zahlen müsste.
 \section{} %6
 		\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm]
 			\node[state] (s) {s};		
