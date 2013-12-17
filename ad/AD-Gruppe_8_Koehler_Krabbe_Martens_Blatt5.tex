@@ -104,6 +104,8 @@ Jim Martens (6420323)}
 		                longestPath = P.length
 		    return longestPath
     	\end{verbatim}
+    	
+    	Die Laufzeit dieses Algorithmus beträgt $\mathcal{O}(|V|^3)$.
 \section{} %5
 	\subsection{} %a
 		Man konstruiere aus der Währungsadjazenzmatrix einen vollständigen Graphen, in dem die Währungen durch Knoten repräsentiert sind und die Werte der Matrix als Kantengewichte verwendet werden. Anhand dieses Graphen kann geprüft werden, ob für einen Zyklus die multiplizierten Kantengewichte einen Wert ungleich 1 ergeben. In solch einem Fall würde es Währungsarbitrage geben.  Gibt es keinen solchen Zyklus, dann gibt es keine Währungsarbitragen in der Adjazenzmatrix.
