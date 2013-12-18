@@ -1,0 +1,117 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\usepackage{multirow}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+% some matrix magic
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jan Branitz (6326955), Jim Martens (6420323),\\
+Stephan Niendorf (6242417)}
+\title{Hausaufgaben zum 6. Januar}
+\maketitle
+\section{} %1
+\section{} %2
+	\subsection{} %a
+		\begin{alignat*}{9}
+			\text{minimiere}\; & 67w &+& 120k &+& 100h &+& 60f &+& 97b &+& 124n &+& 22s &+& 62m &&  \\
+			\multicolumn{18}{l}{\text{unter den Nebenbedingungen}} && \\
+			& 8w &+& 25k &+& 30h &+& 22f &+& 3b &+& 8n &+& 6s && &\geq &\, 75 \\
+			& w &+& 35k &+& 8h &+& f && &+& 33n &+& 13s &+& 98m &\geq &\, 90 \\
+			& 54w && && && &+& 42b &+& 4n &+& 63s && &\geq &\, 300 \\
+			\multicolumn{16}{r}{$w, k, h, f, b, n, s, m$} \,&\geq &\, 0
+		\end{alignat*}
+	\subsection{} %b
+		In das verlinkte Tool wird folgendes eingegeben:
+\begin{verbatim}
+Minimize p = 67w + 120k + 100h + 60f + 97b + 124n + 22s + 62m subject to
+8w + 25k + 30h + 22f + 3b + 8n + 6s + 0m >= 75
+w + 35k + 8h + f + 0b + 33n + 13s + 98m >= 90
+54w + 0k + 0h + 0f + 42b + 4n + 63s + 0m >= 300
+w >= 0
+k >= 0
+h >= 0
+f >= 0
+b >= 0
+n >= 0
+s >= 0
+m >= 0
+\end{verbatim}
+		Die Ausgabe ist:
+\begin{verbatim}
+Optimal Solution: p = 6801/28; w = 0, k = 0, h = 0, f = 87/56, 
+b = 0, n = 0, s = 381/56, m = 0
+\end{verbatim}
+	\subsection{} %c
+		In das verlinkte Tool wird folgendes eingegeben:
+\begin{verbatim}
+Minimize p = 3x1 + 24x2 + 13x3 + 9x4 + 20x5 + 19x6 subject to
+110x1 + 205x2 + 160x3 + 160x3 + 420x5 + 260x6 >= 2000
+4x1 + 32x2 + 13x3 + 8x4 + 4x5 + 14x6 >= 55
+2x1 + 12x2 + 54x3 + 285x4 + 22x5 + 80x6 >= 800
+x1 <= 4
+x2 <= 3
+x3 <= 2
+x4 <= 8
+x5 <= 2
+x6 <= 2
+x1 >= 0
+x2 >= 0
+x3 >= 0
+x4 >= 0
+x5 >= 0
+x6 >= 0
+\end{verbatim}
+		Die Ausgabe ist: 
+\begin{verbatim}
+Optimal Solution: p = 46621/380; x1 = 4, x2 = 0, x3 = 5/4, 
+x4 = 347/190, x5 = 2, x6 = 2
+\end{verbatim}
+	\subsection{} %d
+		In das verlinkte Tool wird folgendes eingegeben:
+\begin{verbatim}
+Maximize p = 8a1 + 3a2 + 6b1 + 3b2 + 9c1 + 5c2 subject to
+a1 + a2 <= 400
+b1 + b2 <= 480
+c1 + c2 <= 230
+a1 + b1 + c1 <= 420
+a2 + b2 + c2 <= 250
+a1 >= 0
+a2 >= 0
+b1 >= 0
+b2 >= 0
+c1 >= 0
+c2 >= 0
+\end{verbatim}
+	Die Ausgabe ist:
+\begin{verbatim}
+Optimal Solution: p = 4550; a1 = 400, a2 = 0, b1 = 0, b2 = 40, 
+c1 = 20, c2 = 210
+\end{verbatim}
+\end{document}
