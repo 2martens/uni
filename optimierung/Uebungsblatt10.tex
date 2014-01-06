@@ -37,7 +37,101 @@ Stephan Niendorf (6242417)}
 \title{Hausaufgaben zum 6. Januar}
 \maketitle
 \section{} %1
+	\begin{tikzpicture}[node distance=2cm]
+		\node (s) {s};
+		\node (a) [above right=of s] {a};
+		\node (b) [right=of s] {b};
+		\node (c) [below right=of s] {c};
+		\node (d) [right=of c] {d};
+		\node (e) [right=of b] {e};
+		\node (t) [right=of e] {t};
+		\node (sCap) [below=0.1 of s] {(-, $\infty$)};
+		\node (aCap) [above=0.1 of a] {(s, +, 3)};
+		\node (bCap) [above=0.1 of b] {(s, +, 5)};
+		\node (cCap) [below=0.1 of c] {(s, +, 6)};
+		\node (tCap) [above=0.1 of t] {(a, +, 3)};
+		\path[->] (s) edge[line width=2pt] node [above left] {0(3)} (a)
+				  (s) edge node [below] {0(5)} (b)
+				  (s) edge node [below left] {0(6)} (c)
+				  (a) edge[line width=2pt] node [above right] {0(5)} (t)
+				  (b) edge node [below] {0(2)} (e)
+				  (b) edge node [below left] {0(6)} (d)
+				  (c) edge node [below] {0(4)} (d)
+				  (d) edge node [below right] {0(5)} (t)
+				  (e) edge node [below] {0(3)} (t);
+	\end{tikzpicture}
 	
+	\begin{tikzpicture}[node distance=2cm]
+		\node (s) {s};
+		\node (a) [above right=of s] {a};
+		\node (b) [right=of s] {b};
+		\node (c) [below right=of s] {c};
+		\node (d) [right=of c] {d};
+		\node (e) [right=of b] {e};
+		\node (t) [right=of e] {t};
+		\node (sCap) [below=0.1 of s] {(-, $\infty$)};
+		\node (bCap) [above=0.1 of b] {(s, +, 5)};
+		\node (cCap) [below=0.1 of c] {(s, +, 6)};
+		\node (dCap) [below=0.1 of d] {(b, +, 6)};
+		\node (tCap) [above=0.1 of t] {(d, +, 5)};
+		\path[->] (s) edge node [above left] {3(3)} (a)
+				  (s) edge[line width=2pt] node [below] {0(5)} (b)
+				  (s) edge node [below left] {0(6)} (c)
+				  (a) edge node [above right] {3(5)} (t)
+				  (b) edge node [below] {0(2)} (e)
+				  (b) edge[line width=2pt] node [below left] {0(6)} (d)
+				  (c) edge node [below] {0(4)} (d)
+				  (d) edge[line width=2pt] node [below right] {0(5)} (t)
+				  (e) edge node [below] {0(3)} (t);
+	\end{tikzpicture}
+	
+	\begin{tikzpicture}[node distance=2cm]
+		\node (s) {s};
+		\node (a) [above right=of s] {a};
+		\node (b) [right=of s] {b};
+		\node (c) [below right=of s] {c};
+		\node (d) [right=of c] {d};
+		\node (e) [right=of b] {e};
+		\node (t) [right=of e] {t};
+		\node (sCap) [below=0.1 of s] {(-, $\infty$)};
+		\node (eCap) [below=0.1 of e] {(b, +, 2)};
+		\node (cCap) [below=0.1 of c] {(s, +, 6)};
+		\node (dCap) [below=0.1 of d] {(c, +, 4)};
+		\node (tCap) [above=0.1 of t] {(e, +, 2)};
+		\node (bCap) [above=0.1 of b] {(d, -, 5)};
+		\path[->] (s) edge node [above left] {3(3)} (a)
+				  (s) edge node [below] {5(5)} (b)
+				  (s) edge[line width=2pt] node [below left] {0(6)} (c)
+				  (a) edge node [above right] {3(5)} (t)
+				  (b) edge[line width=2pt] node [below] {0(2)} (e)
+				  (b) edge[line width=2pt] node [below left] {5(6)} (d)
+				  (c) edge[line width=2pt] node [below] {0(4)} (d)
+				  (d) edge node [below right] {5(5)} (t)
+				  (e) edge[line width=2pt] node [below] {0(3)} (t);
+	\end{tikzpicture}
+	
+	\begin{tikzpicture}[node distance=2cm]
+		\node (s) {s};
+		\node (a) [above right=of s] {a};
+		\node (b) [right=of s] {b};
+		\node (c) [below right=of s] {c};
+		\node (d) [right=of c] {d};
+		\node (e) [right=of b] {e};
+		\node (t) [right=of e] {t};
+		\node (sCap) [below=0.1 of s] {(-, $\infty$)};
+		\node (cCap) [below=0.1 of c] {(s, +, 4)};
+		\node (dCap) [below=0.1 of d] {(c, +, 2)};
+		\node (bCap) [above=0.1 of b] {(d, -, 3)};
+		\path[->] (s) edge node [above left] {3(3)} (a)
+				  (s) edge node [below] {5(5)} (b)
+				  (s) edge node [below left] {2(6)} (c)
+				  (a) edge node [above right] {3(5)} (t)
+				  (b) edge node [below] {2(2)} (e)
+				  (b) edge node [below left] {3(6)} (d)
+				  (c) edge node [below] {2(4)} (d)
+				  (d) edge node [below right] {5(5)} (t)
+				  (e) edge node [below] {2(3)} (t);
+	\end{tikzpicture}
 \section{} %2
 	\subsection{} %a
 		\begin{alignat*}{9}
