@@ -27,6 +27,12 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
 
 ; 3.
 
+; Nach der inneren Reduktion wird zunächst (pimento + 1) ausgeführt.
+; Dabei wird f an + gebunden und arg1 wird an 1 gebunden.
+; Der zurückgegebenen Closure wird nun 3 als Argument übergeben. 
+; Damit wird arg2 an 3 gebunden. Schließlich wird (+ 1 3) ausgeführt
+; und als Ergebnis 4 zurückgegeben.
+
 ; 4.
 
 ; (foldl (curry * 2) 1 '(1 2 3)) -> 48, weil zunächst (curry * 2)
@@ -147,9 +153,9 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
                   (if (= -1 cards)
                       acc
                       (let ((d (modulo cards 3))
-                             (c (modulo (floor (/ cards 3)) 3))
-                             (b (modulo (floor (/ cards 9)) 3))
-                             (a (modulo (floor (/ cards 27)) 3)))
+                            (c (modulo (floor (/ cards 3)) 3))
+                            (b (modulo (floor (/ cards 9)) 3))
+                            (a (modulo (floor (/ cards 27)) 3)))
                         (rec (cons (list
                                     (list-ref (key->wert 'Form ausprägungen) a)
                                     (list-ref (key->wert 'Farbe ausprägungen) b)
@@ -174,6 +180,43 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
 
 ; 3.
 
-;(define (is-a-set? karten))
+(define (is-a-set? karten)
+  (let* ([gleich (λ (wert1 wert2 wert3)
+                   (and 
+                    (equal? wert1 wert2)
+                    (equal? wert1 wert3)
+                    ))]
+         [verschieden (λ (wert1 wert2 wert3)
+                        (and
+                         (not (equal? wert1 wert2))
+                         (not (equal? wert1 wert3))
+                         (not (equal? wert2 wert3))
+                         ))]
+         [qualified (λ (wert1 wert2 wert3)
+                      (or
+                       (gleich wert1 wert2 wert3)
+                       (verschieden wert1 wert2 wert3)
+                       ))])
+    (and 
+     (qualified (first (first karten))
+                (first (second karten))
+                (first (third karten)))
+     (qualified (second (first karten))
+                (second (second karten))
+                (second (third karten)))
+     (qualified (third (first karten))
+                (third (second karten))
+                (third (third karten)))
+     (qualified (fourth (first karten))
+                (fourth (second karten))
+                (fourth (third karten))))))
 
-  
+(display "is-a-set?(#t): ")
+(is-a-set? '((Oval rot ein Linie)
+             (Rechteck rot zwei Linie)
+             (Welle rot drei Linie)))
+(display "is-a-set?(#f): ")
+(is-a-set? '((Oval rot ein Linie)
+             (Oval blau zwei Fläche)
+             (Welle rot drei Linie)))
+
