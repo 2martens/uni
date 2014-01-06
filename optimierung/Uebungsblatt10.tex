@@ -47,13 +47,14 @@ Stephan Niendorf (6242417)}
 		\node (t) [right=of e] {t};
 		\node (sCap) [below=0.1 of s] {(-, $\infty$)};
 		\node (aCap) [above=0.1 of a] {(s, +, 3)};
-		\node (bCap) [above=0.1 of b] {(s, +, 5)};
+		\node (bCap) [below=0.1 of b] {(s, +, 5)};
 		\node (cCap) [below=0.1 of c] {(s, +, 6)};
 		\node (tCap) [above=0.1 of t] {(a, +, 3)};
 		\path[->] (s) edge[line width=2pt] node [above left] {0(3)} (a)
 				  (s) edge node [below] {0(5)} (b)
 				  (s) edge node [below left] {0(6)} (c)
 				  (a) edge[line width=2pt] node [above right] {0(5)} (t)
+				  (a) edge node [left] {0(4)} (b)
 				  (b) edge node [below] {0(2)} (e)
 				  (b) edge node [below left] {0(6)} (d)
 				  (c) edge node [below] {0(4)} (d)
@@ -70,7 +71,7 @@ Stephan Niendorf (6242417)}
 		\node (e) [right=of b] {e};
 		\node (t) [right=of e] {t};
 		\node (sCap) [below=0.1 of s] {(-, $\infty$)};
-		\node (bCap) [above=0.1 of b] {(s, +, 5)};
+		\node (bCap) [below=0.1 of b] {(s, +, 5)};
 		\node (cCap) [below=0.1 of c] {(s, +, 6)};
 		\node (dCap) [below=0.1 of d] {(b, +, 6)};
 		\node (tCap) [above=0.1 of t] {(d, +, 5)};
@@ -78,6 +79,7 @@ Stephan Niendorf (6242417)}
 				  (s) edge[line width=2pt] node [below] {0(5)} (b)
 				  (s) edge node [below left] {0(6)} (c)
 				  (a) edge node [above right] {3(5)} (t)
+				  (a) edge node [left] {0(4)} (b)
 				  (b) edge node [below] {0(2)} (e)
 				  (b) edge[line width=2pt] node [below left] {0(6)} (d)
 				  (c) edge node [below] {0(4)} (d)
@@ -98,11 +100,12 @@ Stephan Niendorf (6242417)}
 		\node (cCap) [below=0.1 of c] {(s, +, 6)};
 		\node (dCap) [below=0.1 of d] {(c, +, 4)};
 		\node (tCap) [above=0.1 of t] {(e, +, 2)};
-		\node (bCap) [above=0.1 of b] {(d, -, 4)};
+		\node (bCap) [below=0.1 of b] {(d, -, 4)};
 		\path[->] (s) edge node [above left] {3(3)} (a)
 				  (s) edge node [below] {5(5)} (b)
 				  (s) edge[line width=2pt] node [below left] {0(6)} (c)
 				  (a) edge node [above right] {3(5)} (t)
+				  (a) edge node [left] {0(4)} (b)
 				  (b) edge[line width=2pt] node [below] {0(2)} (e)
 				  (b) edge[line width=2pt] node [below left] {5(6)} (d)
 				  (c) edge[line width=2pt] node [below] {0(4)} (d)
