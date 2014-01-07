@@ -269,16 +269,16 @@ Stephan Niendorf (6242417)}
 		\underline{3. Iteration}
 		
 		\textbf{1. Schritt} (Lösung von $y^{T}B = c_{B}^{T}$):\\
-		Es gilt $c_{B}^{T} = \begin{pmatrix} 2 & 1 & 0 \end{pmatrix}$. Das Gleichungssystem $y^{T}B = c_{B}^{T}$ lautet
+		Es gilt $c_{B}^{T} = \begin{pmatrix} 2 & 3 & 0 \end{pmatrix}$. Das Gleichungssystem $y^{T}B = c_{B}^{T}$ lautet
 		\begin{alignat*}{4}
 			y_{1} && && &=& 2 \\
-			y_{1} &+& y_{2} &+& y_{3} &=& 1 \\
+			y_{1} &+& y_{2} &+& y_{3} &=& 3 \\
 			&& && y_{3} &=& 0
 		\end{alignat*}
-		Also gilt $y^{T} = \begin{pmatrix} 2 & -1 & 0 \end{pmatrix}$.
+		Also gilt $y^{T} = \begin{pmatrix} 2 & 1 & 0 \end{pmatrix}$.
 		
 		\textbf{2. Schritt} (Bestimmung der Eingangsspalte a und gleichzeitig der Eingangsvariablen):\\
-		Es gilt $A_{N} = \begin{pmatrix} x_{5} & x_{2} & x_{4} \\ 0 & 0 & 1 \\ 1 & 1 & 0 \\ 0 & 2 & 0 \end{pmatrix},\; y^{T}A_{N} = \begin{pmatrix} -1 & -1 & 2 \end{pmatrix}$ und $c_{N}^{T} = \begin{pmatrix} 0 & 2 & 0\end{pmatrix}$. Also kommen nur die ersten beiden Spalten von $A_{N}$ als Eingangsspalte a infrage, wir wählen $a = \begin{pmatrix} 0 \\ 1 \\ 2 \end{pmatrix}$; die Eingangsvariable ist $x_{2}$.
+		Es gilt $A_{N} = \begin{pmatrix} x_{5} & x_{2} & x_{4} \\ 0 & 0 & 1 \\ 1 & 1 & 0 \\ 0 & 2 & 0 \end{pmatrix},\; y^{T}A_{N} = \begin{pmatrix} 1 & 1 & 2 \end{pmatrix}$ und $c_{N}^{T} = \begin{pmatrix} 0 & 2 & 0\end{pmatrix}$. Also kommen nur die ersten beiden Spalten von $A_{N}$ als Eingangsspalte a infrage, wir wählen $a = \begin{pmatrix} 0 \\ 1 \\ 2 \end{pmatrix}$; die Eingangsvariable ist $x_{2}$.
 		
 		\textbf{3. Schritt} (Lösung von $Bd = a$):\\
 		Das Gleichungssystem $Bd = a$ lautet
@@ -396,7 +396,7 @@ Stephan Niendorf (6242417)}
 		Also gilt $y^{T} = \begin{pmatrix} 0 & \frac{9}{2} \end{pmatrix}$.
 		
 		\textbf{2. Schritt} (Bestimmung der Eingangsspalte a und gleichzeitig der Eingangsvariablen):\\
-		Es gilt $A_{N} = \begin{pmatrix} x_{1} & x_{2} & x_{6} & x_{4} \\ 1 & 2 & 1 & 1 \\ 1 & 1 & 0 & 3 \end{pmatrix},\; y^{T}A_{N} = \begin{pmatrix} \frac{9}{2} & \frac{9}{2} & 0 & \frac{27}{2} \end{pmatrix}$ und $c_{N}^{T} = \begin{pmatrix} 5 & 6 & 0 & 8 \end{pmatrix}$. Also kommen nur die ersten beiden Spalten von $A_{N}$ als Eingangsspalte a infrage, wir wählen $a = \begin{pmatrix} 2 \\ 1 \end{pmatrix}$; die Eingangsvariable ist $x_{2}$.
+		Es gilt $A_{N} = \begin{pmatrix} x_{1} & x_{2} & x_{6} & x_{4} \\ 1 & 2 & 0 & 1 \\ 1 & 1 & 1 & 3 \end{pmatrix},\; y^{T}A_{N} = \begin{pmatrix} \frac{9}{2} & \frac{9}{2} & \frac{9}{2} & \frac{27}{2} \end{pmatrix}$ und $c_{N}^{T} = \begin{pmatrix} 5 & 6 & 0 & 8 \end{pmatrix}$. Also kommen nur die ersten drei Spalten von $A_{N}$ als Eingangsspalte a infrage, wir wählen $a = \begin{pmatrix} 2 \\ 1 \end{pmatrix}$; die Eingangsvariable ist $x_{2}$.
 		
 		\textbf{3. Schritt} (Lösung von $Bd = a$):\\
 		Das Gleichungssystem $Bd = a$ lautet
@@ -556,6 +556,6 @@ Stephan Niendorf (6242417)}
 		Also gilt $y^{T} = \begin{pmatrix} 1 & 4 \end{pmatrix}$.
 		
 		\textbf{2. Schritt} (Bestimmung der Eingangsspalte a und gleichzeitig der Eingangsvariablen):\\
-		Es gilt $A_{N} = \begin{pmatrix} x_{4} & x_{5} & x_{6} & x_{3} \\ 1 & 1 & 0 & 3 \\ 3 & 0 & 1 & 2 \end{pmatrix},\; y^{T}A_{N} = \begin{pmatrix} 13 & 1 & 4 & 11 \end{pmatrix}$ und $c_{N}^{T} = \begin{pmatrix} 8 & 0 & 0 & 9\end{pmatrix}$.  Wegen $13 \geq 8, 1 \geq 0, 4 \geq 0, 11 \geq 9$ ist die aktuelle Lösung optimal. Die optimale Lösung lautet $x_{1}^{*} = 1, x_{2}^{*} = 2, x_{3}^{*} = 0, x_{4}^{*} = 0$ mit $z^{*} = 5x_{1}^{*} + 6x_{2}^{*} + 9x_{3}^{*} + 8x_{4}^{*} = 21$.
+		Es gilt $A_{N} = \begin{pmatrix} x_{4} & x_{5} & x_{6} & x_{3} \\ 1 & 1 & 0 & 3 \\ 3 & 0 & 1 & 2 \end{pmatrix},\; y^{T}A_{N} = \begin{pmatrix} 13 & 1 & 4 & 11 \end{pmatrix}$ und $c_{N}^{T} = \begin{pmatrix} 8 & 0 & 0 & 9\end{pmatrix}$.  Wegen $13 \geq 8, 1 \geq 0, 4 \geq 0, 11 \geq 9$ ist die aktuelle Lösung optimal. Die optimale Lösung lautet $x_{1}^{*} = 1, x_{2}^{*} = 2, x_{3}^{*} = 0, x_{4}^{*} = 0$ mit $z^{*} = 5x_{1}^{*} + 6x_{2}^{*} + 9x_{3}^{*} + 8x_{4}^{*} = 17$.
 
 \end{document}
