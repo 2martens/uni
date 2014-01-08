@@ -1,0 +1,105 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\usepackage{multirow}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+% some matrix magic
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jan Branitz (6326955), Jim Martens (6420323),\\
+Stephan Niendorf (6242417)}
+\title{Hausaufgaben zum 13. Januar}
+\maketitle
+\section{} %1
+	\subsection{} %a
+		\subsubsection{} %i
+			Die Knoten werden in der Reihenfolge a, b, f, c, d, g, e und t markiert.
+			
+			\begin{tabular}{c|c}
+			Knoten & Markierung \\
+			\hline
+			s & $(-, \infty)$ \\
+			a & (s, +, 38) \\
+			b & (s, +, 1) \\
+			f & (s, +, 2) \\
+			c & (a, +, 10) \\
+			d & (a, +, 38) \\
+			g & (f, +, 2) \\
+			e & (c, +, 10) \\
+			t & (c, +, 10)
+			\end{tabular}
+			
+			Es gibt keine Knoten, die unmarkiert bleiben.
+		\subsubsection{} %ii
+			%s, a, b, f, d, c, g, e, t
+			Der Pfad $f_{0}$ führt von s über a und c nach t. Der verbesserte Fluss $f_{1}$ weist die folgenden Markierungen auf.
+			
+			\begin{tabular}{c|c}
+			Knoten & Markierung \\
+			\hline
+			s & $(-, \infty)$ \\
+			a & (s, +, 28) \\
+			b & (s, +, 1) \\
+			f & (s, +, 2) \\
+			d & (a, +, 28) \\
+			c & (b, +, 1) \\
+			g & (f, +, 2) \\
+			e & (d, +, 1) \\
+			t & (d, +, 7)
+			\end{tabular}
+	\subsection{} %b
+		Die Knoten, die zu S gehören, sind markiert und die Knoten, die zu T gehören, sind nicht markiert.
+	\subsection{} %c
+		(i) ist wahr und (ii) ist falsch.
+	\subsection{} %d
+		In jedem Graphen gilt $m(G) \leq c(G)$ (siehe Skript Seite 121, 11.1), weswegen (ii) falsch ist. Solange mindestens zwei Knoten nicht zum Matching gehören (je mindestens einer in X und einer in Y), können diese im besten Fall durch eine neue Matchingkante dem Matching hinzugefügt werden. In diesem Fall ist die Matchingzahl $m(G)$ also mindestens um eins höher als ein unter den beschriebenen Voraussetzungen vorhandenes Matching.
+\section{} %2
+	\subsection{} %a
+		\begin{tabular}{c|l}
+			Durchgang & Matching \\
+			\hline
+			1 & $M = \{\{x_{1}, y_{1}\}\}$ \\
+			2 & $M = \{\{x_{1}, y_{1}\}, \{x_{2}, y_{2}\}\}$ \\
+			3 & $M = \{\{x_{1}, y_{4}\}, \{x_{2}, y_{2}\}, \{x_{3}, y_{1}\}\}$ \\
+			4 & $M = \{\{x_{1}, y_{4}\}, \{x_{2}, y_{3}\}, \{x_{3}, y_{1}\}, \{x_{4}, y_{2}\}\}$ \\
+			5 & $M = \{\{x_{1}, y_{4}\}, \{x_{2}, y_{3}\}, \{x_{3}, y_{1}\}, \{x_{4}, y_{2}\}, \{x_{5}, y_{5}\}\}$ \\
+			6 & $M = \{\{x_{1}, y_{4}\}, \{x_{2}, y_{3}\}, \{x_{3}, y_{1}\}, \{x_{4}, y_{2}\}, \{x_{5}, y_{5}\}, \{x_{6}, y_{6}\}\}$ \\
+		\end{tabular}
+	\subsection{} %b
+		\begin{tabular}{c|l}
+			Durchgang & Matching \\
+			\hline
+			1 & $M = \{\{x_{1}, y_{1}\}\}$ \\
+			2 & $M = \{\{x_{1}, y_{1}\}, \{x_{2}, y_{2}\}\}$ \\
+			3 & $M = \{\{x_{1}, y_{3}\}, \{x_{2}, y_{2}\}, \{x_{3}, y_{1}\}\}$ \\
+			4 & $M = \{\{x_{1}, y_{3}\}, \{x_{2}, y_{2}\}, \{x_{3}, y_{1}\}, \{x_{4}, y_{4}\}\}$ \\
+			5 & $M = \{\{x_{1}, y_{3}\}, \{x_{2}, y_{5}\}, \{x_{3}, y_{1}\}, \{x_{4}, y_{4}\}, \{x_{5}, y_{2}\}\}$ \\
+			6 & $M = \{\{x_{1}, y_{3}\}, \{x_{2}, y_{5}\}, \{x_{3}, y_{1}\}, \{x_{4}, y_{4}\}, \{x_{5}, y_{2}\}, \{x_{6}, y_{6}\}\}$ \\
+		\end{tabular}
+\end{document}
