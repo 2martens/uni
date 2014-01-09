@@ -37,8 +37,11 @@
 			      (rubrikZuordnung) edge node [left, align=left] {ON DELETE \\ CASCADE} (benutzer);
 		\end{tikzpicture}
 	\subsection{} %c
+		Vorausgesetzt man hat einen Benutzer, der keine Website eingestellt hat, und möchte diesen löschen. Dieser Benutzer ist ein Verwalter einer Rubrik. Außerdem hat der Benutzer eine Website und eine Rubrik zugeordnet. Wenn der Benutzer gelöscht wird und anschließend die Rubrikzuordnung gelöscht wird, dann können die vom Benutzer verwalteten Rubriken einfach gelöscht werden. Werden hingegen zuerst die Rubriken gelöscht, dann scheitert der Vorgang am ON DELETE RESTRICT von Rubrikzuordnung zu Rubriken.
 		
+		Daher ist das Schema nicht sicher bezüglich referentieller Aktionen.
 	\subsection{} %d
+		Dieses Problem könnte durch das Ändern des ON DELETE RESTRICT zwischen Rubriken und Rubrikzuordnung zu ON DELETE CASCADE behoben werden.
 \section{Änderbarkeit von Sichten}
 	\subsection{} %a
 		\subsubsection{} %i
