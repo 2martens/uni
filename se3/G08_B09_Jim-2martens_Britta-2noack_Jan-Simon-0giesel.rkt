@@ -248,6 +248,17 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
   
 ; 1.3
 
+; Eine Ergänzungsmethode kann vor und nach der Methode der Oberklasse
+; ausgeführt werden. Außerdem kann sie einhüllend wirken und wird sowohl vor
+; als auch nach der Elternmethode aufgerufen.
+
+; Die Vorteile sind, dass jede Ergänzungsmethode ausgeführt wird
+; und damit keine Initialisierungen vergessen oder unterdrückt 
+; werden können, die in den Oberklassen definiert wurden.
+; Desweiteren brauchen die geerbten Methoden nicht durch
+; Modifikationen überladen zu werden, sondern werden nur
+; ergänzt.
+
 ; 2)
 
 ; 2.1
@@ -261,10 +272,31 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
 (defclass luftfahrzeug (fahrzeug))
 
 (defclass amphibienfahrzeug (wasserfahrzeug landfahrzeug))
-(defclass amphibienflugzeug (wasserfahrzeug straßenfahrzeug luftfahrzeug))
+(defclass amphibienflugzeug (luftfahrzeug wasserfahrzeug straßenfahrzeug))
 (defclass zweiwegefahrzeug (schienenfahrzeug straßenfahrzeug))
 (defclass zeitzug (schienenfahrzeug luftfahrzeug))
 
 ; 2.2
+
+; da ein Fahrzeug mehrere Medien aufweisen kann, ist es sinnvoll
+; diese in einer Liste zurückzugeben 
+(defgeneric getMedium ((fz fahrzeug))
+  :combination generic-list-combination)
+; von allen Medien muss die geringste Höchstgeschwindigkeit genommen werden
+; daher ist die min combination hier richtig
+(defgeneric getMaxSpeed ((fz fahrzeug))
+  :combination generic-min-combination)
+; auch bei der Tragfähigkeit ist die geringst mögliche Tragfähigkeit
+; von Interesse
+(defgeneric getTragfähigkeit ((fz fahrzeug))
+  :combination generic-min-combination)
+; beim Verbrauch hingegen ist der maximale Verbrauch über alle
+; Medien interessant
+(defgeneric getVerbrauchPro100km ((fz fahrzeug))
+  :combination generic-max-combination)
+; die Passagierzahl wiederum ist durch die geringste Größe unter allen Medien
+; limitiert, womit hier ebenso eine min combination anzuwenden ist
+(defgeneric getPassagierzahl ((fz fahrzeug))
+  :combination generic-min-combination)
 
 ; 2.3
