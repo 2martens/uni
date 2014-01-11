@@ -12,8 +12,9 @@
 \usepackage{textcomp}
 \usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
 \usepackage{tikz}
+\usepackage{algpseudocode}
 \usepackage{algorithm}
-\usepackage{algorithmic}
+%\usepackage{algorithmic}
 %\usepackage{minted}
 \usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
 \usepackage{polynom}
@@ -94,6 +95,46 @@ Jim Martens (6420323)}
 		
 		Durch die negative Kante von 5 nach 1, würde sich der kürzeste Pfad von 1 von 5 auf 1 ändern, was jedoch nicht geht, da 1 bereits besucht wurde. Daher liefert Dijkstra für das Single-Source-Shortest-Path Problem in $G_{2}$ ein falsches Ergebnis.
 \section{} %2
+	\begin{algorithm}
+		\caption{Relax}
+		\begin{algorithmic}[1]
+			\Procedure{Relax}{$u,v$}
+				\If{$w(u,v) > u.maxWeight$}
+					\State $v.maxWeight \gets w(u,v)$
+					\State $v.\pi \gets u$
+				\EndIf
+			\EndProcedure
+		\end{algorithmic}
+	\end{algorithm}
+	
+	\begin{algorithm}
+		\caption{Initialize single source}
+		\begin{algorithmic}[1]
+			\Procedure{InitializeSingleSource}{$G,s$}
+				\ForAll{$v \in V$}
+					\State $v.maxWeight \gets \infty$
+					\State $v.\pi \gets NIL$
+				\EndFor
+				\State $s.maxWeight \gets 0$
+			\EndProcedure
+		\end{algorithmic}
+	\end{algorithm}
+
+	\begin{algorithm}
+  		\caption{Dijkstra für leichtest mögliche schwerste Kanten}
+		\begin{algorithmic}[1]
+			\Procedure{Dijkstra}{$G,w,s$}
+				\State $\Call{InitializeSingleSource}{G,s}$
+				\State $Q \gets (V, V.maxWeight)$\Comment{ordered by the maximum weight (edge with highest weight) per path in ascending order}
+				\While{$Q \neq \emptyset$}
+					\State $u \gets \Call{Extract}{Q}$
+					\ForAll{v adjacent to u}
+		            	\State $\Call{Relax}{u,v}$ and update the keys in Q accordingly
+					\EndFor
+				\EndWhile
+			\EndProcedure
+		\end{algorithmic}
+	\end{algorithm}
 \section{} %3
 	\subsection{} %a
 	\subsection{} %b
