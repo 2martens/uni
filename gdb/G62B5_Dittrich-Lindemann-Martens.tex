@@ -1,0 +1,150 @@
+\documentclass[ngerman]{gdb-aufgabenblatt}
+\RequirePackage[utf8]{inputenc}
+\renewcommand{\Aufgabenblatt}{5}
+\renewcommand{\Ausgabedatum}{Mi. 11.12.2013}
+\renewcommand{\Abgabedatum}{Do. 09.01.2014}
+\renewcommand{\Gruppe}{Tim Dittrich, Sebastian Lindemann, Jim Martens}
+
+% define how the sections are rendered
+\def\thesection{Aufgabe \arabic{section}:}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{shadows}
+
+\begin{document}
+\section{Referentielle Aktionen}
+	\subsection{} %a
+		Bei einem sicheren Schema ist das Ergebnis der Referentiellen Aktionen unabhängig von der Reihenfolge.
+	\subsection{} %b
+		\begin{tikzpicture}
+			\node[entity] (benutzer) {Benutzer};
+			\node[entity] (websites) [left=4.0 of benutzer] {Websites};
+			\node[entity] (rubriken) [right=4.0 of benutzer] {Rubriken};
+			\node[entity] (rubrikZuordnung) [below=9.0 of benutzer] {RubrikZuordnung};
+			\node (websitesBenutzer) [above=0.5 of websites, align=left] {EingestelltVon $\rightarrow$ \\ Benutzer.UID};
+			\node (benutzerWebsites) [below left=1.5 and 0.5 of benutzer, align=left] {Homepage $\rightarrow$ \\ Websites.WID};
+			\node (rubrikenBenutzer) [above left=0.4 and 0.2 of rubriken,align=left] {Verwalter $\rightarrow$ \\ Benutzer.UID};
+			\node (rubrikZuordnungWebsites) [above left=0.7 and 0.7 of rubrikZuordnung, align=left] {WID $\rightarrow$ \\ Websites.WID};
+			\node (rubrikZuordnungRubriken) [above right=0.7 and 1.5 of rubrikZuordnung, align=left] {RID $\rightarrow$ \\ Rubriken.RID};
+			\node (rubrikZuordnungBenutzer) [above right=4.0 and -1.6 of rubrikZuordnung, align=left] {ZugeordnetVon $\rightarrow$ \\ Benutzer.UID};
+			\path[->] (websites) edge[bend left] node [above, align=left] {ON DELETE \\ RESTRICT} (benutzer)
+			      (benutzer) edge[bend left] node [below, align=left] {ON DELETE \\ SET NULL} (websites)
+			      (rubriken) edge node [above, align=left] {ON DELETE \\ CASCADE} (benutzer)
+			      (rubrikZuordnung) edge[bend left] node [left=0.5, align=left] {ON DELETE \\ CASCADE} (websites)
+			      (rubrikZuordnung) edge[bend right] node [right=0.5, align=left] {ON DELETE \\ RESTRICT} (rubriken)
+			      (rubrikZuordnung) edge node [left, align=left] {ON DELETE \\ CASCADE} (benutzer);
+		\end{tikzpicture}
+	\subsection{} %c
+		Vorausgesetzt man hat einen Benutzer, der keine Website eingestellt hat, und möchte diesen löschen. Dieser Benutzer ist ein Verwalter einer Rubrik. Außerdem hat der Benutzer eine Website und eine Rubrik zugeordnet. Wenn der Benutzer gelöscht wird und anschließend die Rubrikzuordnung gelöscht wird, dann können die vom Benutzer verwalteten Rubriken einfach gelöscht werden. Werden hingegen zuerst die Rubriken gelöscht, dann scheitert der Vorgang am ON DELETE RESTRICT von Rubrikzuordnung zu Rubriken.
+		
+		Daher ist das Schema nicht sicher bezüglich referentieller Aktionen.
+	\subsection{} %d
+		Dieses Problem könnte durch das Ändern des ON DELETE RESTRICT zwischen Rubriken und Rubrikzuordnung zu ON DELETE CASCADE behoben werden.
+\section{Änderbarkeit von Sichten}
+	\subsection{} %a
+		\subsubsection{} %i
+			\begin{verbatim}
+			CREATE VIEW EnterpriseCrew AS
+			    SELECT BNr, Name, Rang
+			    FROM   Besatzungsmitglieder BM,
+			           Raumschiffe RS
+			    WHERE  BM.Schiff = RS.RNr
+			    AND    RS.Name = 'Enterprise';
+			\end{verbatim}
+			Die Sicht erlaubt Änderungsoperationen.
+		\subsubsection{} %ii
+			\begin{verbatim}
+			CREATE VIEW Captains AS
+			    SELECT Name
+			    FROM   Besatzungsmitglieder
+			    WHERE  Rang = 'Captain';
+			\end{verbatim}
+			Die Sicht erlaubt keine Änderungsoperationen, da der primäre Schlüssel nicht enthalten ist und damit Änderungen nicht eindeutig zugeordnet werden können.
+		\subsubsection{} %iii
+			\begin{verbatim}
+			CREATE VIEW WarpFed AS
+			    SELECT RNr, Fraktion, Baujahr
+			    FROM   Raumschiffe
+			    WHERE  Geschwindigkeit >= 1;
+			\end{verbatim}
+			Die Sicht erlaubt Änderungsoperationen.
+	\subsection{} %b
+		\subsubsection{} %i
+			Die SQL-Anweisung kann auf der Sichtdefinition Fö(r)derationsschiffe\footnote{Es heißt "`Vereinige Föderation der Planeten"'. Demnach ist hier das erste r obsolet.} durchgeführt werden. Die betroffenen Tupel bleiben auf jeden Fall in der Sicht Föderationsschiffe sichtbar.
+		\subsubsection{} %ii
+			Die SQL-Anweisung kann auf der Sichtdefinition GalaxyKlasse nicht durchgeführt werden. Dies liegt an der CHECK OPTION für Föderationsschiffe. Die Fraktion des einzufügenden Tupels ist Bajoraner, aber Föderationsschiffe erfordert Föderation, womit die Bedingung für diese Sicht nicht gegeben ist. Da GalaxyKlasse indirekt auf Föderationsschiffe aufbaut, wird die Änderungsoperation auch dort abgelehnt.
+		\subsubsection{} %iii
+			Die SQL-Anweisung kann auf der Sichtdefinition Forschungsschiffe durchgeführt werden. Die betroffenen Tupel bleiben auf jeden Fall in Föderationsschiffe, Forschungsschiffe und in GalaxyKlasse sichtbar.
+		\subsubsection{} %iv
+			Die SQL-Anweisung kann auf der Sichtdefinition NebulaKlasse nicht durchgeführt werden. Dies liegt an der CHECK OPTION für NebulaKlasse. Durch die Änderung würden alle betroffenen Tupel nicht mehr die Bedingung Baujahr > 2365 erfüllen, weswegen die Operation abgelehnt wird.
+		\subsubsection{} %v
+			Die SQL-Anweisung kann auf der Sichtdefinition GalaxyKlasse durchgeführt werden. Zwar erfüllt das einzufügende Tupel nicht die Bedingung von GalaxyKlasse (Geschwindigkeit = 9.8), aber GalaxyKlasse weist keine CHECK OPTION auf. Da das Tupel die Bedingung von Föderationsschiffe erfüllt, macht die dort definierte CHECK OPTION keine Probleme. Nach dem Einfügen ist das Tupel in Föderationsschiffe, Forschungsschiffe und NebulaKlasse sichtbar.
+\section{Serialisierbarkeit und Anomalien}
+	\subsection{} %a
+		S\ts{1}: A = 305, B = 195 \\
+		S\ts{2}: A = 195, B = 5 \\
+		S\ts{3}: A = 300, B = 5 \\
+		S\ts{4}: A = 190, B = 5 \\
+		S\ts{5}: A = 115, B = 5 \\
+		S\ts{6}: A = 300, B = 5
+	\subsection{} %b
+		S\ts{1}: Transaktion 2 kann A erst lesen, nachdem Transaktion 1 dort geschrieben hat. \\
+		S\ts{2}: Transaktion 1 kann erst A beschreiben, nachdem Transaktion 2 A beschrieben hat. \\
+		S\ts{3}: Transaktion 1 kann B erst lesen, nachdem Transaktion 2 B beschrieben hat. Transaktion 1 kann A erst lesen, nachdem Transaktion 2 A beschrieben hat. \\
+		S\ts{4}: Transaktion 1 kann B erst lesen, nachdem Transaktion 2 B beschrieben hat. Transaktion 2 kann A erst beschreiben, nachdem Transaktion 1 A gelesen hat. \\
+		S\ts{5}: Es existieren nur indirekte Abhängigkeiten. So kann Transaktion 2 B erst beschreiben, nachdem Transaktion 1 B gelesen hat. Außerdem kann Transaktion 2 erst A beschreiben, nachdem Transaktion 1 A beschrieben hat. \\
+		S\ts{6}: Es existieren nur indirekte Abhängigkeiten. So kann Transaktion 1 B erst lesen, nachdem Transaktion 2 B beschrieben hat. Außerdem kann Transaktion 1 A erst lesen, nachdem Transaktion 2 A beschrieben hat.
+	\subsection{} %c
+		S\ts{1}: Der Schedule ist seriell. \\
+		S\ts{2}: Der Schedule ist nicht serialisierbar, weil Transaktion 2 in A schreibt, nachdem Transaktion 1 aus A gelesen hat und bevor Transaktion 1 in A schreibt. Außerdem liest Transaktion 2 bevor Transaktion 1 in A schreibt. Somit erhält eine der beiden Leseoperationen einen anderen Wert, wenn entweder T\ts{1} vor T\ts{2} oder T\ts{2} vor T\ts{1} gilt. \\
+		S\ts{3}: Der Schedule ist serialisierbar zu T\ts{2} vor T\ts{1}.\\
+		S\ts{4}: Der Schedule ist nicht serialisierbar, da Transaktion 1 B liest, nachdem Transaktion 2 B beschrieben hat und Transaktion 2 A beschreibt, nachdem Transaktion 1 A gelesen hat. In jedem der beiden Fälle T\ts{1} vor T\ts{2} oder T\ts{2} vor T\ts{1} würde mindestens eine Leseoperation einen anderen Wert erhalten. \\
+		S\ts{5}: Der Schedule ist nicht serialisierbar, da Transaktion 1 A beschreibt, nachdem Transaktion 2 A beschrieben hat und Transaktion 2 B beschreibt, nachdem Transaktion 1 B gelesen hat. In jedem der beiden Fälle T\ts{1} vor T\ts{2} oder T\ts{2} vor T\ts{1} würde mindestens eine Leseoperation einen anderen Wert erhalten.\\
+		S\ts{6}: Der Schedule ist seriell.
+\section{Transaktionen}
+	\[S = w_{1}(x)r_{2}(y)r_{3}(z)w_{3}(y)r_{2}(z)w_{3}(z)w_{1}(z)r_{2}(y)c_{3}c_{1}c_{2}\]	
+	
+	\begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{1cm}|p{1cm}|p{1cm}|p{3cm}|}
+		\hline
+		Zeitschritt & T\ts{1} & T\ts{2} & T\ts{3} & x & y & z & Bemerkung\\
+		\hline
+		0 &  &  &  & NL & NL & NL & \\
+		\hline
+		1 & lock(x,X) &  &  & X\ts{1} & NL & NL & \\
+		\hline
+		2 & write(x) & lock(y,R) &  & X\ts{1} & R\ts{2} & NL & \\
+		\hline
+		3 &  & read(y) & lock(z,R) & X\ts{1} & R\ts{2} & R\ts{3} & \\
+		\hline
+		4 &  & & read(z) & X\ts{1} & R\ts{2} & R\ts{3} & \\
+		\hline
+		5 &  & lock(z,R) & lock(y,X) & X\ts{1} & R\ts{2} & R\ts{2,3} & T\ts{3} wartet auf Freigabe von y \\
+		\hline
+		6 &  & read(z) & & X\ts{1} & R\ts{2} & R\ts{2,3} &  \\
+		\hline
+		7 & lock(z,X) & & & X\ts{1} & R\ts{2} & R\ts{2,3} & T\ts{1} wartet auf Freigabe von z \\
+		\hline
+		8 & & read(y) & & X\ts{1} & R\ts{2} & R\ts{2,3} & \\
+		\hline
+		9 & & unlock(y) & & X\ts{1} & X\ts{3} & R\ts{2,3} & Benachrichtigung von T\ts{3}\\
+		\hline
+		10 & & unlock(z) & write(y) & X\ts{1} & X\ts{3} & R\ts{3} & \\
+		\hline
+		11 & & commit & lock(z,X) & X\ts{1} & X\ts{3} & X\ts{3} & \\
+		\hline
+		12 & & & write(z) & X\ts{1} & X\ts{3} & X\ts{3} & \\
+		\hline
+		13 & & & unlock(z) & X\ts{1} & X\ts{3} & X\ts{1} & Benachrichtigung von T\ts{1} \\
+		\hline
+		14 & write(z) & & unlock(y) & X\ts{1} & NL & X\ts{1} & \\
+		\hline
+		15 & unlock(x) & & commit & NL & NL & X\ts{1} & \\
+		\hline
+		16 & unlock(z) & & & NL & NL & NL & \\
+		\hline
+		17 & commit & & & NL & NL & NL & \\
+		\hline
+	\end{tabular}
+\end{document}
