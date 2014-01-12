@@ -188,23 +188,33 @@
 \section{Introduction}
 \label{sec:introduction}
 
-	% TODO: add more background about input (text only), where in the process
-	% of natural language these methods are, how the output representations can be used
+	%TODO add more background about input (text only), where in the process
+	% of natural language processing/understanding these methods are, how the output representations can be used
 	% What would be a complete and comprehensive scenario for one or both methods?
 
 	It's the dream of many Science-Fiction fans: A fully sentient AI. Let's ignore for a moment all the odds that are against it (morality, physics, etc.) and concentrate on one aspect that is mandatory for even much less ambitious dreams. Imagine a computer game in which you can talk natural language to the NPC counterparts so that they react appropriately to it. Well maybe that is still too ambitious. What about writing what you want to say? In that case the computer needs to understand what you are writing so that it can react to it.
 	
-	This process of understanding natural language contains multiple methods. The first one is the syntactic parsing, the second one the semantic analysis. Syntactic parsing relies on a grammar that describes the set of possible input, also called syntax. The syntax specifies what are allowed sentence structures and how these are built.
-	The semantic analysis relies on the semantics of a given input. That means what the given input means. An example: ``You run around the bush''. The semantic meaning of this sentence is that you are running around a bush. The pragmatics define what is the intended meaning of an input. In this example it's not that you run around the bush but actually that you take a long time to get to the point in a discussion. It's a so called idiom. This difference between semantic meaning, where just the sentence as it is written is considered, and pragmatic meaning, where the intended meaning is considered, generates ambiguity that is easy for humans to resolve but difficult for computers. But even the pragmatics in this example are ambiguous, because it depends on the context what it actually means. If two persons are walking around in a forest and one starts running around the bush, the sentence of this example, would have the semantic meaning as it's pragmatic meaning.
+	The input in this case is plain text, following the grammar of a natural language like English. Without loss of generality it is assumed that the input is syntactically correct and follows the grammar of the natural language. The computer therefore gets a certain amount of text that follows a specified grammar. The grammar of modern English is assumed for the scope of this paper. With this information available, the computer still knows nothing about the meaning of the text. You could ask for a hot chocolate or you could write nasty things, it won't make a difference at this point.
+	
+	In order to make the computer react properly to your input, it needs to understand and therefore process the input in the first place. This can be achieved by the usage of some methods for natural language understanding, a subtopic of natural language processing.\cite{Wikipedi2013} There are various methods in this area but this paper utilizes two of them. The first one is the syntactic parsing, the second one the semantic analysis. To understand how these methods work, you need to know the basic terminology of the subject matter. In the following paragraphs the terms syntax, semantics and pragmatics are explained with respect to the two mentioned methods.
+	
+	The first method syntactic parsing relies on a grammar that describes the set of possible input, also called syntax. The syntax specifies what are allowed sentence structures and how these are built.
+	
+	The semantic analysis relies on the semantics of a given input. That means what the given input means. An example: ``You run around the bush''. The semantic meaning of this sentence is that you are running around a bush. 
+	The pragmatics though define what is the intended meaning of an input. In this example it's not that you run around the bush but actually that you take a long time to get to the point in a discussion. It's a so called idiom. This difference between semantic meaning, where just the sentence as it is written is considered, and pragmatic meaning, where the intended meaning is considered, generates ambiguity that is easy for humans to resolve but difficult for computers. But even the pragmatics in this example are ambiguous, because it depends on the context what it actually means. If two persons are walking around in a forest and one starts running around the bush, the pragmatic meaning of the sentence in this example would be the previously mentioned semantic meaning.
 	
 	On top of that the semantic meaning itself isn't always clear either. Sometimes words have multiple meanings, so that even the semantic meaning can have different possible interpretations.
+	
+	The basic terminology should be clear by now. Whenever there are additional prerequisites to understand a method, these are explained in the section of that method.
+	
+	Before the actual evaluation of the starts, the usage of the result of both methods is shortly described. After both syntactic parsing and semantic analysis have been executed, in this order, you have a semantic representation of the input. This representation can be used  %TODO how can semantic representations be used
 	
 	In this paper both syntactic parsing and semantic analysis are presented. After the presentation of the methods, they are critically discussed to finally come to a conclusion.
 
 \section{Evaluation of methods}
 \label{sec:evalMethods}
 	
-	% TODO: add more detailed and concrete examples for each method
+	%TODO add more detailed and concrete examples for each method
 	
 	Syntactic parsing and semantic analysis offer each a broad range of approaches. In this paper the ``syntax-driven semantic analysis''\cite[p.~617]{Jurafsky2009} is evaluated. It's especially interesting because it utilizes the output of the syntactic parsing to analyze the meaning. Therefore the two methods can be lined up in chronological order. First comes the syntactic parsing and then the semantic analysis. The methods are presented here in the same order. 
 	
@@ -307,9 +317,11 @@
 \section{Critical discussion}
 \label{sec:critDiscussion}
 
-	% TODO: back up every claim (reference after first sentence)
+	%TODO back up every claim (reference after first sentence)
 
 	Now that both methods have been presented with one selected approach each, it is time to discuss them critically. The CYK algorithm solves many problems like ambiguity; at least to a certain degree. But it also is problematic, because of the restriction to CNF. While in theory every context-free grammar can be converted to CNF, in practice it poses ``some non-trivial problems''\cite[p.~475]{Jurafsky2009b}. One of this problems can be explored in conjunction with the second presented method (semantic analysis). ``[T]he conversion to CNF will complicate any syntax-driven approach to semantic analysis''\cite[p.~475]{Jurafsky2009b}. A solution to this problem is some kind of post-processing in which the trees are converted back to the original grammar.\cite{Jurafsky2009b} Another option is to use a more complex dynamic programming algorithm that accepts any kind of context-free grammar. Such an algorithm is the ``Earley Algorithm''\cite[p.~477]{Jurafsky2009b}.
+	
+	%TODO reference for "easy to compute final meaning representation with given table"	
 	
 	The syntax-driven semantic analysis, as it has been presented, is a powerful method that is easy to understand. But it has one essential problem. It relies upon an existing set of grammar rules with semantic attachments to them. In a real world example such a table would contain thousands of grammar rules. While it is relatively easy to compute the final meaning representation with such a given table, it is very hard to create the table in the first place. The difficulty to create this table is split into two main issues. The first one being that you must find a grammar specification that fits all your use cases. This problem applies for the syntactic parsing as well. The second issue is that one has to find out the semantic attachments to the grammar rules.
 	
@@ -334,7 +346,7 @@
 	
 	Looking into the future both methods require substantial improvements on the algorithm side to reach a point where understanding non-restricted natural languages becomes possible. But as it is right now it is not possible to create dialog systems that interact fully natural with humans. To make any kind of language interaction, the set of possible words and sentence structures must be restricted. But even if that is given (like in a flight check-in automaton), the computer has only a finite set of possible cases. The programmer can add tons of if-clauses or comparable statements to check for different cases but in the end it's all finite so that many of the user inputs must lead to the same output or no output at all. This fact has led to the current situation in which the most interaction with a computer happens via a restricted interface in which the user can only choose from a limited set of options (by clicking on a button, selecting an item of a list, etc.).
 	
-	% TODO: the following paragraph is highly speculative, change	
+	%TODO the following paragraph is highly speculative, change	
 	
 	In addition the ambiguity of natural language is a major issue. Going back to the example in the introduction, the syntax-driven semantic analysis	does only work properly if the semantic meaning of the input has no ambiguity. But even than the generated meaning representation does not represent the pragmatic meaning. A dialog system is therefore far from being reached, because every input of a human can have dozens of different meanings. The intended meaning can sometimes depend on a thought that this human had while typing the input. As the computer doesn't have the ability to read thoughts, it would be impossible for the computer to determine the intended meaning of the input.
 	
