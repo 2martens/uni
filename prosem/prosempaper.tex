@@ -188,18 +188,16 @@
 \section{Introduction}
 \label{sec:introduction}
 
-	%TODO add more background about input (text only), where in the process
-	% of natural language processing/understanding these methods are, how the output representations can be used
+	%TODO how the output representations can be used
 	% What would be a complete and comprehensive scenario for one or both methods?
 
 	It's the dream of many Science-Fiction fans: A fully sentient AI. Let's ignore for a moment all the odds that are against it (morality, physics, etc.) and concentrate on one aspect that is mandatory for even much less ambitious dreams. Imagine a computer game in which you can talk natural language to the NPC counterparts so that they react appropriately to it. Well maybe that is still too ambitious. What about writing what you want to say? In that case the computer needs to understand what you are writing so that it can react to it.
 	
 	The input in this case is plain text, following the grammar of a natural language like English. Without loss of generality it is assumed that the input is syntactically correct and follows the grammar of the natural language. The computer therefore gets a certain amount of text that follows a specified grammar. The grammar of modern English is assumed for the scope of this paper. With this information available, the computer still knows nothing about the meaning of the text. You could ask for a hot chocolate or you could write nasty things, it won't make a difference at this point.
 	
-	%TODO explain *why* we use these methods and why they are important
 	%TODO give examples for various other methods in the area
 	
-	In order to make the computer react properly to your input, it needs to understand and therefore process the input in the first place. This can be achieved by the usage of some methods for natural language understanding, a subtopic of natural language processing.\cite{Wikipedi2013} There are various methods in this area but this paper utilizes two of them. The first one is the syntactic parsing, the second one the semantic analysis. To understand how these methods work, you need to know the basic terminology of the subject matter. In the following paragraphs the terms syntax, semantics and pragmatics are explained with respect to the two mentioned methods.
+	In order to make the computer react properly to your input, it needs to understand and therefore process the input in the first place. This can be achieved by the usage of some methods for natural language understanding. For the scope of this paper ``natural language understanding'' contains all the methods used for understanding natural language. These include both methods to understand written natural language and methods used to understand spoken natural language. This paper looks closer at two of the methods used to understand written language. The first one is the syntactic parsing, the second one the semantic analysis. To understand how these methods work, you need to know the basic terminology of the subject matter. In the following paragraphs the terms syntax, semantics and pragmatics are explained with respect to the two mentioned methods.
 	
 	The first method syntactic parsing relies on a grammar that describes the set of possible input, also called syntax. The syntax specifies what are allowed sentence structures and how these are built.
 	
