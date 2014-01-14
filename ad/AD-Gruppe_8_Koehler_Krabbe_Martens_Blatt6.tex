@@ -99,7 +99,8 @@ Jim Martens (6420323)}
 		\caption{Relax}
 		\begin{algorithmic}[1]
 			\Procedure{Relax}{$u,v$}
-				\If{$w(u,v) > u.maxWeight$}
+				\State $maxWeight \gets max(u.maxWeight, w(u,v))$
+				\If{$maxWeight < v.maxWeight$}
 					\State $v.maxWeight \gets w(u,v)$
 					\State $v.\pi \gets u$
 				\EndIf
