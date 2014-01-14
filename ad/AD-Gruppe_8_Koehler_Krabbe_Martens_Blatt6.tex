@@ -138,6 +138,54 @@ Jim Martens (6420323)}
 	\end{algorithm}
 \section{} %3
 	\subsection{} %a
+		Es sei $B(k)$ die in der Aufgabenstellung formulierte Behauptung in Abhängigkeit von $k$.
+
+	    \textbf{Behauptung}\\ $B(k)$ gilt für alle $k \in \mathbb{N}_{\geq 0}$.
+
+	    \textbf{Induktionsanfang}\\ Zu Zeigen: Es gilt $B(0)$.
+
+	    $A^0$ ist die Einheitsmatrix $E$. Ein Eintrag in $E$ ist genau dann 1, wenn er auf der Hauptdiagonalen liegt, andernfalls ist er 0.
+	    Das bedeutet, dass es über 0 Kanten jeweils genau einen Pfad von einem Knoten $i$ zu einem Knoten $j$ gibt, wenn $i = j$ gilt. Bei 0 Kanten sind
+	    dies genau die Pfade, die in einem beliebigen Graphen möglich sind, da ein Weg zu einem anderen Knoten über mindestens eine Kante gehen würde.
+	    Die Matrix $A^0$ ist also korrekt und $B(0)$ gilt.
+
+	    \textbf{Induktionsschritt} Wir nehmen an, dass $B(k)$ gilt. Zu zeigen ist, dass daraus $B(k+1)$ folgt.
+
+	    Sei $X$ eine Matrix, die erfüllt, dass jeder Eintrag $X[i,j]$ die Anzahl der verschiedenen Pfade vom Knoten $i$ über $k+1$ Kanten zum Knoten $j$ repräsentiert.
+	    Nun ist zu zeigen, dass $X=A^{k+1}$ gilt.
+
+	    Wir betrachten nun einen beliebigen Eintrag $L[i,j]$. Um einen solchen Eintrag zu berechnen, summieren wir zunächst die Anzahlen aller Möglichkeiten,
+	    über $k$ Kanten vom Knoten $i$ zu einem beliebigen Knoten $h$ zu gelangen. Laut Induktionsannahme finden wir genau diese in der Matrix $A$,
+	    im Eintrag $A^k[i,h]$. Die Summe aller dieser Möglichkeiten ist wie folgt definiert:
+
+	    $$\sum_{h=1}^{n}{A^k[i,h]}$$
+
+	    Jetzt wollen wir eine Möglichkeit nur betrachten, wenn eine Kante $(h,j)$ existiert.
+	    Also betrachten wir nur noch die Möglichkeiten, über $k+1$ Kanten vom Knoten $i$ zum Knoten $j$ zu gelangen. Wir definieren das $n$-Tupel $Z$:
+
+	    $$ Z=(z_0, z_1, \cdots, z_n), z_h = \left\{
+	    \begin{array}{l}
+	        1: (h,j) \in G \\
+	        0: (h,j) \notin G
+	    \end{array}\right.$$
+
+	    Wir definieren nun die Einträge der Matrix $X$, in denen jeweils alle korrekten Möglichkeiten aufsummiert werden:
+
+	    $$\sum_{h=1}^{n}{A^k[i,h] \cdot z_h} $$
+
+	    Nun entspricht ein Eintrag der Adjazenzmatrix $A$ an der Stelle $A[h,j]$ laut ihrer Definition genau dem Eintrag $z_h$ in dem $j$ zugehörigen Tupel $Z$.
+	    Wir können also genauso schreiben:
+
+	    $$ \sum_{h=1}^{n}{A^k[i,h] \cdot A[h,j]}$$
+
+	    Dies ist nach der Definition der Matrixmultiplikation äquivalent mit:
+
+	    $$ X = A^k \cdot A = A^{k+1} $$
+
+	    Es wurde also gezeigt, dass $X = A^{k+1}$ gilt, und somit jede Matrix, die unsere Forderungen erfüllt, $A^{k+1}$ sein muss.
+	    Demnach gilt $B(k) \Rightarrow B(k+1)$.
+
+	    Damit ist die Induktion abgeschlossen und die Behauptung bewiesen.$\square$
 	\subsection{} %b
 	\subsection{} %c
 \section{} %4
@@ -149,6 +197,7 @@ Jim Martens (6420323)}
 
 		Ist $ W $ jedoch nicht optimal, ist $ c(W) $ natürlich größer. Somit gilt
 		$ c(W) \ge \frac{1}{|E|} \sum_{p \in W} l(p) $.
+	\newpage
 	\subsection{} %b
 		$ c(W) $ ist die größte Kantenlast unter Berücksichtigung aller Kanten in allen Pfaden in $N$. $ c(W^*) $ ist die größte Kantenlast
 		unter Berücksichtigung aller Kanten in allen kürzesten Pfaden in $N$. Dies bedeutet, dass $ c(W) $ die absolute Maximalkantenlast ist,
