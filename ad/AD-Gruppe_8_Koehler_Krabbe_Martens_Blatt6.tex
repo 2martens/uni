@@ -141,6 +141,16 @@ Jim Martens (6420323)}
 	\subsection{} %c
 \section{} %4
 	\subsection{} %a
+		Wäre die Last in $W$ aboslut gleich verteilt, hätte natürlich jede Kante die gleiche Last.
+		$ \sum_{p \in W} l(p) $ ist die Summe aller Pfadlängen, also die Anzahl aller verwendeten Kanten.
+		Diese Anzahl wird in einem optimierten Pfadsystem gleichmäßig verteilt, also ergibt sich
+		$ \frac{1}{|E|} \sum_{p \in W} l(p) $ als untere Grenze von $ c(W) $.
+
+		Ist $ W $ jedoch nicht optimal, ist $ c(W) $ natürlich größer. Somit gilt
+		$ c(W) \ge \frac{1}{|E|} \sum_{p \in W} l(p) $.
 	\subsection{} %b
+		$ c(W) $ ist die größte Kantenlast unter Berücksichtigung aller Kanten in allen Pfaden in $N$. $ c(W^*) $ ist die größte Kantenlast
+		unter Berücksichtigung aller Kanten in allen kürzesten Pfaden in $N$. Dies bedeutet, dass $ c(W) $ die absolute Maximalkantenlast ist,
+		während $ c(W) $ nicht unbedingt alle Kanten berücksichtigt, deswegen auch nicht unbedingt gleich $ c(W) $ ist.
 
 \end{document}
