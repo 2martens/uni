@@ -1,0 +1,138 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\usepackage{multirow}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+% some matrix magic
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jan Branitz (6326955), Jim Martens (6420323),\\
+Stephan Niendorf (6242417)}
+\title{Hausaufgaben zum 20. Januar}
+\maketitle
+\section{} %1
+	\subsection{} %a
+		\begin{tabular}{c|c|c|c|c|c|c|c|c}
+			& s & a & b & c & d & e & f & S\\
+			\hline
+			0 & \underline{0} & 6s & 5s & 2s & $\infty$ & $\infty$ & $\infty$ & $\{s\}$ \\
+			1 & \underline{0} & 6s & 4c & \underline{2}s & $\infty$ & 3c & 5c & $\{s,c\}$ \\
+			2 & \underline{0} & 5e & 4c & \underline{2}s & $\infty$ & \underline{3}c & 4e & $\{s,c,e\}$ \\
+			3 & \underline{0} & 5e & \underline{4}c & \underline{2}s & 8b & \underline{3}c & 4e & $\{s,c,e,b\}$ \\
+			4 & \underline{0} & 5e & \underline{4}c & \underline{2}s & 8b & \underline{3}c & \underline{4}e & $\{s,c,e,b,f\}$ \\
+			5 & \underline{0} & \underline{5}e & \underline{4}c & \underline{2}s & 7a & \underline{3}c & \underline{4}e & $\{s,c,e,b,f,a\}$ \\
+			6 & \underline{0} & \underline{5}e & \underline{4}c & \underline{2}s & \underline{7}a & \underline{3}c & \underline{4}e & $\{s,c,e,b,f,a,d\}$ \\
+		\end{tabular}
+		
+		\begin{tikzpicture}
+			\node (s) {s};
+			\node (a) [above right=of s] {a};
+			\node (b) [right=of s] {b};
+			\node (c) [below right=of s] {c};
+			\node (d) [right=of a] {d};
+			\node (e) [right=of b] {e};
+			\node (f) [right=of c] {f};
+			
+			\path[->,line width=1pt] (s) edge node [below] {2} (c)
+			(c) edge node [above] {1} (e)
+			(c) edge node [left] {2} (b)
+			(e) edge node [right] {1} (f)
+			(e) edge node [below] {2} (a)
+			(a) edge node [above] {2} (d);
+		\end{tikzpicture}
+	\subsection{} %b
+		Als Graph G sei folgender Graph angenommen.
+		
+		\begin{tikzpicture}
+			\node (s) {s};
+			\node (a) [above right=of s] {a};
+			\node (b) [below right=of s] {b};
+			\node (t) [below right=of a] {t};
+			\path[->,line width=1pt] (s) edge node [above left] {-1} (a)
+			(s) edge node [below] {1000} (t)
+			(s) edge node [below left] {-999} (b)
+			(a) edge node [above right] {2} (t)
+			(b) edge node [below right] {1500} (t);
+		\end{tikzpicture}
+		
+		Als Konstante C werde 999 angenommen. Dadurch ergibt sich dieser modifizierte Graph $G'$.
+		
+		\begin{tikzpicture}
+			\node (s) {s};
+			\node (a) [above right=of s] {a};
+			\node (b) [below right=of s] {b};
+			\node (t) [below right=of a] {t};
+			\path[->,line width=1pt] (s) edge node [above left] {998} (a)
+			(s) edge node [below] {1999} (t)
+			(s) edge node [below left] {0} (b)
+			(a) edge node [above right] {1001} (t)
+			(b) edge node [below right] {2499} (t);
+		\end{tikzpicture}
+		
+		Wendet man nun Dijkstra auf diesen modifizierten Graphen an, dann ergibt sich diese Tabelle.
+		
+		\begin{tabular}{c|c|c|c|c|c}
+			& s & a & b & t & S\\
+			\hline
+			0 & \underline{0} & 998s & 0s & 1999s & $\{s\}$ \\
+			1 & \underline{0} & 998s & \underline{0}s & 1999s & $\{s,b\}$ \\
+			2 & \underline{0} & \underline{998}s & \underline{0}s & 1999s & $\{s,b,a\}$ \\
+			3 & \underline{0} & \underline{998}s & \underline{0}s & \underline{1999}s & $\{s,b,a,t\}$
+		\end{tabular}
+		
+		Wie hier erkennbar ist, wird durch den Dijkstra-Algorithmus nach Addierung einer Konstante C ein falscher kürzester Pfad zurückgegeben, der im unveränderten Graphen G um 999 länger als der kürzeste Pfad ist.
+\section{} %2
+	\subsection{} %a
+		Reihenfolge bei Anwendung von Kruskal:
+		
+		\[
+			(a,e), (e,f), (b,e), (f,g), (g,h), (c,g), (d,g)
+		\]
+		
+		Es gibt unterschiedliche Möglichkeiten für die Reihenfolge, denn immer wenn es zwei Kanten mit gleichen Kantengewicht gibt, die beide keinen Kreis entstehen lassen, ist es egal welche genommen wird. Damit können auch unterschiedliche Bäume dabei entstehen.
+	\subsection{} %b
+		\subsubsection{} %i
+			Reihenfolge der Hinzunahme von Kanten:
+			
+			\[
+				(a,b), (b,c), (c,g), (g,d), (g,f), (g,h)
+			\]
+		\subsubsection{} %ii
+			Reihenfolge der Hinzunahme von Kanten:
+			
+			\[
+				(a,b), (f,g), (g,h), (d,g), (b,c), (c,g), (a,e)
+			\]
+		\subsubsection{} %iii
+			Reihenfolge der weggelassenen Kanten:
+			
+			\[
+				(a,f), (b,f), (b,g), (e,f), (d,h), (c,d)
+			\]
+\end{document}
