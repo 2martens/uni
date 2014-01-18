@@ -316,7 +316,23 @@
 		\[
 			\lambda x.\exists e\,Closed(e) \wedge ClosedThing(e,x)
 		\]
-		After combining the formulas of the verb and the noun phrase, the previously shown target representation\eqref{eq:tarRep} is the result.
+		After combining the formulas of the verb and the noun phrase, the previously shown target representation\eqref{eq:tarRep} is the result. This combination is a three step process:
+		\[
+			\lambda P.\lambda Q.\forall x\,P(x) \Rightarrow Q(x)(Restaurant)
+		\]
+		$P$ gets replaced by $Restaurant$:
+		\[
+			\lambda Q.\forall x\,Restaurant(x) \Rightarrow Q(x)(\lambda x.\exists e\,Closed(e) \wedge ClosedThing(e,x))
+		\]
+		$Q$ gets replaced by the verb formula:
+		\[
+			\forall x\,Restaurant(x) \Rightarrow \lambda x.\exists e\,Closed(e) \wedge ClosedThing(e,x)(x)
+		\]
+		$x$ gets replaced by $x$:
+		\[
+			\forall x\,Restaurant(x) \Rightarrow \exists e\,Closed(e) \wedge ClosedThing(e,x)
+		\]
+		After these steps we end up with the target representation, as announced earlier.
 		
 		This example is just one of many, but it shows how semantic meaning can be attached to syntactic components. Furthermore it should be clear now, how semantic analysis in a syntax-driven approach works.
 \section{Critical discussion}
@@ -336,7 +352,7 @@
 	
 	Syntax-driven semantic analysis on the other hand requires a decent amount of work to add semantic attachments to grammar rules. But once this has been done, it works very fast.
 	
-	Both methods require a unique work for one specific usage. This unique workload is the grammar creation for the parsing and the extension of the grammar with semantic attachments for the semantic analysis. The less restricted the usage environment, the more complex the initial workload becomes. The same is true for the recurring workload inside one specific usage.
+	Both methods require an initial workload for every usage domain. This unique workload is the grammar creation for the parsing and the extension of the grammar with semantic attachments for the semantic analysis. The less restricted the usage environment, the more complex the initial workload becomes. The same is true for the recurring workload for every actual usage inside one usage domain.
 	
 	Judging by the state-of-the-art of computer technology, parsing does still pose a significant challenge once the restricted field of programming languages is left. The semantic analysis as the second method in the chain has therefore even more problems to date. As the presented syntax-driven approach does only work with parse trees, a semantic analysis can only be undertaken once the syntactic parsing succeeds.
 	
