@@ -300,7 +300,7 @@
 			\forall x \,Restaurant(x) \Rightarrow \exists e \,Closed(e) \wedge ClosedThing(e,x)
 		\end{equation}
 		
-		The first step is to determine what the meaning representation of \textit{Every restaurant} should be. \textit{Every} is responsible for the $\forall$ quantifier and \textit{restaurant} specifies the category over which is quantified. This is called the ``restriction''\cite[p.~622]{Jurafsky2009} of the noun phrase. The meaning representation could be $\forall x\,Restaurant(x)$. It is a valid logical formula but it doesn't make much sense. ``It says that everything is a restaurant.''\cite[p.~622]{Jurafsky2009} ``Noun phrases like [this] are [usually] embedded in expressions that [say] something about the universally quantified variable. That is, we're probably trying to \textit{say something} about all restaurants. This notion is traditionally referred to as the \textit{NP}'s nuclear scope''\cite[p.~622]{Jurafsky2009}. In the given example, the nuclear scope is \textit{closed}. To represent this notion in the target representation, a dummy predicate $Q$ is added, which results in this expression:
+		The first step is to determine what the meaning representation of \textit{Every restaurant} should be. \textit{Every} is responsible for the $\forall$ quantifier and \textit{restaurant} specifies the category over which is quantified. This is called the ``restriction''\cite[p.~622]{Jurafsky2009} of the noun phrase. The meaning representation could be $\forall x\,Restaurant(x)$. It is a valid logical formula but it doesn't make much sense. ``It says that everything is a restaurant.''\cite[p.~622]{Jurafsky2009} But our goal is to say \textit{something} about all the restaurants. That something is that every restaurant closed. ``This notion is traditionally referred to as the [noun phrase's] nuclear scope''\cite[p.~622]{Jurafsky2009}. In our example the nuclear scope is \textit{closed}. To represent this in the target representation, a dummy predicate $Q$ is added, which results in this expression:
 		\[
 			\forall x\,Restaurant(x) \Rightarrow Q(x)
 		\]
@@ -312,7 +312,7 @@
 		\[
 			\lambda P.\lambda Q.\forall x\,P(x) \Rightarrow Q(x)
 		\]
-		What happened? The descriptor \textit{every} gets this last expression as semantic attachment. The noun \textit{restaurant} gets $\lambda x.Restaurant(x)$. When combined, the second expression is the result. The verb is still missing. Therefore the verb \textit{closed} gets the following expression.
+		What happened? $Restaurant$ was replaced with $P$ and $\lambda P$ was added to the beginning of the previous expression. The verb is still missing though. Therefore the verb \textit{closed} gets the following expression.
 		\[
 			\lambda x.\exists e\,Closed(e) \wedge ClosedThing(e,x)
 		\]
