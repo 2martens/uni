@@ -19,15 +19,76 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
            (if [pred x]
                x
                best))
-         0
+         #f
          xs)
   )
 
 ; 1.2
+(define (symmetrisch? r)
+  (every (λ (x)
+           (some (λ (y)
+                   (and (eq? (cdr y)
+                             (car x))
+                        (eq? (car y)
+                             (cdr x))))
+                 r))
+         r))
 
+(define (asymmetrisch? r)
+  (every (λ (x)
+           (let ((t1 (some (λ (y)
+                             (and (eq? (cdr y)
+                                       (car x))
+                                  (eq? (car y)
+                                       (cdr x)))
+                             ))))
+             r))))
+(not t1)))
+r))
 
+(define (reflexiv? r)
+  (every (λ (x)
+           (and (some (λ (y)
+                        (and (eq? (car y)
+                                  (car x))
+                             (eq? (cdr y)
+                                  (car x))))
+                      r)
+                (some (λ (y)
+                        (and (eq? (car y)
+                                  (cdr x))
+                             (eq? (cdr y)
+                                  (cdr x))))
+                      r)))
+         r))
 
+(define (transitiv? r)
+  (every (λ (x)
+           (let ((t1 (some (λ (y)
+                             (and (eq? (cdr x)
+                                       (car y))
+                                  (not (eq? (cdr x)
+                                            (cdr y)))))
+                           r)))
+             (if t1
+                 (some (λ (z)
+                         (and (eq? (car x)
+                                   (car z))
+                              (eq? (cdr t1)
+                                   (cdr z))))
+                       r)
+                 #t)))
+         r))
 
+(define (aequi? r)
+  (and (reflexiv? r)
+       (symmetrisch? r)
+       (transitiv? r)))
+
+(define (ord? r)
+  (and (reflexiv? r)
+       (not (symmetrisch? r))
+       (transitiv? r)))
 ; 2)
 
 ; 1.
