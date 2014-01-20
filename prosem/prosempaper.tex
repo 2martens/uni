@@ -218,9 +218,11 @@
 	
 	Syntactic parsing and semantic analysis offer each a broad range of approaches. In this paper the ``syntax-driven semantic analysis''\cite[p.~617]{Jurafsky2009} is evaluated. It's especially interesting because it utilizes the output of the syntactic parsing to analyze the meaning. Therefore the two methods can be lined up in chronological order. First comes the syntactic parsing and then the semantic analysis. The methods are presented here in the same order. 
 	
+	They will be explained with the help of an example. Let's take the sentence ``Star Citizen is an upcoming space simulator for the PC''. For every method the theory is introduced first and the practical application with the example comes after it.
+	
 	\subsection{Syntactic Parsing}
 	\label{subSec:syntacticParsing}
-		Syntactic Parsing is used to create parse trees. These can be used for grammar checks in a text editor: ``A sentence that cannot be parsed may have grammatical errors''\cite[p.~461]{Jurafsky2009b}. But they more likely ``serve as an important intermediate stage of representation for semantic analysis''\cite[p.~461]{Jurafsky2009b}. There are different algorithms available to create such trees. The CYK\footnote{named after inventors John Cocke, Daniel Younger and Tadeo Kasami} algorithm will be explained further. But before the CYK algorithm is explained, the reason for its existance is presented.
+		Syntactic Parsing is used to create parse trees. These can be used for grammar checks in a text editor: ``A sentence that cannot be parsed may have grammatical errors''\cite[p.~461]{Jurafsky2009b}. But they more likely ``serve as an important intermediate stage of representation for semantic analysis''\cite[p.~461]{Jurafsky2009b}. There are different algorithms available to create such trees. The CYK\footnote{named after inventors John Cocke, Daniel Younger and Tadeo Kasami\cite[p.~893]{Russel2010}} algorithm will be explained further. But before the CYK algorithm is explained, the reason for its existance is presented.
 		
 		\subsubsection*{Bottom-up and Top-down}
 		\label{subSubSec:bottomUpTopDown}
@@ -236,12 +238,21 @@
 		
 		CYK requires $\mathcal{O}(n^{2}m)$ space for the $P$ table (a table with probabilities), where ``$m$ is the number of nonterminal symbols in the grammar''\cite[p.~893]{Russel2010}, and uses $\mathcal{O}(n^{3}m)$ time. ``$m$ is constant for a particular grammar, [so it] is commonly described as $\mathcal{O}(n^{3})$''\cite[p.~893]{Russel2010}. But these values are of no value if there is no benchmark. How good is $\mathcal{O}(n^{3})$ in comparison? To give a better idea of the relations, here a small comparison to the ``Earley Algorithm''\cite[p.~477]{Jurafsky2009b}. The Earley algorithm performs better with all unambiguous grammars.\cite{Li} It has the same upper bound in time but in most cases it is quicker. Furthermore it has a space complexity of $\mathcal{O}(n)$ which is definitely better than CYK.\cite{Li} For ambiguous grammars though the Earley algorithm uses more space than CYK and the real space used is dependent on the length of the input.\cite{Li} In time complexity the CYK algorithm can only compete with Earley if ambiguous grammars are used.\cite{Li} But CYK is still of use for parsing of natural language, because natural language grammars are always ambiguous. Therefore there is no algorithm that is better than CYK for general context-free grammars.\cite{Russel2010}
 		
-		But how does CYK work? CYK doesn't examine all parse trees. It just examines the most probable one and computes the probability of that tree. All the other parse trees are present in the $P$ table and could be enumerated with a little work (in exponential time). But the strength and beauty of CYK is, that they don't have to be enumerated. CYK defines ``the complete state space defined by the `apply grammar rule' operator''\cite[p.~894]{Russel2010}. You can search just a part of this space with $A^{*}$ search.\cite{Russel2010} ``With the $A^{*}$ algorithm [...] the first parse found will be the most probable''\cite[p.~895]{Russel2010}.
+		But how does CYK work? CYK doesn't examine all parse trees. It just examines the most probable one and computes the probability of that tree. All the other parse trees are present in the $P$ table and could be enumerated with a little work (in exponential time). But the strength and beauty of CYK is, that they don't have to be enumerated. CYK defines ``the complete state space defined by the `apply grammar rule' operator''\cite[p.~894]{Russel2010}. You can search just a part of this space with $A^{*}$ search.\cite{Russel2010} ``With the $A^{*}$ algorithm [...] the first parse found will be the most probable''\cite[p.~895]{Russel2010}. The actual pseudo code can be found in figure 23.5 in Russel\cite[p.~894]{Russel2010}.
 		
 		\subsubsection*{Treebank}
 		\label{subSubSec:treebank}
 		
-		But these probabilities need to be learned from somewhere. This somewhere is usually a ``treebank''\cite[p.~895]{Russel2010}, which contains a corpus of correctly parsed sentences. The best known is the Penn Treebank\cite{Russel2010}, which ``consists of 3 million words which have been annotated with part of speech and parse-tree structure, using human labor assisted by some automated tools''\cite[p.~895]{Russel2010}. The probabilities are then computed by counting and smoothing in the given data.\cite{Russel2010} There are other ways to learn the probabilities that are more difficult. For more information refer to Russel\cite{Russel2010}.		
+		But these probabilities need to be learned from somewhere. This somewhere is usually a ``treebank''\cite[p.~895]{Russel2010}, which contains a corpus of correctly parsed sentences. The best known is the Penn Treebank\cite{Russel2010}, which ``consists of 3 million words which have been annotated with part of speech and parse-tree structure, using human labor assisted by some automated tools''\cite[p.~895]{Russel2010}. The probabilities are then computed by counting and smoothing in the given data.\cite{Russel2010} There are other ways to learn the probabilities that are more difficult. For more information refer to Russel\cite{Russel2010}.
+		
+		\subsubsection*{Application}
+		\label{subSubSec:application}
+		
+		Now it is time to use the CYK algorithm with our example. But before this can happen, the grammar has to be defined first. For our example we take a simplistic one that does only contain what is needed. As a base we will take the grammar $\epsilon_{0}$ from Russel[p.~891]\cite{Russel2010} in figure 23.2. 
+		
+		%TODO grammar table erstellen (probabilities from Penn Treebank)
+		
+		The CYK algorithm is given the words and the grammar and returns the table $P$ containing the probabilities for the whole sentence and it's subsequences.\cite{Russel2010}
 		
 	\subsection{Semantic Analysis}
 	\label{subSec:semanticAnalysis}
@@ -345,11 +356,11 @@
 	
 	Comparing the complexity of the two methods it shows a mirror-like image. For the parsing the creation of the grammar is comparatively easy. The presented CYK algorithm works with context-free grammars which are a very restricted set compared to natural languages. But even within these context-free grammars there are ambiguities inside the texts themselves. The creation of the parse trees is therefore more of a problem.
 	
-	Syntax-driven semantic analysis on the other hand requires a decent amount of work to add semantic attachments to grammar rules. But once this has been done, it works very fast.
+	Syntax-driven semantic analysis on the other hand requires a decent amount of work to add semantic attachments to grammar rules.\cite{Jurafsky2009} But once this has been done, it works very fast.
 	
 	Both methods require an initial workload for every usage domain. This unique workload is the grammar creation for the parsing and the extension of the grammar with semantic attachments for the semantic analysis. The less restricted the usage environment, the more complex the initial workload becomes. The same is true for the recurring workload for every actual usage inside one usage domain.
 	
-	Judging by the state-of-the-art of computer technology, parsing does still pose a significant challenge once the restricted field of programming languages is left. The semantic analysis as the second method in the chain has therefore even more problems to date. As the presented syntax-driven approach does only work with parse trees, a semantic analysis can only be undertaken once the syntactic parsing succeeds.
+	Judging by the state-of-the-art of computer technology, parsing does still pose a significant challenge once the restricted field of programming languages is left. The semantic analysis as the second method in the chain has therefore even more problems to date. As the presented syntax-driven approach does only work with syntactic representations\cite{Jurafsky2009}, a semantic analysis can only be undertaken once the syntactic parsing succeeds.
 	
 	The ambiguity remains one of the bigges issues for both methods. Especially the syntax-driven semantic analysis does only consider the semantic meaning alone. It's not it's fault as the analysis doesn't know the context. The presented approach looks at each sentence in a sandbox. The generated meaning representations are therefore only of limited use for a less restricted grammar.
 	
