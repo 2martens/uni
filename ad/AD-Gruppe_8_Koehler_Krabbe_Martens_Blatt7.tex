@@ -1,0 +1,94 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bytefield}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+%\usepackage{algorithmic}
+%\usepackage{minted}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{(\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+
+\begin{document}
+\author{Reinhard Köhler (6425686), Tronje Krabbe (6435002), \\
+Jim Martens (6420323)}
+\title{Hausaufgaben zum 22. Januar}
+\subtitle{Gruppe 8}
+\maketitle
+
+\section{} %1
+	\subsection{} %a
+	\subsection{} %b
+	\subsection{} %c
+	\subsection{} %d
+\section{} %2
+\setcounter{section}{6}
+\section{} %7
+	\setcounter{subsection}{4}
+	\subsection{} %e
+	\begin{tikzpicture}
+		\node (592) {6};
+		\node (301) [right=of 592] {3};
+		\node (297) [right=of 301] {4};
+		\node (170) [right=of 297] {2};
+		\node (92) [right=of 170] {1};
+		\node (87) [right=of 92] {5};
+		\node (86) [right=of 87] {0};
+		\node (79) [right=of 86] {8};
+		\node (69) [right=of 79] {9};
+		\node (68) [right=of 69] {7};
+		
+		\node[state] (137) [above right=1 and 0.3 of 69] {137};
+		\node[state] (165) [above right=1 and 0.3 of 86] {165};
+		\node[state] (179) [above right=1 and 0.3 of 92] {179};
+		\node[state] (302) [above right=of 165] {302};
+		\node[state] (349) [above left=of 179] {349};
+		\node[state] (598) [above right=1 and 0.3 of 301] {598};
+		\node[state] (651) [above right=2 and 3 of 349] {651};
+		\node[state] (1190) [above left=of 598] {1190};
+		\node[state] (1841) [above left=of 651] {1841};
+		
+		\path (69) edge (137)
+		      (68) edge (137)
+		      (86) edge (165)
+		      (79) edge (165)
+		      (92) edge (179)
+		      (87) edge (179)
+		      (165) edge (302)
+		      (137) edge (302)
+		      (170) edge (349)
+		      (179) edge (349)
+		      (301) edge (598)
+		      (297) edge (598)
+		      (592) edge (1190)
+		      (598) edge (1190)
+		      (349) edge (651)
+		      (302) edge (651)
+		      (1190) edge (1841)
+		      (651) edge (1841);
+	\end{tikzpicture}
+\end{document}
