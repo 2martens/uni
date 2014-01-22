@@ -223,7 +223,7 @@
 	
 	Syntactic parsing and semantic analysis offer each a broad range of approaches. In this paper the ``syntax-driven semantic analysis''\cite[p.~617]{Jurafsky2009} is evaluated. It's especially interesting because it utilizes the output of the syntactic parsing to analyze the meaning. Therefore the two methods can be lined up in chronological order. First comes the syntactic parsing and then the semantic analysis. The methods are presented here in the same order. 
 	
-	They will be explained with the help of an example. Let's take the sentence ``Roberts creates the best damn space simulator''. For every method the theory is introduced first and the practical application with the example comes after it.
+	They will be explained with the help of an example. Let's take the sentence ``The tree is very high''. For every method the theory is introduced first and the practical application with the example comes after it.
 	
 	\subsection{Syntactic Parsing}
 	\label{subSec:syntacticParsing}
@@ -231,45 +231,28 @@
 		
 		\begin{figure}
 			\begin{alignat*}{2}
-				Noun &\rightarrow && \text{simulator [0.10]} \;|\; \text{squadron [0.15]} \;|\; \text{immersion [0.20]} \;|\; ... \\
-				Verb &\rightarrow && \text{is [0.10]} \;|\; \text{create [0.10]} \;|\; \text{love [0.10]} \;|\; \text{suck [0.05]} \;|\; ... \\
-				Adjective &\rightarrow && \text{best [0.40]} \;|\; \text{successful [0.20]} \;|\; \text{crowdfunded [0.20]} \;|\; ... \\
-				Adverb &\rightarrow && \text{here [0.05]} \;|\; \text{ahead [0.05]} \;|\; \text{nearby [0.02]} \;|\; ... \\
-				Pronoun &\rightarrow && \text{me [0.10]} \;|\; \text{you [0.03]} \;|\; \text{I [0.10]} \;|\; \text{it [0.10]} \;|\; ... \\
-				RelPro & \rightarrow && \text{that [0.40]} \;|\; \text{which [0.15]} \;|\; \text{who [0.20]} \;|\; \text{whom [0.02]} \;|\; ... \\
-				Name &\rightarrow && \text{Star Citizen [0.50]} \;|\; \text{Roberts [0.20]} \;|\; \text{Rob [0.05]} \;|\; \text{Ben [0.05]} \;|\; ... \\
-				Article &\rightarrow && \text{the [0.40]} \;|\; \text{a [0.30]} \;|\; \text{an [0.10]} \;|\; \text{every [0.05]} \;|\; ... \\
-				Prep &\rightarrow && \text{to [0.20]} \;|\; \text{in [0.10]} \;|\; \text{on [0.05]} \;|\; \text{near [0.10]} \;|\; ... \\
-				Conj &\rightarrow && \text{and [0.50]} \;|\; \text{or [0.10]} \;|\; \text{but [0.20]} \;|\; \text{yet [0.02]} \;|\; ... \\
-				Digit &\rightarrow && 0 [0.10] \;|\; 1 [0.10] \;|\; 2 [0.20] \;|\; 3 [0.10] \;|\; 4 [0.20] \;|\; ...
+				Noun &\rightarrow && \text{tree [1.00]} \\
+				Verb &\rightarrow && \text{is [1.00]} \\
+				Adjective &\rightarrow && \text{high [0.50]} \;|\; \text{very [0.50]} \\
+				Article &\rightarrow && \text{the [1.00]} \\
 			\end{alignat*}
-			\caption{The lexicon for $\varepsilon_{0}$. The sum of the probabilities for each category is 1. $RelPro$ is short for relative pronoun. $Prep$ for preposition, and $Conj$ for conjunction.}
+			\caption{The lexicon for $\varepsilon_{0}$. The sum of the probabilities for each category is 1.}
 			\label{fig:lexicon}
 		\end{figure}
 		
 		\begin{figure}
 			\begin{alignat*}{3}
-				\varepsilon_{0}:& S \;&\rightarrow &\; NP\;\;VP \;&[1.00]&\; \text{I + love Star Citizen} \\
-				&NP \;&\rightarrow &\; Pronoun \;&[0.30]&\; \text{I} \\
-				& \;&|&\; Name \;&[0.10]&\; \text{Chris} \\
-				& \;&|&\; Noun \;&[0.10]&\; \text{simulator} \\
-				& \;&|&\; Article\;&[0.05]&\; \text{the}\\
-				& \;&|&\; NP\;NP \;&[0.25]&\; \text{the game}\\
-				& \;&|&\; NP\;AN \;&[0.05]&\; \text{the + best game}\\
-				& \;&|&\; NP\;PP \;&[0.10]&\; \text{the space + near the hangar}\\
-				& \;&|&\; NP\;RelClause \;&[0.05]&\; \text{the hangar + that feels good}\\
-				& AN \;&\rightarrow &\; Adjs\;NP\;&[1.00]&\; \text{best + game}\\	
-				& VP \;&\rightarrow &\; Verb \;&[0.40]&\; \text{loves} \\
-				& \;&|&\; VP\;NP \;&[0.35]&\; \text{love + the game} \\
-				& \;&|&\; VP\;Adjs \;&[0.05]&\; \text{feels + good} \\
-				& \;&|&\; VP\;PP \;&[0.10]&\; \text{is + in 4 2} \\
-				& Adjs \;&\rightarrow &\; Adjective \;&[0.80]&\; \text{best} \\
-				& \;&|&\; Adjs\;Adjs \;&[0.20]&\; \text{best + damn} \\
-				& PP \;&\rightarrow &\; Prep\;NP \;&[1.00]&\; \text{to + the space} \\
-				& RelClause \;&\rightarrow &\; RelPro\;VP \;&[1.00]&\; \text{that + is good}
+				\varepsilon_{0}:& S \;&\rightarrow &\; NP\;\;VP \;&[1.00]&\; \text{The tree + is very high} \\
+				& NP \;&\rightarrow &\; A\;N \;&[1.00]&\; \text{The + tree}\\
+				& A \;&\rightarrow &\; Article\;&[1.00]&\; \text{the}\\
+				& N \;&\rightarrow &\; Noun\;&[1.00]&\; \text{tree}\\
+				& VP \;&\rightarrow &\; Verb \;&[0.40]&\; \text{is} \\
+				& \;&|&\; VP\;Adjs \;&[0.60]&\; \text{is + very high} \\
+				& Adjs \;&\rightarrow &\; Adjective \;&[0.80]&\; \text{very} \\
+				& \;&|&\; Adjs\;Adjs \;&[0.20]&\; \text{very + high}
 			\end{alignat*}
 		
-			\caption{The grammar for $\varepsilon_{0}$ with example phrases for each rule. The syntactic categories are sentence (S), noun phrase (NP), verb phrase (VP), adjective noun (AN), list of adjectives (Adjs), prepositional phrase (PP) and relative clause (RelClause). The adjective noun category has been added to allow for a CNF grammar.}
+			\caption{The grammar for $\varepsilon_{0}$ with example phrases for each rule. The syntactic categories are sentence (S), noun phrase (NP), verb phrase (VP), article (A), noun (N) and list of adjectives (Adjs). The categories article and noun have been added to allow a CNF grammar.}
 			\label{fig:grammar}
 		\end{figure}
 		
@@ -297,7 +280,7 @@
 		\subsubsection*{Application}
 		\label{subSubSec:application}
 		
-		Now it is time to use the CYK algorithm with our example. For this case a restricted language called $\varepsilon_{0}$ is defined that is suitable for communication about Star Citizen. Next a lexicon (figure \ref{fig:lexicon}), ``or list of allowable words''\cite[p.~890]{Russel2010}, is defined. Furthermore a grammar (figure \ref{fig:grammar}) for $\varepsilon_{0}$ is defined. The lexicon and the grammar are based upon the lexicon and grammar in figures 23.1 and 23.2 of \cite{Russel2010} respectively.
+		Now it is time to use the CYK algorithm with our example. For this case a restricted language called $\varepsilon_{0}$ is defined that is suitable to form one sentence about a tree. Next a lexicon (figure \ref{fig:lexicon}), ``or list of allowable words''\cite[p.~890]{Russel2010}, is defined. Furthermore a grammar (figure \ref{fig:grammar}) for $\varepsilon_{0}$ is defined. The lexicon and the grammar are based upon the lexicon and grammar in figures 23.1 and 23.2 of \cite{Russel2010} respectively.
 		
 		The CYK algorithm is given the words and the grammar and returns the table $P$ containing the probabilities for the whole sentence and it's subsequences.\cite{Russel2010} The pseudo code can bee seen in algorithm \ref{alg:cyk}.
 		
@@ -306,8 +289,9 @@
 			\label{alg:cyk}
 			\begin{algorithmic}[1]
 				\Procedure{CYK-Parse}{$words, grammar$}
-					\State $N \gets \Call{Length}{Words}$\Comment{N = 7}
+					\State $N \gets \Call{Length}{Words}$\Comment{N = 5}
 					\State $M \gets$ the number of nonterminal symbols in $grammar$\Comment{M = 6}
+					\State $P \gets$ an array of size [M, N, N], initially all 0
 					\For{$i = 1$ to $N$}
 						\ForAll{rules of form ($X \rightarrow words_{i}[p]$)}
 							\State $P[X, i, 1] \gets p$
@@ -329,50 +313,42 @@
 			\end{algorithmic}
 		\end{algorithm}
 		
-		The resulting P table is depicted in table \ref{tab:p}.
+		The resulting P table is depicted in table \ref{tab:p}. As you can see in the table there is just one possible parse for the whole sentence. In linear form the sentence can be parsed as [$S$ [$NP$ [$A$ the] [$N$ tree]][$VP$ [$VP$ is][$Adjs$ [$Adjs$ very][$Adjs$ high]]]. With this information given a parse tree could be easily constructed.
 		
-		%TODO product of probabilities need to be checked
 		\begin{table}
-			\caption{Table of probabilities from the CYK parse.}
+			\caption{Table of probabilities from the CYK parse. The entries with probability 0 have been left out.}
 			\label{tab:p}
+			\centering
 			\begin{tabular}{|c|c|c|c|}
 				\hline
 				X & start & length & p \\
 				\hline
-				NP & 1 & 1 & 0.10 \\
+				A & 1 & 1 & 1.00 \\
 				\hline
-				VP & 2 & 1 & 0.40 \\
+				N & 2 & 1 & 1.00 \\
 				\hline				
-				NP & 3 & 1 & 0.05 \\
+				VP & 3 & 1 & 0.40 \\
 				\hline
 				Adjs & 4 & 1 & 0.80 \\
 				\hline
 				Adjs & 5 & 1 & 0.80 \\
 				\hline
-				NP & 6 & 1 & 0.10 \\
+				NP & 1 & 2 & 1.00 \\
 				\hline
-				NP & 7 & 1 & 0.10 \\
-				\hline
-				S & 1 & 2 & 0.036 \\
+				VP & 3 & 2 & 0.192 \\
 				\hline
 				Adjs & 4 & 2 & 0.128 \\
 				\hline
-				NP & 6 & 2 & 0.0025 \\
+				S & 1 & 3 & 0.40 \\
 				\hline
-				AN & 4 & 3 & 0.0128 \\
+				VP & 3 & 3 & 0.09216 \\
 				\hline
-				AN & 5 & 3 & 0.002 \\
+				S & 1 & 4 & 0.192 \\
 				\hline
-				NP & 3 & 4 & 0.000032 \\
-				\hline
-				VP & 2 & 5 & 0.00000448 \\
-				\hline
-				S & 1 & 6 & 0.000000448 \\
+				S & 1 & 5 & 0.09216 \\
 				\hline
 			\end{tabular}
 		\end{table}
-		
-		With the table given, we can now calculate the most probable parse for the sentence.
 	\subsection{Semantic Analysis}
 	\label{subSec:semanticAnalysis}
 	
