@@ -27,7 +27,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bind packages:
 \usepackage{acronym}                    % Acronyms
-\usepackage{algorithmic}								% Algorithms and Pseudocode
+%\usepackage{algorithmic}								% Algorithms and Pseudocode
+\usepackage{algpseudocode}
 \usepackage{algorithm}									% Algorithms and Pseudocode
 \usepackage{amsfonts}                   % AMS Math Packet (Fonts)
 \usepackage{amsmath}                    % AMS Math Packet
@@ -59,6 +60,10 @@
 %\usepackage[font=footnotesize,labelfont=rm]{subfig}	% Pictures in a floating environment
 \usepackage{tabularx}										% Tables with fixed width but variable rows
 \usepackage{url,xspace,boxedminipage}   % Accurate display of URLs
+
+\usepackage{float}
+\floatstyle{boxed}
+\restylefloat{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Configurationen:
@@ -203,9 +208,9 @@
 	
 	The basic terminology should be clear by now. Whenever there are additional prerequisites to understand a method, these are explained in the section of that method.
 	
-	Before the actual evaluation of the methods starts, the usage of the result of both methods is shortly described. After both syntactic parsing and semantic analysis have been executed, in this order, you have a semantic representation of the input. This representation can be used for example in a game. Actually there is one crowdfunded game in development that goes this very road and dialogue with NPCs happens via natural language. The player types in a question or a sentence in a text field. The input is then processed and the NPC answers more or less meaningful. A simple farm boy for example will more likely answer the same over and over again, whereas a guard for example will be able to give you more detailed information that allows you to continue in the story. While the exact internal processing is unknown, it can be assumed that some sort of parsing and semantic analysis will take place to allow for this to happen. The results so far look promising.\cite{Portalarium2013}
+	Before the actual evaluation of the methods starts, the usage of the result of both methods is shortly described. After both syntactic parsing and semantic analysis have been executed, in this order, you have a semantic representation of the input. This representation could be used for example for an interface to a knowledge database where the user just inserts the question and gets an appropriate answer.
 	
-	But there are other possible use cases as well. The two described methods could be used in a chatbot or a knowledge database that allows you to insert complete questions.
+	But there are other possible use cases as well. The two described methods could be used in a chatbot.
 	
 	%TODO how can semantic representations be used (add references)
 	
@@ -218,11 +223,55 @@
 	
 	Syntactic parsing and semantic analysis offer each a broad range of approaches. In this paper the ``syntax-driven semantic analysis''\cite[p.~617]{Jurafsky2009} is evaluated. It's especially interesting because it utilizes the output of the syntactic parsing to analyze the meaning. Therefore the two methods can be lined up in chronological order. First comes the syntactic parsing and then the semantic analysis. The methods are presented here in the same order. 
 	
-	They will be explained with the help of an example. Let's take the sentence ``Star Citizen is an upcoming space simulator for the PC''. For every method the theory is introduced first and the practical application with the example comes after it.
+	They will be explained with the help of an example. Let's take the sentence ``Roberts creates the best damn space simulator''. For every method the theory is introduced first and the practical application with the example comes after it.
 	
 	\subsection{Syntactic Parsing}
 	\label{subSec:syntacticParsing}
 		Syntactic Parsing is used to create parse trees. These can be used for grammar checks in a text editor: ``A sentence that cannot be parsed may have grammatical errors''\cite[p.~461]{Jurafsky2009b}. But they more likely ``serve as an important intermediate stage of representation for semantic analysis''\cite[p.~461]{Jurafsky2009b}. There are different algorithms available to create such trees. The CYK\footnote{named after inventors John Cocke, Daniel Younger and Tadeo Kasami\cite[p.~893]{Russel2010}} algorithm will be explained further. But before the CYK algorithm is explained, the reason for its existance is presented.
+		
+		\begin{figure}
+			\begin{alignat*}{2}
+				Noun &\rightarrow && \text{simulator [0.10]} \;|\; \text{squadron [0.15]} \;|\; \text{immersion [0.20]} \;|\; ... \\
+				Verb &\rightarrow && \text{is [0.10]} \;|\; \text{create [0.10]} \;|\; \text{love [0.10]} \;|\; \text{suck [0.05]} \;|\; ... \\
+				Adjective &\rightarrow && \text{best [0.40]} \;|\; \text{successful [0.20]} \;|\; \text{crowdfunded [0.20]} \;|\; ... \\
+				Adverb &\rightarrow && \text{here [0.05]} \;|\; \text{ahead [0.05]} \;|\; \text{nearby [0.02]} \;|\; ... \\
+				Pronoun &\rightarrow && \text{me [0.10]} \;|\; \text{you [0.03]} \;|\; \text{I [0.10]} \;|\; \text{it [0.10]} \;|\; ... \\
+				RelPro & \rightarrow && \text{that [0.40]} \;|\; \text{which [0.15]} \;|\; \text{who [0.20]} \;|\; \text{whom [0.02]} \;|\; ... \\
+				Name &\rightarrow && \text{Star Citizen [0.50]} \;|\; \text{Roberts [0.20]} \;|\; \text{Rob [0.05]} \;|\; \text{Ben [0.05]} \;|\; ... \\
+				Article &\rightarrow && \text{the [0.40]} \;|\; \text{a [0.30]} \;|\; \text{an [0.10]} \;|\; \text{every [0.05]} \;|\; ... \\
+				Prep &\rightarrow && \text{to [0.20]} \;|\; \text{in [0.10]} \;|\; \text{on [0.05]} \;|\; \text{near [0.10]} \;|\; ... \\
+				Conj &\rightarrow && \text{and [0.50]} \;|\; \text{or [0.10]} \;|\; \text{but [0.20]} \;|\; \text{yet [0.02]} \;|\; ... \\
+				Digit &\rightarrow && 0 [0.10] \;|\; 1 [0.10] \;|\; 2 [0.20] \;|\; 3 [0.10] \;|\; 4 [0.20] \;|\; ...
+			\end{alignat*}
+			\caption{The lexicon for $\varepsilon_{0}$. The sum of the probabilities for each category is 1. $RelPro$ is short for relative pronoun. $Prep$ for preposition, and $Conj$ for conjunction.}
+			\label{fig:lexicon}
+		\end{figure}
+		
+		\begin{figure}
+			\begin{alignat*}{3}
+				\varepsilon_{0}:& S \;&\rightarrow &\; NP\;\;VP \;&[1.00]&\; \text{I + love Star Citizen} \\
+				&NP \;&\rightarrow &\; Pronoun \;&[0.30]&\; \text{I} \\
+				& \;&|&\; Name \;&[0.10]&\; \text{Chris} \\
+				& \;&|&\; Noun \;&[0.10]&\; \text{simulator} \\
+				& \;&|&\; Article\;&[0.05]&\; \text{the}\\
+				& \;&|&\; NP\;NP \;&[0.25]&\; \text{the game}\\
+				& \;&|&\; NP\;AN \;&[0.05]&\; \text{the + best game}\\
+				& \;&|&\; NP\;PP \;&[0.10]&\; \text{the space + near the hangar}\\
+				& \;&|&\; NP\;RelClause \;&[0.05]&\; \text{the hangar + that feels good}\\
+				& AN \;&\rightarrow &\; Adjs\;NP\;&[1.00]&\; \text{best + game}\\	
+				& VP \;&\rightarrow &\; Verb \;&[0.40]&\; \text{loves} \\
+				& \;&|&\; VP\;NP \;&[0.35]&\; \text{love + the game} \\
+				& \;&|&\; VP\;Adjs \;&[0.05]&\; \text{feels + good} \\
+				& \;&|&\; VP\;PP \;&[0.10]&\; \text{is + in 4 2} \\
+				& Adjs \;&\rightarrow &\; Adjective \;&[0.80]&\; \text{best} \\
+				& \;&|&\; Adjs\;Adjs \;&[0.20]&\; \text{best + damn} \\
+				& PP \;&\rightarrow &\; Prep\;NP \;&[1.00]&\; \text{to + the space} \\
+				& RelClause \;&\rightarrow &\; RelPro\;VP \;&[1.00]&\; \text{that + is good}
+			\end{alignat*}
+		
+			\caption{The grammar for $\varepsilon_{0}$ with example phrases for each rule. The syntactic categories are sentence (S), noun phrase (NP), verb phrase (VP), adjective noun (AN), list of adjectives (Adjs), prepositional phrase (PP) and relative clause (RelClause). The adjective noun category has been added to allow for a CNF grammar.}
+			\label{fig:grammar}
+		\end{figure}
 		
 		\subsubsection*{Bottom-up and Top-down}
 		\label{subSubSec:bottomUpTopDown}
@@ -248,12 +297,82 @@
 		\subsubsection*{Application}
 		\label{subSubSec:application}
 		
-		Now it is time to use the CYK algorithm with our example. But before this can happen, the grammar has to be defined first. For our example we take a simplistic one that does only contain what is needed. As a base we will take the grammar $\epsilon_{0}$ from Russel[p.~891]\cite{Russel2010} in figure 23.2. 
+		Now it is time to use the CYK algorithm with our example. For this case a restricted language called $\varepsilon_{0}$ is defined that is suitable for communication about Star Citizen. Next a lexicon (figure \ref{fig:lexicon}), ``or list of allowable words''\cite[p.~890]{Russel2010}, is defined. Furthermore a grammar (figure \ref{fig:grammar}) for $\varepsilon_{0}$ is defined. The lexicon and the grammar are based upon the lexicon and grammar in figures 23.1 and 23.2 of \cite{Russel2010} respectively.
 		
-		%TODO grammar table erstellen (probabilities from Penn Treebank)
+		The CYK algorithm is given the words and the grammar and returns the table $P$ containing the probabilities for the whole sentence and it's subsequences.\cite{Russel2010} The pseudo code can bee seen in algorithm \ref{alg:cyk}.
 		
-		The CYK algorithm is given the words and the grammar and returns the table $P$ containing the probabilities for the whole sentence and it's subsequences.\cite{Russel2010}
+		\begin{algorithm}
+			\caption{Application of CYK for our problem}
+			\label{alg:cyk}
+			\begin{algorithmic}[1]
+				\Procedure{CYK-Parse}{$words, grammar$}
+					\State $N \gets \Call{Length}{Words}$\Comment{N = 7}
+					\State $M \gets$ the number of nonterminal symbols in $grammar$\Comment{M = 6}
+					\For{$i = 1$ to $N$}
+						\ForAll{rules of form ($X \rightarrow words_{i}[p]$)}
+							\State $P[X, i, 1] \gets p$
+						\EndFor
+					\EndFor
+					\For{$length = 2$ to $N$}
+						\For{$start = 1$ to $N - length + 1$}
+							\For{$len1 = 1$ to $N - 1$}
+								\State $len2 \gets length - len1$
+								\ForAll{rules of the form ($X \rightarrow$ $Y$ $Z$ [$p$])}
+									\State $P[X, start, length] \gets \Call{Max}{P[X, start, length], P[Y, start, len1] \times P[Z, start + len1, len2] \times p}$
+								
+								\EndFor
+							\EndFor
+						\EndFor
+					\EndFor
+					\State \Return $P$
+				\EndProcedure
+			\end{algorithmic}
+		\end{algorithm}
 		
+		The resulting P table is depicted in table \ref{tab:p}.
+		
+		%TODO product of probabilities need to be checked
+		\begin{table}
+			\caption{Table of probabilities from the CYK parse.}
+			\label{tab:p}
+			\begin{tabular}{|c|c|c|c|}
+				\hline
+				X & start & length & p \\
+				\hline
+				NP & 1 & 1 & 0.10 \\
+				\hline
+				VP & 2 & 1 & 0.40 \\
+				\hline				
+				NP & 3 & 1 & 0.05 \\
+				\hline
+				Adjs & 4 & 1 & 0.80 \\
+				\hline
+				Adjs & 5 & 1 & 0.80 \\
+				\hline
+				NP & 6 & 1 & 0.10 \\
+				\hline
+				NP & 7 & 1 & 0.10 \\
+				\hline
+				S & 1 & 2 & 0.036 \\
+				\hline
+				Adjs & 4 & 2 & 0.128 \\
+				\hline
+				NP & 6 & 2 & 0.0025 \\
+				\hline
+				AN & 4 & 3 & 0.0128 \\
+				\hline
+				AN & 5 & 3 & 0.002 \\
+				\hline
+				NP & 3 & 4 & 0.000032 \\
+				\hline
+				VP & 2 & 5 & 0.00000448 \\
+				\hline
+				S & 1 & 6 & 0.000000448 \\
+				\hline
+			\end{tabular}
+		\end{table}
+		
+		With the table given, we can now calculate the most probable parse for the sentence.
 	\subsection{Semantic Analysis}
 	\label{subSec:semanticAnalysis}
 	
