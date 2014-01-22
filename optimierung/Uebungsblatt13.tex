@@ -1,0 +1,75 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\usepackage{multirow}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+% some matrix magic
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jan Branitz (6326955), Jim Martens (6420323),\\
+Stephan Niendorf (6242417)}
+\title{Hausaufgaben zum 27. Januar}
+\maketitle
+
+\section{} %1
+	\begin{tabular}{|c||c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+		\hline
+		7 & 0 & 0 & 0 & 2 & 2 & 4 & 4 & 5 & 6 & 6 & 7 & 8 & 9 & 10 & 10 & 11 & 11 & 11 & 13 & \underline{13} \\
+		\hline
+		6 & 0 & 0 & 0 & 0 & 2 & 4 & 4 & 5 & 6 & 6 & 6 & 7 & 9 & 10 & 10 & 11 & 11 & 11 & 12 & \underline{13} \\
+		\hline
+		5 & 0 & 0 & 0 & 0 & 2 & 2 & 3 & 5 & 6 & 6 & 6 & 7 & 8 & 8 & 9 & 11 & 11 & 11 & 11 & \underline{13} \\
+		\hline
+		4 & 0 & 0 & 0 & 0 & 2 & 2 & 3 & 5 & 5 & 5 & 5 & \underline{7} & 7 & 8 & 8 & 8 & 8 & 9 & 11 & \underline{11} \\
+		\hline
+		3 & 0 & 0 & 0 & 0 & 2 & 2 & \underline{3} & 3 & 3 & 3 & 5 & \underline{6} & 6 & 6 & 6 & 8 & 8 & 9 & 9 & 9 \\
+		\hline
+		2 & 0 & 0 & 0 & 0 & 0 & 0 & \underline{3} & 3 & 3 & 3 & 3 & 6 & 6 & 6 & 6 & 6 & 6 & 9 & 9 & 9 \\
+		\hline
+		1 & 0 & 0 & 0 & 0 & 0 & 0 & \underline{3} & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3 \\
+		\hline
+		0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+		\hline
+		\hline
+		& 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 \\
+		\hline
+	\end{tabular}
+	
+	Der Rucksack ist mit den Items 1, 4 und 5 gefüllt.
+\section{} %2
+	\begin{tabular}{c|c|c|c|c|c}
+		& s & a & b & c & d \\
+		\hline
+		0 & 0 - & $\infty$ - & $\infty$ - & $\infty$ - & $\infty$ - \\
+		1 & 0 - & 6 s & 4 s & 2 b & 2 a \\
+		2 & 0 - & 6 s & 3 d & 1 b & 2 a \\
+		3 & 0 - & 6 s & 3 d & 1 b & 2 a \\
+		4 & 0 - & 6 s & 3 d & 1 b & 2 a
+	\end{tabular}
+\end{document}
