@@ -42,10 +42,68 @@ Jim Martens (6420323)}
 
 \section{} %1
 	\subsection{} %a
+		\[
+			(F, H), (E, G), (D, F), (C, E), (E, F), (I, J), (C, B), (B, A), (G, I)
+		\]
 	\subsection{} %b
+		\begin{tikzpicture}
+			\node (A) {$A^{1}$};
+			\node (B) [below=of A] {$B^{0}$};
+			\node (C) [above right=of A] {$C^{3}$};
+			\node (D) [below=of C] {$D^{0}$};
+			\node (E) [right=of D] {$E^{1}$};
+			\node (F) [below=of E] {$F^{0}$};
+			\node (G) [right=of E] {$G^{2}$};
+			\node (H) [below=of G] {$H^{0}$};
+			\node (I) [right=of H] {$I^{1}$};
+			\node (J) [below=of I] {$J^{0}$};
+			
+			\path[->,line width=1pt] 
+			    (B) edge (A)
+			    (D) edge (C)
+			    (F) edge (E)
+			    (H) edge (G)
+			    (J) edge (I)
+			    (E) edge (C)
+			    (I) edge (G)
+			    (A) edge (C)
+			    (G) edge (C);
+		\end{tikzpicture}
 	\subsection{} %c
+		\[
+			(A, B), (B, G), (E, G), (C, E), (E, F), (F, H), (D, F), (A, I), (I, J)
+		\]
 	\subsection{} %d
+		Beim Algorithmus von Prim wird zunächst eine for-Schleife über alle Knoten durchlaufen, welche damit die Laufzeit $\mathcal{O}(|V|)$ hat. Hinzu kommt eine while-Schleife über eine Queue mit initial $|V|$ Einträgen. Damit wird die while-Schleife genau $|V|$ mal durchlaufen, da in jedem Durchgang ein Eintrag entfernt wird. Die Operation deletemin hat eine Laufzeit von $\mathcal{O}(\log V)$, womit die Aufrufe von deletemin insgesamt $\mathcal{O}(V \cdot \log V)$ Zeit erfordern.
+		
+		Die for each Schleife wird \underline{insgesamt} $2|E|$ mal ausgeführt, was $\mathcal{O}(E)$ entspricht. Die decreasekey-Operation hat eine Laufzeit von $\mathcal{O}(\log V)$, womit sich insgesamt eine Laufzeit von $\mathcal{O}(V + V \cdot \log V + E \cdot \log V) = \mathcal{O}(E \cdot \log V)$ ergibt.		
+		
 \section{} %2
+	\begin{algorithmic}[1]
+		\Function{CanBeDivided}{s}
+			\State $l \gets \Call{Length}{s}$
+			\If{\Call{Dict}{s} = 1}
+				\State \Return 1
+			\ElsIf{$l$ = 0}
+				\State \Return 0
+			\Else
+				\State $Q \gets \Call{CreateQueue}$
+				\For{$i = 1 ... l-1$}
+					\If{\Call{Dict}{$s_{1}...s_{i}$} = 1}
+						\State $Q.enqueue(i+1)$
+					\EndIf
+				\EndFor
+				\State $result \gets 0$
+				\While{Q not empty}
+					\State $pos \gets Q.dequeue()$
+					\If{$!result$}
+						\State $result \gets \Call{CanBeDivided}{s_{pos}...s_{l}}$
+					\EndIf
+				\EndWhile
+				\State \Return $result$	
+			\EndIf
+		\EndFunction
+	\end{algorithmic}
 \setcounter{section}{6}
 \section{} %7
 	\setcounter{subsection}{4}
