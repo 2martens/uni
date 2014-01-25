@@ -212,14 +212,10 @@
 	
 	But there are other possible use cases as well. The two described methods could be used in a chatbot.
 	
-	%TODO how can semantic representations be used (add references)
-	
 	In this paper both syntactic parsing and semantic analysis are presented. After the presentation of the methods, they are critically discussed to finally come to a conclusion.
 
 \section{Evaluation of methods}
 \label{sec:evalMethods}
-	
-	%TODO add more detailed and concrete examples for each method
 	
 	Syntactic parsing and semantic analysis offer each a broad range of approaches. In this paper the ``syntax-driven semantic analysis''\cite[p.~617]{Jurafsky2009} is evaluated. It's especially interesting because it utilizes the output of the syntactic parsing to analyze the meaning. Therefore the two methods can be lined up in chronological order. First comes the syntactic parsing and then the semantic analysis. The methods are presented here in the same order. 
 	
@@ -249,7 +245,7 @@
 				& VP \;&\rightarrow &\; Verb \;&[0.40]&\; \text{is} \\
 				& \;&|&\; VP\;Adjs \;&[0.60]&\; \text{is + very high} \\
 				& Adjs \;&\rightarrow &\; Adjective \;&[0.80]&\; \text{very} \\
-				& \;&|&\; Adjs\;Adjs \;&[0.20]&\; \text{very + high}
+				& \;&|&\; Adj\;Adjs \;&[0.20]&\; \text{very + high}
 			\end{alignat*}
 		
 			\caption{The grammar for $\varepsilon_{0}$ with example phrases for each rule. The syntactic categories are sentence (S), noun phrase (NP), verb phrase (VP), article (A), noun (N) and list of adjectives (Adjs). The categories article and noun have been added to allow a CNF grammar.}
@@ -323,6 +319,7 @@
 				\hline
 				X & start & length & p \\
 				\hline
+				\hline
 				A & 1 & 1 & 1.00 \\
 				\hline
 				N & 2 & 1 & 1.00 \\
@@ -394,54 +391,85 @@
 		\subsubsection*{Syntax-driven semantic analysis}
 		\label{subSubSec:syntaxDrivenSemanticAnalysis}
 		
-		After the prerequisites are now explained, it is time to start with the actual syntax-driven semantic analysis. This first example is taken from Jurafsky and is used to show the process of creating the meaning representation. In the following expressions $x$ symbolizes a thing and $e$ symbolizes a state or attribute. Assume the sentence \textit{Every restaurant closed}. ``The target representation for this example should be the following''\cite[p.~621]{Jurafsky2009}.
+		After the prerequisites are now explained, it is time to start with the actual syntax-driven semantic analysis. It is shown with the previously introduced example and starts there, where the syntactic parsing left.
 		
-		\begin{equation}
-		\label{eq:tarRep}
-			\forall x \,Restaurant(x) \Rightarrow \exists e \,Closed(e) \wedge ClosedThing(e,x)
-		\end{equation}
+		The grammar rules have to be augmented with the semantic attachments. This process goes through all involed rules in a bottom-up way. To remind you of the sentence, here it is again: ``The tree is very high''. The first rule is the $A$ rule, which produces ``The''. The article implies that are is exactly one entity which is therefore easily identified. If there were multiple entities of the same type, ``the'' won't be enough to specify which entity is meant.
 		
-		The first step is to determine what the meaning representation of \textit{Every restaurant} should be. \textit{Every} is responsible for the $\forall$ quantifier and \textit{restaurant} specifies the category over which is quantified. This is called the ``restriction''\cite[p.~622]{Jurafsky2009} of the noun phrase. The meaning representation could be $\forall x\,Restaurant(x)$. It is a valid logical formula but it doesn't make much sense. ``It says that everything is a restaurant.''\cite[p.~622]{Jurafsky2009} But our goal is to say \textit{something} about all the restaurants. That something is that every restaurant closed. ``This notion is traditionally referred to as the [noun phrase's] nuclear scope''\cite[p.~622]{Jurafsky2009}. In our example the nuclear scope is \textit{closed}. To represent this in the target representation, a dummy predicate $Q$ is added, which results in this expression:
 		\[
-			\forall x\,Restaurant(x) \Rightarrow Q(x)
+			A \rightarrow the \;\{\lambda x.\lambda P.\exists x.P(x)\}
 		\]
-		To replace $Q$ with something meaningful, the $\lambda$ notation is needed.
-		\[
-			\lambda Q.\forall x\,Restaurant(x) \Rightarrow Q(x)
-		\] 
-		After more generalization, this is the result:
-		\[
-			\lambda P.\lambda Q.\forall x\,P(x) \Rightarrow Q(x)
-		\]
-		What happened? $Restaurant$ was replaced with $P$ and $\lambda P$ was added to the beginning of the previous expression. The verb is still missing though. Therefore the verb \textit{closed} gets the following expression.
-		\[
-			\lambda x.\exists e\,Closed(e) \wedge ClosedThing(e,x)
-		\]
-		After combining the formulas of the verb and the noun phrase, the previously shown target representation\eqref{eq:tarRep} is the result. This combination is a three step process:
-		\[
-			\lambda P.\lambda Q.\forall x\,P(x) \Rightarrow Q(x)(Restaurant)
-		\]
-		$P$ gets replaced by $Restaurant$:
-		\[
-			\lambda Q.\forall x\,Restaurant(x) \Rightarrow Q(x)(\lambda x.\exists e\,Closed(e) \wedge ClosedThing(e,x))
-		\]
-		$Q$ gets replaced by the verb formula:
-		\[
-			\forall x\,Restaurant(x) \Rightarrow \lambda x.\exists e\,Closed(e) \wedge ClosedThing(e,x)(x)
-		\]
-		$x$ gets replaced by $x$:
-		\[
-			\forall x\,Restaurant(x) \Rightarrow \exists e\,Closed(e) \wedge ClosedThing(e,x)
-		\]
-		After these steps we end up with the target representation, as announced earlier.
 		
-		\subsubsection*{Application}
-		\label{subSub:applicationSem}
+		The next rule is the one responsible for ``tree''.
 		
-		This first shows the process of retrieving the meaning representation. But before the meaning representation can be calculated, the semantic attachments have to be assigned. Therefore the previously introduced example that has already been used for the syntactic parsing, will now be used to show the whole process of semantic analysis, including finding the semantic attachments. 
+		\[
+			N \rightarrow tree \;\{\lambda x.Tree(x)\}
+		\]
 		
-		%TODO finish example for semantic analysis (including semantic attachments)
+		NP is the combination of the two previous rules and will therefore have to combine the meaning somehow. This is done by using the N semantic attachment as argument for the A attachment.
 		
+		\[
+			NP \rightarrow A\;N \;\{A.sem(N.sem)\}
+		\]
+		
+		Next are the Adjs rules. The first is the one that handles ``very''.
+		
+		\[
+			Adjs \rightarrow very \;\{\lambda x.Very(x)\}
+		\]
+		
+		It states that there is an adjective that is increased in meaning by ``very''. The rule for ``high'' gets augmented with an attachment that describes a thing that is high.
+		
+		\[
+			Adjs \rightarrow high \;\{\lambda x.HighThing(a, x)\}
+		\]
+		
+		Here the x stands for an entity that is high. Another Adjs rule brings these two together. To differentiate the semantic attachments of the previous two Adjs rules, the affected adjective is noted in square brackets.
+		
+		\[
+			Adjs \rightarrow Adjs\;Adjs \;\{\lambda x.\exists a.Adjs[very].sem(a) \wedge Adjs[high].sem(x) \}
+		\]
+		
+		The VP rules are next to be augmented. First comes the one that is responsible for ``is''. ``is'' implies that there is an entity with a state.
+		
+		\[
+			VP \rightarrow is \;\{\lambda P.\lambda Q.Q(x) \Rightarrow P(x)\}
+		\]
+		
+		In the next step the VP rule for ``is'' and the adjectives are combined. Here applies the same as for the Adjs case. As there are two VP rules, the ``is'' rule is identified by the verb in square brackes. As there are no square brackets after Adjs in the following attachment, the Adjs rule, that combines the adjective rules, is meant.
+		
+		\[
+			VP \rightarrow VP\;Adjs \;\{VP[is].sem(Adjs.sem)\}
+		\]
+		
+		Last comes the S rule that combines both NP and VP. VP means the rule that combines the ``is'' rule and the Adjs rules.
+		
+		\[
+			S \rightarrow NP\;\;VP \;\{VP.sem(NP.sem)\}
+		\]
+		
+		With the semantic attachments in place, the final meaning representation can easily be retrieved. The replacement happens from top to bottom, by starting with the semantic attachment from S and going down to the semantic attachments of the rules that produce the actual output. The critical part is the $\lambda$-reduction in the first VP rule. The intermediate steps are shown below.
+		
+		\begin{alignat*}{1}
+			\lambda P.\lambda Q.Q(x) \Rightarrow P(x)(\lambda x.\exists a.Adjs[very].sem(a) \wedge Adjs[high].sem(x)) \\
+			\lambda Q.Q(x) \Rightarrow \lambda x.\exists a.Adjs[very].sem(a) \wedge Adjs[high].sem(x)(x) \\
+			\lambda Q.Q(x) \Rightarrow \exists a.Adjs[very].sem(a) \wedge Adjs[high].sem(x) \\
+			\lambda Q.Q(x) \Rightarrow \exists a.\lambda x.Very(x)(a) \wedge Adjs[high].sem(x) \\
+			\lambda Q.Q(x) \Rightarrow \exists a.Very(a) \wedge \lambda x.HighThing(a, x)(x) \\
+			\lambda Q.Q(x) \Rightarrow \exists a.Very(a) \wedge HighThing(a, x) \\
+			\intertext{inserting the NP attachments}
+			\lambda Q.Q(x) \Rightarrow \exists a.Very(a) \wedge HighThing(a, x)(\lambda x.\lambda P.\exists x.P(x)) \\
+			\lambda x.\lambda P.\exists x.P(x)(x) \Rightarrow \exists a.Very(a) \wedge HighThing(a, x)(\lambda x.Tree(x)) \\
+			\exists x.\lambda x.Tree(x)(x) \Rightarrow \exists a.Very(a) \wedge HighThing(a, x) \\
+			\exists x.Tree(x) \Rightarrow \exists a.Very(a) \wedge HighThing(a, x)
+		\end{alignat*}
+		
+		The final meaning representation is therefore the following.
+		
+		\[
+			\exists x.Tree(x) \Rightarrow \exists a.Very(a) \wedge HighThing(a, x)
+		\]
+		
+		If you translate this logic into words, it'd be something similar to this: ``There is a tree that is a high thing, a very high thing''. This complete run-through from the syntactic parsing up to the meaning representation hopefully showed the two presented methods in action and let you understand them better. Furthermore this overarching example should have put you in the situation to follow a critical discussion, which is next in the paper.
 		
 \section{Critical discussion}
 \label{sec:critDiscussion}
