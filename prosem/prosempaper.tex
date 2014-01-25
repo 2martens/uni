@@ -27,7 +27,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bind packages:
 \usepackage{acronym}                    % Acronyms
-\usepackage{algorithmic}								% Algorithms and Pseudocode
+%\usepackage{algorithmic}								% Algorithms and Pseudocode
+\usepackage{algpseudocode}
 \usepackage{algorithm}									% Algorithms and Pseudocode
 \usepackage{amsfonts}                   % AMS Math Packet (Fonts)
 \usepackage{amsmath}                    % AMS Math Packet
@@ -59,6 +60,10 @@
 %\usepackage[font=footnotesize,labelfont=rm]{subfig}	% Pictures in a floating environment
 \usepackage{tabularx}										% Tables with fixed width but variable rows
 \usepackage{url,xspace,boxedminipage}   % Accurate display of URLs
+
+\usepackage{float}
+\floatstyle{boxed}
+\restylefloat{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Configurationen:
@@ -173,7 +178,7 @@
   Syntactic parsing and semantic analysis are two important methods for understanding natural language. Each of them has their individual strengths and weaknesses. But both of them have major issues with ambiguity once a restricted environment is left. Understanding unrestricted natural language is therefore far from being reached.
 
 % Lists:
-\setcounter{tocdepth}{2} 					% depth of the table of contents (for Seminars 2 is recommented)
+\setcounter{tocdepth}{2} 					% depth of the table of contents (for Seminars 2 is recommended)
 \tableofcontents
 \pagenumbering{arabic}
 \clearpage
@@ -190,31 +195,157 @@
 
 	It's the dream of many Science-Fiction fans: A fully sentient AI. Let's ignore for a moment all the odds that are against it (morality, physics, etc.) and concentrate on one aspect that is mandatory for even much less ambitious dreams. Imagine a computer game in which you can talk natural language to the NPC counterparts so that they react appropriately to it. Well maybe that is still too ambitious. What about writing what you want to say? In that case the computer needs to understand what you are writing so that it can react to it.
 	
-	This process of understanding natural language contains multiple methods. The first one is the syntactic parsing, the second one the semantic analysis. Syntactic parsing relies on a grammar that describes the set of possible input, also called syntax. The syntax specifies what are allowed sentence structures and how these are built.
-	The semantic analysis relies on the semantics of a given input. That means what the given input means. An example: ``You run around the bush''. The semantic meaning of this sentence is that you are running around a bush. The pragmatics define what is the intended meaning of an input. In this example it's not that you run around the bush but actually that you take a long time to get to the point in a discussion. It's a so called idiom. This difference between semantic meaning, where just the sentence as it is written is considered, and pragmatic meaning, where the intended meaning is considered, generates ambiguity that is easy for humans to resolve but difficult for computers. But even the pragmatics in this example are ambigious, because it depends on the context what it actually means. If two persons are walking around in a forest and one starts running around the bush, the sentence of this example, would have the semantic meaning as it's pragmatic meaning.
+	The input in this case is plain text, following the grammar of a natural language like English. Without loss of generality it is assumed that the input is syntactically correct and follows the grammar of the natural language. The computer therefore gets a certain amount of text that follows a specified grammar. The grammar of modern English is assumed for the scope of this paper. With this information available, the computer still knows nothing about the meaning of the text. You could ask for a hot chocolate or you could write nasty things, it won't make a difference at this point.
+	
+	In order to make the computer react properly to your input, it needs to understand and therefore process the input in the first place. This can be achieved by the usage of some methods for natural language understanding. For the scope of this paper ``natural language understanding'' contains all the methods used for understanding natural language. These include both methods to understand written natural language and methods used to understand spoken natural language. This paper looks closer at two of the methods used to understand written language. The first one is the syntactic parsing, the second one the semantic analysis. To understand how these methods work, you need to know the basic terminology of the subject matter. In the following paragraphs the terms syntax, semantics and pragmatics are explained with respect to the two mentioned methods.
+	
+	The first method syntactic parsing relies on a grammar that describes the set of possible input, also called syntax. The syntax specifies what are allowed sentence structures and how these are built.
+	
+	The semantic analysis relies on the semantics of a given input. That means what the given input means. An example: ``You run around the bush''. The semantic meaning of this sentence is that you are running around a bush. 
+	The pragmatics though define what is the intended meaning of an input. In this example it's not that you run around the bush but actually that you take a long time to get to the point in a discussion. It's a so called idiom. This difference between semantic meaning, where just the sentence as it is written is considered, and pragmatic meaning, where the intended meaning is considered, generates ambiguity that is easy for humans to resolve but difficult for computers. But even the pragmatics in this example are ambiguous, because it depends on the context what it actually means. If two persons are walking around in a forest and one starts running around the bush, the pragmatic meaning of the sentence in this example would be the previously mentioned semantic meaning.
 	
 	On top of that the semantic meaning itself isn't always clear either. Sometimes words have multiple meanings, so that even the semantic meaning can have different possible interpretations.
+	
+	The basic terminology should be clear by now. Whenever there are additional prerequisites to understand a method, these are explained in the section of that method.
+	
+	Before the actual evaluation of the methods starts, the usage of the result of both methods is shortly described. After both syntactic parsing and semantic analysis have been executed, in this order, you have a semantic representation of the input. This representation could be used for example for an interface to a knowledge database where the user just inserts the question and gets an appropriate answer.
+	
+	But there are other possible use cases as well. The two described methods could be used in a chatbot.
 	
 	In this paper both syntactic parsing and semantic analysis are presented. After the presentation of the methods, they are critically discussed to finally come to a conclusion.
 
 \section{Evaluation of methods}
 \label{sec:evalMethods}
+	
+	Syntactic parsing and semantic analysis offer each a broad range of approaches. In this paper the ``syntax-driven semantic analysis''\cite[p.~617]{Jurafsky2009} is evaluated. It's especially interesting because it utilizes the output of the syntactic parsing to analyze the meaning. Therefore the two methods can be lined up in chronological order. First comes the syntactic parsing and then the semantic analysis. The methods are presented here in the same order. 
+	
+	They will be explained with the help of an example. Let's take the sentence ``The tree is very high''. For every method the theory is introduced first and the practical application with the example comes after it.
+	
 	\subsection{Syntactic Parsing}
 	\label{subSec:syntacticParsing}
-		Syntactic Parsing is used to create parse trees. These can be used for grammar checks in a text editor: ``A sentence that cannot be parsed may have grammatical errors''\cite[p.~461]{Jurafsky2009b}. But they more likely ``serve as an important intermediate stage of representation for semantic analysis''\cite[p.~461]{Jurafsky2009b}. There are different algorithms available to create such trees. The CYK\footnote{named after inventors John Cocke, Daniel Younger and Tadeo Kasami} algorithm will be explained further. But before the CYK algorithm is explained, the reason for its existance is presented.
+		Syntactic Parsing is used to create parse trees. These can be used for grammar checks in a text editor: ``A sentence that cannot be parsed may have grammatical errors''\cite[p.~461]{Jurafsky2009b}. But they more likely ``serve as an important intermediate stage of representation for semantic analysis''\cite[p.~461]{Jurafsky2009b}. There are different algorithms available to create such trees. The CYK\footnote{named after inventors John Cocke, Daniel Younger and Tadeo Kasami\cite[p.~893]{Russel2010}} algorithm will be explained further. But before the CYK algorithm is explained, the reason for its existance is presented.
+		
+		\begin{figure}
+			\begin{alignat*}{2}
+				Noun &\rightarrow && \text{tree [1.00]} \\
+				Verb &\rightarrow && \text{is [1.00]} \\
+				Adjective &\rightarrow && \text{high [0.50]} \;|\; \text{very [0.50]} \\
+				Article &\rightarrow && \text{the [1.00]} \\
+			\end{alignat*}
+			\caption{The lexicon for $\varepsilon_{0}$. The sum of the probabilities for each category is 1.}
+			\label{fig:lexicon}
+		\end{figure}
+		
+		\begin{figure}
+			\begin{alignat*}{3}
+				\varepsilon_{0}:& S \;&\rightarrow &\; NP\;\;VP \;&[1.00]&\; \text{The tree + is very high} \\
+				& NP \;&\rightarrow &\; A\;N \;&[1.00]&\; \text{The + tree}\\
+				& A \;&\rightarrow &\; Article\;&[1.00]&\; \text{the}\\
+				& N \;&\rightarrow &\; Noun\;&[1.00]&\; \text{tree}\\
+				& VP \;&\rightarrow &\; Verb \;&[0.40]&\; \text{is} \\
+				& \;&|&\; VP\;Adjs \;&[0.60]&\; \text{is + very high} \\
+				& Adjs \;&\rightarrow &\; Adjective \;&[0.80]&\; \text{very} \\
+				& \;&|&\; Adj\;Adjs \;&[0.20]&\; \text{very + high}
+			\end{alignat*}
+		
+			\caption{The grammar for $\varepsilon_{0}$ with example phrases for each rule. The syntactic categories are sentence (S), noun phrase (NP), verb phrase (VP), article (A), noun (N) and list of adjectives (Adjs). The categories article and noun have been added to allow a CNF grammar.}
+			\label{fig:grammar}
+		\end{figure}
+		
+		\subsubsection*{Bottom-up and Top-down}
+		\label{subSubSec:bottomUpTopDown}
 		
 		There are two classical ways of parsing a sentence. The one is bottom-up and the other one is top-down. Both approaches have their own advantages and disadvantages. In addition the ambiguity creates problems. To implement bottom-up and top-down search algorithms in the face of ambiguity, ``an agenda-based backtracking strategy''\cite[p.~468]{Jurafsky2009b} is used. The problem here is that every time the parser recognizes that the current parse tree is wrong, it has to backtrack and explore other parts of the sentence. This creates a huge amount of work duplication and is therefore inefficient.
+		
+		\subsubsection*{CYK algorithm}
+		\label{subSubSec:cykAlgorithm}		
 		
 		A solution to these problems is offered by ``dynamic programming parsing methods''\cite[p.~469]{Jurafsky2009b}. The CYK algorithm is one of multiple algorithms based on dynamic programming.
 		
 		The CYK does only work with grammars in the Chomsky Normal Form (CNF). Every context-free grammar can be converted to CNF without loss in expressiveness. Therefore this restriction does no harm but simplifies the parsing. For information on how context-free grammars can be converted to CNF, refer to Jurafsky\cite{Jurafsky2009b}.
 		
-		CYK requires $\mathcal{O}(n^{2}m)$ space for the $P$ table (a table with probabilities), where ``$m$ is the number of nonterminal symbols in the grammar''\cite[p.~893]{Russel2010}, and uses $\mathcal{O}(n^{3}m)$ time. ``$m$ is constant for a particular grammar, [so it] is commonly described as $\mathcal{O}(n^{3})$''\cite[p.~893]{Russel2010}. There is no algorithm that is better than CYK for general context-free grammars\cite{Russel2010}. 
+		CYK requires $\mathcal{O}(n^{2}m)$ space for the $P$ table (a table with probabilities), where ``$m$ is the number of nonterminal symbols in the grammar''\cite[p.~893]{Russel2010}, and uses $\mathcal{O}(n^{3}m)$ time. ``$m$ is constant for a particular grammar, [so it] is commonly described as $\mathcal{O}(n^{3})$''\cite[p.~893]{Russel2010}. But these values are of no value if there is no benchmark. How good is $\mathcal{O}(n^{3})$ in comparison? To give a better idea of the relations, here a small comparison to the ``Earley Algorithm''\cite[p.~477]{Jurafsky2009b}. The Earley algorithm performs better with all unambiguous grammars.\cite{Li} It has the same upper bound in time but in most cases it is quicker. Furthermore it has a space complexity of $\mathcal{O}(n)$ which is definitely better than CYK.\cite{Li} For ambiguous grammars though the Earley algorithm uses more space than CYK and the real space used is dependent on the length of the input.\cite{Li} In time complexity the CYK algorithm can only compete with Earley if ambiguous grammars are used.\cite{Li} But CYK is still of use for parsing of natural language, because natural language grammars are always ambiguous. Therefore there is no algorithm that is better than CYK for general context-free grammars.\cite{Russel2010}
 		
-		But how does CYK work? CYK doesn't examine all parse trees. It just examines the most probable one and computes the probability of that tree. All the other parse trees are present in the $P$ table and could be enumerated with a little work (in exponential time). But the strength and beauty of CYK is, that they don't have to be enumerated. CYK defines ``the complete state space defined by the `apply grammar rule' operator''\cite[p.~894]{Russel2010}. You can search just a part of this space with $A^{*}$ search.\cite{Russel2010} ``With the $A^{*}$ algorithm [...] the first parse found will be the most probable''\cite[p.~895]{Russel2010}.
+		But how does CYK work? CYK doesn't examine all parse trees. It just examines the most probable one and computes the probability of that tree. All the other parse trees are present in the $P$ table and could be enumerated with a little work (in exponential time). But the strength and beauty of CYK is, that they don't have to be enumerated. CYK defines ``the complete state space defined by the `apply grammar rule' operator''\cite[p.~894]{Russel2010}. You can search just a part of this space with $A^{*}$ search.\cite{Russel2010} ``With the $A^{*}$ algorithm [...] the first parse found will be the most probable''\cite[p.~895]{Russel2010}. The actual pseudo code can be found in figure 23.5 in Russel\cite[p.~894]{Russel2010}.
 		
-		But these probabilities need to be learned from somewhere. This somewhere is usually a ``treebank''\cite[p.~895]{Russel2010}, which contains a corpus of correctly parsed sentences. The best known is the Penn Treebank\cite{Russel2010}, which ``consists of 3 million words which have been annotated with part of speech and parse-tree structure, using human labor assisted by some automated tools''\cite[p.~895]{Russel2010}. The probabilities are then computed by counting and smoothing in the given data.\cite{Russel2010} There are other ways to learn the probabilities that are more difficult. For more information refer to Russel\cite{Russel2010}.		
+		\subsubsection*{Treebank}
+		\label{subSubSec:treebank}
 		
+		But these probabilities need to be learned from somewhere. This somewhere is usually a ``treebank''\cite[p.~895]{Russel2010}, which contains a corpus of correctly parsed sentences. The best known is the Penn Treebank\cite{Russel2010}, which ``consists of 3 million words which have been annotated with part of speech and parse-tree structure, using human labor assisted by some automated tools''\cite[p.~895]{Russel2010}. The probabilities are then computed by counting and smoothing in the given data.\cite{Russel2010} There are other ways to learn the probabilities that are more difficult. For more information refer to Russel\cite{Russel2010}.
+		
+		\subsubsection*{Application}
+		\label{subSubSec:application}
+		
+		Now it is time to use the CYK algorithm with our example. For this case a restricted language called $\varepsilon_{0}$ is defined that is suitable to form one sentence about a tree. Next a lexicon (figure \ref{fig:lexicon}), ``or list of allowable words''\cite[p.~890]{Russel2010}, is defined. Furthermore a grammar (figure \ref{fig:grammar}) for $\varepsilon_{0}$ is defined. The lexicon and the grammar are based upon the lexicon and grammar in figures 23.1 and 23.2 of \cite{Russel2010} respectively.
+		
+		The CYK algorithm is given the words and the grammar and returns the table $P$ containing the probabilities for the whole sentence and it's subsequences.\cite{Russel2010} The pseudo code can bee seen in algorithm \ref{alg:cyk}.
+		
+		\begin{algorithm}
+			\caption{Application of CYK for our problem}
+			\label{alg:cyk}
+			\begin{algorithmic}[1]
+				\Procedure{CYK-Parse}{$words, grammar$}
+					\State $N \gets \Call{Length}{Words}$\Comment{N = 5}
+					\State $M \gets$ the number of nonterminal symbols in $grammar$\Comment{M = 6}
+					\State $P \gets$ an array of size [M, N, N], initially all 0
+					\For{$i = 1$ to $N$}
+						\ForAll{rules of form ($X \rightarrow words_{i}[p]$)}
+							\State $P[X, i, 1] \gets p$
+						\EndFor
+					\EndFor
+					\For{$length = 2$ to $N$}
+						\For{$start = 1$ to $N - length + 1$}
+							\For{$len1 = 1$ to $N - 1$}
+								\State $len2 \gets length - len1$
+								\ForAll{rules of the form ($X \rightarrow$ $Y$ $Z$ [$p$])}
+									\State $P[X, start, length] \gets \Call{Max}{P[X, start, length], P[Y, start, len1] \times P[Z, start + len1, len2] \times p}$
+								
+								\EndFor
+							\EndFor
+						\EndFor
+					\EndFor
+					\State \Return $P$
+				\EndProcedure
+			\end{algorithmic}
+		\end{algorithm}
+		
+		The resulting P table is depicted in table \ref{tab:p}. As you can see in the table there is just one possible parse for the whole sentence. In linear form the sentence can be parsed as [$S$ [$NP$ [$A$ the] [$N$ tree]][$VP$ [$VP$ is][$Adjs$ [$Adjs$ very][$Adjs$ high]]]. With this information given a parse tree could be easily constructed.
+		
+		\begin{table}
+			\caption{Table of probabilities from the CYK parse. The entries with probability 0 have been left out.}
+			\label{tab:p}
+			\centering
+			\begin{tabular}{|c|c|c|c|}
+				\hline
+				X & start & length & p \\
+				\hline
+				\hline
+				A & 1 & 1 & 1.00 \\
+				\hline
+				N & 2 & 1 & 1.00 \\
+				\hline				
+				VP & 3 & 1 & 0.40 \\
+				\hline
+				Adjs & 4 & 1 & 0.80 \\
+				\hline
+				Adjs & 5 & 1 & 0.80 \\
+				\hline
+				NP & 1 & 2 & 1.00 \\
+				\hline
+				VP & 3 & 2 & 0.192 \\
+				\hline
+				Adjs & 4 & 2 & 0.128 \\
+				\hline
+				S & 1 & 3 & 0.40 \\
+				\hline
+				VP & 3 & 3 & 0.09216 \\
+				\hline
+				S & 1 & 4 & 0.192 \\
+				\hline
+				S & 1 & 5 & 0.09216 \\
+				\hline
+			\end{tabular}
+		\end{table}
 	\subsection{Semantic Analysis}
 	\label{subSec:semanticAnalysis}
 	
@@ -222,8 +353,14 @@
 
 		Therefore context-free grammar rules are augmented with ``semantic attachments''\cite[p.~618]{Jurafsky2009}. Every word and syntactic structure in a sentence gets such a semantic attachment. The tree with syntactic components is now traversed in a bottom-up manner. On the way the semantic attachments are combined to finally produce ``First-Order Logic''\cite[p.~589]{Jurafsky2009a} that can be interpreted in a meaningful way. This procedure has some prerequisites that will be explained first.
 		
+		\subsubsection*{First-Order Logic}
+		\label{subSubSec:firstOrderLogic}
+		
 		The mentioned \textit{First-Order Logic} can be represented by a context-free grammar specification. It is beyond this paper to describe this specification completely. Jurafsky\cite{Jurafsky2009a} provides a detailed picture of the specification with all elements in figure 17.3. The most important aspects of this specification are explained here. The logic provides terms which can be functions, constants and variables. Functions have a term as argument. Syntactically they are the same as single-argument predicates. But functions represent one unique object.
 		Predicates can have multiple terms as arguments. In addition the logic provides quantifiers ($\forall, \exists$) and connectives ($\wedge, \vee, \Rightarrow$).
+		
+		\subsubsection*{Lambda notation}
+		\label{subSubSec:lambdaNotation}
 		
 		Another prerequisite is the ``lambda notation''\cite[p.~593]{Jurafsky2009a}. A simple example of this notation is an expression of the following form\footnote{examples taken from Jurafsky\cite[pp.~593-594]{Jurafsky2009a}}:		
 		\[
@@ -237,7 +374,7 @@
 			&P(A)&
 		\end{alignat*}
 		
-		Those expressions can be extended to $n$ such $\lambda$s. An example is this expression:
+		Those expressions can be extended to $n$ such $\lambda$s. An example is this expression (where $x$ and $y$ denote things from which a distance to each other can be calculated):
 		\[
 			\lambda x.\lambda y.Near(x,y)
 		\]
@@ -251,61 +388,122 @@
 				
 		This technique is called ``currying''\cite[p.~594]{Jurafsky2009a} and is used to convert ``a predicate with multiple arguments into a sequence of single-argument predicates''\cite[p.~594]{Jurafsky2009a}.
 		
-		After the prerequisites are now explained, it is time to start with the actual syntax-driven semantic analysis. It will be shown with an example provided by Jurafsky. Assume the sentence \textit{Every restaurant closed}. ``The target representation for this example should be the following''\cite[p.~621]{Jurafsky2009}.
+		\subsubsection*{Syntax-driven semantic analysis}
+		\label{subSubSec:syntaxDrivenSemanticAnalysis}
 		
-		\begin{equation}
-		\label{eq:tarRep}
-			\forall x \,Restaurant(x) \Rightarrow \exists e \,Closed(e) \wedge ClosedThing(e,x)
-		\end{equation}
+		After the prerequisites are now explained, it is time to start with the actual syntax-driven semantic analysis. It is shown with the previously introduced example and starts there, where the syntactic parsing left.
 		
-		The first step is to determine what the meaning representation of \textit{Every restaurant} should be. \textit{Every} is responsible for the $\forall$ quantifier and \textit{restaurant} specifies the category over which is quantified. This is called the ``restriction''\cite[p.~622]{Jurafsky2009} of the noun phrase. The meaning representation could be $\forall x\,Restaurant(x)$. It is a valid logical formula but it doesn't make much sense. ``It says that everything is a restaurant.''\cite[p.~622]{Jurafsky2009} ``Noun phrases like [this] are [usually] embedded in expressions that [say] something about the universally quantified variable. That is, we're probably trying to \textit{say something} about all restaurants. This notion is traditionally referred to as the \textit{NP}'s nuclear scope''\cite[p.~622]{Jurafsky2009}. In the given example, the nuclear scope is \textit{closed}. To represent this notion in the target representation, a dummy predicate $Q$ is added, which results in this expression:
-		\[
-			\forall x\,Restaurant(x) \Rightarrow Q(x)
-		\]
-		To replace $Q$ with something meaningful, the $\lambda$ notation is needed.
-		\[
-			\lambda Q.\forall x\,Restaurant(x) \Rightarrow Q(x)
-		\] 
-		After more generalization, this is the result:
-		\[
-			\lambda P.\lambda Q.\forall x\,P(x) \Rightarrow Q(x)
-		\]
-		What happened? The descriptor \textit{every} gets this last expression as semantic attachment. The noun \textit{restaurant} gets $\lambda x.Restaurant(x)$. When combined, the second expression is the result. The verb is still missing. Therefore the verb \textit{closed} gets the following expression.
-		\[
-			\lambda x.\exists e\,Closed(e) \wedge ClosedThing(e,x)
-		\]
-		After combining the formulas of the verb and the noun phrase, the previously shown target representation\eqref{eq:tarRep} is the result.
+		The grammar rules have to be augmented with the semantic attachments. This process goes through all involed rules in a bottom-up way. To remind you of the sentence, here it is again: ``The tree is very high''. The first rule is the $A$ rule, which produces ``The''. The article implies that are is exactly one entity which is therefore easily identified. If there were multiple entities of the same type, ``the'' won't be enough to specify which entity is meant.
 		
-		This example is just one of many, but it shows how semantic meaning can be attached to syntactic components. Furthermore it should be clear now, how semantic analysis in a syntax-driven approach works.
+		\[
+			A \rightarrow the \;\{\lambda x.\lambda P.\exists x.P(x)\}
+		\]
+		
+		The next rule is the one responsible for ``tree''.
+		
+		\[
+			N \rightarrow tree \;\{\lambda x.Tree(x)\}
+		\]
+		
+		NP is the combination of the two previous rules and will therefore have to combine the meaning somehow. This is done by using the N semantic attachment as argument for the A attachment.
+		
+		\[
+			NP \rightarrow A\;N \;\{A.sem(N.sem)\}
+		\]
+		
+		Next are the Adjs rules. The first is the one that handles ``very''.
+		
+		\[
+			Adjs \rightarrow very \;\{\lambda x.Very(x)\}
+		\]
+		
+		It states that there is an adjective that is increased in meaning by ``very''. The rule for ``high'' gets augmented with an attachment that describes a thing that is high.
+		
+		\[
+			Adjs \rightarrow high \;\{\lambda x.HighThing(a, x)\}
+		\]
+		
+		Here the x stands for an entity that is high. Another Adjs rule brings these two together. To differentiate the semantic attachments of the previous two Adjs rules, the affected adjective is noted in square brackets.
+		
+		\[
+			Adjs \rightarrow Adjs\;Adjs \;\{\lambda x.\exists a.Adjs[very].sem(a) \wedge Adjs[high].sem(x) \}
+		\]
+		
+		The VP rules are next to be augmented. First comes the one that is responsible for ``is''. ``is'' implies that there is an entity with a state.
+		
+		\[
+			VP \rightarrow is \;\{\lambda P.\lambda Q.Q(x) \Rightarrow P(x)\}
+		\]
+		
+		In the next step the VP rule for ``is'' and the adjectives are combined. Here applies the same as for the Adjs case. As there are two VP rules, the ``is'' rule is identified by the verb in square brackes. As there are no square brackets after Adjs in the following attachment, the Adjs rule, that combines the adjective rules, is meant.
+		
+		\[
+			VP \rightarrow VP\;Adjs \;\{VP[is].sem(Adjs.sem)\}
+		\]
+		
+		Last comes the S rule that combines both NP and VP. VP means the rule that combines the ``is'' rule and the Adjs rules.
+		
+		\[
+			S \rightarrow NP\;\;VP \;\{VP.sem(NP.sem)\}
+		\]
+		
+		With the semantic attachments in place, the final meaning representation can easily be retrieved. The replacement happens from top to bottom, by starting with the semantic attachment from S and going down to the semantic attachments of the rules that produce the actual output. The critical part is the $\lambda$-reduction in the first VP rule. The intermediate steps are shown below.
+		
+		\begin{alignat*}{1}
+			\lambda P.\lambda Q.Q(x) \Rightarrow P(x)(\lambda x.\exists a.Adjs[very].sem(a) \wedge Adjs[high].sem(x)) \\
+			\lambda Q.Q(x) \Rightarrow \lambda x.\exists a.Adjs[very].sem(a) \wedge Adjs[high].sem(x)(x) \\
+			\lambda Q.Q(x) \Rightarrow \exists a.Adjs[very].sem(a) \wedge Adjs[high].sem(x) \\
+			\lambda Q.Q(x) \Rightarrow \exists a.\lambda x.Very(x)(a) \wedge Adjs[high].sem(x) \\
+			\lambda Q.Q(x) \Rightarrow \exists a.Very(a) \wedge \lambda x.HighThing(a, x)(x) \\
+			\lambda Q.Q(x) \Rightarrow \exists a.Very(a) \wedge HighThing(a, x) \\
+			\intertext{inserting the NP attachments}
+			\lambda Q.Q(x) \Rightarrow \exists a.Very(a) \wedge HighThing(a, x)(\lambda x.\lambda P.\exists x.P(x)) \\
+			\lambda x.\lambda P.\exists x.P(x)(x) \Rightarrow \exists a.Very(a) \wedge HighThing(a, x)(\lambda x.Tree(x)) \\
+			\exists x.\lambda x.Tree(x)(x) \Rightarrow \exists a.Very(a) \wedge HighThing(a, x) \\
+			\exists x.Tree(x) \Rightarrow \exists a.Very(a) \wedge HighThing(a, x)
+		\end{alignat*}
+		
+		The final meaning representation is therefore the following.
+		
+		\[
+			\exists x.Tree(x) \Rightarrow \exists a.Very(a) \wedge HighThing(a, x)
+		\]
+		
+		If you translate this logic into words, it'd be something similar to this: ``There is a tree that is a high thing, a very high thing''. This complete run-through from the syntactic parsing up to the meaning representation hopefully showed the two presented methods in action and let you understand them better. Furthermore this overarching example should have put you in the situation to follow a critical discussion, which is next in the paper.
+		
 \section{Critical discussion}
 \label{sec:critDiscussion}
 
+	%TODO back up every claim (reference after first sentence)
+
 	Now that both methods have been presented with one selected approach each, it is time to discuss them critically. The CYK algorithm solves many problems like ambiguity; at least to a certain degree. But it also is problematic, because of the restriction to CNF. While in theory every context-free grammar can be converted to CNF, in practice it poses ``some non-trivial problems''\cite[p.~475]{Jurafsky2009b}. One of this problems can be explored in conjunction with the second presented method (semantic analysis). ``[T]he conversion to CNF will complicate any syntax-driven approach to semantic analysis''\cite[p.~475]{Jurafsky2009b}. A solution to this problem is some kind of post-processing in which the trees are converted back to the original grammar.\cite{Jurafsky2009b} Another option is to use a more complex dynamic programming algorithm that accepts any kind of context-free grammar. Such an algorithm is the ``Earley Algorithm''\cite[p.~477]{Jurafsky2009b}.
 	
-	The syntax-driven semantic analysis, as it has been presented, is a powerful method that is easy to understand. But it has one essential problem. It relies upon an existing set of grammar rules with semantic attachments to them. In a real world example such a table would contain thousands of grammar rules. While it is relatively easy to compute the final meaning representation with such a given table, it is very hard to create the table in the first place. The difficulty to create this table is split into two main issues. The first one being that you must find a grammar specification that fits all your use cases. This problem applies for the syntactic parsing as well. The second issue is that one has to find out the semantic attachments to the grammar rules.
+	The syntax-driven semantic analysis, as it has been presented, is a powerful method that is easy to understand. But it has one essential problem. It relies upon an existing set of grammar rules with semantic attachments to them. In a real world example such a table would contain thousands of grammar rules.\cite{Russel2010} While it is relatively easy to compute the final meaning representation with such a given table, it is very hard to create the table in the first place. The difficulty to create this table is split into two main issues. The first one being that you must find a grammar specification that fits all your use cases. This problem applies for the syntactic parsing as well. The second issue is that one has to find out the semantic attachments to the grammar rules.
 	
-	This initial workload to create a state, in which the semantic analysis works, is a unique effort. In a restricted environment with a limited set of words and topics, this workload is of low importance. Even if it takes one month to create such a table by hand or by computing it, the subsequent analysis of input based on this table is rather quick and the initial workload is therefore acceptable. But this is only true for restricted environments. If someone tried to use syntax-driven semantic analysis for the complete language of modern English, the creation of such a table would outweigh any possible usage.
+	This initial workload to create a state, in which the semantic analysis works, is a unique effort.\cite{Jurafsky2009} A restricted environment has a limited set of words and topics compared to an unrestricted environment. An example is a flight check-in automaton that only needs to process a subset of the full English grammar. Therefore this workload is of low importance in such an environment. Even if it takes one month to create such a table by hand or by computing it, the subsequent analysis of input based on this table is rather quick and the initial workload is therefore acceptable. But this is only true for restricted environments. If someone tried to use syntax-driven semantic analysis for the complete language of modern English, the creation of such a table would outweigh any possible usage.
+	
+	%TODO three options: add reference to claim, introduce necessary knowledge prior to this point or drop it
 	
 	Comparing the complexity of the two methods it shows a mirror-like image. For the parsing the creation of the grammar is comparatively easy. The presented CYK algorithm works with context-free grammars which are a very restricted set compared to natural languages. But even within these context-free grammars there are ambiguities inside the texts themselves. The creation of the parse trees is therefore more of a problem.
 	
-	Syntax-driven semantic analysis on the other hand requires a decent amount of work to add semantic attachments to grammar rules. But once this has been done, it works very fast.
+	Syntax-driven semantic analysis on the other hand requires a decent amount of work to add semantic attachments to grammar rules.\cite{Jurafsky2009} But once this has been done, it works very fast.
 	
-	Both methods require a unique work for one specific usage. This unique workload is the grammar creation for the parsing and the extension of the grammar with semantic attachments for the semantic analysis. The less restricted the usage environment, the more complex the initial workload becomes. The same is true for the recurring workload inside one specific usage.
+	Both methods require an initial workload for every usage domain. This unique workload is the grammar creation for the parsing and the extension of the grammar with semantic attachments for the semantic analysis. The less restricted the usage environment, the more complex the initial workload becomes. The same is true for the recurring workload for every actual usage inside one usage domain.
 	
-	Judging by the state-of-the-art of computer technology, parsing does still pose a significant challenge once the restricted field of programming languages is left. The semantic analysis as the second method in the chain has therefore even more problems to date. As the presented syntax-driven approach does only work with parse trees, a semantic analysis can only be undertaken once the syntactic parsing succeeds.
+	Judging by the state-of-the-art of computer technology, parsing does still pose a significant challenge once the restricted field of programming languages is left. The semantic analysis as the second method in the chain has therefore even more problems to date. As the presented syntax-driven approach does only work with syntactic representations\cite{Jurafsky2009}, a semantic analysis can only be undertaken once the syntactic parsing succeeds.
 	
 	The ambiguity remains one of the bigges issues for both methods. Especially the syntax-driven semantic analysis does only consider the semantic meaning alone. It's not it's fault as the analysis doesn't know the context. The presented approach looks at each sentence in a sandbox. The generated meaning representations are therefore only of limited use for a less restricted grammar.
 	
 \section{Conclusion}
 \label{sec:concl}
 
-	Syntactic parsing is an important method on the way to understand natural language. The usage of dynamic programming algorithms circumvents many of the issues that classical top-down or bottom-up parsing algorithms face. Ambiguity is the most prominent of those issues. The best algorithm for context-free grammars is the CYK algorithm, which is a dynamic programming algorithm. But in practice it is very restricted, because it only works with grammars in CNF. But there are more complex dynamic programming algorithms that allow any kind of context-free grammar.
+	Syntactic parsing is an important method on the way to understand natural language. The usage of dynamic programming algorithms circumvents many of the issues that classical top-down or bottom-up parsing algorithms face. Ambiguity is the most prominent of those issues. The best algorithm for context-free grammars is the CYK algorithm, which is a dynamic programming algorithm. But in practice it is very restricted, because it only works with grammars in CNF. But there are more complex dynamic programming algorithms that allow any kind of context-free grammar. Such an algorithm is the ``Earley Algorithm''\cite[p.~477]{Jurafsky2009b} which was already introduced in the critical discussion.
 	
-	Semantic analysis is the second method in the chain to understand natural language and therefore important as well. There are different approaches to the analysis. One of them is the syntax-driven approach that depends on parse trees. This dependency creates a delay effect: As long as a certain peace of text cannot be parsed, it definitely can't be analyzed for it's semantic meaning either. This is not an issue for restricted environments like programming languages or a very restricted subset of a natural language's grammar. But it is a major issue for real natural language, because there already the parsing does pose significant challenges.
+	Semantic analysis is the second method in the chain to understand natural language, as it is presented here, and therefore important as well. There are different approaches to the analysis. One of them is the syntax-driven approach that depends on parse trees. This dependency creates a delay effect: As long as a certain peace of text cannot be parsed, it definitely can't be analyzed for it's semantic meaning either. This is not an issue for restricted environments like programming languages or a very restricted subset of a natural language's grammar. But it is a major issue for real natural language, because there already the parsing does pose significant challenges.
 	
 	Looking into the future both methods require substantial improvements on the algorithm side to reach a point where understanding non-restricted natural languages becomes possible. But as it is right now it is not possible to create dialog systems that interact fully natural with humans. To make any kind of language interaction, the set of possible words and sentence structures must be restricted. But even if that is given (like in a flight check-in automaton), the computer has only a finite set of possible cases. The programmer can add tons of if-clauses or comparable statements to check for different cases but in the end it's all finite so that many of the user inputs must lead to the same output or no output at all. This fact has led to the current situation in which the most interaction with a computer happens via a restricted interface in which the user can only choose from a limited set of options (by clicking on a button, selecting an item of a list, etc.).
 	
-	In addition the ambiguity of natural language is a major issue. Going back to the example in the introduction, the syntax-driven semantic analysis	does only work properly if the semantic meaning of the input has no ambiguity. But even than the generated meaning representation does not represent the pragmatic meaning. A dialog system is therefore far from being reached, because every input of a human can have dozens of different meanings. The intended meaning can sometimes depend on a thought that this human had while typing the input. As the computer doesn't have the ability to read thoughts, it would be impossible for the computer to determine the intended meaning of the input.
+	Furthermore the ambiguity of natural language is a major issue. The solution to it could lie in the understanding of the context. Even though natural language is full of ambiguity, we manage to communicate very successfully. Therefore the solution to ambiguity lies probably somewhere in our brain functionality. Cognitively-inspired methods that don't use traditional AI and First-Order logic but instead are inspired by our brain and try to understand and model natural language based on the context, might as well be the solution to ambiguity altogether. The method presented by Gnjatovic\cite{Gnjatovic2012} could be such a method.
 	
 	In a mission critical environment this ambiguity could lead to catastrophic results, because the computer, simply put, ``didn't get it''. This risk limits the usability of natural language communication with a computer for propably a long time to a very restricted set of use cases.
 	
