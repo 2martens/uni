@@ -1,4 +1,4 @@
-#lang swindle
+#lang lazy
 
 #|
 SE 3 Funktional Blatt 11
@@ -9,6 +9,7 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
          (lib "unify.ss"  "se3-bib" "prolog")
          (lib "prolog.ss" "se3-bib" "prolog")
          (lib "prologInScheme.ss"  "se3-bib" "prolog"))
+(require racket/stream)
 
 ; 1)
 
@@ -54,8 +55,10 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
 (<- (leser Luator Eva 104 1988))
 
 ; 1.
+; Im interactions view laufen alle Abfragen. Einige jedoch laufen nicht hier.
 
-;(?- (ausleihe "K 110" ?lesernummer))
+
+;(?- (ausleihe "K 110" ?))
 
 ; 2.
 ;(?- (leser Linux Leo ?lesernummer ?))
@@ -65,7 +68,28 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
 ;    (leser ?nachname ?vorname ?lesernummer ?))
 
 ; 4.
+;(?- (test (< ?jahr 1954))
+;    (leser ?nachname ?vorname ?lesernummer ?geburtsjahr)
+;    (ausleihe ? ?lesernummer))
+
+; 5.
+;(?- (leser ?nachname ?vorname ?lesernummer ?)
+;    (count ?c (ausleihe ? ?lesernummer))
+;    (test (> ?c 1)))
 
 ; 2)
 
+(define memo-fac (memo fac))
+
 ; 3)
+(define natNumb (in-naturals 1))
+(define evilSeven (stream-map (λ (x)
+                                (if (or 
+                                     (= [modulo x 7] 0)
+                                     (pair? (member #\7 
+                                                    (string->list (number->string x)))))
+                                    'sum
+                                    x))
+                              natNumb))
+
+
