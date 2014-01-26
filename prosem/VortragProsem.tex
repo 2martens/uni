@@ -1,14 +1,14 @@
 \documentclass[14pt]{beamer}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Meta informations:
-\newcommand{\trauthor}{Horst Hansen}
-\newcommand{\trtype}{} %{Proseminar} %{Seminar} %{Workshop}
-\newcommand{\trcourse}{Knowledge Processing with Neural Networks}
-\newcommand{\trtitle}{Neural Networks for Artificial Agents}
-\newcommand{\trmatrikelnummer}{6543210}
-\newcommand{\tremail}{hansen@informatik.uni-hamburg.de}
-\newcommand{\trinstitute}{Dept. Informatik -- Knowledge Technology, WTM}
-\newcommand{\trwebsiteordate}{{http://www.informatik.uni-hamburg.de/WTM/}}
+\newcommand{\trauthor}{Jim Martens}
+\newcommand{\trtype}{Proseminar} %{Proseminar} %{Seminar} %{Workshop}
+\newcommand{\trcourse}{Proseminar Artificial Intelligence}
+\newcommand{\trtitle}{Methods for understanding natural language}
+\newcommand{\trmatrikelnummer}{6420323}
+\newcommand{\tremail}{2martens@informatik.uni-hamburg.de}
+\newcommand{\trinstitute}{}
+\newcommand{\trwebsiteordate}{25.02.2014}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Languages:
@@ -125,9 +125,9 @@
     \end{beamercolorbox}
 
 	  \vfill
-	  \begin{beamercolorbox}[ht=8ex,center]{}
-		  \includegraphics[width=0.20\paperwidth]{wtmIcon.pdf}
-	  \end{beamercolorbox}%
+	  %\begin{beamercolorbox}[ht=8ex,center]{}
+	  %  \includegraphics[width=0.20\paperwidth]{wtmIcon.pdf}
+	  %\end{beamercolorbox}%
     \begin{beamercolorbox}[sep=8pt,center,colsep=-4bp,rounded=true,shadow=true]{institute}
       \usebeamerfont{institute}\trwebsiteordate
     \end{beamercolorbox}
@@ -224,62 +224,108 @@
 \section{Motivation and Question}
 
 \frame[t]{
-  \frametitle{Motivation}
-  \begin{itemize}
-  	\item Add your motivation here
+	\frametitle{Motivation}
+	\begin{itemize}
+  		\item dialogue in computer games
 		\begin{itemize}
-			\item Maybe  with some details
-			\begin{itemize}
-				\item but not too much
-			\end{itemize}
+			\item spoken
+			\item written
 		\end{itemize}
-		\item Use references \textsuperscript{[Author, 2010]}
+		\item ambiguity
+		\item disambiguation
+		%\item Use references \textsuperscript{[Author, 2010]}
 	\end{itemize}
 }
 
-\section{Basics and Definition}
+\section{Basics}
 
-\section{Approach}
+\frame[t]
+{
+	\frametitle{Basics}
+	\begin{itemize}
+		\item syntax
+		\item semantics
+		\item pragmatics
+	\end{itemize}
+}
 
-\section{Results}
+\section{Syntactic Parsing}
+
+\frame[t]
+{
+	\frametitle{Lexicon}
+	\begin{itemize}
+		\item allowed words \textsuperscript{[Russel, 2009]}
+		\item probabilities
+	\end{itemize}
+}
+
+\frame[t]
+{
+	\frametitle{Grammar}
+	\begin{itemize}
+		\item combines words into valid phrases \textsuperscript{[Russel, 2009]}
+		\item base for all kinds of parsing
+		\item probabilities
+		\item defines valid syntax
+	\end{itemize}
+}
+
+\frame[t]
+{
+	\frametitle{CYK}
+	\begin{itemize}
+		\item dynamic programming parsing algorithm \textsuperscript{[Russel, 2009]}
+		\item named after inventors \textsuperscript{[Russel, 2009]}
+		\item works only with grammars in CNF \textsuperscript{[Russel, 2009]}
+	\end{itemize}
+}
+
+\section{Semantic Analysis}
+
+\frame[t]
+{
+	\frametitle{Approach}
+	\begin{itemize}
+		\item syntax-driven semantic analysis \textsuperscript{[Jurafsky, 2009]}
+		\item syntax representation
+		\begin{itemize}
+			\item parse trees \textsuperscript{[Jurafsky, 2009]}
+			\item dependency structures \textsuperscript{[Jurafsky, 2009]}
+			\item etc
+		\end{itemize}
+	\end{itemize}
+}
+
 
 \section{Conclusion}
 
 \frame[t]
 {
-  \frametitle{Conclusion}
+	\frametitle{Conclusion}
 
-  Novelty and contribution of this work:
-  \begin{itemize}
-	  \item Sum up the approach
-		\item Sum op the results
-		\item ...
-		\item Show that it solves the question
-  \end{itemize}
-
-\mbox{ }
-  
-	Open Questions:
-  \begin{itemize}
-  	\item Something
-	  \item ... is always missing
-  \end{itemize}
+	\begin{itemize}
+		\item parsing and semantic analysis need restriction
+		\item ambiguity remains large problem
+		\item context is key
+	\end{itemize}
 }
 
 %%%%%%%%%%%%%%
 
 \frame[c]{
-  \frametitle{The End}
-\begin{center}
-  Thank you for your attention.\\[1ex]
-  Any question?\\[5ex]
-\end{center}
-  \footnotesize
-  Literature:
+	\frametitle{The End}
+	\begin{center}
+		Thank you for your attention.\\[1ex]
+		Any questions?\\[5ex]
+	\end{center}
+	\footnotesize
+	Literature:
 	\begin{itemize}
-		\item Author , Author , Author, and Author. Name of the conference paper. \emph{In: Proceedings of the Conference Name}, 2008
-		\item Author, Author, and Author. Name of the Article. \emph{Name of the Journal}, 42:111-133, 2010
-		\item Author, and Author. \emph{Name of the Book}. Publisher, 2009
+		%\item Author , Author , Author, and Author. Name of the conference paper. \emph{In: Proceedings of the Conference Name}, 2008
+		%\item Author, Author, and Author. Name of the Article. \emph{Name of the Journal}, 42:111-133, 2010
+		\item Daniel Jurafsky and James H. Martin. \emph{Speech and Language processing}. Pearson, 2009
+		\item Stuart J. Russel and Peter Norvig. \emph{Artificial intelligence: A Modern Approach}. Pearson, 2009
 	\end{itemize}
 }
 
