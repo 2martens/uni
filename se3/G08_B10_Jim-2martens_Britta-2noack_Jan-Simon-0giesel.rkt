@@ -1,4 +1,4 @@
-#lang racket
+#lang lazy
 
 #|
 SE 3 Funktional Blatt 10
@@ -43,8 +43,6 @@ Abgebende: Jim 2martens, Britta 2noack, Jan-Simon 0giesel
                                        (cdr x)))
                              ))))
              r))))
-(not t1)))
-r))
 
 (define (reflexiv? r)
   (every (λ (x)
