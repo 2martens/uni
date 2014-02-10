@@ -1,0 +1,165 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bytefield}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{mathtools}
+%\usepackage{algorithmic}
+%\usepackage{minted}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+%\def\thesection{\arabic{section})}
+%\def\thesubsection{(\alph{subsection})}
+%\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+%switch starred and non-starred (auto-size)
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\makeatother
+
+\begin{document}
+\author{Jim Martens}
+\title{Zusammenfassung AD}
+\maketitle
+
+\section*{Disclaimer}
+
+	Diese Zusammenfassung setzt ein Belegen der AD-Veranstaltung voraus. Es kann den Besuch der Vorlesungen und Übungen durch das Semester hinweg nicht ersetzen und erhebt auch keinen Anspruch auf Vollständigkeit. Diese Zusammenfassung bezieht sich auf den Stoff der AD-Veranstaltung im Wintersemester 2013/2014 von Frau Luxburg.
+
+\tableofcontents
+
+\clearpage
+
+\section{Landau-Notation}
+
+	Es gibt fünf verschiedene Abschätzungen für die asymptotische Laufzeit eines Algorithmus.
+	
+	\[
+		\mathcal{O}, o, \omega, \theta, \Omega
+	\]
+	
+	$\mathcal{O}$ gibt die obere Schranke der Laufzeit an. Ein Algorithmus, der in $\mathcal{O}(n)$ liegt, hat demnach eine asymptotische Laufzeit von höchstens $n$. $\mathcal{O}$ wird am häufigsten benutzt, weswegen die gesamte Notation häufig auch O-Notation genannt wird.
+	
+	$o$ verhält sich ähnlich, weist aber einen kleinen Unterschied auf. Ein Algorithmus in $o(n)$ wächst asymptotisch echt langsamer als $n$.
+	
+	$\theta$ gibt eine genaue Laufzeit an. Ein Algorithmus in $\theta(n)$ wächst asymptotisch genauso schnell wie $n$.
+	
+	$\omega$ ist das Gegenstück zu $o$ für die untere Schranke. Ein Algorithmus in $\omega(n)$ wächst echt schneller als $n$.
+	
+	$\Omega$ schließlich ist das Gegenstück zu $\mathcal{O}$ für die untere Schranke. Ein Algorithmus in $\Omega(n)$ wächst mindestens so schnell wie $n$.
+	
+	Bei der Landau-Notation fallen Konstanten und niedrigere Potenzen weg. Ein Algorithmus mit der konkreten Laufzeit von $45n^{2} + 100n$ liegt demnach in $\mathcal{O}(n^{2})$.
+	
+	Geht es um den Vergleich zweier Algorithmen und ist die Laufzeit nicht eindeutig feststellbar, dann hilft es den Limes zu bilden. Dabei gelten folgende Regeln.
+	
+	\begin{alignat*}{2}
+		f \in \mathcal{O}(g):& \limsup_{n \rightarrow \infty} \abs{\frac{f(n)}{g(n)}} &<& \infty \\
+		f \in o(g):& \lim_{n \rightarrow \infty} \abs{\frac{f(n)}{g(n)}} &=& 0 \\
+		f \in \Omega(g) :& \liminf_{n \rightarrow \infty} \abs{\frac{f(n)}{g(n)}} &>& 0 \\
+		f \in \omega(g) :& \liminf_{n \rightarrow \infty} \abs{\frac{f(n)}{g(n)}} &=& \infty \\
+		f \in \theta(g) :& 0 < \liminf_{n \rightarrow \infty} \abs{\frac{f(n)}{g(n)}} \leq  \limsup_{n \rightarrow \infty} \abs{\frac{f(n)}{g(n)}} &<& \infty
+	\end{alignat*}
+	
+\section{Mastertheorem}
+
+	Das Mastertheorem gehört ebenso wie die Landau-Notation zur Komplexitätstheorie und wird benutzt, um Algorithmen in Komplexität einzuteilen. Es ist jedoch wichtig zu beachten, dass es nur auf ganz bestimmte Algorithmen anwendbar ist. So kann es nur für divide-and-conquer Algorithmen benutzt werden, bei denen sich die Größe der Subprobleme in jedem Rekursionsschritt um einen festen Faktor verkleinert.
+	
+	Das Mastertheorem behandelt Rekurrenzgleichungen dieser Form:
+	
+	\[
+		T(n) = a \cdot T\left(\ceil*{\frac{n}{b}} \right) + \mathcal{O}(n^{d})
+	\]
+	
+	In dieser Formel steht $a$ für die Anzahl der Subprobleme pro Rekursionsschritt, $b$ für den Faktor, um den sich die Subprobleme pro Schritt verkleinern, $\mathcal{O}(n^{d})$ für die Kosten des Algorithmus, die nicht in der Rekursion liegen und $n$ für die Größe des Gesamtproblems. Dabei gelten diese formalen Bedingungen für die Variablen: 
+	
+	\[
+		a \geq 1, b > 1
+	\]
+	
+	Hat man solch eine Rekurrenzgleichung gefunden, so kann man daraus die Komplexität berechnen.
+	
+	\[
+		T(n) = \begin{cases}
+					\mathcal{O}(n^{d}) &, \text{wenn}\, d > \log_{b}(a) \\
+					\mathcal{O}(n^{d} \cdot \log(n)) &, \text{wenn}\, d = \log_{b}(a) \\
+					\mathcal{O}(n^{\log_{b}(a)}) &, \text{wenn}\, d < \log_{b}(a)
+				\end{cases}
+	\]
+	
+	Die Komplexität der rekursiven Berechnung der Fibonacci-Zahlen beispielsweise lässt sich nicht mit dem Mastertheorem berechnen, da sich die Größe der Subprobleme pro Rekursionsschritt nicht um einen festen Faktor verkleinern.
+	
+\section{Datenstrukturen}
+
+	\subsection{Listen}
+	
+		Es gibt zwei unterschiedliche Arten von Listen. Zum Einen gibt es Single-Linked-Lists, die nur in eine Richtung verbunden sind. Will man das letzte Element der Liste finden, muss man demnach vom Kopfelement die gesamte Liste durchgehen, um das letzte Element zu finden. Zum Anderen gibt es die Double-Linked-Lists, die in beide Richtungen verbunden sind. Dort kann man sich in beide Richtungen bewegen und spart damit Suchzeit, wenn man ein Element am Ende der Liste sucht.
+		
+		Neben diesen zwei grundsätzlichen Arten von Listen gibt es noch unterschiedliche Ausführungsvarianten. In der Praxis trifft man meistens auf Listen, die ein dediziertes Kopf- und Schlusselement haben, welches keinen eigentlichen Wert enthält. Diese "`Wächterknoten"' verhindern eine Reihe von Problemen (siehe SE 1). Desweiteren gibt es noch für Double-Linked-Lists die Variante mit einem und nicht zwei solcher Wächterknoten. Dabei zeigt das letzte Element der Liste wieder auf den Wächterknoten, wodurch ein Ring entsteht.
+		
+	\subsection{Bäume}
+	
+		Bäume sind eine besondere Art von Graphen, die keine Zyklen enthalten und ungerichtet sind. Bäume haben einen Wurzelknoten und ein oder mehrere Blätter (Knoten ohne Kindknoten). Jeder Knoten hat entweder Kindknoten oder ist ein Blatt. Bei einem Baum mit einem einzigen Knoten ist dieser sowohl Wurzel als auch Blatt.
+		
+		Es gibt für t-näre Bäume eine Sprachregelung, die festlegt wie ein solcher Baum heißt. Bei einem vollen (engl.: full) Baum hat jeder Knoten bis auf die Blätter t Kindknoten. Auf der untersten Ebene finden sich also $t^{h}$ Knoten, wobei $h$ die Höhe des Baumes bezeichnet. Die Wurzelebene ist mit Höhe $0$ versehen. Ein vollständiger Baum (engl.: complete) ist bis auf die unterste Ebene wie ein voller Baum. Auf der untersten Ebene befinden sich $1$ bis $t^{h}$ Blätter, die von links nach rechts angeordnet sind.
+		
+		Die Gesamtanzahl an Knoten entspricht bei einem vollen Baum $t^{h+1}-1$ und bei einem vollständigen Baum $t^{h} - 1 + c : 1 \leq c \leq t^{h}$. Die Höhe des Baumes wiederum lässt sich aus der gesamten Anzahl der Knoten berechnen. Bei einem vollen Baum entspricht die Höhe des Baumes, wenn $n$ die Anzahl der Knoten symbolisiert, $\log_{t}(n+1) - 1$. Für einen vollständigen Baum entspricht es $\ceil*{\log_{t}(n+1)-1}$.
+		
+	\subsection{Stack}
+	
+		Ein Stack ist nach dem LIFO-Prinzip organisiert und unterstützt zwei Operationen, die je nach Literatur anders heißen. Die erste Operation erlaubt das Einfügen eines Elementes in den Stack (\texttt{Insert(e)} bzw. \texttt{Push(e)}) und die zweite Operation erlaubt das Entnehmen des zuletzt eingefügten Elementes (\texttt{Delete()} bzw. \texttt{Pop()}).
+		
+		Ein Stack könnte sinnvoll mit einem Array implementiert werden.
+		
+	\subsection{Queue}
+	
+		Eine Queue arbeitet nach dem FIFO-Prinzip und unterstützt ebenso zwei Operationen. Die erste fügt ein Element in die Queue ein (\texttt{Insert(e)} bzw. \texttt{Enqueue(e)}) und die zweite Operation entfernt das vorderste Element in der Queue (\texttt{Delete()} bzw. \texttt{Dequeue()}).
+		
+		Queues können sinnvoll als Double-Linked-Lists implementiert werden. Alternativ könnte man ein Array nehmen, bei dem man sich immer merkt welche Position gerade vorne und welche hinten ist.
+		
+		Es gibt Abwandlungen der Queue, die das FIFO-Prinzip verletzen. Dies sind sogenannte Priority Queues, die das vorderste Element nach einer Sortierung bestimmen. Beispielsweise sorgt eine Min-Priority-Queue dafür, dass immer das Element mit dem geringsten Wert ganz vorne steht.
+		
+	\subsection{Heap}
+	
+		Ein Heap ist ein besonderer Baum, der nach bestimmten Kriterien sortiert ist. Bei einem Max-Heap befindet sich an der Wurzel der Knoten mit dem höchsten Wert und alle Kindknoten haben kleinere Werte. Dies gilt aber nicht nur für die Wurzel, sondern die Kindknoten jedes Knotens haben kleinere Werte als der Knoten, von dem sie Kinder sind.
+		
+		Für einen Heap sind fünf Operationen definiert. Die Operation \texttt{Heapify} geht vom gewählten Knoten zu den Blättern und tauscht den Knoten so lange herunter, bis die Heapeigenschaft für den gesamten Heap unter dem Knoten wieder gilt. Die Operation erfordert gültige Heaps unter dem Knoten. Das bedeutet, dass die Subbäume für sich (mit den Kindern des Knotens als Wurzelknoten) gültige Heaps sind. Die worst case Laufzeit ist $\mathcal{O}(\log n)$.
+		
+		Die zweite Operation \texttt{BuildMaxHeap} geht von den Blättern zum Wurzelknoten und stellt die Heapeigenschaft her. Dabei wird \texttt{Heapify} auf jeden Knoten ausgeführt. In jeder Ebene wird von rechts nach links vorgegangen, angefangen bei dem am weitesten unten rechts stehenden Knoten. Effektiv passiert auf Blattebene jedoch nichts, da diese keine Kindknoten haben, mit denen sie vertauscht werden könnten. Die Laufzeit beträgt $\mathcal{O}(n)$.
+		
+		Die dritte Operation ist \texttt{ExtractMax}. Die Operation entfernt den Wurzelknoten und zieht den am weitesten rechts unten stehenden Knoten zur Wurzelposition und wendet \texttt{Heapify} auf diesen Knoten an. Die Laufzeit beträgt $\mathcal{O}(\log n)$.
+	
+		Die vierte Operation heißt \texttt{DecreaseKey} und setzt den betreffenden Knoten auf den gewählten geringeren Wert und wendet \texttt{Heapify} auf diesen Knoten an. Die Laufzeit beträgt $\mathcal{O}(\log n)$.
+		
+		Das Gegenstück dazu ist \texttt{IncreaseKey}, welches nach dem Verändern des Wertes die Operation \texttt{BuildMaxHeap} ausführt. Die Laufzeit beträgt $\mathcal{O}(\log n)$.
+		
+\section{Hashing}
+
+	Hashing hat das Ziel eine große Menge an Werten auf eine kleinere Menge abzubilden. Eine der einfachsten Hashfunktionen ist die modulo-Funktion für ganze Zahlen.
+	
+\end{document}
