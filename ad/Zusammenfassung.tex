@@ -15,6 +15,7 @@
 \usepackage{algpseudocode}
 \usepackage{algorithm}
 \usepackage{mathtools}
+\usepackage{hyperref}
 %\usepackage{algorithmic}
 %\usepackage{minted}
 \usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
@@ -43,6 +44,14 @@
 \def\abs{\@ifstar{\oldabs}{\oldabs*}}
 \makeatother
 
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
 \begin{document}
 \author{Jim Martens}
 \title{Zusammenfassung AD}
@@ -56,7 +65,7 @@
 
 \clearpage
 
-\section{Landau-Notation}
+\section{Landau--Notation}
 
 	Es gibt fünf verschiedene Abschätzungen für die asymptotische Laufzeit eines Algorithmus.
 	
@@ -74,7 +83,7 @@
 	
 	$\Omega$ schließlich ist das Gegenstück zu $\mathcal{O}$ für die untere Schranke. Ein Algorithmus in $\Omega(n)$ wächst mindestens so schnell wie $n$.
 	
-	Bei der Landau-Notation fallen Konstanten und niedrigere Potenzen weg. Ein Algorithmus mit der konkreten Laufzeit von $45n^{2} + 100n$ liegt demnach in $\mathcal{O}(n^{2})$.
+	Bei der Landau--Notation fallen Konstanten und niedrigere Potenzen weg. Ein Algorithmus mit der konkreten Laufzeit von $45n^{2} + 100n$ liegt demnach in $\mathcal{O}(n^{2})$.
 	
 	Geht es um den Vergleich zweier Algorithmen und ist die Laufzeit nicht eindeutig feststellbar, dann hilft es den Limes zu bilden. Dabei gelten folgende Regeln.
 	
@@ -88,7 +97,7 @@
 	
 \section{Mastertheorem}
 
-	Das Mastertheorem gehört ebenso wie die Landau-Notation zur Komplexitätstheorie und wird benutzt, um Algorithmen in Komplexität einzuteilen. Es ist jedoch wichtig zu beachten, dass es nur auf ganz bestimmte Algorithmen anwendbar ist. So kann es nur für divide-and-conquer Algorithmen benutzt werden, bei denen sich die Größe der Subprobleme in jedem Rekursionsschritt um einen festen Faktor verkleinert.
+	Das Mastertheorem gehört ebenso wie die Landau--Notation zur Komplexitätstheorie und wird benutzt, um Algorithmen in Komplexität einzuteilen. Es ist jedoch wichtig zu beachten, dass es nur auf ganz bestimmte Algorithmen anwendbar ist. So kann es nur für divide-and-conquer Algorithmen benutzt werden, bei denen sich die Größe der Subprobleme in jedem Rekursionsschritt um einen festen Faktor verkleinert.
 	
 	Das Mastertheorem behandelt Rekurrenzgleichungen dieser Form:
 	
@@ -132,21 +141,21 @@
 		
 	\subsection{Stack}
 	
-		Ein Stack ist nach dem LIFO-Prinzip organisiert und unterstützt zwei Operationen, die je nach Literatur anders heißen. Die erste Operation erlaubt das Einfügen eines Elementes in den Stack (\texttt{Insert(e)} bzw. \texttt{Push(e)}) und die zweite Operation erlaubt das Entnehmen des zuletzt eingefügten Elementes (\texttt{Delete()} bzw. \texttt{Pop()}).
+		Ein Stack ist nach dem LIFO--Prinzip organisiert und unterstützt zwei Operationen, die je nach Literatur anders heißen. Die erste Operation erlaubt das Einfügen eines Elementes in den Stack (\texttt{Insert(e)} bzw. \texttt{Push(e)}) und die zweite Operation erlaubt das Entnehmen des zuletzt eingefügten Elementes (\texttt{Delete()} bzw. \texttt{Pop()}).
 		
 		Ein Stack könnte sinnvoll mit einem Array implementiert werden.
 		
 	\subsection{Queue}
 	
-		Eine Queue arbeitet nach dem FIFO-Prinzip und unterstützt ebenso zwei Operationen. Die erste fügt ein Element in die Queue ein (\texttt{Insert(e)} bzw. \texttt{Enqueue(e)}) und die zweite Operation entfernt das vorderste Element in der Queue (\texttt{Delete()} bzw. \texttt{Dequeue()}).
+		Eine Queue arbeitet nach dem FIFO--Prinzip und unterstützt ebenso zwei Operationen. Die erste fügt ein Element in die Queue ein (\texttt{Insert(e)} bzw. \texttt{Enqueue(e)}) und die zweite Operation entfernt das vorderste Element in der Queue (\texttt{Delete()} bzw. \texttt{Dequeue()}).
 		
-		Queues können sinnvoll als Double-Linked-Lists implementiert werden. Alternativ könnte man ein Array nehmen, bei dem man sich immer merkt welche Position gerade vorne und welche hinten ist.
+		Queues können sinnvoll als Double--Linked--Lists implementiert werden. Alternativ könnte man ein Array nehmen, bei dem man sich immer merkt welche Position gerade vorne und welche hinten ist.
 		
-		Es gibt Abwandlungen der Queue, die das FIFO-Prinzip verletzen. Dies sind sogenannte Priority Queues, die das vorderste Element nach einer Sortierung bestimmen. Beispielsweise sorgt eine Min-Priority-Queue dafür, dass immer das Element mit dem geringsten Wert ganz vorne steht.
+		Es gibt Abwandlungen der Queue, die das FIFO--Prinzip verletzen. Dies sind sogenannte Priority Queues, die das vorderste Element nach einer Sortierung bestimmen. Beispielsweise sorgt eine Min-Priority-Queue dafür, dass immer das Element mit dem geringsten Wert ganz vorne steht.
 		
 	\subsection{Heap}
 	
-		Ein Heap ist ein besonderer Baum, der nach bestimmten Kriterien sortiert ist. Bei einem Max-Heap befindet sich an der Wurzel der Knoten mit dem höchsten Wert und alle Kindknoten haben kleinere Werte. Dies gilt aber nicht nur für die Wurzel, sondern die Kindknoten jedes Knotens haben kleinere Werte als der Knoten, von dem sie Kinder sind.
+		Ein Heap ist ein besonderer Baum, der nach bestimmten Kriterien sortiert ist. Bei einem Max--Heap befindet sich an der Wurzel der Knoten mit dem höchsten Wert und alle Kindknoten haben kleinere Werte. Dies gilt aber nicht nur für die Wurzel, sondern die Kindknoten jedes Knotens haben kleinere Werte als der Knoten, von dem sie Kinder sind.
 		
 		Für einen Heap sind fünf Operationen definiert. Die Operation \texttt{Heapify} geht vom gewählten Knoten zu den Blättern und tauscht den Knoten so lange herunter, bis die Heapeigenschaft für den gesamten Heap unter dem Knoten wieder gilt. Die Operation erfordert gültige Heaps unter dem Knoten. Das bedeutet, dass die Subbäume für sich (mit den Kindern des Knotens als Wurzelknoten) gültige Heaps sind. Die worst case Laufzeit ist $\mathcal{O}(\log n)$.
 		
@@ -160,6 +169,99 @@
 		
 \section{Hashing}
 
-	Hashing hat das Ziel eine große Menge an Werten auf eine kleinere Menge abzubilden. Eine der einfachsten Hashfunktionen ist die modulo-Funktion für ganze Zahlen.
+	Hashing hat das Ziel eine große Menge an Werten auf eine kleinere Menge abzubilden. Eine der einfachsten Hashfunktionen ist die modulo-Funktion für ganze Zahlen. 
+	
+	Die Zielmenge wird durch ein Array repräsentiert, wobei die Indizes für die Werte stehen, auf die abgebildet wird. Wenn auf eine kleinere Menge abgebildet wird, sind Kollisionen natürlich unvermeidlich. Dies wird dadurch gehandhabt, dass jedes Arrayelement eine Liste ist, in die alle Werte eingetragen werden, die auf den zugehörigen Index gehasht werden.
+	
+	Das Ziel ist natürlich die Anzahl an Kollisionen pro Index möglichst klein zu halten und möglichst gleichmäßig zu hashen. Aus diesen Anforderungen ergibt sich, dass es bessere und schlechtere Hashfunktionen gibt. Allerdings gibt es keine perfekte Hashfunktion, sondern je nach Anwendungsgebiet kommen andere Funktionen in Betracht.
+	
+	Eine mögliche Strategie der Kollisionsvermeidung ist das Weiterlaufen bis zum nächsten freien Index. Kommt man am Ende des Arrays an, wird wieder von vorne begonnen.
+	
+\section{Sortierverfahren}
+
+	\subsection{Selection Sort}
+	
+		Selection Sort kann man sich gut mit Karten veranschaulichen. Man hat eine Menge an Karten offen vor sich liegen und nimmt nacheinander die Karten in die Hand, beginnend mit der niedrigsten Karte, und reiht sie dort von links nach rechts auf. Die Laufzeit beträgt im worst case $\mathcal{O}(n^{2})$.
+		
+	\subsection{Insertion Sort}
+	
+		Insertion Sort wendet man zum Beispiel bei Skat meist intuitiv an. Man hat eine Menge an verdeckten Karten, zieht nacheinander die jeweils höchste Karte und reiht sie entsprechend in die Hand ein, wobei die niedrigste Karte links und die höchstwertige Karte rechts ist. Die worst case Laufzeit beträgt hier ebenfalls $\mathcal{O}(n^{2})$.
+		
+	\subsection{Bubble Sort}
+	
+		Bubble Sort ist trotz gleicher worst case Laufzeit deutlich arbeitsaufwendiger für Menschen. Denn bereits bei 4 Werten ergeben sich 16 Durchgänge, um die Werte korrekt zu sortieren.
+		
+		Die beste Erklärung des Sortierverfahrens bietet der Pseudocode.
+		
+		\begin{algorithmic}[1]
+			\Procedure{Bubblesort}{A}
+				\For{i = 1 to A.length - 1}
+					\For{j = A.length downto i + 1}
+						\If{A[j] < A[j - 1]}
+							\State exchange A[j] with A[j - 1]
+						\EndIf
+					\EndFor
+				\EndFor
+			\EndProcedure
+		\end{algorithmic}
+		
+	\subsection{Merge Sort}
+	
+		Merge Sort ist mit einer worst case Laufzeit von $\mathcal{O}(n \cdot \log n)$ eines der besten vergleichsbasierten Sortierverfahren. Man nehme eine Reihe von Werten und sehe sie als einzelne Elemente an. Nun verbindet man immer zwei Elemente miteinander und bringt sie gleich in die richtige Reihenfolge. Dabei geht man rigoros von links nach rechts. Man verbindet demnach das erste und zweite Element, das dritte und vierte Element usw. Ist man damit fertig, verbindet man jeweils zwei dieser Zweierpärchen und sortiert alle enthaltenen Elemente in die richtige Reihenfolge. Auch dies wiederholt man für alle Pärchen. Diesen Vorgang wiederholt man nun solange bis am Ende nur noch eine korrekt sortierte Liste herauskommt. 
+		
+		Merge Sort kann man auch als Divide--and--conquer Verfahren bezeichnen. Es ergibt sich die folgende Rekurrenzgleichung.
+		
+		\[
+			T(n) = 2 \cdot T\left(\frac{n}{2}\right) + \mathcal{O}(n)
+		\]
+		
+	\subsection{Heap Sort}
+	
+		Heap Sort macht sich die Heapeigenschaft zunutze und speichert alle Elemente in einem Heap. Somit lässt sich der höchste Wert (Max--Heap) einfach auslesen.
+		
+		Der Pseudocode liest sich folgendermaßen:
+		
+		\begin{algorithmic}[1]
+			\Function{HeapSort}{A}
+				\State n $\gets$ \Call{length}{A}
+				\State B $\gets$ empty array of length n
+				\State H $\gets$ \Call{BuildMaxHeap}{A}
+				\For{i = 1 to n}
+					\State B(n - i) $\gets$ \Call{ExtractMax}{H}
+				\EndFor
+				\State \Return B
+			\EndFunction
+		\end{algorithmic}
+		
+		Das Verfahren hat eine Laufzeit von $\mathcal{O}(n \cdot \log n)$, die sowohl die sowohl worst case als auch best case Laufzeit ist.
+		
+	\subsection{Quick Sort}
+	
+		Quick Sort funktioniert ähnlich wie Merge Sort, nur dass es mit einer kompletten Liste anfängt und dann immer weiter aufteilt und am Ende nur noch zusammenfügen muss. Dies funktioniert durch die Wahl eines Pivotelementes. Im Idealfall teilt es die Liste in zwei gleichgroße Teillisten. Die worst case Laufzeit beträgt $\mathcal{O}(n^{2})$. In den meisten Fällen benötigt Quick Sort jedoch nur $\mathcal{O}(n \cdot \log n)$.
+		
+		Trotz der vermeintlich schlechten Laufzeit wird Quick Sort in der Praxis viel eingesetzt, da es in der Praxis auch auf die Konstanten ankommt, die in der Landau--Notation weggelassen werden. Quick Sort hat vergleichsweise kleine Konstanten wohingegen andere Verfahren mit einer besseren worst case Laufzeit meist größere Konstanten haben.
+		
+	%TODO Counting sort, Radix sort, Bucket sort
+		
+	\subsection{Stabilität von Sortierverfahren}
+		
+		Die Angabe "`wie in AD"' bedeutet, dass die in AD verwendete Variante gemeint ist und es andere Varianten gibt, bei denen das Gegenteilige gilt.
+		
+		\begin{tabular}{c|c}
+			Verfahren & stabil \\
+			\hline
+			Merge Sort & ja \\
+			Quick Sort & ja, wie in AD \\
+			Insertion Sort & nein, wie in AD \\
+			Selection Sort & nein, wie in AD \\
+			Heap Sort & nein \\
+			Bubble Sort & ja
+		\end{tabular}
+		
+	\subsection{Lower bound}
+	
+		Für alle vergleichsbasierten Sortierverfahren gilt, dass sie eine worst case Laufzeit von $\Omega(n \cdot \log n)$ haben.
+		
+%TODO gesamter Rest des Repetitoriums
 	
 \end{document}
