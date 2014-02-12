@@ -195,8 +195,8 @@
 		
 		\begin{algorithmic}[1]
 			\Procedure{Bubblesort}{A}
-				\For{i = 1 to A.length - 1}
-					\For{j = A.length downto i + 1}
+				\For{i $\gets$ 1 to A.length - 1}
+					\For{j $\gets$ A.length downto i + 1}
 						\If{A[j] < A[j - 1]}
 							\State exchange A[j] with A[j - 1]
 						\EndIf
@@ -226,7 +226,7 @@
 				\State n $\gets$ \Call{length}{A}
 				\State B $\gets$ empty array of length n
 				\State H $\gets$ \Call{BuildMaxHeap}{A}
-				\For{i = 1 to n}
+				\For{i $\gets$ 1 to n}
 					\State B(n - i) $\gets$ \Call{ExtractMax}{H}
 				\EndFor
 				\State \Return B
@@ -240,8 +240,82 @@
 		Quick Sort funktioniert ähnlich wie Merge Sort, nur dass es mit einer kompletten Liste anfängt und dann immer weiter aufteilt und am Ende nur noch zusammenfügen muss. Dies funktioniert durch die Wahl eines Pivotelementes. Im Idealfall teilt es die Liste in zwei gleichgroße Teillisten. Die worst case Laufzeit beträgt $\mathcal{O}(n^{2})$. In den meisten Fällen benötigt Quick Sort jedoch nur $\mathcal{O}(n \cdot \log n)$.
 		
 		Trotz der vermeintlich schlechten Laufzeit wird Quick Sort in der Praxis viel eingesetzt, da es in der Praxis auch auf die Konstanten ankommt, die in der Landau--Notation weggelassen werden. Quick Sort hat vergleichsweise kleine Konstanten wohingegen andere Verfahren mit einer besseren worst case Laufzeit meist größere Konstanten haben.
+	
+	\subsection{Counting Sort}
+	
+		Counting Sort ist ein Sortierverfahren, welches nicht vergleichsbasiert ist. Es gibt zwei prominente Implementationsmöglichkeiten. Die erste Möglichkeit ist ein Array mit Countern. Die zweite Möglichkeit ist ein Array mit Listen. Im Folgenden bezeichne K den höchsten Wert in der zu sortierenden Liste (nicht unbedingt die Datenstruktur in der diese Liste an Werten gespeichert ist).
 		
-	%TODO Counting sort, Radix sort, Bucket sort
+		Zunächst der Pseudocode für die erste Variante.
+		
+		\begin{algorithmic}[1]
+			\Function{CountingSort}{A}
+				\State n $\gets$ \Call{length}{A}
+				\State Allocate array B with length K, initialize each cell with 0
+				\For{i $\gets$ 1 to n}
+					\State B[A[i]] $\gets$ B[A[i]] + 1
+				\EndFor
+				\State C $\gets$ empty list
+				\For{key, count in B}
+					\While{count > 0}
+						\State C.append(key)
+						\State count $\gets$ count - 1
+					\EndWhile
+				\EndFor
+				\State \Return C
+			\EndFunction
+		\end{algorithmic}
+		
+		Die zweite For-Schleife ist nur zum Erstellen der sortierten Liste. Die Laufzeit beträgt K für das Initialisieren des Arrays B, n für die erste For-Schleife, K für die zweite For-Schleife und maximal n für die While-Schleife. Dabei ist jedoch zu berücksichtigen, dass die While-Schleife insgesamt über alle Iterationen der For-Schleife nur n--mal aufgerufen wird, denn die Summe aller Counts entspricht der Länge der zu sortierenden Liste an Zahlen. Die Gesamtlaufzeit ist demnach $\mathcal{O}(K + n + n)$ bzw. $\mathcal{O}(K + 2n)$. Die Laufzeit K der zweiten For-Schleife ist hier nicht berücksichtigt, da die While-Schleife insgesamt nur n--mal aufgerufen wird und in den übrigen Fällen in der For-Schleife nichts ausgeführt wird. Nach den Regeln der Landau--Notation entfällt hier das zweite n bzw. die Konstante, da es nichts an der asymptotischen Laufzeit verändert. Die Gesamtlaufzeit ist damit $\mathcal{O}(K + n)$.
+		
+		Die zweite Variante mit Listen im Array wird etwas anders implementiert, hat aber die gleiche Laufzeit.
+		
+		\begin{algorithmic}[1]
+			\Function{CountingSort}{A}
+				\State n $\gets$ \Call{length}{A}
+				\State Allocate array B with length K, initialize each cell with an empty list
+				\For{i $\gets$ 1 to n}
+					\State B[A[i]].append(A[i])
+				\EndFor
+				\State \Return concatenation of B[1], B[2], ..., B[K]
+			\EndFunction
+		\end{algorithmic}
+		
+		Die Laufzeit beträgt hier K für das Initialisieren von B und n für die For-Schleife. Insgesamt ergibt sich somit $\mathcal{O}(n + K)$.
+		
+	\subsection{Radix Sort}
+	
+		Radix Sort ist im Prinzip Counting Sort mit ein paar Veränderungen. Die obere Grenze der Zahlen kann riesig sein ($K = \omega(n)$). Um dem beizukommen stellt man sich jede Zahl als ein String vor. Zunächst werden die Zahlen nach der letzten Ziffer sortiert, dann nach der zweitletzten und so weiter. Dieses Verfahren setzt Counting Sort in der zweiten Variante voraus.
+		
+		Da stets nur nach Ziffern sortiert wird, kann man die Arraylänge auf 10 begrenzen, denn es gibt nur 10 Ziffern. Demzufolge braucht man auch bei einem K von einer Million nur ein Array von 10, um alle Zahlen nach der letzten Ziffer dort einzusortieren in Listen.
+		
+		Als Beispiel nehme man die Zahlen 10, 3, 5, 15, 20, 7 , 11 und 13. Diese werden in der Reihenfolge ihres Erscheinens sortiert und ergeben folgendes Bild im Array B.
+		
+		\begin{alignat*}{1}
+			B[0]:& 10 \rightarrow 20 \\
+			B[1]:& 11 \\
+			B[2]:& \\
+			B[3]:& 3 \rightarrow 13 \\
+			B[4]:& \\
+			B[5]:& 5 \rightarrow 15 \\
+			B[6]:& \\
+			B[7]:& 7 \\
+			B[8]:& \\
+			B[9]:&
+		\end{alignat*}
+		
+		Im zweiten Schritt wird nun das Array und in jeder Zelle die Liste von vorne bis hinten durchgegangen und die jeweils aktuelle Zahl wird dann nach der zweitletzten Ziffer in ein Array C einsortiert. Zahlen mit weniger Ziffern (in diesem Fall die einstelligen Zahlen) werden bei der 0 einsortiert. Am Ende ergibt sich die richtige Reihenfolge und es müssen nur noch alle Zahlen konkateniert werden, um das Ergebnis zu erhalten.
+		
+		Allerdings kann Radix Sort auch auf andere Zahlensysteme angewendet werden. Dann ist die Menge an möglichen Ziffern nicht gleich 10. Daher wird die Anzahl an möglichen Ziffern mit k bezeichnet und die Laufzeit zum Sortieren nach einer Ziffernposition ist dementsprechend $\theta(n + k)$. Counting Sort muss n--mal ausgeführt werden und das Array mit den Listen muss k lang sein und initialisiert werden. Dies ist jedoch nur ein Durchgang. Für die insgesamte Laufzeit von Radix Sort wird eine weitere Variable namens d benötigt, die die maximal mögliche Anzahl an Ziffern in einer Zahl bezeichnet (nicht zu verwechseln mit der Menge der möglichen Ziffern). Die Laufzeit beträgt sodann auch $\theta(d(n + k))$.
+		
+		In unserem Beispiel oben ist k konstant und d ebenso. Demnach fallen beide Weg und es bleibt $\mathcal{O}(n)$ übrig. Wenn k konstant bleibt, aber d in logarithmische Abhängigkeit zu n gestellt wird, dann ergibt sich eine Laufzeit von $\mathcal{O}(n \cdot \log n)$. Ist d sogar gleich n, dann benötigt Radix Sort $\mathcal{O}(n^{2})$.
+		
+		Warum wird Radix Sort dann überhaupt benutzt? Mithilfe von einigen Modifikationen kann man eine lineare Laufzeit erreichen und zwar als worst case. Dies ist möglich mit dem Block-based Radix Sort. Allerdings muss man vorher wissen in welchen Bereich die zu sortierenden Zahlen fallen. Genaueres siehe AD-Folienskript.
+		
+	\subsection{Bucket Sort}
+	
+		Bucket Sort wird zur Sortierung von reellen Zahlen verwendet, die gleichmäßig im Intervall [0,1] vorkommen. Angenommen man bekommt ein Eingabearray der Länge n, dann kann man das Intervall in n Buckets gleicher Länge zerteilen, wobei Bucket i alle Schlüsselwerte des Intervalls $\left[\frac{i}{n}, \frac{(i + 1)}{n}\right[$ enthält.
+		
+		Die durchschnittliche Laufzeit beträgt $\mathcal{O}(n)$ und die worst case Laufzeit beträgt $\mathcal{O}(n \cdot \log n)$.
 		
 	\subsection{Stabilität von Sortierverfahren}
 		
@@ -255,13 +329,279 @@
 			Insertion Sort & nein, wie in AD \\
 			Selection Sort & nein, wie in AD \\
 			Heap Sort & nein \\
-			Bubble Sort & ja
+			Bubble Sort & ja \\
+			Counting Sort & ja, in der zweiten Variante
 		\end{tabular}
 		
 	\subsection{Lower bound}
 	
 		Für alle vergleichsbasierten Sortierverfahren gilt, dass sie eine worst case Laufzeit von $\Omega(n \cdot \log n)$ haben.
 		
-%TODO gesamter Rest des Repetitoriums
+\section{Binäre Suchbäume}
+
+	Binäre Suchbäume haben eine besondere Struktur, die das Suchen erleichtert. Alle linken Kindknoten sind kleiner oder gleich des Elternknoten und alle rechten Kindknoten sind größer oder gleich des Elternknoten. Diese Bedingung gilt für alle Knoten mit Kindern.
 	
+	Aufgrund dessen ist das Einfügen in solch einen Baum relativ deterministisch. Das Löschen gestaltet sich da schon etwas komplizierter.
+	
+	Zunächst werden jedoch die Operationen der Reihe nach durchgegangen. Die erste Operation ist \texttt{Tree-Search} mit folgendem Pseudocode.
+	
+	\begin{algorithmic}[1]
+		\Function{Tree-Search}{x, k}
+			\If{x == NIL or k == x.key}
+				\State \Return x
+			\EndIf
+			\If {k < x.key}
+				\State \Return \Call{Tree-Search}{x.left, k}
+			\Else
+				\State \Return \Call{Tree-Search}{x.right, k}			
+			\EndIf
+		\EndFunction
+	\end{algorithmic}
+	
+	Die Laufzeit beträgt $\mathcal{O}(h)$, wobei h die Höhe des Baumes angibt.
+	
+	Das Minimum des Baumes kann gefunden werden, indem immer das linke Kind genommen wird bis ein Blatt erreicht wird. Dieses Blatt ist das minimale Element des Baumes. Die Laufzeit beträgt ebenso $\mathcal{O}(h)$. Das Maximum findet man analog, nur dass man dort immer das rechte Kind benutzt.
+	
+	Die zweite Operation ist \texttt{Inorder-Tree-Walk} mit diesem Pseudocode.
+	
+	\begin{algorithmic}[1]
+		\Procedure{Inorder-Tree-Walk}{x}
+			\If{x $\neq$ NIL}
+				\State \Call{Inorder-Tree-Walk}{x.left}
+				\State \Call{print}{x.key}
+				\State \Call{Inorder-Tree-Walk}{x.right}
+			\EndIf
+		\EndProcedure
+	\end{algorithmic}
+	
+	Sie hat eine Laufzeit von $\theta(n)$.
+	
+	Nun kommen wir zum Einfügen von Elementen. Für das Einfügen wird der Baum einfach heruntergegangen und das neue Element an der richtigen Stelle eingefügt. Die Laufzeit beträgt hier ebenso $\mathcal{O}(h)$.
+	
+	Für das Entfernen eines Blattes ist es vergleichsweise einfach. Das Blatt kann einfach entfernt werden. Wenn ein Knoten nur einen linken oder nur einen rechten Kindknoten hat, dann können diese einfach an die Position des zu löschenden Knoten rücken. Hat der zu löschende Knoten jedoch sowohl einen linken als auch einen rechten Kindknoten, dann muss dessen Nachfolger gefunden werden. Dafür wird der am weitesten links stehende Knoten im rechten Teilbaum (mit dem rechten Kind des zu löschenden Knoten als Wurzel) herangezogen. Dieser wird dann an die Stelle des zu löschenden Knoten gesetzt und dessen rechtes Kind (falls vorhanden) wird an die Stelle von dem Nachfolger gesetzt.
+	
+	Den Nachfolger zu finden dauert $\mathcal{O}(h)$. Der Rest passiert in konstanter Zeit, sodass die insgesamte Dauer ebenfalls $\mathcal{O}(h)$ ist. Da alle Operationen nur $\mathcal{O}(h)$ benötigen, wäre es natürlich von Interesse das h so klein wie möglich zu haben. Da kommen balancierte Bäume ins Spiel. Bei balancierten Bäumen unterscheidet sich die Höhe der beiden Teilbäume unter einem Knoten um maximal 1 (Bedingung gilt für alle Knoten).
+	
+	\subsection{AVL Bäume}
+
+		AVL Bäume unterstützen Operationen, um die Balanciertheit wiederherzustellen. Allerdings ist dies nicht klausurrelevant, da Frau Luxburg diesen Bereich selber nicht sonderlich versteht.
+	
+		Dennoch wird hier eine kurze Information zu den Operationen gegeben. Die Operationen heißen \texttt{RightRotate} und \texttt{LeftRotate} und benötigen jeweils nur konstante Zeit. Wird die Balanciertheit eines Baumes durch eine Einfüge- oder Löschoperation verletzt, dann müssen maximal Balancieroperationen ausgeführt werden, um die Balanciertheit wiederherzustellen.
+	
+		Die Laufzeit vom Einfügen in einen solchen balancierten Baum beträgt $\mathcal{O}(\log n)$. Das Standardeinfügen benötigt $\mathcal{O}(\log n)$, das checken der Balanciertheit dauert ebenfalls $\mathcal{O}(\log n)$ und für die Wiederherstellung der Balanciertheit werden maximal zwei Rotationen in je konstanter Zeit ausgeführt.
+	
+	\subsection{Red-black tree}
+	
+		Ein Red-black tree hat folgende Eigenschaften.
+		
+		\begin{itemize}
+			\item jeder Knoten ist gefärbt (schwarz/rot)
+			\item Wurzel und Blätter sind schwarz
+			\item roter Knoten hat zwei schwarze Kinder
+			\item von jedem Knoten aus haben alle Pfade zu den Blättern die gleiche Anzahl schwarze Knoten
+			\item ein schwarzer Knoten kann sowohl schwarze als auch rote Kinder haben
+		\end{itemize}
+		
+\section{Binäre Suche}
+
+	Bei der binären Suche hat man ein sortiertes Array gegeben. Nun schaut man sich immer das mittlere Element an und wenn dies kleiner dem gesuchten Element ist, dann wird die binäre Suche auf den rechten Teilbereich des Arrays angewendet. Ist das mittlere Element größer, so wird die binäre Suche auf den linken Teil angewendet und wenn das mittlere Element dem gesuchten Element entspricht, dann wird die Indexposition zurückgegeben. Wird das gesuchte Element nicht gefunden, dann wird \texttt{not\_found} zurückgegeben.
+	
+	Der Pseudocode sieht folgendermaßen aus.
+	
+	\begin{algorithmic}[1]
+		\Function{BinarySearch}{A, value}
+			\State low $\gets$ 0
+			\State high $\gets$ N - 1
+			\While{low $\leq$ high}
+				\State mid $\gets$ (low + high) / 2
+				\If{A[mid] > value}
+					\State high $\gets$ mid - 1
+				\ElsIf{A[mid] < value}
+					 \State low $\gets$ mid + 1
+				\Else
+					\State \Return mid
+				\EndIf
+			\EndWhile
+		\EndFunction
+	\end{algorithmic}
+	
+	Die Laufzeit beträgt $\mathcal{O}(\log n)$.
+	
+	Es gibt jedoch auch noch andere Varianten der binären Suche, wie eine rekursive Variante und eine Variante, bei der, wenn das gesuchte Element nicht vorhanden ist, die Position zurückgegeben wird, bei der das gesuchte Element eingefügt werden kann, sodass das Array weiterhin sortiert ist.
+	
+\section{Graphen}
+
+	Bei dem Abschnitt über Bäume wurden Graphen kurz angeschnitten. Hier wird sich jetzt ausführlicher mit ihnen beschäftigt. Es gibt verschiedene Arten von Graphen.
+	
+	Graphen können ungerichtet oder gerichtet sein und sie können gewichtet oder ungewichtet sein. Allerdings ist ein ungewichteter Graph äquivalent mit einem gewichteten Graphen, bei dem alle Kanten das Gewicht 1 haben. Ein ungerichteter Graph kann in einen gleichwertigen gerichteten Graphen überführt werden, indem jede Kante durch eine Hin- und Rückkante ersetzt wird.
+	
+	Der Grad eines Knotens kann in einem ungerichteten Graphen durch folgende Formel errechnet werden.
+	
+	\[
+		Grad(u) = \sum\limits_{v \in V} w(u, v)
+	\]
+	
+	Bei einem gerichteten Graphen gibt es zwei Grade bei einem Knoten. Der Eingangsgrad und der Ausgangsgrad. Beide können folgendermaßen berechnet werden.
+	
+	\begin{alignat*}{1}
+		Grad-in(u) =& \sum\limits_{v \in V} w(v, u) \\
+		Grad-out(u) =& \sum\limits_{v \in V} w(u, v)
+	\end{alignat*}
+	
+	Pfade sind eine beliebige Abfolge von Kanten. Ein Pfad ist ein Zyklus, wenn ein Knoten sowohl Anfangs- als auch Endknoten ist. Ein Pfad ist einfach (engl.: simple), wenn jeder Knoten nur einmal vorkommt.
+	
+	Man kann Graphen in zusammenhängende und nicht zusammenhängende Graphen unterteilen. Dabei wird ein Graph als zusammenhängend bezeichnet, wenn von jedem Knoten zu jedem anderen Knoten ein Pfad gefunden werden kann (ungerichteter Graph). Ein gerichteter Graph heißt stark zusammenhängend, wenn von jedem Knoten zu jedem anderen ein gerichteter Pfad gefunden werden kann. Ein gerichteter Graph ist schwach zusammenhängend, wenn der zugehörige ungerichtete Graph zusammenhängend ist.
+	
+	Eine Zusammenhangskomponente ist ein Teilgraph des Graphen und ist zusammenhängend. In einem zusammenhängenden Graphen gibt es nur eine Zusammenhangskomponente. In einem gerichteten Graphen sind die starken Zusammenhangskomponenten interessant. Dies sind Teilgraphen des Graphen, die stark zusammenhängend sind. Ein Graph kann schwach zusammenhängend sein und dennoch mehrere starke Zusammenhangskomponenten haben.
+	
+	In einem vollständigen Graph ist jeder Knoten mit jedem anderen Knoten durch eine Kante verbunden.
+	
+	Die Kanten eines Graphen können mithilfe von Adjazenzlisten oder einer Adjazenzmatrix dargestellt werden.
+	
+	Desweiteren kann ein Graph dicht sein (engl.: dense). Dies bedeutet, dass der Graph sehr viele Kanten hat (ungefähr $|V|^{2}$). Außerdem kann ein Graph dünn sein (engl.: sparse). Dies bedeutet, dass der Graph sehr wenige Kanten hat.
+	
+\section{Graphalgorithmen}
+
+	\subsection{Bellman--Ford}
+	
+		Der Bellman-Ford Algorithmus hat folgenden Pseudocode, der bereits eindrücklich zeigen sollte, wie der Algorithmus funktioniert.
+		
+		\begin{algorithmic}[1]
+			\Function{BellmanFord}{G, s}
+				\State \Call{InitializeSingleSource}{G, s}
+				\For{i $\gets$ 1 to |V| - 1}
+					\ForAll{edges (u, v) $\in$ E}
+						\State \Call{Relax}{u, v}
+					\EndFor
+				\EndFor
+				\ForAll{edges (u, v) $\in$ E}
+					\If{v.dist > u.dist + w(u, v)} \Comment{auf negativen Zyklus prüfen}
+						\State \Return false
+					\EndIf
+				\EndFor
+			\EndFunction
+		\end{algorithmic}
+		
+		Die Laufzeit ist wenig verwunderlich: $\mathcal{O}(|V| \cdot |E|)$.
+		
+		Der Algorithmus wird benutzt, um kürzeste Wege zu berechnen. Genauer wird er für das Single--Source--Shortest--Path--Problem verwendet.
+		
+	\subsection{Dijkstra}
+	
+		Dijkstra gibt es in zwei Variationen. Beide verhalten sich gleich, haben aber Unterschiede in der Laufzeit. Die naive Variante hat diesen Pseudocode.
+		
+		\begin{algorithmic}[1]
+			\Procedure{DijkstraNaive}{G, w, s}
+				\State S $\gets$ {s}
+				\State d(s) $\gets$ 0
+				\While{S $\neq$ V}
+					\State U $\gets$ {u $\not\in$ S | u neighbour of a vertex $\in$ S}
+					\ForAll{u $\in$ U}
+						\ForAll{\Call{pre}{u} $\in$ S that are predecessors of u}
+							\State d'(u, \Call{pre}{u}) $\gets$ d(\Call{pre}{u}) + w(\Call{pre}{u}, u)
+						\EndFor
+					\EndFor
+					\State $u^{*} \gets$ argmin\{d'(u, \Call{pre}{u}) | u $\in$ U, \Call{pre}{u} $\in$ S\}
+					\State d($u^{*}$) $\gets$ d'($u^{*}$)
+					\State S $\gets$ S $\cup$ \{$u^{*}$\}
+				\EndWhile
+			\EndProcedure
+		\end{algorithmic}
+		
+		Die Laufzeit der naiven Variante beträgt $\mathcal{O}(|V| \cdot |E|)$.
+		
+		Die zweite Variante ist die Implementation mit der Min--Priority--Queue. Der Pseudocode dieser Variante folgt.
+		
+		\begin{algorithmic}[1]
+			\Procedure{Dijkstra}{G, w, s}
+				\State Q $\gets$ (V, V.dist)
+				\While{Q $\neq \empty$}
+					\State u $\gets$ \Call{Extract}{Q}
+					\ForAll{v adjacent to u}
+						\State \Call{Relax}{u, v} and update the keys in Q accordingly
+					\EndFor
+				\EndWhile
+			\EndProcedure
+		\end{algorithmic}
+		
+		Die Laufzeit mit der Min--Priority--Queue hängt von der Implementation der Queue ab. Bei einem naiven Array beträgt die Laufzeit $\mathcal{O}(n^{2})$. Bei der Implementation mit einem binären Heap sind es nur noch $\mathcal{O}((V + E)\log V)$. Bei der Implementation mit einem t-nären Heap sind es $\mathcal{O}\left((|V| \cdot t + |E|)\frac{\log V}{\log t}\right)$. Die beste Laufzeit kann mit einem Fibonacci Heap erreicht werden: $\mathcal{O}(V \log V + E)$.
+		
+		Wenn der Graph dicht ist, dann sollte die Arrayimplementation genommen werden. Wenn der Graph dünn ist, dann sollte die Heapimplementation bevorzugt werden. Wenn der Graph sehr dünn ist (|E| = $\Omega(|V|)$) bekommen wir die Laufzeit $\mathcal{O}(|V| \log |V|)$.
+		
+		Auch dieser Algorithmus gehört zum Single--Source--Shortest--Path--Problem.
+	
+	\subsection{Floyd--Warshall}
+	
+		Floyd--Warshall ist ein Graphalgorithmus, mit dem man die kürzesten Pfade von jedem Knoten zu jedem Knoten herausfinden kann (All--Pairs--Shortest--Path--Problem). Der Pseudocode ist folgender.
+		
+		\begin{algorithmic}[1]
+			\Function{FloydWarshall}{}
+				\State n $\gets$ |V|
+				\State $D^{(0)} \gets$ new $n \times n$ matrix with all values being $\infty$
+				\ForAll{v $\in$ V}
+					 \State $d_{0}(v,v) \gets$ 0
+				\EndFor
+				\ForAll{(u,v) $\in$ E}
+					\State $d_{0}(u,v) \gets$ w(u,v)
+				\EndFor
+				\For{k $\gets$ 1 to n}
+					\State $D^{k} \gets$ new $n \times n$ matrix
+					\For{s $\gets$ 1 to n}
+						\For{t $\gets$ 1 to n}
+							\State $d_{k}(s, t) \gets$ min\{$d_{k-1}(s, t)$, $d_{k-1}(s, k) + d_{k-1}(k, t)$\}
+						\EndFor
+					\EndFor
+				\EndFor
+				\State \Return $D^{(n)}$
+			\EndFunction
+		\end{algorithmic}
+		
+		Die Laufzeit beträgt $\mathcal{O}(|V|^{3})$.
+		
+	\subsection{SCC--Algorithmus}
+	
+		Der SCC--Algorithmus wird zum Bestimmen von starken Zusammenhangskomponenten beynutzt. Der Algorithmus kann in Worten wie folgt beschrieben werden.
+		
+		\begin{algorithmic}[1]
+			\Procedure{SCC}{G}
+				\State Call \Call{DFS}{G} to compute the finishing times \Call{f}{u}
+				\State Compute the reverse graph $G^{t}$
+				\State Call \Call{DFS}{$G^{t}$}, where the vertices in the main loop are considered in order of decreasing \Call{f}{u}
+				\State Output the subsets that have been discovered by the individual calls of DFS--Visit
+			\EndProcedure
+		\end{algorithmic}
+		
+		Die Laufzeit beträgt insgesamt $\mathcal{O}(|V| + |E|)$.
+		
+	\subsection{Kruskal Algorithmus}
+	
+		%TODO
+		
+	\subsection{Prims Algorithmus}
+	
+		%TODO
+		
+	\subsection{Bidirektionaler Dijkstra}
+	
+		%TODO
+	
+	\subsection{A*--Suche}
+	
+		%TODO
+		
+\section{Dynamisches Programmieren}
+
+	%TODO
+	
+\section{Edit distance}
+
+	%TODO
+	
+	\[
+		E(i, j) = min\begin{cases}
+			E(i - 1, j) + 1 \\
+			E(i, j - 1) + 1 \\
+			E(i - 1, j - 1) + \mathrm{1}_{x[i] \neq y[j]}
+		\end{cases}
+	\]
 \end{document}
