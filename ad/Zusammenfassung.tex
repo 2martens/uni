@@ -558,6 +558,18 @@
 		
 		Die Laufzeit beträgt $\mathcal{O}(|V|^{3})$.
 		
+	\subsection{Bidirektionaler Dijkstra}
+	
+		Der Bidirektionale Dijkstra besteht aus zwei Dijkstra--Algorithmen, die wechselweise ausgeführt werden. Der erste Dijkstra startet beim Startknoten und der zweite Dijkstra startet beim Zielknoten. Beide Algorithmen sind ganz normale Dijkstra--Algorithmen, die solange laufen bis ein Algorithmus einen Knoten aufnimmt, der bereits von dem anderen Algorithmus aufgenommen wurde.
+		
+		Der kürzeste Pfad muss aber nicht über diesen Knoten laufen.
+	
+	\subsection{A*--Suche}
+	
+		$A^{*}$--Suche ist ein modifizierter Dijkstra--Algorithmus. Für jeden Knoten gibt es einen Wert, der die Entfernung zum Ziel angibt. Diese Entfernung muss nicht immer exakt sein, sodass auch eine untere Grenze wie die Luftlinienentfernung hinreichend ist.
+		
+		Diese Entfernung wird bei der Auswahl des nächsten Knotens berücksichtigt. Der Knoten mit dem geringsten Abstand zum Startknoten plus der abgeschätzten Entfernung zum Ziel wird als nächstes ausgewählt.
+		
 	\subsection{SCC--Algorithmus}
 	
 		Der SCC--Algorithmus wird zum Bestimmen von starken Zusammenhangskomponenten beynutzt. Der Algorithmus kann in Worten wie folgt beschrieben werden.
@@ -573,21 +585,13 @@
 		
 		Die Laufzeit beträgt insgesamt $\mathcal{O}(|V| + |E|)$.
 		
-	\subsection{Kruskal Algorithmus}
+	\subsection{Kruskals Algorithmus}
 	
-		%TODO
+		Kruskals Algorithmus geht die Kanten in nicht absteigender Reihenfolge durch und nimmt alle Kanten auf, die keinen Zyklus ergeben.
 		
 	\subsection{Prims Algorithmus}
 	
-		%TODO
-		
-	\subsection{Bidirektionaler Dijkstra}
-	
-		%TODO
-	
-	\subsection{A*--Suche}
-	
-		%TODO
+		Prims Algorithmus beginnt bei einem Startknoten, der zu Beginn einziger Bestandteil der Menge $S$ ist. Prim fügt in jedem Schritt eine Kante hinzu, die $S$ mit $V \setminus S$ verbindet und von allen potentiellen Kanten die mit dem geringsten Gewicht ist.
 		
 \section{Dynamisches Programmieren}
 
