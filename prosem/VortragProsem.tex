@@ -193,15 +193,15 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Display of TOCs:
-\AtBeginSection[]
-{
-	\setcounter{tocdepth}{2}  
-	\frame
-	{
-	  \frametitle{Outline}
-		\tableofcontents[currentsection]
-	}
-}
+%\AtBeginSection[]
+%{
+%	\setcounter{tocdepth}{2}  
+%	\frame
+%	{
+%	  \frametitle{Outline}
+%		\tableofcontents[currentsection]
+%	}
+%}
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Document:
@@ -213,28 +213,28 @@
 \end{frame}
 %\setcounter{framenumber}{0}
 
-\frame{
-	\frametitle{Outline}
-	\tableofcontents
-}
-
 %%%%%%%%%%%%%%
 % Your Content
 
-\section{Motivation and Question}
+\section*{Motivation and Question}
 
 \frame[t]{
 	\frametitle{Motivation}
 	\begin{itemize}
-  		\item dialogue in computer games
+  		\item Dialogue in computer games
 		\begin{itemize}
 			\item spoken
 			\item written
 		\end{itemize}
-		\item ambiguity
-		\item disambiguation
+		\item Ambiguity
+		\item Disambiguation
 		%\item Use references \textsuperscript{[Author, 2010]}
 	\end{itemize}
+}
+
+\frame{
+	\frametitle{Outline}
+	\tableofcontents
 }
 
 \section{Basics}
@@ -243,9 +243,18 @@
 {
 	\frametitle{Basics}
 	\begin{itemize}
-		\item syntax
-		\item semantics
-		\item pragmatics
+		\item Syntax
+		\begin{itemize}
+			\item describes allowed sentence structures
+		\end{itemize}
+		\item Semantics
+		\begin{itemize}
+			\item meaning of the written words
+		\end{itemize}
+		\item Pragmatics
+		\begin{itemize}
+			\item meaning of words in a given context
+		\end{itemize}
 	\end{itemize}
 }
 
@@ -255,8 +264,8 @@
 {
 	\frametitle{Lexicon}
 	\begin{itemize}
-		\item allowed words \textsuperscript{[Russel, 2009]}
-		\item probabilities
+		\item Allowed words \textsuperscript{[Russel, 2009]}
+		\item Probabilities
 	\end{itemize}
 }
 
@@ -264,10 +273,10 @@
 {
 	\frametitle{Grammar}
 	\begin{itemize}
-		\item combines words into valid phrases \textsuperscript{[Russel, 2009]}
-		\item base for all kinds of parsing
-		\item probabilities
-		\item defines valid syntax
+		\item Combines words into valid phrases \textsuperscript{[Russel, 2009]}
+		\item Base for all kinds of parsing
+		\item Probabilities
+		\item Defines valid syntax
 	\end{itemize}
 }
 
@@ -275,9 +284,9 @@
 {
 	\frametitle{CYK}
 	\begin{itemize}
-		\item dynamic programming parsing algorithm \textsuperscript{[Russel, 2009]}
-		\item named after inventors \textsuperscript{[Russel, 2009]}
-		\item works only with grammars in CNF \textsuperscript{[Russel, 2009]}
+		\item Dynamic programming parsing algorithm \textsuperscript{[Russel, 2009]}
+		\item Named after inventors \textsuperscript{[Russel, 2009]}
+		\item Works only with grammars in CNF \textsuperscript{[Russel, 2009]}
 	\end{itemize}
 }
 
@@ -287,8 +296,8 @@
 {
 	\frametitle{Approach}
 	\begin{itemize}
-		\item syntax-driven semantic analysis \textsuperscript{[Jurafsky, 2009]}
-		\item syntax representation
+		\item Syntax-driven semantic analysis \textsuperscript{[Jurafsky, 2009]}
+		\item Syntax representation
 		\begin{itemize}
 			\item parse trees \textsuperscript{[Jurafsky, 2009]}
 			\item dependency structures \textsuperscript{[Jurafsky, 2009]}
@@ -305,9 +314,9 @@
 	\frametitle{Conclusion}
 
 	\begin{itemize}
-		\item parsing and semantic analysis need restriction
-		\item ambiguity remains large problem
-		\item context is key
+		\item Parsing and semantic analysis need restriction
+		\item Ambiguity remains large problem
+		\item Context is key
 	\end{itemize}
 }
 
