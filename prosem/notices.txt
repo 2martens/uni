@@ -1,0 +1,154 @@
+Method for understanding natural language
+=========================================
+
+title slide: present title and lead to motivation (Why is it interesting?)
+-----------
+
+Motivation
+----------
+
+- explain Mass Effect 1 screenshot (short and concise without story details)
+-1- it's a dialogue with predefined options
+- click
+-1- what about a game where I can freely decide what I say?
+-1- speech recognition would be necessary
+- but there are also other kinds of dialogue in computer games
+-2- Shroud of the Avatar uses a dialogue box (similar to chat bot) to enter your sentences
+-2- the NPCs react appropriately
+-2- behind the hood they just use keyword searching
+- click
+- if this is developed further, you come pretty quickly to the methods used to understand natural language
+- but there is an imminent problem: Ambiguity (click)
+- Disambiguation is used to address ambiguity
+
+Outline
+-------
+
+- start with some basic definitions
+- then Syntactic Parsing which is the key aspect of this presentation
+- Semantic Analysis is next but only the key points are presented
+- Conclusion (refers to critical discussion in paper)
+
+Definitions
+-----------
+
+syntax: describes sentence structure (for example subject-predicate-object order) and kind (declarative, question, order)
+
+grammar: specifies valid sentences
+
+semantics: meaning of the written words
+
+pragmatics: meaning of words in a given context/actual meaning
+
+- explain ambiguity on semantic level with the word "order"
+- as you can see this ambiguity can easily be resolved if the context is given
+- but without the context, the word "order" has different possible meanings
+- which one to choose?
+- that's a question that belongs to the semantic analysis
+
+Syntactic Parsing (Lexicon)
+---------------------------
+
+- first we come to syntactic parsing
+- a lexicon is very important there
+- it defines the set of allowed words divided into categories
+- open and closed categories
+-1- open: new words are added constantly, complete list not feasible
+-1- closed: change over course of centuries, complete list possible
+
+- each word is attached a probability
+- all probabilities in one category sum up to 1
+
+Syntactic Parsing (Grammar)
+---------------------------
+
+- the grammar is somewhat the brother of the lexicon
+- defines how the allowed words can be brought into a sentence structure
+- contains multiple rules
+- base for all kinds of parsing as every algorithm must be able to determine if the input is valid
+
+- in our case the grammar is a "Probabilistic context free grammar"
+-1- it has probabilities for each rule
+-1- the probabilities of all rules starting with the same non-terminal sum up to 1
+
+- click
+
+- this is example from paper
+- it's a very simplistic grammar that does only allow the simplest forms of sentences
+- Article, Noun, Verb, Adjective stand for a word from these categories in lexicon
+- as you can see the probabilities of the VP and Adjs rules sum up to 1 each
+- these probabilities are used to calculate the total probability of a parse tree in the (click) Cocke-Younger-Kasami or short CYK algorithm
+
+Syntactic Parsing (CYK)
+-----------------------
+
+- it is named after the inventors John Cocke, Daniel H. Younger and Tadeo Kasami
+- Cocke was awarded the ACM Turing Award and National Medal of Science of the United States
+- Kasami was the first to publish the ideas of the CYK algorithm
+
+- it's a dynamic programming parsing algorithm
+-1- in short: it utilizes the results from earlier iterations
+- it's got the drawback that it only works with grammars in CNF
+-2- in theory no problem as every CFG can be converted to CNF without loss in expressiveness
+-2- in practice it poses non-trivial problems as the resulting trees do not fit to original grammar
+-2- solution to this is a modification of the CYK algorithm to handle unit productions (A->C->B) directly (Jurafsky Chapter 13 Section 4 Page 475)
+
+- probabilities are used for disambiguation (if two things are possible, the one with higher probability does make probably more sense and comes closer to the intended meaning)
+- probabilities are gained from a treebank (like Penn Treebank)
+
+- CYK is the best algorithm for general CFGs
+
+- click
+
+- here's an example for the table used by CYK to determine parse trees (excerpt from table in paper)
+- begins with length 1 and looks at every word (here it's the sentence "The tree is very high")
+- next it looks at length 2, 3, 4 and finally 5
+
+- in the end there should be at least one entry in the table with S in column X, 1 in start and 5 in length. 
+- If there is no such entry and the algorithm was performed correctly, the input is not valid.
+- if there is more than one such entry, there are multiple parse trees and therefore we have ambiguity
+- the probability is then used to decide which one is used to determine the parse tree (for example with the help of backpointers)
+
+- this parse tree is then given to (click) the Semantic Analysis
+
+Semantic Analysis
+-----------------
+
+- there are multiple approaches for Semantic Analysis, the syntax-driven is presented
+- it requires a syntax representation as input
+-1- can be parse trees
+-1- but also dependency structures or other things
+
+- the analysis utilizes First-Order Logic
+-2- connectives: and, or, implies
+-2- quantifiers: for all, exists
+-2- predicates, functions, variables
+
+- and lambda notation (example can be seen in paper)
+
+- the grammar is augmented with semantic attachments (click)
+- these are now combined starting with S and going down
+- in the example of the paper, the final meaning representation is this (showing on representation on slide)
+- one can also see here the elements of the logic (at least partially)
+- the whole process (step-by-step) can be seen in the paper
+
+- the meaning representation can then be computationally used to react to the input
+
+- click
+
+Conclusion
+----------
+
+- even though there are means to minimize ambiguity like probabilities, it is by far not possible to use the full grammar of a natural language (with no hint of the context, there are meany parses that make syntactically sense but not necessarily context-wise)
+- there is simply to much ambiguity and the known methods of disambiguation don't solve the problem completely
+- a restriction of the context and allowed words is therefore necessary to be able to parse and/or compute the meaning
+
+- if we manage to find a way to tell the computer the context without hardcoding it by limiting the input, the problem could be solved altogether
+- cognitive inspired methods could be the key here
+
+- click
+
+End
+---
+
+Thank you for your attention
