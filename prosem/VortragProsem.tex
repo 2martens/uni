@@ -8,7 +8,7 @@
 \newcommand{\trmatrikelnummer}{6420323}
 \newcommand{\tremail}{2martens@informatik.uni-hamburg.de}
 \newcommand{\trinstitute}{}
-\newcommand{\trwebsiteordate}{25.02.2014}
+\newcommand{\trwebsiteordate}{26.02.2014}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Languages:
@@ -53,6 +53,8 @@
 \usepackage{fancybox}                   % Gleichungen einrahmen
 \usepackage{fancyhdr}										% Paket zur schickeren der Gestaltung der 
 \usepackage{graphicx}                   % Inclusion of graphics
+\usepackage{tikz}
+%\usepackage{wrapfig}
 %\usepackage{latexsym}                  % Special symbols
 \usepackage{longtable}									% Allow tables over several parges
 \usepackage{listings}                   % Nicer source code listings
@@ -102,7 +104,7 @@
 
 %\lstloadlanguages{C}                   % Set the default language for listings
 \DeclareGraphicsExtensions{.pdf,.svg,.jpg,.png,.eps} % first try pdf, then eps, png and jpg
-\graphicspath{{./src/}} 								% Path to a folder where all pictures are located
+\graphicspath{{./src/} {/home/jim/Pictures/}} 	% Path to a folder where all pictures are located
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Costom Definitions:
@@ -218,112 +220,178 @@
 
 \section*{Motivation and Question}
 
-\frame[t]{
-	\frametitle{Motivation}
-	\begin{itemize}
-  		\item Dialogue in computer games
-		\begin{itemize}
-			\item spoken
-			\item written
-		\end{itemize}
-		\item Ambiguity
-		\item Disambiguation
-		%\item Use references \textsuperscript{[Author, 2010]}
-	\end{itemize}
-}
+\begin{frame}[t]{Motivation}
+	\begin{columns}[t]
+		\begin{column}{0.5\textwidth}	
+			\begin{itemize}
+	  			\item<2-> Dialogue in computer games
+				\begin{itemize}
+					\item<3-> spoken
+					\item<4-> written
+				\end{itemize}
+				\item<5-> Ambiguity
+				\item<5-> Disambiguation
+				%\item Use references \textsuperscript{[Author, 2010]}
+			\end{itemize}
+		\end{column}
+		\begin{column}{68mm}\centering
+			\begin{pgfpicture}{0cm}{3cm}{1cm}{0cm}
+				\pgfbox[center,center]{\includegraphics[scale=0.15]{massEffectDialogScreenshot}}
+			\end{pgfpicture}
+		\end{column}
+		
+	\end{columns}
+\end{frame}
 
-\frame{
-	\frametitle{Outline}
+\begin{frame}{Outline}
 	\tableofcontents
-}
+\end{frame}
 
-\section{Basics}
+\section{Definitions}
 
-\frame[t]
-{
-	\frametitle{Basics}
+\begin{frame}[t]{Definitions}
 	\begin{itemize}
 		\item Syntax
 		\begin{itemize}
-			\item describes allowed sentence structures
+			\item Describes the sentence structure (e.g. simple subject--predicate--object order) and kind (e.g. declarative, question, order)
+		\end{itemize}
+		\item Grammar
+		\begin{itemize}
+			\item Specifies valid sentences
 		\end{itemize}
 		\item Semantics
 		\begin{itemize}
-			\item meaning of the written words
+			\item Meaning of the written words
 		\end{itemize}
 		\item Pragmatics
 		\begin{itemize}
-			\item meaning of words in a given context
+			\item Meaning of words in a given context or actual meaning
 		\end{itemize}
 	\end{itemize}
-}
+\end{frame}
 
 \section{Syntactic Parsing}
 
-\frame[t]
-{
-	\frametitle{Lexicon}
-	\begin{itemize}
-		\item Allowed words \textsuperscript{[Russel, 2009]}
-		\item Probabilities
-	\end{itemize}
-}
+\begin{frame}[t,fragile]{Lexicon}
+	\begin{columns}[t]
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item Allowed words \textsuperscript{[Russel, 2009]}
+				\item Probabilities
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			Example:
+			\begin{alignat*}{2}
+				Noun &\rightarrow && \text{tree [1.00]} \\
+				Verb &\rightarrow && \text{is [1.00]} \\
+				Adjective &\rightarrow && \text{high [1.00]} \\
+				Article &\rightarrow && \text{the [1.00]} \\
+			\end{alignat*}
+		\end{column}
+	\end{columns}
+\end{frame}
 
-\frame[t]
-{
-	\frametitle{Grammar}
+\begin{frame}[t]{Grammar}
 	\begin{itemize}
 		\item Combines words into valid phrases \textsuperscript{[Russel, 2009]}
 		\item Base for all kinds of parsing
 		\item Probabilities
 		\item Defines valid syntax
 	\end{itemize}
-}
+\end{frame}
+\begin{frame}[t,fragile]{Grammar}
+	Example:
+	\begin{alignat*}{2}
+				S \;&\rightarrow &\; NP\;\;VP \;&[1.00] \\
+				NP \;&\rightarrow &\; A\;N \;&[1.00]\\
+				A \;&\rightarrow &\; Article\;&[1.00]\\
+				N \;&\rightarrow &\; Noun\;&[1.00]\\
+				VP \;&\rightarrow &\; Verb \;&[0.40] \\
+				\;&|&\; VP\;Adjs \;&[0.60] \\
+				Adjs \;&\rightarrow &\; Adjective \;&[0.80] \\
+				\;&|&\; Adjective\;Adjs \;&[0.20]
+			\end{alignat*}
+\end{frame}
 
-\frame[t]
-{
-	\frametitle{CYK}
+\begin{frame}[t]{Cocke Younger Kasami (CYK)}
 	\begin{itemize}
-		\item Dynamic programming parsing algorithm \textsuperscript{[Russel, 2009]}
 		\item Named after inventors \textsuperscript{[Russel, 2009]}
+		\begin{itemize}
+			\item John Cocke (1925--2002)
+			\item Daniel H. Younger
+			\item Tadeo Kasami (1930--2007)
+		\end{itemize}
+		\item Dynamic programming parsing algorithm \textsuperscript{[Russel, 2009]}
 		\item Works only with grammars in CNF \textsuperscript{[Russel, 2009]}
+		\item Probabilities serve as disambiguation \textsuperscript{[Russel, 2009]}
+		\item Best algorithm for general CFGs \textsuperscript{[Russel, 2009]}
 	\end{itemize}
-}
+\end{frame}
+
+\begin{frame}[t]{CYK Example}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+			\hline
+			X & start & length & p \\
+			\hline
+			\hline
+			A & 1 & 1 & 1.00 \\
+			\hline
+			N & 2 & 1 & 1.00 \\
+			\hline				
+			VP & 3 & 1 & 0.40 \\
+			\hline
+			Adjs & 4 & 1 & 0.80 \\
+			\hline
+			Adjs & 5 & 1 & 0.80 \\
+			\hline
+		\end{tabular}
+\end{frame}
 
 \section{Semantic Analysis}
 
-\frame[t]
-{
-	\frametitle{Approach}
+\begin{frame}[t]{Semantic Analysis}
 	\begin{itemize}
 		\item Syntax-driven semantic analysis \textsuperscript{[Jurafsky, 2009]}
 		\item Syntax representation
 		\begin{itemize}
-			\item parse trees \textsuperscript{[Jurafsky, 2009]}
-			\item dependency structures \textsuperscript{[Jurafsky, 2009]}
+			\item Parse trees \textsuperscript{[Jurafsky, 2009]}
+			\item Dependency structures \textsuperscript{[Jurafsky, 2009]}
 			\item etc
 		\end{itemize}
+		\item First--Order Logic
+		\item Lambda notation
+		\item Semantic attachments
+		\item Meaning representation
 	\end{itemize}
-}
+\end{frame}
+
+\begin{frame}[t,fragile]{Semantic Analysis}
+	Example of semantic attachment:
+	\[
+		A \rightarrow the \;\{\lambda x.\lambda P.\exists x.P(x)\}
+	\]
+	Example of meaning representation:
+	\[
+		\exists x.Tree(x) \Rightarrow \exists a.Very(a) \wedge HighThing(a, x)
+	\]
+\end{frame}
 
 
 \section{Conclusion}
 
-\frame[t]
-{
-	\frametitle{Conclusion}
-
+\begin{frame}[t]{Conclusion}
 	\begin{itemize}
-		\item Parsing and semantic analysis need restriction
 		\item Ambiguity remains large problem
+		\item Parsing and semantic analysis need restriction
 		\item Context is key
 	\end{itemize}
-}
+\end{frame}
 
 %%%%%%%%%%%%%%
 
-\frame[c]{
-	\frametitle{The End}
+\begin{frame}[c]{The End}
 	\begin{center}
 		Thank you for your attention.\\[1ex]
 		Any questions?\\[5ex]
@@ -331,11 +399,13 @@
 	\footnotesize
 	Literature:
 	\begin{itemize}
-		%\item Author , Author , Author, and Author. Name of the conference paper. \emph{In: Proceedings of the Conference Name}, 2008
-		%\item Author, Author, and Author. Name of the Article. \emph{Name of the Journal}, 42:111-133, 2010
 		\item Daniel Jurafsky and James H. Martin. \emph{Speech and Language processing}. Pearson, 2009
 		\item Stuart J. Russel and Peter Norvig. \emph{Artificial intelligence: A Modern Approach}. Pearson, 2009
 	\end{itemize}
-}
+	Pictures:
+	\begin{itemize}
+		\item Motivation: Mass Effect 1 Screenshot from IGN.com
+	\end{itemize}
+\end{frame}
 
 \end{document}
