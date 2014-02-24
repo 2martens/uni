@@ -245,7 +245,7 @@
 				& VP \;&\rightarrow &\; Verb \;&[0.40]&\; \text{is} \\
 				& \;&|&\; VP\;Adjs \;&[0.60]&\; \text{is + very high} \\
 				& Adjs \;&\rightarrow &\; Adjective \;&[0.80]&\; \text{very} \\
-				& \;&|&\; Adj\;Adjs \;&[0.20]&\; \text{very + high}
+				& \;&|&\; Adjective\;Adjs \;&[0.20]&\; \text{very + high}
 			\end{alignat*}
 		
 			\caption{The grammar for $\varepsilon_{0}$ with example phrases for each rule. The syntactic categories are sentence (S), noun phrase (NP), verb phrase (VP), article (A), noun (N) and list of adjectives (Adjs). The categories article and noun have been added to allow a CNF grammar.}
@@ -503,7 +503,7 @@
 	
 	Looking into the future both methods require substantial improvements on the algorithm side to reach a point where understanding non-restricted natural languages becomes possible. But as it is right now it is not possible to create dialog systems that interact fully natural with humans. To make any kind of language interaction, the set of possible words and sentence structures must be restricted. But even if that is given (like in a flight check-in automaton), the computer has only a finite set of possible cases. The programmer can add tons of if-clauses or comparable statements to check for different cases but in the end it's all finite so that many of the user inputs must lead to the same output or no output at all. This fact has led to the current situation in which the most interaction with a computer happens via a restricted interface in which the user can only choose from a limited set of options (by clicking on a button, selecting an item of a list, etc.).
 	
-	Furthermore the ambiguity of natural language is a major issue. The solution to it could lie in the understanding of the context. Even though natural language is full of ambiguity, we manage to communicate very successfully. Therefore the solution to ambiguity lies probably somewhere in our brain functionality. Cognitively-inspired methods that don't use traditional AI and First-Order logic but instead are inspired by our brain and try to understand and model natural language based on the context, might as well be the solution to ambiguity altogether. The method presented by Gnjatovic\cite{Gnjatovic2012} could be such a method.
+	Furthermore the ambiguity of natural language is a major issue. The solution to it could lie in the understanding of the context. Even though natural language is full of ambiguity, we manage to communicate very successfully. Therefore the solution to ambiguity lies probably somewhere in our brain functionality. Cognitively-inspired methods that don't use traditional AI and First--Order logic but instead are inspired by our brain and try to understand and model natural language based on the context, might as well be the solution to ambiguity altogether. The method presented by Gnjatovic\cite{Gnjatovic2012} could be such a method.
 	
 	In a mission critical environment this ambiguity could lead to catastrophic results, because the computer, simply put, ``didn't get it''. This risk limits the usability of natural language communication with a computer for propably a long time to a very restricted set of use cases.
 	
