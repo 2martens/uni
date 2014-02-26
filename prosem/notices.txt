@@ -1,4 +1,4 @@
-Method for understanding natural language
+Methods for understanding natural language
 =========================================
 
 title slide: present title and lead to motivation (Why is it interesting?)
@@ -13,7 +13,7 @@ Motivation
 -1- what about a game where I can freely decide what I say?
 -1- speech recognition would be necessary
 - but there are also other kinds of dialogue in computer games
--2- Shroud of the Avatar uses a dialogue box (similar to chat bot) to enter your sentences
+-2- Shroud of the Avatar uses a dialogue box (similar to chat box) to enter your sentences
 -2- the NPCs react appropriately
 -2- behind the hood they just use keyword searching
 - click
