@@ -1,0 +1,68 @@
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+%\usepackage{paralist}
+\useoutertheme{infolines} 
+\usepackage{graphicx}
+\usepackage{hyperref}
+%\usepackage{listings}
+%\usetheme{Berkeley}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setbeamertemplate{navigation symbols}{}
+\graphicspath{ {src/} {/home/jim/Pictures/} }
+%\lstset{language=PHP}
+\setbeamertemplate{frametitle}[default][center]
+
+
+\hypersetup{
+	pdfauthor=Jim Martens
+}
+
+\begin{document}
+\author{Jim Martens}
+\title{E-Mails vernünftig einrichten}
+\date{14. April 2014}
+
+	% Introduction
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	\begin{frame}{Motivation}
+		Studentin A:
+		\begin{quotation}
+			Das KBS findet jetzt montags statt?
+		\end{quotation}
+		
+		Student B:
+		\begin{quotation}
+			In den Semesterferien lese ich meine Mails nicht. Ich bin momentan immer noch ein bisschen in dem Modus.
+		\end{quotation}
+		
+		Student C:
+		\begin{quotation}
+			Ich komme gar nicht dazu die Mails zu lesen.
+		\end{quotation}
+	\end{frame}
+	
+	\begin{frame}{Motivation}
+		\centering
+		\only<1>{\small Wie kann das sein?}
+		\only<2>{\Large Wie kann das sein?}
+		\only<3>{\Huge Wie kann das sein?}
+	\end{frame}
+	
+	{
+	\setbeamertemplate{footline}{}
+	\begin{frame}
+		\includegraphics[scale=0.25]{Thunderbird-KBS.png}
+	\end{frame}
+	}
+	
+	
+\end{document}
+
