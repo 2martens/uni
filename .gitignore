@@ -31,6 +31,7 @@
 *.synctex.gz
 *.toc
 *.vrb
+*.xcf
 *.xdy
 *.tdo
 *.zip
