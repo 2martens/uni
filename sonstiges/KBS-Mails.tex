@@ -6,7 +6,7 @@
 \useoutertheme{infolines} 
 \usepackage{graphicx}
 \usepackage{hyperref}
-%\usepackage{listings}
+\usepackage{listings}
 %\usetheme{Berkeley}
 \pagenumbering{arabic}
 \def\thesection{\arabic{section})}
@@ -63,6 +63,68 @@
 	\end{frame}
 	}
 	
+	\begin{frame}{Lösung}
+		\begin{enumerate}[1.]
+			\item Mailclient installieren (falls noch nicht geschehen)
+			\item @inf-Adresse hinzufügen (falls noch nicht geschehen)
+			\item auf webmail.informatik.uni-hamburg.de 1 Ordner/Mailingliste anlegen
+			\item dort Filterregeln für Mailinglisten anlegen (falls noch nicht geschehen)
+			\item Mailclient mind. einmal täglich (sofern praktisch möglich + Internet vorhanden) öffnen
+			\item Mails checken \underline{und} ungelesene Mails lesen
+		\end{enumerate}
+	\end{frame}
 	
+	\begin{frame}{Lösung}
+		\begin{itemize}
+			\item nützliches Tool: wmctrl (\texttt{sudo apt-get install wmctrl})
+			\item listet Desktops auf (aktueller mit Stern versehen): \texttt{wmctrl -d}
+			\item Skript schreiben, das benötigte Anwendungen automatisch startet und Desktops zuordnet (mithilfe von wmctrl)
+		\end{itemize}		
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Beispiel}
+		\texttt{wmctrl -d} Output
+		\begin{verbatim}
+			0  - DG: 1366x768  VP: N/A  WA: 0,0 1366x743  MAIN
+1  - DG: 1366x768  VP: N/A  WA: 0,0 1366x743  MAIL
+2  * DG: 1366x768  VP: 0,0  WA: 0,0 1366x743  TERMINAL
+3  - DG: 1366x768  VP: N/A  WA: 0,0 1366x743  CHAT
+4  - DG: 1366x768  VP: N/A  WA: 0,0 1366x743  OTHER
+		\end{verbatim}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Beispiel - 2}
+		\begin{verbatim}			
+firefox &
+thunderbird &
+pidgin &
+sleep 20
+gnome-terminal &
+sleep 15
+wmctrl -r "Terminal" -N "TermLeft"
+wmctrl -r "TermLeft" -e 0,6,48,677,716
+wmctrl -r "TermLeft" -t 2
+wmctrl -r "Mozilla Thunderbird" -e 0,0,48,1366,718
+wmctrl -r "Buddy List" -e 0,689,48,677,716
+wmctrl -r "Star Citizen" -e 0,0,48,677,716
+wmctrl -r "Mozilla Thunderbird" -t 1
+wmctrl -r "Buddy List" -t 3
+		\end{verbatim}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Beispiel - 3}
+		\begin{verbatim}
+wmctrl -s 1	
+sleep 2
+wmctrl -r "Star Citizen" -t 3
+wmctrl -r "Terminal" -N "TermRight"
+wmctrl -r "TermRight" -e 0,689,48,677,716
+wmctrl -r "TermRight" -t 2
+echo "Done"
+		\end{verbatim}
+	\end{frame}
 \end{document}
 
