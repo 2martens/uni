@@ -1,0 +1,59 @@
+\documentclass[a4paper,10pt]{scrartcl}
+
+% Hier die Nummer des Blatts und Autoren angeben.
+\newcommand{\blatt}{3}
+\newcommand{\autor}{Florian B\"{o}hm, Christopher Gawehn, Ulrike Geries, Jim Martens}
+
+\usepackage{hci}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage[official]{eurosym}
+
+\begin{document}
+% Seitenkopf mit Informationen
+\kopf
+\renewcommand{\figurename}{Figure}
+
+\aufgabe{1}
+
+\begin{tikzpicture}[>=stealth]
+				\begin{axis}[
+					ymin=0,ymax=12,
+					x=1cm,
+					y=1cm,
+					axis x line=middle,
+					axis y line=middle,
+					axis line style=->,
+					xlabel={ID},
+					ylabel={Zeit in sec.},
+					xmin=0,xmax=5
+				]
+				
+				 \node at (axis cs: 2,7.68) {.};
+				 \node at (axis cs: 2,7.81) {.};
+				 \node at (axis cs: 2,6.16) {.};
+				 \node at (axis cs: 2,6.2) {.};
+				 \node at (axis cs: 2,4.35) {.};
+				 \node at (axis cs: 2,3.81) {.};
+				 
+				 \node at (axis cs: 3,9.82) {.};
+				 \node at (axis cs: 3,9.03) {.};
+				 \node at (axis cs: 3,7.99) {.};
+				 \node at (axis cs: 3,8.12) {.};
+				 \node at (axis cs: 3,5.65) {.};
+				 \node at (axis cs: 3,4.85) {.};
+				 
+				 \node at (axis cs: 4,10.41) {.};
+				 \node at (axis cs: 4,10.82) {.};
+				 \node at (axis cs: 4,9.75) {.};
+				 \node at (axis cs: 4,10.4) {.};
+				 \node at (axis cs: 4,6.79) {.};
+				 \node at (axis cs: 4,5.92) {.};
+				 
+				\end{axis}
+	
+\end{tikzpicture}
+
+Eine lineare Regression konnte von uns wegen mangelndem Wissen nicht durchgeführt werden. Wir waren auch nicht imstande eine vernünftige Erklärung zu finden.
+
+\end{document}
