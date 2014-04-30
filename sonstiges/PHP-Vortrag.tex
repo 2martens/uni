@@ -1,0 +1,257 @@
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+%\usepackage{paralist}
+%\useoutertheme{infolines} 
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usetheme{Warsaw}
+\usecolortheme{crane}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setbeamertemplate{navigation symbols}{}
+\graphicspath{ {src/} {/home/jim/Pictures/} }
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygray},    % comment style
+  deletekeywords={},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=PHP,                 % the language of the code
+  morekeywords={class, function, return, protected, public, private, const, static, new, extends, namespace, null},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mygreen},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\hypersetup{
+	pdfauthor=Jim Martens,
+	pdfstartview=Fit
+}
+
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+	\raggedleft \insertframenumber\,/\,\inserttotalframenumber\;}
+
+\begin{document}
+\author{Jim Martens}
+\title{PHP (Un-)Wahrheiten}
+\date{02. Juni 2014}
+
+	% Introduction
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	% Motivation
+	\begin{frame}{Motivation}
+		\begin{quotation}
+			"`PHP ist keine Programmiersprache."'
+		\end{quotation}
+			
+		\begin{quotation}
+			"`PHP ist eine Programmiersprache."'
+		\end{quotation}
+		
+		\begin{quotation}
+			"`PHP ist eine Skriptsprache."'
+		\end{quotation}
+		
+		\begin{quotation}
+			"`PHP hat eine inkonsistente API."'
+		\end{quotation}
+		
+		\begin{quotation}
+			"`PHP ist hässlich."'
+		\end{quotation}
+		
+		\begin{quotation}
+			"`PHP ist eine Templatesprache."'
+		\end{quotation}
+	\end{frame}
+	
+	% Contents
+	\begin{frame}{Agenda}
+		\tableofcontents
+	\end{frame}
+	
+	% History
+	\section{Historie}
+	\begin{frame}{Von den Anfängen...}
+		\begin{itemize}
+			\item 1994: CGI binaries by Rasmus Lerdorf written in C \\ (Personal Homepage Tools bzw. PHP Tools)
+			\item June 1995: Rewrite of PHP Tools with database interaction and more
+			\item September 1995: Forms Interpreter (FI) with Perl-like variables, HTML embedded syntax, automatic interpretation of form variables
+			\item October 1995: Personal Home Page Construction Kit
+			\item April 1996: PHP/FI (another complete makeover) \\
+			with DBM, mSQL, Postgres95, cookies, user-defined function support and more
+			\item June 1996: PHP/FI gets version 2.0 status
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Von den Anfängen...}
+		Beispielcode von PHP/FI:
+		\begin{verbatim}
+			<!--include /text/header.html-->
+		
+			<!--getenv HTTP_USER_AGENT-->
+			<!--ifsubstr $exec_result Mozilla-->
+			    Hey, you are using Netscape!<p>
+			<!--endif-->
+		\end{verbatim}
+	\end{frame}
+	
+	\begin{frame}{Von den Anfängen...}
+		\begin{itemize}
+			\item 1997/8: several thousand users around the world
+			\item May 1998: Netcraft survey: 60,000 domains use PHP \\ ($1\%$ of all domains at that time use PHP)
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{...zu einer Programmiersprache...}
+		\begin{itemize}
+			\item 1997: Andi Gutmans and Zeev Suraski (Tel Aviv, Israel) began another complete rewrite of the parser
+			\item they approached Rasmus and the three decided to collaborate \\
+			in development of new, independent programming language
+			\item this language was released under PHP meaning PHP Hypertext Preprocessor
+			\item offered strong extensibility features, OOP support and more powerful and consistent language syntax
+			\item June 1998: PHP 3.0 was announced as successor to PHP/FI 2.0
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{...mit einer neuen Engine...}
+		\begin{itemize}
+			\item winter 1998: Andi Gutmans and Zeev Suraski started work on rewrite of Core
+			\item new engine was named Zend Engine (comprised of the first names, Zeev and Andi)
+			\item mid 1999: first introduction of new engine
+			\item May 2000: official release of PHP 4.0
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{...und neuem Objektmodell sowie vielen weiteren Features.}
+		\begin{itemize}
+			\item July 2004: release of PHP 5.0 with Zend Engine 2.0
+			\item November 2005: release of PHP 5.1 with PDOs
+			\item November 2006: release of PHP 5.2 with native JSON support
+			\item June 2009: release of PHP 5.3 with namespaces, late static binding, native closures, GC for circular references, mysqlnd, etc.
+			\item March 2012: release of PHP 5.4 with traits, short array syntax support, built-in web server
+			\item June 2013: release of PHP 5.5 with generator support, finally blocks for exception handling, OpCache in official distribution
+			\item February 2014: $82\%$ aller Websites, deren serverseitige Programmiersprache bekannt ist, nutzen PHP
+		\end{itemize}
+	\end{frame}
+	
+	\section{Gegenwart}
+	\subsection{Syntax}
+	\begin{frame}[fragile]
+		\frametitle{Syntax}
+		\begin{lstlisting}
+			<?php
+			namespace test;
+			
+			class Schwachsinn {
+			    const KONSTANTE = 4;
+			    public static $publicClassVariable = array(
+			        'userID' => 4,
+			        'username' => 'Max'
+			    );
+			    protected static $protClassVar = array(4,5,6);
+			    private static $privateClassVariable = 4;
+			    
+			    public $publicObjectVariable = array();
+			    protected $protectedObjectVariable = '';
+			    private $privateObjectVariable = null;
+			    
+		\end{lstlisting}
+	\end{frame}
+	\begin{frame}[fragile]
+		\frametitle{Syntax}
+		\begin{lstlisting}	    
+			    /**
+			     * Initializes an object of Schwachsinn.
+			     */
+			    public function __construct() {
+			        $this->init();
+			    }
+			    
+			    protected function init() {
+			        echo $this->protectedObjectVariable.
+			        ':'.
+			        static::$publicClassVariable['userID'];
+			    }
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Syntax}
+		\begin{lstlisting}
+			class Schwachsinn2 extends Schwachsinn {
+			    public static $publicClassVariable = array(
+			        'userID' => 5,
+			        'username' => 'Mustermann'
+			    );
+			    
+			    protected $protectedObjectVariable = 'Hallo';
+			}
+			
+			// what is echoed?
+			$object = new Schwachsinn2();
+			$object2 = new Schwachsinn();
+		\end{lstlisting}
+	\end{frame}
+	
+	\subsection{Design Patterns}
+	\begin{frame}{Täglich grüßt das Murmeltier...}
+		\begin{itemize}
+			\item<2-> MVC
+			\item<3-> Singleton
+			\item<4-> Listener
+			\item<5-> Fabrik
+			\item<6-> Dependency Injection
+		\end{itemize}
+	\end{frame}
+	\subsection{Reallife}
+	\begin{frame}{Beispiele}
+		PHP in tatsächlicher Verwendung:
+		\begin{itemize}
+			\item Symfony2
+			\item Woltlab Community Framework (WCF)
+			\item Wordpress
+		\end{itemize}
+	\end{frame}
+	
+	\section{Abschluss}
+	\begin{frame}{Quellen}
+		\begin{itemize}
+			\item \url{php.net/manual/en/history.php.php}
+			\item \url{w3techs.com/technologies/overview/programming_language/all}
+			\item \url{php.net/ChangeLog-5.php}
+		\end{itemize}
+	\end{frame}
+	
+\end{document}
+
