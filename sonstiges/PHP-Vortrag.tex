@@ -98,6 +98,15 @@
 		\tableofcontents
 	\end{frame}
 	
+	% Definitions
+	\begin{frame}{Definitionen}
+		\begin{description}
+			\item[Skriptsprachen] sind Programmiersprachen, die vor allem für kleine, überschaubare Programme gedacht sind.
+			\item[Programmiersprachen] sind [...] formale Sprachen zur Formulierung von Datenstrukturen und Algorithmen, d. h. von Rechenvorschriften, die von einem Computer ausgeführt werden können. Sie setzen sich aus Anweisungen nach einem vorgegebenen Muster zusammen, der sogenannten Syntax.
+			\item[Templatesprachen] sind begrenzte Programmiersprachen, die meistens kompiliert und zur Strukturierung von Templates verwendet werden.
+		\end{description}
+	\end{frame}
+	
 	% History
 	\section{Historie}
 	\begin{frame}{Von den Anfängen...}
@@ -115,14 +124,16 @@
 	\begin{frame}[fragile]
 		\frametitle{Von den Anfängen...}
 		Beispielcode von PHP/FI:
-		\begin{verbatim}
+		\begin{lstlisting}[commentstyle=\color{mygreen},%
+		deletekeywords={header},%
+		morekeywords={ifsubstr,endif}]
 			<!--include /text/header.html-->
 		
 			<!--getenv HTTP_USER_AGENT-->
 			<!--ifsubstr $exec_result Mozilla-->
 			    Hey, you are using Netscape!<p>
 			<!--endif-->
-		\end{verbatim}
+		\end{lstlisting}
 	\end{frame}
 	
 	\begin{frame}{Von den Anfängen...}
@@ -238,10 +249,23 @@
 	\begin{frame}{Beispiele}
 		PHP in tatsächlicher Verwendung:
 		\begin{itemize}
-			\item Symfony2
+			\item Symfony2 - Full-Stack Framework
 			\item Woltlab Community Framework (WCF)
-			\item Wordpress
+			\item Wordpress - ihr wisst schon
 		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Zusammenfassung}
+		\begin{itemize}
+			\item PHP startete als Skriptsprache,
+			\item<2-> wurde eine Templatesprache und
+			\item<3-> schließlich eine vollwertige Programmiersprache.
+		\end{itemize}
+		\only<4->{Allerdings blieben Elemente der vorigen Verwendung in der Sprache erhalten. Somit ist PHP primär eine vollwertige Programmiersprache, kann aber auch als Template- oder Skriptsprache eingesetzt werden.}
+	\end{frame}
+	
+	\begin{frame}{Fragen}
+		Fragen bis hier her?
 	\end{frame}
 	
 	\section{Abschluss}
@@ -250,6 +274,8 @@
 			\item \url{php.net/manual/en/history.php.php}
 			\item \url{w3techs.com/technologies/overview/programming_language/all}
 			\item \url{php.net/ChangeLog-5.php}
+			\item \url{https://de.wikipedia.org/wiki/Scriptsprache}
+			\item \url{https://de.wikipedia.org/wiki/Programmiersprache}
 		\end{itemize}
 	\end{frame}
 	
