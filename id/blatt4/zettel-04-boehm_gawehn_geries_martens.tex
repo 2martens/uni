@@ -1,0 +1,50 @@
+\documentclass[a4paper,10pt]{scrartcl}
+
+% Hier die Nummer des Blatts und Autoren angeben.
+\newcommand{\blatt}{4}
+\newcommand{\autor}{Florian B\"{o}hm, Christopher Gawehn, Ulrike Geries, Jim Martens}
+
+\usepackage{hci}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage[official]{eurosym}
+
+\begin{document}
+% Seitenkopf mit Informationen
+\kopf
+\renewcommand{\figurename}{Figure}
+
+\aufgabe{3}
+
+\begin{enumerate}
+	\item Bei dem Pull-Down-Menü ergeben sich folgende Werte:\\
+	\begin{tabular}{c|c|c|c}
+		Option & Zieldistanz (in px) & Zielbreite (in px) & ID \\
+		\hline
+		Option 1 & 31.6 & 63.2 & 0.6 \\
+		Option 2 & 42.4 & 28.3 & 1.3 \\
+		Option 3 & 58.3 & 23.3 & 1.8 \\
+		Option 4 & 76.2 & 21.8 & 2.2
+	\end{tabular}
+	\\\\
+	Bei dem Pie-Menü ergeben sich folgende Werte:\\
+	\begin{tabular}{c|c|c|c}
+		Option & Zieldistanz (in px) & Zielbreite (in px) & ID \\
+		\hline
+		Option 1 & 20 & 40 & 0.6 \\
+		Option 2 & 20 & 40 & 0.6 \\
+		Option 3 & 20 & 40 & 0.6 \\
+		Option 4 & 20 & 40 & 0.6
+	\end{tabular}
+	
+	\item
+	Pie-Menüs haben den klaren Vorteil, dass alle Menüelemente gleich weit weg sind vom Mauszeiger. Aufgrund der Kreiseigenschaft ist auch der Index of Difficulty gleich für jedes Element gleich. Außerdem ist das Klicken auf ein falsches Element sehr unwahrscheinlich. Desweiteren sind alle Optionen auf einen Blick sichtbar und es ist kein Scrollen, wie bei einer Liste nötig.
+	
+	Allerdings haben diese Menüs auch klare Nachteile. So sind sie für viele Optionen ungeeignet, da einzelne Felder sehr klein werden. Optionen mit langer Beschriftung sind somit schwieriger zu implementieren. Abschließend brauchen diese Menüs auch verhältnismäßig viel Platz.
+	
+	Pie-Menüs können sinnvoll verwendet werden bei Menüs in Konsolenspielen, die mit einem Controller bedient werden. Ein anderes sinnvolles Szenario sind Entscheidungssituationen, in denen mehr als zwei exklusive Optionen (mutually exclusive) vorhanden sind.
+	
+	Weniger gut können diese Menüs bei der normalen Menüführung in Desktopanwendungen benutzt werden.
+\end{enumerate}
+
+\end{document}
