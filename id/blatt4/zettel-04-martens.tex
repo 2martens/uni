@@ -1,0 +1,85 @@
+\documentclass[a4paper,10pt]{scrartcl}
+
+% Hier die Nummer des Blatts und Autoren angeben.
+\newcommand{\blatt}{4}
+\newcommand{\autor}{Jim Martens}
+
+\usepackage{hci}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage[official]{eurosym}
+
+\begin{document}
+% Seitenkopf mit Informationen
+\kopf
+\renewcommand{\figurename}{Figure}
+
+\aufgabe{1}
+
+Vannevar Bush schreibt über die arithmetischen Maschinen der Zukunft (aus dem Blickwinkel von 1945) und wie sie die wissenschaftliche Arbeit verändern könnten.
+
+Er erörtert die Möglichkeit Maschinen zu haben, die gesprochene Sprache in geschriebene Sprache umwandeln können. So könnte ein Wissenschaftler während der Untersuchung einfach in die Aufnahme sprechen und sich somit besser auf die eigentliche Arbeit konzentrieren.
+
+Außerdem beschreibt Bush ein Gerät namens Memex, welches für einzelne Anwender gedacht ist und ihnen erlaubt Daten abzuspeichern und wieder auf sie zuzugreifen. Eine Besonderheit des Memex sei, so Bush, dass man Gegenstände bzw. Daten miteinander verbinden/assoziieren kann. Dies beruhe auf dem menschlichen Gehirn, dass u.a. mit Assoziierungen arbeitet.
+
+Mithilfe dieser Assoziierungen können ganze Stränge an Artikeln und Bücher miteinander verbunden werden. Im Gegensatz zum Gehirn verlieren sie sich nicht in der Vergesslichkeit, sondern bleiben. Ferner ist es möglich diese Ketten an Verbindungen mit Freunden zu teilen und damit eine ganz neue Art von Enzyklopädie aufzubauen.
+
+\aufgabe{2}
+
+Worst Case:
+
+GOAL: Suche "`Interaktionsdesign"' bei Google \\
+\begin{tabular}{l|c}
+	LOCATE-MENU & M \\
+	MOVE-CURSOR-OVER-MENU & P \\
+	LOCATE-INTERNET & M \\
+	MOVE-CURSOR-OVER-INTERNET & P \\
+	LOCATE-FIREFOX & M \\
+	MOVE-CURSOR-OVER-FIREFOX & P \\
+	CLICK-LEFT-MOUSE-BUTTON & BB \\
+	LOCATE-ADD-TAB-BUTTON & M \\
+	MOVE-CURSOR-OVER-ADD-TAB-BUTTON & P \\
+	CLICK-LEFT-MOUSE-BUTTON & BB \\
+	LOCATE-ADDRESS-BAR & M \\
+	MOVE-CURSOR-OVER-ADDRESS-BAR & P \\
+	CLICK-LEFT-MOUSE-BUTTON & BB \\
+	TYPE-TEXT (www.google.de) & T(13) \\
+	LOCATE-SEARCH-FIELD & M \\
+	MOVE-CURSOR-OVER-SEARCH-FIELD & P \\
+	CLICK-LEFT-MOUSE-BUTTON & BB \\
+	TYPE-TEXT (Interaktionsdesign) & T(18) \\
+	LOCATE-SEARCH-BUTTON & M \\
+	MOVE-CURSOR-OVER-SEARCH-BUTTON & P \\
+	CLICK-LEFT-MOUSE-BUTTON & BB
+\end{tabular}
+
+\begin{alignat*}{2}
+\text{Total time} &=&& 7 \cdot M + 7 \cdot P + 5 \cdot BB + 13 \cdot K + 18 \cdot K \\
+&=&& 7 \cdot 1.2 + 7 \cdot 1.1 + 5 \cdot 0.2 + 13 \cdot 0.28 + 18 \cdot 0.28 \\
+&=&& 25.78 \text{ sec}
+\end{alignat*}
+
+
+Best Case:
+
+GOAL: Suche "`Interaktionsdesign"' bei Google \\
+\begin{tabular}{l|c}
+	PRESS-SUPER-KEY & K \\
+	TYPE-TEXT (fir) & T(4) \\
+	PRESS-ENTER-KEY & K \\
+	PRESS-SHIFT-AND-T & KK \\
+	TYPE-TEXT (Interaktionsdesign g!) & T(21) \\
+	PRESS-ENTER-KEY & K
+\end{tabular}
+
+\begin{alignat*}{2}
+\text{Total time} &=&& 5 \cdot K + 4 \cdot K + 21 \cdot K \\
+&=&& 5 \cdot 0.28 + 4 \cdot 0.28 + 21 \cdot 0.28  \\
+&=&& 8.4 \text{ sec}
+\end{alignat*}
+
+Der Best Case (defacto Realistic Case) dauert nur rund 33 \% so lange wie der Worst Case, ist also um zwei Drittel schneller. Beim Worst Case muss beachtet werden, dass dies für einen Nutzer ohne konkrete Erfahrung mit meinem System gilt. Ferner wurden dort sämtliche Gimmicks und Zeitverkürzungen (Suche über Adressleiste oder InstantSearch bei Google) nicht berücksichtigt.
+
+Der Best Case berücksichtigt alle Tricks und Kniffe (u.a. auch die standardmäßig in Firefox eingestellte Suchmaschine).
+
+\end{document}
