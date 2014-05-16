@@ -1,0 +1,99 @@
+\documentclass[a4paper,10pt]{scrartcl}
+
+% Hier die Nummer des Blatts und Autoren angeben.
+\newcommand{\blatt}{6}
+\newcommand{\autor}{Jim Martens}
+
+\usepackage{hci}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage[official]{eurosym}
+
+\begin{document}
+% Seitenkopf mit Informationen
+\kopf
+\renewcommand{\figurename}{Figure}
+
+\aufgabe{1}
+
+Erste Skizze:\\
+
+\begin{tikzpicture}[
+	goal/.style={rectangle,draw,fill=yellow!40,align=left},
+	plan/.style={align=left},
+	level 1/.style={sibling distance=7.5em},
+	nextLevel/.style={level distance=40ex},
+  	nextLevel2/.style={level distance=30ex},
+  	nextLevel3/.style={level distance=18ex}]
+	
+	\coordinate
+	  child[grow=up] {node[goal,anchor=south] (start) {0. Recorder programmieren}}
+	  child[grow=down,level distance=0ex]
+      [edge from parent fork down]
+      % sub goals
+      child {node[goal] (one) {1. Geräte \\ einschalten}
+      	child[nextLevel2] {node[goal]{1.1 Fernseher \\ einschalten}}
+	    child[nextLevel2] {node[goal]{1.2 Recorder \\ einschalten}}
+      }
+      child {node[goal]{2. Programm \\ öffnen}}
+      child {node[goal]{4. Aufnahme \\ auswählen}}
+      child {node[goal] (three) {3. Sendung \\ auswählen}
+		child[nextLevel2] {node[goal]{3.1 Tag \\ auswählen}}
+		child[nextLevel2] {node[goal]{3.2 Zur Uhrzeit \\ navigieren}}
+		child[nextLevel2] {node[goal]{3.3 Sendung \\ selektieren}}
+      }
+      child {node[goal]{5. Programmie- \\ rung speichern}};
+
+	\node[plan] [below right=0.4 and -2.0 of start] {\underline{Plan 0:} \\
+	  	IF ein Gerät aus DO 1. \\
+		DO 2.-5.
+	  };
+     \node[plan] [below left=0.4 and -1.0 of one] {\underline{Plan 1:} \\
+      		IF Fernseher aus DO 1.1 \\
+      		IF Recorder aus DO 1.2};
+     \node[plan] [below left=0.4 and -1.0 of three] {\underline{Plan 3:} \\
+     	DO 3.1-3.3};
+\end{tikzpicture}
+
+\newpage
+
+heuristisch verbessert:\\
+
+\begin{tikzpicture}[
+	goal/.style={rectangle,draw,fill=yellow!40,align=left},
+	plan/.style={align=left},
+	level 1/.style={sibling distance=7.5em},
+	nextLevel/.style={level distance=40ex},
+  	nextLevel2/.style={level distance=30ex},
+  	nextLevel3/.style={level distance=18ex}]
+	
+	\coordinate
+	  child[grow=up] {node[goal,anchor=south] (start) {0. Recorder programmieren}}
+	  child[grow=down,level distance=0ex]
+      [edge from parent fork down]
+      % sub goals
+      child {node[goal] (one) {1. Geräte \\ einschalten}
+      	child[nextLevel2] {node[goal]{1.1 Fernseher \\ einschalten}}
+	    child[nextLevel2] {node[goal]{1.2 Recorder \\ einschalten}}
+      }
+      child {node[goal]{2. Programm \\ öffnen}}
+      child {node[goal]{4. Aufnahme \\ auswählen}}
+      child {node[goal] (three) {3. Sendungen \\ auswählen}
+		child[nextLevel2] {node[goal]{3.1 Tag \\ auswählen}}
+		child[nextLevel2] {node[goal]{3.2 Zur Uhrzeit \\ navigieren}}
+		child[nextLevel2] {node[goal]{3.3 Sendung \\ selektieren}}
+      }
+      child {node[goal]{5. Programmie- \\ rung speichern}};
+
+	\node[plan] [below right=0.4 and -2.0 of start] {\underline{Plan 0:} \\
+	  	IF ein Gerät aus DO 1. \\
+		DO 2.-5.
+	  };
+     \node[plan] [below left=0.4 and -1.0 of one] {\underline{Plan 1:} \\
+      		IF Fernseher aus DO 1.1 \\
+      		IF Recorder aus DO 1.2};
+     \node[plan] [below left=0.4 and -1.0 of three] {\underline{Plan 3:} \\
+     	FOR all Sendungen DO 3.1-3.3};
+\end{tikzpicture}
+
+\end{document}
