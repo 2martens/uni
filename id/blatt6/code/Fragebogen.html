@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Evaluierung Interaktionsdesign</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+        <meta name="author" content="Jim Martens" />
+        <meta name="description" content="Online-Evaluierung für Vorlesung und Übung von Interaktionsdesign" />
+        <meta name="keywords" content="HCI, MCI, Interaktionsdesign, Evaluierung" />
+        <meta charset="UTF-8" />
+        <style type="text/css">
+            .block {
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="form">
+            <form action="" method="post">
+                <!-- Allgemeines -->
+                <fieldset class="page1 page">
+                    <legend>Wie häufig gehen Sie zur Vorlesung?</legend>
+                    <label class="block" for="visitedNoLecture"><input type="radio" name="visitedLectures" id="visitedNoLecture" value="zero" />Niemals</label>
+                    <label class="block" for="visitedFewLectures"><input type="radio" name="visitedLectures" id="visitedFewLectures" value="rarely" />Selten</label>
+                    <label class="block" for="visitedOrdinaryLectures"><input type="radio" name="visitedLectures" id="visitedOrdinaryLecture" value="normal" />Ab und zu</label>
+                    <label class="block" for="visitedMostLectures"><input type="radio" name="visitedLectures" id="visitedMostLectures" value="mostly" />Meistens</label>
+                    <label class="block" for="visitedAllLectures"><input type="radio" name="visitedLectures" id="visitedAllLectures" value="always" />Immer</label>
+                </fieldset>
+
+                <!-- Übung -->
+                <fieldset class="page2 page">
+                    <legend>Wie empfinden Sie den Arbeitsaufwand für die Übung?</legend>
+                    <label class="block" for="veryLowWorkClass"><input type="radio" name="amountWorkClass" id="veryLowWorkClass" value="veryLow" />Sehr gering</label>
+                    <label class="block" for="lowWorkClass"><input type="radio" name="amountWorkClass" id="lowWorkClass" value="veryLow" />Gering</label>
+                    <label class="block" for="okWorkClass"><input type="radio" name="amountWorkClass" id="okWorkClass" value="veryLow" />Akzeptabel</label>
+                    <label class="block" for="highWorkClass"><input type="radio" name="amountWorkClass" id="highWorkClass" value="high" />Hoch</label>
+                    <label class="block" for="veryHighWorkClass"><input type="radio" name="amountWorkClass" id="veryHighWorkClass" value="veryHigh" />Sehr hoch</label>
+                </fieldset>
+
+                <fieldset class="page2 page">
+                    <legend>Wie empfinden Sie den Zeitaufwand für die Übung?</legend>
+                    <label class="block" for="veryLowTimeClass"><input type="radio" name="amountTimeClass" id="veryLowTimeClass" value="veryLow" />Sehr gering</label>
+                    <label class="block" for="lowTimeClass"><input type="radio" name="amountTimeClass" id="lowTimeClass" value="veryLow" />Gering</label>
+                    <label class="block" for="okTimeClass"><input type="radio" name="amountTimeClass" id="okTimeClass" value="veryLow" />Akzeptabel</label>
+                    <label class="block" for="highTimeClass"><input type="radio" name="amountTimeClass" id="highTimeClass" value="high" />Hoch</label>
+                    <label class="block" for="veryHighTimeClass"><input type="radio" name="amountTimeClass" id="veryHighTimeClass" value="veryHigh" />Sehr hoch</label>
+                </fieldset>
+
+
+
+                <!-- Demographie -->
+                <fieldset class="page4 page">
+                    <legend>Welches Geschlecht haben Sie?</legend>
+                    <label class="block" for="male"><input type="radio" name="gender" id="male" value="male" />Männlich</label>
+                    <label class="block" for="female"><input type="radio" name="gender" id="female" value="female" />Weiblich</label>
+                    <label class="block" for="otherGender"><input type="radio" name="gender" id="otherGender" value="other" />Keine Angaben</label>
+                </fieldset>
+                <fieldset class="page4 page">
+                    <legend>Wie alt sind Sie?</legend>
+                    <label class="block" for="underage"><input type="radio" name="age" id="underage" value="underage" />&lt; 18</label>
+                    <label class="block" for="normalAge"><input type="radio" name="age" id="normalAge" value="normalAge" />18-25</label>
+                    <label class="block" for="oldAge"><input type="radio" name="age" id="oldAge" value="oldAge" />&gt; 25</label>
+                </fieldset>
+                <fieldset class="page4 page">
+                    <legend>Welchen Studiengang studieren Sie?</legend>
+                    <label class="block" for="bscinf"><input type="radio" name="study" id="bscinf" value="bscinf" />B.Sc. Informatik</label>
+                    <label class="block" for="sse"><input type="radio" name="study" id="sse" value="sse" />B.Sc. SSE</label>
+                    <label class="block" for="mci"><input type="radio" name="study" id="mci" value="mci" 
+                    />B.Sc. MCI</label>
+                    <label class="block" for="cis"><input type="radio" name="study" id="cis" value="cis" />B.Sc. CIS</label>
+                    <label class="block" for="wiinf"><input type="radio" name="study" id="wiinf" value="wiinf" />B.Sc. Wirtschaftsinformatik</label>
+                </fieldset>
+                <div>
+                    <button type="button" class="backButton" value="next">Zurück</button>
+                    <button type="button" class="nextButton" value="next">Weiter</button>
+                </div>
+            </form>
+        </div>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript">
+            //<![CDATA[
+            $(function() {
+                var page = 1;
+                var maxPage = 4;
+                $('.page').hide();
+                $('.page' + page).show();
+                $('.backButton').hide();
+                $('.nextButton').click(function(event) {
+                    var oldPage = page;
+                    if (page == maxPage) {
+                        $('form').submit();
+                        return;
+                    }
+                    page++;
+                    if (page == maxPage) {
+                        $('.nextButton').text('Abschließen');
+                    }
+                    $('.backButton').show();
+                    $('.page' + oldPage).hide();
+                    $('.page' + page).show();
+                });
+                $('.backButton').click(function(event) {
+                    $('.page' + page).hide();
+                    if (page == maxPage) {
+                        $('.nextButton').text('Weiter');
+                        $('.nextButton').prop('type', 'button');
+                    }
+                    page--;
+                    if (page == 1) {
+                        $('.backButton').hide();
+                    }
+                    $('.page' + page).show();
+                });
+            });
+            //]]>
+        </script>
+    </body>
+</html>
