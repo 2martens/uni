@@ -12,6 +12,12 @@
             .block {
                 display: block;
             }
+            .alignRight {
+                text-align: right;
+            }
+            .alignLeft {
+                text-align: left;
+            }
         </style>
     </head>
     <body>
@@ -22,17 +28,26 @@
                     <legend>Wie häufig gehen Sie zur Vorlesung?</legend>
                     <label class="block" for="visitedNoLecture"><input type="radio" name="visitedLectures" id="visitedNoLecture" value="zero" />Niemals</label>
                     <label class="block" for="visitedFewLectures"><input type="radio" name="visitedLectures" id="visitedFewLectures" value="rarely" />Selten</label>
-                    <label class="block" for="visitedOrdinaryLectures"><input type="radio" name="visitedLectures" id="visitedOrdinaryLecture" value="normal" />Ab und zu</label>
+                    <label class="block" for="visitedSomeLectures"><input type="radio" name="visitedLectures" id="visitedSomeLectures" value="normal" />Ab und zu</label>
                     <label class="block" for="visitedMostLectures"><input type="radio" name="visitedLectures" id="visitedMostLectures" value="mostly" />Meistens</label>
                     <label class="block" for="visitedAllLectures"><input type="radio" name="visitedLectures" id="visitedAllLectures" value="always" />Immer</label>
+                </fieldset>
+
+                <fieldset class="page1 page">
+                    <legend>Wie häufig bereiten Sie den Vorlesungsstoff vor bzw. nach?</legend>
+                    <label class="block" for="preparedNoLecture"><input type="radio" name="preparedLectures" id="preparedNoLecture" value="zero" />Niemals</label>
+                    <label class="block" for="preparedFewLectures"><input type="radio" name="preparedLectures" id="preparedFewLectures" value="rarely" />Selten</label>
+                    <label class="block" for="preparedSomeLectures"><input type="radio" name="preparedLectures" id="preparedSomeLectures" value="normal" />Ab und zu</label>
+                    <label class="block" for="preparedMostLectures"><input type="radio" name="preparedLectures" id="preparedMostLectures" value="mostly" />Meistens</label>
+                    <label class="block" for="preparedAllLectures"><input type="radio" name="preparedLectures" id="preparedAllLectures" value="always" />Immer</label>
                 </fieldset>
 
                 <!-- Übung -->
                 <fieldset class="page2 page">
                     <legend>Wie empfinden Sie den Arbeitsaufwand für die Übung?</legend>
                     <label class="block" for="veryLowWorkClass"><input type="radio" name="amountWorkClass" id="veryLowWorkClass" value="veryLow" />Sehr gering</label>
-                    <label class="block" for="lowWorkClass"><input type="radio" name="amountWorkClass" id="lowWorkClass" value="veryLow" />Gering</label>
-                    <label class="block" for="okWorkClass"><input type="radio" name="amountWorkClass" id="okWorkClass" value="veryLow" />Akzeptabel</label>
+                    <label class="block" for="lowWorkClass"><input type="radio" name="amountWorkClass" id="lowWorkClass" value="low" />Gering</label>
+                    <label class="block" for="okWorkClass"><input type="radio" name="amountWorkClass" id="okWorkClass" value="ok" />Akzeptabel</label>
                     <label class="block" for="highWorkClass"><input type="radio" name="amountWorkClass" id="highWorkClass" value="high" />Hoch</label>
                     <label class="block" for="veryHighWorkClass"><input type="radio" name="amountWorkClass" id="veryHighWorkClass" value="veryHigh" />Sehr hoch</label>
                 </fieldset>
@@ -40,13 +55,37 @@
                 <fieldset class="page2 page">
                     <legend>Wie empfinden Sie den Zeitaufwand für die Übung?</legend>
                     <label class="block" for="veryLowTimeClass"><input type="radio" name="amountTimeClass" id="veryLowTimeClass" value="veryLow" />Sehr gering</label>
-                    <label class="block" for="lowTimeClass"><input type="radio" name="amountTimeClass" id="lowTimeClass" value="veryLow" />Gering</label>
-                    <label class="block" for="okTimeClass"><input type="radio" name="amountTimeClass" id="okTimeClass" value="veryLow" />Akzeptabel</label>
+                    <label class="block" for="lowTimeClass"><input type="radio" name="amountTimeClass" id="lowTimeClass" value="low" />Gering</label>
+                    <label class="block" for="okTimeClass"><input type="radio" name="amountTimeClass" id="okTimeClass" value="ok" />Akzeptabel</label>
                     <label class="block" for="highTimeClass"><input type="radio" name="amountTimeClass" id="highTimeClass" value="high" />Hoch</label>
                     <label class="block" for="veryHighTimeClass"><input type="radio" name="amountTimeClass" id="veryHighTimeClass" value="veryHigh" />Sehr hoch</label>
                 </fieldset>
 
-
+                <fieldset class="page2 page">
+                    <legend>Wie vorbereitet wirkt der Übungsgruppenleiter auf Sie?</legend>
+                    <label class="block" for="veryBadPreparedClass"><input type="radio" name="preparedClass" id="veryBadPreparedClass" value="veryBad" />Sehr schlecht</label>
+                    <label class="block" for="badPreparedClass"><input type="radio" name="preparedClass" id="badPreparedClass" value="bad" />Schlecht</label>
+                    <label class="block" for="okPreparedClass"><input type="radio" name="preparedClass" id="okPreparedClass" value="ok" />Akzeptabel</label>
+                    <label class="block" for="goodPreparedClass"><input type="radio" name="preparedClass" id="goodPreparedClass" value="good" />Gut</label>
+                    <label class="block" for="veryGoodPreparedClass"><input type="radio" name="preparedClass" id="veryGoodPreparedClass" value="veryGood" />Sehr gut</label>
+                </fieldset>
+                
+                <!-- Vorlesung -->
+                <fieldset class="page3 page">
+                    <legend>Wie nützlich finden Sie die Vorlesung für das Verständnis?</legend>
+                    <label class="block" for="notAtAllUsefulLecture"><input type="radio" name="usefulnessLecture" id="notAtAllUsefulLecture" value="notAtAllUseful" />Überhaupt nicht nützlich</label>
+                    <label class="block" for="notReallyUsefulLecture"><input type="radio" name="usefulnessLecture" id="notReallyUsefulLecture" value="notReallyUseful" />Kaum nützlich</label>
+                    <label class="block" for="sometimesUsefulLecture"><input type="radio" name="usefulnessLecture" id="sometimesUsefulLecture" value="ok" />Geht so</label>
+                    <label class="block" for="usefulLecture"><input type="radio" name="usefulnessLecture" id="usefulLecture" value="useful" />Nützlich</label>
+                    <label class="block" for="veryUsefulLecture"><input type="radio" name="usefulnessLecture" id="veryUsefulLecture" value="veryUseful" />Sehr nützlich</label>
+                </fieldset>
+                <fieldset class="page3 page">
+                    <legend>Die Vorlesung ist ...</legend>
+                    <label class="block" for="interactivityLecture"><span class="alignRight">nicht interaktiv</span><input type="range" name="interactivityLecture" id="interactivityLecture" min="0" max="10" value="5" /><span class="alignLeft">sehr interaktiv</span></label>
+                    <label class="block" for="relevanceLecture"><span class="alignRight">nicht relevant</span><input type="range" name="relevanceLecture" id="relevanceLecture" min="0" max="10" value="5" /><span class="alignLeft">sehr relevant</span></label>
+                    <label class="block" for="interestLecture"><span class="alignRight">nicht interessant</span><input type="range" name="interestLecture" id="interestLecture" min="0" max="10" value="5" /><span class="alignLeft">sehr interessant</span></label>
+                    <label class="block" for="structureLecture"><span class="alignRight">nicht strukturiert</span><input type="range" name="structureLecture" id="structureLecture" min="0" max="10" value="5" /><span class="alignLeft">sehr strukturiert</span></label>
+                </fieldset>
 
                 <!-- Demographie -->
                 <fieldset class="page4 page">
