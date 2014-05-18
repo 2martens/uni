@@ -12,11 +12,23 @@
             .block {
                 display: block;
             }
+            .inlineBlock {
+                display: inline-block;
+            }
             .alignRight {
                 text-align: right;
             }
             .alignLeft {
                 text-align: left;
+            }
+            .table {
+                display: table;
+            }
+            .tableRow {
+                display: table-row;
+            }
+            .tableCell {
+                display: table-cell;
             }
         </style>
     </head>
@@ -45,29 +57,50 @@
                 <!-- Übung -->
                 <fieldset class="page2 page">
                     <legend>Wie empfinden Sie den Arbeitsaufwand für die Übung?</legend>
-                    <label class="block" for="veryLowWorkClass"><input type="radio" name="amountWorkClass" id="veryLowWorkClass" value="veryLow" />Sehr gering</label>
-                    <label class="block" for="lowWorkClass"><input type="radio" name="amountWorkClass" id="lowWorkClass" value="low" />Gering</label>
-                    <label class="block" for="okWorkClass"><input type="radio" name="amountWorkClass" id="okWorkClass" value="ok" />Akzeptabel</label>
-                    <label class="block" for="highWorkClass"><input type="radio" name="amountWorkClass" id="highWorkClass" value="high" />Hoch</label>
-                    <label class="block" for="veryHighWorkClass"><input type="radio" name="amountWorkClass" id="veryHighWorkClass" value="veryHigh" />Sehr hoch</label>
+                    <label class="block" for="veryLowWorkExercise"><input type="radio" name="amountWorkExercise" id="veryLowWorkExercise" value="veryLow" />Sehr gering</label>
+                    <label class="block" for="lowWorkExercise"><input type="radio" name="amountWorkExercise" id="lowWorkExercise" value="low" />Gering</label>
+                    <label class="block" for="okWorkExercise"><input type="radio" name="amountWorkExercise" id="okWorkExercise" value="ok" />Akzeptabel</label>
+                    <label class="block" for="highWorkExercise"><input type="radio" name="amountWorkExercise" id="highWorkExercise" value="high" />Hoch</label>
+                    <label class="block" for="veryHighWorkExercise"><input type="radio" name="amountWorkExercise" id="veryHighWorkExercise" value="veryHigh" />Sehr hoch</label>
                 </fieldset>
 
                 <fieldset class="page2 page">
                     <legend>Wie empfinden Sie den Zeitaufwand für die Übung?</legend>
-                    <label class="block" for="veryLowTimeClass"><input type="radio" name="amountTimeClass" id="veryLowTimeClass" value="veryLow" />Sehr gering</label>
-                    <label class="block" for="lowTimeClass"><input type="radio" name="amountTimeClass" id="lowTimeClass" value="low" />Gering</label>
-                    <label class="block" for="okTimeClass"><input type="radio" name="amountTimeClass" id="okTimeClass" value="ok" />Akzeptabel</label>
-                    <label class="block" for="highTimeClass"><input type="radio" name="amountTimeClass" id="highTimeClass" value="high" />Hoch</label>
-                    <label class="block" for="veryHighTimeClass"><input type="radio" name="amountTimeClass" id="veryHighTimeClass" value="veryHigh" />Sehr hoch</label>
+                    <label class="block" for="veryLowTimeExercise"><input type="radio" name="amountTimeExercise" id="veryLowTimeExercise" value="veryLow" />Sehr gering</label>
+                    <label class="block" for="lowTimeExercise"><input type="radio" name="amountTimeExercise" id="lowTimeExercise" value="low" />Gering</label>
+                    <label class="block" for="okTimeExercise"><input type="radio" name="amountTimeExercise" id="okTimeExercise" value="ok" />Akzeptabel</label>
+                    <label class="block" for="highTimeExercise"><input type="radio" name="amountTimeExercise" id="highTimeExercise" value="high" />Hoch</label>
+                    <label class="block" for="veryHighTimeExercise"><input type="radio" name="amountTimeExercise" id="veryHighTimeExercise" value="veryHigh" />Sehr hoch</label>
+                </fieldset>
+
+                <fieldset class="page2 page">
+                    <legend>Die Übung ist ...</legend>
+                    <div class="table">
+                        <div class="tableRow">
+                            <label class="tableCell alignRight" for="interactivityExercise">nicht interaktiv</label>
+                            <input class="tableCell" type="range" name="interactivityExercise" id="interactivityExercise" min="0" max="10" value="5" />
+                            <label class="tableCell alignLeft" for="interactivityExercise">sehr interaktiv</label>
+                        </div>
+                        <div class="tableRow">
+                            <label class="tableCell alignRight" for="highDemandExercise">nicht anspruchsvoll</label>
+                            <input class="tableCell" type="range" name="highDemandExercise" id="highDemandExercise" min="0" max="10" value="5" />
+                            <label class="tableCell alignLeft" for="highDemandExercise">sehr anspruchsvoll</label>
+                        </div>
+                        <div class="tableRow">
+                            <label class="tableCell alignRight" for="interestExercise">nicht interessant</label>
+                            <input class="tableCell" type="range" name="interestExercise" id="interestExercise" min="0" max="10" value="5" />
+                            <label class="tableCell alignLeft" for="interestExercise">sehr interessant</label>
+                        </div>
+                    </div>
                 </fieldset>
 
                 <fieldset class="page2 page">
                     <legend>Wie vorbereitet wirkt der Übungsgruppenleiter auf Sie?</legend>
-                    <label class="block" for="veryBadPreparedClass"><input type="radio" name="preparedClass" id="veryBadPreparedClass" value="veryBad" />Sehr schlecht</label>
-                    <label class="block" for="badPreparedClass"><input type="radio" name="preparedClass" id="badPreparedClass" value="bad" />Schlecht</label>
-                    <label class="block" for="okPreparedClass"><input type="radio" name="preparedClass" id="okPreparedClass" value="ok" />Akzeptabel</label>
-                    <label class="block" for="goodPreparedClass"><input type="radio" name="preparedClass" id="goodPreparedClass" value="good" />Gut</label>
-                    <label class="block" for="veryGoodPreparedClass"><input type="radio" name="preparedClass" id="veryGoodPreparedClass" value="veryGood" />Sehr gut</label>
+                    <label class="block" for="veryBadPreparedExercise"><input type="radio" name="preparedExercise" id="veryBadPreparedExercise" value="veryBad" />Sehr schlecht</label>
+                    <label class="block" for="badPreparedExercise"><input type="radio" name="preparedExercise" id="badPreparedExercise" value="bad" />Schlecht</label>
+                    <label class="block" for="okPreparedExercise"><input type="radio" name="preparedExercise" id="okPreparedExercise" value="ok" />Akzeptabel</label>
+                    <label class="block" for="goodPreparedExercise"><input type="radio" name="preparedExercise" id="goodPreparedExercise" value="good" />Gut</label>
+                    <label class="block" for="veryGoodPreparedExercise"><input type="radio" name="preparedExercise" id="veryGoodPreparedExercise" value="veryGood" />Sehr gut</label>
                 </fieldset>
                 
                 <!-- Vorlesung -->
@@ -81,10 +114,33 @@
                 </fieldset>
                 <fieldset class="page3 page">
                     <legend>Die Vorlesung ist ...</legend>
-                    <label class="block" for="interactivityLecture"><span class="alignRight">nicht interaktiv</span><input type="range" name="interactivityLecture" id="interactivityLecture" min="0" max="10" value="5" /><span class="alignLeft">sehr interaktiv</span></label>
-                    <label class="block" for="relevanceLecture"><span class="alignRight">nicht relevant</span><input type="range" name="relevanceLecture" id="relevanceLecture" min="0" max="10" value="5" /><span class="alignLeft">sehr relevant</span></label>
-                    <label class="block" for="interestLecture"><span class="alignRight">nicht interessant</span><input type="range" name="interestLecture" id="interestLecture" min="0" max="10" value="5" /><span class="alignLeft">sehr interessant</span></label>
-                    <label class="block" for="structureLecture"><span class="alignRight">nicht strukturiert</span><input type="range" name="structureLecture" id="structureLecture" min="0" max="10" value="5" /><span class="alignLeft">sehr strukturiert</span></label>
+                    <div class="table">
+                        <div class="tableRow">
+                            <label class="tableCell alignRight" for="interactivityLecture">nicht interaktiv</label>
+                            <input class="tableCell" type="range" name="interactivityLecture" id="interactivityLecture" min="0" max="10" value="5" />
+                            <label class="tableCell alignLeft" for="interactivityLecture">sehr interaktiv</label>
+                        </div>
+                        <div class="tableRow">
+                            <label class="tableCell alignRight" for="relevanceLecture">nicht relevant</label>
+                            <input class="tableCell" type="range" name="relevanceLecture" id="relevanceLecture" min="0" max="10" value="5" />
+                            <label class="tableCell alignLeft" for="relevanceLecture">sehr relevant</label>
+                        </div>
+                        <div class="tableRow">
+                            <label class="tableCell alignRight" for="interestLecture">nicht interessant</label>
+                            <input class="tableCell" type="range" name="interestLecture" id="interestLecture" min="0" max="10" value="5" />
+                            <label class="tableCell alignLeft" for="interestLecture">sehr interessant</label>
+                        </div>
+                        <div class="tableRow">
+                            <label class="tableCell alignRight" for="structureLecture">nicht strukturiert</label>
+                            <input class="tableCell" type="range" name="structureLecture" id="structureLecture" min="0" max="10" value="5" />
+                            <label class="tableCell alignLeft" for="structureLecture">sehr strukturiert</label>
+                        </div>
+                        <div class="tableRow">
+                            <label class="tableCell alignRight" for="practiceConnectionLecture">nicht praxisbezogen</label>
+                            <input class="tableCell" type="range" name="practiceConnectionLecture" id="practiceConnectionLecture" min="0" max="10" value="5" />
+                            <label class="tableCell alignLeft" for="practiceConnectionLecture">sehr praxisbezogen</label>
+                        </div>
+                    </div>
                 </fieldset>
 
                 <!-- Demographie -->
@@ -108,6 +164,7 @@
                     />B.Sc. MCI</label>
                     <label class="block" for="cis"><input type="radio" name="study" id="cis" value="cis" />B.Sc. CIS</label>
                     <label class="block" for="wiinf"><input type="radio" name="study" id="wiinf" value="wiinf" />B.Sc. Wirtschaftsinformatik</label>
+                    <label class="block" for="other"><input type="radio" name="study" id="other" value="other" />Anderer Studiengang</label>
                 </fieldset>
                 <div>
                     <button type="button" class="backButton" value="next">Zurück</button>
