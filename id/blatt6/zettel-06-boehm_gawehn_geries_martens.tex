@@ -1,0 +1,133 @@
+\documentclass[a4paper,10pt]{scrartcl}
+
+% Hier die Nummer des Blatts und Autoren angeben.
+\newcommand{\blatt}{6}
+\newcommand{\autor}{Florian B\"{o}hm, Christopher Gawehn, Ulrike Geries, Jim Martens}
+
+\usepackage{hci}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage[official]{eurosym}
+
+\begin{document}
+% Seitenkopf mit Informationen
+\kopf
+\renewcommand{\figurename}{Figure}
+
+\aufgabe{1}
+
+Erste Skizze:\\
+
+\begin{tikzpicture}[
+	goal/.style={rectangle,draw,fill=yellow!40,align=left},
+	plan/.style={align=left},
+	level 0/.style={sibling distance=17em},
+	level 1/.style={sibling distance=15em},
+	level 2/.style={sibling distance=8em},
+	level 3/.style={sibling distance=7em},
+	level 4/.style={sibling distance=10em},
+	nextLevel/.style={level distance=40ex},
+  	nextLevel2/.style={level distance=30ex},
+  	nextLevel3/.style={level distance=30ex}]
+	
+	\coordinate
+	  child[grow=up] {node[goal,anchor=south] (start) {0. Bearbeitung hochladen}}
+	  child[grow=down,level distance=0ex]
+      [edge from parent fork down]
+      % sub goals
+      child {node[goal] (one) {1. Raum Interak- \\ tionsdesign öffnen}
+      	child[nextLevel2] {node[goal]{1.1 Commsy \\ öffnen}}
+	    child[nextLevel2] {node[goal]{1.2 Raum \\ betreten}}
+      }
+      child {node[goal] (two) {2. Aufgabe \\ erstellen}
+		child[nextLevel2] {node[goal]{2.1 Aufga- \\ ben öffnen}}
+	    child[nextLevel2] {node[goal] (twoTwo) {2.2 Neuen Ein- \\ trag erstellen}
+	    	child[nextLevel3] {node[goal] (twoTwoOne) {2.2.1 Meta- \\ daten eintra- \\ gen}
+				child[nextLevel3] {node[goal]{2.2.1.1 Titel \\ eintragen}}
+				child[nextLevel3] {node[goal]{2.2.1.2 Fällig am \\ eintragen}}
+				child[nextLevel3] {node[goal]{2.2.1.3 Geplante Zeit \\ eintragen}}
+				child[nextLevel3] {node[goal]{2.2.1.4 Status \\ eintragen}}
+			}
+			child[nextLevel3] {node[goal]{2.2.2 Dateien \\ hochladen}}
+			child[nextLevel3] {node[goal]{2.2.3 Katego- \\ rien auswählen}}
+			child[nextLevel3] {node[goal]{2.2.4 \\ Zugriffs- \\ rechte ein- \\ stellen}}
+			child[nextLevel3] {node[goal]{2.2.5 Auf \\ Erstell- \\ button \\ klicken}}
+	    }
+      };
+
+	  \node[plan] [below right=0.4 and -2.0 of start] {\underline{Plan 0:} \\
+	  	DO 1.-2.
+	  };
+	  \node[plan] [below right=0.4 and -1.4 of one] {\underline{Plan 1:} \\
+	  	DO 1.1.-1.2.
+	  };
+	  \node[plan] [below right=0.4 and -1 of two] {\underline{Plan 2:} \\
+	  	DO 2.1.-2.2.
+	  };
+	  \node[plan] [below right=0.4 and -1 of twoTwo] {\underline{Plan 2.2:} \\
+	  	DO 2.2.1.-2.2.5
+	  };
+	  \node[plan] [below right=0.4 and -1 of twoTwoOne] {\underline{Plan 2.2.1:} \\
+	  	DO 2.2.1.1-2.2.1.4
+	  };
+\end{tikzpicture}
+
+\newpage
+
+heuristisch verbessert:
+
+\begin{tikzpicture}[
+	goal/.style={rectangle,draw,fill=yellow!40,align=left},
+	plan/.style={align=left},
+	level 0/.style={sibling distance=17em},
+	level 1/.style={sibling distance=15em},
+	level 2/.style={sibling distance=8em},
+	level 3/.style={sibling distance=7em},
+	level 4/.style={sibling distance=10em},
+	nextLevel/.style={level distance=40ex},
+  	nextLevel2/.style={level distance=30ex},
+  	nextLevel3/.style={level distance=30ex}]
+	
+	\coordinate
+	  child[grow=up] {node[goal,anchor=south] (start) {0. Bearbeitung hochladen}}
+	  child[grow=down,level distance=0ex]
+      [edge from parent fork down]
+      % sub goals
+      child {node[goal] (one) {1. Raum Interak- \\ tionsdesign öffnen}
+      	child[nextLevel2] {node[goal]{1.1 Commsy \\ öffnen}}
+	    child[nextLevel2] {node[goal]{1.2 Raum \\ betreten}}
+      }
+      child {node[goal] (two) {2. Aufgabe \\ erstellen}
+		child[nextLevel2] {node[goal]{2.1 Aufga- \\ ben öffnen}}
+	    child[nextLevel2] {node[goal] (twoTwo) {2.2 Neuen Ein- \\ trag erstellen}
+	    	child[nextLevel3] {node[goal] (twoTwoOne) {2.2.1 Meta- \\ daten eintra- \\ gen}
+				child[nextLevel3] {node[goal]{2.2.1.1 Titel \\ eintragen}}
+				child[nextLevel3] {node[goal]{2.2.1.2 Fällig am \\ eintragen}}
+				child[nextLevel3] {node[goal]{2.2.1.3 Geplante Zeit \\ eintragen}}
+				child[nextLevel3] {node[goal]{2.2.1.4 Status \\ eintragen}}
+			}
+			child[nextLevel3] {node[goal]{2.2.2 Dateien \\ hochladen}}
+			child[nextLevel3] {node[goal]{2.2.3 Katego- \\ rien auswählen}}
+			child[nextLevel3] {node[goal]{2.2.4 \\ Zugriffs- \\ rechte ein- \\ stellen}}
+			child[nextLevel3] {node[goal]{2.2.5 Auf \\ Erstell- \\ button \\ klicken}}
+	    }
+      };
+
+	  \node[plan] [below right=0.4 and -2.0 of start] {\underline{Plan 0:} \\
+	  	DO 1.-2.
+	  };
+	  \node[plan] [below right=0.4 and -1.4 of one] {\underline{Plan 1:} \\
+	  	DO 1.1.-1.2.
+	  };
+	  \node[plan] [below right=0.4 and -1 of two] {\underline{Plan 2:} \\
+	  	DO 2.1.-2.2.
+	  };
+	  \node[plan] [below right=0.4 and -1 of twoTwo] {\underline{Plan 2.2:} \\
+	  	DO 2.2.1.-2.2.5
+	  };
+	  \node[plan] [below right=0.4 and -1 of twoTwoOne] {\underline{Plan 2.2.1:} \\
+	  	DO 2.2.1.1-2.2.1.4
+	  };
+\end{tikzpicture}
+
+\end{document}
