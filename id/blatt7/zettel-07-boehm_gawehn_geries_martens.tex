@@ -1,0 +1,43 @@
+\documentclass[a4paper,10pt]{scrartcl}
+
+% Hier die Nummer des Blatts und Autoren angeben.
+\newcommand{\blatt}{7}
+\newcommand{\autor}{Florian B\"{o}hm, Christopher Gawehn, Ulrike Geries, Jim Martens}
+
+\usepackage{hci}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage[official]{eurosym}
+
+\begin{document}
+% Seitenkopf mit Informationen
+\kopf
+\renewcommand{\figurename}{Figure}
+
+\aufgabe{1}
+
+Im Folgenden wird der Zusammenhang zwischen Geschlecht und der Beurteilung des kognitiven Aufwands betrachtet.
+
+\paragraph{Hypothese} Es gibt keinen Zusammenhang zwischen Geschlecht und der Beurteilung des kognitiven Aufwands. 
+
+\paragraph{Ergebnisse} Die Hypothese kann bestätigt werden, da es keine signifikanten Unterschiede in den erhobenen Daten gibt.\\
+
+Zunächst wurde ein Shapiro-Wilk Test angewandt, um die Daten auf eine Normalverteilung zu testen. Das Ergebnis war, dass die Daten normalverteilt sind (\texttt{p = 0.05075}).
+
+Da es beim Geschlecht nur zwei Gruppen gab und jeder nur einer angehörte (in den Auswertungen gab es nur die Werte "`male"' und "`female"', wurde ein unpaired t test vorgenommen. Das Ergebnis war, dass es keinen signifikanten Unterschied zwischen den Geschlechtern gibt (\texttt{t(24.848) = -0.6244; p = 0.5381}). Zum leichteren Verständnis ein Diagramm, dass den Mittelwert und die Verteilung zeigt.
+
+\begin{figure}[hb]
+	\caption{Beurteilung des kognitiven Aufwands nach Geschlecht}
+	\includegraphics[scale=0.8]{zettel-07-gruppe-plot}
+\end{figure}
+
+\newpage 
+Diesem Diagramm liegen diese Werte zugrunde:
+
+\begin{tabular}{ccc}
+	& Mittelwert & Standardabweichung \\
+	Male & $14.667$ & $3.512$ \\
+	Female & $15.41667$ & $3.204$
+\end{tabular}
+
+\end{document}
