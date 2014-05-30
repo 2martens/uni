@@ -1,0 +1,67 @@
+\documentclass[14pt]{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+%\usepackage{paralist}
+\useoutertheme{infolines} 
+\usepackage{graphicx}
+\usepackage{hyperref}
+%\usepackage{listings}
+%\usetheme{Berkeley}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setbeamertemplate{footline}{}
+\setbeamertemplate{navigation symbols}{}
+\graphicspath{ {src/} {/home/jim/Pictures/} }
+%\lstset{language=PHP}
+\setbeamertemplate{frametitle}[default][center]
+
+\hypersetup{
+	pdfauthor=Jim Martens
+}
+
+\begin{document}
+\author{Jim Martens}
+\title{\bfseries \color{black}Untersuchung zum Vorlesungsbesuch im Modul Interaktionsdesign}
+
+% Seitenkopf mit Informationen
+\renewcommand{\figurename}{Figure}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}{\bfseries \color{black}Hypothese}
+	MCI-Studierende sind häufiger in der Vorlesung als Studierende von BSc. Informatik oder SSE.
+\end{frame}
+
+\begin{frame}{\bfseries \color{black}Datenerhebung}
+	Erhebung mittels eines mehrseitigen Fragebogens
+\end{frame}
+
+\begin{frame}{\bfseries \color{black}Ergebnisse}
+	\centering
+	\includegraphics[scale=0.45]{zettel-07-plot}
+\end{frame}
+
+\begin{frame}{\bfseries \color{black}Daten}
+
+Die zugrundeliegenden Daten:
+
+\begin{tabular}{ccc}
+	& Mittelwert & Standardabweichung \\
+	BSc. Informatik & $2.333$ & $1.345$ \\
+	MCI & 2 & $1.319$ \\
+	SSE & $2.1$ & $1.197$ 
+\end{tabular}
+\end{frame}
+
+\begin{frame}{\bfseries \color{black}Interpretation}
+	Die erhobenen Daten sind nicht signifikant.
+	
+	Es gibt keinen Zusammenhang zwischen Studiengang und Vorlesungsbesuch.
+\end{frame}
+
+\end{document}

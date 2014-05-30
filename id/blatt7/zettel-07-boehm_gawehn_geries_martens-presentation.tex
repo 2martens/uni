@@ -1,0 +1,66 @@
+\documentclass[14pt]{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+%\usepackage{paralist}
+\useoutertheme{infolines} 
+\usepackage{graphicx}
+\usepackage{hyperref}
+%\usepackage{listings}
+%\usetheme{Berkeley}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setbeamertemplate{footline}{}
+\setbeamertemplate{navigation symbols}{}
+\graphicspath{ {src/} {/home/jim/Pictures/} }
+%\lstset{language=PHP}
+\setbeamertemplate{frametitle}[default][center]
+
+\hypersetup{
+	pdfauthor={Florian Böhm, Christopher Gawehn, Ulrike Geries, Jim Martens}
+}
+
+\begin{document}
+\author{Florian Böhm, Christopher Gawehn, Ulrike Geries, Jim Martens}
+\title{\bfseries \color{black}Untersuchung zum kognitiven Aufwand}
+
+% Seitenkopf mit Informationen
+\renewcommand{\figurename}{Figure}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}{\bfseries \color{black}Hypothese}
+	Es gibt keinen signifikanten Zusammenhang zwischen Geschlecht und kognitivem Aufwand.
+\end{frame}
+
+\begin{frame}{\bfseries \color{black}Datenerhebung}
+	Erhebung mittels eines Fragebogens
+\end{frame}
+
+\begin{frame}{\bfseries \color{black}Ergebnisse}
+	\centering
+	\includegraphics[scale=0.45]{zettel-07-gruppe-plot}
+\end{frame}
+
+\begin{frame}{\bfseries \color{black}Daten}
+
+Die zugrundeliegenden Daten:
+
+\begin{tabular}{ccc}
+	& Mittelwert & Standardabweichung \\
+	Male & $14.667$ & $3.512$ \\
+	Female & $15.41667$ & $3.204$
+\end{tabular}
+\end{frame}
+
+\begin{frame}{\bfseries \color{black}Interpretation}
+	Die Unterschiede in den erhobenen Daten sind nicht signifikant.
+	
+	Es gibt damit keinen Zusammenhang zwischen Geschlecht und kognitivem Aufwand.
+\end{frame}
+
+\end{document}

@@ -1,0 +1,39 @@
+\documentclass[a4paper,10pt]{scrartcl}
+
+% Hier die Nummer des Blatts und Autoren angeben.
+\newcommand{\blatt}{7}
+\newcommand{\autor}{Jim Martens}
+
+\usepackage{hci}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage[official]{eurosym}
+
+\begin{document}
+% Seitenkopf mit Informationen
+\kopf
+\renewcommand{\figurename}{Figure}
+
+\aufgabe{2}
+
+Mich interessiert, ob es einen Zusammenhang gibt zwischen dem Besuch der Vorlesung und dem Studiengang?
+
+\paragraph{Hypothese} Da Interaktionsdesign in den Bereich Mensch-Computer-Interaktion einzuordnen ist, sind MCI-Studierende häufiger in der Vorlesung als Studierende von BSc. Informatik oder SSE. Personen die andere als die eben genannten Fächer studieren werden entfernt.
+
+\paragraph{Ergebnisse} Es gibt keinen signifikanten Zusammenhang zwischen dem Studiengang und dem Besuchen der Vorlesung nach einem ANOVA-Test. Die Daten sind nicht einmal normalverteilt. Daher lohnt sich auch kein Vergleich zwischen je zwei Studiengängen.
+
+\begin{figure}[hb]
+	\caption{Häufigkeit des Vorlesungsbesuch je untersuchtem Studiengang. 1 bedeutet "`immer"', 5 "`überhaupt nicht"'}
+	\includegraphics[scale=0.8]{zettel-07-plot}
+\end{figure}
+
+Um diese Grafik besser nachvollziehen zu können folgen hier die Mittelwerte und Standardabweichungen je Studiengang.
+
+\begin{tabular}{ccc}
+	& Mittelwert & Standardabweichung \\
+	BSc. Informatik & $2.333$ & $1.345$ \\
+	MCI & 2 & $1.319$ \\
+	SSE & $2.1$ & $1.197$ 
+\end{tabular}
+
+\end{document}
