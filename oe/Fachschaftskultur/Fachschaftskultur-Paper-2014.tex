@@ -1,0 +1,119 @@
+\documentclass[a4paper,11pt]{scrartcl} % Dokumenttyp
+\usepackage{polyglossia} % Babel-Ersatz für XeLaTex
+\usepackage{graphicx} % Grafiken
+\usepackage{tabularx} % Tabellen
+\usepackage{fancyhdr} % Kopfzeile
+\usepackage{wrapfig} % toc-wrapper
+\usepackage{wasysym} % für die Checkboxes
+\usepackage{multicol} % für zweispaltigen Text
+\usepackage[tocflat]{tocstyle} % um Punkte-Linie und di Einrückung im Inhaltsverzeichnis zu unterdrücken
+\usepackage[left=2.5cm,right=2.5cm,top=2cm,bottom=1cm,includeheadfoot]{geometry} % Seitenränder
+
+\pagestyle{fancyplain} % Kopfzeile anzeigen
+\setlength{\headheight}{30pt} % Abstände
+\pagenumbering{gobble} % Seitenzahlen unterdrücken
+\usetocstyle{noonewithdot} % Punkte-Linie im Inhaltsverzeichnis unterdrücken
+\graphicspath{{images/}} % Pfad für Bild-Dateien TODO Bild-Dateien im Unterordner ``images'' ablegen
+\setdefaultlanguage[babelshorthands=true]{german} % Deutsche Formatierung
+
+% Silbentrennung für bestimmte Worte
+\newcommand{\sethyphenation}[3][]{%
+  \sbox0{\begin{otherlanguage}[#1]{#2}
+    \hyphenation{#3}\end{otherlanguage}}}
+
+\sethyphenation{german}{Ki-cker-raum}
+
+\newcommand{\AGName}{Fachschaftskultur-AG} % TODO "Beispiel-AG" durch AG-Name ersetzen
+\newenvironment{myitemize}{\begin{itemize}\itemsep -2pt}{\end{itemize}} % Zeilenabstand in Aufzählungen geringer
+
+\fancyhead[C]{\AGName} % Inhalt Kopfzeile mittig
+\fancyhead[R]{} % Inhalt Kopfzeile rechts leer
+\fancyhead[L]{} % Inhalt Kopfzeile rechts leer
+\fancypagestyle{firststyle}{\fancyhead[C]{}\fancyhead[L]{\huge\textbf{\AGName}}} % Inhalt Kopfzeile Seite 1
+
+\begin{document}
+\thispagestyle{firststyle}
+
+\begin{wrapfigure}{r}{130pt}
+\vspace{-78pt}
+  \fbox{
+  \begin{minipage}{140pt}
+   \tableofcontents
+  \end{minipage}
+  }
+\end{wrapfigure}
+
+\section{Kurzbeschreibung} % TODO Text ersetzen
+    Die Fachschaftskultur-AG wurde 2014 gegründet, um Methoden zu erarbeiten, die hoffentlich eine bessere Fachschaftskultur fördern.
+    
+\section{Für den OE-Tutor}
+  \subsection{Checkliste: Material} % TODO Punkte ersetzen
+    \begin{multicols}{2}[]
+      \begin{myitemize}
+      \begin{raggedright}
+	\item[\Square] Kärtchen
+      \end{raggedright}
+      \end{myitemize}
+    \end{multicols}
+  \subsection{Checkliste: Themen/Aufgaben} % TODO Punkte ersetzen; (chrono-)logisch
+      \begin{myitemize}
+	\item[\Square] Kärtchen nacheinander durchgehen (bei jedem kurz überlegen lassen, dann auflösen)
+      \end{myitemize}
+
+ 
+\section{Beschreibung lang} 
+% TODO Optional Struktur ändern (subsections ändern, subsubsections einfügen etc.) 
+% Anmerkung: "subsection*{Titel}" erscheint nicht in der Inhaltsangabe; "\\" erzwingt einen Zeilenumbruch
+
+  \subsection{Vorbereitung} % TODO Text ersetzen; (chrono)logisch
+\subsubsection*{Zwischenmenschliches Verhalten}
+
+Als Vorbereitung für die eine Einheit (das mit den Kärtchen) aber auch für den Rest solltest du dich noch einmal mit den Grundzügen von zwischenmenschlichem Verhalten beschäftigen. Warum denn das? Das ist doch selbstverständlich.
+Nun... die Vergangenheit hat leider gezeigt, dass es nicht selbstverständlich ist und als Tutor bist du ein Vorbild für deine Ersties. Als Vorbild solltest du dich auch vorbildlich verhalten.
+
+Dieses Paper hat das Ziel dir dabei zu helfen, kann dir die Arbeit aber nicht abnehmen, denn schlussendlich wirst du Kontakt zu den Ersties haben und nicht dieses Paper. Genug der Vorrede, es ist Zeit für ein paar althergebrachte Weisheiten. Wenn diese dir bekannt vorkommen und du sie bereits verinnerlicht hast, umso besser.
+
+\begin{myitemize}
+	\item Geschirr wird abgewaschen und nicht einfach in der Spüle belassen
+	\item Müll wird in die dafür vorgesehenen Behältnisse verfrachtet und nicht auf dem Boden liegen gelassen
+	\item Fenster werden nicht komplett offen gelassen, wenn man den Raum verlässt und ansonsten sich keiner im Raum befindet (Einbrecher und so)
+	\item Licht wird abends nach verlassen des Raumes abgeschaltet
+\end{myitemize}
+
+Du fragst dich jetzt vielleicht "`Alles gut und schön, aber wo genau soll welcher Müll hin?"' und das zurecht. Daher folgt hier eine kurze Abfalllehre (schönes Wort, oder?).
+
+\begin{description}
+	\item[Pizzakartons] leere Pizzakartons gehören in den roten Behälter im Flur zwischen c.t. und Kickerraum oder in die Papiertonnen vor Haus D
+	\item[Essensreste] Essensreste gehören NICHT in die Mülleimer vor den Häusern (Rattengefahr), sondern stattdessen in die Mülltonnen für gewerblichen Abfall vor Haus D (möglichst nicht lose einwerfen)
+\end{description}
+
+Diese Regeln sind notwendig für ein erfolgreiches Miteinander und um weitere Einschnitte in unsere Privilegien (im Vergleich zu anderen Fachschaften) zu verhindern.
+
+\subsubsection*{Einheit}
+
+Zusätzlich zu dieser allgemeinen Vorbereitung ist auch die gezielte Vorbereitung auf die Einheit wichtig. Um dir bei diesem Ziel helfend unter die Arme zu greifen werden wir im folgenden Abschnitt die einzelnen Karten durchgehen und dir die Hintergründe zu den Geschehnissen darlegen.
+
+%TODO Karten durchgehen und erklären
+
+  \subsection{Während der Einheit} % TODO Text ersetzen; (chrono)logisch
+Es ist so weit. Du befindest dich kurz vor oder nach der Gremienorientierung und deine Ersties schauen dich erwartungsvoll an. Was machst du?
+
+Ganz klar: Du leitest die Einheit kurz ein (je nach Zustand der Gruppe, du solltest mittlerweile bereits ein bisschen Übung damit haben) und kannst beispielsweise so beginnen (nach Gremienorientierung): "`Gerade haben wir ja die Gremien erarbeitet. Eines dieser Gremien ist der FSR, der die Fachschaft Informatik vertritt und auch von dieser gewählt wird. Statt um den FSR geht es jetzt aber um die Fachschaft, also ihr, ich und alle anderen Informatikstudierenden an diesem Fachbereich.
+Insbesondere geht es um das Verhalten untereinander und miteinander. Dazu habe ich hier ein paar Karten mitgebracht. Wir werden die nacheinander durchgehen und ihr habt bei jeder Karte kurz Gelegenheit darüber nachzudenken. Fangen wir also an mit der ersten Karte"'. 
+
+Alternativ kannst du wie folgt beginnen, wenn die Gremienorientierung noch vor dir liegt: "`Gleich haben wir die Gremienorientierung. Da wird es dann um die verschiedenen Ebenen der Gremien gehen. Eines der Gremien ist der Fachschaftsrat (kurz: FSR), der von den Studierenden der Informatik (der Fachschaft) gewählt wird und diese vertritt. Um eben diese Fachschaft geht es jetzt.
+Insbesondere geht es um das Verhalten untereinander und miteinander. Dazu habe ich hier ein paar Karten mitgebracht. Wir werden die nacheinander durchgehen und ihr habt bei jeder Karte kurz Gelegenheit darüber nachzudenken. Fangen wir also an mit der ersten Karte"'.
+
+Diese beiden Einleitungen sind Beispiele, wie gelungen von einer Einheit zur anderen übergeleitet und vor allem deren Relevanz und Beziehung zueinander dargelegt werden können. Du hast natürlich alles Recht der Welt eine andere Einleitung bzw. Überleitung zu nutzen und diese an die jeweilige Gruppe anzupassen.
+
+Die eigentliche Durchführung der Einheit verläuft von der Technik dahinter sehr monoton: Karte nehmen, Vorderseite vorlesen, Ersties grübeln lassen, Auflösung von Rückseite lesen, repeat.
+Es liegt an dir diesen Vorgang nicht monoton erscheinen zu lassen. Hilfreich dafür ist es, wenn du die Auflösungen zu den Karten bereits kennst und zwar nicht als auswendiggelerntes Wissen, sondern als nachhaltig gelerntes Wissen. Dann wirkst du bereits viel glaubhafter und die Einheit hat viel mehr Effekt auf die Ersties, als wenn du klar nach außen zeigst, dass du eigentlich gar keine Ahnung davon hast und es als Pflichtprogramm abhakst.
+
+Genau hier kommt wieder die Vorbildfunktion zum Tragen. Wenn du dich als Tutor mit der Fachschaftsarbeit auskennst und für diese Themen wie eine lebende Bibliothek bist, dann ist die Chance die Ersties für eine aktive Teilhabe in der Fachschaft zu motivieren weitaus höher.
+
+  \subsection{Nach der Einheit} % TODO Text ersetzen; (chrono)logisch
+Damit die Einheit nicht als Standpauke verstanden wird und anschließend in den Katakomben des Gehirns verscharrt wird, ist es extrem wichtig, dass du dich in der ganzen OE-Woche entsprechend der Regeln verhältst (wenn du es bereits verinnerlicht hast, ist dies hier eine Formalität und keine Herausforderung) und natürlich darüber hinaus.
+
+Wenn du wirklich Kenntnis hast, dann kannst du bei überschüssiger Zeit auch das ein oder andere an den jeweiligen Orten der Geschehnisse sagen.
+
+\end{document}

@@ -1,0 +1,124 @@
+\documentclass[a4paper,11pt]{scrartcl} % Dokumenttyp
+\usepackage{polyglossia} % Babel-Ersatz für XeLaTex
+\usepackage{graphicx} % Grafiken
+\usepackage{tabularx} % Tabellen
+\usepackage{fancyhdr} % Kopfzeile
+\usepackage{wrapfig} % toc-wrapper
+\usepackage{wasysym} % für die Checkboxes
+\usepackage{multicol} % für zweispaltigen Text
+\usepackage[tocflat]{tocstyle} % um Punkte-Linie und di Einrückung im Inhaltsverzeichnis zu unterdrücken
+\usepackage[left=2.5cm,right=2.5cm,top=2cm,bottom=1cm,includeheadfoot]{geometry} % Seitenränder
+
+\pagestyle{fancyplain} % Kopfzeile anzeigen
+\setlength{\headheight}{30pt} % Abstände
+\pagenumbering{gobble} % Seitenzahlen unterdrücken
+\usetocstyle{noonewithdot} % Punkte-Linie im Inhaltsverzeichnis unterdrücken
+\graphicspath{{images/}} % Pfad für Bild-Dateien TODO Bild-Dateien im Unterordner ``images'' ablegen
+\setdefaultlanguage[babelshorthands=true]{german} % Deutsche Formatierung
+
+\newcommand{\AGName}{Beispiel-AG} % TODO "Beispiel-AG" durch AG-Name ersetzen
+\newenvironment{myitemize}{\begin{itemize}\itemsep -2pt}{\end{itemize}} % Zeilenabstand in Aufzählungen geringer
+
+\fancyhead[C]{\AGName} % Inhalt Kopfzeile mittig
+\fancyhead[R]{} % Inhalt Kopfzeile rechts leer
+\fancyhead[L]{} % Inhalt Kopfzeile rechts leer
+\fancypagestyle{firststyle}{\fancyhead[C]{}\fancyhead[L]{\huge\textbf{\AGName}}} % Inhalt Kopfzeile Seite 1
+
+\begin{document}
+\thispagestyle{firststyle}
+
+\begin{wrapfigure}{r}{130pt}
+\vspace{-78pt}
+  \fbox{
+  \begin{minipage}{140pt}
+   \tableofcontents
+  \end{minipage}
+  }
+\end{wrapfigure}
+
+\section{Kurzbeschreibung} % TODO Text ersetzen
+    Diese Beispiel-AG beschäftigt sich mit Gurken und Tomaten. 
+    In der OE-Woche kümmern wir uns um Thunfischbrote. 
+    
+\section{Für den OE-Tutor}
+  \subsection{Checkliste: Material} % TODO Punkte ersetzen
+    \begin{multicols}{2}[]
+      \begin{myitemize}
+      \begin{raggedright}
+	\item[\Square] Thunfisch aus der Dose
+	\item[\Square] Weissbrot
+	\item[\Square] Remoulade
+	\item[\Square] Teller
+	\item[\Square] Messer
+	\item[\Square] Servietten
+      \end{raggedright}
+      \end{myitemize}
+    \end{multicols}
+  \subsection{Checkliste: Themen/Aufgaben} % TODO Punkte ersetzen; (chrono-)logisch
+      \begin{myitemize}
+	\item[\Square] Teller, Messer und Servietten bereit legen
+	\item[\Square] Brot aufmachen
+	\item[\Square] Brotscheibe nehmen und auf den Teller legen
+	\item[\Square] Remoulade aufmachen
+	\item[\Square] Remoulade auf die Brotscheibe schmieren
+	\item[\Square] Thundfisch oben drauf tun
+	\item[\Square] zweite Brotscheiben nehmen und oben drauf legen
+      \end{myitemize}
+
+ 
+\section{Beschreibung lang} 
+% TODO Optional Struktur ändern (subsections ändern, subsubsections einfügen etc.) 
+% Anmerkung: "subsection*{Titel}" erscheint nicht in der Inhaltsangabe; "\\" erzwingt einen Zeilenumbruch
+
+  \subsection{Vor der Einheit} % TODO Text ersetzen; (chrono)logisch
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam 
+voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet 
+clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit 
+amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam 
+nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, 
+sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit 
+amet.
+
+  \subsection{Während der Einheit} % TODO Text ersetzen; (chrono)logisch
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam 
+voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet 
+clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit 
+amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam 
+nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, 
+sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit 
+amet.
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam 
+voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet 
+clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit 
+amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam 
+nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, 
+sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit 
+amet.
+
+  \subsection{Nach der Einheit} % TODO Text ersetzen; (chrono)logisch
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam 
+voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet 
+clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit 
+amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam 
+nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, 
+sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit 
+amet.
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam 
+voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet 
+clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit 
+amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam 
+nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, 
+sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit 
+amet.
+
+\end{document}
