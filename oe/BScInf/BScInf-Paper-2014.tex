@@ -1,0 +1,128 @@
+\documentclass[a4paper,11pt]{scrartcl} % Dokumenttyp
+\usepackage[utf8x]{inputenc} % utf8
+\usepackage[T1]{fontenc} % Schriftart
+\usepackage{lmodern} % Schriftart
+\usepackage[ngerman]{babel} % Deutsche Formatierung
+\usepackage{graphicx} % Grafiken
+\usepackage{tabularx} % Tabellen
+\usepackage{fancyhdr} % Kopfzeile
+\usepackage{wrapfig} % toc-wrapper
+\usepackage{wasysym} % für die Checkboxes
+\usepackage{multicol} % für zweispaltigen Text
+\usepackage[tocflat]{tocstyle} % um Punkte-Linie und di Einrückung im Inhaltsverzeichnis zu unterdrücken
+\usepackage[left=2.5cm,right=2.5cm,top=2cm,bottom=1cm,includeheadfoot]{geometry} % Seitenränder
+\usepackage[hidelinks]{hyperref}
+
+\pagestyle{fancyplain} % Kopfzeile anzeigen
+\setlength{\headheight}{30pt} % Abstände
+\pagenumbering{gobble} % Seitenzahlen unterdrücken
+\usetocstyle{noonewithdot} % Punkte-Linie im Inhaltsverzeichnis unterdrücken
+\graphicspath{{images/}} % Pfad für Bild-Dateien TODO Bild-Dateien im Unterordner ``images'' ablegen
+
+\hyphenation{Stu-dien-gang}
+
+\newcommand{\AGName}{BSc. Informatik-AG} 
+\newenvironment{myitemize}{\begin{itemize}\itemsep -2pt}{\end{itemize}} % Zeilenabstand in Aufzählungen geringer
+
+\fancyhead[C]{\AGName} % Inhalt Kopfzeile mittig
+\fancyhead[R]{} % Inhalt Kopfzeile rechts leer
+\fancyhead[L]{} % Inhalt Kopfzeile rechts leer
+\fancypagestyle{firststyle}{\fancyhead[C]{}\fancyhead[L]{\huge\textbf{\AGName}}} % Inhalt Kopfzeile Seite 1
+
+\begin{document}
+\thispagestyle{firststyle}
+
+\begin{wrapfigure}{r}{130pt}
+\vspace{-78pt}
+  \fbox{
+  \begin{minipage}{140pt}
+   \tableofcontents
+  \end{minipage}
+  }
+\end{wrapfigure}
+
+\section{Kurzbeschreibung}
+    Der Studiengang Informatik B.Sc. gehört offiziell zur MIN-Fakultät. Er ist das Zugpferd der Informatik und hat die höchsten Studierendenzahlen. 
+
+    Wichtig ist für dich die Informationen zum Studiengang auf der Website zu lesen \footnote{\url{http://www.informatik.uni-hamburg.de/Info/Studium/BSc/Informatik/}}.
+    Zusammengefasst beschreiben diese Informationen, dass der Informatik-Studiengang die Vermittlung eines breiten informatischen Wissens anstrebt, das zum einen berufsbefähigend ist und zum Anderen das Fundament für die konsekutiven Masterstudiengänge legt.
+    
+\section{Für den OE-Tutor}
+  \subsection{Checkliste: Themen/Aufgaben}
+      \begin{myitemize}
+          \item[\Square] Besonderheiten des Studiengangs angesprochen
+      \end{myitemize}
+    
+   \subsection{Checkliste: Material}
+    siehe Studienberatungspaper
+\section{Beschreibung lang}
+
+    \subsection{Vorbereitung}
+
+Du solltest dir unbedingt die Studiengangsbeschreibung in den OE-Bits und das Tetris ansehen. Beides gibt dir einen grundlegenden Einblick in den Studiengang Informatik. Vieles ist ähnlich innerhalb der Informatik, einige Dinge sind jedoch auch von Studiengang zu Studiengang verschieden. Wenn du Informatik-Tutor bist, aber selber nicht Informatik studierst, dann ist es umso wichtiger, dass du dir die Besonderheiten merkst. Diese findest du im Abschnitt "`Besonderheiten"'.
+
+Für weitergehende Informationen sollten die Prüfungsordnung, die FSB samt Anlage A und die o.g. Webseite herangezogen werden.
+
+	\subsection{Durchführung}
+	
+Die Informationen zu der eigentlichen Durchführung der Studienberatungseinheiten finden sich im Studienberatungspaper. 
+
+	\subsection{Nachbereitung}
+
+Nach der Einheit ist vor der Einheit, zumindest bis zum Freitag in der zweiten OE-Woche. Nach den Studienberatungseinheiten solltest du dir noch offene Fragen aufschreiben (sofern noch nicht geschehen) und falls du die Antwort dazu nicht kennst, solltest du die Infozentrale fragen.
+
+Trotz aller Vorbereitung kann es natürlich mal passieren, dass auch du noch Fragen hast. Wenn möglich schaue dir dann das Tetris noch einmal an, ebenso wie den Informatikartikel in den OE-Bits. Hilft beides nicht, weil die Frage ein spezifisches Modul betrifft, so kann zum Beispiel die Modultabelle (Anlage A) weiterhelfen.
+
+	\subsection{Allgemeines}
+	
+		\subsubsection*{Aufbau des Studiengangs}
+
+		In den ersten beiden Semestern sind laut Tetris die meisten Pflichtmodule enthalten. Auch wenn man auch Mathe erst im 5. und 6. Semester machen könnte, so ist diese Aufteilung doch sehr sinnvoll, denn viele dieser Module werden später defacto in Wahlpflichtmodulen inhaltlich vorausgesetzt. Dennoch ist es möglich Proseminar und Methodenkompetenz im dritten Semester (oder später) zu machen. In diesem Fall kann man aber auch problemlos bereits Module aus dem Wahlpflichtbereich vorziehen und schon im zweiten Semester machen. Da beide ABK-Module zusammen 6 LP entsprechen, könnte man z.B. "`Recht der Informationswirtschaft"' vorziehen, welches ebenfalls 3 LP hat.
+		
+		\subsubsection*{Modulangebot}
+		
+		Nicht jedes Modul ist immer wählbar. Einige haben verpflichtende Vorbedingungen, wie ein erfolgreich abgeschlossenes anderes Modul oder eine Mindstmenge an erworbenen LP. Zusätzlich gibt es häufig die Einschränkung, dass Module entweder nur im Winter- oder nur im Sommersemester angeboten werden. Einige Module werden auch in beiden Semestern angeboten.
+		
+		Es gibt es auch Module, die nur noch bis zum Zeitpunkt XY garantiert sind. Das bedeutet, dass aufgrund dem Wegfall einer Professur und fehlender Neubesetzung ein Modul über diesen Zeitpunkt hinaus nicht sicher weiter angeboten wird. Bei der Entscheidung zu Modulen im Wahlpflichtbereich sollte man dies berücksichtigen, da einige der Module schon in wenigen Semestern nicht mehr angeboten werden könnten. 
+		
+		Die großen Bacheloreinstiegsmodule, wie SE-I, RS und Mathe sind davon jedoch nicht betroffen, wenngleich die Dozenten wechseln können.		
+		
+		\subsubsection*{Klausurregelungen}
+		
+		Bei Wahl eines Moduls meldet STiNE einen automatisch zum ersten Klausurtermin (sofern vorhanden) an. Sollte man wider Erwarten nicht zur Klausur kommen können, so sollte man sich auf jeden Fall wieder abmelden. Denn: \textbf{Wer zu einem Klausurtermin angemeldet ist und ohne ärztliches Attest fehlt, verwirkt einen Prüfungsversuch.} 
+
+		Andersherum sollte man auf jeden Fall angemeldet sein, wenn man mitschreiben möchte. Spontan hingehen und erst vor Ort entscheiden ist nicht. Wer angemeldet ist und anwesend ist, der verbraucht einen Versuch. Besteht man diesen Versuch, dann darf man sich nicht erneut im Modul prüfen lassen. Wer unangemeldet mitschreibt, hat umsonst mitgeschrieben.
+		
+		Von diesen Prüfungsversuchen hat man pauschal 3 pro Modul. Besteht man dreimal nicht, dann gilt der Studiengang als \textbf{endgültig nicht bestanden} und man wird exmatrikuliert und darf keinen Studiengang mehr studieren, der das nicht bestandene Modul enthält. Gerade bei Grundlagenmodulen kann dies verheerende Auswirkungen haben.
+		
+		Es gibt pro Semester meistens zwei Klausurblöcke. Der eine befindet sich am Anfang der vorlesungsfreien Zeit, der andere am Ende.
+		
+		\subsubsection*{Abhängigkeiten von Modulen}
+		
+		Ergänzend zu dem bereits unter "`Modulangebot"' Erwähnten, hier noch einige Zusatzinfos zu Abhängigkeiten von Modulen. In Folge der Studienreform 2011 wurden viele Module entkoppelt und mittlerweile gibt es kaum mehr verpflichtende Vorbedingungen. Nichtsdestotrotz ist der Stoffumfang nicht auf einmal kleiner geworden und die inhaltlichen Abhängigkeiten weniger. Daher gibt es bei vielen Modulen sogenannte "`empfohlene Voraussetzungen"', die zwar nicht formal vorausgesetzt werden, aber inhaltlich durchaus Sinn machen. In SE 2 wird der Stoff von SE 1 vorausgesetzt, obgleich es keine verpflichtende Voraussetzung ist. Auch muss man FGI 2 nicht belegen, wenn man den Informatik-Master später studieren möchte. Da jedoch FGI 3 im Master Pflicht ist, ist es zumindest nicht verkehrt darüber nachzudenken auch FGI 2 zu belegen. Eine inhaltliche Voraussetzung besteht hier jedoch nicht.
+
+    \subsection{Besonderheiten} % TODO Text ersetzen (chrono)logisch
+
+In diesem Abschnitt wollen wir euch die Besonderheiten des Studiengangs BSc. Informatik darlegen.
+	
+		\subsubsection*{Wahlpflichtbereich}
+
+Wie eingangs bereits erwähnt, hat der Informatik-Studiengang einen verhältnismäßig großen Bereich mit 66 LP. Mit der Studiengangsreform 2011 sind viele Pflichtmodule in den Wahlpflichtbereich gewandert (GDB, SE III nur als Beispiele). Bei den Ersties könnte der Eindruck entstehen, dass man sich nun im Wahlpflichtbereich alles frei auswählen kann und quasi nichts wirklich relevant ist.
+
+Rein technisch mag dies zwar stimmen, aber inhaltlich sind viele der vormaligen Pflichtmodule immer noch sehr relevant. Eigentlich jeder Informatikstudent sollte GDB belegen, denn Persistenz in Form von Datenbanken könnte wichtiger nicht sein. Es ist hier also wichtig mit der Verantwortung, die uns der Fachbereich gibt, sinnvoll umzugehen.
+
+Das kann einen natürlich jetzt erschlagen, aber dafür gibt es die Wahlpflichtvorstellung im Sommersemester.
+
+		\subsubsection*{Mathe für Informatiker}
+		
+Das Mathemodul im ersten und zweiten Semester ist eine Sonderregelung, denn normalerweise gibt es nur einsemestrige Module. Es wurde angelegt, um die Durchfallquoten zu senken. Zum Bestehen des Moduls müssen 40\% der über beide Klausuren maximal verfügbaren Punktzahl erreicht werden.
+
+Herr Andreae unterrichtet das Modul ab dem kommenden Wintersemester leider nicht mehr. Daher kann auch nicht gesagt werden, wie die Klausuren aufgebaut sein werden.
+
+Auch wenn die Ersties nicht unbedingt positive Erfahrungen mit Mathe in der Schule hatten, so ist das Mathemodul unbedingt ernst zu nehmen. Von daher sollte den Ersties verklickert werden, dass man von der ersten Woche an voll dabei sein sollte.
+
+		\subsubsection*{Pläne nach dem Bachelor}
+
+Der Informatik-Studiengang bietet durch den großen Wahlpflichtbereich viele Individualisierungsmöglichkeiten. Damit ist er eine gute Grundlage für einen konsekutiven Master, bietet aber auch in Sachen Berufseinstieg Abgrenzungsmöglichkeiten. Dies bedeutet, dass die Ersties im Informatikstudium Akzente setzen können für eine spätere berufliche oder wissenschaftliche Laufbahn. Den Ersties steht das volle Spektrum der Informatik zur Verfügung, wodurch die alleinige Entscheidung zum Studiengang noch keine Festlegung auf einen bestimmten Bereich darstellt.
+  
+\end{document}
