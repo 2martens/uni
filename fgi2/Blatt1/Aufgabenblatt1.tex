@@ -21,7 +21,7 @@
 \parindent 0pt
 % define how the sections are rendered
 \def\thesection{1.\arabic{section})}
-\def\thesubsection{\arabic{subsection})}
+\def\thesubsection{\arabic{subsection}.}
 \def\thesubsubsection{(\roman{subsubsection})}
 % some matrix magic
 \makeatletter
@@ -39,6 +39,24 @@
 \setcounter{section}{2}
 \section{} %1.3
 	\subsection{} %1.
-	\[d + a\{n\}d + \]
-
+	\[\underbrace{aaa \cdots aaa}_{\text{n times}}d + d + \underbrace{\underbrace{aaa \cdots aaa}_{\text{2k - 1 times}} \cdot c \cdot \underbrace{bbb \cdots bbb}_{\text{2k - 1 times}}}_{\forall k \in \mathbb{N}| 0 < k \leq \frac{1}{2}n} + \underbrace{\underbrace{aaa \cdots aaa}_{\text{2k times}} \cdot d \cdot \underbrace{bbb \cdots bbb}_{\text{2k times}}}_{\forall k \in \mathbb{N}| 0 < k \leq \frac{1}{2}n}\]
+	\subsection{}
+	\[\bigcup\limits_{k = 1}^{\frac{1}{2}n} \left\lbrace \underbrace{aaa \cdots aaa}_{\text{2k -1 times}} c \underbrace{bbb \cdots bbb}_{\text{2k -1 times}}\right\rbrace \cup \bigcup\limits_{k = 1}^{\frac{1}{2}n} \left\lbrace \underbrace{aaa \cdots aaa}_{\text{2k times}} d \underbrace{bbb \cdots bbb}_{\text{2k times}}\right\rbrace \cup \left\lbrace \underbrace{aaa \cdots aaa}_{\text{n times}}d\right\rbrace \cup \{d\}\]
+	\subsection{}
+	\subsection{}
+	\(L(A_{n})\) ist für ein beliebigesb fest gewähltes \(n\) regulär, da die Sprache durch einen deterministischen endlichen Automaten akzeptiert wird (siehe Aufgabe 1.3).
+\section{} %1.4
+	\subsection{}
+	Von einem gegebenen Automaten werden Start- und Endzustände vertauscht, sowie alle Kantenbeziehungen umgekehrt. Für den resultierenden NFA (in den meisten Fällen nicht mehr deterministisch) wird nun ein Potenzautomaten gebildet, welcher vollständig gemacht wird.
+	\subsection{}
+	\subsection{}
+	\[f^{*}(fe)^{*}ee^{*}f(e + f)^{*}\]
+	\subsection{}
+	Nach Umkehrung der Kantenbeziehungen und Vertauschen des Start- und Endzustands, ergibt sich dieser Automat.
+	% TODO: Automat
+	
+	Anschließend wird der Potenzautomat gebildet.
+	
+	Abschließend wird dieser vollständig gemacht.
+	\subsection{}
 \end{document}
