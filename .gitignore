@@ -14,6 +14,7 @@
 *.ilg
 *.ind
 *.ist
+*.jpg
 *.lof
 *.log
 *.lot
@@ -25,6 +26,7 @@
 *.out
 *.pdf
 *.pdfsync
+*.png
 *.ps
 *.pyg
 *.snm
