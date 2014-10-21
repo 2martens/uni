@@ -74,20 +74,33 @@
 	\caption{Büchi-Automat \(A'_{2.3}\), der \((L(A_{2.3}))^{\omega}\) akzeptiert.} 
 	\label{fig:1}
 	\end{figure}
-	Es sind zwei Teilmengenbeziehungen zu zeigen. Die erste Richtung besagt \(L^{\omega}(A'_{2.3}) \subseteq (L(A_{2.3}))^{\omega}\) und die zweite \((L(A_{2.3}))^{\omega} \subseteq L^{\omega}(A'_{2.3})\). Es gelte \(A'_{2.3} = (Q, \Sigma, \delta, Q^{0}, F)\).
+	Es sind zwei Teilmengenbeziehungen zu zeigen. Die erste Richtung besagt \(L^{\omega}(A'_{2.3}) \subseteq (L(A_{2.3}))^{\omega}\) und die zweite \((L(A_{2.3}))^{\omega} \subseteq L^{\omega}(A'_{2.3})\). Es gelte \(A'_{2.3} = (Q', \Sigma ', \delta ', Q'^{0}, F')\). Desweiteren gelte \(A_{2.3} = (Q, \Sigma, \delta, Q^{0}, F)\). Für die Konstruktion von \(A'_{2.3}\) siehe \fref{fig:1}.
 	
-	Zunächst wird die erstgenannte Richtung gezeigt.
+	Zunächst wird \(L^{\omega}(A'_{2.3}) \subseteq (L(A_{2.3}))^{\omega}\) gezeigt.
 	
 	\begin{alignat*}{2}
 	w \in L^{\omega}(A'_{2.3}) &\Rightarrow & A'_{2.3} \text{ akzeptiert }w \\
 								&\Rightarrow & \exists \text{ Erfolgsrechnung von \(A'_{2.3}\) auf }w \\
-								&\Rightarrow & \exists p = z_{0}z_{1}z_{2}... | z_{0} \in Q^{0} \wedge F \cap inf(p) \neq \emptyset \\
-								&\Rightarrow & 
+								&\Rightarrow & \exists p = z_{0}z_{1}z_{2}... | z_{0} \in Q'^{0} \wedge F' \cap inf(p) \neq \emptyset \\
+								&\Rightarrow & \exists z_{i} \text{ in } p | i \in \mathbb{N} : z_{i} \in F'
 	\end{alignat*}
 	
 \section{} %2.4
 	\subsection{} % 1.
+		\begin{enumerate}
+			\item Voraussetzen, dass \(W\) regulär und \(U\) \(\omega\)-regulär ist
+			\item Zeigen, dass jedes Wort aus \(W \cdot U\) mit einem Wort aus \(U\) endet
+			\item Zeigen, dass jedes Wort aus \(W \cdot U\) mindestens einen Endzustand unendlich durchläuft
+		\end{enumerate}
 	\subsection{} % 2.
+		\begin{enumerate}
+			\item endlichen Automaten zu \(W\) konstruieren
+			\item Büchi-Automaten zu \(U\) konstruieren
+			\item Kantenbeziehungen von jedem Endzustand des endlichen Automaten (folgend: \(A_{W}\)) zu den Folgezuständen des Startzustands des Büchi-Automaten (folgend: \(A_{U}\) ergänzen
+			\item Startzustand von \(A_{U}\) zu normalem Status degradieren
+			\item Endzustände von \(A_{W}\) zu normalen Stati degradieren
+		\end{enumerate}
 	\subsection{} % 3.
+		
 	\subsection{} % 4.
 \end{document}
