@@ -42,9 +42,49 @@
 	\subsection{} % 1.
 		\[L(A_{2.3}) = a \cdot (ba^{*}c)^{*} + bc(abc)^{*} \cdot (a + e)\]
 		\[L^{\omega}(A_{2.3}) = a(ba^{*}c)^{\omega} + bc(abc)^{\omega}\]
-		\[\]
+		\[(L(A_{2.3}))^{\omega} = (a \cdot (ba^{*}c)^{*} + bc(abc)^{*} \cdot (a + e))^ {\omega}\]
 	\subsection{} % 2.
+		Es sei \(w_{1}\) ein Wort aus der Sprache \(L^{\omega}(A_{2.3})\) und \(w_{2}\) ein Wort aus der Sprache \((L(A_{2.3}))^{\omega}\). Es gelte \(w_{1} = bc(abc)^{\omega}\) und \(w_{2} = (bcabce)^{\omega}\).
+		
+		Bei der Sprache \(L^{\omega}(A_{2.3})\) hat man Wörter, die zum Teil aus unendlich oft auftretenden Zeichenfolgen bestehen. Die Sprache \((L(A_{2.3}))^{\omega}\) enthält alle Wörter der Sprache \(L(A_{2.3})\), welche unendlich oft hintereinander kommen können. Die erste Sprache enthält zum Beispiel nicht das Wort \(w_{2}\), da es auf \(e\) endet und dieser Endzustand nicht unendlich oft durchlaufen werden kann.
 	\subsection{} % 3.
+	\begin{figure}
+	\begin{tikzpicture}[node distance=2cm]
+		\node[state,initial] (q0) {\(q_{0}\)};
+		\node[state,accepting] (q1) [below=of q0] {\(q_{1}\)};
+		\node[state] (q2) [right=of q1] {\(q_{2}\)};
+		\node[state] (q3) [right=of q0] {\(q_{3}\)};
+		\node[state] (q4) [right=of q3] {\(q_{4}\)};
+		\node[state,accepting] (q6) [right=of q4] {\(q_{6}\)};
+		\node[state,accepting] (q5) [below=of q4] {\(q_{5}\)};
+		\node[state] (q7) [below=of q1] {\(q_{7}\)};
+		\path[->] (q0) edge node [above] {\(b\)} (q3)
+			(q0) edge node [left] {\(a\)} (q1)
+			(q1) edge[bend left] node [above] {\(b\)} (q2)
+			(q2) edge[loop below] node [below] {\(a\)} (q2)
+			(q2) edge[bend left] node [below] {\(c\)} (q1)
+			(q3) edge node [above] {\(c\)} (q4)
+			(q4) edge node [right] {\(a\)} (q5)
+			(q5) edge node [below left] {\(b\)} (q3)
+			(q4) edge node [above] {\(e\)} (q6)
+			(q6) edge[bend right] node [above] {\(b\)} (q3)
+			(q1) edge node [left] {\(a\)} (q7)
+			(q7) edge node [below right] {\(b\)} (q2);
+	\end{tikzpicture}
+	\caption{Büchi-Automat \(A'_{2.3}\), der \((L(A_{2.3}))^{\omega}\) akzeptiert.} 
+	\label{fig:1}
+	\end{figure}
+	Es sind zwei Teilmengenbeziehungen zu zeigen. Die erste Richtung besagt \(L^{\omega}(A'_{2.3}) \subseteq (L(A_{2.3}))^{\omega}\) und die zweite \((L(A_{2.3}))^{\omega} \subseteq L^{\omega}(A'_{2.3})\). Es gelte \(A'_{2.3} = (Q, \Sigma, \delta, Q^{0}, F)\).
+	
+	Zunächst wird die erstgenannte Richtung gezeigt.
+	
+	\begin{alignat*}{2}
+	w \in L^{\omega}(A'_{2.3}) &\Rightarrow & A'_{2.3} \text{ akzeptiert }w \\
+								&\Rightarrow & \exists \text{ Erfolgsrechnung von \(A'_{2.3}\) auf }w \\
+								&\Rightarrow & \exists p = z_{0}z_{1}z_{2}... | z_{0} \in Q^{0} \wedge F \cap inf(p) \neq \emptyset \\
+								&\Rightarrow & 
+	\end{alignat*}
+	
 \section{} %2.4
 	\subsection{} % 1.
 	\subsection{} % 2.
