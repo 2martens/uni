@@ -1,0 +1,53 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\usepackage{multirow}
+\usepackage[german]{fancyref}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+\def\thesection{2.\arabic{section})}
+\def\thesubsection{\arabic{subsection}.}
+\def\thesubsubsection{(\roman{subsubsection})}
+% some matrix magic
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Benjamin Kuffel, Jim Martens, Sabrina Mehrens\\Gruppe 6}
+\title{Hausaufgaben zum 27. Oktober}
+\maketitle
+
+\setcounter{section}{2}
+\section{} %2.3
+	\subsection{} % 1.
+		\[L(A_{2.3}) = a \cdot (ba^{*}c)^{*} + bc(abc)^{*} \cdot (a + e)\]
+		\[L^{\omega}(A_{2.3}) = a(ba^{*}c)^{\omega} + bc(abc)^{\omega}\]
+		\[\]
+	\subsection{} % 2.
+	\subsection{} % 3.
+\section{} %2.4
+	\subsection{} % 1.
+	\subsection{} % 2.
+	\subsection{} % 3.
+	\subsection{} % 4.
+\end{document}
