@@ -74,16 +74,36 @@
 	\caption{Büchi-Automat \(A'_{2.3}\), der \((L(A_{2.3}))^{\omega}\) akzeptiert.} 
 	\label{fig:1}
 	\end{figure}
-	Es sind zwei Teilmengenbeziehungen zu zeigen. Die erste Richtung besagt \(L^{\omega}(A'_{2.3}) \subseteq (L(A_{2.3}))^{\omega}\) und die zweite \((L(A_{2.3}))^{\omega} \subseteq L^{\omega}(A'_{2.3})\). Es gelte \(A'_{2.3} = (Q', \Sigma ', \delta ', Q'^{0}, F')\). Desweiteren gelte \(A_{2.3} = (Q, \Sigma, \delta, Q^{0}, F)\). Für die Konstruktion von \(A'_{2.3}\) siehe \fref{fig:1}.
+	Es sind zwei Teilmengenbeziehungen zu zeigen. Die erste Richtung besagt \(L^{\omega}(A'_{2.3}) \subseteq (L(A_{2.3}))^{\omega}\) und die zweite \((L(A_{2.3}))^{\omega} \subseteq L^{\omega}(A'_{2.3})\). Es gelte \(A'_{2.3} = (Q', \Sigma ', \delta ', Q'^{0}, F')\). Desweiteren gelte \(A_{2.3} = (Q, \Sigma, \delta, Q^{0}, F)\). Für die Konstruktion von \(A'_{2.3}\) siehe \fref{fig:1}. Anhand der Konstruktion ist ersichtlich, dass \(F = F'\), sowie \(Q^{0} = Q'^{0}\) und \(Q \subseteq Q'\) gelten.
 	
-	Zunächst wird \(L^{\omega}(A'_{2.3}) \subseteq (L(A_{2.3}))^{\omega}\) gezeigt.
+	Zunächst wird \((L(A_{2.3}))^{\omega} \subseteq L^{\omega}(A'_{2.3})\) gezeigt.
 	
 	\begin{alignat*}{2}
-	w \in L^{\omega}(A'_{2.3}) &\Rightarrow & A'_{2.3} \text{ akzeptiert }w \\
-								&\Rightarrow & \exists \text{ Erfolgsrechnung von \(A'_{2.3}\) auf }w \\
-								&\Rightarrow & \exists p = z_{0}z_{1}z_{2}... | z_{0} \in Q'^{0} \wedge F' \cap inf(p) \neq \emptyset \\
-								&\Rightarrow & \exists z_{i} \text{ in } p | i \in \mathbb{N} : z_{i} \in F'
+	w \in (L(A_{2.3}))^{\omega} &\Rightarrow & \exists w_{det} = c_{0}c_{1}...c_{i} | i \in \mathbb{N} : w_{det} \text{ wird von \(A_{2.3}\) akzeptiert} \\
+								 &\Rightarrow & w = (w_{det})^{\omega} \\
+								 &\Rightarrow & \exists \text{ Erfolgsrechnung von \(A_{2.3}\) auf \(w_{det}\)} \\
+								 &\Rightarrow & \exists p_{det} = z_{0}z_{1}z_{2}...z_{i} | \exists i \in \mathbb{N} : z_{0} \in Q^{0} \wedge z_{i} \in F \\
+								 &\Rightarrow & \exists p = p_{det}s_{0}s_{1}...s_{i}... | \exists i \in \mathbb{N} : s_{i} \in F \wedge s_{i+1} = s_{0} \\
+								 &\Rightarrow & F \cap inf(p) \neq \emptyset \\
+								 &\Rightarrow & F' \cap inf(p) \neq \emptyset \\
+								 &\Rightarrow & w \in L^{\omega}(A'_{2.3})
 	\end{alignat*}
+	
+	Es bleibt noch zu zeigen, dass \(L^{\omega}(A'_{2.3}) \subseteq (L(A_{2.3}))^{\omega}\) gilt.
+	
+	\begin{alignat*}{2}
+		w \in L^{\omega}(A'_{2.3}) &\Rightarrow & w \text{ wird von \(A'_{2.3}\) akzeptiert} \\
+									&\Rightarrow & \exists \text{ Erfolgsrechnung von \(A'_{2.3}\) auf \(w\)} \\
+									&\Rightarrow & \exists p = z_{0}z_{1}z_{2}... | i \in \mathbb{N} : z_{0} \in Q'^{0} \wedge F' \cap inf(p) \neq \emptyset \\
+									&\Rightarrow & z_{0} \in Q^{0} \wedge F \cap inf(p) \neq \emptyset \\
+									&\Rightarrow & \exists p_{det} = z_{0}z_{1}z_{2}...z_{i} | \exists i \in \mathbb{N} : z_{0} \in Q^{0} \wedge z_{i} \in F \\
+									&\Rightarrow & p = p_{det}s_{0}s_{1}...s_{i}... | \exists i \in \mathbb{N} : s_{i} \in F \wedge s_{i+1} = s_{0} \\
+									&\Rightarrow & \exists w_{det} \text{ welches von \(A_{2.3}\) akzeptiert wird} \\
+									&\Rightarrow & w = (w_{det})^{\omega} \\
+									&\Rightarrow & w \in (L(A_{2.3}))^{\omega}
+	\end{alignat*}
+	
+	Damit ist die Korrektheit des konstruierten Automaten gezeigt.
 	
 \section{} %2.4
 	\subsection{} % 1.
