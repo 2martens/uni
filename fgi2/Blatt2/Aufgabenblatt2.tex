@@ -109,8 +109,7 @@
 	\subsection{} % 1.
 		\begin{enumerate}
 			\item Voraussetzen, dass \(W\) regulär und \(U\) \(\omega\)-regulär ist
-			\item Zeigen, dass jedes Wort aus \(W \cdot U\) mit einem Wort aus \(U\) endet
-			\item Zeigen, dass jedes Wort aus \(W \cdot U\) mindestens einen Endzustand unendlich durchläuft
+			\item Zeigen, dass jede Erfolgsrechnung für ein Wort aus \(W \cdot U\) mindestens einen Endzustand unendlich oft durchläuft
 		\end{enumerate}
 	\subsection{} % 2.
 		\begin{enumerate}
@@ -121,6 +120,21 @@
 			\item Endzustände von \(A_{W}\) zu normalen Stati degradieren
 		\end{enumerate}
 	\subsection{} % 3.
+		Das in 2.4.2 beschriebene Verfahren terminiert nach endlich vielen Schritten, da sowohl ein endlicher Automat als auch ein Büchi-Automat endlich viele Zustände haben, endlich viele Kantenbeziehungen hinzugefügt werden und endlich viele Zustände degradiert werden.
 		
+		Zum Nachweis der Korrektheit wird das in 2.4.1 beschriebene Verfahren angewendet. Dabei sei vorausgesetzt, dass \(W\) regulär und \(U\) \(\omega\)-regulär ist. Daraus folgend ist zu zeigen, dass jede Erfolgsrechnung für ein Wort aus der Konkatenation mindestens einen Endzustand unendlich oft durchläuft. Ebenfalls sei vorausgesetzt, dass die konstruierten Automaten für ihre jeweiligen Sprachen korrekt sind (Sprache des endlichen Automaten = \(W\) und Sprache des Büchi-Automaten = \(U\)). Der endliche Automat sei durch \(A_{det} = (Q, \Sigma, \delta, Q^{0}, F)\) und der Büchi-Automat durch \(A_{buechi} = (Q', \Sigma ', \delta ', Q'^{0}, F')\) beschrieben. Der zusammengesetzte Automat sei durch \(A_{concat} = (Q_{c}, \Sigma_{c}, \delta_{c}, Q_{c}^{0}, F_{c})\) beschrieben.
+		
+		\begin{alignat*}{2}
+			w \in W \cdot U &\Rightarrow & \exists \text{ Zerlegung von \(w\) wie folgt: }w = w_{w} \cdot w_{u} : w_{w} \in W \wedge w_{u} \in U \\
+							&\Rightarrow & w_{u} \text{ wird von \(A_{buechi}\) akzeptiert} \\
+							&\Rightarrow & \exists \text{ Erfolgsrechnung von \(A_{buechi}\) auf \(w_{u}\)} \\
+							&\Rightarrow & \exists p_{buechi} = z_{0}z_{1}z_{2}... | z_{0} \in Q'^{0} \wedge F' \cap inf(p) \neq \emptyset \\
+							&\Rightarrow & w_{w} \text{ wird von \(A_{det}\) akzeptiert} \\
+							&\Rightarrow & \exists \text{ Erfolgsrechnung von \(A_{det}\) auf \(w_{w}\)} \\
+							&\Rightarrow & \exists p_{det} = s_{0}s_{1}s_{2}...s_{i} | \exists i \in \mathbb{N} : s_{0} \in Q^{0} \wedge s_{i} \in F \\
+							&\Rightarrow & \text{nach Konstruktion: } \exists p = p_{det}x_{0}x_{1}...x_{i}x_{i+1}... | \forall i \in \mathbb{N} : x_{i} = z_{i+1}  \\
+							&\Rightarrow & F_{c} \cap inf(p) \neq \emptyset \\
+							&\Rightarrow & W \cdot U \text{ ist eine \(\omega\)-reguläre Menge}
+		\end{alignat*}
 	\subsection{} % 4.
 \end{document}
