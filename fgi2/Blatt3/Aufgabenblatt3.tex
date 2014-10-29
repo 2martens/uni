@@ -67,8 +67,12 @@
 		\begin{alignat*}{2}
 			L(A_{3}) &=& (a^{*}ba^{*}b)^{*}ba^{*} \\
 			L^{\omega}(A_{3}) &=& (a^{*}ba^{*}b)^{*}a^{*}ba^{\omega} \\
-			L(A_{1}) \cap L(A_{2}) &=& 
+			L(A_{1}) \cap L(A_{2}) &=& a^{*}b(a^{*}ba^{*}b)^{*} = (a^{*}ba^{*}b)^{*}a^{*}b \\
+			L^\omega(A_{1}) \cap L^{\omega}(A_{2}) &=& (a^{*}ba^{*}b)^{\omega}
 		\end{alignat*}
+		Es fällt auf, dass \(L(A_{3})\) größtenteils dem Durchschnitt von \(L(A_{1})\) und \(L(A_{2})\) entspricht. Lediglich am Ende unterscheiden sich beide Sprachen. Im Fall von \(L(A_{3})\) werden Wörter mit einem \(a\) am Ende akzeptiert, während der Durchschnitt lediglich Wörter mit einem \(b\) am Ende akzeptiert.
+		
+		Vergleicht man \(L^{\omega}(A_{3})\) mit dem Durchschnitt der beiden \(\omega \)-Sprachen, so ergibt sich, dass in \(L^{\omega}(A_{3})\) die Schleife maximal endlich oft durchlaufen werden darf und dann beliebig viele \(a\), ein \(b\) und unendlich viele \(a\) folgen müssen. Im Falle des Durchschnitts hingegen, muss die Schleife unendlich oft durchlaufen werden.
 	\subsection{}
 		\begin{figure}
 			\begin{tikzpicture}[node distance=2cm]
