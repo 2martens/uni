@@ -21,7 +21,7 @@
 \parskip 12pt plus 1pt minus 1pt
 \parindent 0pt
 % define how the sections are rendered
-\def\thesection{2.\arabic{section})}
+\def\thesection{3.\arabic{section})}
 \def\thesubsection{\arabic{subsection}.}
 \def\thesubsubsection{(\roman{subsubsection})}
 % some matrix magic
@@ -37,7 +37,7 @@
 \title{Hausaufgaben zum 3. November}
 \maketitle
 
-\setcounter{section}{3}
+\setcounter{section}{2}
 \section{} %3.3
 	\subsection{}
 		\begin{alignat*}{2}
@@ -100,4 +100,15 @@
 			L^{\omega}(A_{4}) &=& ((aa^{*}b + b)(b + aa^{*}b))^{\omega}(((aa^{*}b + b)(b + aa^{*}b)) + ba(aa)^{\omega})
 		\end{alignat*}
 \section{} %3.4	
+	\(TS_{1}\) und \(TS_{2}\) sind bisimilar. Die dazugehörige Relation lautet:
+	\[
+		\mathcal{B}_{1} = \{(P_{0}, Q_{0}), (P_{1}, Q_{1}), (P_{2}, Q_{1}), (P_{3}, Q_{2}), (P_{0}, Q_{3})\}
+	\]
+	
+	\(TS_{3}\) und \(TS_{4}\) sind nicht bisimilar. Dies lässt sich an der theoretisch benötigten Relation sehen.
+	\[
+		\mathcal{B}_{2} = \{(R_{0}, S_{0}), (R_{0}, S_{1}), (R_{1}, S_{2}), (R_{1}, S_{3}), (R_{2}, S_{2}), (R_{2}, S_{3}), (R_{3}, S_{4}), (R_{4}, S_{4})\}
+	\]
+	
+	Es ist deutlich zu sehen, dass \(R_{1}\) und \(S_{2}\) ein Paar sein müssten. Von \(R_{1}\) gehen zwei Kanten ab, einmal \(b\) und einmal \(c\). Von \(S_{2}\) geht jedoch nur eine Kante ab und zwar eine mit \(b\). Da es keine Kante mit einem \(c\) gibt, sind die beiden Transitionsnetze nicht bisimilar.
 \end{document}
