@@ -1,0 +1,103 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\usepackage{multirow}
+\usepackage[german]{fancyref}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+\def\thesection{2.\arabic{section})}
+\def\thesubsection{\arabic{subsection}.}
+\def\thesubsubsection{(\roman{subsubsection})}
+% some matrix magic
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Benjamin Kuffel, Jim Martens\\Gruppe 6}
+\title{Hausaufgaben zum 3. November}
+\maketitle
+
+\setcounter{section}{3}
+\section{} %3.3
+	\subsection{}
+		\begin{alignat*}{2}
+			L(A_{1}) &=& (a^{*}ba^{*}b)^{*}(a^{*} + a^{*}ba^{*}) \\
+			L(A_{2}) &=& a^{*}b(a^{*}ba^{*}b)^{*} \\
+			L^{\omega}(A_{1}) &=& (a^{*}ba^{*}b)^{\omega} + ((a^{*}ba^{*}b)^{*}a^{*}ba^{\omega}) \\
+			L^{\omega}(A_{2}) &=& (a^{*}ba^{*}b)^{\omega}
+		\end{alignat*}
+	\subsection{}
+		\begin{figure}
+			\begin{tikzpicture}[node distance=2cm]
+				\node[state,initial] (qs) {\((q, s)\)};
+				\node[state] (rt) [right=of qs] {\((r, t)\)};
+				\node[state,accepting] (pt) [above=of qs] {\((p, t)\)};
+				\path[->] (qs) edge[bend left] node [above] {\(b\)} (rt)
+					(qs) edge[loop below] node [below] {\(a\)} (qs)
+					(rt) edge[loop right] node [right] {\(a\)} (rt)
+					(rt) edge[bend left] node [below] {\(b\)} (qs)
+					(qs) edge node [left] {\(b\)} (pt)
+					(pt) edge[loop right] node [right] {\(a\)} (pt);
+			\end{tikzpicture}
+			\caption{initiale Zusammenhangskomponente des Produktautomaten \(A_{3}\)} 
+			\label{fig:1}
+		\end{figure}
+		Siehe \fref{fig:1} für die Konstruktion.
+	\subsection{}
+		\begin{alignat*}{2}
+			L(A_{3}) &=& (a^{*}ba^{*}b)^{*}ba^{*} \\
+			L^{\omega}(A_{3}) &=& (a^{*}ba^{*}b)^{*}a^{*}ba^{\omega} \\
+			L(A_{1}) \cap L(A_{2}) &=& 
+		\end{alignat*}
+	\subsection{}
+		\begin{figure}
+			\begin{tikzpicture}[node distance=2cm]
+				\node[state,initial,accepting] (qs1) {\((q, s, 1)\)};
+				\node[state] (qs2) [above=of qs1] {\((q, s, 2)\)};
+				\node[state] (rt1) [right=of qs1] {\((r, t, 1)\)};
+				\node[state,accepting] (pt1) [below=of qs1] {\((p, t, 1)\)};
+				\node[state] (rt2) [above=of rt1] {\((r, t, 2)\)};
+				\node[state] (pt2) [right=of pt1] {\((p, t, 2)\)};
+				\path[->] (qs1) edge[bend right] node [above left] {\(b\)} (rt2)
+					(qs1) edge node [right] {\(a\)} (qs2)
+					(qs2) edge node [above] {\(b\)} (rt2)
+					(qs2) edge[loop left] node [left] {\(a\)} (qs2)
+					(rt2) edge node [below right] {\(a\)} (rt1)
+					(rt2) edge[bend right] node [below right] {\(b\)} (qs1)
+					(rt1) edge[loop right] node [right] {\(a\)} (rt1)
+					(rt1) edge node [below] {\(b\)} (qs1)
+					(qs1) edge[bend left] node [above right] {\(b\)} (pt2)
+					(pt2) edge[bend left] node [below] {\(a\)} (pt1)
+					(pt1) edge[bend left] node [below] {\(a\)} (pt2);
+			\end{tikzpicture}
+			\caption{initiale Zusammenhangskomponente des Produktautomaten \(A_{4}\)} 
+			\label{fig:2}
+		\end{figure}
+		Siehe \fref{fig:2} für die Konstruktion.
+	\subsection{}
+		\begin{alignat*}{2}
+			L(A_{4}) &=& ((aa^{*}b + b)(b + aa^{*}b))^{*}(((aa^{*}b + b)(b + aa^{*}b)) + ba(aa)^{*}) \\
+			L^{\omega}(A_{4}) &=& ((aa^{*}b + b)(b + aa^{*}b))^{\omega}(((aa^{*}b + b)(b + aa^{*}b)) + ba(aa)^{\omega})
+		\end{alignat*}
+\section{} %3.4	
+\end{document}
