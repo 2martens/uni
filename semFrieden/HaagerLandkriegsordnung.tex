@@ -1,0 +1,77 @@
+%!TEX encoding = UTF-8 Unicode
+\documentclass[12pt]{scrartcl}
+%\usepackage[applemac]{inputenc} % Mac-Umlaute direkt verwenden öäüß
+%\usepackage[isolatin]{inputenc} % PC-Umlaute direkt verwenden 
+\usepackage[utf8]{inputenc} % Unicode funktioniert unter Windows, Linux und Mac
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage[numbers]{natbib}
+\usepackage[fixlanguage]{babelbib}
+\selectbiblanguage{ngerman}
+%\usepackage{ngerman}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}\urlstyle{rm}
+\usepackage{times}
+\usepackage[scaled]{helvet}
+\usepackage{a4wide}
+\usepackage{rotating}
+\usepackage{listings}\lstset{breaklines=true,breakatwhitespace=true,frame=leftline,captionpos=b,xleftmargin=6ex,tabsize=4,numbers=left,numberstyle=\ttfamily\footnotesize,basicstyle=\ttfamily\footnotesize}
+\sloppy
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1.2ex plus 0.5ex minus 0.5ex}
+\pagestyle{plain}
+
+\begin{document}
+
+\newpage
+\thispagestyle{empty}
+\begin{center}\Large
+Universität Hamburg \par
+Fachbereich Informatik
+\vfill
+Seminararbeit
+\vfill
+{\Large\textsf{\textbf{Haager Landkriegsordnung}}\par}
+\vfill
+vorgelegt von 
+\par\bigskip
+Jim Martens \par
+%Matrikelnummern 6420323 \par
+Studiengang BSc. Informatik
+\end{center}
+
+\newpage
+\section*{Zusammenfassung}
+
+
+\newpage
+\tableofcontents
+
+\newpage
+\section{Vorbemerkung}
+
+
+\section{Inhalt}
+\cite{Gasser1991}
+\cite{Lingen2014}
+\cite{Buss1992}
+\cite{Fraenkel1968}
+\cite{Heffter1951}
+\cite{Reich2010}
+
+\section{Schlussbemerkungen}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+\bibliography{semFrieden}
+\bibliographystyle{plainnat}
+\addcontentsline{toc}{section}{Literaturverzeichnis}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\addcontentsline{toc}{section}{Anhang}
+
+\end{document}
