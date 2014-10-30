@@ -70,9 +70,10 @@
 			L(A_{1}) \cap L(A_{2}) &=& a^{*}b(a^{*}ba^{*}b)^{*} = (a^{*}ba^{*}b)^{*}a^{*}b \\
 			L^\omega(A_{1}) \cap L^{\omega}(A_{2}) &=& (a^{*}ba^{*}b)^{\omega}
 		\end{alignat*}
-		Es fällt auf, dass \(L(A_{3})\) größtenteils dem Durchschnitt von \(L(A_{1})\) und \(L(A_{2})\) entspricht. Lediglich am Ende unterscheiden sich beide Sprachen. Im Fall von \(L(A_{3})\) werden Wörter mit einem \(a\) am Ende akzeptiert, während der Durchschnitt lediglich Wörter mit einem \(b\) am Ende akzeptiert.
 		
-		Vergleicht man \(L^{\omega}(A_{3})\) mit dem Durchschnitt der beiden \(\omega \)-Sprachen, so ergibt sich, dass in \(L^{\omega}(A_{3})\) die Schleife maximal endlich oft durchlaufen werden darf und dann beliebig viele \(a\), ein \(b\) und unendlich viele \(a\) folgen müssen. Im Falle des Durchschnitts hingegen, muss die Schleife unendlich oft durchlaufen werden.
+		Es gilt \(L(A_{3}) \not\subseteq L(A_{1}) \cap L(A_{2})\), weil \(ba \in L(A_{3})\), aber \(ba \not\in L(A_{1}) \cap L(A_{2})\). Es gilt \(L(A_{1}) \cap L(A_{2}) \not\subseteq L(A_{3})\), weil \(ab \in L(A_{1}) \cap L(A_{2})\), aber \(ab \not\in L(A_{3})\). Daher gilt \(L(A_{3}) \neq L(A_{1}) \cap L(A_{2})\).
+		
+		Es gilt \(L^{\omega}(A_{3}) \not\subseteq L^{\omega}(A_{1}) \cap L^{\omega}(A_{2})\), weil \(ba^{\omega} \in L^{\omega}(A_{3})\), aber \(ba^{\omega} \not\in L^{\omega}(A_{1}) \cap L^{\omega}(A_{2})\). Es gilt \(L^{\omega}(A_{1}) \cap L^{\omega}(A_{2}) \not\subseteq L^{\omega}(A_{3})\), weil \((a^{*}ba^{*}b)^{\omega} \in L^{\omega}(A_{1}) \cap L^{\omega}(A_{2})\), aber \((a^{*}ba^{*}b)^{\omega} \not\in L^{\omega}(A_{3})\). Daher gilt \(L^{\omega}(A_{3}) \neq L^{\omega}(A_{1}) \cap L^{\omega}(A_{2})\).
 	\subsection{}
 		\begin{figure}
 			\begin{tikzpicture}[node distance=2cm]
@@ -100,9 +101,15 @@
 		Siehe \fref{fig:2} für die Konstruktion.
 	\subsection{}
 		\begin{alignat*}{2}
-			L(A_{4}) &=& ((aa^{*}b + b)(b + aa^{*}b))^{*}(((aa^{*}b + b)(b + aa^{*}b)) + ba(aa)^{*}) \\
-			L^{\omega}(A_{4}) &=& ((aa^{*}b + b)(b + aa^{*}b))^{\omega}(((aa^{*}b + b)(b + aa^{*}b)) + ba(aa)^{\omega})
+			L(A_{4}) &=& ((aa^{*}b + b)(b + aa^{*}b))^{*} + (((aa^{*}b + b)(b + aa^{*}b))^{*} + ba(aa)^{*}) \\
+			L^{\omega}(A_{4}) &=& ((aa^{*}b + b)(b + aa^{*}b))^{\omega} + (((aa^{*}b + b)(b + aa^{*}b))^{*} + ba(aa)^{\omega})	
 		\end{alignat*}
+		
+		Es gilt \(L(A_{4}) \not\subseteq L(A_{1}) \cap L(A_{2})\), weil \(\epsilon \in L(A_{4})\), aber \(\epsilon \not\in L(A_{1}) \cap L(A_{2})\).
+		Es gilt \(L(A_{1}) \cap L(A_{2}) \not\subseteq L(A_{4})\), weil \(b \in L(A_{1}) \cap L(A_{2})\), aber \(b \not\in L(A_{4})\). Damit gilt \(L(A_{4}) \neq L(A_{1}) \cap L(A_{2})\).
+		
+		Es gilt \(L^{\omega}(A_{4}) \not\subseteq L^{\omega}(A_{1}) \cap L^{\omega}(A_{2})\), weil \(ba(aa)^{\omega} \in L^{\omega}(A_{4})\), aber \(ba(aa)^{\omega} \not\in L^{\omega}(A_{1}) \cap L^{\omega}(A_{2})\).
+		Es gilt \(L^{\omega}(A_{1}) \cap L^{\omega}(A_{2}) \subseteq L^{\omega}(A_{4})\), weil \(((aa^{*}b + b)(b + aa^{*}b))^{\omega} = (a^{+}ba^{+}b + a^{+}bb + ba^{+}b + bb)^{\omega} = (a^{*}ba^{*}b)^{\omega}\). Damit gilt \(L^{\omega}(A_{1}) \cap L^{\omega}(A_{2}) \subset L^{\omega}(A_{4})\).
 \section{} %3.4	
 	\(TS_{1}\) und \(TS_{2}\) sind bisimilar. Die dazugehörige Relation lautet:
 	\[
