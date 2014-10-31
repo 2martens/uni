@@ -1,0 +1,204 @@
+\RequirePackage{pdf14}
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+%\usepackage{paralist}
+%\useoutertheme{infolines} 
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usetheme{Warsaw}
+\usecolortheme{crane}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setbeamertemplate{navigation symbols}{}
+\graphicspath{ {src/} {/home/jim/Pictures/} }
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygray},    % comment style
+  deletekeywords={},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=PHP,                 % the language of the code
+  morekeywords={class, function, return, protected, public, private, const, static, new, extends, namespace, null},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mygreen},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\hypersetup{
+	pdfauthor=Jim Martens,
+	pdfstartview=Fit
+}
+
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+	\raggedleft \insertframenumber\,/\,\inserttotalframenumber\;}
+
+\begin{document}
+\author{Jim Martens}
+\title{Emails, Deadlines, Productivity}
+\date{13. November 2014}
+
+	% Introduction
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	% Contents
+	\begin{frame}{Contents}
+		\tableofcontents
+	\end{frame}
+	
+	\section{Basics}
+	% Terms	
+	\begin{frame}{Terms}
+		\begin{itemize}
+			\item IMAP (preferred)
+			\item POP
+			\item SMTP
+			\item Ports
+		\end{itemize}
+	\end{frame}
+	
+	% Applications
+	\begin{frame}{Applications}
+		\begin{itemize}
+			\item Mozilla Thunderbird
+			\item Microsoft Office Outlook
+			\item Mozilla Firefox
+			\item Google Chrome
+		\end{itemize}
+	\end{frame}
+	
+	\section{Preparation}
+	\subsection{Installation}
+	\begin{frame}[fragile]{Linux}
+		\begin{verbatim}
+			sudo apt-get install thunderbird
+			sudo yum install thunderbird
+			sudo pacman -S thunderbird			
+		\end{verbatim}
+	\end{frame}
+	\begin{frame}{Rest}
+		https://www.mozilla.org/de/thunderbird/
+	\end{frame}
+	\begin{frame}{All}
+		Install Lightning addon
+	\end{frame}
+	
+	\subsection{Configuration}
+	\begin{frame}{Add email address}
+		Add @inf email address
+	\end{frame}
+	
+	\section{Filter}
+	\subsection{Basics}
+	\begin{frame}{Filter basics}
+		\begin{itemize}
+			\item client-side
+			\begin{itemize}
+				\item must be repeated on each client
+				\item useful for (additional) junk filter
+			\end{itemize}
+			\item server-side
+			\begin{itemize}
+				\item setup once, use on each client
+				\item preferred way
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	\subsection{Setup}
+	\begin{frame}{Webmail}
+		\begin{enumerate}
+			\item Open browser
+			\item Navigate to https://webmail.informatik.uni-hamburg.de
+			\item Login with @inf credentials
+			\item Navigate to ``Ordner''
+			\item Create one folder for each mailing list (e.g. mafia@inf, stud@inf, bacc@inf, fs-inf@inf)
+			\item Navigate to ``Filter''
+			\item Create one rule for each mailing list
+			\item Repeat above steps whenever you join a new mailing list
+		\end{enumerate}
+	\end{frame}
+	
+	\begin{frame}{Thunderbird}
+		\begin{enumerate}
+			\item Click on header of mail account
+			\item Click on ``Manage message filters''
+			\item Create the filters you want
+		\end{enumerate}
+	\end{frame}
+	
+	\section{Calendar}
+	\subsection{Basics}
+	\begin{frame}{Basics}
+		\begin{itemize}
+			\item CALDav
+			\item iCal
+			\item Calendars are extremely useful
+		\end{itemize}
+	\end{frame}	
+	
+	\subsection{Setup}
+	\begin{frame}{Mafiasi calendars}
+		
+	\end{frame}	
+	
+	\section{Productivity}
+	\subsection{Settings}
+	\begin{frame}{Thunderbird}
+		\begin{itemize}
+			\item text-only mails
+			\item begin answer below quote
+			\item don't show alert if new message
+			\item don't play sound if new message
+			\item check for missing attachment
+			\item automatically add outgoing mails to my ``Collected Addresses''
+			\item tell sites you don't want to be tracked
+			\item mark messages marked as junk as read
+			\item enable adaptive junk filter logging
+			\item move junk messages to ``Junk'' folder
+			\item don't mark messages automatically as read
+			\item don't only show display name for people in your address book
+		\end{itemize}
+	\end{frame}
+	
+	\subsection{Workflow}		
+	\begin{frame}{Workflow}
+		\begin{enumerate}
+			\item have mail client open all the time
+			\item don't look at it all the time
+			\item whenever you have time, look at it
+			\item scan new/unread mails (info mails, action mails and general mails, personal mails)
+			\item answer all action mails that require less than 5 minutes time
+			\item once answered, mark them as read
+			\item leave mails, you still have to respond to, marked as unread
+		\end{enumerate}
+	\end{frame}	
+	
+\end{document}
+
