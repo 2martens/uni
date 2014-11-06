@@ -49,23 +49,26 @@
 		SS(M) = 1(3(5763)^{*}1 + 1)^{\omega}
 	\]
 	\subsection{}
-	\[
-		ES(M) = 1(3(5763)^{*}1 + 1)^{\omega}
-	\]
-	\subsection{}
+	\begin{alignat*}{2}
+		E_{S}(M) &=& E_{S}(1(3(5763)^{*}1 + 1)^{\omega}) \\
+		         &=& (E_{S}(1)(E_{S}(3)(E_{S}(5)E_{S}(7)E_{S}(6)E_{S}(3))))^{\omega}
+	\end{alignat*}
+	\subsection{} %
 	\begin{alignat*}{2}
 		Sat(Teig \vee \lnot Hitze) &=& \{1, 4, 5\} \\
 		Sat(\lnot Teig) &=& \{1, 2, 3, 6, 7\}
 	\end{alignat*}	
 	
+	\subsection{} %Gegenbeispiel finden
+	
 \section{} %4.4
 	\begin{tabular}{l|l|l}
 		\(f\) & \(M_{kuchen} \models f \) & \(M_{kuchen}, \pi \models f\)\\
 		\hline
-		\(\lozenge \square(\lnot Teig \vee Hitze) \)& nein & nein \\
+		\(\lozenge \square(\lnot Teig \vee Hitze) \)& nein & ja \\
 		\(\square	\lozenge(\lnot Teig \vee Hitze)\) & ja & ja \\
 		\(\square	(Hitze \;\mathcal{U}\; Backen)\) & nein & nein \\
-		\(\square	\lozenge (Hitze \Rightarrow XX\lnot Backen)\) & ja & nein \\
+		\(\square	\lozenge (Backen \Rightarrow XX\lnot Backen)\) & ja & ja \\
 		\(\square ((Hitze \wedge Teig) \Rightarrow \lozenge \lnot Teig)\) & ja & ja \\
 		\(XX \lozenge (\lnot Hitze \wedge \lnot Teig)\) & nein & nein  
 	\end{tabular}
