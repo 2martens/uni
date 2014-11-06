@@ -56,10 +56,33 @@
 	\subsection{} %
 	\begin{alignat*}{2}
 		Sat(Teig \vee \lnot Hitze) &=& \{1, 4, 5\} \\
-		Sat(\lnot Teig) &=& \{1, 2, 3, 6, 7\}
-	\end{alignat*}	
+		Sat(\lnot Teig) &=& \{1, 2, 3, 6, 7\} \\
+		\intertext{Auflösen der Implikation}		
+		f &=& GF((Teig \vee \lnot Hitze) \Rightarrow F \lnot Teig) \\		
+		&\Leftrightarrow & GF(F(\lnot(Teig \vee \lnot Hitze) \vee F \lnot Teig))
+		\intertext{Berechnung der weiterführenden \(Sat\)-Mengen}
+		Sat(\lnot(Teig \vee \lnot Hitze)) &=& \{2,3,6,7\} \\
+		Sat(\lnot(Teig \vee \lnot Hitze) \vee \lnot Teig) &=& \{1,2,3,6,7\}
+	\end{alignat*}
+	
+	Da der Anfangszustand in der Menge vorhanden ist, gilt die Formel.
 	
 	\subsection{} %Gegenbeispiel finden
+	\begin{alignat*}{2}
+		Sat(Backen) &=& \{6,7\} \\
+		Sat(Zeit) &=& \{2,6\} \\
+		Sat(Backen \wedge Zeit) &=& \{6\}
+	\end{alignat*}
+	
+	Die Formel gilt nicht im Anfangszustand. Gegenbeispiel:
+	\[
+		\pi = 14576(32)^{\omega}
+	\]
+	
+	Pfad, bei dem es funktioniert:
+	\[
+		\pi = 1457(6)^{\omega}
+	\]
 	
 \section{} %4.4
 	\begin{tabular}{l|l|l}
@@ -67,7 +90,7 @@
 		\hline
 		\(\lozenge \square(\lnot Teig \vee Hitze) \)& nein & ja \\
 		\(\square	\lozenge(\lnot Teig \vee Hitze)\) & ja & ja \\
-		\(\square	(Hitze \;\mathcal{U}\; Backen)\) & nein & nein \\
+		\(\square	(Hitze \;U\; Backen)\) & nein & nein \\
 		\(\square	\lozenge (Backen \Rightarrow XX\lnot Backen)\) & ja & ja \\
 		\(\square ((Hitze \wedge Teig) \Rightarrow \lozenge \lnot Teig)\) & ja & ja \\
 		\(XX \lozenge (\lnot Hitze \wedge \lnot Teig)\) & nein & nein  
