@@ -1,0 +1,138 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\usepackage{multirow}
+\usepackage[german]{fancyref}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+\def\thesection{5.\arabic{section})}
+\def\thesubsection{\arabic{subsection}.}
+\def\thesubsubsection{(\alph{subsubsection})}
+% some matrix magic
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Benjamin Kuffel, Jim Martens\\Gruppe 6}
+\title{Hausaufgaben zum 17. November}
+\maketitle
+
+\setcounter{section}{2}
+\section{} %4.3
+	\subsection{}
+	Der Abwicklungsbaum befindet sich auf \fref{fig:531}.
+	\begin{figure}
+		\begin{tikzpicture}[node distance=1cm]
+			\node[state,initial] (s0start) {\(\{b\}\)};
+			\node (t0start) [above=0.0001 of s0start] {\(s_{0}\)};
+			\node[state] (s01) [below left=of s0start] {\(\{b\}\)};
+			\node (t01) [above=0.0001 of s01] {\(s_{0}\)};
+			\node[state] (s11) [below right=of s0start] {\(\{s\}\)};
+			\node (t11) [above=0.0001 of s11] {\(s_{1}\)};
+			\node[state] (s02) [below left=of s01] {\(\{b\}\)};
+			\node (t02) [above=0.0001 of s02] {\(s_{0}\)};
+			\node[state] (s12) [below right=of s01] {\(\{s\}\)};
+			\node (t12) [above=0.0001 of s12] {\(s_{1}\)};
+			\node[state] (s22) [below right=of s11] {\(\{g\}\)};
+			\node (t22) [above=0.0001 of s22] {\(s_{2}\)};
+			\node[state] (s03) [below left=of s02] {\(\{b\}\)};
+			\node (t03) [above=0.0001 of s03] {\(s_{0}\)};
+			\node[state] (s13) [below right=of s02] {\(\{s\}\)};
+			\node (t13) [above=0.0001 of s13] {\(s_{1}\)};	
+			\node[state] (s23) [below right=of s12] {\(\{g\}\)};
+			\node (t23) [above=0.0001 of s23] {\(s_{2}\)};
+			\node[state] (s23-1) [below right=of s22] {\(\{g\}\)};
+			\node (t23-1) [above=0.0001 of s23-1] {\(s_{2}\)};
+			\node[state] (s04) [below left=of s03] {\(\{b\}\)};
+			\node (t04) [above=0.0001 of s04] {\(s_{0}\)};
+			\node[state] (s14) [below right=of s03] {\(\{s\}\)};
+			\node (t14) [above=0.0001 of s14] {\(s_{1}\)};
+			\node[state] (s24) [below right=of s13] {\(\{g\}\)};
+			\node (t24) [above=0.0001 of s24] {\(s_{2}\)};
+			\node[state] (s24-1) [below right=of s23] {\(\{g\}\)};
+			\node (t24-1) [above=0.0001 of s24-1] {\(s_{2}\)};
+			\node[state] (s24-2) [below right=of s23-1] {\(\{g\}\)};
+			\node (t24-2) [above=0.0001 of s24-2] {\(s_{2}\)};
+			\path[->] (s0start) edge (s01)
+				(s0start) edge (s11)
+				(s01) edge (s02)
+				(s01) edge (s12)
+				(s11) edge (s22)
+				(s02) edge (s03)
+				(s02) edge (s13)
+				(s12) edge (s23)
+				(s22) edge (s23-1)
+				(s03) edge (s04)
+				(s03) edge (s14)
+				(s13) edge (s24)
+				(s23) edge (s24-1)
+				(s23-1) edge (s24-2);
+		\end{tikzpicture}
+		\caption{Abwicklungsbaum \(Abwicklung_{AKW}\) der Tiefe 4}
+		\label{fig:531}
+	\end{figure}
+	
+	\subsection{}
+		\subsubsection{}
+		\[Sat(\alpha _{1}) = \{s_{0},s_{1},s_{2}\}\]
+		\subsubsection{}
+		\[Sat(\textbf{AG}\alpha _{1}) = \{s_{0},s_{1},s_{2}\}\]
+		\subsubsection{}
+		\[Sat(\textbf{EG}\lnot b) = \{s_{1},s_{2}\} \]
+		\subsubsection{}
+		\[Sat(\textbf{AX}\lnot g) = \{s_{0}\} \]
+	\subsection{}
+	\(\beta _{1} = \textbf{AGEX}(s \vee g)\) bedeutet, dass für alle Pfade immer gilt, dass es einen Pfad gibt, für den im nächsten Schritt \(s\) oder \(g\) gilt.
+	
+	\(\beta _{2} = \textbf{EG}\lnot b\) bedeutet, dass es einen Pfad gibt, für den immer \(\lnot b\) gilt.
+		
+		\subsubsection{}
+		\(\beta _{1}\) gilt nach 5.3.2.(b) für alle Zustände und somit auch für den Startzustand. Damit gilt \(M_{AKW} \models \textbf{AGEX}(s \vee g)\).
+		\subsubsection{}
+		\(\beta _{2}\) gilt nach 5.3.2.(c) für keinen Zustand und somit auch nicht für den Startzustand. Damit gilt \(M_{AKW} \models \textbf{EG}\lnot b\) nicht.
+\section{} %4.4
+	\subsection{}
+	Umwandeln von \(\beta _{1}\) in \(\beta '_{1}\):
+	\[\beta '_{1} = \lnot EF(\lnot EX \lnot s)\]
+	Umwandeln von \(\beta _{2}\) in \(\beta '_{2}\):
+	\[\beta '_{2} = EX(\lnot EF s)\]
+	
+	\subsection{}
+	\begin{tabular}{c|c|c|c}
+		Teilformel & Zustand \(s_{0}\) & Zustand \(s_{1}\) & Zustand \(s_{2}\) \\
+		\hline
+		\hline
+		\(s\) & -- & + & -- \\
+		\(\lnot s\) & + & -- & + \\
+		\(\textbf{EX}\lnot s\) & + & + & + \\
+		\(\lnot \textbf{EX}\lnot s\) & -- & -- & -- \\
+		\(\textbf{EF}(\lnot \textbf{EX}\lnot s) \) & -- & -- & -- \\
+		\(\lnot \textbf{EF}(\lnot \textbf{EX}\lnot s) \) & + & + & + \\
+		\(\textbf{EF}s\) & + & + & -- \\
+		\(\lnot \textbf{EF}s\) & -- & -- & + \\
+		\(\textbf{EX}(\lnot \textbf{EF}s) \) & -- & + & +		
+	\end{tabular}
+	
+	\subsection{}
+	\(M_{AKW} \models \beta _{1}\) gilt, aber \(M_{AKW} \models \beta _{2}\) gilt nicht.
+\end{document}
