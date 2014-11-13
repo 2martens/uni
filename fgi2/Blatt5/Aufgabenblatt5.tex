@@ -110,6 +110,159 @@
 		\(\beta _{1}\) gilt nach 5.3.2.(b) für alle Zustände und somit auch für den Startzustand. Damit gilt \(M_{AKW} \models \textbf{AGEX}(s \vee g)\).
 		\subsubsection{}
 		\(\beta _{2}\) gilt nach 5.3.2.(c) nur für \(s_{1}\) und \(s_{2}\) und somit nicht für den Startzustand. Damit gilt \(M_{AKW} \models \textbf{EG}\lnot b\) nicht.
+	
+	\subsection{}
+	\subsubsection{}
+	Es ist zu beweisen, dass für alle Aussagen \(a\) folgendes gilt: \(\textbf{AGAX}a \equiv \textbf{AXAG}a\).
+	
+	Dazu wird für beide Seiten der Abwicklungsbaum (ohne konkrete Formel ist dies nur abstrakt möglich) konstruiert. Der Baum für die linke Seite ist auf \fref{fig:ABaum1} zu sehen. Der für die rechte Seite auf \fref{fig:ABaum2}.
+	
+	Wie aus den Bäumen hervorgeht, sind beide Formel äquivalent. Zur Sicherung dieses vordergründigen Ergebnisses, werden nun die Zustände, in denen die Formel gilt, nach dem Verfahren aus Aufgabe 5.4.2. Dazu werden die Formeln zunächst in die Normalform überführt.
+
+Linke Seite:	
+	\[AGAX a = AG\lnot EX(\lnot a) = \lnot EF(EX(\lnot a))\]
+	
+Rechte Seite:
+	\[AXAG a = AX\lnot EF(\lnot a) = \lnot EX(EF(\lnot a))\]
+	
+	Nach dem Verfahren ergibt sich folgende Tabelle.
+	
+	\begin{tabular}{c|c|c|c}
+		Teilformel & Zustand \(s_{0}\) & Zustand \(s_{1}\) & Zustand \(s_{2}\) \\
+		\hline
+		\hline
+		\(a\) & ? & + & + \\
+		\(\lnot a\) & ? & -- & -- \\
+		\(\textbf{EX}\lnot a\) & -- & -- & -- \\
+		\(\textbf{EF}(\textbf{EX}\lnot a) \) & -- & -- & -- \\
+		\(\lnot \textbf{EF}(\textbf{EX}\lnot a) \) & + & + & + \\
+		\(\textbf{EF} \lnot a\) & -- & -- & -- \\
+		\(\textbf{EX}(\textbf{EF} \lnot a) \) & -- & -- & -- \\		
+		\(\lnot \textbf{EX}(\textbf{EF} \lnot a) \) & + & + & + \\
+	\end{tabular}
+	
+	Anhand der Tabelle erschließt sich ebenso, dass beide Formeln äquivalent sind und genau dann im Startzustand gelten, wenn die jeweilige andere Formel ebenso gilt.
+	
+	\begin{figure}
+		\begin{tikzpicture}[node distance=1cm]
+			\node[state,initial] (something) {\(true\)};
+			\node (tsomething) [above=0.0001 of something] {\(s_{0}\)};
+			\node[state] (al) [below left=1 and 3 of something] {\(\{a\}\)};
+			\node (tal) [above=0.0001 of al] {\(s_{1}\)};
+			\node[state] (all) [below left=1 and 1.5 of al] {\(\{a\}\)};
+			\node (tall) [above=0.0001 of all] {\(s_{3}\)};
+			\node[state] (alr) [below right=1 and 1.5 of al] {\(\{a\}\)};
+			\node (talr) [above=0.0001 of alr] {\(s_{4}\)};
+			\node (allli) [below left=of all] {...};
+			\node (allri) [below right=of all] {...};
+			\node (alrli) [below left=of alr] {...};
+			\node (alrri) [below right=of alr] {...};
+			\node[state] (ar) [below right=1 and 3 of something] {\(\{a\}\)};
+			\node (tar) [above=0.0001 of ar] {\(s_{2}\)};
+			\node[state] (arl) [below left=1 and 1.5 of ar] {\(\{a\}\)};
+			\node (tarl) [above=0.0001 of arl] {\(s_{5}\)};
+			\node[state] (arr) [below right=1 and 1.5 of ar] {\(\{a\}\)};
+			\node (tarr) [above=0.0001 of arr] {\(s_{6}\)};
+			\node (arlli) [below left=of arl] {...};
+			\node (arlri) [below right=of arl] {...};
+			\node (arrli) [below left=of arr] {...};
+			\node (arrri) [below right=of arr] {...};
+			\path[->] (something) edge (al)
+				(something) edge (ar)
+				(al) edge (all)
+				(al) edge (alr)
+				(ar) edge (arl)
+				(ar) edge (arr)
+				(all) edge (allli)
+				(all) edge (allri)
+				(alr) edge (alrli)
+				(alr) edge (alrri)
+				(arr) edge (arrli)
+				(arr) edge (arrri)
+				(arl) edge (arlli)
+				(arl) edge (arlri);
+		\end{tikzpicture}
+		\caption{Abwicklungsbaum für \(\textbf{AGAX}a\)}
+		\label{fig:ABaum1}
+	\end{figure}
+	
+	\begin{figure}
+		\begin{tikzpicture}[node distance=1cm]
+			\node[state,initial] (something) {\(true\)};
+			\node (tsomething) [above=0.0001 of something] {\(s_{0}\)};
+			\node[state] (al) [below left=1 and 3 of something] {\(\{a\}\)};
+			\node (tal) [above=0.0001 of al] {\(s_{1}\)};
+			\node[state] (all) [below left=1 and 1.5 of al] {\(\{a\}\)};
+			\node (tall) [above=0.0001 of all] {\(s_{3}\)};
+			\node[state] (alr) [below right=1 and 1.5 of al] {\(\{a\}\)};
+			\node (talr) [above=0.0001 of alr] {\(s_{4}\)};
+			\node (allli) [below left=of all] {...};
+			\node (allri) [below right=of all] {...};
+			\node (alrli) [below left=of alr] {...};
+			\node (alrri) [below right=of alr] {...};
+			\node[state] (ar) [below right=1 and 3 of something] {\(\{a\}\)};
+			\node (tar) [above=0.0001 of ar] {\(s_{2}\)};
+			\node[state] (arl) [below left=1 and 1.5 of ar] {\(\{a\}\)};
+			\node (tarl) [above=0.0001 of arl] {\(s_{5}\)};
+			\node[state] (arr) [below right=1 and 1.5 of ar] {\(\{a\}\)};
+			\node (tarr) [above=0.0001 of arr] {\(s_{6}\)};
+			\node (arlli) [below left=of arl] {...};
+			\node (arlri) [below right=of arl] {...};
+			\node (arrli) [below left=of arr] {...};
+			\node (arrri) [below right=of arr] {...};
+			\path[->] (something) edge (al)
+				(something) edge (ar)
+				(al) edge (all)
+				(al) edge (alr)
+				(ar) edge (arl)
+				(ar) edge (arr)
+				(all) edge (allli)
+				(all) edge (allri)
+				(alr) edge (alrli)
+				(alr) edge (alrri)
+				(arr) edge (arrli)
+				(arr) edge (arrri)
+				(arl) edge (arlli)
+				(arl) edge (arlri);
+		\end{tikzpicture}
+		\caption{Abwicklungsbaum für \(\textbf{AXAG}a\)}
+		\label{fig:ABaum2}
+	\end{figure}
+	
+	\subsubsection{}
+	Es ist zu beweisen, dass für alle Aussagen \(s\) die folgende Formel nicht gilt:	\(\textbf{EXEG}s \equiv \textbf{EGEX}s\). Dies kann in Bezug zu \(M_{AKW}\) anhand der Aussage \(s\) gezeigt werden. Es wird erneut die Tabelle zur Ermittlung der entsprechenden Zustände aufgestellt. In diesem Fall wird ebenso auf das Verfahren aus Aufgabe 5.4.2 zurückgegriffen.
+	
+	\begin{tabular}{c|c|c|c}
+		Teilformel & Zustand \(s_{0}\) & Zustand \(s_{1}\) & Zustand \(s_{2}\) \\
+		\hline
+		\hline
+		\(s\) & -- & + & -- \\
+		\(\textbf{EX} s\) & + & + & -- \\
+		\(\textbf{EGEX}s\) & + & -- & -- \\
+		\(\textbf{EG}s\) & -- & -- & -- \\
+		\(\textbf{EXEG}s\) & -- & -- & --
+	\end{tabular}
+	
+	Anhand der Tabelle ist klar ersichtlich, dass \(\textbf{EGEX}s\) im Startzustand und damit im betrachteten Modell gilt, wohingegen \(\textbf{EXEG}s\) nicht im Startzustand gilt. Damit ist die notwenige Biimplikation zur Gültigkeit nicht gegeben, was bedeutet, dass die betrachteten Formeln nicht äquivalent sind.
+	
+	\subsection{}
+		\subsubsection{}
+		\subsubsection{}
+		Es ist zu beweisen, dass für alle Aussagen \(s\) die folgende Äquivalenz nicht gilt: \(\textbf{EG}\lnot s \equiv G \lnot s\).
+		
+		Dies kann wieder anhand der bereits mehrfach verwendeten Tabelle und in Bezug auf \(M_{AKW}\) geschehen.
+		
+	\begin{tabular}{c|c|c|c}
+		Teilformel & Zustand \(s_{0}\) & Zustand \(s_{1}\) & Zustand \(s_{2}\) \\
+		\hline
+		\hline
+		\(s\) & -- & + & -- \\
+		\(\lnot s\) & + & -- & + \\
+		\(\textbf{EG}\lnot s\) & + & -- & + \\
+		\(\textbf{G}\lnot s\) & -- & -- & +
+	\end{tabular}
+	
+	Anhand der Tabelle ist ersichtlich, dass \(\textbf{EG}\lnot s\) im Startzustand und damit dem Modell gilt, wohingegen \(\textbf{G}\lnot s\) nicht im Startzustand gilt. Damit ist die notwendige Biimplikation nicht gegeben und die Formeln sind daher nicht äquivalent.
 \section{} %4.4
 	\subsection{}
 	Umwandeln von \(\beta _{1}\) in \(\beta '_{1}\):
