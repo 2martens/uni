@@ -1,0 +1,179 @@
+\RequirePackage{pdf14}
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+%\usepackage{paralist}
+%\useoutertheme{infolines} 
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usetheme{Warsaw}
+\usecolortheme{crane}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setbeamertemplate{navigation symbols}{}
+\graphicspath{ {src/} {/home/jim/Pictures/Studium/KBS/} }
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygray},    % comment style
+  deletekeywords={},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=PHP,                 % the language of the code
+  morekeywords={class, function, return, protected, public, private, const, static, new, extends, namespace, null},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mygreen},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\hypersetup{
+	pdfauthor=Jim Martens,
+	pdfstartview=Fit
+}
+
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+	\raggedleft \insertframenumber\,/\,\inserttotalframenumber\;}
+
+\begin{document}
+\author{Jim 2martens}
+\title{Panem - EU - Nazi-Deutschland}
+\date{28. November 2014}
+
+	% Introduction
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	\section{Panem}
+	\begin{frame}{Panem Struktur}
+		\begin{itemize}
+			\item Capitol
+			\item Distrikte
+			\item Diktatur
+			\item Peacekeepers
+			\item jährliche Hunger Games
+			\item alle 25 Jahre Quarter Quells
+			\item Dystopie
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Panem Ideologie}
+		\begin{itemize}
+			\item reiche Oberschicht im Capitol ("`bessere"' Menschen)
+			\item verteidigt durch riesige Schutzmaßnahmen
+			\item arme Leute in Distrikten ("`schlechtere"' Menschen)
+			\item dem Capitol schutzlos ausgeliefert und eingezäunt
+			\item "`Distrikte versorgen das Capitol, im Gegenzug bietet dieses Ordnung und Sicherheit"' (Präsident Snow)
+		\end{itemize}
+	\end{frame}
+	
+	\section{EU}
+	\begin{frame}{EU Struktur}
+		\begin{itemize}
+			\item EU Kommission
+			\item nicht demokratisch gewählt
+			\item Frontex (EU-Grenzschutzagentur)
+			\item Schutzzäune um Festung Europa
+			\item bisher sind 20.000 Menschen an der EU-Außengrenze gestorben
+			\item in 40 Jahren sind 800 Menschen an der DDR-Grenze gestorben
+			\item DDR := Unrechtsregime
+			\item EU := Friedensnobelpreisträger
+		\end{itemize}
+		
+		Quelle: ZDF Die Anstalt 18.11.2014
+	\end{frame}
+	\begin{frame}{EU Struktur}
+		\centering
+		\includegraphics[scale=0.9]{eu-wall-spain-africa}
+		
+		Grenzzaun in spanischer Exklave in Afrika
+	\end{frame}
+	\begin{frame}{EU Struktur}
+		\centering
+		\includegraphics[scale=0.4]{eu-wall-greece}
+		
+		Grenzzaun in Griechenland
+	\end{frame}
+	\begin{frame}{EU Struktur}
+		\centering
+		\includegraphics[scale=0.6]{eu-wall-bulgaria}
+		
+		Grenzzaun in Bulgarien
+	\end{frame}
+	\begin{frame}{EU Struktur}
+		\centering
+		\includegraphics[scale=0.7]{eu-wall-bulgaria-turkey}
+		
+		Grenzzaun zwischen Bulgarien und Türkei
+	\end{frame}
+	\begin{frame}{EU Ideologie}
+		\begin{itemize}
+			\item in Europa geborene Menschen (offenbar "`bessere"' Menschen)
+			\item können sich frei bewegen
+			\item als Flüchtlinge nach Europa kommende Menschen (offenbar "`schlechtere"' Menschen)
+			\item sterben oder werden gefangen genommen und der "`Rückführung zugeführt"'
+		\end{itemize}
+		
+		Quelle: ZDF Die Anstalt 18.11.2014
+	\end{frame}
+	
+	\section{Nazi-Deutschland}
+	\begin{frame}{Nazi-DEU Struktur}
+		\begin{itemize}
+			\item Diktatur
+			\item Konzentrations- und Vernichtungslager
+			\item industrielle Vernichtung und Verarbeitung von Menschen
+			\item zentralisiert
+			\item Gaue als Verwaltungseinheiten
+		\end{itemize}
+	\end{frame}
+	\begin{frame}{Nazi-DEU Ideologie}
+		\begin{itemize}
+			\item linientreue "`Arier"' ("`bessere"' Menschen)
+			\item keine Einschränkungen
+			\item Andere: z.B. politische Gegner, Juden, Homosexuelle, Behinderte, Roma ("`schlechtere"' Menschen)
+			\item politisch verfolgt und vernichtet
+		\end{itemize}
+	\end{frame}
+	
+	\section{Fazit}
+	\begin{frame}{Fazit}
+		\begin{itemize}
+			\item alle drei Systeme haben im Grunde die gleiche Ideologie
+			\item "`bessere"' und "`schlechtere"' Menschen
+			\item Rhetorik und Mittel sind unterschiedlich
+		\end{itemize}
+	\end{frame}
+	\begin{frame}{Konsequenzen}
+		\begin{itemize}
+			\item Geht wählen!
+			\item Beteiligt euch an politischen Diskussionen!
+			\item Verändert die Welt zum Besseren, damit Panem niemals Realität werden und die Vergangenheit nicht zurückkommen kann!
+			\item Werdet ein mündiger Bürger und entsagt der Politikverdrossenheit, denn sie führt unweigerlich zur Diktatur.
+		\end{itemize}
+	\end{frame}
+\end{document}
+
