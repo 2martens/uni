@@ -1,3 +1,4 @@
+
 %!TEX encoding = UTF-8 Unicode
 \documentclass[12pt]{scrartcl}
 %\usepackage[applemac]{inputenc} % Mac-Umlaute direkt verwenden öäüß
@@ -65,11 +66,17 @@ Standard vs. Implementation, Netzwerkschicht vs. Anwendungsschicht,
 IP vs. SSL/TLS, Firewalldurchlässigkeit, Geschwindigkeit, Sicherheit
 
 \begin{itemize}
+	\item IPSec und Open VPN grundsätzlich bekannt
+	\item Vergleich anhand von Kriterien: Authenfizierungsmethoden, Nachrichtenauthentifizierung nach Kontakt, Authentifizierungsalgorithmus, Hash-Algorithmen für Nachrichtenauthentifizierung, Kompatibilität, Verbreitung, Layer, Performance
 	\item IPSec unterstützt Secret Key\cite{Alshamsi2005}, Open VPN (SSL) nicht
 	\item IPSec unterstützt eine Authentifizierungsmethode, SSL mehrere\cite{Alshamsi2005}
 	\item beide nutzen MACs (Message Authentication Codes) für die Authentifizierung von Nachrichten nach initialem Kontakt\cite{Alshamsi2005}
 	\item beide erfordern die Implementation von HMAC-SHA-1 und HMAC-MD5\cite{Alshamsi2005}
-	\end{itemize}
+	\item IPSec hat Probleme mit Implementationen anderer Hersteller zusammenzuarbeiten, SSL hat dieses Problem nicht\cite{Alshamsi2005}
+	\item IPSec in Netzwerkschicht, OpenVPN in Anwendungsschicht
+	\item IPSec ist Standard, Open VPN Implementation von SSL-basierten VPNs	
+	\item SSL faster than IPSec with 3DES over 1000MBit/s channel transmitting 100MB (exact numbers are aged an no longer relevant)
+\end{itemize}
 \section{Schlussbemerkungen}
 Ausblick: (weitere) Vereinfachung von IPSec?, unterschiedliche Ansätze, Vor- und Nachteile bei beiden
 
