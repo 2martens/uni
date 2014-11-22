@@ -4,6 +4,7 @@
 *.aux
 *.bak
 *.bbl
+*.bcf
 *.blg
 *.dvi
 *.fdb_latexmk
@@ -29,6 +30,7 @@
 *.png
 *.ps
 *.pyg
+*.run.xml
 *.snm
 *.synctex.gz
 *.toc
@@ -37,4 +39,4 @@
 *.xdy
 *.tdo
 *.zip
-*~
+~
