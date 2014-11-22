@@ -5,9 +5,12 @@
 \usepackage[utf8]{inputenc} % Unicode funktioniert unter Windows, Linux und Mac
 \usepackage[T1]{fontenc}
 \usepackage[ngerman]{babel}
-\usepackage[numbers]{natbib}
-\usepackage[fixlanguage]{babelbib}
-\selectbiblanguage{ngerman}
+\usepackage{csquotes}
+\usepackage[
+backend=biber,
+bibstyle=ieee,
+citestyle=ieee
+]{biblatex}
 %\usepackage{ngerman}
 \usepackage{graphicx}
 \usepackage[hidelinks]{hyperref}\urlstyle{rm}
@@ -20,6 +23,7 @@
 \setlength{\parindent}{0em}
 \setlength{\parskip}{1.2ex plus 0.5ex minus 0.5ex}
 \pagestyle{plain}
+\addbibresource{semFrieden.bib}
 
 \begin{document}
 
@@ -65,8 +69,7 @@ Studiengang BSc. Informatik
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 
-\bibliography{semFrieden}
-\bibliographystyle{plainnat}
+\printbibliography
 \addcontentsline{toc}{section}{Literaturverzeichnis}
 
 
