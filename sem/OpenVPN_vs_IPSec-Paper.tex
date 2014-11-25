@@ -39,11 +39,12 @@ Seminararbeit
 \vfill
 {\Large\textsf{\textbf{Vergleich von IPSec und OpenVPN}}\par}
 \vfill
-vorgelegt von 
+von 
 \par\bigskip
 Mustafa Eris, Jim Martens, Benjamin Scholz \par
+Betreuer: Hannes Federrath \par
 %Matrikelnummern 6420323 \par
-Studiengang BSc. Informatik
+%Studiengang BSc. Informatik
 \end{center}
 
 \newpage
@@ -100,20 +101,24 @@ In RFC 4835 ist festgehalten welche Algorithmen implementiert werden können, so
 \section{OpenVPN}
 Was ist OpenVPN? Wer ist dafür verantwortlich? Wie funktioniert es? 
 \section{Vergleich von IPSec mit OpenVPN}
-Standard vs. Implementation, Netzwerkschicht vs. Anwendungsschicht,
-IP vs. SSL/TLS, Firewalldurchlässigkeit, Geschwindigkeit, Sicherheit
 
 \begin{itemize}
 	\item IPSec und Open VPN grundsätzlich bekannt
-	\item Vergleich anhand von Kriterien: Authenfizierungsmethoden, Nachrichtenauthentifizierung nach Kontakt, Authentifizierungsalgorithmus, Hash-Algorithmen für Nachrichtenauthentifizierung, Kompatibilität, Verbreitung, Layer, Performance
+	\item Vergleich anhand von Kriterien: Sicherheit (Schutzziele, Sicherheitslücken), Performance (theoretisiert - paketorientiert vs. verbindungsorientiert), Kompatibilität
+	\item Vertraulichkeit (Verschlüsselung - Schlüsselaustausch, Schlüsselstärke, Algorithmen)
+	\item Integrität (e.g MACs)
+	\item Verfügbarkeit (Kompatibilität, Sicherheitslücken)
+	\item Performance (IPSec paketorientiert und daher Overhead für jedes Paket, OpenVPN verbindungsorientiert und daher einmaliger Overhead für jede Verbindung, allg.: Durchsatz)
+\end{itemize}
+
+Pool
+\begin{itemize}
 	\item IPSec unterstützt Secret Key\cite{Alshamsi2005}, Open VPN (SSL) nicht
 	\item IPSec unterstützt eine Authentifizierungsmethode, SSL mehrere\cite{Alshamsi2005}
 	\item beide nutzen MACs (Message Authentication Codes) für die Authentifizierung von Nachrichten nach initialem Kontakt\cite{Alshamsi2005}
 	\item beide erfordern die Implementation von HMAC-SHA-1 und HMAC-MD5\cite{Alshamsi2005}
 	\item IPSec hat Probleme mit Implementationen anderer Hersteller zusammenzuarbeiten, SSL hat dieses Problem nicht\cite{Alshamsi2005}
 	\item IPSec in Netzwerkschicht, OpenVPN in Anwendungsschicht
-	\item IPSec ist Standard, Open VPN Implementation von SSL-basierten VPNs	
-	\item SSL faster than IPSec with 3DES over 1000MBit/s channel transmitting 100MB (exact numbers are aged an no longer relevant)
 \end{itemize}
 \section{Schlussbemerkungen}
 Ausblick: (weitere) Vereinfachung von IPSec?, unterschiedliche Ansätze, Vor- und Nachteile bei beiden
