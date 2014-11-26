@@ -88,4 +88,17 @@
 	\caption{Erreichbarkeitsgraph für Netz \(N_{7.4b}\)}
 	\label{fig:2}
 	\end{figure}
+	
+	\subsection{}
+	Anhand des Erreichbarkeitsgraphen ist ersichtlich, dass niemals mehr als vier Marken in einem Platz liegen. Daher ist das Netz \(N_{7.4a}\) beschränkt und \(k\)-beschränkt für \(k=4, k=5\). Das Netz ist nicht \(k\)-beschränkt für \(k=3\).
+	
+	Ebenfalls anhand des Erreichbarkeitsgraphen kann gesagt werden, dass das Netz verklemmungsfrei ist, da immer eine Transition schalten kann. Außerdem ist es lebendig, da für jede Transition von jeder Markierung eine Schaltfolge gefunden werden kann, die diese Transition aktiviert. Allerdings ist das Netz nicht reversibel, da es nicht möglich ist in die Startmarkierung zurückzukommen.
+	
+	Da das Netz lebendig ist, muss es demzufolge strukturell lebendig sein, da sonst eine Anfangsmarkierung, für die das Netz lebendig ist, nicht vorkommen könnte.
+	
+	Das zweite Netz \(N_{7.4b}\) ist nicht strukturell beschränkt, da der Algorithmus 7.1 bei dem Erstellen des Erreichbarkeitsgraphen abbricht.
+	
+	\subsection{}
+		\subsubsection{}
+		Ein solches Netz ist \(N = (P,T,F,W,m_0)\) mit \(P = \{p_0,p_1\}, T= \{t_0,t_1\}, F = \{(p_0,t_0,p_1),(p_1,t_1,p_0)\}, m_0 = (1,0)^T)\). Die Funktion \(W\) ist wie folgt definiert: \(W(p_0,t_0) = 1, W(t_0,p_1) = 1, W(p_1,t_1) = 1, W(t_1,p_0) = 1\).
 \end{document}
