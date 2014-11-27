@@ -101,4 +101,32 @@
 	\subsection{}
 		\subsubsection{}
 		Ein solches Netz ist \(N = (P,T,F,W,m_0)\) mit \(P = \{p_0,p_1\}, T= \{t_0,t_1\}, F = \{(p_0,t_0,p_1),(p_1,t_1,p_0)\}, m_0 = (1,0)^T)\). Die Funktion \(W\) ist wie folgt definiert: \(W(p_0,t_0) = 1, W(t_0,p_1) = 1, W(p_1,t_1) = 1, W(t_1,p_0) = 1\).
+		
+		\subsubsection{}
+		Die Behauptung wird mittels Induktion über die Länge \(n = |w|\) der Schaltfolgen gezeigt. Es gelte \(m, m', m'' \in R(N, m_{0})\).
+		
+		I.A. Sei \(n=0\), d.h. \(w = \epsilon\). Es gilt \(m \overset{\epsilon}{\rightarrow} m\). Somit ist \(m' = m\) und somit auch \(|m'| = |m|\), wodurch \(|m'| \geq |m|\) trivialerweise erfüllt ist.
+		
+		I.V. Es gelte für alle Schaltfolgen \(w\) mit \(|w| \leq n: m \overset{w}{\rightarrow} m' \Longrightarrow |m'| \geq |m|\).
+		
+		I.S. Sei \(v\) eine Schaltfolge der Länge \(n + 1\). Dann kann die letzte Transition der Schaltfolge abgetrennt werden: \(\exists w \in T^{*}: \exists t \in T: v = wt\). Es gibt dann eine Markierung \(m''\), sodass \(m \overset{w}{\rightarrow} m'' \overset{t}{\rightarrow} m'\) gilt. \(m'\) berechnet sich gemäß Schaltregel wie folgt:
+		
+		\begin{alignat*}{2}
+			m' &=&& m'' - W(\bullet, t) + W(t, \bullet) \\
+			|m'| &=& |m''| - \sum_{p \in P}\tilde{W}(p,t) + \sum_{p \in P}\tilde{W}(t,p) \\
+			\intertext{Anwenden der Behauptung}
+			|m'| &=&& |m''| - \sum_{p \in P}\tilde{W}(p,t) + 2\sum_{p \in P}\tilde{W}(p,t) - 1 \\
+			&=&& |m''| + \sum_{p \in P}\tilde{W}(p,t) - 1 \\
+			\intertext{Anwenden dass es keine Senken gibt}
+			(*) &\geq && |m''| + 1 - 1 \\
+			&\geq && |m''| \\
+			\intertext{Anwenden der Induktionsvoraussetzung}
+			&\geq && |m''| \geq |m|
+		\end{alignat*}
+		
+		Zur Umwandlung \((*)\) ist folgendes anzumerken: Da es in dem Netz keine Senken gibt, gibt es mindestens eine Transition im Nachbereich einer Stelle und die Kantengewichtung ist mindestens 1. Damit ist die Umwandlung der Summe möglich.
+		
+		Da \(|w| = n\) gilt, ist die Induktionsvoraussetzung anwendbar, d.h. \(|m''| \geq |m|\). Somit gilt auch \(|m| \leq |m''| \leq |m'|\).
+		
+		Die Aussage wurde für beliebig lange Schaltfolgen bewiesen. Also gilt sie für alle Schaltfolgen und damit auch für alle erreichbaren Markierungen.
 \end{document}
