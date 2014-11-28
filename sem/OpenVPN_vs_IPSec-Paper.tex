@@ -101,14 +101,47 @@ In RFC 4835 ist festgehalten welche Algorithmen implementiert werden können, so
 Was ist OpenVPN? Wer ist dafür verantwortlich? Wie funktioniert es? 
 \section{Vergleich von IPSec mit OpenVPN}
 
-\begin{itemize}
-	\item IPSec und Open VPN grundsätzlich bekannt
-	\item Vergleich anhand von Kriterien: Sicherheit (Schutzziele, Sicherheitslücken), Performance (theoretisiert - paketorientiert vs. verbindungsorientiert), Kompatibilität
-	\item Vertraulichkeit (Verschlüsselung - Schlüsselaustausch, Schlüsselstärke, Algorithmen)
-	\item Integrität (e.g MACs)
-	\item Verfügbarkeit (Kompatibilität, Sicherheitslücken)
-	\item Performance (IPSec paketorientiert und daher Overhead für jedes Paket, OpenVPN verbindungsorientiert und daher einmaliger Overhead für jede Verbindung, allg.: Durchsatz)
-\end{itemize}
+In den vorangegangenen Abschnitten wurden IPSec und OpenVPN vorgestellt. In diesem Abschnitt widmen wir uns dem Vergleich der beiden. Damit ein solcher Vergleich jedoch sinnvoll stattfinden kann, muss im Voraus klar sein, was verglichen wird. Wir benötigen daher Kriterien. Im Folgenden werden die Kriterien erarbeitet und erläutert, warum wir das jeweilige Kriterium für wichtig befinden.
+
+\subsection{Kriterien}
+Ein Hauptziel von VPNs ist die sichere Kommunikation zwischen zwei privaten Netzen. In dem Ziel selber steckt daher bereits Sicherheit als Anforderung. Es muss sichergestellt sein, dass Nachrichten von einem Netz zum anderen gelangen, ohne dass sie unterwegs in irgendeiner Weise beeinträchtigt werden. Aus diesem Grund ist natürlich von großem Interesse, wie sicher IPSec bzw. OpenVPN sind und weitergehend, ob eine der beiden Varianten sicherer ist als die andere.
+
+Aus was setzt sich die Sicherheit jedoch zusammen? Zur Sicherheit gehören einerseits die Schutzziele in der IT-Sicherheit: Vertraulichkeit, Integrität, Verfügbarkeit. Andererseits gehören aber auch das Vorhandensein von Sicherheitslücken zur Sicherheit. Denn was nutzt ein theoretisch sicheres Verfahren, wenn es in der Implementation reihenweise Sicherheitslücken gibt?
+
+Allerdings ist es nicht wirklich gangbar IPSec und OpenVPN anhand von Sicherheitslücken zu vergleichen, denn während IPSec ein Standard ist\cite{Kent2005}, handelt es sich bei OpenVPN um eine konkrete Implementation eines SSL/TLS-basierten VPNs\cite{Kotuliak2011}. Daher haben wir uns dagegen entschieden Sicherheitslücken in den Vergleich mit einzubeziehen.
+
+Allerdings sind wir damit noch nicht am Ende unserer Kriterien angelangt. Aus dem Schutzziel der Verfügbarkeit lässt sich die Performance als Kriterium ableiten. Schließlich interessiert es neben der Sicherheit auch, wie schnell die Nachrichten von A nach B kommen. Was konkrete Werte bei einem Performancevergleich angeht, verweisen wir auf einen solchen Vergleich von 2011, welcher im Rahmen der ICETA Konferenz von Kotuliak\cite{Kotuliak2011} unternommen wurde.
+
+Ein weiteres Kriterium ist die Kompatibilität zwischen Lösungen unterschiedlicher Hersteller. Dies liegt darin begründet, dass es aus Gründen der Sicherheit sinnvoll ist, Hardware unterschiedlicher Hersteller zu benutzen, da somit Sicherheitslücken bei einem Hersteller sich nicht auf das gesamte Netzwerk auswirken. Dies ist jedoch nur möglich, wenn die Implementationen der verschiedenen Hersteller zueinander kompatibel sind. In der Hinsicht hat auch Kompatibilität etwas mit Sicherheit zu tun.
+
+Wir haben die Kriterien in dem obigen Abschnitt herausgearbeitet. Zusammengefasst sind es: Vertraulichkeit, Integrität, Verfügbarkeit, Performance und Kompatibilität.
+
+\subsection{Vertraulichkeit}
+Wir beginnen den Vergleich mit der Vertraulichkeit. Interessant sind da die unterstützten Verschlüsselungsalgorithmen und die maximalen Schlüssellängen der Algorithmen.
+
+%TODO Vergleich Vertraulichkeit
+
+\subsection{Integrität}
+Neben der Vertraulichkeit ist auch die Integrität wichtig. Daher werden wir im folgenden Abschnitt vergleichen, welche Methoden von IPSec und OpenVPN zur Wahrung der Integrität verwendet werden.
+
+%TODO Vergleich Integrität
+
+\subsection{Verfügbarkeit}
+Das dritte Schutzziel ist Verfügbarkeit. Traditionell fallen Dinge wie DDOS-Angriffe\footnote{Distributed-Denial-of-Service-Angriffe} unter dieses Schutzziel bzw. beeinträchtigen es. In unserem Zusammenhang ist jedoch viel wichtiger, wie weit verbreitet IPSec bzw. OpenVPN sind. Bei einer hohen Verbreitung ist es intuitiv gesehen erst einmal einfacher eine Verbindung zwischen zwei Netzen aufzubauen, da die Wahrscheinlichkeit, dass die Gegenstelle die gleiche Lösung (IPSec bzw. OpenVPN) unterstützt, höher ist. Ob dies tatsächlich so ist, werden wir im Rahmen des Vergleichs ergründen.
+
+%TODO Vergleich Verfügbarkeit
+
+\subsection{Performance}
+Nachdem wir IPSec und OpenVPN bezüglich der Schutzziele verglichen haben, widmen wir uns jetzt der Performance.
+
+%TODO Vergleich Performance
+
+\subsection{Kompatibilität}
+Abschließend vergleichen wir die Hardware verschiedener Hersteller auf Kompatibilität zueinander.
+
+%TODO Vergleich Kompatibilität
+
+\clearpage
 
 Pool
 \begin{itemize}
@@ -119,6 +152,7 @@ Pool
 	\item IPSec hat Probleme mit Implementationen anderer Hersteller zusammenzuarbeiten, SSL hat dieses Problem nicht\cite{Alshamsi2005}
 	\item IPSec in Netzwerkschicht, OpenVPN in Anwendungsschicht
 \end{itemize}
+
 \section{Schlussbemerkungen}
 Ausblick: (weitere) Vereinfachung von IPSec?, unterschiedliche Ansätze, Vor- und Nachteile bei beiden
 
