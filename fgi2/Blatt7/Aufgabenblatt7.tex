@@ -1,0 +1,132 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\usepackage{multirow}
+\usepackage[german]{fancyref}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+\def\thesection{7.\arabic{section})}
+\def\thesubsection{\arabic{subsection}.}
+\def\thesubsubsection{(\alph{subsubsection})}
+% some matrix magic
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Benjamin Kuffel, Jim Martens\\Gruppe 6}
+\title{Hausaufgaben zum 1. Dezember}
+\maketitle
+
+\setcounter{section}{2}
+\section{} %7.3
+	\setcounter{subsection}{1}
+	\subsection{}
+	Das Netz \(N_{1}\) ist nicht lebendig, beschränkt oder reversibel. Die Transitionen gta, rz, s und f sind lebendig. Alle Plätze außer "`Bauteile"' und "`fertige Bauteile"' sind beschränkt.
+\section{} %7.4
+	\subsection{}
+	Der Erreichbarkeitsgraph für das Netz \(N_{7.4a}\) befindet sich auf \fref{fig:1}. Der Erreichbarkeitsgraph für das Netz \(N_{7.4b}\) befindet sich auf \fref{fig:2} und der Algorithmus hätte in der Markierung \((3,0,0,3)^T\) abgebrochen.
+	\begin{figure}
+	\begin{tikzpicture}[node distance=2cm]
+		\node (m0) {\((0,0,2,4)^T\)};
+		\node (m1) [right=of m0] {\((1,0,1,3)^T\)};
+		\node (m2) [right=of m1] {\((2,0,0,2)^T\)};
+		\node (m3) [below=of m2] {\((0,1,1,2)^T\)};
+		\node (m4) [right=of m3] {\((1,1,0,1)^T\)};
+		\path[->] (m0) edge node[above] {v} (m1)
+			(m1) edge node[above] {v} (m2)
+			(m2) edge node[right] {u} (m3)
+			(m3) edge node[above right] {t} (m1)
+			(m3) edge node[above] {v} (m4)
+			(m4) edge node[above right] {t} (m2);
+	\end{tikzpicture}
+	\caption{Erreichbarkeitsgraph für Netz \(N_{7.4a}\)}
+	\label{fig:1}
+	\end{figure}
+	
+	\begin{figure}
+	\begin{tikzpicture}[node distance=2cm]
+		\node (m0) {\((0,0,1,4)^T\)};
+		\node (m1) [right=of m0] {\((3,0,0,3)^T\)};
+		\node (m2) [right=of m1] {\((1,2,1,3)^T\)};
+		\node (m3) [below=of m2] {\((3,0,1,4)^T\)};
+		\node (m4) [left=of m3] {\((3,2,0,2)^T\)};
+		\node (m5) [below=of m3] {\((6,0,0,3)^T\)};
+		\node (m6) [below=of m5] {\((4,2,1,3)^T\)};
+		\node (m7) [left=of m5] {\((1,2,2,4)^T\)};
+		\node (m8) [left=of m7] {\((1,4,1,2)^T\)};
+		\node (m9) [left=of m4] {\((5,0,0,3)^T\)};
+		\path[->] (m0) edge node[above] {v} (m1)
+			(m1) edge node[above] {u} (m2)
+			(m2) edge node[right] {t} (m3)
+			(m2) edge node[below right] {v} (m4)
+			(m3) edge node[right] {v} (m5)
+			(m4) edge node[below right] {u} (m8)
+			(m4) edge node[above] {t} (m9)
+			(m5) edge node[right] {u} (m6)
+			(m3) edge node[below right] {u} (m7);
+	\end{tikzpicture}
+	\caption{Erreichbarkeitsgraph für Netz \(N_{7.4b}\)}
+	\label{fig:2}
+	\end{figure}
+	
+	\subsection{}
+	Anhand des Erreichbarkeitsgraphen ist ersichtlich, dass niemals mehr als vier Marken in einem Platz liegen. Daher ist das Netz \(N_{7.4a}\) beschränkt und \(k\)-beschränkt für \(k=4, k=5\). Das Netz ist nicht \(k\)-beschränkt für \(k=3\).
+	
+	Ebenfalls anhand des Erreichbarkeitsgraphen kann gesagt werden, dass das Netz verklemmungsfrei ist, da immer eine Transition schalten kann. Außerdem ist es lebendig, da für jede Transition von jeder Markierung eine Schaltfolge gefunden werden kann, die diese Transition aktiviert. Allerdings ist das Netz nicht reversibel, da es nicht möglich ist in die Startmarkierung zurückzukommen.
+	
+	Da das Netz lebendig ist, muss es demzufolge strukturell lebendig sein, da sonst eine Anfangsmarkierung, für die das Netz lebendig ist, nicht vorkommen könnte.
+	
+	Das zweite Netz \(N_{7.4b}\) ist nicht strukturell beschränkt, da der Algorithmus 7.1 bei dem Erstellen des Erreichbarkeitsgraphen abbricht.
+	
+	\subsection{}
+		\subsubsection{}
+		Ein solches Netz ist \(N = (P,T,F,W,m_0)\) mit \(P = \{p_0,p_1\}, T= \{t_0,t_1\}, F = \{(p_0,t_0,p_1),(p_1,t_1,p_0)\}, m_0 = (1,0)^T)\). Die Funktion \(W\) ist wie folgt definiert: \(W(p_0,t_0) = 1, W(t_0,p_1) = 1, W(p_1,t_1) = 1, W(t_1,p_0) = 1\).
+		
+		\subsubsection{}
+		Die Behauptung wird mittels Induktion über die Länge \(n = |w|\) der Schaltfolgen gezeigt. Es gelte \(m, m', m'' \in R(N, m_{0})\).
+		
+		I.A. Sei \(n=0\), d.h. \(w = \epsilon\). Es gilt \(m \overset{\epsilon}{\rightarrow} m\). Somit ist \(m' = m\) und somit auch \(|m'| = |m|\), wodurch \(|m'| \geq |m|\) trivialerweise erfüllt ist.
+		
+		I.V. Es gelte für alle Schaltfolgen \(w\) mit \(|w| \leq n: m \overset{w}{\rightarrow} m' \Longrightarrow |m'| \geq |m|\).
+		
+		I.S. Sei \(v\) eine Schaltfolge der Länge \(n + 1\). Dann kann die letzte Transition der Schaltfolge abgetrennt werden: \(\exists w \in T^{*}: \exists t \in T: v = wt\). Es gibt dann eine Markierung \(m''\), sodass \(m \overset{w}{\rightarrow} m'' \overset{t}{\rightarrow} m'\) gilt. \(m'\) berechnet sich gemäß Schaltregel wie folgt:
+		
+		\begin{alignat*}{2}
+			m' &=&& m'' - W(\bullet, t) + W(t, \bullet) \\
+			|m'| &=& |m''| - \sum_{p \in P}\tilde{W}(p,t) + \sum_{p \in P}\tilde{W}(t,p) \\
+			\intertext{Anwenden der Behauptung}
+			|m'| &=&& |m''| - \sum_{p \in P}\tilde{W}(p,t) + 2\sum_{p \in P}\tilde{W}(p,t) - 1 \\
+			&=&& |m''| + \sum_{p \in P}\tilde{W}(p,t) - 1 \\
+			\intertext{Anwenden dass es keine Senken gibt}
+			(*) &\geq && |m''| + 1 - 1 \\
+			&\geq && |m''| \\
+			\intertext{Anwenden der Induktionsvoraussetzung}
+			&\geq && |m''| \geq |m|
+		\end{alignat*}
+		
+		Zur Umwandlung \((*)\) ist folgendes anzumerken: Da es in dem Netz keine Senken gibt, gibt es mindestens eine Transition im Nachbereich einer Stelle und die Kantengewichtung ist mindestens 1. Damit ist die Umwandlung der Summe möglich.
+		
+		Da \(|w| = n\) gilt, ist die Induktionsvoraussetzung anwendbar, d.h. \(|m''| \geq |m|\). Somit gilt auch \(|m| \leq |m''| \leq |m'|\).
+		
+		Die Aussage wurde für beliebig lange Schaltfolgen bewiesen. Also gilt sie für alle Schaltfolgen und damit auch für alle erreichbaren Markierungen.
+\end{document}
