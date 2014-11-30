@@ -84,14 +84,14 @@ IPSec kann in zwei verschiedenen Modi betrieben werden: Transport Modus oder Tun
 Beim Tunnel Modus werden die IP-Pakete in neue Pakete verpackt mit einem neuen Header. Dabei werden die Pakete jedoch von den einzelnen Gateways bearbeitet. Das heißt im Endeffekt, dass die Sicherheit nur von Gateway zu Gateway gewährleistet wird und nicht vom einem Ende zum anderen. Der Vorteil ist, dass der Endnutzer die Anwendung nicht merkt, da zum Beispiel der Router dies übernehmen kann. 
 Im Transport Modus ist die Sicherheit vom einen zum anderen Ende gewährleistet. Dabei werden die eigentlichen IP-Pakete beibehalten und einige sicherheitsrelevante Felder hinzugefügt.
 \subsubsection{Authentication Header}
-Der Authentication Header, kurz AH, kann dazu verwendet werden, um die Authentizität und Integrität von Daten zu gewährleisten, und außerdem um Replay-Angriffe abzuwehren. Er muss im Gegensatz zur Alternative `` Encapsulating Security Payload'' jedoch nicht von IPSec Implementationen unterstützt werden.\footnote{RFC 4301 3.2.  How IPsec Works} Der Authentication Header wird dabei an die IP-Pakete angehängt und sieht wie folgt aus:
+Der Authentication Header, kurz AH, kann dazu verwendet werden, um die Authentizität und Integrität von Daten zu gewährleisten, und außerdem um Replay-Angriffe abzuwehren. Er muss im Gegensatz zur Alternative `` Encapsulating Security Payload'' jedoch nicht von IPSec Implementationen unterstützt werden.\footnote{RFC 4301 3.2.  How IPsec Works} Der Grund hierfür ist einfach, dass ESP neben dem, was der AH leistet zusätzlich noch die Vertraulichkeit der Pakete schützt. Der Authentication Header wird dabei an die IP-Pakete angehängt und sieht wie folgt aus:
 
-\begin{figure}[htbp] 
-  \centering
-     \includegraphics[width=0.7\textwidth]{AH-Aufbau.png}
-  \caption{Aufbau des Authentication Headers aus RFC 4302}
-  \label{AH-Aufbau}
-\end{figure}
+%\begin{figure}[htbp] 
+%  \centering
+%     \includegraphics[width=0.7\textwidth]{AH-Aufbau.png}
+%  \caption{Aufbau des Authentication Headers aus RFC 4302}
+%  \label{AH-Aufbau}
+%\end{figure}
 
 Das 8 Bit lange Feld ``Next Header'' gibt an welche Art Nutzdaten nach dem AH folgen. Eine 4 bedeutet zum Beispiel IPv4 und eine 41 IPv6. \\
 Das 8 Bit lange Feld ``Payload Length'' gibt die Länge des AH in 4 Byte Worten - 2 an. \\
@@ -101,12 +101,29 @@ Das 32 Bit lange Feld ``Sequence Number'' wird bei jedem versendeten Paket um 1 
 Das Feld ``Integrity Check Value'' (ICV) enthält den MAC-Wert. Da dieser je nach verwendetem Algorithmus unterschiedlich lang ist, hat das Feld ebenfalls eine Variable Länge, dessen Beschränkung allerdings ist, dass es ein Vielfaches von 32 Bit sein muss, und dass der komplette AH ebenfalls ein vielfaches von 32 Bit bei IPv4 und ein vielfaches von 64 Bit bei IPv6 sein muss. Der MAC-Wert wird zur Überprüfung der Authentizität der Daten verwendet, das heißt es wird überprüft, ob das Paket auch tatsächlich vom Absender und nicht von einem Angreifer stammt.
 \subsubsection{Encapsulating Security Payload}
 Die Alternative zum AH ist ``Encapsulating Security Payload'', kurz ESP. Wie schon erwähnt muss ESP von implementationen von IPSec unterstützt werden. 
+ESP schützt auch wie AH die Integrität und Authentizität der Daten. Zusätzlich bietet es auch noch einen Schutz der Vertraulichkeit. Um dies zu erreichen können die Daten verschlüsselt werden. Der Aufbau von ESP ist wie folgt:
+%Abbild Aufbau des ESP
+Im Allgemeinen wird zwischen dem Header der vor den Nutzdaten kommt, dem Trailer welcher nach den Nutzdaten angelegt ist und dem Feld zum prüfen der Authentizität unterschieden. Das heißt beim ESP sind die Nutzdaten, wie der Name schon schließen lässt von diesen Feldern umgeben.
+Das 32 Bit lange Feld ``Security Parameters Index'' (SPI) wird genau wie beim AH verwendet.\\
+Das 32 Bit lange Feld ``Sequence Numbers'' ist ebenfalls sehr ähnlich zu dem entsprechenden Feld im AH, allerdings muss die Empfänger die Nummer ignorieren, wenn der Algorithmus zur Überprüfung der Integrität Null ist. Es gibt auch die Option zu einer Erweiterung zu einem 64 Bit langem Feld.\\
+Das Feld ``Payload Data'' hat eine variable Länge. Es enthält die Nutzdaten des Paketes.\\
+Das Feld ``Padding'' ist 0 bis 255 Bytes lang und kann zu verschiedenen Zwecken verwendet werden. Es gibt einige Verschlüsselungs-Algorithmen die nur Inhalte verschlüsseln können die ein vielfaches einer bestimmten Byte-Zahl sind. Mit dem Padding-Feld können so die Nutzdaten aufgefüllt werden. Eine weitere Anwendungsmöglichkeit ist mit dem Feld die tatsächliche Länge für einen Angreifer zu verbergen, allerdings wird davon im RFC abgeraten, da dies nicht effektiv genug ist und das optionale Feld ``TFC Padding'' dafür bereits vorgesehen ist.\\
+Dieses Feld ist anders als das normale Padding-Feld nicht auf 255 Bytes limitiert und kann so einen Angreifer, der die Verkehrsdaten analysiert abwehren. Dieses Feld kann man jedoch im Transport-Modus nicht immer anwenden. Eine weitere Möglichkeit die Verkehrsdaten-Analyse zu verhindern ist dummy-Pakete zu versenden, die keinen nützlichen Inhalt haben, was aber nur für den Absender und Empfänger ersichtlich ist.\\
+Das Feld ``Pad Length'' enthält die Länge des Padding-Feldes, jedoch nicht des TFC-Padding-Feldes, da dessen Länge in dem Payload Data-Feld gespeichert wird.\\%herausfinden warum genau
+Das Feld ``Next Header'' ist 8 Bit lang. Es funktioniert ähnlich wie das entsprechende Feld des AH. Es wird benutzt um den Typ der Nutzdaten zu speichern. Wie schon beim AH gibt es zum Beispiel Werte für IPv4 und IPv6, aber zusätzlich gibt es beim ESP noch den Wert 59, welcher auf ein dummy-Paket hinweist.\\
+Das Feld ``Integrity Check Value'' hat eine variable Länge und enthält wie schon beim AH den Message Authentication Code, der benutzt wird um die Authentizität und Integrität der Nachricht zu prüfen. Der MAC wird dabei aus allen vorigen Feldern berechnet und wenn der Inhalt verschlüsselt wird, dann wird der MAC erst nach dem verschlüsseln generiert. 
+
+
 \subsubsection{Algorithmen}
 In RFC 4835 ist festgehalten welche Algorithmen implementiert werden können, sollen oder müssen. Dabei sind die Algorithmen mit den Bewertungen must, must not, should, should not und may versehen. Zusätzlich gibt es zum Beispiel must-, was bedeutet, dass es zwar noch implementiert werden muss, aber wahrscheinlich bald zu should herabgestuft wird. Dabei wird unterschieden zwischen Verschlüsselungs-Algorithmen und Authentifizierungs-Algorithmen für ESP und Authentifizierungs-Algorithmen für AH.\\
-Für ESP muss zur Zeit zur Verschlüsselung AES-CBC unterstützt werden. Im RFC 7321 steht außerdem, dass der Algorithmus Null unterstützt werden muss, was lediglich bedeutet, dass es auch möglich sein muss die Daten nicht zu verschlüsseln.\\
+Für ESP muss zur Zeit zur Verschlüsselung AES-CBC unterstützt werden. Hierbei werden die Felder Payload Data, Padding, TFC Padding, Pad Length und Next Header verschlüsselt. Im RFC 7321 steht außerdem, dass der Algorithmus Null unterstützt werden muss, was lediglich bedeutet, dass es auch möglich sein muss die Daten nicht zu verschlüsseln.\\
 Die Algorithmen zum Authentisieren sind bei AH und ESP gleich. Unterstützt werden muss HMAC-SHA1-96.\\
 Es sind jeweils noch weitere Hinweise zu Algorithmen im RFC vorhanden, welche zum Beispiel unterstützt werden sollten oder auch nicht unterstützt werden dürfen. 
 \subsubsection{Internet Key Exchange Version 2}
+Es gibt bei IPSec eine ``Security Policy Database'' (SPD). Diese legt fest welche Verfahren angewendet werden dürfen, das heißt hier wird festgelegt welche Security Associations erstellt werden dürfen. Die Security Associations (SA) werden wiederum in einer eigenen Datenbank gespeichert, also in einer SAD. Die SA enthalten unter anderem auch die verwendeten Schlüssel. \\
+Die SPD wird üblicherweise per Hand eingerichtet, da diese eher statisch ist und man während der Kommunikation keine Einträge vornehmen muss. Für die SAD wird üblicherweise IKEv2 verwendet, welches die SAs automatisch verwaltet.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{OpenVPN}
