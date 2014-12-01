@@ -129,7 +129,7 @@ Für jedes Verschlüsselungsverfahren wird ein Schlüssel benötigt. Daher werde
 
 Es ist ersichtlich, dass IPSec und TLS DH unterstützen. Zusätzlich unterstützt IPSec KINK und TLS RSA. Ein wirklicher Vor- oder Nachteil kann in diesem Fall weder IPSec noch TLS zugesprochen werden. Wenn wir die Verbreitung von KINK bzw. RSA vergleichen, dann liegt RSA vorne, da es seit langem standardisiert ist und es etliche Implementationen gibt.
 
-Ein weiterer Punkt bei der Vertraulichkeit ist die Authentifizierungsmethode. IPSec unterstützt lediglich die gegenseitige Authentifizierung. TLS hingegen unterstützt eine reine Server-Authentifizierung, eine gegenseitige Authentifizierung, die auch Client-Authentifizierung genannt wird und eine anonyme Authentifizierung, bei der nichts authentifiziert wird.\cite{Alshamsi2005}
+Ein weiterer Punkt bei der Vertraulichkeit ist die Authentifizierungsmethode. IPSec unterstützt lediglich die gegenseitige Authentifizierung. TLS hingegen unterstützt eine reine Server-Authentifizierung, eine gegenseitige Authentifizierung, die auch Client-Authentifizierung genannt wird, und eine anonyme Authentifizierung, bei der nichts authentifiziert wird.\cite{Alshamsi2005}
 
 Bei den Authentifizierungsalgorithmen hat jedoch IPSec einen Vorteil, denn es wird sowohl die Nutzung einer digitalen Signatur als auch die Verwendung eines Algorithmus, der auf einem geheimen Schlüssel basiert, ermöglicht. TLS benötigt hingegen zwangsweise eine digitale Signatur. Sollten alle Algorithmen mit digitaler Signatur ausfallen, kann IPSec weiterhin implementiert werden, TLS jedoch nicht.\cite{Alshamsi2005}
 
