@@ -128,7 +128,22 @@ Die SPD wird üblicherweise per Hand eingerichtet, da diese eher statisch ist un
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{OpenVPN}
-Was ist OpenVPN? Wer ist dafür verantwortlich? Wie funktioniert es? 
+%\input{VPN}
+Was ist OpenVPN? Wer ist dafür verantwortlich? Wie funktioniert es?
+\subsection{Was ist ein VPN?}
+Man stellt sich unter einem Netzwerk immer Verbindungen zwischen einzelnen Computern in Form von Verkabelungen vor. Ein VPN verbindet hingegen Rechner oder ganze Netzwerke über bereits vorhandene Netzwerke hinweg.
+
+Virtuelle Private Netzwerke (VPN) erlauben eine sichere, stabile und preisgünstige Kommunikation über das Internet. Mit ihrer Hilfe können verteilte Unternehmensnetze verbunden werden oder Außendienstmitarbeiter auf Ressourcen und Daten in dem Unternehmensnetz zugreifen. Sie bieten eine kostengünstige und sichere Anbindung von Filialen an eine Zentrale und erlauben den Einsatz von Telearbeitsplätzen, bei denen die Angestellten ihre Arbeit zu Hause erledigen.
+
+\subsection{Was ist ein OpenVPN?}
+
+Open VPN ist eine VPN-Lösung, die unter Linux, Windows und vielen weiteren Betriebssystemen eingesetzt werden kann.
+Open VPN ist eine freie Software und steht unter der GPL ( GNU General Public License ).
+
+\subsection{Verschlüsselung bei OpenVPN}
+
+OpenVPN benutzt zur Authentifizierung und Verschlüsselung der Daten kryptografische Verfahren auf Basis von TLS (Transport Layer Security). TLS ist ein Verschlüsselungsprotokoll zur Datenübertragung und der Nachfolger vom bekannteren SSL (Secure Sockets Layer).Die meisten Internetbrowser unterstützen TLS-Verbindungen. Dieses Protokoll wird im Internet u.a. zum Aufbau von sicheren Verbindungen  (HTTPS-Verbindungen) bei Banken oder Shopsystemen  eingesetzt. Daran erkennt man , dass dies allgemein anerkannte und vor allem auch ausgereifte  Standardverfahren ist.
+
 \section{Vergleich von IPSec mit OpenVPN}
 
 In den vorangegangenen Abschnitten wurden IPSec und OpenVPN vorgestellt. In diesem Abschnitt widmen wir uns dem Vergleich der beiden. Damit ein solcher Vergleich jedoch sinnvoll stattfinden kann, muss im Voraus klar sein, was verglichen wird. Wir benötigen daher Kriterien. Im Folgenden werden die Kriterien erarbeitet und erläutert, warum wir das jeweilige Kriterium für wichtig befinden.
