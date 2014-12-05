@@ -1,0 +1,695 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings,petri}
+\usepackage{polynom}
+\usepackage{multirow}
+\usepackage[german]{fancyref}
+\usepackage{morefloats}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+\def\thesection{8.\arabic{section})}
+\def\thesubsection{\arabic{subsection}.}
+\def\thesubsubsection{(\alph{subsubsection})}
+% some matrix magic
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\tikzset{
+    place/.style={
+        circle,
+        thick,
+        draw=black,
+        fill=white,
+        minimum size=6mm,
+        font=\bfseries
+    },
+    transitionH/.style={
+        rectangle,
+        thick,
+        draw=black,
+        fill=white,
+        minimum width=8mm,
+        inner ysep=4pt,
+        font=\bfseries
+    },
+    transitionV/.style={
+        rectangle,
+        thick,
+        fill=black,
+        minimum height=8mm,
+        inner xsep=2pt
+    }
+}
+
+\begin{document}
+\author{Benjamin Kuffel, Jim Martens\\Gruppe 6}
+\title{Hausaufgaben zum 8. Dezember}
+\maketitle
+
+\setcounter{section}{2}
+\section{} %8.3
+	\subsection{}
+	Die Prozesse sind auf den Abbildungen von \fref{fig:831-1} bis \fref{fig:831-18} zu sehen.
+	\begin{figure}	
+	\begin{tikzpicture}[node distance=1cm]
+		\node[place] (b1) {b1};
+	\end{tikzpicture}
+	\caption{Prozess 1 für 8.3.1}
+	\label{fig:831-1}
+	\end{figure}
+	
+	\begin{figure}	
+	\begin{tikzpicture}[node distance=1cm]
+		\node[place] (b1) {b1};
+		\node[transitionH] (a) [right=of b1] {a};
+		\node[place] (b2) [right=of a] {b2};
+		\node[place] (b3) [below=0.25 of b2] {b3};
+		\node[place] (b4) [above=0.5 of b2] {b4};
+		\node[place] (b5) [below=0.5 of b3] {b5};
+		
+		\path[->] (b1) edge (a)
+			(a) edge (b2)
+			(a) edge (b3)
+			(a) edge (b4)
+			(a) edge (b5);
+	\end{tikzpicture}
+	\caption{Prozess 2 für 8.3.1}
+	\label{fig:831-2}
+	\end{figure}
+	
+	\begin{figure}	
+	\begin{tikzpicture}[node distance=1cm]
+		\node[place] (b1) {b1};
+		\node[transitionH] (a) [right=of b1] {a};
+		\node[place] (b2) [right=of a] {b2};
+		\node[place] (b3) [below=0.25 of b2] {b3};
+		\node[place] (b4) [above=of b2] {b4};
+		\node[place] (b5) [below=of b3] {b5};
+		\node[transitionH] (b) [above right=0.5 and 1 of b2] {b};
+		\node[place] (b6) [right=of b] {b6};
+		\path[->] (b1) edge (a)
+			(a) edge (b2)
+			(a) edge (b3)
+			(a) edge (b4)
+			(a) edge (b5)
+			(b2) edge (b)
+			(b4) edge (b)
+			(b) edge (b6);
+	\end{tikzpicture}
+	\caption{Prozess 3 für 8.3.1}
+	\label{fig:831-3}
+	\end{figure}
+	
+	\begin{figure}	
+	\begin{tikzpicture}[node distance=1cm]
+		\node[place] (b1) {b1};
+		\node[transitionH] (a) [right=of b1] {a};
+		\node[place] (b2) [right=of a] {b2};
+		\node[place] (b3) [below=0.25 of b2] {b3};
+		\node[place] (b4) [above=of b2] {b4};
+		\node[place] (b5) [below=of b3] {b5};
+		\node[transitionH] (b) [right=of b2] {b};
+		\node[place] (b6) [right=of b] {b6};
+		\path[->] (b1) edge (a)
+			(a) edge (b2)
+			(a) edge (b3)
+			(a) edge (b4)
+			(a) edge (b5)
+			(b3) edge (b)
+			(b4) edge (b)
+			(b) edge (b6);
+	\end{tikzpicture}
+	\caption{Prozess 4 für 8.3.1}
+	\label{fig:831-4}
+	\end{figure}
+	
+	\begin{figure}	
+	\begin{tikzpicture}[node distance=1cm]
+		\node[place] (b1) {b1};
+		\node[transitionH] (a) [right=of b1] {a};
+		\node[place] (b2) [right=of a] {b2};
+		\node[place] (b3) [below=0.25 of b2] {b3};
+		\node[place] (b4) [above=of b2] {b4};
+		\node[place] (b5) [below=of b3] {b5};
+		\node[transitionH] (c) [below right=0.5 and 1 of b3] {c};
+		\node[place] (b6) [right=of c] {b6};
+		\path[->] (b1) edge (a)
+			(a) edge (b2)
+			(a) edge (b3)
+			(a) edge (b4)
+			(a) edge (b5)
+			(b3) edge (c)
+			(b5) edge (c)
+			(c) edge (b6);
+	\end{tikzpicture}
+	\caption{Prozess 5 für 8.3.1}
+	\label{fig:831-5}
+	\end{figure}
+	
+	\begin{figure}	
+	\begin{tikzpicture}[node distance=1cm]
+		\node[place] (b1) {b1};
+		\node[transitionH] (a) [right=of b1] {a};
+		\node[place] (b2) [right=of a] {b2};
+		\node[place] (b3) [below=0.25 of b2] {b3};
+		\node[place] (b4) [above=of b2] {b4};
+		\node[place] (b5) [below=of b3] {b5};
+		\node[transitionH] (c) [right=of b3] {c};
+		\node[place] (b6) [right=of c] {b6};
+		\path[->] (b1) edge (a)
+			(a) edge (b2)
+			(a) edge (b3)
+			(a) edge (b4)
+			(a) edge (b5)
+			(b2) edge (c)
+			(b5) edge (c)
+			(c) edge (b6);
+	\end{tikzpicture}
+	\caption{Prozess 6 für 8.3.1}
+	\label{fig:831-6}
+	\end{figure}
+	
+	\begin{figure}	
+	\begin{tikzpicture}[node distance=1cm]
+		\node[place] (b1) {b1};
+		\node[transitionH] (a) [right=of b1] {a};
+		\node[place] (b2) [right=of a] {b2};
+		\node[place] (b3) [below=0.25 of b2] {b3};
+		\node[place] (b4) [above=of b2] {b4};
+		\node[place] (b5) [below=of b3] {b5};
+		\node[transitionH] (c) [right=of b3] {c};
+		\node[place] (b6) [right=of c] {b6};
+		\node[transitionH] (b) [right=of b2] {b};
+		\node[place] (b7) [right=of b] {b7};
+		\path[->] (b1) edge (a)
+			(a) edge (b2)
+			(a) edge (b3)
+			(a) edge (b4)
+			(a) edge (b5)
+			(b2) edge (c)
+			(b5) edge (c)
+			(c) edge (b6)
+			(b4) edge (b)
+			(b3) edge (b)
+			(b) edge (b7);
+	\end{tikzpicture}
+	\caption{Prozess 7 für 8.3.1}
+	\label{fig:831-7}
+	\end{figure}
+	
+	\begin{figure}	
+	\begin{tikzpicture}[node distance=1cm]
+		\node[place] (b1) {b1};
+		\node[transitionH] (a) [right=of b1] {a};
+		\node[place] (b2) [right=of a] {b2};
+		\node[place] (b3) [below=0.25 of b2] {b3};
+		\node[place] (b4) [above=of b2] {b4};
+		\node[place] (b5) [below=of b3] {b5};
+		\node[transitionH] (c) [below right=0.5 and 1 of b3] {c};
+		\node[place] (b6) [right=of c] {b6};
+		\node[transitionH] (b) [above right=0.5 and 1 of b2] {b};
+		\node[place] (b7) [right=of b] {b7};
+		\path[->] (b1) edge (a)
+			(a) edge (b2)
+			(a) edge (b3)
+			(a) edge (b4)
+			(a) edge (b5)
+			(b3) edge (c)
+			(b5) edge (c)
+			(c) edge (b6)
+			(b4) edge (b)
+			(b2) edge (b)
+			(b) edge (b7);
+	\end{tikzpicture}
+	\caption{Prozess 8 für 8.3.1}
+	\label{fig:831-8}
+	\end{figure}
+	
+	\begin{figure}	
+	\begin{tikzpicture}[node distance=1cm]
+		\node[place] (b1) {b1};
+		\node[transitionH] (a) [right=of b1] {a};
+		\node[place] (b2) [right=of a] {b2};
+		\node[place] (b3) [below=0.25 of b2] {b3};
+		\node[place] (b4) [above=of b2] {b4};
+		\node[place] (b5) [below=of b3] {b5};
+		\node[transitionH] (b) [above right=0.5 and 1 of b2] {b};
+		\node[place] (b6) [right=of b] {b6};
+		\node[transitionH] (d) [right=of b6] {d};
+		\node[place] (b7) [right=of d] {b7};
+		\path[->] (b1) edge (a)
+			(a) edge (b2)
+			(a) edge (b3)
+			(a) edge (b4)
+			(a) edge (b5)
+			(b2) edge (b)
+			(b4) edge (b)
+			(b) edge (b6)
+			(b6) edge (d)
+			(d) edge (b7);
+	\end{tikzpicture}
+	\caption{Prozess 9 für 8.3.1}
+	\label{fig:831-9}
+	\end{figure}
+	
+	\begin{figure}	
+	\begin{tikzpicture}[node distance=1cm]
+		\node[place] (b1) {b1};
+		\node[transitionH] (a) [right=of b1] {a};
+		\node[place] (b2) [right=of a] {b2};
+		\node[place] (b3) [below=0.25 of b2] {b3};
+		\node[place] (b4) [above=of b2] {b4};
+		\node[place] (b5) [below=of b3] {b5};
+		\node[transitionH] (b) [right=of b2] {b};
+		\node[place] (b6) [right=of b] {b6};
+		\node[transitionH] (d) [right=of b6] {d};
+		\node[place] (b7) [right=of d] {b7};
+		\path[->] (b1) edge (a)
+			(a) edge (b2)
+			(a) edge (b3)
+			(a) edge (b4)
+			(a) edge (b5)
+			(b3) edge (b)
+			(b4) edge (b)
+			(b) edge (b6)
+			(b6) edge (d)
+			(d) edge (b7);
+	\end{tikzpicture}
+	\caption{Prozess 10 für 8.3.1}
+	\label{fig:831-10}
+	\end{figure}
+	
+	\begin{figure}	
+	\begin{tikzpicture}[node distance=1cm]
+		\node[place] (b1) {b1};
+		\node[transitionH] (a) [right=of b1] {a};
+		\node[place] (b2) [right=of a] {b2};
+		\node[place] (b3) [below=0.25 of b2] {b3};
+		\node[place] (b4) [above=of b2] {b4};
+		\node[place] (b5) [below=of b3] {b5};
+		\node[transitionH] (c) [below right=0.5 and 1 of b3] {c};
+		\node[place] (b6) [right=of c] {b6};
+		\node[transitionH] (d) [right=of b6] {d};
+		\node[place] (b7) [right=of d] {b7};
+		\path[->] (b1) edge (a)
+			(a) edge (b2)
+			(a) edge (b3)
+			(a) edge (b4)
+			(a) edge (b5)
+			(b3) edge (c)
+			(b5) edge (c)
+			(c) edge (b6)
+			(b6) edge (d)
+			(d) edge (b7);
+	\end{tikzpicture}
+	\caption{Prozess 11 für 8.3.1}
+	\label{fig:831-11}
+	\end{figure}
+	
+	\begin{figure}	
+	\begin{tikzpicture}[node distance=1cm]
+		\node[place] (b1) {b1};
+		\node[transitionH] (a) [right=of b1] {a};
+		\node[place] (b2) [right=of a] {b2};
+		\node[place] (b3) [below=0.25 of b2] {b3};
+		\node[place] (b4) [above=of b2] {b4};
+		\node[place] (b5) [below=of b3] {b5};
+		\node[transitionH] (c) [right=of b3] {c};
+		\node[place] (b6) [right=of c] {b6};
+		\node[transitionH] (d) [right=of b6] {d};
+		\node[place] (b7) [right=of d] {b7};
+		\path[->] (b1) edge (a)
+			(a) edge (b2)
+			(a) edge (b3)
+			(a) edge (b4)
+			(a) edge (b5)
+			(b2) edge (c)
+			(b5) edge (c)
+			(c) edge (b6)
+			(b6) edge (d)
+			(d) edge (b7);
+	\end{tikzpicture}
+	\caption{Prozess 12 für 8.3.1}
+	\label{fig:831-12}
+	\end{figure}
+	
+	\begin{figure}	
+	\begin{tikzpicture}[node distance=1cm]
+		\node[place] (b1) {b1};
+		\node[transitionH] (a) [right=of b1] {a};
+		\node[place] (b2) [right=of a] {b2};
+		\node[place] (b3) [below=0.25 of b2] {b3};
+		\node[place] (b4) [above=of b2] {b4};
+		\node[place] (b5) [below=of b3] {b5};
+		\node[transitionH] (b) [above right=0.5 and 1 of b2] {b};
+		\node[place] (b6) [right=of b] {b6};
+		\node[transitionH] (d) [right=of b6] {d};
+		\node[place] (b7) [right=of d] {b7};
+		\node[transitionH] (c) [below right=0.5 and 1 of b3] {c};
+		\node[place] (b8) [right=of c] {b8};
+		\path[->] (b1) edge (a)
+			(a) edge (b2)
+			(a) edge (b3)
+			(a) edge (b4)
+			(a) edge (b5)
+			(b2) edge (b)
+			(b4) edge (b)
+			(b) edge (b6)
+			(b6) edge (d)
+			(d) edge (b7)
+			(b3) edge (c)
+			(b5) edge (c)
+			(c) edge (b8);
+	\end{tikzpicture}
+	\caption{Prozess 13 für 8.3.1}
+	\label{fig:831-13}
+	\end{figure}
+	
+	\begin{figure}	
+	\begin{tikzpicture}[node distance=1cm]
+		\node[place] (b1) {b1};
+		\node[transitionH] (a) [right=of b1] {a};
+		\node[place] (b2) [right=of a] {b2};
+		\node[place] (b3) [below=0.25 of b2] {b3};
+		\node[place] (b4) [above=of b2] {b4};
+		\node[place] (b5) [below=of b3] {b5};
+		\node[transitionH] (b) [right=of b2] {b};
+		\node[place] (b6) [right=of b] {b6};
+		\node[transitionH] (d) [right=of b6] {d};
+		\node[place] (b7) [right=of d] {b7};
+		\node[transitionH] (c) [right=of b3] {c};
+		\node[place] (b8) [right=of c] {b8};
+		\path[->] (b1) edge (a)
+			(a) edge (b2)
+			(a) edge (b3)
+			(a) edge (b4)
+			(a) edge (b5)
+			(b3) edge (b)
+			(b4) edge (b)
+			(b) edge (b6)
+			(b6) edge (d)
+			(d) edge (b7)
+			(b2) edge (c)
+			(b5) edge (c)
+			(c) edge (b8);
+	\end{tikzpicture}
+	\caption{Prozess 14 für 8.3.1}
+	\label{fig:831-14}
+	\end{figure}
+	
+	\begin{figure}	
+	\begin{tikzpicture}[node distance=1cm]
+		\node[place] (b1) {b1};
+		\node[transitionH] (a) [right=of b1] {a};
+		\node[place] (b2) [right=of a] {b2};
+		\node[place] (b3) [below=0.25 of b2] {b3};
+		\node[place] (b4) [above=of b2] {b4};
+		\node[place] (b5) [below=of b3] {b5};
+		\node[transitionH] (c) [below right=0.5 and 1 of b3] {c};
+		\node[place] (b6) [right=of c] {b6};
+		\node[transitionH] (d) [right=of b6] {d};
+		\node[place] (b7) [right=of d] {b7};
+		\node[transitionH] (b) [above right=0.5 and 1 of b2] {b};
+		\node[place] (b8) [right=of b] {b8};
+		\path[->] (b1) edge (a)
+			(a) edge (b2)
+			(a) edge (b3)
+			(a) edge (b4)
+			(a) edge (b5)
+			(b3) edge (c)
+			(b5) edge (c)
+			(c) edge (b6)
+			(b6) edge (d)
+			(d) edge (b7)
+			(b2) edge (b)
+			(b4) edge (b)
+			(b) edge (b8);
+	\end{tikzpicture}
+	\caption{Prozess 15 für 8.3.1}
+	\label{fig:831-15}
+	\end{figure}
+	
+	\begin{figure}	
+	\begin{tikzpicture}[node distance=1cm]
+		\node[place] (b1) {b1};
+		\node[transitionH] (a) [right=of b1] {a};
+		\node[place] (b2) [right=of a] {b2};
+		\node[place] (b3) [below=0.25 of b2] {b3};
+		\node[place] (b4) [above=of b2] {b4};
+		\node[place] (b5) [below=of b3] {b5};
+		\node[transitionH] (c) [right=of b3] {c};
+		\node[place] (b6) [right=of c] {b6};
+		\node[transitionH] (d) [right=of b6] {d};
+		\node[place] (b7) [right=of d] {b7};
+		\node[transitionH] (b) [right=of b2] {b};
+		\node[place] (b8) [right=of b] {b8};
+		\path[->] (b1) edge (a)
+			(a) edge (b2)
+			(a) edge (b3)
+			(a) edge (b4)
+			(a) edge (b5)
+			(b2) edge (c)
+			(b5) edge (c)
+			(c) edge (b6)
+			(b6) edge (d)
+			(d) edge (b7)
+			(b3) edge (b)
+			(b4) edge (b)
+			(b) edge (b8);
+	\end{tikzpicture}
+	\caption{Prozess 16 für 8.3.1}
+	\label{fig:831-16}
+	\end{figure}
+	
+	\begin{figure}	
+	\begin{tikzpicture}[node distance=1cm]
+		\node[place] (b1) {b1};
+		\node[transitionH] (a) [right=of b1] {a};
+		\node[place] (b2) [right=of a] {b2};
+		\node[place] (b3) [below=0.25 of b2] {b3};
+		\node[place] (b4) [above=of b2] {b4};
+		\node[place] (b5) [below=of b3] {b5};
+		\node[transitionH] (b) [above right=0.5 and 1 of b2] {b};
+		\node[place] (b6) [right=of b] {b6};
+		\node[transitionH] (d) [right=of b6] {d};
+		\node[place] (b7) [right=of d] {b7};
+		\node[transitionH] (c) [below right=0.5 and 1 of b3] {c};
+		\node[place] (b8) [right=of c] {b8};
+		\node[transitionH] (d2) [right=of b8] {d};
+		\node[place] (b9) [right=of d2] {b9};
+		\path[->] (b1) edge (a)
+			(a) edge (b2)
+			(a) edge (b3)
+			(a) edge (b4)
+			(a) edge (b5)
+			(b2) edge (b)
+			(b4) edge (b)
+			(b) edge (b6)
+			(b6) edge (d)
+			(d) edge (b7)
+			(b3) edge (c)
+			(b5) edge (c)
+			(c) edge (b8)
+			(b8) edge (d2)
+			(d2) edge (b9);
+	\end{tikzpicture}
+	\caption{Prozess 17 für 8.3.1}
+	\label{fig:831-17}
+	\end{figure}
+	
+	\begin{figure}	
+	\begin{tikzpicture}[node distance=1cm]
+		\node[place] (b1) {b1};
+		\node[transitionH] (a) [right=of b1] {a};
+		\node[place] (b2) [right=of a] {b2};
+		\node[place] (b3) [below=0.25 of b2] {b3};
+		\node[place] (b4) [above=of b2] {b4};
+		\node[place] (b5) [below=of b3] {b5};
+		\node[transitionH] (b) [right=of b2] {b};
+		\node[place] (b6) [right=of b] {b6};
+		\node[transitionH] (d) [right=of b6] {d};
+		\node[place] (b7) [right=of d] {b7};
+		\node[transitionH] (c) [right=of b3] {c};
+		\node[place] (b8) [right=of c] {b8};
+		\node[transitionH] (d2) [right=of b8] {d};
+		\node[place] (b9) [right=of d2] {b9};
+		\path[->] (b1) edge (a)
+			(a) edge (b2)
+			(a) edge (b3)
+			(a) edge (b4)
+			(a) edge (b5)
+			(b3) edge (b)
+			(b4) edge (b)
+			(b) edge (b6)
+			(b6) edge (d)
+			(d) edge (b7)
+			(b2) edge (c)
+			(b5) edge (c)
+			(c) edge (b8)
+			(b8) edge (d2)
+			(d2) edge (b9);
+	\end{tikzpicture}
+	\caption{Prozess 18 für 8.3.1}
+	\label{fig:831-18}
+	\end{figure}
+	
+	\subsection{}
+	Die \(<\)-Relation kann auf \fref{fig:832-l} gesehen werden. Die \(\lessdot \)-Relation kann auf \fref{fig:832-ld} gesehen werden. Die \textbf{li}-Relation kann auf \fref{fig:832-li} gesehen werden. Die \textbf{co}-Relation kann auf \fref{fig:832-co} gesehen werden.
+	\begin{figure}
+	\begin{tikzpicture}[node distance=2cm]
+		\node[place] (b1) {b1};
+		\node[transitionH] (a) [right=of b1] {a};
+		\node[place] (b3) [right=of a] {b3};
+		\node[place] (b4) [below=of b3] {b4};
+		\node[transitionH] (c) [below right=of b4] {c};
+		\node[place] (b2) [left=3 of c] {b2};
+		\node[place] (b5) [right=of c] {b5};
+		
+		\path[->] (b1) edge (a)
+			(a) edge (b3)
+			(a) edge (b4)
+			(b4) edge (c)
+			(b2) edge (c)
+			(c) edge (b5)
+			(b1) edge[bend left] (b3)
+			(b1) edge[bend right] (b4)
+			(b1) edge[bend right] (c)
+			(b1) edge[bend left=90] (b5)
+			(a) edge[bend left] (c)
+			(a) edge (b5)
+			(b2) edge[bend right] (b5)
+			(b4) edge (b5);
+	\end{tikzpicture}
+	\caption{\(<\)-Relation}
+	\label{fig:832-l}
+	\end{figure}
+	\begin{figure}
+	\begin{tikzpicture}[node distance=1cm]
+		\node[place] (b1) {b1};
+		\node[transitionH] (a) [right=of b1] {a};
+		\node[place] (b3) [right=of a] {b3};
+		\node[place] (b4) [below=of b3] {b4};
+		\node[transitionH] (c) [below right=of b4] {c};
+		\node[place] (b2) [left=3 of c] {b2};
+		\node[place] (b5) [right=of c] {b5};
+		
+		\path[->] (b1) edge (a)
+			(a) edge (b3)
+			(a) edge (b4)
+			(b4) edge (c)
+			(b2) edge (c)
+			(c) edge (b5);
+	\end{tikzpicture}
+	\caption{\(\lessdot \)-Relation}
+	\label{fig:832-ld}
+	\end{figure}
+	
+	\begin{figure}
+	\begin{tikzpicture}[node distance=2cm]
+		\node[place] (b1) {b1};
+		\node[transitionH] (a) [right=of b1] {a};
+		\node[place] (b3) [right=of a] {b3};
+		\node[place] (b4) [below=of b3] {b4};
+		\node[transitionH] (c) [below right=of b4] {c};
+		\node[place] (b2) [left=3 of c] {b2};
+		\node[place] (b5) [right=of c] {b5};
+		
+		\path (b1) edge (a)
+			(a) edge (b3)
+			(a) edge (b4)
+			(b4) edge (c)
+			(b2) edge (c)
+			(c) edge (b5)
+			(b1) edge[bend left] (b3)
+			(b1) edge[bend right] (b4)
+			(b1) edge[bend right] (c)
+			(b1) edge[bend left=90] (b5)
+			(a) edge[bend left] (c)
+			(a) edge (b5)
+			(b2) edge[bend right] (b5)
+			(b4) edge (b5);
+	\end{tikzpicture}
+	\caption{\textbf{li}-Relation}
+	\label{fig:832-li}
+	\end{figure}
+	
+	\begin{figure}
+	\begin{tikzpicture}[node distance=1cm]
+		\node[place] (b1) {b1};
+		\node[transitionH] (a) [right=of b1] {a};
+		\node[place] (b3) [right=of a] {b3};
+		\node[place] (b4) [below=of b3] {b4};
+		\node[transitionH] (c) [below right=of b4] {c};
+		\node[place] (b2) [left=3 of c] {b2};
+		\node[place] (b5) [right=of c] {b5};
+		
+		\path (b1) edge (b2)
+			(b3) edge (b5)
+			(b3) edge (b2)
+			(b2) edge (b4)
+			(a) edge (b2)
+			(b3) edge (b4)
+			(b3) edge (c);
+	\end{tikzpicture}
+	\caption{\textbf{co}-Relation}
+	\label{fig:832-co}
+	\end{figure}
+	
+	\subsection{}
+	P-Schnitt: b2, b4, b3 und T-Schnitt: a
+\section{} %8.4
+\section{} %8.5
+	\subsection{}
+	Diese Transitionen sind nebenläufig, können also unabhängig voneinander schalten.
+	\subsection{}
+	Diese Stellen sind Teil eines Stellenschnittes, einer erreichbaren Markierung.
+	\subsection{}
+	Jeder Prozess ist ein Kausalnetz mit einem Abbildungspaar, welches die Bedingungen auf Stellen und die Ereignisse auf Transitionen abbildet. Das zu einem Prozess gehörende Kausalnetz ist vorgängerendlich. Es gibt jedoch auch Kausalnetze, die nicht vorgängerendlich und damit nicht Bestandteil von Prozessen sind.
+	
+	Der strukturelle Unterschied besteht darin, dass Kausalnetze aus Bedingungen und Ereignissen bestehen, wohingegen Prozesse ein Kausalnetz referenzieren und eine Abbildung von Bedingungen und Ereignissen auf Plätze und Transitionen enthalten. Naiv gesehen könnte man sagen, dass Kausalnetze weniger umfassen als Prozesse.
+	
+	Rein zahlenmäßig ist das Verhältnis jedoch umgekehrt, wie bereits mit der Vorgängerendlichkeit beschrieben.
+	\subsection{}
+	Das Kausalnetz passt zu den Petrinetzen \(N_{8.4a}\) und \(N_{8.4b}\). Die Abbildung für das erste Petrinetz sieht so aus:
+	\begin{alignat*}{2}
+		\phi(b1) &=& p1 \\
+		\phi(b2) &=& p1 \\
+		\phi(x) &=& a \\
+		\phi(b3) &=& p1 \\
+		\phi(b4) &=& p1 \\
+		\phi(y) &=& b \\
+		\phi(b5) &=& p1 \\
+		\phi(b6) &=& p1
+	\end{alignat*}
+	
+	Für das zweite Petrinetz sieht die Abbildung so aus:
+	\begin{alignat*}{2}
+		\phi(b1) &=& q2 \\
+		\phi(b2) &=& q1 \\
+		\phi(x) &=& s \\
+		\phi(b3) &=& q3 \\
+		\phi(b4) &=& q2 \\
+		\phi(y) &=& t \\
+		\phi(b5) &=& q3 \\
+		\phi(b6) &=& q4
+	\end{alignat*}
+\end{document}
