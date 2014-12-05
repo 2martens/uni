@@ -10,7 +10,7 @@
 \usepackage{pgfplots}
 \usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
 \usepackage{tikz}
-\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings,petri}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings,petri,shapes}
 \usepackage{polynom}
 \usepackage{multirow}
 \usepackage[german]{fancyref}
@@ -657,6 +657,64 @@
 	\subsection{}
 	P-Schnitt: b2, b4, b3 und T-Schnitt: a
 \section{} %8.4
+	\begin{figure}
+	\begin{tikzpicture}[node distance=1cm]
+		\node[ellipse] (m0) {2p1};
+		\node[ellipse] (m1) [below=of m0] {p1 + 3p3};
+		\node[ellipse] (m3) [below=of m1] {p1 + p2 + 2p3};
+		\node[ellipse] (m2) [left=of m3] {6p3};
+		\node[ellipse] (m4) [below=of m2] {p2 + 5p3};
+		\node[ellipse] (m5) [below=of m3] {p1 + 2p3};
+		\node[ellipse] (m6) [below=of m4] {2p2 + 4p3};
+		\node[ellipse] (m7) [below=of m5] {5p3};
+		\node[ellipse] (m8) [below=of m6] {3p2 + 3p3};
+		\node[ellipse] (m9) [below=of m7] {p2 + 4p3};
+		\node[ellipse] (m10) [below=of m9] {2p2 + 3p3};
+		\node[ellipse] (m11) [below=of m8] {p1 + 2p2 + p3};
+		\node[ellipse] (m12) [left=of m11] {4p2 + 2p3};
+		\node[ellipse] (m13) [below=of m11] {p1 + p2 + p3};		
+		\node[ellipse] (m14) [below=of m10] {3p2 + 2p3};
+		\node[ellipse] (m15) [below=of m12] {p1 + 3p2};
+		\node[ellipse] (m16) [below=of m13] {p1 + 2p2};
+		\node[ellipse] (m17) [below=of m15] {p1 + p3};
+		\node[ellipse] (m18) [below=of m16] {p1 + p2};
+		\node[ellipse] (m19) [below=of m17] {4p3};
+		\node[ellipse] (m20) [below=of m18] {p1};
+		\path[->] (m0) edge node[right] {a} (m1)
+			(m1) edge node[above left] {a} (m2)
+			(m1) edge node[above right] {d} (m3)
+			(m2) edge node[left] {d} (m4)
+			(m3) edge node[below right] {a} (m4)
+			(m3) edge node[right] {b} (m5)
+			(m3) edge[bend right=45] node[right] {c} (m0)
+			(m4) edge node[below right] {c} (m1)
+			(m4) edge node[left] {d} (m6)
+			(m5) edge node[right] {a} (m7)
+			(m6) edge node[below right] {c} (m3)
+			(m6) edge node[left] {d} (m8)
+			(m7) edge node[right] {d} (m9)
+			(m9) edge[bend right] node[right] {c} (m5)
+			(m9) edge node[right] {d} (m10)
+			(m8) edge node[left] {c} (m11)
+			(m8) edge node[above left] {d} (m12)
+			(m10) edge node[below right] {c} (m13)
+			(m10) edge node[right] {d} (m14)
+			(m11) edge node[left] {b} (m13)
+			(m11) edge[bend right=45] node[right] {a} (m6)
+			(m12) edge node[left] {c} (m15)
+			(m15) edge node[below right] {a} (m8)
+			(m15) edge node[below left=0.5 and 0.6] {b} (m16)
+			(m13) edge node[above left] {a} (m9)
+			(m14) edge node[below left=0.1 and 0.1] {c} (m16)
+			(m13) edge node[above left=0.5 and 0.6] {b} (m17)
+			(m16) edge node[left] {b} (m18)
+			(m16) edge node[below right] {a} (m10)
+			(m17) edge node[left] {a} (m19)
+			(m18) edge node[right] {b} (m20);
+	\end{tikzpicture}
+	\caption{Erreichbarkeitsgraph für 8.4}
+	\label{fig:84-rg}
+	\end{figure}
 \section{} %8.5
 	\subsection{}
 	Diese Transitionen sind nebenläufig, können also unabhängig voneinander schalten.
