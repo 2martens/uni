@@ -19,6 +19,7 @@ citestyle=ieee
 \usepackage[scaled]{helvet}
 \usepackage{a4wide}
 \usepackage{rotating}
+\usepackage[german]{fancyref}
 \usepackage{listings}\lstset{breaklines=true,breakatwhitespace=true,frame=leftline,captionpos=b,xleftmargin=6ex,tabsize=4,numbers=left,numberstyle=\ttfamily\footnotesize,basicstyle=\ttfamily\footnotesize}
 \sloppy
 \setlength{\parindent}{0em}
@@ -203,8 +204,35 @@ Für die Verwendung hinter hochrestriktiven Firewalls ist OpenVPN im Vorteil, da
 \subsection{Performance}
 Nachdem wir IPSec und OpenVPN bezüglich der Schutzziele verglichen haben, widmen wir uns jetzt der Performance.
 
-%TODO Vergleich Performance
+Dabei beziehen wir uns auf den bereits genannten Vergleich von Kotuliak\cite{Kotuliak2011}. Zum Vergleich wurden zwei Rechner genommen, die über ein 1 GBit Ethernet verbunden waren. Auf beiden Rechnern lief Windows Vista. Zusätzlich lief auf beiden eine virtuelle Maschine von Debian mit der VM-Software VMware. Die beiden virtuellen Maschinen waren mit Ausnahme der IP und des Rechnernamens identisch.
 
+Aufgrund des höheren Rechenaufwands durch eine virtuelle Maschine können minimale Unterschiede besser erkannt werden. Diese Unterschiede sind vor allem technischer Natur: IPSec benötigt einen low-level Zugriff auf das Netzwerkinterface, um die Pakete zu manipulieren. Dafür operiert IPSec im Ring0 des Kernel-Space.\cite{Kotuliak2011}
+
+Der Kernel-Space ist in Ringe unterteilt, wobei Ring0 für den Kernel und andere essentielle Prozesse reserviert ist. Ring1 ist für andere Systemprozesse reserviert, die low-level Zugriff auf Hardware benötigen. Je weiter man sich von Ring0 entfernt, desto weniger Privilegien haben die Prozesse. In Ring3 findet man schließlich die meisten Userprozesse, u.a. auch TLS-Implementationen. Prozesse in Ringen mit höheren Nummern können Prozesse aus Ringen mit niedrigeren Ringen nicht stören.\cite{Kotuliak2011}
+
+Mit diesem technischen Hintergrundwissen ausgestattet, können wir die Ergebnisse des Vergleichs betrachten. Der durchschnittliche Durchsatz kann in \fref{tab:tp} gesehen werden. Es fällt auf, dass der Durchsatz ohne Verschlüsselung weit über dem der Verschlüsselung liegt. Allerdings ist das auch nicht anders zu erwarten. Zum Verständnis ist jedoch noch wichtig, dass die verwendete Ethernetverbindung nicht für die Verwendung von Jumbo-Frames eingerichtet wurde. Ohne diese Frames ist solch eine Gigabit-Verbindung jedoch erheblich langsamer als der theoretische Wert (1 GBit/s).\cite{Kotuliak2011}
+
+Eine weitere Auffälligkeit ist die im Vergleich zu den übrigen Algorithmen schlechte Performance von 3DES. Dies liegt schlichtweg daran, dass 3DES ein veraltetes Verfahren ist und nicht weiter benutzt werden sollte. Bei diesem konkreten Verfahren ist IPSec (45 Mbps) langsamer als OpenVPN (60,98 Mbps), allerdings hat das kaum eine Relevanz, da 3DES wie gesagt veraltet ist.
+
+Interessanter ist dort der Unterschied zwischen dem Durchsatz von IPSec AES (142 Mbps) bzw. IPSec Blowfish (121,76 Mbps) und OpenVPN AES (98 Mbps) bzw. OpenVPN Blowfish (96 Mbps). Dieser signifikante Unterschied liegt an der Hardwarenähe von IPSec und ist dementsprechend auch erwartbar gewesen.
+
+Anhand dieser Zahlen ist auch ersichtlich, dass es keinen ernstzunehmenden Unterschied zwischen AES und Blowfish gibt. AES hat von beiden den Vorteil, dass das Verfahren standardisiert ist und von vielen Regierungen und im privaten Sektor größtenteils unterstützt wird.
+
+\begin{table}
+\caption{Vergleich des durchschnittlichen Throughputs in Megabit pro Sekunde. Werte von Kotuliak\cite{Kotuliak2011}}
+\label{tab:tp}
+\begin{tabular}{c|c}
+Szenario & Throughput (Mbps) \\
+\hline
+Ethernet ohne Verschlüsselung & 553 \\
+OpenVPN 3DES & 60,98 \\
+OpenVPN AES & 98 \\
+OpenVPN Blowfish & 96 \\
+IPSec 3DES & 45 \\
+IPSec AES & 142 \\
+IPSec Blowfish & 121,76
+\end{tabular}
+\end{table}
 \subsection{Kompatibilität}
 Abschließend gehen wir auf die Kompatibilität der Implementationen verschiedener Hersteller untereinander ein. Uns war es nicht möglich eigene Vergleiche hinsichtlich der Kompatibilität durchzuführen, daher werden wir nur oberflächlich darauf eingehen.
 
