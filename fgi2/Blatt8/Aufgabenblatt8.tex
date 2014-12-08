@@ -10,7 +10,7 @@
 \usepackage{pgfplots}
 \usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
 \usepackage{tikz}
-\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings,petri}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings,petri,shapes}
 \usepackage{polynom}
 \usepackage{multirow}
 \usepackage[german]{fancyref}
@@ -64,6 +64,8 @@
 \author{Benjamin Kuffel, Jim Martens\\Gruppe 6}
 \title{Hausaufgaben zum 8. Dezember}
 \maketitle
+
+WICHTIG: Aufgrund der Aufgabe 8.3.1 ist diese Bearbeitung SEHR lang. Einige der Aufgaben befinden sich nach den geforderten Prozessabbildungen.
 
 \setcounter{section}{2}
 \section{} %8.3
@@ -657,6 +659,154 @@
 	\subsection{}
 	P-Schnitt: b2, b4, b3 und T-Schnitt: a
 \section{} %8.4
+	Der Erreichbarkeitsgraph zu dieser Aufgabe ist auf \fref{fig:84-rg} zu sehen.
+
+	Im Folgenden wird der Lösungsweg in natürlicher Sprache, mit dem reduzierten Graphen und Pseudocode erläutert. Dabei werden die strengen Zusammenhangskomponenten (kurz: SZKs) aus Platzgründen (siehe Erreichbarkeitsgraph) nicht vollständig angegeben, sondern mithilfe von natürlicher Sprache.
+	
+	Es gibt vier SZKs, wobei eine davon eine terminale SZK ist. \(C_{1}\) enthält alle Markierungen, die von der Startmarkierung aus durch beliebiges Schalten der Transitionen \(a,c,d\) erreicht werden können. Durch das Schalten von \(b\) wird diese SZK verlassen und man gelangt in \(C_{2}\). Diese SZK enthält wiederum alle Markierungen, die von einer ihrer Markierungen mit beliebigem Schalten von \(a,c,d\) erreicht werden können. Erneut wird die SZK durch das Schalten von \(b\) verlassen und man befindet sich in \(C_{3}\). Für diese SZK gilt die gleiche Regel, wie für die vorangegangenen. Verlässt man diese SZK über das Schalten von \(b\) gelangt man in die terminale SZK \(C_{4}\).
+	
+	Der reduzierte Graph ist im Vergleich zum Erreichbarkeitsgraph recht simpel. Er kann auf \fref{fig:84-rgc} gefunden werden.
+	
+	Nachdem nun die Vorarbeit getan ist, werden die vier Transitionen nacheinander durchgegangen, um zu zeigen, dass sie entweder lebendig sind oder nicht.
+	
+	Transition \(a\):
+	\begin{verbatim}
+		C_i = C_0
+		C_i.contains(m, a) = true
+		C_i = C_1
+		C_i.contains(m, a) = true
+		C_i = C_2
+		C_i.contains(m, a) = true
+		C_i = C_3
+		C_i.contains(m, a) = true
+		return true
+	\end{verbatim}
+	
+	Transition \(b\):
+	\begin{verbatim}
+		C_i = C_0
+		C_i.contains(m, b) = true
+		C_i = C_1
+		C_i.contains(m, b) = true
+		C_i = C_2
+		C_i.contains(m, b) = true
+		C_i = C_3
+		C_i.contains(m, b) = false
+		return false
+	\end{verbatim}
+	
+	Transition \(c\):
+	\begin{verbatim}
+		C_i = C_0
+		C_i.contains(m, c) = true
+		C_i = C_1
+		C_i.contains(m, c) = true
+		C_i = C_2
+		C_i.contains(m, c) = true
+		C_i = C_3
+		C_i.contains(m, c) = true
+		return true
+	\end{verbatim}
+	
+	Transition \(d\):
+	\begin{verbatim}
+		C_i = C_0
+		C_i.contains(m, d) = true
+		C_i = C_1
+		C_i.contains(m, d) = true
+		C_i = C_2
+		C_i.contains(m, d) = true
+		C_i = C_3
+		C_i.contains(m, d) = true
+		return true
+	\end{verbatim}
+	
+	Mithilfe des Algorithmus 7.3 aus dem Skript (Entscheiden einer Lebendigkeits-Invarianzeigenschaft) war es möglich zu zeigen, dass die Transitionen \(a,c\) und \(d\) lebendig sind, während Transition \(b\) dies nicht ist.
+	
+	\begin{figure}
+	\begin{tikzpicture}[node distance=1cm]
+		\node[ellipse] (m0) {2p1};
+		\node[ellipse] (m1) [below=of m0] {p1 + 3p3};
+		\node[ellipse] (m3) [below=of m1] {p1 + p2 + 2p3};
+		\node[ellipse] (m2) [left=2 of m1] {6p3};
+		\node[ellipse] (m4) [below=of m2] {p2 + 5p3};
+		\node[ellipse] (m5) [below=of m3] {p1 + 2p3};
+		\node[ellipse] (m6) [below=of m4] {2p2 + 4p3};
+		\node[ellipse] (m7) [below=of m5] {5p3};
+		\node[ellipse] (m8) [below=of m6] {3p2 + 3p3};
+		\node[ellipse] (m9) [below=of m7] {p2 + 4p3};
+		\node[ellipse] (m10) [below=of m9] {2p2 + 3p3};
+		\node[ellipse] (m11) [below=of m8] {p1 + 2p2 + p3};
+		\node[ellipse] (m12) [left=of m8] {4p2 + 2p3};
+		\node[ellipse] (m13) [below=of m11] {p1 + p2 + p3};		
+		\node[ellipse] (m14) [below=of m10] {3p2 + 2p3};
+		\node[ellipse] (m15) [below=of m12] {p1 + 3p2};
+		\node[ellipse] (m16) [below=of m13] {p1 + 2p2};
+		\node[ellipse] (m17) [left=of m16] {p1 + p3};
+		\node[ellipse] (m18) [below=of m16] {p1 + p2};
+		\node[ellipse] (m19) [below=of m17] {4p3};
+		\node[ellipse] (m20) [below=of m14] {p1};
+		\node[ellipse] (m21) [below=of m18] {p2 + 3p3};
+		\node[ellipse] (m22) [below=of m20] {3p3};
+		\node[ellipse] (m23) [below=of m22] {p2 + 2p3};
+		\node[ellipse] (m24) [below=of m21] {2p2 + 2p3};
+		\path[->] (m0) edge node[right] {a} (m1)
+			(m1) edge node[above] {a} (m2)
+			(m1) edge node[above right] {d} (m3)
+			(m2) edge node[left] {d} (m4)
+			(m3) edge node[above] {a} (m4)
+			(m3) edge node[right] {b} (m5)
+			(m3) edge[bend right=45] node[right] {c} (m0)
+			(m4) edge node[below right] {c} (m1)
+			(m4) edge node[left] {d} (m6)
+			(m5) edge node[right] {a} (m7)
+			(m6) edge node[below right] {c} (m3)
+			(m6) edge node[left] {d} (m8)
+			(m7) edge node[right] {d} (m9)
+			(m9) edge[bend right] node[right] {c} (m5)
+			(m9) edge node[right] {d} (m10)
+			(m8) edge node[left] {c} (m11)
+			(m8) edge node[above left] {d} (m12)
+			(m10) edge node[below right] {c} (m13)
+			(m10) edge node[right] {d} (m14)
+			(m11) edge node[left] {b} (m13)
+			(m11) edge[bend right=45] node[right] {a} (m6)
+			(m12) edge node[left] {c} (m15)
+			(m15) edge node[below right] {a} (m8)
+			(m15) edge node[left] {b} (m16)
+			(m13) edge node[above left] {a} (m9)
+			(m14) edge node[below left] {c} (m16)
+			(m13) edge node[above left] {b} (m17)
+			(m16) edge node[left] {b} (m18)
+			(m16) edge node[below right] {a} (m10)
+			(m17) edge node[left] {a} (m19)
+			(m18) edge node[above] {b} (m20)
+			(m18) edge node[right] {a} (m21)
+			(m20) edge node[right] {a} (m22)
+			(m22) edge node[right] {d} (m23)
+			(m23) edge[bend right] node[right] {c} (m20)
+			(m19) edge node[below left] {d} (m21)
+			(m21) edge node[above right] {c} (m17)
+			(m21) edge node[right] {d} (m24)
+			(m24) edge[bend right=45] node[right] {c} (m18);
+	\end{tikzpicture}
+	\caption{Erreichbarkeitsgraph für 8.4}
+	\label{fig:84-rg}
+	\end{figure}
+
+	\begin{figure}
+	\begin{tikzpicture}[node distance=1cm]
+		\node[place] (c0) {\(C_{0}\)};
+		\node[place] (c1) [right=of c0] {\(C_{1}\)};
+		\node[place] (c2) [below=of c1] {\(C_{2}\)};
+		\node[place] (c3) [left=of c2] {\(C_{3}\)};
+		\path[->] (c0) edge node[above] {b} (c1)
+			(c1) edge node[right] {b} (c2)
+			(c2) edge node[above] {b} (c3);
+	\end{tikzpicture}
+	\caption{Reduzierter Erreichbarkeitsgraph aus 8.4}
+	\label{fig:84-rgc}
+	\end{figure}
 \section{} %8.5
 	\subsection{}
 	Diese Transitionen sind nebenläufig, können also unabhängig voneinander schalten.

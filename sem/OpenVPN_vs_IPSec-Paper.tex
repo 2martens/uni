@@ -19,6 +19,7 @@ citestyle=ieee
 \usepackage[scaled]{helvet}
 \usepackage{a4wide}
 \usepackage{rotating}
+\usepackage[german]{fancyref}
 \usepackage{listings}\lstset{breaklines=true,breakatwhitespace=true,frame=leftline,captionpos=b,xleftmargin=6ex,tabsize=4,numbers=left,numberstyle=\ttfamily\footnotesize,basicstyle=\ttfamily\footnotesize}
 \sloppy
 \setlength{\parindent}{0em}
@@ -77,7 +78,7 @@ IPSec und OpenVPN sind zwei Lösungen, um ein solches Netzwerk zu errichten. Im 
 
 \section{IPSec}
 \subsection{Entstehungsgeschichte}
-IPSec ist unter der Aufsicht eines Komitees entstanden. Diese Vorgehensweise wurde dabei gezwungenermaßen auferlegt und erschwerte nach Ansicht vieler Mitwirkender die Arbeit erheblich.\cite{Ferguson2000}
+IPSec ist unter der Aufsicht eines Komitees entstanden. Diese Vorgehensweise wurde dabei gezwungenermaßen auferlegt und erschwerte nach Ansicht vieler Mitwirkender die Arbeit erheblich. \footnote{Ferguson, Niels, and Bruce Schneier. ``A cryptographic evaluation of IPsec."' Counterpane Internet Security, Inc 3031 (2000).} 
 
 Die Entstehungsweise führte dazu, dass IPSec unnötig kompliziert wurde. Die einen Mitglieder wollten die eine Lösung implementieren und andere plädierten für eine andere Lösung, was dazu führte, dass beide Lösungen implementiert wurden. Dies geht jedoch zu Lasten der Nutzbarkeit. Zu viele Optionen führen nicht nur zur Verwirrung und Komplizierung der Implementation von IPSec, es kann vor allem auch zu Sicherheitslücken führen. Experten bemängelten diese Komplexität.
 
@@ -159,7 +160,32 @@ Open VPN ist eine freie Software und steht unter der GPL ( GNU General Public Li
 
 \subsection{Verschlüsselung bei OpenVPN}
 
-OpenVPN benutzt zur Authentifizierung und Verschlüsselung der Daten kryptografische Verfahren auf Basis von TLS (Transport Layer Security). TLS ist ein Verschlüsselungsprotokoll zur Datenübertragung und der Nachfolger vom bekannteren SSL (Secure Sockets Layer).Die meisten Internetbrowser unterstützen TLS-Verbindungen. Dieses Protokoll wird im Internet u.a. zum Aufbau von sicheren Verbindungen  (HTTPS-Verbindungen) bei Banken oder Shopsystemen  eingesetzt. Daran erkennt man , dass dies allgemein anerkannte und vor allem auch ausgereifte  Standardverfahren ist.
+OpenVPN benutzt zur Authentifizierung und Verschlüsselung der Daten kryptografische Verfahren auf Basis von TLS (Transport Layer Security). TLS ist ein Verschlüsselungsprotokoll zur Datenübertragung und der Nachfolger vom bekannteren SSL (Secure Sockets Layer).Die meisten Internetbrowser unterstützen TLS-Verbindungen. Dieses Protokoll wird im Internet u.a. zum Aufbau von sicheren Verbindungen  (HTTPS-Verbindungen) bei Banken oder Shopsystemen  eingesetzt. Daran erkennt man , dass dies allgemein anerkannte und vor allem auch ausgereifte  Standardverfahren sind.
+
+Da OpenVPN diese Verfahren benutzt, kann kein IPSec eingesetzt werden! Dies bedeutet, dass man die Windows-internen Funktionen zum Herstellen einer Verbindung nicht verwenden kann. Das können wir als Nachteil, aber auch als Vorteil sehen. Der Nachteil ist, dass wir auf jedem Rechner OpenVPN instalieren müssen und mit Betriebssystemen, für die es nicht zur Verfügung steht, keine Verbindung herstellen können.Der Vorteil ist, dass wir sich nicht wirklich mit dem Einrichten von VPNs auf "fremden" Systemen auskennen müssen. Es wird ja immer OpenVPN benutzt. Weiterhin ist man auch nicht von eventuell auftretenden Problemen bei Updates des Systems betroffen.
+
+Zur Authentifizierung können statische Schlüssel (Preshared Keys) oder Zertifikate benutzt werden. Statische Schlüssel gelten im Vergleich mit Zertifikaten  als weniger sicher, sind aber einfacher zu erstellen und zu verwalten. Zertifikate kann man sich selbst ausstellen oder bei so genannten Zertifizierungsstellen beantragen. Für Firmen ist dies allerdings meist mit Kosten verbunden. Der Vorteil von Zertifizierungsstellen ist, dass die Zertifikate weltweit einsetzbar sind und ihre Echtheit von diesen Stellen bestätigt wird. Zum Aufbau von firmeninternen Verbindungen sind diese Echtheitsbestätigungen aber nicht zwingend erforderlich.
+
+\subsection{Verbindungsarten}
+
+Zum Aufbauen von Verbindungen kennt OpenVPN zwei verschiedene Betriebsmodi :
+
+* Routing-Modus : eine Verbindung zwischen zwei Gegenstellen (Punkt zu Punk Verbindung).
+
+* Bridging-Modus : eine Verbindung (Brücke) zwischen zwei Netzwerken.
+
+In diesen Modi kommen jeweils das TUN uns das TAP Device zum Einsatz. Diese Devices sind Treiber, die virtuelle Netzwerkgeräte zur Verfügung stellen. Pakete, die diese Geräte empfangen, werden an OpenVPN weitergeleitet und dort verarbeitet. Das TUN Device wird für den Routing-Modus genutzt und stellt ein Point to Point Gerät zur Verfügung. Das TAP Device kommt im Bridging Modus zum Einsatz und emuliert eine komplette Netzwerkkarte. 
+
+* Routing-Modus :
+
+Im Routing-Modus wird eine Verbindung zwischen zwei Gegenstellen über das IP-Protokoll hergestellt(eine Point to Point bzw. Punkt zu Punkt Verbindung, auch P2P genannt). Der  Modus funktioniert daher auch nur mit den Gegenstellen zugreifen zu können, wird Routing eingesetzt, und die VPN-Gateways müssen IP-Forwarding unterstützen.
+
+* Bridging-Modus : 
+
+Beim Bridging-Modus werden zwei Netzwerke miteinander verbunden. Hierbei spielt das benutzte Protokoll der Netzwerke keine Rolle. Allerdings wird auch der komplette Netzwerkverkehr übermittelt. Daher hat man im Gegensatz zum Routing-Modus einen höheren Datendurchsatz.
+
+
+
 
 \section{Vergleich von IPSec mit OpenVPN}
 
@@ -218,8 +244,35 @@ Für die Verwendung hinter hochrestriktiven Firewalls ist OpenVPN im Vorteil, da
 \subsection{Performance}
 Nachdem wir IPSec und OpenVPN bezüglich der Schutzziele verglichen haben, widmen wir uns jetzt der Performance.
 
-%TODO Vergleich Performance
+Dabei beziehen wir uns auf den bereits genannten Vergleich von Kotuliak\cite{Kotuliak2011}. Zum Vergleich wurden zwei Rechner genommen, die über ein 1 GBit Ethernet verbunden waren. Auf beiden Rechnern lief Windows Vista. Zusätzlich lief auf beiden eine virtuelle Maschine von Debian mit der VM-Software VMware. Die beiden virtuellen Maschinen waren mit Ausnahme der IP und des Rechnernamens identisch.
 
+Aufgrund des höheren Rechenaufwands durch eine virtuelle Maschine können minimale Unterschiede besser erkannt werden. Diese Unterschiede sind vor allem technischer Natur: IPSec benötigt einen low-level Zugriff auf das Netzwerkinterface, um die Pakete zu manipulieren. Dafür operiert IPSec im Ring0 des Kernel-Space.\cite{Kotuliak2011}
+
+Der Kernel-Space ist in Ringe unterteilt, wobei Ring0 für den Kernel und andere essentielle Prozesse reserviert ist. Ring1 ist für andere Systemprozesse reserviert, die low-level Zugriff auf Hardware benötigen. Je weiter man sich von Ring0 entfernt, desto weniger Privilegien haben die Prozesse. In Ring3 findet man schließlich die meisten Userprozesse, u.a. auch TLS-Implementationen. Prozesse in Ringen mit höheren Nummern können Prozesse aus Ringen mit niedrigeren Ringen nicht stören.\cite{Kotuliak2011}
+
+Mit diesem technischen Hintergrundwissen ausgestattet, können wir die Ergebnisse des Vergleichs betrachten. Der durchschnittliche Durchsatz kann in \fref{tab:tp} gesehen werden. Es fällt auf, dass der Durchsatz ohne Verschlüsselung weit über dem der Verschlüsselung liegt. Allerdings ist das auch nicht anders zu erwarten. Zum Verständnis ist jedoch noch wichtig, dass die verwendete Ethernetverbindung nicht für die Verwendung von Jumbo-Frames eingerichtet wurde. Ohne diese Frames ist solch eine Gigabit-Verbindung jedoch erheblich langsamer als der theoretische Wert (1 GBit/s).\cite{Kotuliak2011}
+
+Eine weitere Auffälligkeit ist die im Vergleich zu den übrigen Algorithmen schlechte Performance von 3DES. Dies liegt schlichtweg daran, dass 3DES ein veraltetes Verfahren ist und nicht weiter benutzt werden sollte. Bei diesem konkreten Verfahren ist IPSec (45 Mbps) langsamer als OpenVPN (60,98 Mbps), allerdings hat das kaum eine Relevanz, da 3DES wie gesagt veraltet ist.
+
+Interessanter ist dort der Unterschied zwischen dem Durchsatz von IPSec AES (142 Mbps) bzw. IPSec Blowfish (121,76 Mbps) und OpenVPN AES (98 Mbps) bzw. OpenVPN Blowfish (96 Mbps). Dieser signifikante Unterschied liegt an der Hardwarenähe von IPSec und ist dementsprechend auch erwartbar gewesen.
+
+Anhand dieser Zahlen ist auch ersichtlich, dass es keinen ernstzunehmenden Unterschied zwischen AES und Blowfish gibt. AES hat von beiden den Vorteil, dass das Verfahren standardisiert ist und von vielen Regierungen und im privaten Sektor größtenteils unterstützt wird.
+
+\begin{table}
+\caption{Vergleich des durchschnittlichen Throughputs in Megabit pro Sekunde. Werte von Kotuliak\cite{Kotuliak2011}}
+\label{tab:tp}
+\begin{tabular}{c|c}
+Szenario & Throughput (Mbps) \\
+\hline
+Ethernet ohne Verschlüsselung & 553 \\
+OpenVPN 3DES & 60,98 \\
+OpenVPN AES & 98 \\
+OpenVPN Blowfish & 96 \\
+IPSec 3DES & 45 \\
+IPSec AES & 142 \\
+IPSec Blowfish & 121,76
+\end{tabular}
+\end{table}
 \subsection{Kompatibilität}
 Abschließend gehen wir auf die Kompatibilität der Implementationen verschiedener Hersteller untereinander ein. Uns war es nicht möglich eigene Vergleiche hinsichtlich der Kompatibilität durchzuführen, daher werden wir nur oberflächlich darauf eingehen.
 
