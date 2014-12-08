@@ -19,7 +19,6 @@ citestyle=ieee
 \usepackage[scaled]{helvet}
 \usepackage{a4wide}
 \usepackage{rotating}
-\usepackage[german]{fancyref}
 \usepackage{listings}\lstset{breaklines=true,breakatwhitespace=true,frame=leftline,captionpos=b,xleftmargin=6ex,tabsize=4,numbers=left,numberstyle=\ttfamily\footnotesize,basicstyle=\ttfamily\footnotesize}
 \sloppy
 \setlength{\parindent}{0em}
@@ -61,6 +60,12 @@ Relevanz: sichere Kommunikation zwischen zwei privaten Netzwerken
 
 \section{Grundlagen}
 Was sind VPNs? Warum braucht man sie? Wozu werden sie verwendet?
+
+\subsection{Was ist VPN?}
+Man stellt sich unter einem Netzwerk immer Verbindungen zwischen einzelnen Computern in Form von Verkabelungen vor. Ein VPN verbindet hingegen Rechner oder ganze Netzwerke über bereits vorhandene Netzwerke hinweg.
+
+Virtuelle Private Netzwerke (VPN) erlauben eine sichere, stabile und preisgünstige Kommunikation über das Internet. Mit ihrer Hilfe können verteilte Unternehmensnetze verbunden werden oder Außendienstmitarbeiter auf Ressourcen und Daten in dem Unternehmensnetz zugreifen. Sie bieten eine kostengünstige und sichere Anbindung von Filialen an eine Zentrale und erlauben den Einsatz von Telearbeitsplätzen, bei denen die Angestellten ihre Arbeit zu Hause erledigen.
+
 Was ist das OSI-Referenzmodell? Wie ist es aufgebaut?
 \section{IPSec}
 \subsection{Entstehungsgeschichte}
@@ -123,22 +128,17 @@ Für ESP muss zur Zeit zur Verschlüsselung AES-CBC unterstützt werden. Hierbei
 Die Algorithmen zum Authentifizieren sind bei AH und ESP gleich. Unterstützt werden muss HMAC-SHA1-96.\\
 Es sind jeweils noch weitere Hinweise zu Algorithmen im RFC vorhanden, welche zum Beispiel unterstützt werden sollten oder auch nicht unterstützt werden dürfen. 
 \subsubsection{Internet Key Exchange Version 2}
-Es gibt bei IPSec eine ``Security Policy Database'' (SPD). Diese legt fest welche Verfahren angewendet werden dürfen, das heißt hier wird festgelegt welche Security Associations erstellt werden dürfen. Die Security Associations (SA) werden wiederum in einer eigenen Datenbank gespeichert, also in einer SAD. Die SA enthalten unter anderem auch die verwendeten Schlüssel.
+Es gibt bei IPSec eine "`Security Policy Database"' (SPD). Diese legt fest welche Verfahren angewendet werden und welche Security Associations erstellt werden dürfen. Die Security Associations (SA) werden wiederum in einer eigenen Datenbank gespeichert, also in einer SAD. Die SA enthalten unter anderem auch die verwendeten Schlüssel.
 
 Die SPD wird üblicherweise per Hand eingerichtet, da diese eher statisch ist und man während der Kommunikation keine Einträge vornehmen muss. Für die SAD wird üblicherweise IKEv2 verwendet, welches die SAs automatisch verwaltet.
 
-Zunächst wird eine Prozedur durchlaufen, um eine Verbindung zwischen den Kommunizierenden herzustellen. Die einzelnen Schritte bestehen immer aus einer Nachricht des Senders und einer Nachricht des Empfängers. Der erste Austausch wird IKE\_SA\_INIT genannt. Hierbei werden zunächst Daten ausgetauscht, um zu vereinbaren wie die Verbindung hergestellt wird, also z.B. welche Algorithmen verwendet werden. Dazu schickt der Initiator dem Empfänger Vorschläge wie die Verbindung aussehen soll und der Empfänger bestätigt dann seine Auswahl. Außerdem werden Diffie-Hellman Werte und Noncen ausgetauscht. Anhand von diesen Werten und der Noncen wird SKEYSEED generiert. Mit Hilfe dieses SKEYSEEDs werden nun mehrere Schlüssel erstellt, die zum Verschlüsseln und Authentifizieren nachfolgender Kommunikation verwendet werden. Der nächste Austausch wird IKE\_AUTH genannt. Dieser Austausch ist mit den vorher generierten Schlüssel geschützt und nun können sich die Kommunizierenden, ebenfalls anhand der vorher generierten Schlüssel, authentifizieren. Nun wird eine SA ausgemacht, die letztendlich auch in die SAD eingetragen wird, also letztendlich genutzt wird um den später die eigentliche Datenkommunikation zu regeln.
-Nachfolgende Kommunikation bezüglich IKE wird CREATE CHILD SA genannt und kann dazu genutzt werden um weitere SAs zu vereinbaren. Es gibt außerdem noch INFORMATIONAL, welches z.B. für Fehlermeldungen von IKEv2 und ähnliches genutzt wird.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{OpenVPN}
 %\input{VPN}
 Was ist OpenVPN? Wer ist dafür verantwortlich? Wie funktioniert es?
-\subsection{Was ist ein VPN?}
-Man stellt sich unter einem Netzwerk immer Verbindungen zwischen einzelnen Computern in Form von Verkabelungen vor. Ein VPN verbindet hingegen Rechner oder ganze Netzwerke über bereits vorhandene Netzwerke hinweg.
 
-Virtuelle Private Netzwerke (VPN) erlauben eine sichere, stabile und preisgünstige Kommunikation über das Internet. Mit ihrer Hilfe können verteilte Unternehmensnetze verbunden werden oder Außendienstmitarbeiter auf Ressourcen und Daten in dem Unternehmensnetz zugreifen. Sie bieten eine kostengünstige und sichere Anbindung von Filialen an eine Zentrale und erlauben den Einsatz von Telearbeitsplätzen, bei denen die Angestellten ihre Arbeit zu Hause erledigen.
 
-\subsection{Was ist ein OpenVPN?}
+\subsection{Was ist OpenVPN?}
 
 Open VPN ist eine VPN-Lösung, die unter Linux, Windows und vielen weiteren Betriebssystemen eingesetzt werden kann.
 Open VPN ist eine freie Software und steht unter der GPL ( GNU General Public License ).
@@ -147,7 +147,7 @@ Open VPN ist eine freie Software und steht unter der GPL ( GNU General Public Li
 
 OpenVPN benutzt zur Authentifizierung und Verschlüsselung der Daten kryptografische Verfahren auf Basis von TLS (Transport Layer Security). TLS ist ein Verschlüsselungsprotokoll zur Datenübertragung und der Nachfolger vom bekannteren SSL (Secure Sockets Layer).Die meisten Internetbrowser unterstützen TLS-Verbindungen. Dieses Protokoll wird im Internet u.a. zum Aufbau von sicheren Verbindungen  (HTTPS-Verbindungen) bei Banken oder Shopsystemen  eingesetzt. Daran erkennt man , dass dies allgemein anerkannte und vor allem auch ausgereifte  Standardverfahren sind.
 
-Da OpenVPN diese Verfahren benutzt, kann kein IPSec eingesetzt werden! Dies bedeutet, dass man die Windows-internen Funktionen zum Herstellen einer Verbindung nicht verwenden kann. Das können wir als Nachteil, aber auch als Vorteil sehen. Der Nachteil ist, dass wir auf jedem Rechner OpenVPN instalieren müssen und mit Betriebssystemen, für die es nicht zur Verfügung steht, keine Verbindung herstellen können.Der Vorteil ist, dass wir sich nicht wirklich mit dem Einrichten von VPNs auf "fremden" Systemen auskennen müssen. Es wird ja immer OpenVPN benutzt. Weiterhin ist man auch nicht von eventuell auftretenden Problemen bei Updates des Systems betroffen.
+Da OpenVPN diese Verfahren benutzt, kann kein IPSec eingesetzt werden! Dies bedeutet, dass man die Windows-internen Funktionen zum Herstellen einer Verbindung nicht verwenden kann. Das können wir als Nachteil, aber auch als Vorteil sehen. Der Nachteil ist, dass wir auf jedem Rechner OpenVPN instalieren müssen und mit Betriebssystemen, für die es nicht zur Verfügung steht, keine Verbindung herstellen können.Der Vorteil ist, dass wir sich nicht wirklich mit dem Einrichten von VPNs auf fremden Systemen auskennen müssen. Es wird ja immer OpenVPN benutzt. Weiterhin ist man auch nicht von eventuell auftretenden Problemen bei Updates des Systems betroffen.
 
 Zur Authentifizierung können statische Schlüssel (Preshared Keys) oder Zertifikate benutzt werden. Statische Schlüssel gelten im Vergleich mit Zertifikaten  als weniger sicher, sind aber einfacher zu erstellen und zu verwalten. Zertifikate kann man sich selbst ausstellen oder bei so genannten Zertifizierungsstellen beantragen. Für Firmen ist dies allerdings meist mit Kosten verbunden. Der Vorteil von Zertifizierungsstellen ist, dass die Zertifikate weltweit einsetzbar sind und ihre Echtheit von diesen Stellen bestätigt wird. Zum Aufbau von firmeninternen Verbindungen sind diese Echtheitsbestätigungen aber nicht zwingend erforderlich.
 
@@ -229,35 +229,8 @@ Für die Verwendung hinter hochrestriktiven Firewalls ist OpenVPN im Vorteil, da
 \subsection{Performance}
 Nachdem wir IPSec und OpenVPN bezüglich der Schutzziele verglichen haben, widmen wir uns jetzt der Performance.
 
-Dabei beziehen wir uns auf den bereits genannten Vergleich von Kotuliak\cite{Kotuliak2011}. Zum Vergleich wurden zwei Rechner genommen, die über ein 1 GBit Ethernet verbunden waren. Auf beiden Rechnern lief Windows Vista. Zusätzlich lief auf beiden eine virtuelle Maschine von Debian mit der VM-Software VMware. Die beiden virtuellen Maschinen waren mit Ausnahme der IP und des Rechnernamens identisch.
+%TODO Vergleich Performance
 
-Aufgrund des höheren Rechenaufwands durch eine virtuelle Maschine können minimale Unterschiede besser erkannt werden. Diese Unterschiede sind vor allem technischer Natur: IPSec benötigt einen low-level Zugriff auf das Netzwerkinterface, um die Pakete zu manipulieren. Dafür operiert IPSec im Ring0 des Kernel-Space.\cite{Kotuliak2011}
-
-Der Kernel-Space ist in Ringe unterteilt, wobei Ring0 für den Kernel und andere essentielle Prozesse reserviert ist. Ring1 ist für andere Systemprozesse reserviert, die low-level Zugriff auf Hardware benötigen. Je weiter man sich von Ring0 entfernt, desto weniger Privilegien haben die Prozesse. In Ring3 findet man schließlich die meisten Userprozesse, u.a. auch TLS-Implementationen. Prozesse in Ringen mit höheren Nummern können Prozesse aus Ringen mit niedrigeren Ringen nicht stören.\cite{Kotuliak2011}
-
-Mit diesem technischen Hintergrundwissen ausgestattet, können wir die Ergebnisse des Vergleichs betrachten. Der durchschnittliche Durchsatz kann in \fref{tab:tp} gesehen werden. Es fällt auf, dass der Durchsatz ohne Verschlüsselung weit über dem der Verschlüsselung liegt. Allerdings ist das auch nicht anders zu erwarten. Zum Verständnis ist jedoch noch wichtig, dass die verwendete Ethernetverbindung nicht für die Verwendung von Jumbo-Frames eingerichtet wurde. Ohne diese Frames ist solch eine Gigabit-Verbindung jedoch erheblich langsamer als der theoretische Wert (1 GBit/s).\cite{Kotuliak2011}
-
-Eine weitere Auffälligkeit ist die im Vergleich zu den übrigen Algorithmen schlechte Performance von 3DES. Dies liegt schlichtweg daran, dass 3DES ein veraltetes Verfahren ist und nicht weiter benutzt werden sollte. Bei diesem konkreten Verfahren ist IPSec (45 Mbps) langsamer als OpenVPN (60,98 Mbps), allerdings hat das kaum eine Relevanz, da 3DES wie gesagt veraltet ist.
-
-Interessanter ist dort der Unterschied zwischen dem Durchsatz von IPSec AES (142 Mbps) bzw. IPSec Blowfish (121,76 Mbps) und OpenVPN AES (98 Mbps) bzw. OpenVPN Blowfish (96 Mbps). Dieser signifikante Unterschied liegt an der Hardwarenähe von IPSec und ist dementsprechend auch erwartbar gewesen.
-
-Anhand dieser Zahlen ist auch ersichtlich, dass es keinen ernstzunehmenden Unterschied zwischen AES und Blowfish gibt. AES hat von beiden den Vorteil, dass das Verfahren standardisiert ist und von vielen Regierungen und im privaten Sektor größtenteils unterstützt wird.
-
-\begin{table}
-\caption{Vergleich des durchschnittlichen Throughputs in Megabit pro Sekunde. Werte von Kotuliak\cite{Kotuliak2011}}
-\label{tab:tp}
-\begin{tabular}{c|c}
-Szenario & Throughput (Mbps) \\
-\hline
-Ethernet ohne Verschlüsselung & 553 \\
-OpenVPN 3DES & 60,98 \\
-OpenVPN AES & 98 \\
-OpenVPN Blowfish & 96 \\
-IPSec 3DES & 45 \\
-IPSec AES & 142 \\
-IPSec Blowfish & 121,76
-\end{tabular}
-\end{table}
 \subsection{Kompatibilität}
 Abschließend gehen wir auf die Kompatibilität der Implementationen verschiedener Hersteller untereinander ein. Uns war es nicht möglich eigene Vergleiche hinsichtlich der Kompatibilität durchzuführen, daher werden wir nur oberflächlich darauf eingehen.
 
@@ -266,6 +239,18 @@ OpenVPN benutzt TLS und dieses Protokoll ist seit langem erprobt und von einer V
 Bei IPSec sieht das anders aus. Zwar ist auch IPSec standardisiert, ebenso wie TLS, aber der Umfang der RFCs macht ein Verständnis relativ schwer. Daraus ist auch zu begründen, warum es zu Beginn kaum untereinander kompatible Lösungen gab\cite{Alshamsi2005}. Mittlerweile ist der Standard jedoch älter und auf breiterer Schicht umgesetzt, sodass es zwar noch Unterschiede zwischen TLS und IPSec gibt, diese jedoch nicht mehr ins Gewicht fallen.
 
 Bezüglich der Kompatibilität kommen wir zu dem Fazit, dass IPSec noch im Vergleich zu TLS aufholen muss, allerdings bereits viele der anfänglichen Kompatibilitätsprobleme überwunden hat.
+
+\clearpage
+
+Pool
+\begin{itemize}
+	\item IPSec unterstützt Secret Key\cite{Alshamsi2005}, Open VPN (SSL) nicht
+	\item IPSec unterstützt eine Authentifizierungsmethode, SSL mehrere\cite{Alshamsi2005}
+	\item beide nutzen MACs (Message Authentication Codes) für die Authentifizierung von Nachrichten nach initialem Kontakt\cite{Alshamsi2005}
+	\item beide erfordern die Implementation von HMAC-SHA-1 und HMAC-MD5\cite{Alshamsi2005}
+	\item IPSec hat Probleme mit Implementationen anderer Hersteller zusammenzuarbeiten, SSL hat dieses Problem nicht\cite{Alshamsi2005}
+	\item IPSec in Netzwerkschicht, OpenVPN in Anwendungsschicht
+\end{itemize}
 
 \section{Schlussbemerkungen}
 Ausblick: (weitere) Vereinfachung von IPSec?, unterschiedliche Ansätze, Vor- und Nachteile bei beiden
