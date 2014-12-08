@@ -58,6 +58,7 @@ Betreuer: Hannes Federrath \par
 \section{Vorbemerkung}
 Problem: VPN (Virtual Private Network) aufsetzen
 Relevanz: sichere Kommunikation zwischen zwei privaten Netzwerken
+
 \section{Grundlagen}
 Was sind VPNs? Warum braucht man sie? Wozu werden sie verwendet?
 
@@ -87,7 +88,7 @@ IPSec und OpenVPN sind zwei Lösungen, um ein solches Netzwerk zu errichten. Im 
 \subsection{Entstehungsgeschichte}
 IPSec ist unter der Aufsicht eines Komitees entstanden. Diese Vorgehensweise wurde dabei gezwungenermaßen auferlegt und erschwerte nach Ansicht vieler Mitwirkender die Arbeit erheblich. \footnote{Ferguson, Niels, and Bruce Schneier. ``A cryptographic evaluation of IPsec."' Counterpane Internet Security, Inc 3031 (2000).} 
 
-Die Entstehungsweise führte dazu, dass IPSec unnötig kompliziert wurde. Die einen Mitglieder wollten die eine Lösung implementieren und andere plädierten für eine andere Lösung, was dazu führte, dass beide Lösungen implementiert wurden. Dies geht jedoch zu Lasten der Nutzbarkeit. Zu viele Optionen führen nicht nur zur Verwirrung und Komplizierung der Implementation von IPSec, es kann vor allem auch zu Sicherheitslücken führen. Experten bemängelten diese Komplexität.
+Die Entstehungsweise führte dazu, dass IPSec unnötig kompliziert wurde. Die einen Mitglieder wollten die eine Lösung implementieren und andere plädierten für eine andere Lösung, was dazu führte, dass beide Lösungen implementiert wurden. Dies geht jedoch zu Lasten der Nutzbarkeit. Zu viele Optionen führen nicht nur zur Verwirrung und Komplizierung der Implementation von IPSec bei den Nutzern, es kann vor allem auch zu Sicherheitslücken führen. Experten bemängelten diese Komplexität.
 
 Die erste Version von IPSec ist 1995 spezifiziert worden. Doch über die Jahre ist der Standard immer weiter entwickelt worden und so gibt es eine zweite Version aus 1998 und eine dritte aus 2005. Diese gelten zwar allgemein als V2 und V3, jedoch sind verschiedene Aspekte von IPSec in verschiedenen sogenannten ``Request for Comments"', kurz RFC, spezifiziert. So gibt es beispielsweise ein RFC, dass sich allgemein auf IPSec bezieht, aktuell RFC 4301 aus 2005, und es gibt beispielsweise ein RFC, dass sich auf die zu verwendenden Verschlüsselungsalgorithmen bezieht, aktuell RFC 7321 bereits aus 2014. So ist gewährleistet, dass IPSec weiterhin auf dem neuesten Stand gehalten werden kann, ohne dass man jedes mal die komplette Spezifikation überarbeiten muss.
 
@@ -101,7 +102,7 @@ Die folgenden RFCs sind für IPSec relevant:
 \item RFC 4307: Gibt vor welche Algorithmen für IKEv2 verwendet werden sollten
 \item RFC 4308: Gibt Empfehlungen für Sammlungen von Algorithmen, die verwendet werden können
 \end{itemize}
-Es gibt noch weitere RFCs, die man IPSec zuordnen kann, doch dies sind die Wichtigsten. Im folgenden Abschnitt werden wir näher auf die technischen Aspekte von IPSec eingehen und die Themen der einzelnen RFCs näher betrachten.
+Es gibt noch viel mehr RFCs die man IPSec zuordnen kann, doch dies sind die wichtigsten. Im folgenden Abschnitt werden wir näher auf die technischen Aspekte von IPSec eingehen und die Themen der einzelnen RFCs näher betrachten.
 
 \subsection{Technischer Aufbau}
 \subsubsection{Tunnel Modus und Transport Modus}
