@@ -82,6 +82,7 @@ Diesen Umstand kann man beispielsweise auch für Services nutzen, die nur in bes
 IPSec und OpenVPN sind zwei Lösungen, um ein solches Netzwerk zu errichten. Im Folgenden werden wir näher darauf eingehen, wie dies jeweils technisch umgesetzt ist.
 
 \section{IPSec}
+%TODO Referenzen
 \subsection{Entstehungsgeschichte}
 IPSec ist unter der Aufsicht eines Komitees entstanden. Diese Vorgehensweise wurde dabei gezwungenermaßen auferlegt und erschwerte nach Ansicht vieler Mitwirkender die Arbeit erheblich. \footnote{Ferguson, Niels, and Bruce Schneier. ``A cryptographic evaluation of IPsec."' Counterpane Internet Security, Inc 3031 (2000).} 
 
@@ -150,16 +151,22 @@ Die SPD wird üblicherweise per Hand eingerichtet, da diese eher statisch ist un
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{OpenVPN}
 %\input{VPN}
+%TODO insgesamt gesehen: Referenzen
 Was ist OpenVPN? Wer ist dafür verantwortlich? Wie funktioniert es?
 
-
 \subsection{Was ist OpenVPN?}
+%TODO hier müsste eher stehen was OpenVPN technisch gesehen ist
+Beispielsweise:
+Open VPN ist eine VPN-Lösung, die TLS-basiert ist und im OSI-Referenzmodell in der Anwendungsschicht angesiedelt ist. Unter den TLS-basierten VPN-Implementationen ist Open VPN eine sehr weit verbreitete Implementation, die plattformübergreifend verfügbar ist.
+
+%TODO auch interessant wäre (gerade im Gegensatz zu IPSec), wer für Open VPN verantwortlich zeichnet (Komitee, Firma, Entwicklercommunity)
 
 Open VPN ist eine VPN-Lösung, die unter Linux, Windows und vielen weiteren Betriebssystemen eingesetzt werden kann.
 Open VPN ist eine freie Software und steht unter der GPL ( GNU General Public License ).
 
 \subsection{Verschlüsselung bei OpenVPN}
 
+%TODO auf TLS eingehen in technischer Sicht -> Wie funktioniert die Verschlüsselung mit TLS (z.B. Handshake)
 OpenVPN benutzt zur Authentifizierung und Verschlüsselung der Daten kryptografische Verfahren auf Basis von TLS (Transport Layer Security). TLS ist ein Verschlüsselungsprotokoll zur Datenübertragung und der Nachfolger vom bekannteren SSL (Secure Sockets Layer).Die meisten Internetbrowser unterstützen TLS-Verbindungen. Dieses Protokoll wird im Internet u.a. zum Aufbau von sicheren Verbindungen  (HTTPS-Verbindungen) bei Banken oder Shopsystemen  eingesetzt. Daran erkennt man , dass dies allgemein anerkannte und vor allem auch ausgereifte  Standardverfahren sind.
 
 Da OpenVPN diese Verfahren benutzt, kann kein IPSec eingesetzt werden! Dies bedeutet, dass man die Windows-internen Funktionen zum Herstellen einer Verbindung nicht verwenden kann. Das können wir als Nachteil, aber auch als Vorteil sehen. Der Nachteil ist, dass wir auf jedem Rechner OpenVPN instalieren müssen und mit Betriebssystemen, für die es nicht zur Verfügung steht, keine Verbindung herstellen können.Der Vorteil ist, dass wir sich nicht wirklich mit dem Einrichten von VPNs auf fremden Systemen auskennen müssen. Es wird ja immer OpenVPN benutzt. Weiterhin ist man auch nicht von eventuell auftretenden Problemen bei Updates des Systems betroffen.
@@ -183,9 +190,6 @@ Im Routing-Modus wird eine Verbindung zwischen zwei Gegenstellen über das IP-Pr
 * Bridging-Modus : 
 
 Beim Bridging-Modus werden zwei Netzwerke miteinander verbunden. Hierbei spielt das benutzte Protokoll der Netzwerke keine Rolle. Allerdings wird auch der komplette Netzwerkverkehr übermittelt. Daher hat man im Gegensatz zum Routing-Modus einen höheren Datendurchsatz.
-
-
-
 
 \section{Vergleich von IPSec mit OpenVPN}
 
