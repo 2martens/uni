@@ -1,0 +1,165 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\arabic{subsubsection})}
+
+\begin{document}
+\author{Jim Martens}
+\title{Hausaufgaben zum 29./30. November}
+\maketitle
+\section{} %1
+\subsection{} %a
+Das Produkt AB existiert, da A gleich viele Spalten (3) wie B Zeilen (3) hat.
+\begin{alignat*}{2}
+A \cdot B &=& \begin{pmatrix} 2 & 0 & 1 \\ 1 & 0 & -1 \\ 7 & 6 & 3 \\ -1 & 2 & 4 \end{pmatrix} \cdot \begin{pmatrix} 3 & 2 & -1 \\ 1 & 0 & 2 \\ 1 & 1 & 0 \end{pmatrix} \\
+&=& \begin{pmatrix} 7 & 5 & -2 \\ 2 & 1 & -1 \\ 30 & 17 & 5 \\ 3 & 2 & 5 \end{pmatrix}
+\end{alignat*}
+
+BA existiert nicht, da B weniger Spalten (3) als A Zeilen (4) hat.
+AC existiert nicht, da A mehr Spalten (3) als C Zeilen (1) hat.
+AD existiert, da A gleich viele Spalten (3) wie D Zeilen (3) hat.
+
+\begin{alignat*}{2}
+A \cdot D &=& \begin{pmatrix} 2 & 0 & 1 \\ 1 & 0 & -1 \\ 7 & 6 & 3 \\ -1 & 2 & 4 \end{pmatrix} \cdot \begin{pmatrix} 2 \\ 3 \\ -2 \end{pmatrix} \\
+&=& \begin{pmatrix} 2 \\ 0 \\ 26 \\ -4 \end{pmatrix}
+\end{alignat*}
+
+AA existiert nicht, da A weniger Spalten (3) hat als Zeilen (4).
+BB existiert, da B gleich viele Spalten (3) und Zeilen (3) hat.
+
+\begin{alignat*}{2}
+A \cdot D &=& \begin{pmatrix} 3 & 2 & -1 \\ 1 & 0 & 2 \\ 1 & 1 & 0 \end{pmatrix} \cdot \begin{pmatrix} 3 & 2 & -1 \\ 1 & 0 & 2 \\ 1 & 1 & 0 \end{pmatrix} \\
+&=& \begin{pmatrix} 10 & 5 & 1 \\ 5 & 4 & -1 \\ 4 & 2 & 1 \end{pmatrix}
+\end{alignat*}
+
+CD existiert, da C gleich viele Spalten (3) wie D Zeilen (3) hat.
+
+\begin{alignat*}{2}
+C \cdot D &=& \begin{pmatrix} 1 & 2 & -2 \end{pmatrix} \cdot \begin{pmatrix} 2 \\ 3 \\ -2 \end{pmatrix} \\
+&=& \begin{pmatrix} 12 \end{pmatrix}
+\end{alignat*}
+
+DC existiert, da D gleich viele Spalten (1) wie C Zeilen (1) hat.
+
+\begin{alignat*}{2}
+D \cdot C &=& \begin{pmatrix} 2 \\ 3 \\ -2 \end{pmatrix} \cdot \begin{pmatrix} 1 & 2 & -2 \end{pmatrix} \\
+&=& \begin{pmatrix} 2 & 4 & -4 \\ 3 & 6 & -6 \\ -2 & -4 & 4 \end{pmatrix}
+\end{alignat*}
+
+\subsection{} %b
+Um das Element zu berechnen, das in AB in der dritten Zeile und zweiten Spalte steht, benötigen wir die dritte Zeile von A und die zweite Spalte von B. Diese packen wir in eigene Matrizen und multiplizieren diese.
+
+\begin{alignat*}{2}
+A_{3j} \cdot B_{i2} &=& \begin{pmatrix} 1 & 2 & 3 & 4 \end{pmatrix} \cdot \begin{pmatrix} -2 \\ 2 \\ 3 \\ 1 \end{pmatrix} \\
+&=& \begin{pmatrix} 15 \end{pmatrix}
+\end{alignat*}
+
+Für die vierte Spalte von AB benötigen wir A und die vierte Spalte von B. Wir multiplizieren also A und die vierte Spalte von B, die in einer eigenen Matrix steht.
+
+\begin{alignat*}{2}
+A \cdot B_{i4} &=& \begin{pmatrix} 3 & 4 & 5 & 6 \\ 2 & 3 & 4 & 5 \\ 1 & 2 & 3 & 4 \\ 4 & 7 & 7 & 4 \end{pmatrix} \cdot \begin{pmatrix} 4 \\ 4 \\ -3 \\ 0 \end{pmatrix} \\
+&=& \begin{pmatrix} 13 \\ 8 \\ 3 \\ 23 \end{pmatrix}
+\end{alignat*}
+
+\section{} %2
+\subsection{} %a
+Um das Distributivgesetz zu bestätigen, wird zunächst $A(B_{1} + B_{2})$ gerechnet und anschließend $AB_{1} + AB_{2}$. Das Ergebnis muss gleich sein, um das Gesetz zu bestätigen.
+
+\begin{alignat*}{2}
+A \cdot (B_{1} + B_{2}) &=& \begin{pmatrix} 5 & 7 \\ 9 & -1 \\ 8 & 2 \end{pmatrix} \cdot \left( \begin{pmatrix} 1 & 2 \\ 3 & 6 \end{pmatrix} + \begin{pmatrix} 1 & -2 \\ 3 & 2 \end{pmatrix} \right)\\
+&=& \begin{pmatrix} 5 & 7 \\ 9 & -1 \\ 8 & 2 \end{pmatrix} \cdot \begin{pmatrix} 2 & 0 \\ 6 & 8 \end{pmatrix} \\
+&=& \begin{pmatrix} 52 & 56 \\ 12 & -8 \\ 28 & 16 \end{pmatrix}
+\end{alignat*}
+
+Nun folgt die Berechnung des zweiten Teils.
+
+\begin{alignat*}{2}
+AB_{1} + AB_{2} &=& \left( \begin{pmatrix} 5 & 7 \\ 9 & -1 \\ 8 & 2 \end{pmatrix} \cdot \begin{pmatrix} 1 & 2 \\ 3 & 6 \end{pmatrix} \right) + \left(\begin{pmatrix} 5 & 7 \\ 9 & -1 \\ 8 & 2 \end{pmatrix} \cdot \begin{pmatrix} 1 & -2 \\ 3 & 2 \end{pmatrix} \right)\\
+&=& \begin{pmatrix} 26 & 52 \\ 6 & 12 \\ 14 & 28 \end{pmatrix} + \begin{pmatrix} 26 & 4 \\ 6 & -20 \\ 14 & -12 \end{pmatrix} \\
+&=& \begin{pmatrix} 52 & 56 \\ 12 & -8 \\ 28 & 16 \end{pmatrix}
+\end{alignat*}
+
+Beide Seiten der Gleichung ergeben dasselbe Ergebnis, somit ist das Distributivgesetz mit den angegebenen Matrizen bestätigt.
+
+\subsection{} %b
+Um die Gleichung $(AB)^{T} = B^{T}A^{T}$ zu bestätigen, wird zunächst $(AB)^{T}$ berechnet und anschließend $B^{T}A^{T}$. Ergeben beide Berechnungen das gleiche Ergebnis, so ist die Gleichung damit bestätigt.
+
+\begin{alignat*}{2}
+(AB)^{T} &=& \left( \begin{pmatrix} 1 & 3 \\ 2 & 6 \end{pmatrix} \cdot \begin{pmatrix} 2 & -1 & 5 \\ 3 & 2 & 4 \end{pmatrix} \right)^{T} \\
+&=& \begin{pmatrix} 11 & 5 & 17 \\ 22 & 10 & 34 \end{pmatrix}^{T} \\
+&=& \begin{pmatrix} 11 & 22 \\ 5 & 10 \\ 17 & 34 \end{pmatrix}
+\end{alignat*}
+
+Nun folgt die Berechnung des zweiten Teils.
+
+\begin{alignat}{2}
+B^{T}A^{T} &=& \begin{pmatrix} 2 & -1 & 5 \\ 3 & 2 & 4 \end{pmatrix}^{T} \cdot \begin{pmatrix} 1 & 3 \\ 2 & 6 \end{pmatrix}^{T} \notag\\
+&=& \begin{pmatrix} 2 & 3 \\ -1 & 2 \\ 5 & 4 \end{pmatrix} \cdot \begin{pmatrix} 1 & 2 \\ 3 & 6 \end{pmatrix} \label{eq:transponiert} \\
+&=& \begin{pmatrix} 11 & 22 \\ 5 & 10 \\ 17 & 34 \end{pmatrix} \notag
+\end{alignat}
+
+Beide Seiten der Gleichung ergeben das gleiche Ergebnis, somit ist die Gleichung $(AB)^{T} = B^{T}A^{T}$ bestätigt.
+
+\subsection{} %c
+Wie in \eqref{eq:transponiert} sichtbar, hat $A^{T}$ weniger Spalten als $B^{T}$ Zeilen hat. Somit kann $A^{T}B^{T}$ gar nicht berechnet werden.
+\section{} %3
+Beweis des Distributivgesetzes $A(B_{1} + B_{2}) = AB_{1} + AB_{2}$.
+
+Es werden die beiden Seiten der Gleichung zunächst einzeln gerechnet und im Anschluss verglichen. Bei gleichem Ergebnis stimmt die Aussage.
+
+Es seien $A,B_{1},B_{2}$ folgende Matrizen:
+\begin{alignat*}{2}
+A &=& \begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\ a_{31} & a_{32} & a_{33} \end{pmatrix} \\
+B_{1} = B &=& \begin{pmatrix} b_{11} & b_{12} & b_{13} \\ b_{21} & b_{22} & b_{23} \\ b_{31} & b_{32} & b_{33} \end{pmatrix} \\
+B_{2} = C &=& \begin{pmatrix} c_{11} & c_{12} & c_{13} \\ c_{21} & c_{22} & c_{23} \\ c_{31} & c_{32} & c_{33} \end{pmatrix} \\
+\intertext{Berechnung des linken Teils der Gleichung}
+B + C &=& \begin{pmatrix} b_{11} + c_{11} & b_{12} + c_{12} & b_{13} + c_{13} \\ b_{21} + c_{21} & b_{22} + c_{22} & b_{23} + c_{23} \\ b_{31} + c_{31} & b_{32} + c_{32} & b_{33} + c_{33} \end{pmatrix} \\
+% todo
+A \cdot (B+C) &=& \begin{pmatrix} \sum\limits_{i=1}^{3} a_{1i} \cdot (b_{i1} + c_{i1}) & \sum\limits_{i=1}^{3} a_{1i} \cdot (b_{i2} + c_{i2}) & \sum\limits_{i=1}^{3} a_{1i} \cdot (b_{i3} + c_{i3})  \\ \sum\limits_{i=1}^{3} a_{2i} \cdot (b_{i1} + c_{i1}) & \sum\limits_{i=1}^{3} a_{2i} \cdot (b_{i2} + c_{i2}) & \sum\limits_{i=1}^{3} a_{2i} \cdot (b_{i3} + c_{i3}) \\ \sum\limits_{i=1}^{3} a_{3i} \cdot (b_{i1} + c_{i1}) & \sum\limits_{i=1}^{3} a_{3i} \cdot (b_{i2} + c_{i2}) & \sum\limits_{i=1}^{3} a_{3i} \cdot (b_{i3} + c_{i3}) \end{pmatrix} \\
+\intertext{Berechnung des rechten Teils der Gleichung}
+AB &=& \begin{pmatrix} \sum\limits_{i=1}^{3} a_{1i} \cdot b_{i1} & \sum\limits_{i=1}^{3} a_{1i} \cdot b_{i2} & \sum\limits_{i=1}^{3} a_{1i} \cdot b_{i3} \\ \sum\limits_{i=1}^{3} a_{2i} \cdot b_{i1} & \sum\limits_{i=1}^{3} a_{2i} \cdot b_{i2} & \sum\limits_{i=1}^{3} a_{2i} \cdot b_{i3} \\ \sum\limits_{i=1}^{3} a_{3i} \cdot b_{i1} & \sum\limits_{i=1}^{3} a_{3i} \cdot b_{i2} & \sum\limits_{i=1}^{3} a_{3i} \cdot b_{i3} \end{pmatrix} \\
+AC &=& \begin{pmatrix} \sum\limits_{i=1}^{3} a_{1i} \cdot c_{i1} & \sum\limits_{i=1}^{3} a_{1i} \cdot c_{i2} & \sum\limits_{i=1}^{3} a_{1i} \cdot c_{i3} \\ \sum\limits_{i=1}^{3} a_{2i} \cdot c_{i1} & \sum\limits_{i=1}^{3} a_{2i} \cdot c_{i2} & \sum\limits_{i=1}^{3} a_{2i} \cdot c_{i3} \\ \sum\limits_{i=1}^{3} a_{3i} \cdot c_{i1} & \sum\limits_{i=1}^{3} a_{3i} \cdot c_{i2} & \sum\limits_{i=1}^{3} a_{3i} \cdot c_{i3} \end{pmatrix} \\
+AB + AC &=& \begin{pmatrix} \sum\limits_{i=1}^{3} a_{1i} \cdot b_{i1} + a_{1i} \cdot c_{i1} & \sum\limits_{i=1}^{3} a_{1i} \cdot b_{i2} + a_{1i} \cdot c_{i2} & \sum\limits_{i=1}^{3} a_{1i} \cdot b_{i3} + a_{1i} \cdot c_{i3} \\ \sum\limits_{i=1}^{3} a_{2i} \cdot b_{i1} + a_{2i} \cdot c_{i1} & \sum\limits_{i=1}^{3} a_{2i} \cdot b_{i2} + a_{2i} \cdot c_{i2} & \sum\limits_{i=1}^{3} a_{2i} \cdot b_{i3} + a_{2i} \cdot c_{i3} \\ \sum\limits_{i=1}^{3} a_{3i} \cdot b_{i1} + a_{3i} \cdot c_{i1} & \sum\limits_{i=1}^{3} a_{3i} \cdot b_{i2} + a_{3i} \cdot c_{i2} & \sum\limits_{i=1}^{3} a_{3i} \cdot b_{i3} + a_{3i} \cdot c_{i3} \end{pmatrix} \\
+\intertext{Durch Ausklammern des a ergibt sich:}
+&=& \begin{pmatrix} \sum\limits_{i=1}^{3} a_{1i} \cdot (b_{i1} + c_{i1}) & \sum\limits_{i=1}^{3} a_{1i} \cdot (b_{i2} + c_{i2}) & \sum\limits_{i=1}^{3} a_{1i} \cdot (b_{i3} + c_{i3})  \\ \sum\limits_{i=1}^{3} a_{2i} \cdot (b_{i1} + c_{i1}) & \sum\limits_{i=1}^{3} a_{2i} \cdot (b_{i2} + c_{i2}) & \sum\limits_{i=1}^{3} a_{2i} \cdot (b_{i3} + c_{i3}) \\ \sum\limits_{i=1}^{3} a_{3i} \cdot (b_{i1} + c_{i1}) & \sum\limits_{i=1}^{3} a_{3i} \cdot (b_{i2} + c_{i2}) & \sum\limits_{i=1}^{3} a_{3i} \cdot (b_{i3} + c_{i3}) \end{pmatrix}
+\end{alignat*}
+
+Auf beiden Seiten kommt das gleiche Ergebnis heraus. Also ist das Distributivgesetz $A(B_{1} + B_{2}) = AB_{1} + AB_{2}$ damit bewiesen. \hfill $\Box$
+\section{} %4
+\subsection{} %a
+Beweis der Aussage (6), Skript Seite 61. Es ist zu zeigen, dass für jede Abbildung $f: A \rightarrow B$ und jedes $B' \subseteq B$ Folgendes gilt: 
+\begin{equation*}
+f(f^{-1}(B')) \subseteq B'
+\end{equation*}
+
+%todo, siehe Tutorium Di
+Es gelte $b \in f(f^{-1}(B'))$. Daraus ergeben sich zwei mögliche Fälle:
+
+\begin{alignat*}{1}
+\intertext{Fall 1}
+\exists a \in f^{-1}(B'): f(a)=b \\
+\Rightarrow f(a)=b \in B'
+\intertext{Fall 2}
+\nexists a \in f^{-1}(B'): f(a)=b
+\end{alignat*}
+
+Anhand von Fall 1 ist klar, dass es für jedes Urbild von einem $b \in B'$ ein Bild $b' \in B'$ gibt. Fall 2 behandelt die $b \in B'$, die kein Urbild haben. Die Menge $f(f^{-1}(B'))$ enthält nur solche $b \in B'$, die ein Urbild haben und ist demzufolge eine Teilmenge von $B'$.
+
+Also gilt die Aussage (6), Skript Seite 61. \hfill $\Box$
+
+\subsection{} %b
+Es gebe die Mengen $A$ und $B'$ mit $A = \{1\}$ und $B' = \{5, 6\}$. Es gebe die folgende Abbildungsvorschrift $f(1) = 5$.
+
+Die Urbildmenge von $B'$ ist in diesem Fall $A$. Die Bildmenge von $A$ ist in diesem Fall $\{5\}$. Es gilt $\{5\} \neq B'$.
+\end{document}

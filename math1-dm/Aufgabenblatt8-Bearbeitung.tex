@@ -1,0 +1,266 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\arabic{subsubsection})}
+
+\begin{document}
+\author{Jim Martens}
+\title{Hausaufgaben zum 13./14. Dezember}
+\maketitle
+\section{} %1
+\subsection{} %a
+Ja, die Graphen sind isomorph.
+
+In Graph G gibt es vier Knoten mit je vier abgehenden Kanten und vier Knoten mit je drei abgehenden Kanten.
+
+In Graph G' gibt es ebenfalls vier Knoten mit vier abgehenden Kanten und auch vier Knoten mit je drei abgehenden Kanten.
+
+Die Knoten seien von oben links beginnend im Uhrzeigersinn aufsteigend nummeriert. Die äußeren vier Knoten im Graph G haben die Bezeichnungen 1,2,3 und 4. Die inneren vier Knoten (auch oben links beginnend) haben die Bezeichnungen 5,6,7 und 8.
+
+Im Graph G' werden die Knoten in gleicher Weise mit Buchstaben bezeichnet. Somit ergeben sich für die äußeren Knoten a,b,c und d, sowie e,f,g, und h für die inneren Knoten (jeweils oben links beginnend).
+
+Damit gebe es folgende Abbildung $f: G \rightarrow G'$:\\
+
+\begin{alignat*}{2}
+f(1) &=& b \\
+f(2) &=& a \\
+f(3) &=& c \\
+f(4) &=& d \\
+f(5) &=& f \\
+f(6) &=& e \\
+f(7) &=& g \\
+f(8) &=& h
+\end{alignat*}
+\subsection{} %b
+Alle drei Graphen sind isomorph zueinander.
+
+\section{} %2
+\subsection{} %a
+G hat $\frac{10 \cdot 9}{2} = 45$ Kanten.
+\subsection{} %b
+Es gibt $\binom{10}{3} = 120$ Kreise mit der Länge $3$ in G.
+\subsection{} %c
+Es gibt $\binom{10}{4} = 210$ Kreise mit der Länge $4$ in G.
+\subsection{} %d
+Es gibt $\binom{10}{4}$ Möglichkeiten vier Knoten aus zehn zu nehmen. Für jede dieser vier Knoten gibt es zwei Möglichkeiten die Diagonale zu wählen. Es ergeben sich daher $\binom{10}{4} \cdot 2 = 210 \cdot 2 = 420$ Möglichkeiten einen solchen Teilgraphen aus G zu nehmen.
+\section{} %3
+\subsection{} %a
+%\begin{figure}[h!]
+$n=4$:\\
+\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm,on grid]
+%h1
+\node (v1) {$v_{1}$};
+\node (v2) [below=of v1] {$v_{2}$};
+\node (v3) [right=of v2] {$v_{3}$};
+\node (v4) [right=of v1] {$v_{4}$};
+
+\path[every node/.style={font=\scriptsize}] 
+	(v1) edge (v2)
+	(v1) edge (v3)
+	(v1) edge (v4)
+	(v2) edge (v3)
+	(v2) edge (v4)
+	(v3) edge (v4);
+	
+%h2
+\node (v5) [right=2 of v4] {$v_{5}$} 
+edge [bend right] (v1)
+edge [bend left=50] (v2)
+edge (v4)
+edge [bend left] (v3);
+\node (v6) [below=of v5] {$v_{6}$} 
+edge [bend right=50] (v1)
+edge [bend right] (v4)
+edge (v3)
+edge [bend left] (v2);
+\node (v7) [right=of v6] {$v_{7}$} 
+edge [bend left=60] (v1)
+edge [bend left] (v4)
+edge [bend left] (v3)
+edge [bend left] (v2);
+\node (v8) [right=of v5] {$v_{8}$} 
+edge [bend right] (v1)
+edge [bend right=60] (v2)
+edge [bend right] (v4)
+edge [bend right] (v3);
+
+\path[every node/.style={font=\scriptsize}] 
+	(v5) edge (v6)
+	(v5) edge (v7)
+	(v5) edge (v8)
+	(v6) edge (v7)
+	(v6) edge (v8)
+	(v7) edge (v8);
+\end{tikzpicture}
+
+$n=6$:\\
+\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm,on grid]
+%h1
+\node (v1) {$v_{1}$};
+\node (v2) [below left=of v1] {$v_{2}$};
+\node (v3) [below right=of v2] {$v_{3}$};
+\node (v4) [right=of v3] {$v_{4}$};
+\node (v5) [above right=of v4] {$v_{5}$};
+\node (v6) [above left=of v5] {$v_{6}$};
+
+\path[every node/.style={font=\scriptsize}] 
+	(v1) edge (v2)
+	(v1) edge (v6)
+	(v1) edge (v4)
+	(v2) edge (v3)
+	(v2) edge (v5)
+	(v3) edge (v4)
+	(v3) edge (v6)
+	(v4) edge (v5)
+	(v5) edge (v6);
+	
+%h2
+\node (v7) [right=2.5 of v6] {$v_{7}$}
+edge (v6)
+edge [bend right=10] (v5)
+edge (v4)
+edge [bend right] (v1)
+edge [bend right=70] (v2)
+edge [bend right=30] (v3);
+\node (v8) [below left=of v7] {$v_{8}$}
+edge (v5)
+edge [bend right=10] (v6)
+edge [bend left=10] (v4)
+edge [bend right=87] (v2)
+edge [bend right=10] (v1)
+edge [bend left=10] (v3);
+\node (v9) [below right=of v8] {$v_{9}$}
+edge (v4)
+edge [bend left=10] (v5)
+edge (v6)
+edge [bend left] (v3)
+edge [bend left=70] (v2)
+edge [bend left=30] (v1);
+\node (v10) [right=of v9] {$v_{10}$}
+edge [bend left] (v3)
+edge [bend left] (v4)
+edge [bend left] (v5)
+edge [bend left=60] (v2)
+edge [bend right=15] (v6)
+edge [bend left=40] (v1);
+\node (v11) [above right=of v10] {$v_{11}$}
+edge [bend right=15] (v5)
+edge (v6)
+edge (v4)
+edge [bend right=85] (v2)
+edge [bend right=45] (v1)
+edge [bend left=45] (v3);
+\node (v12) [above left=of v11] {$v_{12}$}
+edge [bend right] (v1)
+edge [bend right] (v6)
+edge [bend right] (v5)
+edge [bend right=60] (v2)
+edge [bend left=15] (v4)
+edge [bend right=40] (v3);
+
+\path[every node/.style={font=\scriptsize}] 
+	(v7) edge (v8)
+	(v7) edge (v9)
+	(v7) edge (v10)
+	(v7) edge (v11)
+	(v7) edge (v12)
+	(v8) edge (v9)
+	(v8) edge (v10)
+	(v8) edge (v11)
+	(v8) edge (v12)
+	(v9) edge (v10)
+	(v9) edge (v11)
+	(v9) edge (v12)
+	(v10) edge (v11)
+	(v10) edge (v12)
+	(v11) edge (v12);
+\end{tikzpicture}
+%\end{figure}
+\subsection{} %b
+Es ist zu zeigen, dass $|E(G)| = \frac{3}{2}n^{2} + n$ gilt.\\
+In der Zusammenhangskomponente $H_{1}$ hat jeder Knoten den Grad $3$. Bei $n$ Knoten ergibt dies $\frac{3n}{2}$ Kanten in $H_{1}$. In der Zusammenhangskomponente $H_{2}$ gibt es auch $n$ Knoten und jeder Knoten ist mit jedem verbunden. Es ergeben sich also dort $\frac{n \cdot (n-1)}{2}$ Kanten. In $G$ gibt es nun zusätzlich zwischen jedem Knoten aus $H_{1}$ und $H_{2}$ eine Kante, wodurch sich $\frac{n \cdot n}{2}$ Kanten für die Verbindungen ergeben. Zusammengefasst ergibt sich:\\
+\begin{alignat*}{2}
+|E(G)| &=& \frac{3n + n \cdot (n-1) + n \cdot n}{2} \\
+&=& \frac{3n + n^{2} -n + n^{2}}{2} \\
+&=& \frac{2n + 2n^{2}}{2} \\
+&=& n + n^{2}
+\end{alignat*}
+Die zu zeigende Formel gilt augenscheinlich nicht.
+\subsection{} %c
+Für $n=4$ startet man bei $v_{4}$, geht zu $v_{1}$, dann $v_{2}$, $v_{3}$, weiter zu $v_{6}$, $v_{7}$, $v_{8}$, $v_{5}$, dann wieder zurück zu $v_{4}$.
+\subsection{} %d
+$G$ besitzt keine Eulersche Linie, da der Grad jedes Knotens $2n-1$ beträgt. Für die Existenz einer Eulerschen Linie muss jeder Knoten einen geraden Grad besitzen.
+\section{} %4
+\subsection{} %a
+$P(M)$ enthält $2^{n} = 2^{4} = 16$ Elemente. Es gilt:\\
+\begin{alignat*}{2}
+P(M) &=& \{\emptyset, \{a\}, \{b\}, \{c\}, \{d\}, \{a,b\}, \{a,c\}, \{a,d\}, \{b,c\}, \{b,d\}, \{c,d\}, \\
+&& \{a,b,c\}, \{a,b,d\}, \{a,c,d\}, \{b,c,d\}, \{a,b,c,d\}\}
+\end{alignat*}
+\subsection{} %b
+\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm,on grid]
+\node (empty) {$\emptyset$};
+\node (a) [above left=1.5 and 2.0 of empty] {$\{a\}$};
+\node (b) [right=1.25 of a] {$\{b\}$};
+\node (c) [right=1.25 of b] {$\{c\}$};
+\node (d) [right=1.25 of c] {$\{d\}$};
+\node (ab) [above left=1.5 and 0.5 of a] {$\{a,b\}$};
+\node (ac) [right=1.0 of ab] {$\{a,c\}$};
+\node (ad) [right=2.0 of ab] {$\{a,d\}$};
+\node (bc) [right=3.0 of ab] {$\{b,c\}$};
+\node (bd) [right=4.0 of ab] {$\{b,d\}$};
+\node (cd) [right=5.0 of ab] {$\{c,d\}$};
+\node (abc) [above=3.0 of a] {$\{a,b,c\}$};
+\node (abd) [above=3.0 of b] {$\{a,b,d\}$};
+\node (acd) [above=3.0 of c] {$\{a,c,d\}$};
+\node (bcd) [above=3.0 of d] {$\{b,c,d\}$};
+\node (abcd) [above=6.0 of empty] {$\{a,b,c,d\}$};
+
+\path[every node/.style={font=\scriptsize}]
+(empty) edge (a)
+(empty) edge (b)
+(empty) edge (c)
+(empty) edge (d)
+(a) edge (ab)
+(a) edge (ac)
+(a) edge (ad)
+(b) edge (ab)
+(b) edge (bc)
+(b) edge (bd)
+(c) edge (ac)
+(c) edge (bc)
+(c) edge (cd)
+(d) edge (ad)
+(d) edge (bd)
+(d) edge (cd)
+(ab) edge (abc)
+(ac) edge (abc)
+(bc) edge (abc)
+(ab) edge (abd)
+(ad) edge (abd)
+(bd) edge (abd)
+(ac) edge (acd)
+(ad) edge (acd)
+(cd) edge (acd)
+(bc) edge (bcd)
+(bd) edge (bcd)
+(cd) edge (bcd)
+(abc) edge (abcd)
+(abd) edge (abcd)
+(acd) edge (abcd)
+(bcd) edge (abcd);
+\end{tikzpicture}
+\subsection{} %c
+Solch ein Graph kam auf dem Übungsblatt (Präsenz- und Hausaufgaben) nicht vor. Entweder hat keiner der Graphen $16$ Knoten und/oder die Knoten haben nicht alle den Grad $4$. Von daher kann die Eigenschaft der Isomorphie von vornherein verneint werden.
+\end{document}

@@ -1,0 +1,84 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\arabic{subsubsection})}
+
+\begin{document}
+\author{Jim Martens}
+\title{Hausaufgaben zum 06./07. Dezember}
+\maketitle
+\section{} %1
+\subsection{} %a
+Euklidischer Algorithmus:\\
+\begin{alignat*}{4}
+2413 &=& 5 &\cdot & 473 &+& 48 \\
+473 &=& 9 &\cdot & 48 &+& 41 \\
+48 &=& 1 &\cdot & 41 &+& 7 \\
+41 &=& 5 &\cdot & 7 &+& 6 \\
+7 &=& 1 &\cdot & 6 &+& \underline{1} \\
+6 &=& 6 &\cdot & 1 &+& 0
+\end{alignat*}
+
+Es gilt also $d = \,\text{ggT}\,(a,b) = 1$. Ausgehend von der vorletzten Gleichung erhält man durch Rückwärtseinsetzen:
+
+\begin{alignat*}{2}
+d = 6& = &&7 - 1 \cdot 6 \\
+&=&& 7 - 1 \cdot (41 - 5 \cdot 7) \\
+&=&& (-1) \cdot 41 + 6 \cdot 7  \\
+&=&& (-1) \cdot 41 + 6 \cdot (48 - 1 \cdot 41) \\
+&=&& 6 \cdot 48 + (-7) \cdot 41 \\
+&=&& 6 \cdot 48 + (-7) \cdot (473 - 9 \cdot 48) \\
+&=&& (-7) \cdot 473 + 69 \cdot 48 \\
+&=&& (-7) \cdot 473 + 69 \cdot (2413 - 5 \cdot 473) \\
+&=&& 69 \cdot 2413 + (-352) \cdot 473 \\
+&=&& \lambda \cdot 2413 + \mu \cdot 473 \;\text{für} \; \lambda = 69 \;\text{und}\; \mu = -352
+\end{alignat*}
+
+Daraus folgt $1 \equiv \lambda \cdot 2413 + \mu \cdot 473 \equiv \mu \cdot 473$ (mod $2413$). Also ist $\mu$ bzw. $2061$ das Inverse von $473$ in $\mathbb{Z}_{2413}$.
+\subsection{} %b
+Euklidischer Algorithmus:\\
+\begin{alignat*}{4}
+2413 &=& 1 &\cdot & 1672 &+& 741 \\
+1672 &=& 2 &\cdot & 741 &+& 190 \\
+741 &=& 3 &\cdot & 190 &+& 171 \\
+190 &=& 1 &\cdot & 171 &+& 19 \\
+171 &=& 9 &\cdot & 19 &+& 0
+\end{alignat*}
+
+Da ggT$(2413,1672) = 19$ gilt, ist $1672$ in $\mathbb{Z}_{2413}$ nicht invertierbar.
+\subsection{} %c
+Das Inverse von $2412$ in $\mathbb{Z}_{2413}$ ist $-1$. Dies gilt, da $2412$ durch eine beliebige Zahl in der gleichen Restklasse ausgetauscht werden kann. $-1$ liegt in derselben Restklasse, denn von $-2413$ bis $-1$ sind es genau $2412$ Rest. Und $-1$ mit sich selbst multipliziert ergibt $1$.
+\section{} %2
+Es gilt $1000 = 12$ (mod 19). Damit ergibt sich $3^{12} = 3^{1000}$ (mod 19). %todo
+
+ 
+\section{} %3
+\subsection{} %a
+	\begin{alignat*}{2}
+		\pi &=& (1,7,6) \circ (2,10,8,5,11,13) \circ (3,4) \circ (9,12)
+	\end{alignat*}
+\subsection{} %b
+	\begin{alignat*}{2}
+		\pi &=& (1,6) \circ (1,7) \circ (2,13) \circ (2,11) \circ (2,5) \circ (2,8) \circ (2,10) \circ (3,4) \circ (9,12)
+	\end{alignat*}
+\subsection{} %c
+	\begin{alignat*}{2}
+		\text{sign}\, \pi &=& -1
+	\end{alignat*}
+\section{} %4
+\subsection{} %a
+Die Menge $A \times B \times C$ besitzt $30$ Elemente. Dies ergibt sich aus $3 \cdot 5 \cdot 2 = 30$.
+\subsection{} %b
+Es gibt $2^{30}$ verschiedene ternäre Relationen über A, B, C. Jede Teilmenge von $A \times B \times C$ ist eine ternäre Relation. Es gibt $30$ Elemente und demzufolge $2^{30}$ Teilmengen. Da jede Teilmenge eine ternäre Relation ist, ist $2^{30}$ richtig.
+\end{document}
