@@ -1,0 +1,91 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings,petri,shapes}
+\usepackage{polynom}
+\usepackage{multirow}
+\usepackage[german]{fancyref}
+\usepackage{morefloats}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+\def\thesection{9.\arabic{section})}
+\def\thesubsection{\arabic{subsection}.}
+\def\thesubsubsection{(\alph{subsubsection})}
+% some matrix magic
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\tikzset{
+    place/.style={
+        circle,
+        thick,
+        draw=black,
+        fill=white,
+        minimum size=6mm,
+        font=\bfseries
+    },
+    transitionH/.style={
+        rectangle,
+        thick,
+        draw=black,
+        fill=white,
+        minimum width=8mm,
+        inner ysep=4pt,
+        font=\bfseries
+    },
+    transitionV/.style={
+        rectangle,
+        thick,
+        fill=black,
+        minimum height=8mm,
+        inner xsep=2pt
+    }
+}
+
+\begin{document}
+\author{Benjamin Kuffel, Jim Martens\\Gruppe 6}
+\title{Hausaufgaben zum 15. Dezember}
+\maketitle
+
+\setcounter{section}{2}
+\section{} %9.3
+\subsection{}
+Es ist zu zeigen, dass die Beschränktheit von P/T-Netzen monoton ist. Nach Satz 7.1 wissen wir bereits, dass ein Netz \(N\) unbeschränkt ist, wenn es zwei von der Anfangsmarkierung aus erreichbare Markierungen \(m_1,m_2\) gibt, für die \(m_1 \lneq m_2\) und \(\exists \sigma : m_1 \overset{\sigma}{\rightarrow} m_2\) gilt.
+
+Setzen wir \(m_{1}\) auf die Anfangsmarkierung, dann wissen wir anhand dieses Satzes, dass das Netz genau dann unbeschränkt ist, wenn es eine weitere von \(m_0\) verschiedene Markierung gibt, die echt größer als \(m_0\) ist und von \(m_0\) aus erreichbar ist.
+
+Im Folgenden setzen wir voraus, dass das Netz \(N\) unbeschränkt ist und es daher eine solche Schaltfolge \(\sigma\) und Markierung \(m_1\) gibt, für die Satz 7.1 gilt.
+
+Auf diese Schaltfolge und Markierung wenden wir nun Lemma 6.17 an. Danach können wir eine beliebige Markierung \(m\) zu \(m_0\) und \(m_1\) hinzuaddieren und es gilt für das feste \(\sigma\): \(m_0 + m \overset{\sigma}{\rightarrow} m_1 + m\). Damit ist Satz 7.1 weiterhin anwendbar und das Netz weiterhin unbeschränkt.
+
+Um die Monotonie abschließend zu zeigen, wählen wir das \(m\) so, dass \(m'_0 = m_0 + m\) gilt. Damit gilt auch \(m'_1 = m_1 + m'_0 - m_0\).
+
+\subsection{}
+\[
+	B := \{(0,0,0,2),(4,0,0,0),(0,6,0,0)\}
+\]
+
+Die Menge enthält alle Markierungen, mit denen entweder der Zyklus p1 - a -> p2 - b -> p1 oder p4 - c -> p4 lebendig gemacht wird. Da jede der Markierungen nur Marken auf einer der Stellen enthält, sind die Markierungen nicht vergleichbar zueinander und damit gibt es auch keine kleinere Markierung. Das Netz ist bei allen der in der Menge enthaltenen Markierungen unbeschränkt, da durch die Lebendigkeit eines der beiden Zyklen beliebig viele Marken in p3 landen können.
+\section{} %9.4
+\subsection{}
+
+\section{} %9.5
+\end{document}
