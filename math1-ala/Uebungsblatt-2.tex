@@ -1,0 +1,216 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Hausaufgaben zum 18. April}
+\maketitle
+\section{} %1
+\subsubsection{} %(i)
+\begin{alignat*}{3}
+\underset{n \rightarrow \infty}{\text{lim}} \left(\frac{-3n^{4}+2n^{2}+n+1}{-7n^{4}+25} \right) &\Rightarrow & \frac{-3n^{4}+2n^{2}+n+1}{-7n^{4}+25} && \\
+\intertext{Ausklammern von $n^{4}$}
+&\Leftrightarrow & \frac{-3 + \frac{2}{n^{2}} + \frac{1}{n^{3}} + \frac{1}{n^{4}}}{-7 + \frac{25}{n^{4}}} &\rightarrow & \frac{3}{7}
+\end{alignat*}
+\subsubsection{} %(ii)
+\begin{alignat*}{3}
+\underset{n \rightarrow \infty}{\text{lim}} \left(\frac{-3n^{4}+2n^{2}+n+1}{-7n^{5}+25} \right) &\Rightarrow & \frac{-3n^{4}+2n^{2}+n+1}{-7n^{5}+25} && \\
+\intertext{Ausklammern von $n^{4}$ im Zähler und $n^{5}$ im Nenner}
+&\Leftrightarrow & \frac{1}{n} \cdot \frac{-3 + \frac{2}{n^{2}} + \frac{1}{n^{3}} + \frac{1}{n^{4}}}{-7 + \frac{25}{n^{5}}} &\rightarrow & 0
+\end{alignat*}
+\subsubsection{} %(iii)
+\begin{alignat*}{3}
+\underset{n \rightarrow \infty}{\text{lim}} \left(\frac{-3n^{5}+2n^{2}+n+1}{-7n^{4}+25} \right) &\Rightarrow & \frac{-3n^{5}+2n^{2}+n+1}{-7n^{4}+25} && \\
+\intertext{Ausklammern von $n^{5}$ im Zähler und $n^{4}$ im Nenner}
+&\Leftrightarrow & n \cdot \frac{-3 + \frac{2}{n^{3}} + \frac{1}{n^{4}} + \frac{1}{n^{5}}}{-7 + \frac{25}{n^{4}}} &\rightarrow & \infty
+\end{alignat*}
+\subsubsection{} %(iv)
+\begin{alignat*}{3}
+\hspace{-2.5cm}
+\underset{n \rightarrow \infty}{\text{lim}} \left( \frac{6n^{3}+2n-3}{9n^{2}+2} - \frac{2n^{3}+5n^{2}+7}{3n^{2}+3} \right) &\Rightarrow & \frac{6n^{3}+2n-3}{9n^{2}+2} - \frac{2n^{3}+5n^{2}+7}{3n^{2}+3} && \\
+\intertext{Auf gleichen Nenner bringen}
+\hspace{-2.5cm}
+&\Leftrightarrow & \frac{(6n^{3}+2n-3)(3n^{2}+3) - (2n^{3}+5n^{2}+7)(9n^{2}+2)}{(9n^{2}+2)(3n^{2}+3)} && \\
+\intertext{Klammern auflösen und zusammenfassen}
+\hspace{-2.5cm}
+&\Leftrightarrow & \frac{-45n^{4} + 20n^{3}-82n^{2}+6n-23}{27n^{4}+33n^{2}+6} && \\
+\intertext{Ausklammern von $n^{4}$}
+\hspace{-2.5cm}
+&\Leftrightarrow & \frac{-45 + \frac{20}{n}-\frac{82}{n^{2}}+\frac{6}{n^{3}}-\frac{23}{n^{4}}}{27+\frac{33}{n^{2}}+\frac{6}{n^{4}}} &\rightarrow & \frac{-45}{27} = \frac{-5}{3}
+\end{alignat*}
+\subsubsection{} %(v)
+\begin{alignat*}{3}
+\underset{n \rightarrow \infty}{\text{lim}} \left( \frac{\sqrt{9n^{4}+n^{2}+1}-2n^{2}+3}{\sqrt{2n^{2}+1} \cdot \sqrt{2n^{2}+n+1}} \right) &\Rightarrow & \frac{\sqrt{9n^{4}+n^{2}+1}-2n^{2}+3}{\sqrt{2n^{2}+1} \cdot \sqrt{2n^{2}+n+1}} && \\
+\intertext{Anwendung der Wurzelgesetze}
+&\Leftrightarrow &\frac{\sqrt{9n^{4}+n^{2}+1}-2n^{2}+3}{\sqrt{(2n^{2}+1) \cdot (2n^{2}+n+1)}} && \\
+\intertext{Zusammenfassen}
+&\Leftrightarrow &\frac{\sqrt{9n^{4}+n^{2}+1}-2n^{2}+3}{\sqrt{4n^{4}+2n^{3}+4n^{2} + 1}} && \\
+\intertext{$n^{2}$ ausklammern}
+&\Leftrightarrow &\frac{\sqrt{9+\frac{1}{n^{2}}+\frac{1}{n^{4}}}-2+\frac{3}{n^{2}}}{\sqrt{4+\frac{2}{n}+\frac{4}{n^{2}} + \frac{1}{n^{4}}}} &\rightarrow & \frac{7}{2}
+\end{alignat*}
+\section{} %2
+\subsection{} %a
+\subsubsection{} %i
+\begin{alignat*}{3}
+a_{0} &=& 1 &&&\\
+a_{1} &=& \frac{2}{5} &&& \\
+a_{2} &=& \left(\frac{2}{5}\right)^{2} = \frac{4}{25} &&& \\
+a_{3} &=& \left(\frac{2}{5}\right)^{3} = \frac{8}{125} &&& \\
+a_{4} &=& \left(\frac{2}{5}\right)^{4} = \frac{16}{625} &&& \\
+s_{0} &=& a_{0} &=&& 1 \\
+s_{1} &=& a_{0} + a_{1} = 1 + \frac{2}{5} = \frac{7}{5} &=&& 1.4 \\
+s_{2} &=& a_{0} + a_{1} + a_{2} = \frac{7}{5} + \frac{4}{25} = \frac{39}{25} &=&& 1.56 \\
+s_{3} &=& a_{0} + a_{1} + a_{2} + a_{3} = \frac{39}{25} + \frac{8}{125} = \frac{203}{125} &=&& 1.624 \\
+s_{4}&=& a_{0} + a_{1} + a_{2} + a_{3} + a_{4} = \frac{203}{125} + \frac{16}{625} = \frac{1031}{625} &=&& 1.6496
+\end{alignat*}\\
+Bestimmung des Grenzwertes mithilfe der Geometrischen Summenformel:\\
+\begin{alignat*}{2}
+\underset{n \rightarrow \infty}{\text{lim}} \left( \sum\limits_{i=0}^{n} \left(\frac{2}{5}\right)^{i} \right) &=& \underset{n \rightarrow \infty}{\text{lim}} \left(\frac{1-\left(\frac{2}{5}\right)^{n+1}}{1-\left(\frac{2}{5}\right)} \right) \\
+&=& \frac{1}{\frac{3}{5}} = \frac{5}{3}
+\end{alignat*}
+\subsubsection{} %ii
+\begin{alignat*}{3}
+a_{0} &=& 1 &&& \\
+a_{1} &=& \frac{5}{2}&&& \\
+a_{2} &=& \left(\frac{5}{2}\right)^{2} = \frac{25}{4} &&&\\
+a_{3} &=& \left(\frac{5}{2}\right)^{3} = \frac{125}{8} &&& \\
+a_{4} &=& \left(\frac{5}{2}\right)^{4} = \frac{625}{16} &&& \\
+s_{0} &=& a_{0} &=& 1 \\
+s_{1} &=& a_{0} + a_{1} = 1 + \frac{5}{2} = \frac{7}{2} &=&& 3.5 \\
+s_{2} &=& a_{0} + a_{1} + a_{2} = \frac{7}{2} + \frac{25}{4} = \frac{39}{4} &=&& 9.75 \\
+s_{3} &=& a_{0} + a_{1} + a_{2} + a_{3} = \frac{39}{4} + \frac{125}{8} = \frac{203}{8} &=&& 25.375 \\
+s_{4}&=& a_{0} + a_{1} + a_{2} + a_{3} + a_{4} = \frac{203}{8} + \frac{625}{16} = \frac{1031}{16} &=&& 64,4375
+\end{alignat*}\\
+Die Reihe divergiert, da geometrische Reihen immer divergieren, wenn der Betrag von q größer als $1$ ist. Dies ist mit $\frac{5}{2}$ der Fall.
+\subsubsection{} %iii
+\begin{alignat*}{3}
+a_{0} &=& 1 &&&\\
+a_{1} &=& -\frac{2}{5} &&& \\
+a_{2} &=& \left(-\frac{2}{5}\right)^{2} = \frac{4}{25} &&& \\
+a_{3} &=& \left(-\frac{2}{5}\right)^{3} = -\frac{8}{125} &&& \\
+a_{4} &=& \left(-\frac{2}{5}\right)^{4} = \frac{16}{625} &&& \\
+s_{0} &=& a_{0} &=&& 1 \\
+s_{1} &=& a_{0} + a_{1} = 1 - \frac{2}{5} = \frac{3}{5} &=&& 0.6 \\
+s_{2} &=& a_{0} + a_{1} + a_{2} = \frac{3}{5} + \frac{4}{25} = \frac{19}{25} &=&& 0.76 \\
+s_{3} &=& a_{0} + a_{1} + a_{2} + a_{3} = \frac{19}{25} - \frac{8}{125} = \frac{87}{125} &=&& 0.696 \\
+s_{4}&=& a_{0} + a_{1} + a_{2} + a_{3} + a_{4} = \frac{87}{125} + \frac{16}{625} = \frac{451}{625} &=&& 0.7216
+\end{alignat*} \\
+Bestimmung des Grenzwertes mithilfe der Geometrischen Summenformel:\\
+\begin{alignat*}{2}
+\underset{n \rightarrow \infty}{\text{lim}} \left( \sum\limits_{i=0}^{n} \left(-\frac{2}{5}\right)^{i} \right) &=& \underset{n \rightarrow \infty}{\text{lim}} \left(\frac{1-\left(-\frac{2}{5}\right)^{n+1}}{1+\left(\frac{2}{5}\right)} \right) \\
+&=& \frac{1}{\frac{7}{5}} = \frac{5}{7}
+\end{alignat*}
+\subsection{} %b
+\subsubsection{} %i
+Bestimmung des Grenzwertes mithilfe der Geometrischen Summenformel:\\
+\begin{alignat*}{2}
+\underset{n \rightarrow \infty}{\text{lim}} \left( \sum\limits_{i=0}^{n} \left(-\frac{3}{10}\right)^{i} \right) &=& \underset{n \rightarrow \infty}{\text{lim}} \left(\frac{1-\left(-\frac{3}{10}\right)^{n+1}}{1+\left(\frac{3}{10}\right)} \right) \\
+&=& \frac{1}{\frac{13}{10}} = \frac{10}{13}
+\end{alignat*}
+Die Reihe konvergiert gegen den Wert $\frac{10}{13} \approx 0.769$.
+\subsubsection{} %ii
+\begin{alignat*}{3}
+&& \underset{n \rightarrow \infty}{\text{lim}} \left( \sum\limits_{i=0}^{n} x^{i} \right) &=& \frac{5}{8} \\
+\Rightarrow && \frac{1}{1-x} &=& \frac{5}{8} \\
+\overset{\cdot (1-x)}{\Leftrightarrow} && 1 &=& \frac{5}{8} - \frac{5}{8}x \\
+\overset{-\frac{5}{8}}{\Leftrightarrow} && \frac{3}{8} &=& -\frac{5}{8}x \\
+\overset{\cdot -\frac{8}{5}}{\Leftrightarrow} && -\frac{3}{5} &=& x
+\end{alignat*}
+$x$ ist gleich $-\frac{3}{5}$.
+\section{} %3
+\subsection{}
+\subsubsection{} %(i)
+Die Reihe konvergiert, da der Betrag von $q = \frac{7}{9}$ kleiner als $1$ ist.\\
+Berechnung des Grenzwertes mithilfe der Geometrischen Summenformel:\\
+\begin{alignat*}{2}
+\underset{n \rightarrow \infty}{\text{lim}} \left( \sum\limits_{i=0}^{n} \left(\frac{7}{9}\right)^{i} \right) &=& \underset{n \rightarrow \infty}{\text{lim}} \left(\frac{1-\left(\frac{7}{9}\right)^{n+1}}{1-\left(\frac{7}{9}\right)} \right) \\
+&=& \frac{1}{\frac{2}{9}} = \frac{9}{2}
+\end{alignat*}
+\subsubsection{} %(ii)
+Die Reihe konvergiert, da der Betrag von $q = -\frac{7}{9}$ kleiner als $1$ ist.\\
+Berechnung des Grenzwertes mithilfe der Geometrischen Summenformel:\\
+\begin{alignat*}{2}
+\sum\limits_{i=1}^{\infty} \left(-\frac{7}{9}\right)^{i} &=& \sum\limits_{i=0}^{\infty} \left(-\frac{7}{9}\right)^{i} - \left(-\frac{7}{9}\right)^{0} \\
+&=& \underset{n \rightarrow \infty}{\text{lim}} \left( \sum\limits_{i=0}^{n} \left(-\frac{7}{9}\right)^{i} - \left(-\frac{7}{9}\right)^{0} \right) \\
+&=& \underset{n \rightarrow \infty}{\text{lim}} \left( \sum\limits_{i=0}^{n} \left(-\frac{7}{9}\right)^{i} \right) - 1 \\
+&=& \frac{1}{1 + \frac{7}{9}} - 1 = \frac{1}{\frac{16}{9}} \\
+&=& \frac{9}{16} - 1 = -\frac{7}{16}
+\end{alignat*}
+Der Grenzwert ist $-\frac{7}{16}$.
+\subsubsection{} %(iii)
+\begin{alignat*}{2}
+\sum\limits_{i=2}^{\infty} (-1)^{i} \cdot \left( \frac{7}{9} \right)^{i+1} &=& \sum\limits_{i=2}^{\infty} (-1)^{i} \cdot \left( \frac{7}{9} \right)^{i} \cdot \left( \frac{7}{9} \right) \\
+&=& \sum\limits_{i=2}^{\infty} \left( -\frac{7}{9} \right)^{i} \cdot \left( \frac{7}{9} \right) \\
+&=& \left( \frac{7}{9} \right) \cdot \sum\limits_{i=2}^{\infty} \left( -\frac{7}{9} \right)^{i} \\
+&=& \underset{n \rightarrow \infty}{\text{lim}} \left( \frac{7}{9} \cdot \sum\limits_{i=2}^{n} \left( -\frac{7}{9} \right)^{i} \right) \\
+&=& \underset{n \rightarrow \infty}{\text{lim}} \left( \frac{7}{9} \cdot \left( \sum\limits_{i=0}^{n} \left( -\frac{7}{9} \right)^{i} - \left( -\frac{7}{9} \right)^{0} - \left( -\frac{7}{9} \right)^{1} \right) \right) \\
+&=& \underset{n \rightarrow \infty}{\text{lim}} \left( \frac{7}{9} \cdot \left( \sum\limits_{i=0}^{n} \left( -\frac{7}{9} \right)^{i} - 1 + \frac{7}{9} \right) \right) \\
+&=& \underset{n \rightarrow \infty}{\text{lim}} \left( \frac{7}{9} \cdot \left( \frac{1- \left(-\frac{7}{9} \right)^{n+1}}{1 - \left(-\frac{7}{9} \right)} - 1 + \frac{7}{9} \right) \right) \\
+&=& \underset{n \rightarrow \infty}{\text{lim}} \left( \frac{7}{9} \cdot \left( \frac{1- \left(-\frac{7}{9} \right)^{n+1}}{1 + \frac{7}{9}} - 1 + \frac{7}{9} \right) \right)\\
+&\rightarrow & \frac{7}{9} \cdot \left( \frac{1}{1 + \frac{7}{9}} - 1 + \frac{7}{9} \right) \\
+&=& \frac{7}{9} \cdot \left( \frac{9}{16} - 1 + \frac{7}{9} \right) \\
+&=& \frac{7}{9} \cdot \left( -\frac{7}{16} + \frac{7}{9} \right) \\
+&=& \frac{7}{9} \cdot \frac{49}{144} \\
+&=& \frac{343}{1296} \approx 0.26
+\end{alignat*}\\
+Der Grenzwert beträgt $\frac{343}{1296}$.
+\subsubsection{} %(iv)
+
+\begin{alignat*}{3}
+\sum\limits_{i=2}^{\infty} \frac{1}{(i+1)i} &=& \sum\limits_{i=2}^{\infty} \left( \frac{1}{i} - \frac{1}{i+1} \right) \\
+&=& \sum\limits_{i=2}^{\infty} \frac{1}{i} - \sum\limits_{i=2}^{\infty} \frac{1}{i+1} \\
+&=& \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + ... + \frac{1}{n} - \frac{1}{3} - \frac{1}{4} - ... - \frac{1}{n+1} \\
+&\Rightarrow & \underset{n \rightarrow \infty}{\text{lim}} \left(\frac{1}{2} - \frac{1}{n+1} \right) = \frac{1}{2}
+\end{alignat*}\\
+Der Grenzwert ist $\frac{1}{2}$.
+\section{} %4
+\subsection{}
+\subsubsection{} %(i)
+\begin{alignat*}{2}
+\underset{n \rightarrow \infty}{\text{lim}} \left(1 + \frac{1}{n} \right)^{n+3} &=& \underset{n \rightarrow \infty}{\text{lim}} \left(1 + \frac{1}{n} \right)^{n} \cdot \underset{n \rightarrow \infty}{\text{lim}} \left(1 + \frac{1}{n} \right)^{3} \\
+&=& e \cdot 1 = e
+\end{alignat*}\\
+\subsubsection{} %(ii)
+\begin{alignat*}{2}
+\underset{n \rightarrow \infty}{\text{lim}} \left(1 + \frac{1}{n} \right)^{3n} &=& \underset{n \rightarrow \infty}{\text{lim}} \left(1 + \frac{1}{n} \right)^{n} \cdot \underset{n \rightarrow \infty}{\text{lim}} \left(1 + \frac{1}{n} \right)^{n} \cdot \underset{n \rightarrow \infty}{\text{lim}} \left(1 + \frac{1}{n} \right)^{n} \\
+&=& e \cdot e \cdot e \\
+&=& e^{3}
+\end{alignat*}\\
+\subsubsection{} %(iii)
+\begin{alignat*}{2}
+\underset{n \rightarrow \infty}{\text{lim}} \left(1 + \frac{1}{n} \right)^{3} &=& \underset{n \rightarrow \infty}{\text{lim}} \left(1 + \frac{1}{n} \right) \cdot \underset{n \rightarrow \infty}{\text{lim}} \left(1 + \frac{1}{n} \right) \cdot \underset{n \rightarrow \infty}{\text{lim}} \left(1 + \frac{1}{n} \right) \\
+&=& 1 \cdot 1 \cdot 1 = 1
+\end{alignat*}
+\subsubsection{} %(iv)
+\begin{alignat*}{2}
+\underset{n \rightarrow \infty}{\text{lim}} \left(1 + \frac{1}{3n} \right)^{3n} &=& \underset{n \rightarrow \infty}{\text{lim}} \left( \left(1 + \frac{1}{3n} \right)^{3} \right)^{n} \\
+&=&  \underset{n \rightarrow \infty}{\text{lim}} \left( \left(1 + \frac{1}{3n} \right)^{2} \cdot \left(1 + \frac{1}{3n} \right) \right)^{n} \\
+&=& \underset{n \rightarrow \infty}{\text{lim}} \left( \left(1 + \frac{2}{3n} + \frac{1}{9n^{2}} \right) \cdot \left(1 + \frac{1}{3n} \right) \right)^{n} \\
+&=& \underset{n \rightarrow \infty}{\text{lim}} \left( 1 + \frac{1}{3n} + \frac{2}{3n} + \frac{2}{9n^{2}} + \frac{1}{9n^{2}} + \frac{1}{27n^{3}} \right)^{n} \\
+&=& \underset{n \rightarrow \infty}{\text{lim}} \left( 1 + \frac{3}{3n} + \frac{3}{9n^{2}} + \frac{1}{27n^{3}} \right)^{n} \\
+&=& \underset{n \rightarrow \infty}{\text{lim}} \left( 1 + \frac{1}{n} + \frac{1}{3n^{2}} + \frac{1}{27n^{3}} \right)^{n} \\
+&\rightarrow & 1
+\end{alignat*}
+\end{document}

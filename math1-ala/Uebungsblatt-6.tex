@@ -1,0 +1,392 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Hausaufgaben zum 30. Mai}
+\maketitle
+\section{} %1
+\subsection{} %a
+Berechnen von $\lim\limits_{n \rightarrow \infty} O_{n}$. Es gilt:\\
+\begin{alignat*}{2}
+O_{n} &=&& \frac{b-a}{n} \sum\limits_{i=1}^{n} f(x_{i}) = \frac{3}{n} \sum\limits_{i=1}^{n} f\left( \frac{3i}{n}\right) = \frac{3}{n} \sum\limits_{i=1}^{n} \left( \frac{3i}{n}\right)^{3} = \frac{3}{n^{4}} \sum\limits_{i=1}^{n} 27 \cdot i^{3}\\
+&=&& \frac{81}{n^{4}} \sum\limits_{i=1}^{n} i^{3} = \frac{81}{n^{4}} \cdot \frac{n^{2}(n+1)^{2}}{4} = \frac{81 \cdot n^{2}(n+1)^{2}}{4 \cdot n^{4}} = \frac{81 \cdot (n+1)^{2}}{4 \cdot n^{2}} \\
+&=&& \frac{81 \cdot (n^{2} + 2n + 1)}{4 \cdot n^{2}} = \frac{81n^{2} + 162n + 81}{4n^{2}}
+\end{alignat*}\\
+Also gilt $\lim\limits_{n \rightarrow \infty} O_{n} = \lim\limits_{n \rightarrow \infty} \left(\frac{81n^{2} + 162n + 81}{4n^{2}} \right) = \frac{81}{4}$. Der gesuchte Flächeninhalt hat den Wert $\frac{81}{4}$.
+\subsection{} %b
+\begin{alignat*}{2}
+\int\limits_{a}^{b} f(x) \,dx = \int\limits_{0}^{3} x^{3} \,dx &=& \left[\frac{1}{4}x^{4}\right]_{0}^{3} \\
+&=& \frac{1}{4} \cdot 3^{4} - \frac{1}{4} \cdot 0^{4} = \frac{1}{4} \cdot 81 - 0 = \frac{81}{4}
+\end{alignat*}
+\section{} %2
+\subsubsection{} %i
+\begin{alignat*}{2}
+\int\limits_{1}^{3} (x^{2} -x-6) \,dx &=& \left[\frac{1}{3}x^{3} - \frac{1}{2}x^{2} - 6x \right]_{1}^{3} \\
+&=& \left(\frac{1}{3} \cdot 3^{3} - \frac{1}{2} \cdot 3^{2} - 6  \cdot 3\right) - \left(\frac{1}{3} \cdot 1^{3} - \frac{1}{2} \cdot 1^{2} - 6  \cdot 1\right) \\
+&=& \left(9 - \frac{9}{2} - 18\right) - \left(\frac{1}{3} - \frac{1}{2} - 6\right) = \left(\frac{18 - 9 - 36}{2}\right) - \left(\frac{2 - 3 - 36}{6}\right) \\
+&=& \left(\frac{-27}{2}\right) - \left(\frac{-37}{6}\right) = \frac{-27}{2} + \frac{37}{6} = \frac{-81 + 37}{6} \\
+&=& -\frac{44}{6} = -\frac{22}{3}
+\end{alignat*}
+\begin{tikzpicture}[>=stealth]
+\begin{axis}[
+	ymin=-7,ymax=1,
+	x=1em,
+	y=1em,
+	axis x line=middle,
+	axis y line=middle,
+	axis line style=->,
+	xlabel={$x$},
+	ylabel={$y$},
+	xmin=0,xmax=4
+	]
+
+\addplot[no marks, black, -] expression[domain=1:3,samples=100]{x*x -x -6} node[pos=0.65,anchor=north]{};
+\node at (axis cs: 2.75,-3) {f};
+\node at (axis cs: 1.75,-2.5) {A};
+\draw[>=stealth] (axis cs:1,0) -- (axis cs:1,-6) node [pos=0.65,anchor=north]{};
+\end{axis}
+\end{tikzpicture}
+\subsubsection{} %ii
+\begin{alignat*}{2}
+\int\limits_{1}^{3} x^{\frac{1}{3}} \,dx &=& \left[\frac{3}{4}x^{\frac{4}{3}} \right]_{1}^{3} \\
+&=& \left(\frac{3}{4} \cdot 3^{\frac{4}{3}}\right) - \left(\frac{3}{4} \cdot 1^{\frac{4}{3}}\right) = 3^{\frac{4}{3}} \cdot \frac{3}{4} - \frac{3}{4} \\
+&=& \left(3^{\frac{4}{3}} - 1\right) \cdot \frac{3}{4}
+\end{alignat*}
+\begin{tikzpicture}[>=stealth]
+\begin{axis}[
+	ymin=0,ymax=3,
+	x=1cm,
+	y=1cm,
+	axis x line=middle,
+	axis y line=middle,
+	axis line style=->,
+	xlabel={$x$},
+	ylabel={$y$},
+	xmin=0,xmax=4
+	]
+
+\addplot[no marks, black, -] expression[domain=1:3,samples=100]{x^(1/3)} node[pos=0.65,anchor=north]{};
+\node at (axis cs: 2,1.5) {f};
+\node at (axis cs: 2,0.5) {A};
+\draw[>=stealth] (axis cs:1,0) -- (axis cs:1,1) node [pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:3,0) -- (axis cs:3,1.44224957) node [pos=0.65,anchor=north]{};
+\end{axis}
+\end{tikzpicture}
+\subsubsection{} %iii
+\begin{alignat*}{2}
+\int\limits_{1}^{3} \frac{1}{1+x^{2}} \,dx &=& \left[\arctan x \right]_{1}^{3} \\
+&=& \arctan 3 - \arctan 1
+\end{alignat*}
+\begin{tikzpicture}[>=stealth]
+\begin{axis}[
+	ymin=0,ymax=2,
+	x=1cm,
+	y=1cm,
+	axis x line=middle,
+	axis y line=middle,
+	axis line style=->,
+	xlabel={$x$},
+	ylabel={$y$},
+	xmin=0,xmax=4
+	]
+
+\addplot[no marks, black, -] expression[domain=1:3,samples=100]{1/(1+x*x)} node[pos=0.65,anchor=north]{};
+\node at (axis cs: 2,0.5) {f};
+\node at (axis cs: 1.2,0.2) {A};
+\draw[>=stealth] (axis cs:1,0) -- (axis cs:1,0.5) node [pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:3,0) -- (axis cs:3,0.1) node [pos=0.65,anchor=north]{};
+\end{axis}
+\end{tikzpicture}
+\subsubsection{} %iv
+\begin{alignat*}{2}
+\int\limits_{1}^{3} \ln x \,dx &=& \left[x \cdot \ln x - x \right]_{1}^{3} \\
+&=& \left(3 \cdot \ln 3 - 3 \right) - \left(1 \cdot \ln 1 - 1 \right) = 3 \cdot \ln 3 - 3 + 1 \\
+&=& 3 \cdot \ln 3 - 2
+\end{alignat*}
+\begin{tikzpicture}[>=stealth]
+\begin{axis}[
+	ymin=0,ymax=2,
+	x=1cm,
+	y=1cm,
+	axis x line=middle,
+	axis y line=middle,
+	axis line style=->,
+	xlabel={$x$},
+	ylabel={$y$},
+	xmin=0,xmax=4
+	]
+
+\addplot[no marks, black, -] expression[domain=1:3,samples=100]{ln x} node[pos=0.65,anchor=north]{};
+\node at (axis cs: 2,1) {f};
+\node at (axis cs: 2.2,0.4) {A};
+%\draw[>=stealth] (axis cs:1,0) -- (axis cs:1,0.5) node [pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:3,0) -- (axis cs:3,1.098612289) node [pos=0.65,anchor=north]{};
+\end{axis}
+\end{tikzpicture}
+\subsubsection{} %v
+\begin{alignat*}{2}
+\int\limits_{1}^{3} e^{-x} \,dx &=& \left[-e^{-x} \right]_{1}^{3} \\
+&=& \left(-e^{-3} \right) - \left( -e^{-1}\right) = -e^{-3} + e^{-1}
+\end{alignat*}
+\begin{tikzpicture}[>=stealth]
+\begin{axis}[
+	ymin=0,ymax=2,
+	x=1cm,
+	y=1cm,
+	axis x line=middle,
+	axis y line=middle,
+	axis line style=->,
+	xlabel={$x$},
+	ylabel={$y$},
+	xmin=0,xmax=4
+	]
+
+\addplot[no marks, black, -] expression[domain=1:3,samples=100]{e^(-x)} node[pos=0.65,anchor=north]{};
+\node at (axis cs: 2,0.5) {f};
+\node at (axis cs: 1.15,0.12) {A};
+\draw[>=stealth] (axis cs:1,0) -- (axis cs:1,0.367879441) node [pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:3,0) -- (axis cs:3,0.049787068) node [pos=0.65,anchor=north]{};
+\end{axis}
+\end{tikzpicture}
+\section{} %3
+\setcounter{subsubsection}{0}
+\subsubsection{} %i
+\begin{alignat*}{2}
+\int (x^{4} + 2x^{3} -x +5) \,dx &=& \frac{1}{5}x^{5} + \frac{1}{4}x^{4} - \frac{1}{2}x^{2} + 5x
+\end{alignat*}
+\subsubsection{} %ii
+\begin{alignat*}{2}
+\int \frac{1}{\sqrt{x^{3}}} \,dx &=& \int \frac{1}{x^{\frac{3}{2}}} \,dx = \int x^{\frac{2}{3}} \,dx \\
+&=& \frac{3}{5}x^{\frac{5}{3}}
+\end{alignat*}
+\subsubsection{} %iii
+\begin{alignat*}{2}
+\int x \cdot \sin(3x) \,dx &=& \frac{-\cos(3x)}{3} \cdot x + \frac{\sin(3x)}{9} \\
+\intertext{Probe:}
+\left(\frac{-\cos(3x)}{3} \cdot x + \frac{\sin(3x)}{9}\right)' &=& \left(\frac{-\cos(3x)}{3}\right)' \cdot x + \frac{-\cos(3x)}{3} \cdot 1 + \left(\frac{\sin(3x)}{9}\right)' \\
+&=& \frac{\sin(3x) \cdot 3}{3} \cdot x + \frac{-\cos(3x)}{3} + \frac{\cos(3x) \cdot 3}{9} \\
+&=& \sin(3x) \cdot x + \frac{-\cos(3x)}{3} + \frac{\cos(3x)}{3} \\
+&=& \sin(3x) \cdot x
+\end{alignat*}
+\subsubsection{} %iv
+\begin{alignat*}{2}
+\int x^{3} \cdot \ln x \,dx &=& \frac{1}{4}x^{4} \cdot \ln x - \int \frac{1}{4}x^{4} \cdot \frac{1}{x}\,dx \\
+&=& \frac{1}{4}x^{4} \cdot \ln x - \int \frac{1}{4}x^{3}\,dx \\
+&=& \frac{1}{4}x^{4} \cdot \ln x - \frac{1}{16}x^{4} \\
+\intertext{Probe:}
+\left(\frac{1}{4}x^{4} \cdot \ln x - \frac{1}{4}x^{4}\right)' &=& (\frac{1}{4}x^{4} \cdot \ln x)' - \left(\frac{1}{16}x^{4}\right)' \\
+&=& x^{3} \cdot \ln x + \frac{1}{4}x^{4} \cdot \frac{1}{x} - \frac{1}{4}x^{3} \\
+&=& x^{3} \cdot \ln x + \frac{1}{4}x^{3} - \frac{1}{4}x^{3}\\
+&=& x^{3} \cdot \ln x
+\end{alignat*}
+\subsubsection{} %v
+\begin{alignat*}{2}
+\int x^{2}e^{x} \,dx &=& x^{2}e^{x} - \int 2x \cdot e^{x}\,dx \\
+&=& x^{2}e^{x} - 2 \cdot \int x \cdot e^{x}\,dx \\
+&=& x^{2}e^{x} - 2 \cdot \left(x \cdot e^{x} - \int 1 \cdot e^{x}\,dx \right) \\
+&=& x^{2}e^{x} - 2 \cdot (x \cdot e^{x} - e^{x}) \\
+&=& x^{2}e^{x} - 2x \cdot e^{x} +2e^{x} \\
+\intertext{Probe:}
+(x^{2}e^{x} - 2x \cdot e^{x} +2e^{x})' &=& (x^{2}e^{x})' - (2x \cdot e^{x})' + 2e^{x} \\
+&=& (2x \cdot e^{x} + x^{2}e^{x}) - (2e^{x} + 2x \cdot e^{x}) + 2e^{x} \\
+&=& 2x \cdot e^{x} + x^{2}e^{x} - 2e^{x} - 2x \cdot e^{x} + 2e^{x} \\
+&=& x^{2}e^{x}
+\end{alignat*}
+\section{} %4
+\setcounter{subsubsection}{0}
+\subsubsection{} %i
+\begin{alignat*}{2}
+t &=& \sqrt{2x+5} \\
+\frac{dt}{dx} &=& \frac{2}{2 \cdot \sqrt{2x+5}} \\
+\sqrt{2x+5}\,dt &=& dx \\
+dx &=& t\,dt\\
+\int \cos(\sqrt{2x+5}) \,dx &=& \int \cos(t) \cdot t\,dt \\
+&=& \int \cos(t) \cdot t\,dt \\
+&=& \sin(t) \cdot t - \int \sin(t) \cdot 1 \,dt \\
+&=& \sin(t) \cdot t + \cos(t) \\
+\int \cos(\sqrt{2x+5}) \,dx &=& \sqrt{2x+5} \cdot \sin(\sqrt{2x+5}) + \cos(\sqrt{2x+5})
+\end{alignat*}
+\begin{alignat*}{3}
+\intertext{Probe:}
+\left(\sqrt{2x+5} \cdot \sin(\sqrt{2x+5}) + \cos(\sqrt{2x+5})\right)' &=& (\sqrt{2x+5} \cdot \sin(\sqrt{2x+5}))' + (\cos(\sqrt{2x+5}))' \\
+\intertext{Ableiten}
+&=\begin{split}\frac{2 \cdot \sin(\sqrt{2x+5})}{2 \cdot \sqrt{2x+5}}\\ + \sqrt{2x+5} \cdot \frac{\cos(\sqrt{2x+5}) \cdot 2}{2 \cdot \sqrt{2x+5}} \\ + (-\sin(\sqrt{2x+5}) \cdot (\sqrt{2x+5})')\end{split}\\
+\intertext{Zusammenfassen und Ableiten}
+&= \begin{split}\frac{\sin(\sqrt{2x+5})}{\sqrt{2x+5}} + \cos(\sqrt{2x+5})\\ - \frac{\sin(\sqrt{2x+5}) \cdot 2}{2 \cdot \sqrt{2x+5}}\end{split} \\
+\intertext{Zusammenfassen}
+&= \begin{split}\frac{\sin(\sqrt{2x+5})}{\sqrt{2x+5}} + \cos(\sqrt{2x+5})\\ - \frac{\sin(\sqrt{2x+5})}{\sqrt{2x+5}}\end{split} \\
+\intertext{Zusammenfassen}
+&=& \cos(\sqrt{2x+5})
+\end{alignat*}
+\subsubsection{} %ii
+\begin{alignat*}{2}
+t &=& \sqrt[3]{x} \\
+\frac{dt}{dx} &=& \frac{1}{3 \cdot \left(\sqrt[3]{x}\right)^{2}} \\
+dx &=& 3 \cdot \left(\sqrt[3]{x}\right)^{2}\,dt \\
+dx &=& 3 \cdot t^{2}\,dt\\
+\int \sin(\sqrt[3]{x})\,dx &=& \int \sin(t) \cdot 3t^{2}\,dt\\
+&=& 3 \int \sin(t) \cdot t^{2}\,dt \\
+&=& 3\left(-\cos(t) \cdot t^{2} - \int -\cos(t) \cdot 2t \right) \\
+3\left(-\cos(t) \cdot t^{2} + 2\int \cos(t) \cdot t \right) \\
+&=& 3\left(-\cos(t) \cdot t^{2} + 2\left( \sin(t) \cdot t - \int \sin(t) \cdot 1 \right)\right) \\
+&=& 3\left(-\cos(t) \cdot t^{2} + 2\left( \sin(t) \cdot t + \cos(t) \right)\right) \\
+&=& 3\left(-\cos(t) \cdot t^{2} + \sin(t) \cdot 2t + 2 \cdot \cos(t)\right) \\
+&=& -3t^{2} \cdot \cos(t) + 6t \cdot \sin(t) + 6 \cdot \cos(t) \\
+\int \sin(\sqrt[3]{x})\,dx &=& -3 \cdot \sqrt[3]{x}^{2} \cdot \cos(\sqrt[3]{x}) + 6 \cdot \sqrt[3]{x} \cdot \sin(\sqrt[3]{x}) + 6 \cdot \cos(\sqrt[3]{x}) \\
+&=& -3 \cdot x^{\frac{2}{3}} \cdot \cos(x^{\frac{1}{3}}) + 6 \cdot x^{\frac{1}{3}} \cdot \sin(x^{\frac{1}{3}}) + 6 \cdot \cos(x^{\frac{1}{3}})
+\end{alignat*}
+\begin{alignat*}{2}
+\intertext{Probe:}
+&& \left(-3 \cdot x^{\frac{2}{3}} \cdot \cos(x^{\frac{1}{3}}) + 6 \cdot x^{\frac{1}{3}} \cdot \sin(x^{\frac{1}{3}}) + 6 \cdot \cos(x^{\frac{1}{3}})\right)' \\
+&=& \left(-3 \cdot x^{\frac{2}{3}} \cdot \cos(x^{\frac{1}{3}})\right)' + 6\left(\left(x^{\frac{1}{3}} \cdot \sin(x^{\frac{1}{3}})\right)' + \left(\cos(x^{\frac{1}{3}})\right)'\right) \\
+&=& -3\left(\frac{2}{3}x^{-\frac{1}{3}} \cdot \cos(x^{\frac{1}{3}}) + x^{\frac{2}{3}} \cdot (-\sin(x^{\frac{1}{3}})) \cdot \frac{1}{3}x^{-\frac{2}{3}}\right)+ 6\left(\left(x^{\frac{1}{3}} \cdot \sin(x^{\frac{1}{3}})\right)' + \left(\cos(x^{\frac{1}{3}})\right)'\right) \\
+&=& -3\left(\frac{2}{3}x^{-\frac{1}{3}} \cdot \cos(x^{\frac{1}{3}}) - \frac{1}{3} \cdot \sin(x^{\frac{1}{3}})\right)+ 6\left(\left(x^{\frac{1}{3}} \cdot \sin(x^{\frac{1}{3}})\right)' + \left(\cos(x^{\frac{1}{3}})\right)'\right) \\
+\intertext{Ableiten}
+&= \begin{split}-3\left(\frac{2}{3}x^{-\frac{1}{3}} \cdot \cos(x^{\frac{1}{3}}) - \frac{1}{3} \cdot \sin(x^{\frac{1}{3}})\right)\\ + 6\left(\left(\frac{1}{3}x^{-\frac{2}{3}} \cdot \sin(x^{\frac{1}{3}}) + x^{\frac{1}{3}} \cdot \cos(x^{\frac{1}{3}}) \cdot \frac{1}{3}x^{-\frac{2}{3}} \right) + \left(\cos(x^{\frac{1}{3}})\right)'\right) \end{split} \\
+\intertext{Zusammenfassen}
+&= \begin{split}-3\left(\frac{2}{3}x^{-\frac{1}{3}} \cdot \cos(x^{\frac{1}{3}}) - \frac{1}{3} \cdot \sin(x^{\frac{1}{3}})\right)\\ + 6\left(\frac{1}{3}x^{-\frac{2}{3}} \cdot \sin(x^{\frac{1}{3}}) + \frac{1}{3}x^{-\frac{1}{3}} \cdot \cos(x^{\frac{1}{3}}) + \left(\cos(x^{\frac{1}{3}})\right)'\right) \end{split} \\
+\intertext{Ableiten}
+&= \begin{split}-3\left(\frac{2}{3}x^{-\frac{1}{3}} \cdot \cos(x^{\frac{1}{3}}) - \frac{1}{3} \cdot \sin(x^{\frac{1}{3}})\right)\\ + 6\left(\frac{1}{3}x^{-\frac{2}{3}} \cdot \sin(x^{\frac{1}{3}}) + \frac{1}{3}x^{-\frac{1}{3}} \cdot \cos(x^{\frac{1}{3}}) - \sin(x^{\frac{1}{3}}) \cdot \frac{1}{3}x^{-\frac{2}{3}} \right) \end{split} \\
+\intertext{Zusammenfassen}
+&= \begin{split}-3\left(\frac{2}{3}x^{-\frac{1}{3}} \cdot \cos(x^{\frac{1}{3}}) - \frac{1}{3} \cdot \sin(x^{\frac{1}{3}})\right)\\ + 6\left(\frac{1}{3}x^{-\frac{1}{3}} \cdot \cos(x^{\frac{1}{3}})\right) \end{split} \\
+\intertext{Zusammenfassen}
+&=& -2x^{-\frac{1}{3}} \cdot \cos(x^{\frac{1}{3}}) + \sin(x^{\frac{1}{3}}) + 2x^{-\frac{1}{3}} \cdot \cos(x^{\frac{1}{3}}) \\
+\intertext{Zusammenfassen}
+&=& \sin(x^{\frac{1}{3}})
+\end{alignat*}
+\subsubsection{} %iii
+\begin{alignat*}{2}
+t &=& \sqrt{\frac{2}{7}x+3} \\
+\frac{dt}{dx} &=& \frac{2}{14 \cdot \sqrt{\frac{2}{7}x+3}} \\
+\frac{dt}{dx} &=& \frac{1}{7 \cdot \sqrt{\frac{2}{7}x+3}} \\
+dx &=& 7 \cdot \sqrt{\frac{2}{7}x+3}\, dt \\
+&=& 7t\\
+\int e^{\sqrt{\frac{2}{7}x+3}}\,dx &=& \int e^{t} \cdot 7t\,dt \\
+&=& e^{t} \cdot 7t - \int e^{t} \cdot 7\,dt \\
+&=& e^{t} \cdot 7t - 7\int e^{t}\,dt \\
+&=& e^{t} \cdot 7t - 7 \cdot e^{t} \\
+&=& e^{t}(7t - 7) \\
+&=& e^{\sqrt{\frac{2}{7}x+3}}\left(7 \cdot \sqrt{\frac{2}{7}x+3} - 7\right)
+\end{alignat*}
+\begin{alignat*}{2}
+\intertext{Probe:}
+&& \left(e^{\sqrt{\frac{2}{7}x+3}}\left(7 \cdot \sqrt{\frac{2}{7}x+3} - 7\right) \right)' \\
+&=& \left(e^{\sqrt{\frac{2}{7}x+3}}\right)' \cdot \left(7 \cdot \sqrt{\frac{2}{7}x+3} - 7\right) + \left(e^{\sqrt{\frac{2}{7}x+3}}\right) \cdot \left(7 \cdot \sqrt{\frac{2}{7}x+3} - 7\right)' \\
+&=& e^{\sqrt{\frac{2}{7}x+3}} \cdot \frac{2}{14 \cdot \sqrt{\frac{2}{7}x+3}} \cdot \left(7 \cdot \sqrt{\frac{2}{7}x+3} - 7\right) + \left(e^{\sqrt{\frac{2}{7}x+3}}\right) \cdot \left(7 \cdot \left(\frac{2}{7}x+3\right)^{\frac{1}{2}} - 7\right)' \\
+&=& e^{\sqrt{\frac{2}{7}x+3}} \cdot \frac{1}{7 \cdot \sqrt{\frac{2}{7}x+3}} \cdot \left(7 \cdot \sqrt{\frac{2}{7}x+3} - 7\right) + \left(e^{\sqrt{\frac{2}{7}x+3}}\right) \cdot \left(7 \cdot \left(\frac{2}{7}x+3\right)^{\frac{1}{2}}\right)'\\
+&=& e^{\sqrt{\frac{2}{7}x+3}} \cdot \frac{1}{7 \cdot \sqrt{\frac{2}{7}x+3}} \cdot \left(7 \cdot \sqrt{\frac{2}{7}x+3} - 7\right) + \left(e^{\sqrt{\frac{2}{7}x+3}}\right) \cdot \left(\frac{7}{2} \cdot \left(\frac{2}{7}x+3\right)^{-\frac{1}{2}} \cdot \frac{2}{7}\right) \\
+\intertext{Zusammenfassen}
+&=& e^{\sqrt{\frac{2}{7}x+3}} \cdot \left(1 - \frac{1}{\sqrt{\frac{2}{7}x+3}}\right) + \left(e^{\sqrt{\frac{2}{7}x+3}}\right) \cdot \left(\frac{2}{7}x+3\right)^{-\frac{1}{2}} \\
+\intertext{Ausklammern}
+&=& e^{\sqrt{\frac{2}{7}x+3}} \left(\left(1 - \frac{1}{\sqrt{\frac{2}{7}x+3}}\right) + \frac{1}{\sqrt{\frac{2}{7}x+3}} \right) \\
+\intertext{Klammern auflösen}
+&=& e^{\sqrt{\frac{2}{7}x+3}} \left(1 - \frac{1}{\sqrt{\frac{2}{7}x+3}} + \frac{1}{\sqrt{\frac{2}{7}x+3}}\right) \\
+\intertext{Zusammenfassen}
+&=& e^{\sqrt{\frac{2}{7}x+3}}
+\end{alignat*}
+\subsubsection{} %iv
+\begin{alignat*}{2}
+t &=& \ln(2x+1) \\
+e^{t} &=& 2x+1 \\
+x &=& \frac{e^{t}-1}{2} \\
+\frac{dx}{dt} &=& \frac{1}{2}\left(e^{t}\right) \\
+dx &=& \frac{1}{2} \cdot e^{t}\,dt \\
+\int \left(\ln (2x+1)\right)^{2}\,dx &=& \int t^{2} \cdot \frac{1}{2} \cdot e^{t}\,dt \\
+&=& \frac{1}{2} \int t^{2} \cdot e^{t} \\
+&=& \frac{1}{2}\left(t^{2} \cdot e^{t} - \int 2t \cdot e^{t} \right) \\
+&=& \frac{1}{2}\left(t^{2} \cdot e^{t} - 2\int t \cdot e^{t} \right) \\
+&=& \frac{1}{2}\left(t^{2} \cdot e^{t} - 2\left(t \cdot e^{t} - \int 1 \cdot e^{t} \right)\right) \\
+&=& \frac{1}{2}\left(t^{2} \cdot e^{t} - 2t \cdot e^{t} + 2 \cdot e^{t} \right) \\
+&=& \frac{1}{2}t^{2} \cdot e^{t} - t \cdot e^{t} + e^{t} \\
+&=& \frac{1}{2} \left(\ln(2x+1)\right)^{2} \cdot e^{\ln(2x+1)} - \ln(2x+1) \cdot e^{\ln(2x+1)} + e^{\ln(2x+1)} \\
+&=& \left(\frac{1}{2} \left(\ln(2x+1)\right)^{2} - \ln(2x+1) + 1\right)e^{\ln(2x+1)} \\
+&=& \left(\frac{1}{2} \left(\ln(2x+1)\right)^{2} - \ln(2x+1) + 1\right) \cdot (2x+1)
+\end{alignat*}
+\begin{alignat*}{2}
+\intertext{Probe:}
+&& \left(\left(\frac{1}{2} \left(\ln(2x+1)\right)^{2} - \ln(2x+1) + 1\right)\cdot (2x+1)\right)' \\
+&=& \left(\frac{1}{2} \left(\ln(2x+1)\right)^{2} - \ln(2x+1) + 1\right)' \cdot (2x+1) + \left(\frac{1}{2}\left(\ln(2x+1)\right)^{2} - \ln(2x+1) + 1\right) \cdot (2x+1)' \\
+&=& \left(\frac{2 \cdot \ln(2x+1)}{2x+1} - \frac{2}{2x+1}\right) \cdot (2x+1) + \left(\frac{1}{2}\left(\ln(2x+1)\right)^{2} - \ln(2x+1) + 1\right) \cdot 2 \\
+&=& \left(\frac{2 \cdot \ln(2x+1) - 2}{2x+1}\right) \cdot (2x+1) + \left(\frac{1}{2}\left(\ln(2x+1)\right)^{2} - \ln(2x+1) + 1\right) \cdot 2 \\
+\intertext{Zusammenfassen}
+&=& \frac{2 \cdot \ln(2x+1) \cdot (2x+1) - 2 \cdot (2x+1)}{2x+1} + \left(\frac{1}{2}\left(\ln(2x+1)\right)^{2} - \ln(2x+1) + 1\right) \cdot 2 \\
+\intertext{Zusammenfassen}
+&=& 2 \cdot \ln(2x+1) - 2 + \left(\frac{1}{2}\left(\ln(2x+1)\right)^{2} - \ln(2x+1) + 1\right) \cdot 2 \\
+\intertext{Zusammenfassen}
+&=& 2 \cdot \ln(2x+1) - 2 + \left(\ln(2x+1)\right)^{2} - 2 \cdot \ln(2x+1) + 2 \\
+\intertext{Zusammenfassen}
+&=& \left(\ln(2x+1)\right)^{2}
+\end{alignat*}
+\section{} %5
+\setcounter{subsubsection}{0}
+\subsubsection{} %i
+\begin{alignat*}{2}
+f(x) &=& x^{3} - 12x^{2} + 36x + 1\\
+f'(x) &=& 3x^{2} -24x + 36 \\
+f''(x) &=& 6x - 24 \\
+f'''(x) &=& 6 \\
+\intertext{Berechnung Nullstellen erste Ableitung}
+f'(x) &=& 0 \\
+0 &=& 3x^{2} - 24x + 36 \\
+0 &=& x^{2} - 8x + 12 \\
+\intertext{pq-Formel}
+x_{1,2} &=& 4 \pm \sqrt{4^{2} -12} \\
+&=& 4 \pm \sqrt{16 - 12} \\
+&=& 4 \pm \sqrt{4} \\
+x_{1} &=& 4 + 2 = 6 \\
+x_{2} &=& 4-2 = 2 \\
+\intertext{Einsetzen in zweite Ableitung}
+f''(2) &=& 6 \cdot 2 - 24 \\
+&=& -12 \Rightarrow \text{ Maximum} \\
+f''(6) &=& 6 \cdot 6 - 24 \\
+&=& 12 \Rightarrow \text{ Minimum} \\
+\intertext{Einsetzen in Funktion}
+f(2) &=& 2^{3} - 12 \cdot 2^{2} + 36 \cdot 2 + 1 \\
+&=& 8 - 48 + 72 + 1 \\
+&=& 33 \\
+f(6) &=& 6^{3} - 12 \cdot 6^{2} + 36 \cdot 6 + 1 \\
+&=& 216 - 12 \cdot 36 + 216 + 1 \\
+&=& 216 - 432 + 216 + 1 \\
+&=& 1 \\
+\intertext{Überprüfen der Intervallgrenzen - nur $f(0)$ noch nötig, da $f(6)$ bereits berechnet}
+f(0) &=& 0^{3} - 12 \cdot 0^{2} + 36 \cdot 0 + 1 \\
+&=& 1
+\end{alignat*}
+Die Tageshöchsttemperatur ist demnach $33\,^{\circ} \mathrm{C}$.
+\subsubsection{} %ii
+Wie in i) berechnet, ist die Tagestiefsttemperatur $1\,^{\circ} \mathrm{C}$.
+\subsubsection{} %iii
+Der Mittelwert wird klassisch so berechnet: Addieren aller Einzelwerte und Teilen der Summe durch deren Anzahl. In diesem Fall entspricht der Flächeninhalt zwischen dem Integral und der x-Achse der Summe aller einzelnen Temperaturen. Nun muss das Ergebnis noch mal $\frac{1}{6}$ genommen werden.\\
+\begin{alignat*}{2}
+\frac{1}{6} \cdot \int\limits_{0}^{6} (x^{3} - 12x^{2} + 36x +1) \,dx &=& \frac{1}{6} \cdot \left[\frac{1}{4}x^{4} - 4x^{3} + 18x^{2} + x \right]_{0}^{6} \\
+&=& \frac{1}{6} \cdot \left(\left(\frac{1}{4} \cdot 6^{4} - 4 \cdot 6^{3} + 18 \cdot 6^{2} + 6 \right) - \left(\frac{1}{4} \cdot 0^{4} - 4 \cdot 0^{3} + 18 \cdot 0^{2} + 0 \right)\right) \\ 
+&=& \frac{1}{6} \cdot \left(\frac{1}{4} \cdot 1296 - 4 \cdot 216 + 18 \cdot 36 + 6 \right)\\ 
+&=& \frac{1}{6} \cdot \left(324 - 864 + 648 + 6 \right) \\
+&=& \frac{1}{6} \cdot 114 = 19
+\end{alignat*}\\
+Die Durchschnittstemperatur des Tages ist demnach $19\,^{\circ} \mathrm{C}$.
+\end{document}
