@@ -1,0 +1,402 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{qtree}
+\usepackage[locale=DE,exponent-product=\cdot ,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage[scaled=0.78]{luximono}
+\usepackage{listings}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,decorations.text,arrows}
+\pagenumbering{arabic}
+\def\thesection{7.\arabic{section})}
+\def\thesubsection{(\alph{subsection})}
+\def\thesubsubsection{(\arabic{subsubsection})}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\hyphenation{Nach-komma-stel-len}
+\lstnewenvironment{java}[1][]{%
+	\lstset{basicstyle=\ttfamily ,backgroundcolor=\color[gray]{.95},columns=flexible,fontadjust=true,language=Java,tabsize=4,numbers=none,#1}%
+}{%
+}
+\graphicspath{{D:/Users/Jim-Studium/Pictures/Studium/RS/}}
+
+\tikzstyle{huffmanNodes}=[matrix of nodes,
+	nodes={circle,thin,draw=black!20,minimum size=10mm,text height=1.5ex,text depth=.25ex,inner sep=-10pt}]
+\tikzstyle{huffmanBase}=[matrix of nodes,
+	nodes={minimum size=10mm,text height=1.5ex,text depth=.25ex,inner sep=-10pt}]
+\begin{document}
+\author{Jim Martens (Matrikelnummer 6420323) \and Marlo Kornblum (Matrikelnummer 6427301)}
+\title{Rechnerstrukturen Aufgabenblatt 6}
+\maketitle
+
+\section{} %7.1
+\subsection{} %a
+DNF:\\
+\begin{alignat*}{2}
+f(x) &=& ((\overline{x_{3}} \vee \overline{x_{2}}) \wedge (\overline{x_{2}} \vee \overline{x_{1}}))\vee ((x_{3} \vee \overline{x_{2}}) \wedge (\overline{x_{2}} \vee \overline{x_{1}})) \\
+&& \vee ((x_{3} \vee x_{2}) \wedge (x_{2} \vee \overline{x_{1}})) \vee ((x_{3} \vee x_{2}) \wedge (x_{2} \vee x_{1}))
+\end{alignat*}\\
+KNF:\\
+\begin{alignat*}{2}
+f(x) &=& ((x_{3} \vee x_{2}) \wedge (x_{2} \vee x_{1})) \wedge ((x_{3} \vee x_{2}) \wedge (x_{2} \vee \overline{x_{1}})) \wedge ((x_{3} \vee \overline{x_{2}}) \\
+&& \wedge (x_{2} \vee x_{1})) \wedge ((x_{3} \vee \overline{x_{2}}) \wedge (x_{2} \vee \overline{x_{1}})) \wedge ((\overline{x_{3}} \vee x_{2}) \wedge (x_{2} \vee \overline{x_{1}}))
+\end{alignat*}\\
+Reed-Muller Form:\\
+\begin{alignat*}{2}
+f(x) &=& (x_{3} \vee \overline{x_{2}}) \wedge (x_{2} \vee \overline{x_{1}}) \\
+&=& (x_{3} \oplus \overline{x_{2}} \oplus x_{3}\overline{x_{2}}) \wedge (x_{2} \oplus \overline{x_{1}} \oplus x_{2}\overline{x_{1}}) \\
+&=& (x_{3} \oplus (x_{2} \oplus 1) \oplus x_{3}(x_{2} \oplus 1)) \wedge (x_{2} \oplus (x_{1} \oplus 1) \oplus x_{2}(x_{1} \oplus 1)) \\
+&=& (x_{3} \oplus x_{2} \oplus 1 \oplus x_{3}x_{2} \oplus x_{3}) \wedge (x_{2} \oplus x_{1} \oplus 1 \oplus x_{2}x_{1} \oplus x_{2}) \\
+&=& (x_{2} \oplus 1 \oplus x_{3}x_{2}) \wedge (x_{1} \oplus 1 \oplus x_{2}x_{1})
+\end{alignat*}
+\subsection{} %b
+DNF:\\
+\begin{alignat*}{2}
+g(x) &=& (\overline{x_{3}} \oplus x_{1}) \vee (x_{3} \oplus \overline{x_{1}})
+\end{alignat*}\\
+KNF:\\
+\begin{alignat*}{2}
+g(x) &=& (x_{3} \oplus x_{1}) \wedge (\overline{x_{3}} \oplus \overline{x_{1}})
+\end{alignat*}\\
+Reed-Muller Form:\\
+\begin{alignat*}{2}
+g(x) &=& \overline{x_{3}} \oplus \overline{x_{1}} \\
+&=& (x_{3} \oplus 1) \oplus (x_{1} \oplus 1) \\
+&=& x_{3} \oplus 1 \oplus x_{1} \oplus 1 \\
+&=& x_{3} \oplus x_{1}
+\end{alignat*}
+\section{} %7.2
+\subsection{} %a
+AND: $a \wedge b = \overline{(\overline{a \wedge b}) \wedge (\overline{a \wedge b})}$\\
+ODER: $a \vee b = \overline{\overline{a} \wedge \overline{b}} = \overline{(\overline{a \wedge a}) \wedge (\overline{b \wedge b})}$\\
+Negation: $\overline{a} = \overline{a \wedge a}$\\
+\subsection{} %b
+\begin{alignat*}{2}
+f(x_{3}, x_{2}, x_{1}) &=&& (\overline{x_{3}}(\overline{x_{2}} \vee x_{1})) \vee (x_{1}(\overline{x_{2}} \vee x_{1})) \\
+&=&& ((\overline{x_{3}} \wedge \overline{x_{2}}) \vee \overline{x_{3}}x_{1}) \vee (x_{1}\overline{x_{2}} \vee x_{1}x_{1})
+%&=&& ( \overline{( \overline{( \overline{x_{3}} \wedge \overline{x_{2}} ) \wedge ( \overline{x_{3}} \wedge \overline{x_{2}} ) } ) \wedge ( \overline{( \overline{x_{3}}x_{1} ) \wedge ( \overline{x_{3}}x_{1} )} )} ) \vee \\ 
+%&&&( \overline{ (\overline{ (x_{1} \wedge \overline{x_{2}}) \wedge (x_{1} \wedge \overline{x_{2}})}) \wedge (\overline{ (x_{1} \wedge x_{1}) \wedge (x_{1} \wedge x_{1})}) } ) \\
+%
+%&=&& (\overline{(\overline{( (\overline{x_{3} \wedge x_{3}}) \wedge (\overline{x_{2} \wedge x_{2}}))} \wedge ((\overline{x_{3} \wedge x_{3}}) \wedge (\overline{x_{2} \wedge x_{2}) )}) \wedge (\overline{( (\overline{x_{3} \wedge x_{3}}) \wedge x_{1}) \wedge ( (\overline{x_{3} \wedge x_{3}}) \wedge x_{1})})}) \vee \\
+%&&&(\overline{(\overline{(x_{1} \wedge (\overline{x_{2} \wedge x_{2}})) \wedge (x_{1} \wedge (\overline{x_{2} \wedge x_{2}}) )}) \wedge (\overline{ (x_{1} \wedge x_{1}) \wedge (x_{1} \wedge x_{1})})}) \\
+%
+%&=&& \overline{(\overline{(\overline{( (\overline{x_{3} \wedge x_{3}}) \wedge (\overline{x_{2} \wedge x_{2}}))} \wedge ((\overline{x_{3} \wedge x_{3}}) \wedge (\overline{x_{2} \wedge x_{2}) )}) \wedge (\overline{( (\overline{x_{3} \wedge x_{3}}) \wedge x_{1}) \wedge ( (\overline{x_{3} \wedge x_{3}}) \wedge x_{1})})}) \wedge (\overline{(\overline{( (\overline{x_{3} \wedge x_{3}}) \wedge (\overline{x_{2} \wedge x_{2}}))} \wedge ((\overline{x_{3} \wedge x_{3}}) \wedge (\overline{x_{2} \wedge x_{2}) )}) \wedge (\overline{( (\overline{x_{3} \wedge x_{3}}) \wedge x_{1}) \wedge ( (\overline{x_{3} \wedge x_{3}}) \wedge x_{1})})})} \wedge \\
+%&&&\overline{(\overline{(\overline{(x_{1} \wedge (\overline{x_{2} \wedge x_{2}})) \wedge (x_{1} \wedge (\overline{x_{2} \wedge x_{2}}) )}) \wedge (\overline{ (x_{1} \wedge x_{1}) \wedge (x_{1} \wedge x_{1})})}) \wedge (\overline{(\overline{(x_{1} \wedge (\overline{x_{2} \wedge x_{2}})) \wedge (x_{1} \wedge (\overline{x_{2} \wedge x_{2}}) )}) \wedge (\overline{ (x_{1} \wedge x_{1}) \wedge (x_{1} \wedge x_{1})})})}
+%wie soll das bitte gehen? (Trick17?)
+\end{alignat*}
+
+\section{} %7.3
+\subsection{} %a
+\begin{tabular}{r|ccccc}
+dez.& $x_{3}$	& $x_{2}$	& $x_{1}$	& $x_{0}$	& A \\
+\hline
+0	& 0 		& 0			& 0			& 0		  	& 1 \\
+1	& 0			& 0			& 0			& 1		  	& 0 \\
+2	& 0			& 0			& 1			& 0			& 1 \\
+3	& 0			& 0			& 1			& 1			& 1 \\
+4	& 0			& 1			& 0			& 0			& 0 \\
+5	& 0			& 1			& 0 		& 1			& 1 \\
+6	& 0			& 1			& 1			& 0			& 1 \\
+7	& 0			& 1			& 1			& 1			& 1 \\
+8	& 1			& 0			& 0			& 0			& 1 \\
+9	& 1			& 0			& 0			& 1			& 1 \\
+10	& 1			& 0			& 1			& 0			& * \\
+11	& 1			& 0			& 1 		& 1			& * \\
+12	& 1			& 1			& 0			& 0			& * \\
+13 	& 1			& 1			& 0			& 1			& * \\
+14	& 1			& 1			& 1			& 0			& * \\
+15	& 1			& 1			& 1			& 1			& *
+\end{tabular}
+\begin{tikzpicture}
+	\draw (0,0) -- +(2,0); %obere Kante
+	\draw (0,0) -- +(0,-2); %linke Kante
+	\draw (1,0) -- +(0,-2); %mittlere vertikale Kante 
+	\draw (0,-1) -- +(2,0); %mittlere horizontale Kante
+	\draw (0,-2) -- +(2,0); %untere Kante
+	\draw (2,0) -- +(0,-2); %rechte Kante
+	\draw (0.5,0) -- +(0,-2); %linke mittlere Kante
+	\draw (1.5,0) -- +(0,-2); %rechte mittlere Kante
+	\draw (0,-0.5) -- +(2,0); %obere mittlere Kante
+	\draw (0,-1.5) -- +(2,0); %untere mittlere Kante
+	\draw (0,0) -- +(-0.5,0.5); %schräger Strich
+	
+	\node at ++(0.2,0.25) (start11) {$00$}; %Variablenzeile 0
+	\node at ++(0.7,0.25) (start12) {$01$};
+	\node at ++(1.2,0.25) (start13) {$11$};
+	\node at ++(1.7,0.25) (start14) {$10$};
+	
+	\node at ++(-0.25,-0.2) (start10) {$00$}; %Variablenspalte 0
+	\node at ++(-0.25,-0.7) (start20) {$01$};
+	\node at ++(-0.25,-1.2) (start30) {$11$};
+	\node at ++(-0.25,-1.7) (start40) {$10$};
+	
+	\node at ++(-0.8,0.2) (var1) {$x3\,x2$};
+	\node at ++(0.0,0.6) (var1) {$x1\,x0$};
+	
+	\node at ++(0.25, -0.25) (row11) {$1$}; %erste Zeile
+	\node at ++(0.75, -0.25) (row12) {$0$};
+	\node at ++(1.25, -0.25) (row13) {$1$};
+	\node at ++(1.75, -0.25) (row14) {$1$};
+	
+	\node at ++(0.25, -0.75) (row21) {$0$}; %zweite Zeile
+	\node at ++(0.75, -0.75) (row22) {$1$};
+	\node at ++(1.25, -0.75) (row23) {$1$};
+	\node at ++(1.75, -0.75) (row24) {$1$};
+	
+	\node at ++(0.25, -1.25) (row31) {$*$}; %dritte Zeile
+	\node at ++(0.75, -1.25) (row32) {$*$};
+	\node at ++(1.25, -1.25) (row33) {$*$};
+	\node at ++(1.75, -1.25) (row34) {$*$};
+	
+	\node at ++(0.25, -1.75) (row41) {$1$}; %vierte Zeile
+	\node at ++(0.75, -1.75) (row42) {$1$};
+	\node at ++(1.25, -1.75) (row43) {$*$};
+	\node at ++(1.75, -1.75) (row44) {$*$};
+\end{tikzpicture}
+
+\begin{figure}[h]
+\begin{tabular}{r|ccccc}
+dez.& $x_{3}$	& $x_{2}$	& $x_{1}$	& $x_{0}$	& B \\
+\hline
+0	& 0 		& 0			& 0			& 0		  	& 1 \\
+1	& 0			& 0			& 0			& 1		  	& 1 \\
+2	& 0			& 0			& 1			& 0			& 1 \\
+3	& 0			& 0			& 1			& 1			& 1 \\
+4	& 0			& 1			& 0			& 0			& 1 \\
+5	& 0			& 1			& 0 		& 1			& 0 \\
+6	& 0			& 1			& 1			& 0			& 0 \\
+7	& 0			& 1			& 1			& 1			& 1 \\
+8	& 1			& 0			& 0			& 0			& 1 \\
+9	& 1			& 0			& 0			& 1			& 1 \\
+10	& 1			& 0			& 1			& 0			& * \\
+11	& 1			& 0			& 1 		& 1			& * \\
+12	& 1			& 1			& 0			& 0			& * \\
+13 	& 1			& 1			& 0			& 1			& * \\
+14	& 1			& 1			& 1			& 0			& * \\
+15	& 1			& 1			& 1			& 1			& *
+\end{tabular}
+\begin{tikzpicture}
+	\draw (0,0) -- +(2,0); %obere Kante
+	\draw (0,0) -- +(0,-2); %linke Kante
+	\draw (1,0) -- +(0,-2); %mittlere vertikale Kante 
+	\draw (0,-1) -- +(2,0); %mittlere horizontale Kante
+	\draw (0,-2) -- +(2,0); %untere Kante
+	\draw (2,0) -- +(0,-2); %rechte Kante
+	\draw (0.5,0) -- +(0,-2); %linke mittlere Kante
+	\draw (1.5,0) -- +(0,-2); %rechte mittlere Kante
+	\draw (0,-0.5) -- +(2,0); %obere mittlere Kante
+	\draw (0,-1.5) -- +(2,0); %untere mittlere Kante
+	\draw (0,0) -- +(-0.5,0.5); %schräger Strich
+	
+	\node at ++(0.2,0.25) (start11) {$00$}; %Variablenzeile 0
+	\node at ++(0.7,0.25) (start12) {$01$};
+	\node at ++(1.2,0.25) (start13) {$11$};
+	\node at ++(1.7,0.25) (start14) {$10$};
+	
+	\node at ++(-0.25,-0.2) (start10) {$00$}; %Variablenspalte 0
+	\node at ++(-0.25,-0.7) (start20) {$01$};
+	\node at ++(-0.25,-1.2) (start30) {$11$};
+	\node at ++(-0.25,-1.7) (start40) {$10$};
+	
+	\node at ++(-0.8,0.2) (var1) {$x3\,x2$};
+	\node at ++(0.0,0.6) (var1) {$x1\,x0$};
+	
+	\node at ++(0.25, -0.25) (row11) {$1$}; %erste Zeile
+	\node at ++(0.75, -0.25) (row12) {$1$};
+	\node at ++(1.25, -0.25) (row13) {$1$};
+	\node at ++(1.75, -0.25) (row14) {$1$};
+	
+	\node at ++(0.25, -0.75) (row21) {$1$}; %zweite Zeile
+	\node at ++(0.75, -0.75) (row22) {$0$};
+	\node at ++(1.25, -0.75) (row23) {$1$};
+	\node at ++(1.75, -0.75) (row24) {$0$};
+	
+	\node at ++(0.25, -1.25) (row31) {$*$}; %dritte Zeile
+	\node at ++(0.75, -1.25) (row32) {$*$};
+	\node at ++(1.25, -1.25) (row33) {$*$};
+	\node at ++(1.75, -1.25) (row34) {$*$};
+	
+	\node at ++(0.25, -1.75) (row41) {$1$}; %vierte Zeile
+	\node at ++(0.75, -1.75) (row42) {$1$};
+	\node at ++(1.25, -1.75) (row43) {$*$};
+	\node at ++(1.75, -1.75) (row44) {$*$};
+\end{tikzpicture}
+\end{figure}
+\subsection{} %b
+A:\\
+Es lassen sich vier Schleifen bilden. Man kann die dritte und vierte Spalte und dritte und vierte Zeile jeweils komplett in eine Schleife packen. Zudem kann die 1 ganz oben links mit der 1 ganz unten links verbunden werden. Außerdem lassen sich die 1 in der zweiten Zeile und Spalte mit dem Don't-Care-Term in der zweiten Spalte und dritten Zeile verbinden.
+
+Daraus ergibt sich dieser Term für A:
+\begin{equation*}
+A(x_{3},x_{2},x_{1},x_{0}) = (x_{3}) \vee (x_{1}) \vee (x_{2}\overline{x_{1}}x_{0}) \vee (\overline{x_{2}} \wedge \overline{x_{1}} \wedge \overline{x_{0}})
+\end{equation*}
+\\
+B:\\
+Es lassen sich auch hier wieder vier Schleifen bilden. Man kann die dritte und vierte Zeile komplett in eine Schleife üacken. Zudem kann man die erste Zeile, erste Spalte und dritte Spalte jeweils in eine Schleife packen.
+
+Daraus ergibt sich dieser Term für B:
+\begin{equation*}
+B(x_{3},x_{2},x_{1},x_{0}) = (x_{3}) \vee (x_{1}x_{0}) \vee (\overline{x_{3}} \wedge \overline{x_{2}}) \vee (\overline{x_{1}} \wedge \overline{x_{0}})
+\end{equation*}
+\section{} %7.4
+\subsection{} %a
+\begin{tabular}{r|ccccc}
+dez.& $x_{3}$	& $x_{2}$	& $x_{1}$	& $x_{0}$	& y \\
+\hline
+0	& 0 		& 0			& 0			& 0		  	& 0 \\
+1	& 0			& 0			& 0			& 1		  	& 0 \\
+2	& 0			& 0			& 1			& 0			& 0 \\
+3	& 0			& 0			& 1			& 1			& 0 \\
+4	& 0			& 1			& 0			& 0			& 0 \\
+5	& 0			& 1			& 0 		& 1			& 1 \\
+6	& 0			& 1			& 1			& 0			& 0 \\
+7	& 0			& 1			& 1			& 1			& 1 \\
+8	& 1			& 0			& 0			& 0			& 0 \\
+9	& 1			& 0			& 0			& 1			& 0 \\
+10	& 1			& 0			& 1			& 0			& 0 \\
+11	& 1			& 0			& 1 		& 1			& 0 \\
+12	& 1			& 1			& 0			& 0			& 1 \\
+13 	& 1			& 1			& 0			& 1			& 1 \\
+14	& 1			& 1			& 1			& 0			& 1 \\
+15	& 1			& 1			& 1			& 1			& 1
+\end{tabular}
+\subsection{} %b
+\begin{tikzpicture}
+	\draw (0,0) -- +(2,0); %obere Kante
+	\draw (0,0) -- +(0,-2); %linke Kante
+	\draw (1,0) -- +(0,-2); %mittlere vertikale Kante 
+	\draw (0,-1) -- +(2,0); %mittlere horizontale Kante
+	\draw (0,-2) -- +(2,0); %untere Kante
+	\draw (2,0) -- +(0,-2); %rechte Kante
+	\draw (0.5,0) -- +(0,-2); %linke mittlere Kante
+	\draw (1.5,0) -- +(0,-2); %rechte mittlere Kante
+	\draw (0,-0.5) -- +(2,0); %obere mittlere Kante
+	\draw (0,-1.5) -- +(2,0); %untere mittlere Kante
+	\draw (0,0) -- +(-0.5,0.5); %schräger Strich
+	
+	\node at ++(0.2,0.25) (start11) {$00$}; %Variablenzeile 0
+	\node at ++(0.7,0.25) (start12) {$01$};
+	\node at ++(1.2,0.25) (start13) {$11$};
+	\node at ++(1.7,0.25) (start14) {$10$};
+	
+	\node at ++(-0.25,-0.2) (start10) {$00$}; %Variablenspalte 0
+	\node at ++(-0.25,-0.7) (start20) {$01$};
+	\node at ++(-0.25,-1.2) (start30) {$11$};
+	\node at ++(-0.25,-1.7) (start40) {$10$};
+	
+	\node at ++(-0.8,0.2) (var1) {$x3\,x2$};
+	\node at ++(0.0,0.6) (var1) {$x1\,x0$};
+	
+	\node at ++(0.25, -0.25) (row11) {$0$}; %erste Zeile
+	\node at ++(0.75, -0.25) (row12) {$0$};
+	\node at ++(1.25, -0.25) (row13) {$0$};
+	\node at ++(1.75, -0.25) (row14) {$0$};
+	
+	\node at ++(0.25, -0.75) (row21) {$0$}; %zweite Zeile
+	\node at ++(0.75, -0.75) (row22) {$1$};
+	\node at ++(1.25, -0.75) (row23) {$1$};
+	\node at ++(1.75, -0.75) (row24) {$0$};
+	
+	\node at ++(0.25, -1.25) (row31) {$1$}; %dritte Zeile
+	\node at ++(0.75, -1.25) (row32) {$1$};
+	\node at ++(1.25, -1.25) (row33) {$1$};
+	\node at ++(1.75, -1.25) (row34) {$1$};
+	
+	\node at ++(0.25, -1.75) (row41) {$0$}; %vierte Zeile
+	\node at ++(0.75, -1.75) (row42) {$0$};
+	\node at ++(1.25, -1.75) (row43) {$0$};
+	\node at ++(1.75, -1.75) (row44) {$0$};
+\end{tikzpicture}
+\subsection{} %c
+Es können zwei Schleifen gebildet werden. Zunächst kann die dritte Zeile komplett als Schleife genommen werden. Außerdem können die beiden Einsen in der zweiten Zeile und die mittleren Einsen in der dritten Zeile in eine Schleife gepackt werden.
+
+Daraus ergibt sich folgender Term für y:
+\begin{equation*}
+y(x_{3},x_{2},x_{1},x_{0}) = (x_{3}x_{2}) \vee (x_{2}x_{0})
+\end{equation*}
+
+\subsection{} %d
+\includegraphics[scale=.5]{Uebung7-Schaltplan.png}
+\\\\\\\\\\\\\\\\\\\\\\\\
+\subsection{} %e
+\begin{figure}[h!bp]
+\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm,on grid,auto,/tikz/initial text=]
+	%level 4
+	\node[state] (f1) {$1$};
+	%\node[state] (f2) [right=1 of f1] {$1$};
+	\node[state] (f3) [right=2 of f1] {$0$};
+	%\node[state] (f4) [right=3 of f1] {$0$};
+	%\node[state] (f5) [right=4 of f1] {$1$};
+	%\node[state] (f6) [right=5 of f1] {$1$};
+	%\node[state] (f7) [right=6 of f1] {$0$};
+	%\node[state] (f8) [right=7 of f1] {$0$};
+	\node[state] (f9) [right=4 of f1] {$1$};
+	\node[state] (f10) [right=5 of f1] {$0$};
+	\node[state] (f11) [right=6 of f1] {$0$};
+	%\node[state] (f12) [right=11 of f1] {$0$};
+	\node[state] (f13) [right=8 of f1] {$1$};
+	\node[state] (f14) [right=9 of f1] {$0$};
+	%\node[state] (f15) [right=14 of f1] {$0$};
+	\node[state] (f16) [right=11 of f1] {$0$};	
+	
+	%level 3
+	%\node[state] (x31) [above right=1.3 and 0.5 of f1] {$x_{3}$};
+	%\node[state] (x32) [right=2 of x31] {$x_{3}$};
+	%\node[state] (x33) [above right=1.3 and 0.5 of f5] {$x_{3}$};
+	%\node[state] (x34) [right=2 of x33] {$x_{3}$};
+	\node[state] (x35) [above right=1.3 and 0.5 of f9] {$x_{3}$};
+	%\node[state] (x36) [right=2 of x35] {$x_{3}$};
+	\node[state] (x37) [right=4 of x35] {$x_{3}$};
+	%\node[state] (x38) [right=6 of x35] {$x_{3}$};
+	
+	%level 2
+	\node[state] (x23) [above right=1.3 and 1 of x35] {$x_{2}$};
+	%\node[state] (x22) [left=4 of x23] {$x_{2}$};
+	\node[state] (x21) [left=4 of x23] {$x_{2}$};
+	\node[state] (x24) [right=4 of x23] {$x_{2}$};
+	
+	%level 1
+	%\node[state] (x11) [above right=1.3 and 2 of x21] {$x_{1}$};
+	\node[state] (x12) [above right=1.3 and 2 of x23] {$x_{1}$};
+	
+	%level 0
+	\node[state] (x0) [above left=1.3 and 4 of x12] {$x_{0}$};
+	
+	\path[every node/.style={font=\scriptsize}]
+	(f1) edge node [near start] {$1$} (x21)
+	%(f2) edge node [near end] {$0$} (x31)
+	(f3) edge node [near end] {$0$} (x21)
+	%(f4) edge node [near end] {$0$} (x32)
+	%(f5) edge node [near start] {$1$} (x22)
+	%(f6) edge node [near end] {$0$} (x33)
+	%(f7) edge node [near end] {$0$} (x22)
+	%(f8) edge node [near end] {$0$} (x34)
+	(f9) edge node [near start] {$1$} (x35)
+	(f10) edge node [near end] {$0$} (x35)
+	(f11) edge node [near end] {$0$} (x23)
+	%(f12) edge node [near end] {$0$} (x36)
+	(f13) edge node [near start] {$1$} (x37)
+	(f14) edge node [near end] {$0$} (x37)
+	%(f15) edge node [near start] {$1$} (x38)
+	(f16) edge node [near end] {$0$} (x24)
+	%(x31) edge node [near start] {$1$} (x21)
+	%(x32) edge node [near end] {$0$} (x21)
+	%(x33) edge node [near start] {$1$} (x22)
+	%(x34) edge node [near end] {$0$} (x22)
+	(x35) edge node [near start] {$1$} (x23)
+	%(x36) edge node [near end] {$0$} (x23)
+	(x37) edge node [near start] {$1$} (x24)
+	%(x38) edge node [near end] {$0$} (x24)
+	(x21) edge node [near start] {$1$} (x0)
+	%(x22) edge node [near end] {$0$} (x11)
+	(x23) edge node [near start] {$1$} (x12)
+	(x24) edge node [near end] {$0$} (x12)
+	%(x11) edge node [near start] {$1$} (x0)
+	(x12) edge node [near end] {$0$} (x0);
+\end{tikzpicture}
+\end{figure}
+\end{document}

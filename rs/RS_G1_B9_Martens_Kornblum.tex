@@ -1,0 +1,607 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{qtree}
+\usepackage[locale=DE,exponent-product=\cdot ,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage[scaled=0.78]{luximono}
+\usepackage{listings}
+\usepackage{subfigure}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,decorations.text,arrows}
+\pagenumbering{arabic}
+\def\thesection{9.\arabic{section})}
+\def\thesubsection{(\alph{subsection})}
+\def\thesubsubsection{(\arabic{subsubsection})}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\hyphenation{Nach-komma-stel-len}
+\lstnewenvironment{java}[1][]{%
+	\lstset{basicstyle=\ttfamily ,backgroundcolor=\color[gray]{.95},columns=flexible,fontadjust=true,language=Java,tabsize=4,numbers=none,#1}%
+}{%
+}
+\graphicspath{{D:/Users/Jim-Studium/Pictures/Studium/RS/}}
+
+\tikzstyle{huffmanNodes}=[matrix of nodes,
+	nodes={circle,thin,draw=black!20,minimum size=10mm,text height=1.5ex,text depth=.25ex,inner sep=-10pt}]
+\tikzstyle{huffmanBase}=[matrix of nodes,
+	nodes={minimum size=10mm,text height=1.5ex,text depth=.25ex,inner sep=-10pt}]
+\begin{document}
+\author{Jim Martens (Matrikelnummer 6420323) \and Marlo Kornblum (Matrikelnummer 6427301)}
+\title{Rechnerstrukturen Aufgabenblatt 9}
+\maketitle
+
+\section{} %9.1
+\includegraphics[scale=1.0]{Uebung9-1.png}
+\section{} %9.2
+\subsection{} %a
+\begin{figure}[h!]
+Erste Schaltung:
+\hfill
+ZweiteSchaltung:
+
+\subfigure{
+\begin{tabular}{ccc||c}
+D 	& E 	& CLK	& $Q^{+}$ \\
+\hline
+*	& * 	& 0		& Q	\\
+*	& *		& 1		& Q	\\
+*	& 0		& $\uparrow$ & Q \\
+0	& 1		& $\uparrow$ & 1 \\
+1	& 1		& $\uparrow$ & 1 
+\end{tabular}
+}\hfill
+\subfigure{
+\begin{tabular}{ccc||c}
+D 	& E 				& CLK			& $Q^{+}$ \\
+\hline
+*	& 0 				& *				& Q	\\
+*	& 1					& 0				& Q	\\
+*	& 1					& 1				& Q	\\
+0	& $\uparrow$		& 1 			& 0 \\
+1	& $\uparrow$		& 1 			& 1 \\
+0	& 1					& $\uparrow$	& 0 \\
+1	& 1					& $\uparrow$	& 1 \\
+0	& $\uparrow$		& $\uparrow$	& 0 \\
+1	& $\uparrow$		& $\uparrow$	& 1
+\end{tabular}
+}
+\end{figure}
+\subsection{} %b
+Bei beiden Schaltungen werden nur bestimmte Dateneingänge gespeichert. Dies wird für Schaltungen eingesetzt, bei denen sich der Zustand nur in festgelegten Intervallen (Takten) ändern soll.
+\subsection{} %c
+Der Vorteil der zweiten Lösung ist die Nichtverwendung eines Multiplexers. Das macht die Schaltung weitaus simpler und reduziert womöglich die Gatterlaufzeiten.
+Auf der anderen Seite ist ein großer Nachteil der zweiten Lösung, dass auch mit E "geclockt" werden kann. Somit ist nicht immer eindeutig, ob immer ein gewollter Takt anliegt.
+Durch Hazards kann an ungewollten Stellen geschaltet werden.
+
+Die Vor- und Nachteile der zweiten Lösung, sind die Nach- und Vorteile der ersten Lösung. Negativ ist, dass ein Multiplexer verwendet wird. Positiv ist hingegen, dass der Takt an sich immer eindeutig ist und auch immer eindeutige Daten am Flipflop ankommen. Entweder D (E ist auf 1) oder Q. Ist E auf 0 kann sich der Folgezustand demzufolge gar nicht ändern.
+\section{} %9.3
+\subsection{} %a
+\begin{tikzpicture}[shorten >=1pt,node distance=2.0cm,on grid,auto,/tikz/initial text=,>=stealth']
+	\tikzset{every state/.style={minimum size=3.6em}}
+	\node[state,initial] (Z0) {$Z_{0}$};
+	\node[state] (Z1) [below right=1.3 and 1.5 of Z0] {$Z_{1}$};
+	\node[state] (Z2) [below right=1.3 and 1.5 of Z1] {$Z_{2}$};
+	\node[state] (Z3) [below left=1.3 and 1.5 of Z2] {$Z_{3}$};
+	\node[state] (Z4) [below left=1.3 and 1.5 of Z3] {$Z_{4}$};
+	\node[state] (Z5) [above left=1.3 and 1.5 of Z4] {$Z_{5}$};
+	\node[state] (Z6) [above left=1.3 and 1.5 of Z5] {$Z_{6}$};
+	\node[state] (Z7) [above right=1.3 and 1.5 of Z6] {$Z_{7}$};
+	
+	\node (z0) [below=0.2 of Z0] {\tiny{$000$}};
+	\node (z1) [below=0.2 of Z1] {\tiny{$001$}};
+	\node (z2) [below=0.2 of Z2] {\tiny{$010$}};
+	\node (z3) [below=0.2 of Z3] {\tiny{$011$}};
+	\node (z4) [below=0.2 of Z4] {\tiny{$100$}};
+	\node (z5) [below=0.2 of Z5] {\tiny{$101$}};
+	\node (z6) [below=0.2 of Z6] {\tiny{$110$}};
+	\node (z7) [below=0.2 of Z7] {\tiny{$111$}};
+	
+	\path[every node/.style={font=\scriptsize}] 
+	(Z0) edge[->] (Z1)
+	(Z1) edge[->] (Z2)
+	(Z2) edge[loop right,->] node [near start] {$i=0$} (Z2)
+	(Z2) edge[->] node [near start] {$i=1$} (Z3)
+	(Z3) edge[->] (Z4)
+	(Z4) edge[->] (Z5)
+	(Z5) edge[->] (Z6)
+	(Z6) edge[->] (Z7)
+	(Z7) edge[->] (Z0);
+	
+	\draw (-0.55,-0.3) -- +(1.15,0);
+	\draw (0.95,-1.6) -- +(1.15,0);
+	\draw (2.45,-2.9) -- +(1.15,0);
+	\draw (0.95,-4.2) -- +(1.15,0);
+	\draw (-0.55,-5.5) -- +(1.15,0);	
+	\draw (-2.05,-4.2) -- +(1.15,0);
+	\draw (-3.55,-2.9) -- +(1.15,0);
+	\draw (-2.05,-1.6) -- +(1.15,0);
+	
+	\node (z00) [below=0.45 of Z0] {\small{$r;r$}};
+	\node (z01) [below=0.45 of Z1] {\small{$r,ge;r$}};
+	\node (z02) [below=0.45 of Z2] {\small{$gr;r$}};
+	\node (z03) [below=0.45 of Z3] {\small{$ge;r$}};
+	\node (z04) [below=0.45 of Z4] {\small{$r;r$}};
+	\node (z05) [below=0.45 of Z5] {\small{$r;r,ge$}};
+	\node (z06) [below=0.45 of Z6] {\small{$r;gr$}};
+	\node (z07) [below=0.45 of Z7] {\small{$r;ge$}};
+\end{tikzpicture}
+\subsection{} %b
+\begin{tabular}{c|ccc||ccc|ccc|ccc}
+i & $z_{2}$ & $z_{1}$ & $z_{0}$ & $z_{2}^{+}$ & $z_{1}^{+}$ & $z_{0}^{+}$ & $rt_{H}$ & $ge_{H}$ & $gr_{H}$ & $rt_{N}$ & $ge_{N}$ & $gr_{N}$\\
+\hline
+* & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 0 & 0\\
+* & 0 & 0 & 1 & 0 & 1 & 0 & 1 & 1 & 0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 0\\
+1 & 0 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 1 & 0 & 0\\
+* & 0 & 1 & 1 & 1 & 0 & 0 & 0 & 1 & 0 & 1 & 0 & 0\\
+* & 1 & 0 & 0 & 1 & 0 & 1 & 1 & 0 & 0 & 1 & 0 & 0\\
+* & 1 & 0 & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 1 & 1 & 0\\
+* & 1 & 1 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 1\\
+* & 1 & 1 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 0
+\end{tabular}
+\subsection{} %c
+\begin{figure}[hbp]
+\subfigure{
+\begin{tikzpicture}
+	\draw (0,0) -- +(2,0); %obere Kante
+	\draw (0,0) -- +(0,-2); %linke Kante
+	\draw (1,0) -- +(0,-2); %mittlere vertikale Kante 
+	\draw (0,-1) -- +(2,0); %mittlere horizontale Kante
+	\draw (0,-2) -- +(2,0); %untere Kante
+	\draw (2,0) -- +(0,-2); %rechte Kante
+	\draw (0.5,0) -- +(0,-2); %linke mittlere Kante
+	\draw (1.5,0) -- +(0,-2); %rechte mittlere Kante
+	\draw (0,-0.5) -- +(2,0); %obere mittlere Kante
+	\draw (0,-1.5) -- +(2,0); %untere mittlere Kante
+	\draw (0,0) -- +(-0.5,0.5); %schräger Strich
+	
+	\node at ++(0.2,0.25) (start11) {$00$}; %Variablenzeile 0
+	\node at ++(0.7,0.25) (start12) {$01$};
+	\node at ++(1.2,0.25) (start13) {$11$};
+	\node at ++(1.7,0.25) (start14) {$10$};
+	
+	\node at ++(-0.25,-0.2) (start10) {$00$}; %Variablenspalte 0
+	\node at ++(-0.25,-0.7) (start20) {$01$};
+	\node at ++(-0.25,-1.2) (start30) {$11$};
+	\node at ++(-0.25,-1.7) (start40) {$10$};
+	
+	\node at ++(-0.8,0.2) (var1) {$i, z_{2}$};
+	\node at ++(0.0,0.6) (var1) {$z_{1}\,z_{0}$};
+	
+	\node at ++(0.25, -0.25) (row11) {$0$}; %erste Zeile
+	\node at ++(0.75, -0.25) (row12) {$0$};
+	\node at ++(1.25, -0.25) (row13) {$0$};
+	\node at ++(1.75, -0.25) (row14) {$1$};
+	
+	\node at ++(0.25, -0.75) (row21) {$1$}; %zweite Zeile
+	\node at ++(0.75, -0.75) (row22) {$1$};
+	\node at ++(1.25, -0.75) (row23) {$1$};
+	\node at ++(1.75, -0.75) (row24) {$0$};
+	
+	\node at ++(0.25, -1.25) (row31) {$1$}; %dritte Zeile
+	\node at ++(0.75, -1.25) (row32) {$1$};
+	\node at ++(1.25, -1.25) (row33) {$1$};
+	\node at ++(1.75, -1.25) (row34) {$0$};
+	
+	\node at ++(0.25, -1.75) (row41) {$0$}; %vierte Zeile
+	\node at ++(0.75, -1.75) (row42) {$0$};
+	\node at ++(1.25, -1.75) (row43) {$0$};
+	\node at ++(1.75, -1.75) (row44) {$1$};
+\end{tikzpicture}
+}\hfill
+\subfigure{
+\begin{tikzpicture}
+	\draw (0,0) -- +(2,0); %obere Kante
+	\draw (0,0) -- +(0,-2); %linke Kante
+	\draw (1,0) -- +(0,-2); %mittlere vertikale Kante 
+	\draw (0,-1) -- +(2,0); %mittlere horizontale Kante
+	\draw (0,-2) -- +(2,0); %untere Kante
+	\draw (2,0) -- +(0,-2); %rechte Kante
+	\draw (0.5,0) -- +(0,-2); %linke mittlere Kante
+	\draw (1.5,0) -- +(0,-2); %rechte mittlere Kante
+	\draw (0,-0.5) -- +(2,0); %obere mittlere Kante
+	\draw (0,-1.5) -- +(2,0); %untere mittlere Kante
+	\draw (0,0) -- +(-0.5,0.5); %schräger Strich
+	
+	\node at ++(0.2,0.25) (start11) {$00$}; %Variablenzeile 0
+	\node at ++(0.7,0.25) (start12) {$01$};
+	\node at ++(1.2,0.25) (start13) {$11$};
+	\node at ++(1.7,0.25) (start14) {$10$};
+	
+	\node at ++(-0.25,-0.2) (start10) {$00$}; %Variablenspalte 0
+	\node at ++(-0.25,-0.7) (start20) {$01$};
+	\node at ++(-0.25,-1.2) (start30) {$11$};
+	\node at ++(-0.25,-1.7) (start40) {$10$};
+	
+	\node at ++(-0.8,0.2) (var1) {$i, z_{2}$};
+	\node at ++(0.0,0.6) (var1) {$z_{1}\,z_{0}$};
+	
+	\node at ++(0.25, -0.25) (row11) {$0$}; %erste Zeile
+	\node at ++(0.75, -0.25) (row12) {$1$};
+	\node at ++(1.25, -0.25) (row13) {$0$};
+	\node at ++(1.75, -0.25) (row14) {$1$};
+	
+	\node at ++(0.25, -0.75) (row21) {$0$}; %zweite Zeile
+	\node at ++(0.75, -0.75) (row22) {$1$};
+	\node at ++(1.25, -0.75) (row23) {$0$};
+	\node at ++(1.75, -0.75) (row24) {$1$};
+	
+	\node at ++(0.25, -1.25) (row31) {$0$}; %dritte Zeile
+	\node at ++(0.75, -1.25) (row32) {$1$};
+	\node at ++(1.25, -1.25) (row33) {$0$};
+	\node at ++(1.75, -1.25) (row34) {$1$};
+	
+	\node at ++(0.25, -1.75) (row41) {$0$}; %vierte Zeile
+	\node at ++(0.75, -1.75) (row42) {$1$};
+	\node at ++(1.25, -1.75) (row43) {$0$};
+	\node at ++(1.75, -1.75) (row44) {$1$};
+\end{tikzpicture}
+}
+
+KV-Diagramm für $z_{2}^{+}$
+\hfill
+KV-Diagramm für $z_{1}^{+}$
+\end{figure}
+\begin{figure}[hbp]
+\subfigure{
+\begin{tikzpicture}
+	\draw (0,0) -- +(2,0); %obere Kante
+	\draw (0,0) -- +(0,-2); %linke Kante
+	\draw (1,0) -- +(0,-2); %mittlere vertikale Kante 
+	\draw (0,-1) -- +(2,0); %mittlere horizontale Kante
+	\draw (0,-2) -- +(2,0); %untere Kante
+	\draw (2,0) -- +(0,-2); %rechte Kante
+	\draw (0.5,0) -- +(0,-2); %linke mittlere Kante
+	\draw (1.5,0) -- +(0,-2); %rechte mittlere Kante
+	\draw (0,-0.5) -- +(2,0); %obere mittlere Kante
+	\draw (0,-1.5) -- +(2,0); %untere mittlere Kante
+	\draw (0,0) -- +(-0.5,0.5); %schräger Strich
+	
+	\node at ++(0.2,0.25) (start11) {$00$}; %Variablenzeile 0
+	\node at ++(0.7,0.25) (start12) {$01$};
+	\node at ++(1.2,0.25) (start13) {$11$};
+	\node at ++(1.7,0.25) (start14) {$10$};
+	
+	\node at ++(-0.25,-0.2) (start10) {$00$}; %Variablenspalte 0
+	\node at ++(-0.25,-0.7) (start20) {$01$};
+	\node at ++(-0.25,-1.2) (start30) {$11$};
+	\node at ++(-0.25,-1.7) (start40) {$10$};
+	
+	\node at ++(-0.8,0.2) (var1) {$i, z_{2}$};
+	\node at ++(0.0,0.6) (var1) {$z_{1}\,z_{0}$};
+	
+	\node at ++(0.25, -0.25) (row11) {$1$}; %erste Zeile
+	\node at ++(0.75, -0.25) (row12) {$0$};
+	\node at ++(1.25, -0.25) (row13) {$0$};
+	\node at ++(1.75, -0.25) (row14) {$0$};
+	
+	\node at ++(0.25, -0.75) (row21) {$1$}; %zweite Zeile
+	\node at ++(0.75, -0.75) (row22) {$0$};
+	\node at ++(1.25, -0.75) (row23) {$0$};
+	\node at ++(1.75, -0.75) (row24) {$1$};
+	
+	\node at ++(0.25, -1.25) (row31) {$1$}; %dritte Zeile
+	\node at ++(0.75, -1.25) (row32) {$0$};
+	\node at ++(1.25, -1.25) (row33) {$0$};
+	\node at ++(1.75, -1.25) (row34) {$1$};
+	
+	\node at ++(0.25, -1.75) (row41) {$1$}; %vierte Zeile
+	\node at ++(0.75, -1.75) (row42) {$0$};
+	\node at ++(1.25, -1.75) (row43) {$0$};
+	\node at ++(1.75, -1.75) (row44) {$1$};
+\end{tikzpicture}
+}\hfill
+\subfigure{
+\begin{tikzpicture}
+	\draw (0,0) -- +(2,0); %obere Kante
+	\draw (0,0) -- +(0,-2); %linke Kante
+	\draw (1,0) -- +(0,-2); %mittlere vertikale Kante 
+	\draw (0,-1) -- +(2,0); %mittlere horizontale Kante
+	\draw (0,-2) -- +(2,0); %untere Kante
+	\draw (2,0) -- +(0,-2); %rechte Kante
+	\draw (0.5,0) -- +(0,-2); %linke mittlere Kante
+	\draw (1.5,0) -- +(0,-2); %rechte mittlere Kante
+	\draw (0,-0.5) -- +(2,0); %obere mittlere Kante
+	\draw (0,-1.5) -- +(2,0); %untere mittlere Kante
+	\draw (0,0) -- +(-0.5,0.5); %schräger Strich
+	
+	\node at ++(0.2,0.25) (start11) {$00$}; %Variablenzeile 0
+	\node at ++(0.7,0.25) (start12) {$01$};
+	\node at ++(1.2,0.25) (start13) {$11$};
+	\node at ++(1.7,0.25) (start14) {$10$};
+	
+	\node at ++(-0.25,-0.2) (start10) {$00$}; %Variablenspalte 0
+	\node at ++(-0.25,-0.7) (start20) {$01$};
+	\node at ++(-0.25,-1.2) (start30) {$11$};
+	\node at ++(-0.25,-1.7) (start40) {$10$};
+	
+	\node at ++(-0.8,0.2) (var1) {$i, z_{2}$};
+	\node at ++(0.0,0.6) (var1) {$z_{1}\,z_{0}$};
+	
+	\node at ++(0.25, -0.25) (row11) {$1$}; %erste Zeile
+	\node at ++(0.75, -0.25) (row12) {$1$};
+	\node at ++(1.25, -0.25) (row13) {$0$};
+	\node at ++(1.75, -0.25) (row14) {$0$};
+	
+	\node at ++(0.25, -0.75) (row21) {$1$}; %zweite Zeile
+	\node at ++(0.75, -0.75) (row22) {$1$};
+	\node at ++(1.25, -0.75) (row23) {$1$};
+	\node at ++(1.75, -0.75) (row24) {$1$};
+	
+	\node at ++(0.25, -1.25) (row31) {$1$}; %dritte Zeile
+	\node at ++(0.75, -1.25) (row32) {$1$};
+	\node at ++(1.25, -1.25) (row33) {$1$};
+	\node at ++(1.75, -1.25) (row34) {$1$};
+	
+	\node at ++(0.25, -1.75) (row41) {$1$}; %vierte Zeile
+	\node at ++(0.75, -1.75) (row42) {$1$};
+	\node at ++(1.25, -1.75) (row43) {$0$};
+	\node at ++(1.75, -1.75) (row44) {$0$};
+\end{tikzpicture}
+}
+
+KV-Diagramm für $z_{0}^{+}$
+\hfill
+KV-Diagramm für $rt_{H}$
+\end{figure}
+\begin{figure}[hbp]
+\subfigure{
+\begin{tikzpicture}
+	\draw (0,0) -- +(2,0); %obere Kante
+	\draw (0,0) -- +(0,-2); %linke Kante
+	\draw (1,0) -- +(0,-2); %mittlere vertikale Kante 
+	\draw (0,-1) -- +(2,0); %mittlere horizontale Kante
+	\draw (0,-2) -- +(2,0); %untere Kante
+	\draw (2,0) -- +(0,-2); %rechte Kante
+	\draw (0.5,0) -- +(0,-2); %linke mittlere Kante
+	\draw (1.5,0) -- +(0,-2); %rechte mittlere Kante
+	\draw (0,-0.5) -- +(2,0); %obere mittlere Kante
+	\draw (0,-1.5) -- +(2,0); %untere mittlere Kante
+	\draw (0,0) -- +(-0.5,0.5); %schräger Strich
+	
+	\node at ++(0.2,0.25) (start11) {$00$}; %Variablenzeile 0
+	\node at ++(0.7,0.25) (start12) {$01$};
+	\node at ++(1.2,0.25) (start13) {$11$};
+	\node at ++(1.7,0.25) (start14) {$10$};
+	
+	\node at ++(-0.25,-0.2) (start10) {$00$}; %Variablenspalte 0
+	\node at ++(-0.25,-0.7) (start20) {$01$};
+	\node at ++(-0.25,-1.2) (start30) {$11$};
+	\node at ++(-0.25,-1.7) (start40) {$10$};
+	
+	\node at ++(-0.8,0.2) (var1) {$i, z_{2}$};
+	\node at ++(0.0,0.6) (var1) {$z_{1}\,z_{0}$};
+	
+	\node at ++(0.25, -0.25) (row11) {$0$}; %erste Zeile
+	\node at ++(0.75, -0.25) (row12) {$1$};
+	\node at ++(1.25, -0.25) (row13) {$1$};
+	\node at ++(1.75, -0.25) (row14) {$0$};
+	
+	\node at ++(0.25, -0.75) (row21) {$0$}; %zweite Zeile
+	\node at ++(0.75, -0.75) (row22) {$0$};
+	\node at ++(1.25, -0.75) (row23) {$0$};
+	\node at ++(1.75, -0.75) (row24) {$0$};
+	
+	\node at ++(0.25, -1.25) (row31) {$0$}; %dritte Zeile
+	\node at ++(0.75, -1.25) (row32) {$0$};
+	\node at ++(1.25, -1.25) (row33) {$0$};
+	\node at ++(1.75, -1.25) (row34) {$0$};
+	
+	\node at ++(0.25, -1.75) (row41) {$0$}; %vierte Zeile
+	\node at ++(0.75, -1.75) (row42) {$1$};
+	\node at ++(1.25, -1.75) (row43) {$1$};
+	\node at ++(1.75, -1.75) (row44) {$0$};
+\end{tikzpicture}
+}\hfill
+\subfigure{
+\begin{tikzpicture}
+	\draw (0,0) -- +(2,0); %obere Kante
+	\draw (0,0) -- +(0,-2); %linke Kante
+	\draw (1,0) -- +(0,-2); %mittlere vertikale Kante 
+	\draw (0,-1) -- +(2,0); %mittlere horizontale Kante
+	\draw (0,-2) -- +(2,0); %untere Kante
+	\draw (2,0) -- +(0,-2); %rechte Kante
+	\draw (0.5,0) -- +(0,-2); %linke mittlere Kante
+	\draw (1.5,0) -- +(0,-2); %rechte mittlere Kante
+	\draw (0,-0.5) -- +(2,0); %obere mittlere Kante
+	\draw (0,-1.5) -- +(2,0); %untere mittlere Kante
+	\draw (0,0) -- +(-0.5,0.5); %schräger Strich
+	
+	\node at ++(0.2,0.25) (start11) {$00$}; %Variablenzeile 0
+	\node at ++(0.7,0.25) (start12) {$01$};
+	\node at ++(1.2,0.25) (start13) {$11$};
+	\node at ++(1.7,0.25) (start14) {$10$};
+	
+	\node at ++(-0.25,-0.2) (start10) {$00$}; %Variablenspalte 0
+	\node at ++(-0.25,-0.7) (start20) {$01$};
+	\node at ++(-0.25,-1.2) (start30) {$11$};
+	\node at ++(-0.25,-1.7) (start40) {$10$};
+	
+	\node at ++(-0.8,0.2) (var1) {$i, z_{2}$};
+	\node at ++(0.0,0.6) (var1) {$z_{1}\,z_{0}$};
+	
+	\node at ++(0.25, -0.25) (row11) {$0$}; %erste Zeile
+	\node at ++(0.75, -0.25) (row12) {$0$};
+	\node at ++(1.25, -0.25) (row13) {$0$};
+	\node at ++(1.75, -0.25) (row14) {$1$};
+	
+	\node at ++(0.25, -0.75) (row21) {$0$}; %zweite Zeile
+	\node at ++(0.75, -0.75) (row22) {$0$};
+	\node at ++(1.25, -0.75) (row23) {$0$};
+	\node at ++(1.75, -0.75) (row24) {$0$};
+	
+	\node at ++(0.25, -1.25) (row31) {$0$}; %dritte Zeile
+	\node at ++(0.75, -1.25) (row32) {$0$};
+	\node at ++(1.25, -1.25) (row33) {$0$};
+	\node at ++(1.75, -1.25) (row34) {$0$};
+	
+	\node at ++(0.25, -1.75) (row41) {$0$}; %vierte Zeile
+	\node at ++(0.75, -1.75) (row42) {$0$};
+	\node at ++(1.25, -1.75) (row43) {$0$};
+	\node at ++(1.75, -1.75) (row44) {$1$};
+\end{tikzpicture}
+}
+
+KV-Diagramm für $ge_{H}$
+\hfill
+KV-Diagramm für $gr_{H}$
+\end{figure}
+\begin{figure}[hbp]
+\subfigure{
+\begin{tikzpicture}
+	\draw (0,0) -- +(2,0); %obere Kante
+	\draw (0,0) -- +(0,-2); %linke Kante
+	\draw (1,0) -- +(0,-2); %mittlere vertikale Kante 
+	\draw (0,-1) -- +(2,0); %mittlere horizontale Kante
+	\draw (0,-2) -- +(2,0); %untere Kante
+	\draw (2,0) -- +(0,-2); %rechte Kante
+	\draw (0.5,0) -- +(0,-2); %linke mittlere Kante
+	\draw (1.5,0) -- +(0,-2); %rechte mittlere Kante
+	\draw (0,-0.5) -- +(2,0); %obere mittlere Kante
+	\draw (0,-1.5) -- +(2,0); %untere mittlere Kante
+	\draw (0,0) -- +(-0.5,0.5); %schräger Strich
+	
+	\node at ++(0.2,0.25) (start11) {$00$}; %Variablenzeile 0
+	\node at ++(0.7,0.25) (start12) {$01$};
+	\node at ++(1.2,0.25) (start13) {$11$};
+	\node at ++(1.7,0.25) (start14) {$10$};
+	
+	\node at ++(-0.25,-0.2) (start10) {$00$}; %Variablenspalte 0
+	\node at ++(-0.25,-0.7) (start20) {$01$};
+	\node at ++(-0.25,-1.2) (start30) {$11$};
+	\node at ++(-0.25,-1.7) (start40) {$10$};
+	
+	\node at ++(-0.8,0.2) (var1) {$i, z_{2}$};
+	\node at ++(0.0,0.6) (var1) {$z_{1}\,z_{0}$};
+	
+	\node at ++(0.25, -0.25) (row11) {$1$}; %erste Zeile
+	\node at ++(0.75, -0.25) (row12) {$1$};
+	\node at ++(1.25, -0.25) (row13) {$1$};
+	\node at ++(1.75, -0.25) (row14) {$1$};
+	
+	\node at ++(0.25, -0.75) (row21) {$1$}; %zweite Zeile
+	\node at ++(0.75, -0.75) (row22) {$1$};
+	\node at ++(1.25, -0.75) (row23) {$0$};
+	\node at ++(1.75, -0.75) (row24) {$0$};
+	
+	\node at ++(0.25, -1.25) (row31) {$1$}; %dritte Zeile
+	\node at ++(0.75, -1.25) (row32) {$1$};
+	\node at ++(1.25, -1.25) (row33) {$0$};
+	\node at ++(1.75, -1.25) (row34) {$0$};
+	
+	\node at ++(0.25, -1.75) (row41) {$1$}; %vierte Zeile
+	\node at ++(0.75, -1.75) (row42) {$1$};
+	\node at ++(1.25, -1.75) (row43) {$1$};
+	\node at ++(1.75, -1.75) (row44) {$1$};
+\end{tikzpicture}
+}\hfill
+\subfigure{
+\begin{tikzpicture}
+	\draw (0,0) -- +(2,0); %obere Kante
+	\draw (0,0) -- +(0,-2); %linke Kante
+	\draw (1,0) -- +(0,-2); %mittlere vertikale Kante 
+	\draw (0,-1) -- +(2,0); %mittlere horizontale Kante
+	\draw (0,-2) -- +(2,0); %untere Kante
+	\draw (2,0) -- +(0,-2); %rechte Kante
+	\draw (0.5,0) -- +(0,-2); %linke mittlere Kante
+	\draw (1.5,0) -- +(0,-2); %rechte mittlere Kante
+	\draw (0,-0.5) -- +(2,0); %obere mittlere Kante
+	\draw (0,-1.5) -- +(2,0); %untere mittlere Kante
+	\draw (0,0) -- +(-0.5,0.5); %schräger Strich
+	
+	\node at ++(0.2,0.25) (start11) {$00$}; %Variablenzeile 0
+	\node at ++(0.7,0.25) (start12) {$01$};
+	\node at ++(1.2,0.25) (start13) {$11$};
+	\node at ++(1.7,0.25) (start14) {$10$};
+	
+	\node at ++(-0.25,-0.2) (start10) {$00$}; %Variablenspalte 0
+	\node at ++(-0.25,-0.7) (start20) {$01$};
+	\node at ++(-0.25,-1.2) (start30) {$11$};
+	\node at ++(-0.25,-1.7) (start40) {$10$};
+	
+	\node at ++(-0.8,0.2) (var1) {$i, z_{2}$};
+	\node at ++(0.0,0.6) (var1) {$z_{1}\,z_{0}$};
+	
+	\node at ++(0.25, -0.25) (row11) {$0$}; %erste Zeile
+	\node at ++(0.75, -0.25) (row12) {$0$};
+	\node at ++(1.25, -0.25) (row13) {$0$};
+	\node at ++(1.75, -0.25) (row14) {$0$};
+	
+	\node at ++(0.25, -0.75) (row21) {$0$}; %zweite Zeile
+	\node at ++(0.75, -0.75) (row22) {$1$};
+	\node at ++(1.25, -0.75) (row23) {$1$};
+	\node at ++(1.75, -0.75) (row24) {$0$};
+	
+	\node at ++(0.25, -1.25) (row31) {$0$}; %dritte Zeile
+	\node at ++(0.75, -1.25) (row32) {$1$};
+	\node at ++(1.25, -1.25) (row33) {$1$};
+	\node at ++(1.75, -1.25) (row34) {$0$};
+	
+	\node at ++(0.25, -1.75) (row41) {$0$}; %vierte Zeile
+	\node at ++(0.75, -1.75) (row42) {$0$};
+	\node at ++(1.25, -1.75) (row43) {$0$};
+	\node at ++(1.75, -1.75) (row44) {$0$};
+\end{tikzpicture}
+}
+
+KV-Diagramm für $rt_{N}$
+\hfill
+KV-Diagramm für $ge_{N}$
+\end{figure}
+\begin{figure}[hb]
+\subfigure{
+\begin{tikzpicture}
+	\draw (0,0) -- +(2,0); %obere Kante
+	\draw (0,0) -- +(0,-2); %linke Kante
+	\draw (1,0) -- +(0,-2); %mittlere vertikale Kante 
+	\draw (0,-1) -- +(2,0); %mittlere horizontale Kante
+	\draw (0,-2) -- +(2,0); %untere Kante
+	\draw (2,0) -- +(0,-2); %rechte Kante
+	\draw (0.5,0) -- +(0,-2); %linke mittlere Kante
+	\draw (1.5,0) -- +(0,-2); %rechte mittlere Kante
+	\draw (0,-0.5) -- +(2,0); %obere mittlere Kante
+	\draw (0,-1.5) -- +(2,0); %untere mittlere Kante
+	\draw (0,0) -- +(-0.5,0.5); %schräger Strich
+	
+	\node at ++(0.2,0.25) (start11) {$00$}; %Variablenzeile 0
+	\node at ++(0.7,0.25) (start12) {$01$};
+	\node at ++(1.2,0.25) (start13) {$11$};
+	\node at ++(1.7,0.25) (start14) {$10$};
+	
+	\node at ++(-0.25,-0.2) (start10) {$00$}; %Variablenspalte 0
+	\node at ++(-0.25,-0.7) (start20) {$01$};
+	\node at ++(-0.25,-1.2) (start30) {$11$};
+	\node at ++(-0.25,-1.7) (start40) {$10$};
+	
+	\node at ++(-0.8,0.2) (var1) {$i, z_{2}$};
+	\node at ++(0.0,0.6) (var1) {$z_{1}\,z_{0}$};
+	
+	\node at ++(0.25, -0.25) (row11) {$0$}; %erste Zeile
+	\node at ++(0.75, -0.25) (row12) {$0$};
+	\node at ++(1.25, -0.25) (row13) {$0$};
+	\node at ++(1.75, -0.25) (row14) {$0$};
+	
+	\node at ++(0.25, -0.75) (row21) {$0$}; %zweite Zeile
+	\node at ++(0.75, -0.75) (row22) {$0$};
+	\node at ++(1.25, -0.75) (row23) {$0$};
+	\node at ++(1.75, -0.75) (row24) {$1$};
+	
+	\node at ++(0.25, -1.25) (row31) {$0$}; %dritte Zeile
+	\node at ++(0.75, -1.25) (row32) {$0$};
+	\node at ++(1.25, -1.25) (row33) {$0$};
+	\node at ++(1.75, -1.25) (row34) {$1$};
+	
+	\node at ++(0.25, -1.75) (row41) {$0$}; %vierte Zeile
+	\node at ++(0.75, -1.75) (row42) {$0$};
+	\node at ++(1.25, -1.75) (row43) {$0$};
+	\node at ++(1.75, -1.75) (row44) {$0$};
+\end{tikzpicture}
+}
+
+KV-Diagramm für $gr_{N}$
+\end{figure}
+\end{document}

@@ -1,0 +1,823 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage[locale=DE,exponent-product=\cdot ,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage[scaled=0.78]{luximono}
+\usepackage{listings}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,decorations.text,arrows}
+\pagenumbering{arabic}
+\def\thesection{5.\arabic{section})}
+\def\thesubsection{(\alph{subsection})}
+\def\thesubsubsection{(\arabic{subsubsection})}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\hyphenation{Nach-komma-stel-len}
+\lstnewenvironment{java}[1][]{%
+	\lstset{basicstyle=\ttfamily ,backgroundcolor=\color[gray]{.95},columns=flexible,fontadjust=true,language=Java,tabsize=4,numbers=none,#1}%
+}{%
+}
+
+\tikzstyle{huffmanNodes}=[matrix of nodes,
+	nodes={circle,thin,draw=black!20,minimum size=10mm,text height=1.5ex,text depth=.25ex,inner sep=-10pt}]
+\tikzstyle{huffmanBase}=[matrix of nodes,
+	nodes={minimum size=10mm,text height=1.5ex,text depth=.25ex,inner sep=-10pt}]
+\begin{document}
+\author{Jim Martens (Matrikelnummer 6420323) \and Marlo Kornblum (Matrikelnummer 6427301)}
+\title{Rechnerstrukturen Aufgabenblatt 5}
+\maketitle
+
+\section{}%5.1
+\begin{java}
+int a1, a2, a3, a4;
+
+int b1 = (a1 << 2) | (a2 >>> 4);
+int b2 = (a2 << 4) | (a3 >>> 2);
+int b3 = (a3 << 6) | a4;
+
+...
+\end{java}
+\section{}%5.2
+\subsection{} %a
+Der Code hat $\frac{360^{\circ}}{15^{\circ}}=24$ Codewörter.
+\subsection{} %b
+Wir starten mit den beiden Symbolen $0$ und $1$. Daraus ergibt sich in weiteren Schritten folgendes:
+\begin{alignat*}{2}
+0, & 1 \\
+00, 01, & 11, 10 \\
+000, 001, 011, 010, & 110, 111, 101, 100 \\
+0000, 0001, 0011, 0010, 0110, 0111, 0101, 0100, & 1100, 1101, 1111, 1110, 1010, 1011, 1001, 1000
+\end{alignat*}
+\begin{alignat*}{2}
+\intertext{Nachfolgend der erste Teil der fünften Zeile}
+00000, 000001, 00011, 00010, 00110, 00111, 00101, 00100,\\
+\intertext{Der zweite Teil}
+01100, 01101, 01111, 01110, 01010, 01011, 01001, 01000,\\
+\intertext{Und nun der dritte Teil} 11000, 11001, 11011, 11010, 11110, 11111, 11101, 11100,\\
+\intertext{Abschließend der vierte Teil}
+10100, 10101, 10111, 10110, 10010, 10011, 10001, 10000
+\end{alignat*}
+Die zuletzt dargestellte Zeile enthält $32$ Codewörter. Da wir nur $24$ benötigen, werden beidseitig $4$ weggestrichen. Damit bleibt die Fano-Bedingung erfüllt. Das Ergebnis ist dieser Code (auf zwei Zeileneinträge aufgeteilt):
+
+\begin{alignat*}{2}
+00110, 00111, 00101, 00100, 01100, 01101, 01111, 01110, 01010, 01011, 01001, 01000, \\
+11000, 11001, 11011, 11010, 11110, 11111, 11101, 11100, 10100, 10101, 10111, 10110
+\end{alignat*}
+\section{}%5.3
+\subsection{} %a
+
+Es ergeben sich die folgenden Codes:
+
+\begin{tikzpicture}
+	\matrix[matrix of nodes]
+		{a & b & c & d & e & f & g & h & i & j & k & l \\
+		$100$ & $01011$ & $01000$ & $00$ & $010010$ & $1011$ & $111$ & $010011$ & $01010$ & $110$ & $011$ & $1010$ \\};
+\end{tikzpicture}
+
+\begin{figure}[hbp]
+Erster Schritt:
+
+\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm,on grid,auto,/tikz/initial text=]
+	%level 1	
+	\node[state] (e) {e};
+	\node[state] (h) [right=of e] {h};
+	\node[state] (b) [right=of h] {b};
+	\node[state] (i) [right=of b] {i};
+	\node[state] (c) [right=of i] {c};
+	\node[state] (f) [right=of c] {f};
+	\node[state] (l) [right=of f] {l};	
+	\node[state] (g) [right=of l] {g};
+	\node[state] (j) [right=of g] {j};
+	\node[state] (a) [right=of j] {a};
+	\node[state] (k) [right=of a] {k};
+	\node[state] (d) [right=of k] {d};	
+	
+	%level 2
+	\node[state] (eh) [above right=1.3 and 0.6 of e] {$0.04$};
+	
+	\path[every node/.style={font=\scriptsize}] 
+	(e) edge node [near start] {$1$} (eh)
+	(h) edge node [near end] {$0$} (eh);
+	%\draw[decorate,decoration={text along path,text=$0.02$] (e) -- (eh);
+	
+	\node (pE) [below=0.7 of e] {0.02};
+	\node (pH) [below=0.7 of h] {0.02};
+	\node (pB) [below=0.7 of b] {0.03};
+	\node (pI) [below=0.7 of i] {0.03};
+	\node (pC) [below=0.7 of c] {0.05};
+	\node (pF) [below=0.7 of f] {0.05};
+	\node (pL) [below=0.7 of l] {0.06};
+	\node (pG) [below=0.7 of g] {0.1};
+	\node (pJ) [below=0.7 of j] {0.1};
+	\node (pA) [below=0.7 of a] {0.12};
+	\node (pK) [below=0.7 of k] {0.12};
+	\node (pD) [below=0.7 of d] {0.3};
+\end{tikzpicture}
+\end{figure}
+
+\begin{figure}[hbp]
+Zweiter Schritt:
+
+\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm,on grid,auto,/tikz/initial text=, nodes={decoration={}} ]
+	%level 1	
+	\node[state] (e2) {e};
+	\node[state] (h2) [right=of e2] {h};
+	
+	%level 2
+	\node[state] (eh2) [above right=1.3 and 0.6 of e2] {$0.04$};
+	\node[state] (i2) [left=of eh2] {i};
+	\node[state] (b2) [left=of i2] {b};
+	\node[state] (c2) [right=of eh] {c};
+	\node[state] (f2) [right=of c2] {f};
+	\node[state] (l2) [right=of f2] {l};	
+	\node[state] (g2) [right=of l2] {g};
+	\node[state] (j2) [right=of g2] {j};
+	\node[state] (a2) [right=of j2] {a};
+	\node[state] (k2) [right=of a2] {k};
+	\node[state] (d2) [right=of k2] {d};
+	
+	%level 3
+	\node[state] (bi2) [above right=1.3 and 0.6 of b2] {$0.06$};
+	
+	\path[every node/.style={font=\scriptsize}] 
+	(e2) edge node [near start] {$1$} (eh2)
+	(h2) edge node [near end] {$0$} (eh2)
+	(b2) edge node [near start] {$1$} (bi2)
+	(i2) edge node [near end] {$0$} (bi2);
+	
+	\node (pE2) [below=0.7 of e2] {0.02};
+	\node (pH2) [below=0.7 of h2] {0.02};
+	\node (pB2) [below=0.7 of b2] {0.03};
+	\node (pI2) [below=0.7 of i2] {0.03};
+	\node (pC2) [below=0.7 of c2] {0.05};
+	\node (pF2) [below=0.7 of f2] {0.05};
+	\node (pL2) [below=0.7 of l2] {0.06};
+	\node (pG2) [below=0.7 of g2] {0.1};
+	\node (pJ2) [below=0.7 of j2] {0.1};
+	\node (pA2) [below=0.7 of a2] {0.12};
+	\node (pK2) [below=0.7 of k2] {0.12};
+	\node (pD2) [below=0.7 of d2] {0.3};
+\end{tikzpicture}
+\end{figure}
+
+\begin{figure}[hbp]
+Dritter Schritt:
+
+\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm,on grid,auto,/tikz/initial text=]
+	%level 2
+	\node[state] (e3) {e};
+	\node[state] (h3) [right=of e3] {h};
+	\node[state] (b3) [right=2.2 of h3] {b};
+	\node[state] (i3) [right=of b3] {i};
+	
+	%level 3
+	\node[state] (eh3) [above right=1.3 and 0.6 of e3] {$0.04$};
+	\node[state] (c3) [right=of eh3] {c};
+	\node[state] (f3) [right=of c3] {f};
+	\node[state] (bi3) [right=of f3] {$0.06$};	
+	\node[state] (l3) [right=of bi3] {l};	
+	\node[state] (g3) [right=of l3] {g};
+	\node[state] (j3) [right=of g3] {j};
+	\node[state] (a3) [right=of j3] {a};
+	\node[state] (k3) [right=of a3] {k};
+	\node[state] (d3) [right=of k3] {d};
+	
+	%level 4
+	\node[state] (ehc3) [above right=1.3 and 0.6 of eh3] {$0.09$};
+	
+	\path[every node/.style={font=\scriptsize}] 
+	(e3) edge node [near start] {$1$} (eh3)
+	(h3) edge node [near end] {$0$} (eh3)
+	(b3) edge node [near start] {$1$} (bi3)
+	(i3) edge node [near end] {$0$} (bi3)
+	(eh3) edge node [near start] {$1$} (ehc3)
+	(c3) edge node [near end] {$0$} (ehc3);
+	
+	\node (pE3) [below=0.7 of e3] {0.02};
+	\node (pH3) [below=0.7 of h3] {0.02};
+	\node (pB3) [below=0.7 of b3] {0.03};
+	\node (pI3) [below=0.7 of i3] {0.03};
+	\node (pC3) [below=0.7 of c3] {0.05};
+	\node (pF3) [below=0.7 of f3] {0.05};
+	\node (pL3) [below=0.7 of l3] {0.06};
+	\node (pG3) [below=0.7 of g3] {0.1};
+	\node (pJ3) [below=0.7 of j3] {0.1};
+	\node (pA3) [below=0.7 of a3] {0.12};
+	\node (pK3) [below=0.7 of k3] {0.12};
+	\node (pD3) [below=0.7 of d3] {0.3};
+\end{tikzpicture}
+\end{figure}
+
+\begin{figure}[hbp]
+Vierter Schritt:
+
+\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm,on grid,auto,/tikz/initial text=]
+	%level 2
+	\node[state] (e4) {e};
+	\node[state] (h4) [right=of e4] {h};
+	
+	%level 3
+	\node[state] (eh4) [above right=1.3 and 0.6 of e4] {$0.04$};
+	\node[state] (i4) [left=of eh4] {i};
+	\node[state] (b4) [left=of i4] {b};
+	\node[state] (c4) [right=of eh4] {c};
+	
+	%level 4
+	\node[state] (bi4) [above right=1.3 and 0.6 of b4] {$0.06$};		
+	\node[state] (l4) [left=of bi4] {l};	
+	\node[state] (f4) [left=of l4] {f};
+	\node[state] (ehc4) [right=2.2 of bi4] {$0.09$};
+	\node[state] (g4) [right=of ehc4] {g};
+	\node[state] (j4) [right=of g4] {j};
+	\node[state] (a4) [right=of j4] {a};
+	\node[state] (k4) [right=of a4] {k};
+	\node[state] (d4) [right=of k4] {d};
+	
+	%level 5
+	\node[state] (fl4) [above right=1.3 and 0.6 of f4] {$0.11$};
+	
+	\path[every node/.style={font=\scriptsize}] 
+	(e4) edge node [near start] {$1$} (eh4)
+	(h4) edge node [near end] {$0$} (eh4)
+	(b4) edge node [near start] {$1$} (bi4)
+	(i4) edge node [near end] {$0$} (bi4)
+	(eh4) edge node [near start] {$1$} (ehc4)
+	(c4) edge node [near end] {$0$} (ehc4)
+	(f4) edge node [near start] {$1$} (fl4)
+	(l4) edge node [near end] {$0$} (fl4);
+	
+	\node (pE4) [below=0.7 of e4] {0.02};
+	\node (pH4) [below=0.7 of h4] {0.02};
+	\node (pB4) [below=0.7 of b4] {0.03};
+	\node (pI4) [below=0.7 of i4] {0.03};
+	\node (pC4) [below=0.7 of c4] {0.05};
+	\node (pF4) [below=0.7 of f4] {0.05};
+	\node (pL4) [below=0.7 of l4] {0.06};
+	\node (pG4) [below=0.7 of g4] {0.1};
+	\node (pJ4) [below=0.7 of j4] {0.1};
+	\node (pA4) [below=0.7 of a4] {0.12};
+	\node (pK4) [below=0.7 of k4] {0.12};
+	\node (pD4) [below=0.7 of d4] {0.3};
+\end{tikzpicture}
+\end{figure}
+
+\begin{figure}[hbp]
+Fünfter Schritt:
+
+\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm,on grid,auto,/tikz/initial text=]
+	%level 3
+	\node[state] (e6) {e};
+	\node[state] (h6) [right=of e6] {h};
+	
+	%level 4
+	\node[state] (eh6) [above right=1.3 and 0.6 of e6] {$0.04$};
+	\node[state] (i6) [left=of eh6] {i};
+	\node[state] (b6) [left=of i6] {b};
+	\node[state] (c6) [right=of eh6] {c};
+	\node[state] (f6) [right=2.2 of c6] {f};
+	\node[state] (l6) [right=of f6] {l};	
+	
+	%level 5
+	\node[state] (bi6) [above right=1.3 and 0.6 of b6] {$0.06$};		
+	\node[state] (ehc6) [right=2.2 of bi6] {$0.09$};
+	\node[state] (g6) [right=of ehc6] {j};
+	\node[state] (j6) [right=of g6] {g};
+	\node[state] (fl6) [right=of j6] {$0.11$};
+	\node[state] (a6) [right=of fl6] {a};
+	\node[state] (k6) [right=of a6] {k};
+	\node[state] (d6) [right=of k6] {d};
+	
+	%level 6
+	\node[state] (ehcbi6) [above right=1.3 and 1.1 of bi6] {$0.15$};
+	
+	\path[every node/.style={font=\scriptsize}] 
+	(e6) edge node [near start] {$1$} (eh6)
+	(h6) edge node [near end] {$0$} (eh6)
+	(b6) edge node [near start] {$1$} (bi6)
+	(i6) edge node [near end] {$0$} (bi6)
+	(eh6) edge node [near start] {$1$} (ehc6)
+	(c6) edge node [near end] {$0$} (ehc6)
+	(f6) edge node [near start] {$1$} (fl6)
+	(l6) edge node [near end] {$0$} (fl6)
+	(bi6) edge node [near start] {$1$} (ehcbi6)
+	(ehc6) edge node [near end] {$0$} (ehcbi6);
+	
+	\node (pE6) [below=0.7 of e6] {0.02};
+	\node (pH6) [below=0.7 of h6] {0.02};
+	\node (pB6) [below=0.7 of b6] {0.03};
+	\node (pI6) [below=0.7 of i6] {0.03};
+	\node (pC6) [below=0.7 of c6] {0.05};
+	\node (pF6) [below=0.7 of f6] {0.05};
+	\node (pL6) [below=0.7 of l6] {0.06};
+	\node (pG6) [below=0.7 of g6] {0.1};
+	\node (pJ6) [below=0.7 of j6] {0.1};
+	\node (pA6) [below=0.7 of a6] {0.12};
+	\node (pK6) [below=0.7 of k6] {0.12};
+	\node (pD6) [below=0.7 of d6] {0.3};
+\end{tikzpicture}
+\end{figure}
+
+\begin{figure}[hbp]
+Sechster Schritt:
+
+\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm,on grid,auto,/tikz/initial text=]
+	%level 3
+	\node[state] (e7) {e};
+	\node[state] (h7) [right=of e7] {h};
+	
+	%level 4
+	\node[state] (eh7) [above right=1.3 and 0.6 of e7] {$0.04$};
+	\node[state] (i7) [left=of eh7] {i};
+	\node[state] (b7) [left=of i7] {b};
+	\node[state] (c7) [right=of eh7] {c};
+	
+	%level 5
+	\node[state] (bi7) [above right=1.3 and 0.6 of b7] {$0.06$};		
+	\node[state] (l7) [left=1.65 of bi7] {l};
+	\node[state] (f7) [left=of l7] {f};	
+	\node[state] (ehc7) [right=2.2 of bi7] {$0.09$};
+	
+	%level 6
+	\node[state] (ehcbi7) [above right=1.3 and 1.1 of bi7] {$0.15$};
+	\node[state] (k7) [left=of ehcbi7] {k};	
+	\node[state] (a7) [left=of k7] {a};
+	\node[state] (fl7) [left=of a7] {$0.11$};
+	\node[state] (j7) [left=of fl7] {j};
+	\node[state] (g7) [left=of j7] {g};
+	\node[state] (d7) [right=of ehcbi7] {d};
+	
+	%level 7
+	\node[state] (gj7) [above right=1.3 and 0.6 of g7] {$0.2$};
+	
+	\path[every node/.style={font=\scriptsize}] 
+	(e7) edge node [near start] {$1$} (eh7)
+	(h7) edge node [near end] {$0$} (eh7)
+	(b7) edge node [near start] {$1$} (bi7)
+	(i7) edge node [near end] {$0$} (bi7)
+	(eh7) edge node [near start] {$1$} (ehc7)
+	(c7) edge node [near end] {$0$} (ehc7)
+	(f7) edge node [near start] {$1$} (fl7)
+	(l7) edge node [near end] {$0$} (fl7)
+	(bi7) edge node [near start] {$1$} (ehcbi7)
+	(ehc7) edge node [near end] {$0$} (ehcbi7)
+	(g7) edge node [near start] {$1$} (gj7)
+	(j7) edge node [near end] {$0$} (gj7);
+	
+	\node (pE7) [below=0.7 of e7] {0.02};
+	\node (pH7) [below=0.7 of h7] {0.02};
+	\node (pB7) [below=0.7 of b7] {0.03};
+	\node (pI7) [below=0.7 of i7] {0.03};
+	\node (pC7) [below=0.7 of c7] {0.05};
+	\node (pF7) [below=0.7 of f7] {0.05};
+	\node (pL7) [below=0.7 of l7] {0.06};
+	\node (pG7) [below=0.7 of g7] {0.1};
+	\node (pJ7) [below=0.7 of j7] {0.1};
+	\node (pA7) [below=0.7 of a7] {0.12};
+	\node (pK7) [below=0.7 of k7] {0.12};
+	\node (pD7) [below=0.7 of d7] {0.3};
+\end{tikzpicture}
+\end{figure}
+
+\begin{figure}[hbp]
+Siebter Schritt:
+
+\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm,on grid,auto,/tikz/initial text=]
+	%level 4
+	\node[state] (e8) {e};
+	\node[state] (h8) [right=of e8] {h};
+	
+	%level 5
+	\node[state] (eh8) [above right=1.3 and 0.6 of e8] {$0.04$};
+	\node[state] (i8) [left=of eh8] {i};
+	\node[state] (b8) [left=of i8] {b};
+	\node[state] (c8) [right=of eh8] {c};
+	
+	%level 6
+	\node[state] (bi8) [above right=1.3 and 0.6 of b8] {$0.06$};		
+	\node[state] (l8) [left=1.65 of bi8] {l};
+	\node[state] (f8) [left=of l8] {f};	
+	\node[state] (ehc8) [right=2.2 of bi8] {$0.09$};
+	\node[state] (g8) [right=1.1 of ehc8] {g};
+	\node[state] (j8) [right=of g8] {j};
+	
+	%level 7
+	\node[state] (gj8) [above right=1.3 and 0.6 of g8] {$0.2$};
+	\node[state] (ehcbi8) [left=2.75 of gj8] {$0.15$};
+	\node[state] (k8) [left=of ehcbi8] {k};	
+	\node[state] (a8) [left=of k8] {a};
+	\node[state] (fl8) [left=1.1 of a8] {$0.11$};
+	\node[state] (d8) [right=of gj8] {d};
+	
+	%level 8
+	\node[state] (fla8) [above right=1.3 and 0.6 of fl8] {$0.23$};
+	
+	\path[every node/.style={font=\scriptsize}] 
+	(e8) edge node [near start] {$1$} (eh8)
+	(h8) edge node [near end] {$0$} (eh8)
+	(b8) edge node [near start] {$1$} (bi8)
+	(i8) edge node [near end] {$0$} (bi8)
+	(eh8) edge node [near start] {$1$} (ehc8)
+	(c8) edge node [near end] {$0$} (ehc8)
+	(f8) edge node [near start] {$1$} (fl8)
+	(l8) edge node [near end] {$0$} (fl8)
+	(bi8) edge node [near start] {$1$} (ehcbi8)
+	(ehc8) edge node [near end] {$0$} (ehcbi8)
+	(g8) edge node [near start] {$1$} (gj8)
+	(j8) edge node [near end] {$0$} (gj8)
+	(fl8) edge node [near start] {$1$} (fla8)
+	(a8) edge node [near end] {$0$} (fla8);
+	
+	\node (pE8) [below=0.7 of e8] {0.02};
+	\node (pH8) [below=0.7 of h8] {0.02};
+	\node (pB8) [below=0.7 of b8] {0.03};
+	\node (pI8) [below=0.7 of i8] {0.03};
+	\node (pC8) [below=0.7 of c8] {0.05};
+	\node (pF8) [below=0.7 of f8] {0.05};
+	\node (pL8) [below=0.7 of l8] {0.06};
+	\node (pG8) [below=0.7 of g8] {0.1};
+	\node (pJ8) [below=0.7 of j8] {0.1};
+	\node (pA8) [below=0.7 of a8] {0.12};
+	\node (pK8) [below=0.7 of k8] {0.12};
+	\node (pD8) [below=0.7 of d8] {0.3};
+\end{tikzpicture}
+\end{figure}
+
+\begin{figure}[hbp]
+Achter Schritt:
+
+\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm,on grid,auto,/tikz/initial text=]
+	%level 4
+	\node[state] (e9) {e};
+	\node[state] (h9) [right=of e9] {h};
+	
+	%level 5
+	\node[state] (eh9) [above right=1.3 and 0.6 of e9] {$0.04$};
+	\node[state] (i9) [left=of eh9] {i};
+	\node[state] (b9) [left=of i9] {b};
+	\node[state] (c9) [right=of eh9] {c};
+	\node[state] (f9) [right=2.2 of c9] {f};
+	\node[state] (l9) [right=of f9] {l};
+	
+	%level 6
+	\node[state] (bi9) [above right=1.3 and 0.6 of b9] {$0.06$};		
+	\node[state] (ehc9) [right=2.2 of bi9] {$0.09$};
+	\node[state] (g9) [right=1.1 of ehc9] {g};
+	\node[state] (j9) [right=of g9] {j};
+	\node[state] (fl9) [right=of j9] {$0.11$};	
+	\node[state] (a9) [right=of fl9] {a};
+	
+	%level 7
+	\node[state] (gj9) [above right=1.3 and 0.6 of g9] {$0.2$};
+	\node[state] (ehcbi9) [left=2.75 of gj9] {$0.15$};
+	\node[state] (k9) [left=of ehcbi9] {k};	
+	\node[state] (fla9) [right=2.2 of gj9] {$0.23$};
+	\node[state] (d9) [right=of fla9] {d};	
+	
+	%level 8
+	\node[state] (kehcbi9) [above right=1.3 and 0.6 of k9] {$0.27$};
+	
+	\path[every node/.style={font=\scriptsize}] 
+	(e9) edge node [near start] {$1$} (eh9)
+	(h9) edge node [near end] {$0$} (eh9)
+	(b9) edge node [near start] {$1$} (bi9)
+	(i9) edge node [near end] {$0$} (bi9)
+	(eh9) edge node [near start] {$1$} (ehc9)
+	(c9) edge node [near end] {$0$} (ehc9)
+	(f9) edge node [near start] {$1$} (fl9)
+	(l9) edge node [near end] {$0$} (fl9)
+	(bi9) edge node [near start] {$1$} (ehcbi9)
+	(ehc9) edge node [near end] {$0$} (ehcbi9)
+	(g9) edge node [near start] {$1$} (gj9)
+	(j9) edge node [near end] {$0$} (gj9)
+	(fl9) edge node [near start] {$1$} (fla9)
+	(a9) edge node [near end] {$0$} (fla9)
+	(k9) edge node [near start] {$1$} (kehcbi9)
+	(ehcbi9) edge node [near end] {$0$} (kehcbi9);
+	
+	\node (pE9) [below=0.7 of e9] {0.02};
+	\node (pH9) [below=0.7 of h9] {0.02};
+	\node (pB9) [below=0.7 of b9] {0.03};
+	\node (pI9) [below=0.7 of i9] {0.03};
+	\node (pC9) [below=0.7 of c9] {0.05};
+	\node (pF9) [below=0.7 of f9] {0.05};
+	\node (pL9) [below=0.7 of l9] {0.06};
+	\node (pG9) [below=0.7 of g9] {0.1};
+	\node (pJ9) [below=0.7 of j9] {0.1};
+	\node (pA9) [below=0.7 of a9] {0.12};
+	\node (pK9) [below=0.7 of k9] {0.12};
+	\node (pD9) [below=0.7 of d9] {0.3};
+\end{tikzpicture}
+\end{figure}
+
+\begin{figure}[hbp]
+Neunter Schritt:
+
+\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm,on grid,auto,/tikz/initial text=]
+		
+	
+	%level 8
+	\node[state] [above right=5.2 and 3.6] (kehcbi10)  {$0.27$};
+	\node[state] (fla10) [left=2.2 of kehcbi10] {$0.23$};
+	\node[state] (gj10) [left=2.2 of fla10] {$0.2$};
+	\node[state] (d10) [right=of kehcbi10] {d};
+	
+	%level 7
+	\node[state] (ehcbi10) [below right=1.3 and 0.6 of kehcbi10]  {$0.15$};
+	\node[state] (k10) [left=of ehcbi10] {k};	
+	\node[state] (a10) [left=of k10] {a};
+	\node[state] (fl10) [left=of a10] {$0.11$};
+	\node[state] (j10) [left=of fl10] {j};
+	\node[state] (g10) [left=of j10] {g};
+	
+	\node[state] (bi10) [below left=1.3 and 1.2 of ehcbi10] {$0.06$};		
+	\node[state] (l10) [left=1.65 of bi10] {l};
+	\node[state] (f10) [left=of l10] {f};
+	\node[state] (ehc10) [right=2.2of bi10] {$0.09$};
+	
+	\node[state] (eh10) [below left=1.3 and 0.6 of ehc10] {$0.04$};
+	\node[state] (i10) [left=of eh10] {i};
+	\node[state] (b10) [left=of i10] {b};
+	\node[state] (c10) [right=of eh10] {c};
+	
+	\node[state] (e10) [below left=1.3 and 0.6 of eh10] {e};
+	\node[state] (h10) [right=of e10] {h};
+	
+	%level 9
+	\node[state] (gjfla10) [above right=1.3 and 1.1 of gj10] {$0.43$};	
+	
+	\path[every node/.style={font=\scriptsize}] 
+	(e10) edge node [near start] {$1$} (eh10)
+	(h10) edge node [near end] {$0$} (eh10)
+	(b10) edge node [near start] {$1$} (bi10)
+	(i10) edge node [near end] {$0$} (bi10)
+	(eh10) edge node [near start] {$1$} (ehc10)
+	(c10) edge node [near end] {$0$} (ehc10)
+	(f10) edge node [near start] {$1$} (fl10)
+	(l10) edge node [near end] {$0$} (fl10)
+	(bi10) edge node [near start] {$1$} (ehcbi10)
+	(ehc10) edge node [near end] {$0$} (ehcbi10)
+	(g10) edge node [near start] {$1$} (gj10)
+	(j10) edge node [near end] {$0$} (gj10)
+	(fl10) edge node [near start] {$1$} (fla10)
+	(a10) edge node [near end] {$0$} (fla10)
+	(k10) edge node [near start] {$1$} (kehcbi10)
+	(ehcbi10) edge node [near end] {$0$} (kehcbi10)
+	(gj10) edge node [near start] {$1$} (gjfla10)
+	(fla10) edge node [near end] {$0$} (gjfla10);
+	
+	\node (pE10) [below=0.7 of e10] {0.02};
+	\node (pH10) [below=0.7 of h10] {0.02};
+	\node (pB10) [below=0.7 of b10] {0.03};
+	\node (pI10) [below=0.7 of i10] {0.03};
+	\node (pC10) [below=0.7 of c10] {0.05};
+	\node (pF10) [below=0.7 of f10] {0.05};
+	\node (pL10) [below=0.7 of l10] {0.06};
+	\node (pG10) [below=0.7 of g10] {0.1};
+	\node (pJ10) [below=0.7 of j10] {0.1};
+	\node (pA10) [below=0.7 of a10] {0.12};
+	\node (pK10) [below=0.7 of k10] {0.12};
+	\node (pD10) [below=0.7 of d10] {0.3};
+\end{tikzpicture}
+\end{figure}
+
+\begin{figure}[hbp]
+Zehnter Schritt:
+
+\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm,on grid,auto,/tikz/initial text=]
+	%level 4
+	\node[state] (e11) {e};
+	\node[state] (h11) [right=of e11] {h};
+	
+	%level 5
+	\node[state] (eh11) [above right=1.3 and 0.6 of e11] {$0.04$};
+	\node[state] (i11) [left=of eh11] {i};
+	\node[state] (b11) [left=of i11] {b};
+	\node[state] (c11) [right=of eh11] {c};
+	\node[state] (f11) [right=2.2 of c11] {f};	
+	\node[state] (l11) [right=of f11] {l};
+	
+	%level 6
+	\node[state] (bi11) [above right=1.3 and 0.6 of b11] {$0.06$};		
+	
+	\node[state] (ehc11) [right=2.2 of bi11] {$0.09$};
+	\node[state] (g11) [right=of ehc11] {g};
+	\node[state] (j11) [right=of g11] {j};
+	\node[state] (fl11) [right=of j11] {$0.11$};
+	\node[state] (a11) [right=of fl11] {a};
+	
+	%level 7
+	\node[state] (ehcbi11) [above right=1.3 and 1.2 of bi11] {$0.15$};
+	\node[state] (k11) [left=of ehcbi11] {k};
+	\node[state] (gj11) [right=2.75 of ehcbi11] {$0.2$};
+	\node[state] (fla11) [right=2.2 of gj11] {$0.23$};
+	
+	%level 8
+	\node[state] (kehcbi11) [above right=1.3 and 0.6 of k11] {$0.27$};
+	
+	\node[state] (d11) [right=of kehcbi11] {d};
+	\node[state] (gjfla11) [right=3.3 of d11] {$0.43$};	
+	
+	%level 9
+	\node[state] (kehcbid11) [above right=1.3 and 0.6 of kehcbi11] {$0.57$};
+	
+	\path[every node/.style={font=\scriptsize}] 
+	(e11) edge node [near start] {$1$} (eh11)
+	(h11) edge node [near end] {$0$} (eh11)
+	(b11) edge node [near start] {$1$} (bi11)
+	(i11) edge node [near end] {$0$} (bi11)
+	(eh11) edge node [near start] {$1$} (ehc11)
+	(c11) edge node [near end] {$0$} (ehc11)
+	(f11) edge node [near start] {$1$} (fl11)
+	(l11) edge node [near end] {$0$} (fl11)
+	(bi11) edge node [near start] {$1$} (ehcbi11)
+	(ehc11) edge node [near end] {$0$} (ehcbi11)
+	(g11) edge node [near start] {$1$} (gj11)
+	(j11) edge node [near end] {$0$} (gj11)
+	(fl11) edge node [near start] {$1$} (fla11)
+	(a11) edge node [near end] {$0$} (fla11)
+	(k11) edge node [near start] {$1$} (kehcbi11)
+	(ehcbi11) edge node [near end] {$0$} (kehcbi11)
+	(gj11) edge node [near start] {$1$} (gjfla11)
+	(fla11) edge node [near end] {$0$} (gjfla11)
+	(kehcbi11) edge node [near start] {$1$} (kehcbid11)
+	(d11) edge node [near end] {$0$} (kehcbid11);
+	
+	\node (pE11) [below=0.7 of e11] {0.02};
+	\node (pH11) [below=0.7 of h11] {0.02};
+	\node (pB11) [below=0.7 of b11] {0.03};
+	\node (pI11) [below=0.7 of i11] {0.03};
+	\node (pC11) [below=0.7 of c11] {0.05};
+	\node (pF11) [below=0.7 of f11] {0.05};
+	\node (pL11) [below=0.7 of l11] {0.06};
+	\node (pG11) [below=0.7 of g11] {0.1};
+	\node (pJ11) [below=0.7 of j11] {0.1};
+	\node (pA11) [below=0.7 of a11] {0.12};
+	\node (pK11) [below=0.7 of k11] {0.12};
+	\node (pD11) [below=0.7 of d11] {0.3};
+\end{tikzpicture}
+\end{figure}
+
+\begin{figure}[h!]
+Elfter Schritt:
+
+\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm,on grid,auto,/tikz/initial text=]
+	%level 4
+	\node[state] (e12) {e};
+	\node[state] (h12) [right=of e12] {h};
+	
+	%level 5
+	\node[state] (eh12) [above right=1.3 and 0.6 of e12] {$0.04$};
+	\node[state] (i12) [left=of eh12] {i};
+	\node[state] (b12) [left=of i12] {b};
+	\node[state] (c12) [right=of eh12] {c};
+	
+	%level 6
+	\node[state] (bi12) [above right=1.3 and 0.6 of b12] {$0.06$};	
+	\node[state] (l12) [left=1.65 of bi12] {l};	
+	\node[state] (f12) [left=of l12] {f};
+	\node[state] (ehc12) [right=2.2 of bi12] {$0.09$};
+	
+	%level 7
+	\node[state] (ehcbi12) [above right=1.3 and 1.2 of bi12] {$0.15$};
+	\node[state] (k12) [left=of ehcbi12] {k};
+	\node[state] (a12) [left=of k12] {a};
+	\node[state] (fl12) [left=of a12] {$0.11$};
+	\node[state] (j12) [left=of fl12] {j};
+	\node[state] (g12) [left=of j12] {g};
+	
+	%level 8
+	\node[state] (kehcbi12) [above right=1.3 and 0.6 of k12] {$0.27$};
+	\node[state] (fla12) [left=2.2 of kehcbi12] {$0.23$};	
+	\node[state] (gj12) [left=2.2 of fla12] {$0.2$};
+	
+	\node[state] (d12) [right=of kehcbi12] {d};	
+	
+	%level 9
+	\node[state] (kehcbid12) [above right=1.3 and 0.6 of kehcbi12] {$0.57$};
+	\node[state] (gjfla12) [left=3.95 of kehcbid12] {$0.43$};
+	
+	%level 10
+	\node[state] (gjflakehcbid12) [above right=1.3 and 2.0 of gjfla12] {$1$};
+	
+	\path[every node/.style={font=\scriptsize}] 
+	(e12) edge node [near start] {$1$} (eh12)
+	(h12) edge node [near end] {$0$} (eh12)
+	(b12) edge node [near start] {$1$} (bi12)
+	(i12) edge node [near end] {$0$} (bi12)
+	(eh12) edge node [near start] {$1$} (ehc12)
+	(c12) edge node [near end] {$0$} (ehc12)
+	(f12) edge node [near start] {$1$} (fl12)
+	(l12) edge node [near end] {$0$} (fl12)
+	(bi12) edge node [near start] {$1$} (ehcbi12)
+	(ehc12) edge node [near end] {$0$} (ehcbi12)
+	(g12) edge node [near start] {$1$} (gj12)
+	(j12) edge node [near end] {$0$} (gj12)
+	(fl12) edge node [near start] {$1$} (fla12)
+	(a12) edge node [near end] {$0$} (fla12)
+	(k12) edge node [near start] {$1$} (kehcbi12)
+	(ehcbi12) edge node [near end] {$0$} (kehcbi12)
+	(gj12) edge node [near start] {$1$} (gjfla12)
+	(fla12) edge node [near end] {$0$} (gjfla12)
+	(kehcbi12) edge node [near start] {$1$} (kehcbid12)
+	(d12) edge node [near end] {$0$} (kehcbid12)
+	(gjfla12) edge node [near start] {$1$} (gjflakehcbid12)
+	(kehcbid12) edge node [near end] {$0$} (gjflakehcbid12);
+	
+	\node (pE12) [below=0.7 of e12] {0.02};
+	\node (pH12) [below=0.7 of h12] {0.02};
+	\node (pB12) [below=0.7 of b12] {0.03};
+	\node (pI12) [below=0.7 of i12] {0.03};
+	\node (pC12) [below=0.7 of c12] {0.05};
+	\node (pF12) [below=0.7 of f12] {0.05};
+	\node (pL12) [below=0.7 of l12] {0.06};
+	\node (pG12) [below=0.7 of g12] {0.1};
+	\node (pJ12) [below=0.7 of j12] {0.1};
+	\node (pA12) [below=0.7 of a12] {0.12};
+	\node (pK12) [below=0.7 of k12] {0.12};
+	\node (pD12) [below=0.7 of d12] {0.3};
+\end{tikzpicture}
+\end{figure}
+
+\subsection{} %b
+Mittlerer Informationsgehalt(Entropie):
+\begin{alignat*}{2}
+H &=& \sum\limits_{i} p_{i} \cdot \log_{2}{(\frac{1}{p_{i}})} \\
+H &=& 2 \cdot (0.02 \cdot \log_{2}{(\frac{1}{0.02})}) + 2 \cdot (0.03 \cdot \log_{2}{(\frac{1}{0.03})}) \\
+& & + 2 \cdot (0.05 \cdot \log_{2}{(\frac{1}{0.05})}) + (0.06 \cdot \log_{2}{(\frac{1}{0.06})})\\
+& & + 2 \cdot ( 0.1 \cdot \log_{2}{(\frac{1}{0.1})}) + 2 \cdot (0.12 \cdot \log_{2}{(\frac{1}{0.12})})\\
+& & + (0.3 \cdot \log_{2}{(\frac{1}{0.3})}) \\
+H &\approx & 3.125 Bit
+\end{alignat*}
+\section{}%5.4
+\subsection{} %a
+Codieren von Dezimalziffern auf 4-Bit Binärwörter:
+
+\begin{tikzpicture}
+	\matrix[matrix of math nodes,nodes={rectangle,thin,draw=black!20,minimum size=10mm}]
+		{0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+		0000 & 0001 & 0010 & 0011 & 0100 & 0101 & 0110 & 0111 & 1000 & 1001 \\};
+\end{tikzpicture}
+
+4 Binärstellen für 10 Codewörter, da maximal mögliche Anzahl von Codewörtern gleich $2^{4} = 16$.
+\begin{alignat*}{2}
+H_{0} &=& \log_{2}{(2^{4})} \\
+H_{0} &=& 4 \\
+\intertext{Also 4 Bit möglicher Informationsgehalt}
+H &=& 10 \cdot \frac{1}{10} \cdot \log_{2}{(\frac{1}{\frac{1}{10}})} \\
+H &\approx & 3.32 \\
+\intertext{Also rund 3.32 Bit mittlerer Informationsgehalt}
+R &=& H_{0} - H \\
+R &=& 0.68
+\intertext{Also rund 0.68 Bit Redundanz}
+\end{alignat*}
+\subsection{} %b
+Es werden $7$ bits verbraucht, da $2^{7}=128$ und $2^{6}=64$.
+
+Code für die Dezimalziffern 0-9:
+
+\begin{tikzpicture}
+	\matrix[matrix of math nodes,nodes={rectangle,thin,draw=black!20,minimum size=10mm}]
+		{0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+		00 & 01 & 02 & 03 & 04 & 05 & 06 & 07 & 08 & 09 \\};
+\end{tikzpicture}
+
+Aufgrund der Formel $H_{0}=\log_{2}{2^{7}}=7$ gilt, dass der mögliche Informationsgehalt $7$ beträgt.
+
+Aufgrund der Formel $H = 100 \cdot \frac{1}{100} \cdot \log_{2}{(\frac{1}{\frac{1}{100}})} \approx 6.43$ beträgt der mittlere Informationsgehalt rund $6.43$ Bit.
+
+Daraus ergibt sich sich die Redundanz $R = H_{0} - H \approx 0.36$ Bit.
+
+Die Redundanz bezogen auf eine einzelne Dezimalziffer beträgt $\frac{R}{2} \approx 0.18$ Bit.
+\subsection{} %c
+Bei Gruppen von drei Ziffern werden $10$ Bits belegt. Dies ergibt sich aus $2^{10} = 1024$.
+Demzufolge ist der mögliche Informationsgehalt $H_{0}$ für alle Codewörter gleich $10$ Bit. Bezogen auf eine einzelne Ziffer sind es $\frac{10}{3}$ Bit. 
+
+Bei Gruppen von vier Ziffern werden $14$ Bits belegt. Dies ergibt sich aus $2^{14}=16384$.
+Demzufolge ist der mögliche Informationsgehalt gleich $14$ Bit. Bezogen auf eine einzelne Ziffer sind es $\frac{14}{4} = \frac{7}{2} = 3.5$ Bit.
+
+Die Unterschiede ergeben sich durch unterschiedlich viele Kombinationsmöglichkeiten. Bei 3-er Gruppen gibt es $3^{10}$ und bei 4-er Gruppen $4^{10}$ mögliche Kombinationen. Demzufolge ist der mögliche Informationsgehalt pro Ziffer bei letzterem minimal höher.
+\subsection{} %d
+
+Code mit variabler Länge (Fano-Code):
+
+\begin{tikzpicture}
+	\matrix[matrix of nodes]
+		{0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+		$000$ & $001$ & $010$ & $0110$ & $0111$ & $100$ & $101$ & $110$ & $1110$ & $1111$ \\};
+\end{tikzpicture}
+
+\begin{alignat*}{2}
+P(a_{i}) &=& \frac{1}{10} \\
+H_{0} &=& (\frac{1}{10} \cdot 4 \cdot \log_{2}{2^{4}}) + (\frac{1}{10} \cdot 6 \cdot \log_{2}{2^{3}}) \\
+H_{0} &\approx & 1.6 + 1.8 = 3.4\, \text{Bit} \\
+R &=& H_{0} - H \\
+R &=& 0.08\,\text{Bit}
+\end{alignat*}
+
+Der Code wird noch effizienter, wenn x-beliebige Codewörter zu einem Codewort zusammengefasst werden.
+
+\end{document}

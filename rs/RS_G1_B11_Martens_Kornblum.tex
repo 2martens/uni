@@ -1,0 +1,202 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{qtree}
+\usepackage[locale=DE,exponent-product=\cdot ,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage[scaled=0.78]{luximono}
+\usepackage{listings}
+\usepackage{subfigure}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,decorations.text,arrows}
+\pagenumbering{arabic}
+\def\thesection{11.\arabic{section})}
+\def\thesubsection{(\alph{subsection})}
+\def\thesubsubsection{(\arabic{subsubsection})}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\hyphenation{Nach-komma-stel-len}
+\lstnewenvironment{java}[1][]{%
+	\lstset{basicstyle=\ttfamily ,backgroundcolor=\color[gray]{.95},columns=flexible,fontadjust=true,language=Java,tabsize=4,numbers=none,#1}%
+}{%
+}
+\graphicspath{{D:/Users/Jim-Studium/Pictures/Studium/RS/}}
+
+\tikzstyle{huffmanNodes}=[matrix of nodes,
+	nodes={circle,thin,draw=black!20,minimum size=10mm,text height=1.5ex,text depth=.25ex,inner sep=-10pt}]
+\tikzstyle{huffmanBase}=[matrix of nodes,
+	nodes={minimum size=10mm,text height=1.5ex,text depth=.25ex,inner sep=-10pt}]
+\begin{document}
+\author{Jim Martens (Matrikelnummer 6420323) \and Marlo Kornblum (Matrikelnummer 6427301)}
+\title{Rechnerstrukturen Aufgabenblatt 11}
+\maketitle
+
+\section{} %11.1
+\subsection{} %a
+30
+\subsection{} %b
+40
+\subsection{} %c
+50
+\subsection{} %d
+30
+\subsection{} %e
+40
+\section{} %11.2
+\begin{figure}[h]
+7 Befehle mit einer 5-bit Registernummer und einer 24-bit Adresse:\\
+\begin{tikzpicture}
+\draw (0,0) -- +(12,0); %untere Kante
+\draw (0,0) -- +(0,0.5); %linke Kante
+\draw (0,0.5) -- +(12,0); %obere Kante
+\draw (12,0) -- +(0,0.5); %rechte Kante
+\draw (1.5,0) -- +(0,0.5); %rechte Kante von Opcode
+\draw (4.0,0) -- +(0,0.5); %rechte Kante der Reg-nr.
+\node at ++(0.7, 0.2) (opcode) {Opcode}; %Opcode
+\node at ++(2.2, 0.2) (regNr) {Reg-Nr.}; %Reg-Nr.
+\node at ++(6.2, 0.2) (address) {Adresse}; %Adresse
+\node at ++(0.2,-0.4) (31) {$31$};
+\node at ++(1.3,-0.4) (29) {$29$};
+\node at ++(1.7,-0.4) (28) {$28$};
+\node at ++(4.8,-0.4) (24) {$24$};
+\node at ++(5.2,-0.4) (23) {$23$};
+\node at ++(11.8,-0.4) (0) {$0$};
+\end{tikzpicture}
+\end{figure}
+
+\begin{figure}[h]
+100 Befehle mit zwei 5-bit Registernummern und einem Adressoffset:\\
+\begin{tikzpicture}
+\draw (0,0) -- +(12,0); %untere Kante
+\draw (0,0) -- +(0,0.5); %linke Kante
+\draw (0,0.5) -- +(12,0); %obere Kante
+\draw (12,0) -- +(0,0.5); %rechte Kante
+\draw (1.5,0) -- +(0,0.5); %rechte Kante von Opcode1
+\draw (5.0,0) -- +(0,0.5); %rechte Kante von Opcode2
+\draw (7.5,0) -- +(0,0.5); %rechte Kante von Reg-Nr.
+\draw (10.0,0) -- +(0,0.5); %rechte Kante von Reg-Nr. 2
+\node at ++(0.7,0.2) (opcode1) {$111$}; %Opcode1
+\node at ++(2.2,0.2) (opcode2) {Opcode}; %Opcode2
+\node at ++(5.7,0.2) (regNr) {Reg-Nr.}; %Reg-Nr.
+\node at ++(8.4,0.2) (regNr2) {Reg-Nr. 2}; %Reg-Nr. 2
+\node at ++(10.7,0.2) (offset) {Offset}; %Adressoffset
+\node at ++(0.2,-0.4) (31) {$31$};
+\node at ++(1.3,-0.4) (29) {$29$};
+\node at ++(1.7,-0.4) (28) {$28$};
+\node at ++(4.8,-0.4) (22) {$22$};
+\node at ++(5.2,-0.4) (21) {$21$};
+\node at ++(7.3,-0.4) (17) {$17$};
+\node at ++(7.7,-0.4) (16) {$16$};
+\node at ++(9.8,-0.4) (12) {$12$};
+\node at ++(10.2,-0.4) (11) {$11$};
+\node at ++(11.8,-0.4) (0) {$0$};
+\end{tikzpicture}\\
+Es stehen maximal $12$ Bit für den Adressoffset zur Verfügung.
+\end{figure}
+\begin{figure}[h]
+30 Befehle ohne Adressen oder Registerangaben:\\
+\begin{tikzpicture}
+\draw (0,0) -- +(12,0); %untere Kante
+\draw (0,0) -- +(0,0.5); %linke Kante
+\draw (0,0.5) -- +(12,0); %obere Kante
+\draw (12,0) -- +(0,0.5); %rechte Kante
+\draw (1.5,0) -- +(0,0.5); %rechte Kante von Opcode1
+\draw (5.0,0) -- +(0,0.5); %rechte Kante von Opcode2
+\draw (7.5,0) -- +(0,0.5); %rechte Kante von Opcode3
+\node at ++(0.7,0.2) (opcode1) {$111$}; %Opcode1
+\node at ++(2.2,0.2) (opcode2) {$1111111$}; %Opcode2
+\node at ++(5.7,0.2) (opcode3) {Opcode}; %Opcode3
+\node at ++(8.5,0.2) (undefined) {unbenutzt}; %unbenutzt
+\node at ++(0.2,-0.4) (31) {$31$};
+\node at ++(1.3,-0.4) (29) {$29$};
+\node at ++(1.7,-0.4) (28) {$28$};
+\node at ++(4.8,-0.4) (22) {$22$};
+\node at ++(5.2,-0.4) (21) {$21$};
+\node at ++(7.3,-0.4) (17) {$17$};
+\node at ++(7.7,-0.4) (16) {$16$};
+\node at ++(11.8,-0.4) (0) {$0$};
+\end{tikzpicture}
+\end{figure}
+
+Für die ersten sieben Befehle wird ein dreistelliger Opcode benötigt, um sie voneinander unterscheiden zu können. Da 8 Codes maximal möglich sind, aber nur 7 benutzt werden, kann die achte Kombination (111) als Differenzierung zur zweiten Befehlsanzahl fungieren.
+
+Bei dieser wird ein siebenstelliger Opcode benötigt, um die 100 Befehle voneinander unterscheiden zu können. Ein sechsstelliger Opcode würde nur $64$ Befehle unterstützen.
+Die 5-bit Registernummern sind in den beiden ersten Fällen vorhanden und verbrauchen beide Male 5-bit.
+
+Der Adressoffset benutzt schließlich die übrigen unbenutzten Stellen.
+
+Die 30 restlichen Befehle werden von den vorigen beiden Befehlstypen durch die drei Einsen der ersten Befehle und weiteren 7 Einsen der zweiten Befehle (beide Male sind diese Werte ohne Benutzung) unterschieden. Innerhalb dieser 30 Befehle wird mithilfe eines 5-bit Opcodes zwischen den einzelnen Befehlen unterschieden.
+\section{} %11.3
+Wir nehmen an, dass anstatt 12-bit tatsächlich die 8-bit Kodierung gemeint war. Schließlich kann der Immediate-Wert nur 8-bit darstellen. Daher werden wir im Folgenden die Werte in 8-bit Kodierung darstellen.
+\subsection{} %a
+$185_{10} = 10111001_{2}, rot = 16$
+\subsection{} %b
+$355_{10} = 101100011_{2}$ 
+Kann nicht dargestellt werden, da der Immediate-Wert nur 8-bit nutzen kann. Hier werden jedoch 9-bit benutzt.
+\subsection{} %c
+$1576_{10} = 11000101_{2}, rot = n.e.$
+Kann nicht dargestellt werden, da durch Rotierung des Immediate-Wertes nicht die nötige Position erreicht werden kann. Es würde eine ungerade Anzahl an Schiebeoperationen erfordern, was hier nicht möglich ist.
+\subsection{} %d
+$1584_{10} = 01100011_{2}, rot = 14$
+\subsection{} %e
+$2415919104_{10} = 00001001_{2}, rot = 2$
+\section{} %11.4
+\subsection{} %a
+0-Adress-Maschine:\\
+PUSH F\\
+PUSH E\\
+PUSH D\\
+MUL\\
+ADD\\
+PUSH C\\
+PUSH B\\
+MUL\\
+PUSH A\\
+SUB\\
+DIV\\
+POP R\\
+\\
+1-Adress-Maschine:\\
+LOAD D\\
+MUL E\\
+ADD F\\
+STORE G\\
+LOAD B\\
+MUL C\\
+STORE H\\
+LOAD A\\
+SUB H\\
+DIV G\\
+STORE R\\
+\\
+2-Adress-Maschine:\\
+MOV G,D\\
+MUL G,E\\
+ADD G,F\\
+MOV H,B\\
+MUL H,C\\
+SUB A,H\\
+DIV A,G\\
+MOV R,A\\
+\\
+3-Adress-Maschine:\\
+LOAD X,D\\
+LOAD Y,E\\
+MUL X,X,Y\\
+LOAD Y,F\\
+ADD X,X,Y\\
+LOAD Y,B\\
+LOAD Z,C\\
+MUL Y,Y,Z\\
+LOAD Z,A\\
+SUB Z,Z,Y\\
+DIV Z,Z,X\\
+STORE R,Z\\
+\subsection{} %b
+Die 0-Adress-Maschine verbraucht $212$ Bit. Die 1-Adress-Maschine verbraucht $236$ Bit. Die 2-Adress-Maschine verbraucht $208$ Bit. Die 3-Adress-Maschine verbraucht $220$ Bit.
+
+Die 2-Adress-Maschine verbraucht am wenigsten Bit.
+\end{document}
