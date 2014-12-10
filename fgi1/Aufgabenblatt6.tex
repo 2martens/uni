@@ -1,0 +1,99 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{stmaryrd}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pagenumbering{arabic}
+\def\thesection{6.\arabic{section})}
+\def\thesubsection{\arabic{subsection}.}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setcounter{section}{3}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\addtolength{\parskip}{\baselineskip}
+
+\begin{document}
+\author{Jim Martens}
+\title{Hausaufgaben zum 14. Mai}
+\maketitle
+
+\section{} %6.4
+\subsection{} %1.
+Zunächst werden links und rechts vom Wort Marker geschrieben. Der Lesekopf wird auf das letzte $a$ bewegt. Nun wird der Lesekopf nach links bewegt, bis der linke Marker erreicht wird. Auf dem Weg wird das erste, dritte, fünfte usw. gelesene a durch ein + ersetzt. Anschließend wird das Band noch einmal komplett durchlaufen, dabei werden die mit + beschriebenen Felder ignoriert. Die TM merkt sich die Parität ($0$, $1$, $0$, etc.) in jeweils einem Zustand. Das zuerst gelesene $a$ erzeugt die Parität $1$, das zweite $0$, usw. bis der Lesekopf den rechten Marker erreicht. Die aktuelle Parität wird auf das erste unbeschriebene Feld links vom linken Marker geschrieben. 
+
+Nun bewegt sich der Lesekopf zurück auf das rechte Ende des Wortes (letztes $a$). Jetzt bewegt sich der Lesekopf wieder nach links und ersetzt das erste, dritte, fünfte usw. gelesene $a$ durch ein +. Es wird wieder das Band abgelaufen und die Parität gemerkt. Das Ergebnis wird links vom linken Marker auf das erste unbeschriebene Feld geschrieben.
+
+Dies wiederholt sich nun so lange bis zwischen den beiden Markern keine $a$s mehr stehen. Nun werden die ganzen +-Zeichen gelöscht und abschließend auch die Marker. Der Lesekopf bewegt sich auf den Anfang der jetzt noch beschriebenen Felder.
+\subsection{} %2.
+\begin{tikzpicture}[shorten >=1pt,node distance=2.0cm,on grid,auto,/tikz/initial text=,>=stealth',text centered]
+
+\node[initial,state] (z0) {$z_{0}$};
+\node[state] (z1) [below=2.0 of z0] {$z_{1}$};
+\node[state] (z2) [right=2.0 of z1] {$z_{2}$};
+\node[state] (z3) [right=3.0 of z0] {$z_{3}$};
+\node[state] (z4) [below right=4.0 and 3.0 of z0] {$z_{4}$};
+\node[state] (z5) [right=4.0 of z3] {$z_{5}$};
+\node[state] (z6) [right=4.0 of z4] {$z_{6}$};
+\node[state] (z7) [below right=2.0 and 2.0 of z5] {$z_{7}$};
+\node[state] (z8) [left=2.0 of z7] {$z_{8}$};
+\node[state] (z9) [below right=2.0 and 4.0 of z8] {$z_{9}$};
+\node[state,accepting] (z10) [below=2.0 of z9] {$z_{10}$};
+
+
+\path[every node/.style={font=\scriptsize}] 
+(z0) edge[loop above,->] node[above,align=center] {0,0,L\\1,1,L} (z0)
+(z0) edge[->] node[left] {\#,\$,R} (z1)
+(z1) edge[loop below,->] node[below,align=center] {0,0,R\\1,1R} (z1)
+(z1) edge[->] node[above] {\#,\$,L} (z2)
+(z2) edge[->] node[near start] {1,\#,R} (z3)
+(z2) edge[->] node[below left] {0,\#,R} (z4)
+(z3) edge[loop above,->] node[above] {\#,\#,R} (z3)
+(z3) edge[->] node[near start] {\$,\$,R} (z5)
+(z4) edge[loop below,->] node[below] {\#,\#,R} (z4)
+(z4) edge[->] node[below] {\$,\$,R} (z6)
+(z5) edge[loop above,->] node[above,align=center] {0,0,R\\1,1,R} (z5)
+(z6) edge[loop below,->] node[below,align=center] {1,1,R\\0,0,R} (z6)
+(z5) edge[->] node[near start] {\#,1,L} (z7)
+(z6) edge[->] node[above left,near start] {\#,0,L} (z7)
+(z2) edge[->] node[near start] {\$,\$,-} (z8)
+(z7) edge[->] node[above] {\$,\$,L} (z8)
+(z7) edge[loop right,->] node[right,align=center] {1,1,L\\0,0,L} (z7)
+(z8) edge[->] node[near end] {1,\#,R} (z3)
+(z8) edge[->] node[above] {0,\#,R} (z4)
+(z8) edge[loop above,->] node[above] {\#,\#,L} (z8)
+(z8) edge[->] node[above right,near end] {\$,\#,R}
+(z9)
+(z9) edge[loop right,->] node[right] {\#,\#,R} (z9)
+(z9) edge[->] node[right] {\$,\#,R} (z10); 
+\end{tikzpicture}\\
+Zu Beginn wird im Zustand $z_{0}$ solange nach links gegangen, bis man an den unbeschriebenen Rand kommt. Dann wird das erste unbeschriebene Feld durch ein \$-Zeichen ersetzt und im Zustand $z_{1}$ wird einmal bis an das rechte Ende des Wortes gelaufen. Auch dort wird im Übergang zu $z_{2}$ das erste unbeschriebene Feld durch \$-Zeichen ersetzt.
+Damit steht der Lesekopf nun auf dem letzten Zeichen des Wortes $w$ und das Wort $w$ ist vorne und hinten durch ein \$-Zeichen begrenzt.
+
+Anschließend wird entweder eine $0$ oder eine $1$ gelesen. Im Falle der $1$ wird sie durch $\#$ ersetzt. Der Lesekopf bewegt sich am rechten Marker vorbei und schreibt die $1$ auf das Band ($z_{2} \rightarrow z_{3} \rightarrow z_{5} \rightarrow z_{7}$. Nun bewegt er sich wieder am Marker vorbei ($z_{7} \rightarrow z_{8}$), durchläuft die unbeschriebenen Felder bis er auf eine $0$ oder eine $1$ trifft. Im Falle der $1$ löscht er diese und durchläuft alle unbeschriebenen Felder, die rechts davon stehen bis er wieder auf den rechten Marker trifft. Er durchläuft alle hier bereits geschriebenen Felder und schreibt auf das erste unbeschriebene Feld eine $1$.
+
+Folgend werden alle bereits beschriebenen Felder und der Marker, sowie alle unbeschriebenen Felder links vom Marker durchlaufen, bis wieder auf eine $1$ oder eine $0$ getroffen wird. Für die $0$ funktioniert es analog. nur werden statt $z_{3}$ und $z_{5}$ die Zustände $z_{4}$ und $z_{6}$ durchlaufen.
+
+Das wiederholt sich so lange, bis das ganze Wort gelesen wurde, zwischen den beiden Markern also nur noch unbeschriebene Felder stehen, und der Lesekopf am linken Marker ankommt.
+Damit wurde das Wort $w$ nun komplett gelesen und in umgekehrter Reihenfolge rechts vom rechten Marker wieder aufgeschrieben.
+
+Abschließend wird der linke Marker gelöscht, dann werden alle unbeschriebenen Felder nach rechts durchlaufen bis der Lesekopf auf den rechten Marker trifft. Dieser wird auch noch gelöscht und der Lesekopf steht am Beginn des umgekehrten Wortes $w$. Die TM ist im Endzustand und akzeptiert damit das Wort $w$.
+
+Ist das Eingabewort leer, so wird direkt der linke Marker geschrieben ($z_{0} \rightarrow z_{1}$) und dann der rechte ($z_{1} \rightarrow z_{2}$), wobei der Lesekopf nun auf dem linken Marker steht. Er hält auf dem Marker ($z_{2} \rightarrow z_{8}$), löscht ihn und wechselt dabei auf den rechten Marker ($z_{8} \rightarrow z_{9}$), um auch diesen sofort zu löschen ($z_{9} \rightarrow z_{10}$). Der Lesekopf befindet sich nun zwei Felder weiter rechts als am Anfang, da aber das ganze Band nun genauso leer ist wie am Anfang, ist die Position irrelevant. Die TM ist auch hier im Endzustand, womit klar ist, dass das leere Wort das leere Wort ergibt.
+\pagebreak
+\section{} %6.5
+
+\end{document}

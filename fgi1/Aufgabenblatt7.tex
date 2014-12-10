@@ -1,0 +1,61 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{stmaryrd}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pagenumbering{arabic}
+\def\thesection{7.\arabic{section})}
+\def\thesubsection{\arabic{subsection}.}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setcounter{section}{2}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\addtolength{\parskip}{\baselineskip}
+
+\begin{document}
+\author{Jim Martens}
+\title{Hausaufgaben zum 28. Mai}
+\maketitle
+
+\section{} %7.3
+\subsection{} %1.
+Ich erstelle zunächst ein Array $A$ aus der Länge $|V-1|$. In dieses Array sollen die Knotenbezeichner geschrieben werden. Die Reihenfolge der Knotenbezeichner von vorne nach hinten entspricht der Reihenfolge, in denen die Knoten durchlaufen werden. \\
+Wenn es eine Verbindung von $s$ nach $t$ gibt, dann verbraucht sie maximal $O(V-1)$ Platz. Der Startknoten $s$ muss nicht gespeichert werden.\\
+\\
+Dies folgt so: Nichtdeterministisch wird für $A[1]$ ein Bezeichner der Nachfolgeknoten von $s$ gewählt. Anschließend wird nichtdeterministisch ein Wert für $A[2]$ ausgewählt, der ein Knotenbezeichner des Knoten sein muss, der für $A[1]$ gewählt wurde. Analog funktioniert es für $A[3]$, $A[4]$ usw. Um diese nichtdeterministischen Schritte zu verdeutlichen, gehe ich beispielsweise von $|V|=4$ (vier Knoten) und einem Array mit drei Elementen aus. $s$ sei $v_{1}$ und $t$ sei $v_{4}$. Ich gehe ferner von einer TM aus. So bin ich am Anfang dann in einem Zustand $z_{0}$ und der Arrayinhalt lässt sich darstellen als $[\#,\#,\#]$, wobei die $\#$ dafür stehen, dass das Arrayelement an dieser Stelle noch nicht initialisiert wurde.  Nach dem ersten nichtdeterministischen Schritt sind wir nun im Zustand $z_{1}$ und der Arrayinhalt hat die Form $[v_{2},\#,\#]$ oder $[v_{3},\#,\#]$. Notiere ich die Konfiguration der TM als ein Tupel bestehend aus dem Zustand $z$ und dem Arrayinhalt, so bin ich nun also nichtdeterministisch in den Konfigurationen $(z_{1},[v_{2},\#,\#])$ und $(z_{1},[v_{3},\#,\#])$. Nun wird in den Zustand $z_{2}$ gewechselt und der Nachfolgeknoten für die bisher gewählten Knoten gewählt bzw. geraten. Ich bin nun in den Konfigurationen $(z_{2},[v_{2},v_{3},\#,\#])$, $(z_{2},[v_{2},v_{4},\#,\#])$, $(z_{2},[v_{3},v_{1},\#,\#])$ und $(z_{2},[v_{3},v_{2},\#,\#])$. Dies setzt sich nun fort, sodass ich dann am Ende nichtdeterministisch in den Konfigurationen $(z_{4},[x,y,z,w])$ bin, wobei $x,y,z$ und $w$ alle Nachfolgeknoten des jeweils vorherigen Knoten durchlaufen. Dies ist ähnlich zu einem NFA, der nach Lesen eines Symbols nichtdeterministisch in verschiedenen Zuständen sein kann.\\
+\\
+Zurück zu eigentlichen Aufgabe: Nachdem nun alle möglichen Pfade im Graphen nichtdeterministisch durchlaufen worden sind, braucht nur noch überprüft zu werden, ob der Pfad korrekt ist. Dazu muss jedes Array nur mittels for-each-Schleife durchlaufen werden und auf Vorhandensein von $t$ geprüft werden. Kommt $t$ im Array vor, dann ist dies eine Erfolgsrechnung und die Überprüfung weiterer Arrays ist irrelevant. Kommt $t$ in allen Arrays nicht vor, dann existiert kein Pfad von $s$ nach $t$.\\
+\\
+Die Laufzeit liegt bei maximal $O(2 \cdot (V-1))$, da zunächst maximal $O(V-1)$ Schritte benötigt werden, um den Pfad zu raten (man beachte, dass hier in einer Rechnung nur maximal $O(V-1)$ Schritte gemacht werden, auch wenn die Anzahl der Schritte in allen Rechnungen viel höher ist, aber es geht eben gerade um die (maximale) Anzahl der Schritte in einer Rechnung) und dann noch weitere maximal $O(V-1)$ Schritte, um den Pfad zu überprüfen. Der Platzbedarf liegt lediglich bei maximal $O(V-1)$, da dies ausreicht, um einen geratenen Pfad zu speichern. Auch hier beachte man, dass es nur um den (maximalen) Platzbedarf in einer Rechnung geht, nicht um den Platzbedarf über alle nichtdeterministischen Rechnungen.
+\subsection{} %2.
+Bei maximal logarithmisch viel Platz ist das Verfahren nahezu analog. Allerdings werden nicht alle Knoten eines Pfades (außer s) gespeichert, sondern immer nur der letzte.
+Nehme ich wieder das Beispiel mit den vier Knoten, dann ergibt sich für $z_{0}$ $[v_{1}]$. Für $z_{1}$ ergibt sich $[v_{2}],[v_{3}]$. Für $z_{2}$ ergibt sich $[v_{1}],[v_{2}],[v_{3}],[v_{4}]$. In diesem Fall kann die TM bereits hier abbrechen, da bei den vier geratenen Knoten jeder Knoten enthalten ist. Weitere Schritte würden also keine zusätzlichen Infos bringen. Nun können die Rechnungen überprüft werden, wobei pro Rechnung maximal $O(V-1)$ Schritte für das Raten des Pfades und $O(1)$ Schritte für das Überprüfen nötig sind. Insgesamt benötigt der Algorithmus also $O(V)$ Schritte Zeit. Er verbraucht nur $O(1)$ Platz, was einem logarithmischen Platzverbrauch entspricht.\\
+Für den Fall $|V|=2$ müsste gar nichts gespeichert werden, da die TM hier nur zwei Optionen hat: $s$ hat einen Nachfolgeknoten oder keinen. Gibt es einen, dann existiert eine Verbindung, gibt es keinen, dann nicht.
+\section{} %7.4
+\subsection{} %1.
+Es werden nichtdeterministisch alle Kanten aus $E_{2}$ folgendermaßen überprüft:\\
+\begin{enumerate}
+	\item Bestimmen der beiden verbundenen Knoten aus $V_{2}$.
+	\item Bestimmen der Bilder dieser Knoten
+	\item Nichtdeterministisch überprüfen, ob eine entsprechende Kante in $E_{1}$ existiert.
+	\item Gibt es keine solche Kante, dann kann abgebrochen werden.
+\end{enumerate}
+Wurde nicht abgebrochen, dann kann es Teilmengen geben, die die Bedingung erfüllen.
+Der Algorithmus dauert $O(3)$ lang. Damit dauert der Algorithmus nur polynomiell lang.
+\subsection{} %2.
+
+\end{document}

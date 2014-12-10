@@ -1,0 +1,170 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{stmaryrd}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pagenumbering{arabic}
+\def\thesection{4.\arabic{section})}
+\def\thesubsection{\arabic{subsection}.}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setcounter{section}{3}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jim Martens}
+\title{Hausaufgaben zum 30. April}
+\maketitle
+\section{} %4.4
+\subsection{} %1.
+$G_{1}$:\\
+\begin{alignat*}{2}
+S &\rightarrow & aS | AB  \\
+A &\rightarrow & aAb | \lambda \\
+B &\rightarrow & bBc | \lambda
+\end{alignat*}
+Ich behaupte $L(G_{1}) = \{a^{i + j}b^{i + k}c^{k}|i,j,k \geq 0\} =: M$.
+Zunächst zeige ich $L(G_{1}) \subseteq M$. Sei dazu $w \in L(G_{1})$, d.h. es gilt $S \overset{*}{\Longrightarrow} w$. Wie kann $w \in V_{T}^{*}$ entstanden sein? Durch $j$-malige Anwendung der Produktion $S \rightarrow aS$ erhält man zunächst $S \overset{*}{\Longrightarrow} a^{j}S$. Anschließend muss die Produktion $S \rightarrow AB$ benutzt werden. Dies führt zu $S \overset{*}{\Longrightarrow} a^{j}S \overset{*}{\Longrightarrow} a^{j}AB$. Durch $i$-malige Anwendung der Produktion $A \rightarrow aAb$ erhält man $S \overset{*}{\Longrightarrow} a^{j}S \overset{*}{\Longrightarrow} a^{j}AB \overset{*}{\Longrightarrow} a^{j}a^{i}Ab^{i}B$. Dann muss die Produktion $A \rightarrow \lambda$ gewählt werden. Es ergibt sich daher 
+$S \overset{*}{\Longrightarrow} a^{j}S \overset{*}{\Longrightarrow} a^{j}AB \overset{*}{\Longrightarrow} a^{j}a^{i}Ab^{i}B \Longrightarrow a^{j}a^{i}b^{i}B$. Durch $k$-malige Anwendung der Produktion $B \rightarrow  bBc$ erhält man $S \overset{*}{\Longrightarrow} a^{j}S \overset{*}{\Longrightarrow} a^{j}AB \overset{*}{\Longrightarrow} a^{j}a^{i}Ab^{i}B \Longrightarrow a^{j}a^{i}b^{i}B \overset{*}{\Longrightarrow} a^{j}a^{i}b^{i}b^{k}Bc^{k}$. Abschließend muss die Produktion $B \rightarrow \lambda$ gewählt werden.\\
+\\
+Insgesamt muss $w$ damit die Form $a^{j}a^{i}b^{i}b^{k}c^{k} = a^{i + j}b^{i + k}c^{k}$ haben. Es gilt also $w \in M$.\\
+\\
+Sei umgekehrt $w \in M$. Hat $w$ die Form $a^{i + j}b^{i + k}c^{k} = a^{j}a^{i}b^{i}b^{k}c^{k}$ für $i,j,k \geq 0$, so kann $w$ durch $j$-malige Anwendung der Regel $S \rightarrow aS$, anschließende Anwendung der Regel $S \rightarrow AB$, $i$-malige Anwendung der Regel $A \rightarrow aAb$ mit anschließender Anwendung von $A \rightarrow \lambda$, $k$-maliger Anwendung von $B \rightarrow bBc$ und anschließender Anwendung von $B \rightarrow \lambda$ abgeleitet werden. Damit gilt für jedes $w \in M$ also auch $w \in L(G_{1})$ und die Behauptung ist gezeigt.
+\subsection{} %2.
+$G_{2}$:\\
+\begin{alignat*}{2}
+S &\rightarrow & 0ABD | B1CD | A1CE | AE2D \\
+A &\rightarrow & 0A | \lambda \\
+B &\rightarrow & 0B1 | \lambda \\
+C &\rightarrow & 1C | \lambda \\
+D &\rightarrow & 2D | \lambda \\
+E &\rightarrow & 1E2 | \lambda
+\end{alignat*}
+Ich behaupte $L(G_{2}) = \{0^{i + j}1^{i}2^{n}, 0^{i}1^{i + k}2^{n}, 0^{n}1^{i + l}2^{i}, 0^{n}1^{i}2^{i + m}|i,n \geq 0 \wedge j,k,l,m \geq 1\} =: M$.\\
+Zunächst zeige ich $L(G_{2}) \subseteq M$. Sei dazu $w \in L(G_{2})$, d.h. es gilt $S \overset{*}{\Longrightarrow} w$. Wie kann $w \in V_{T}^{*}$ entstanden sein? Es gibt vier Fälle für Wörter von $L_{2}$:
+\begin{enumerate}
+	\item $|w|_{0} > |w|_{1}$ \\
+	\item $|w|_{0} < |w|_{1}$ \\
+	\item $|w|_{1} > |w|_{2}$ \\
+	\item $|w|_{1} < |w|_{2}$
+\end{enumerate}
+Es ist natürlich möglich, dass mehrere von diesen Fällen zur gleichen Zeit zutreffen, allerdings muss immer mindestens einer zutreffen. Die jeweils nicht genannten Anzahlen sind beliebig.
+
+Für den ersten Fall ergibt sich folgende Ableitung:\\
+Zunächst wird die Produktion $S \rightarrow 0ABD$ gewählt. Durch $j-1$-malige Anwendung der Produktion $A \rightarrow 0A$ erhält man zunächst $S \overset{*}{\Longrightarrow} 00^{j-1}ABD$. Als nächstes wird die Produktion $A \rightarrow \lambda$ gewählt. Durch $i$-malige Anwendung der Produktion $B \rightarrow 0B1$ erhält man $S \overset{*}{\Longrightarrow} 00^{j-1}ABD \overset{*}{\Longrightarrow} 00^{j-1}0^{i}B1^{i}D$. Es wird die Produktion $B \rightarrow \lambda$ gewählt. Durch $n$-malige Anwendung von $D \rightarrow 2D$ erhält man $S \overset{*}{\Longrightarrow} 00^{j-1}ABD \overset{*}{\Longrightarrow} 00^{j-1}0^{i}B1^{i}D \overset{*}{\Longrightarrow} 00^{j-1}0^{i}1^{i}2^{n}D$. Abschließend wird $D \rightarrow \lambda$ gewählt. Das Wort $w$ hat demnach die Form $00^{j-1}0^{i}1^{i}2^{n} = 0^{i + j}1^{i}2^{n}$ mit $i, n \geq 0 \wedge j \geq 1$.\\
+\\
+Für den zweiten Fall ergibt sich folgende Ableitung:\\
+Zunächst wird die Produktion $S \rightarrow B1CD$ gewählt. Durch $i$-malige Anwendung der Produktion $B \rightarrow 0B1$ erhält man $S \overset{*}{\Longrightarrow}0^{i}B1^{i}1CD$. Es wird die Produktion $B \rightarrow \lambda$ gewählt. Durch $k-1$-malige Anwendung von $C \rightarrow 1C$ erhält man $S \overset{*}{\Longrightarrow}0^{i}B1^{i}1CD \overset{*}{\Longrightarrow} 0^{i}1^{i}11^{k-1}CD$. Durch $n$-malige Anwendung von $D \rightarrow 2D$ erhält man $S \overset{*}{\Longrightarrow}0^{i}B1^{i}1CD \overset{*}{\Longrightarrow} 0^{i}1^{i}11^{k-1}CD \overset{*}{\Longrightarrow} 0^{i}1^{i}11^{k-1}2^{n}D$. Abschließend wird $D \rightarrow \lambda$ gewählt. Das Wort $w$ hat demnach die Form $0^{i}1^{i}11^{k-1}2^{n} = 0^{i}1^{i + k}2^{n}$ mit $i, n \geq 0 \wedge k \geq 1$.\\
+\\
+Für den dritten Fall ergibt sich diese Ableitung:\\
+Zunächst wird die Produktion $S \rightarrow A1CE$ gewählt. Durch $n$-malige Anwendung der Produktion $A \rightarrow 0A$ erhält man zunächst $S \overset{*}{\Longrightarrow} 0^{n}A1CE$. Direkt danach folgt die Produktion $A \rightarrow \lambda$. Durch $l-1$-malige Anwendung der Produktion $C \rightarrow 1C$ erhält man $S \overset{*}{\Longrightarrow} 0^{n}A1CE \overset{*}{\Longrightarrow} 0^{n}11^{l-1}CE$. Anschließend folgt die Produktion $C \rightarrow \lambda$. Mit $i$-maliger Anwendung der Produktion  $E \rightarrow 1E2$ erhält man $S \overset{*}{\Longrightarrow} 0^{n}A1CE \overset{*}{\Longrightarrow} 0^{n}11^{l-1}CE \overset{*}{\Longrightarrow} 0^{n}11^{l-1}1^{i}E2^{i}$. Abschließend wird die Produktion $E \rightarrow \lambda$ angewendet. Das Wort $w$ hat demnach die Form $0^{n}11^{l-1}1^{i}2^{i} = 0^{n}1^{i + l}2^{i}$ mit $i,n \geq 0 \wedge l \geq 1$. \\
+\\
+Für den vierten Fall ergibt sich diese Ableitung:\\
+Zunächst wird die Produktion $S \rightarrow AE2D$ gewählt. Durch $n$-malige Anwendung der Produktion $A \rightarrow 0A$ erhält man zunächst $S \overset{*}{\Longrightarrow} 0^{n}AE2D$. Direkt danach folgt die Produktion $A \rightarrow \lambda$. Mit $i$-maliger Anwendung der Produktion  $E \rightarrow 1E2$ erhält man $S \overset{*}{\Longrightarrow} 0^{n}AE2D \overset{*}{\Longrightarrow} 0^{n}1^{i}E2^{i}2D$. Abschließend wird die Produktion $E \rightarrow \lambda$ angewendet. Durch $m-1$-malige Anwendung der Produktion $D \rightarrow 2D$ erhält man $S \overset{*}{\Longrightarrow} 0^{n}AE2D \overset{*}{\Longrightarrow} 0^{n}1^{i}E2^{i}2D \overset{*}{\Longrightarrow} 0^{n}1^{i}2^{i}22^{m-1}D$. Abschließend wird die Produktion $D \rightarrow \lambda$ gewählt. Das Wort $w$ hat demnach die Form $0^{n}1^{i}2^{i}22^{m-1} = 0^{n}1^{i}2^{i + m}$ mit $i,n \geq 0 \wedge m \geq 1$. \\
+\\
+Insgesamt muss $w$ damit die Form $0^{i + j}1^{i}2^{n}, 0^{i}1^{i + k}2^{n}, 0^{n}1^{i + l}2^{i}$ oder $0^{n}1^{i}2^{i + m}$ haben. Es gilt also $w \in M$.\\
+\\
+Sei umgekehrt $w \in M$. Hat $w$ die Form $0^{i + j}1^{i}2^{n}$, so kann $w$ durch die im ersten Fall beschriebene Ableitungsfolge abgeleitet werden. Hat $w$ die Form $0^{i}1^{i + k}2^{n}$, so kann $w$ durch die im zweiten Fall beschriebene Ableitungsfolge abgeleitet werden. Hat $w$ die Form $0^{n}1^{i + l}2^{i}$, so kann $w$ durch die im dritten Fall beschriebene Ableitungsfolge abgeleitet werden. Hat $w$ die Form $0^{n}1^{i}2^{i + m}$, so kann $w$ durch die im vierten Fall beschriebene Ableitungsfolge abgeleitet werden. Damit gilt für jedes $w \in M$ also auch $w \in L(G_{2})$ und die Behauptung ist gezeigt.
+\section{} %4.5
+Zunächst werden alle $\lambda$-Produktionen nach dem Verfahren von Theorem 9.12 entfernt.
+\begin{alignat*}{2}
+M_{0} &=& \{C\} \\
+M_{1} &=& \{C,F,S\} \\
+M_{2} &=& \{C,F,S\} = M_{1} \\
+V_{\lambda} &=& M_{2}
+\end{alignat*}
+Daraus ergibt sich folgende Grammatik:\\
+\begin{alignat*}{2}
+S &\rightarrow & AB | AB1B | AD | DE | C \\
+A &\rightarrow & EBEE \\
+B &\rightarrow & A | E | SE \\
+D &\rightarrow & CBG | BG | 0G | 1D \\
+E &\rightarrow & 0 | 1 \\
+F &\rightarrow & 0E | EF | CC | C | E
+\end{alignat*}\\
+Anschließend wird nach dem Verfahren von Theorem 9.11 reduziert. Zunächst werden dabei alle unproduktiven Nonterminale entfernt.\\
+\begin{alignat*}{2}
+M_{0} &=& \{0,1\} \\
+M_{1} &=& \{0,1,E\} \\
+M_{2} &=& \{0,1,E,F,B\} \\
+M_{3} &=& \{0,1,E,F,B,A\} \\
+M_{4} &=& \{0,1,E,F,B,A,S\} \\
+M_{5} &=& \{0,1,E,F,B,A,S\} = M_{4}
+\end{alignat*}
+Es ergibt sich folgende Grammatik:\\
+\begin{alignat*}{2}
+S &\rightarrow & AB | AB1B \\
+A &\rightarrow & EBEE \\
+B &\rightarrow & A | E | SE \\
+E &\rightarrow & 0 | 1 \\
+F &\rightarrow & 0E | EF | E
+\end{alignat*}
+Daraufhin werden alle Produktionen entfernt, die auf der linken oder rechten Seite unerreichbare Nonterminale haben.
+\begin{alignat*}{2}
+M_{0} &=& \{S\} \\
+M_{1} &=& \{S,A,B\} \\
+M_{2} &=& \{S,A,B,E\} \\
+M_{3} &=& \{S,A,B,E\} = M_{2}
+\end{alignat*}
+Es ergibt sich die Grammatik:\\
+\begin{alignat*}{2}
+S &\rightarrow & AB | AB1B \\
+A &\rightarrow & EBEE \\
+B &\rightarrow & A | E | SE \\
+E &\rightarrow & 0 | 1
+\end{alignat*}
+Im dritten Schritt werden die Kettenregeln entfernt. Daraus ergibt sich diese Grammatik:\\
+\begin{alignat*}{2}
+S &\rightarrow & AB | AB1B \\
+A &\rightarrow & EBEE \\
+B &\rightarrow & EBEE | 0 | 1 | SE \\
+E &\rightarrow & 0 | 1
+\end{alignat*}
+Im vierten Schritt werden lange Terminalregeln ersetzt. Daraus ergibt sich diese Grammatik:\\
+\begin{alignat*}{2}
+S &\rightarrow & AB | AB\left\langle 1 \right\rangle B \\
+A &\rightarrow & EBEE \\
+B &\rightarrow & EBEE | 0 | 1 | SE \\
+E &\rightarrow & 0 | 1 \\
+\left\langle 1 \right\rangle &\rightarrow & 1
+\end{alignat*}
+Im fünften Schritt werden zu lange Regeln verkürzt. Daraus ergibt sich diese Grammatik:\\
+\begin{alignat*}{2}
+S &\rightarrow & AB | \left\langle AB \right\rangle \left\langle \left\langle 1 \right\rangle B \right\rangle \\
+\left\langle AB \right\rangle &\rightarrow & AB \\
+\left\langle \left\langle 1 \right\rangle B \right\rangle &\rightarrow &\left\langle 1 \right\rangle B \\
+A &\rightarrow & \left\langle EB \right\rangle \left\langle EE \right\rangle \\
+\left\langle EB \right\rangle &\rightarrow & EB \\
+\left\langle EE \right\rangle &\rightarrow & EE \\
+B &\rightarrow & \left\langle EB \right\rangle \left\langle EE \right\rangle | 0 | 1 | SE \\
+E &\rightarrow & 0 | 1 \\
+\left\langle 1 \right\rangle &\rightarrow & 1
+\end{alignat*}
+Im sechsten Schritt wird die ursprüngliche Sprache wiederhergestellt, indem eine $\lambda$-Regel hinzugenommen wird. Daraus ergibt sich diese Grammatik:\\
+\begin{alignat*}{2}
+S_{neu} &\rightarrow & \lambda | AB | \left\langle AB \right\rangle \left\langle \left\langle 1 \right\rangle B \right\rangle \\
+\left\langle AB \right\rangle &\rightarrow & AB \\
+\left\langle \left\langle 1 \right\rangle B \right\rangle &\rightarrow &\left\langle 1 \right\rangle B \\
+A &\rightarrow & \left\langle EB \right\rangle \left\langle EE \right\rangle \\
+\left\langle EB \right\rangle &\rightarrow & EB \\
+\left\langle EE \right\rangle &\rightarrow & EE \\
+B &\rightarrow & \left\langle EB \right\rangle \left\langle EE \right\rangle | 0 | 1 | SE \\
+E &\rightarrow & 0 | 1 \\
+\left\langle 1 \right\rangle &\rightarrow & 1
+\end{alignat*}
+\section{} %4.6
+\end{document}

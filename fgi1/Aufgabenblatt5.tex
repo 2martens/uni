@@ -1,0 +1,93 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{stmaryrd}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pagenumbering{arabic}
+\def\thesection{5.\arabic{section})}
+\def\thesubsection{\arabic{subsection}.}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setcounter{section}{3}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jim Martens}
+\title{Hausaufgaben zum 7. Mai}
+\maketitle
+\section{} %5.4
+\subsection{} %1.
+$G_{1}$:\\
+\begin{alignat*}{2}
+S &\rightarrow & aSb | A \\
+A &\rightarrow & bAa | \lambda
+\end{alignat*}
+Behauptung: Es gilt $L(G_{1}) = L_{1}$.\\
+Zunächst zeige ich $L(G_{1}) \subseteq L_{1}$. Sei dazu $w \in L(G_{1})$, d.h. es gilt $S \overset{*}{\Longrightarrow} w$. Durch $n$-malige Anwendung der Produktion $S \rightarrow aSb$ erhält man zunächst $S \overset{*}{\Longrightarrow} a^{n}Sb^{n}$. Anschließend muss die Produktion $S \rightarrow A$ gewählt werden. Durch $m$-malige Anwendung der Regel $A \rightarrow bAa$ erhält man $S \overset{*}{\Longrightarrow} a^{n}Sb^{n} \overset{*}{\Longrightarrow} a^{n}b^{m}Aa^{m}b^{n}$. Abschließend wird die Produktion $A \rightarrow \lambda$ gewählt. Insgesamt muss $w$ damit die Form $a^{n}b^{m}a^{m}b^{n}$ haben. Es gilt also $w \in L_{1}$.\\
+\\
+Sei umgekehrt $w \in L_{1}$. Hat $w$ die Form $a^{n}b^{m}a^{m}b^{n}$ für $n,m \geq 0$, so kann $w$ durch $n$-malige Anwendung der Produktion $S \rightarrow aSb$, Anwendung der Regel $S \rightarrow A$, $m$-malige Anwendung von $A \rightarrow bAa$ und abschließende Anwendung von $A \rightarrow \lambda$ abgeleitet werden.\\
+Damit gilt für jedes $w \in L_{1}$ demnach auch $w \in L(G_{1})$ und die Behauptung ist gezeigt.\\
+\\
+Bei Anwendung des Pumping-Lemmas kommt es bei der Wahl des Wortes zu Problemen. Bei einer kontextfreien Sprache gilt das Pumping-Lemma für alle Wörter der Sprache. Möchte man dies nun zeigen, so müsste man unendlich viele Wörter zeigen, was nicht machbar ist.\\
+Sollte man einen Widerspruch zeigen wollen, so wird man kein Wort der Sprache finden, bei dem es einen gibt, denn bei einer kontextfreien Sprache gilt das Pumping-Lemma für jedes Wort.
+\subsection{} %2.
+\begin{alignat*}{2}
+L_{2} &=& \{a^{n}b^{m}a^{n}b^{m} | n,m \geq 0\}
+\end{alignat*}\\
+Angenommen $L_{2}$ wäre kontextfrei.\\
+Sei $n$ die Zahl aus dem Pumping Lemma. Wähle $z = a^{n}b^{n}a^{n}b^{n}$ mit $n \in \mathbb{N}$.\\
+Die ersten $a$s seien durch $a_{1}$ markiert und die ersten $b$s durch $b_{1}$. Die jeweils zweiten Blöcke durch den Index $2$.\\
+Also $z \in L_{2}, |z| = 4n$.\\
+Also existiert eine Zerlegung $z = uvwxy$ mit $(i)$ und $(ii)$. Ich führe nun jede dieser Zerlegungen zu einem Widerspruch mit der dritten Eigenschaft des Pumping Lemmas.\\
+
+\begin{enumerate}[i)]
+	\item $|vx| \geq 1$
+	\item $|vwx| \leq n$
+	\item $\forall i \geq 0:uv^{i}wx^{i}y \in L$
+\end{enumerate}
+Zunächst gibt es wegen $|vwx| \leq n$ und der Form von $z$ sieben Fälle zu unterscheiden: $vwx \in \{a_{1}\}^{*}, vwx \in \{a_{1}\}^{*}\{b_{1}\}^{*}, vwx \in \{b_{1}\}^{*}, vwx \in \{b_{1}\}^{*}\{a_{2}\}^{*}, vwx \in \{a_{2}\}^{*}, vwx \in \{a_{2}\}^{*}\{b_{2}\}^{*} \text{ und } vwx \in \{b_{2}\}^{*}$. In den Fällen $vwx \in \{a_{1}\}^{*}, vwx \in \{b_{1}\}^{*}, vwx \in \{a_{2}\}^{*}$ und $vwx \in \{b_{2}\}^{*}$ führt wegen $|vx| \geq 1$ die Betrachtung von $uv^{2}wx^{2}y$ bereits zum Widerspruch. Es ist dann $uv^{2}wx^{2}y = a^{n+j}b^{n}a^{n}b^{n}$, $uv^{2}wx^{2}y = a^{n}b^{n+j}a^{n}b^{n}$, $uv^{2}wx^{2}y = a^{n}b^{n}a^{n+j}b^{n}$ bzw. $uv^{2}wx^{2}y = a^{n}b^{n}a^{n}b^{n+j}$ mit $j > 0$ und folglich gilt nicht mehr, dass der Exponent von den beiden $a$- bzw. $b$-Blöcken gleich sein muss.\\
+\\
+Gilt in $vwx \in \{a_{1}\}^{*}\{b_{1}\}^{*}, vwx \in \{b_{1}\}^{*}\{a_{2}\}^{*}$ bzw. $vwx \in \{a_{2}\}^{*}\{b_{2}\}^{*}$, dass $v$ oder $x$ bereits aus mehr als einem Symbol aufgebaut sind (also selbst in $\{a\}^{+}\{b\}^{+}$ bzw. $\{b\}^{+}\{a\}^{+}$ sind), so führt $uv^{2}wx^{2}y$ sofort zu einem Widerspruch, da dieses Wort dann nicht einmal mehr in $\{a\}^{*}\{b\}^{*}\{a\}^{*}\{b\}^{*}$ ist (und damit ganz bestimmt nicht in $L_{2}$).\\
+\\
+Ist jedoch im Fall $vwx \in \{a_{1}\}^{*}\{b_{1}\}^{*}$ das $v$ aus den $a$s und das $x$ in den $b$s, so führt ähnlich wie bei den zuerst diskutierten Fällen die Betrachtung von $uv^{2}wx^{2}y = a^{n+j}b^{n+k}a^{n}b^{n}$ zu einem Widerspruch ($n+j = n$ bzw. $n+k = n$ gilt nicht, da wegen $|vx| \geq 1$ auch $j+k \geq 1$ sein muss). Der Fall $vwx \in \{a_{2}\}^{*}\{b_{2}\}^{*}$ führt analog zu einem Widerspruch (lediglich mit den beiden hinteren Blöcken).\\
+Ist im Fall von $vwx \in \{b_{1}\}^{*}\{a_{2}\}^{*}$ das $v$ in den $b$s und das $x$ in den $a$s, so führt ebenfalls ähnlich zu den zuerst diskutierten Fällen die Betrachtung von $uv^{2}wx^{2}y = a^{n}b^{n+j}a^{n+k}b^{n}$ zu einem Widerspruch (abermals gilt $n+j = n$ bzw. $n+k = n$ nicht, da $j+k \geq 1$ sein muss).\\
+\\
+Damit sind alle Fälle zum Widerspruch geführt und es gibt also keine Zerlegung von $z$ in $uvwxy$ derart, dass die drei Bedingungen des Pumping Lemmas erfüllt sind. Folglich ist die ursprüngliche Annahme, $L_{2}$ wäre kontextfrei nicht haltbar und $L_{2}$ ist also nicht kontextfrei.
+\section{} %5.5
+\subsection{} %1.
+$G_{1}$:\\
+\begin{alignat*}{2}
+S &\rightarrow & aSc | A \\
+A &\rightarrow & bc | \lambda
+\end{alignat*}
+Behauptung: Es gilt $L(G_{1}) = L_{1}$.\\
+Zunächst zeige ich $L(G_{1}) \subseteq L_{1}$. Sei dazu $w \in L(G_{1})$, d.h. es gilt $S \overset{*}{\Longrightarrow} w$. Durch $i$-malige Anwendung der Produktion $S \rightarrow aSc$ erhält man zunächst $S \overset{*}{\Longrightarrow} a^{i}Sc^{i}$. Anschließend muss die Produktion $S \rightarrow A$ gewählt werden. Durch $j$-malige Anwendung der Regel $A \rightarrow bAc$ erhält man $S \overset{*}{\Longrightarrow} a^{i}Sc^{i} \overset{*}{\Longrightarrow} a^{i}b^{j}Ac^{i+j}$. Abschließend wird die Produktion $A \rightarrow \lambda$ gewählt. Insgesamt muss $w$ damit die Form $a^{i}b^{j}c^{i+j} = a^{i}b^{j}c^{k}$ für $k = i+j$ haben. Es gilt also $w \in L_{1}$.\\
+\\
+Sei umgekehrt $w \in L_{1}$. Hat $w$ die Form $a^{i}b^{j}c^{k} = a^{i}b^{j}c^{i+j}$ für $k = i+j$, so kann $w$ durch $i$-malige Anwendung der Produktion $S \rightarrow aSc$, Anwendung der Regel $S \rightarrow A$, $j$-malige Anwendung von $A \rightarrow bAc$ und abschließende Anwendung von $A \rightarrow \lambda$ abgeleitet werden.\\
+Damit gilt für jedes $w \in L_{1}$ demnach auch $w \in L(G_{1})$ und die Behauptung ist gezeigt.
+\subsection{} %2.
+
+\section{} %5.6
+\subsection{} %1.
+$z_{0}$ ist der Start- und $z_{4}$ der einzige Endzustand. Im Zustand $z_{0}$ können beliebig viele $a$s gelesen werden (auch keine). Anschließend kann bei leerer Eingabe in den Endzustand gewechselt werden oder bei einem $b$ in der Eingabe in den Zustand $z_{1}$. Der Zustand kann nur wieder verlassen werden, wenn mindestens ein weiteres $b$ von der Eingabe gelesen wird. Im Zustand $z_{2}$ befindet man sich demnach nur, wenn zuvor jeweils 2 $b$s gelesen wurden. Entweder direkt von $z_{0}$ nach $z_{1}$ und von $z_{1}$ nach $z_{2}$ oder von $z_{2}$ nach $z_{1}$ und von $z_{1}$ nach $z_{2}$.\\
+Nur beim Wechsel von Zustand $z_{1}$ nach $z_{2}$ wird ein $B$ auf den Keller gelegt. Sind alle $b$s gelesen, liegen demnach also halb so viele $B$s auf dem Keller, wie $b$s gelesen wurden.\\
+In den Zustand $z_{3}$ kann nur gewechselt werden, wenn ein $a$ gelesen wird und ein $B$ auf dem Keller liegt. $z_{3}$ kann erst wieder verlassen werden, wenn alle $B$s wieder vom Keller gelöscht worden sind.\\
+Zum Schluss kann in den Endzustand gewechselt werden. Befindet man sich im Endzustand wurden also beliebig viele $a$s (auch keine), gefolgt von keinen weiteren Zeichen oder $2n$ $b$s und $n$ $a$s gelesen.\\
+Ist $w \in L$, so enthält das Wort zunächst beliebig viele $a$s, dann keine weiteren Zeichen oder aber $2n$ $b$s und $n$ $a$s. Dies ist gleichbedeutend mit dem Endzustand des Automaten.\\
+Ist umgekehrt $w \in L(A)$, so muss das Lesen von $w$ den Automaten $A$ in den Zustand $z_{4}$ überführen, da dies der einzige Endzustand ist. Dies ist aber gleichbedeutend damit, dass nach Konstruktion von $A$ auch $w = a^{m}b^{2n}a^{n}$, also $w \in L$ gilt.
+\subsection{} %2.
+\end{document}

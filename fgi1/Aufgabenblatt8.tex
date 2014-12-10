@@ -1,0 +1,137 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{stmaryrd}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pagenumbering{arabic}
+\def\thesection{8.\arabic{section})}
+\def\thesubsection{\arabic{subsection}.}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setcounter{section}{1}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\addtolength{\parskip}{\baselineskip}
+
+\begin{document}
+\author{Jim Martens}
+\title{Hausaufgaben zum 4. Juni}
+\maketitle
+
+\section{} %8.2
+\textit{Behauptung}\\
+Für alle Formeln F$\, \in \mathcal{L}_{AL}$ gilt, $|\text{Tf(F)}| \leq |\text{F}|$.\\
+\\
+\textit{Induktionsanfang}\\
+Teilbeweis für die auf atomare Formeln eingeschränkte Behauptung: Für jedes Aussagensymbol
+A$\, \in \mathcal{A}s_{AL}$ gilt: $|\text{Tf(A)}| \leq |\text{A}|$.\\
+A hat nur eine Teilformel und zwar sich selbst. Die Länge von A beträgt ebenso eins. Demnach ergibt sich $1 \leq 1$, was offensichtlich gilt.\\
+\\
+\textit{Induktionsannahme}\\
+Es seien G$_{1}, \,$G$_{2} \in \mathcal{L}_{AL}$ Formeln, für die gilt: $|\text{Tf(G}_{1}\text{)}| \leq |\text{G}_{1}|$ und $|\text{Tf(G}_{2}\text{)}| \leq |\text{G}_{2}|$.\\
+\\
+\textit{Induktionsschritt}\\
+Fall: $\neg \,$G$_{1}$\\
+Teilbeweis für $|\text{Tf(}\neg \text{G}_{1}\text{)}| \leq |\neg \,\text{G}_{1}|$.\\
+Es gilt: $|\text{Tf(}\neg \,\text{G}_{1}\text{)}| = 1 + |\text{Tf(G}_{1}\text{)}| \overset{IA}{\leq} 1 + |\text{G}_{1}| = |\neg \,\text{G}_{1}|$\\
+Demnach gilt die Behauptung für $\neg \,$G$_{1}$.\\
+\\
+Fall: (G$_{1} \circ \,$G$_{2}$) für $\circ \in \{\vee, \wedge, \Rightarrow, \Leftrightarrow\}$\\
+Teilbeweis für $|\text{Tf(G}_{1} \circ \, \text{G}_{2}\text{)}| \leq |(\text{G}_{1} \circ \,\text{G}_{2})|$.\\
+Es gilt:\\
+\begin{alignat*}{2}
+|\text{Tf(G}_{1} \circ \, \text{G}_{2}\text{)}| &=& 1 + |\text{Tf(G}_{1}\text{)}| + |\text{Tf(G}_{2}\text{)}| \\
+1 + |\text{Tf(G}_{1}\text{)}| + |\text{Tf(G}_{2}\text{)}| &\overset{IA}{\leq}& 1 + |\text{G}_{1}| + |\text{G}_{2}| \\
+1 + |\text{G}_{1}| + |\text{G}_{2}| &\leq & 3 + |\text{G}_{1}| + |\text{G}_{2}| \\
+3 + |\text{G}_{1}| + |\text{G}_{2}| &=& |(\text{G}_{1} \circ \,\text{G}_{2})|
+\end{alignat*}
+Demnach gilt die Behauptung für (G$_{1} \circ \,$G$_{2}$).\\
+\\
+\textit{Resumé}\\
+Nach dem Prinzip der strukturellen Induktion ergibt sich damit: Für alle Formeln F$\, \in \mathcal{L}_{AL}$
+gilt, $|\text{Tf(F)}| \leq |\text{F}|$.
+%
+%
+%
+\section{} %8.3
+\textit{Behauptung}\\
+Für alle Formeln F$\, \in \mathcal{L}_{AL}$ gilt, $|$F$| \leq 2^{|\text{Tf(F)}|+1}-3$.\\
+\\
+\textit{Induktionsanfang}\\
+Teilbeweis für die auf atomare Formeln eingeschränkte Behauptung: Für jedes Aussagensymbol
+A$\, \in \mathcal{A}s_{AL}$ gilt: $|$A$| \leq 2^{|\text{Tf(A)}|+1}-3$.\\
+Die Länge von A beträgt 1. Ebenso hat A lediglich eine Teilformel und zwar sich selbst. Daraus ergibt sich:\\
+\begin{alignat*}{2}
+1 &\leq & 2^{1 + 1}-3 \\
+1 &\leq & 2^{2} - 3 \\
+1 &\leq & 4-3 = 1
+\end{alignat*}
+Dies gilt offensichtlich.\\
+\\
+\textit{Induktionsannahme}\\
+Es seien G$_{1}, \,$G$_{2} \in \mathcal{L}_{AL}$ Formeln, für die gilt: $|$G$_{1}| \leq 2^{|\text{Tf(G}_{1}\text{)}|+1}-3$ und $|$G$_{2}| \leq 2^{|\text{Tf(G}_{2}\text{)}|+1}-3$.\\
+\\
+\textit{Induktionsschritt}\\
+Fall: $\neg \,$G$_{1}$\\
+Teilbeweis für $|\neg \,$G$_{1}| \leq 2^{|\text{Tf(}\neg \,\text{G}_{1}\text{)}|+1}-3$.\\
+Es gilt:\\
+\begin{alignat*}{2}
+|\neg \,\text{G}_{1}| = 1 + |\text{G}_{1}| &\overset{IA}{\leq} & 1 + 2^{|\text{Tf(G}_{1}\text{)}|+1}-3 \\
+1 + 2^{|\text{Tf(G}_{1}\text{)}|+1}-3 &\leq & \left(2^{|\text{Tf(G}_{1}\text{)}|+1}-3\right) + \left(2^{|\text{Tf(G}_{1}\text{)}|+1}-3\right) \\
+\left(2^{|\text{Tf(G}_{1}\text{)}|+1}-3\right) + \left(2^{|\text{Tf(G}_{1}\text{)}|+1}-3\right) &=&
+2\cdot 2^{|\text{Tf(G}_{1}\text{)}|+1}-3 \\
+&=& 2^{|\text{Tf(G}_{1}\text{)}|+1+1}-3 \\
+&=& 2^{|\text{Tf(}\neg \,\text{G}_{1}\text{)}|+1}-3
+\end{alignat*}
+Die Behauptung gilt demnach für $\neg \,$G$_{1}$.\\
+\\
+Fall: (G$_{1} \circ \,$G$_{2}$) für $\circ \in \{\vee, \wedge, \Rightarrow, \Leftrightarrow\}$\\
+Teilbeweis für $|($G$_{1} \circ \,$G$_{2})| \leq 2^{|\text{Tf(G}_{1} \circ \,\text{G}_{2}\text{)}|+1}-3$ .\\
+Es gilt:\\
+\begin{alignat*}{2}
+|\text{G}_{1} \circ \,\text{G}_{2}| = 3 + |\text{G}_{1}| + |\text{G}_{2}| &\overset{IA}{\leq}& 3 + 2^{|\text{Tf(G}_{1}\text{)}|+1}-3 + 2^{|\text{Tf(G}_{2}\text{)}|+1}-3 \\
+3 + 2^{|\text{Tf(G}_{1}\text{)}|+1}-3 + 2^{|\text{Tf(G}_{2}\text{)}|+1}-3 &=& 2^{|\text{Tf(G}_{1}\text{)}|+1} + 2^{|\text{Tf(G}_{2}\text{)}|+1}-3 \\
+2^{|\text{Tf(G}_{1}\text{)}|+1} + 2^{|\text{Tf(G}_{2}\text{)}|+1}-3 &=& 2 \cdot \left(2^{|\text{Tf(G}_{1}\text{)}|}+2^{|\text{Tf(G}_{2}\text{)}|}\right) -3 \\
+2 \cdot \left(2^{|\text{Tf(G}_{1}\text{)}|}+2^{|\text{Tf(G}_{2}\text{)}|}\right) -3 &\leq & 2 \cdot \left(2^{|\text{Tf(G}_{1}\text{)}|} \cdot 2^{|\text{Tf(G}_{2}\text{)}|}\right) -3 \\
+2 \cdot \left(2^{|\text{Tf(G}_{1}\text{)}|} \cdot 2^{|\text{Tf(G}_{2}\text{)}|}\right) -3 &=& 2 \cdot 2^{|\text{Tf(G}_{1}\text{)}|+|\text{Tf(G}_{2}\text{)}|} -3 \\
+2 \cdot 2^{|\text{Tf(G}_{1}\text{)}|+|\text{Tf(G}_{2}\text{)}|} -3 &\leq & 2 \cdot 2^{|\text{Tf(G}_{1}\text{)}|+|\text{Tf(G}_{2}\text{)}| + 1} -3 \\
+2 \cdot 2^{|\text{Tf(G}_{1}\text{)}|+|\text{Tf(G}_{2}\text{)}| + 1} -3 &=& 2 \cdot 2^{|\text{Tf(G}_{1} \circ \,\text{G}_{2}\text{)}|} -3 \\
+&=& 2^{|\text{Tf(G}_{1} \circ \,\text{G}_{2}\text{)}|+1} - 3
+\end{alignat*}
+Demnach gilt die Behauptung für (G$_{1} \circ \,$G$_{2}$).\\
+\\
+\textit{Resumé}\\
+Nach dem Prinzip der strukturellen Induktion ergibt sich damit: Für alle Formeln F$\, \in \mathcal{L}_{AL}$
+gilt, $|$F$| \leq 2^{|\text{Tf(F)}|+1}-3$.
+\section{} %8.4
+\subsection{} %1.
+\begin{alignat*}{2}
+F^{n}_{a} &=& \begin{cases}
+A & n=1\\
+\neg A & n=2 \\
+\neg F^{(n-1)}_{a} & n > 2
+\end{cases}
+\end{alignat*}
+\subsection{} %2.
+\begin{alignat*}{2}
+F^{n}_{b} &=& \begin{cases}
+A & n=1 \\
+\neg A & n=2 \\
+(A \wedge B) & n=3 \\
+\neg F^{(n-1)}_{b} & n > 3
+\end{cases}
+\end{alignat*}
+\end{document}
