@@ -1,0 +1,106 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{stmaryrd}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pagenumbering{arabic}
+\def\thesection{12.\arabic{section})}
+\def\thesubsection{\arabic{subsection}.}
+\def\thesubsubsection{(\alph{subsubsection})}
+\setcounter{section}{2}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\addtolength{\parskip}{\baselineskip}
+
+\begin{document}
+\author{Jim Martens}
+\title{Hausaufgaben zum 2. Juli}
+\maketitle
+
+\section{} %12.3
+\subsection{} %1.
+\begin{itemize}
+	\item Q und t müssen Variablen sein, da sie hinter Quantoren auftreten.
+	\item z(t), m(S, Q) und m(Q(S), z) müssen Formeln sein, da sie mit Junktoren verknüpft werden.
+	\item Entsprechend müssen z und m Prädikatensymbole sein und S, Q(S) und z Terme. z ist einstellig und m ist zweistellig.
+	\item S und z könnten eine Variable oder eine Konstante sein, denn sie sind atomare Terme.
+	\item Q ist ein Funktionssymbol und einstellig.
+\end{itemize}
+Das Problem der Formalisierung ist, dass Q eine Variable sein muss und gleichzeitig ein Funktionssymbol ist. Ebenso ist z einmal ein Prädikatensymbol und einmal ein atomarer Term.
+\subsection{} %2.
+\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm,on grid]
+\node (A_z) {$\forall z$};
+\node (Impl) [below=of A_z]{$\Rightarrow$};
+\node (E_x) [below left=1.0 and 2.0 of Impl] {$\exists x$};
+\node (E_y) [below right=1.0 and 2.0 of Impl] {$\exists y$};
+\node (and1) [below of=E_x] {$\wedge$};
+\node (p1) [below left=1.0 and 1.2 of and1] {$P(g(x), y)$};
+\node (p2) [below right=1.0 and 1.2 of and1] {$P(z, x)$};
+\node (and2) [below=of E_y] {$\wedge$};
+\node (E_z) [below left=1.0 and 1.2 of and2] {$\exists z$};
+\node (z) [below=of E_z] {$z$};
+\node (p3) [below right=1.0 and 1.5 of and2] {$P(g(y), f(x,z))$};
+\end{tikzpicture}
+\subsection{} %3.
+\subsubsection{} %a
+Für mindestens ($\exists x$) einen Tag (x) im Sommer gilt, dass die Sonne scheint ($P_{1}(x)$) und mindestens ($\exists y$) ein Rockkonzert ($Q_{1}(y)$) aufgeführt wird ($R_{1}(x,y)$). 
+\subsubsection{} %b
+Für jeden Tag ($\forall x$) im Sommer gilt, dass wenn die Temperaturen über 35$^{\circ}$ steigen, ($P_{2}(x)$) es für alle ($\forall y$) Schüler, die unter 16 Jahren sind ($Q_{2}(y)$), hitzefrei ($R_{2}(x,y)$) gibt.
+\subsubsection{} %c
+An Tag ($\forall x$), der frei ist ($P_{3}(x)$), gehen alle ($\forall y$) Schüler, die zuhause sind ($R_{3}(x,y)$), zum Kino ($Q_{3}(y)$).
+\subsubsection{} %d
+
+\subsubsection{} %e
+\section{} %11.4
+\def\thesubsubsection{\arabic{subsubsection}.}
+\setcounter{subsubsection}{0}
+\subsubsection{} %1
+$F_{41} = (P(x) \Rightarrow \exists x (R(x,x) \wedge \neg P(x)))$\\
+\begin{tabular}{c|c|c|c|c|c|c|c|c}
+& P & R & x & P(x) & R(x,x) & $\neg$P(x) & $\exists x (R(x,x) \wedge \neg P(x)) $ & $F_{41}$ \\
+\hline
+$A_{4}$ & $\{3,9\}$ & $\{(3,9),(6,6), (6,9), (9,9)\}$ & 9 & 1 & & & & 0 \\
+\hline
+$A_{4[x/3]}$ & $\{3,9\}$ & $\{(3,9),(6,6), (6,9), (9,9)\}$ & 3 & 1 & 0 & 0 & 0 \\
+$A_{4[x/6]}$ & $\{3,9\}$ & $\{(3,9),(6,6), (6,9), (9,9)\}$ & 6 & 1 & 1 & 0 & 0 \\
+$A_{4[x/9]}$ & $\{3,9\}$ & $\{(3,9),(6,6), (6,9), (9,9)\}$ & 9 & 1 & 1 & 0 & 0
+\end{tabular}
+\subsubsection{} %2
+$F_{42} = \forall y (\exists x R(x,y) \Rightarrow \forall x R(x,y))$\\
+Zur Platzersparnis wird die Spalte mit den Werten von P und R weggelassen. Die sind in allen Varianten gleich.\\
+\begin{tabular}{c|c|c|c|c|c|c|c}
+& x & y & R(x,y) & $\exists x R(x,y)$ & $\forall x R(x,y)$ & $ \exists x R(x,y) \wedge \forall x R(x,y)$ & $F_{42}$ \\
+\hline
+$A_{4}$ & 9 & 9 & & & & & 0 \\
+\hline
+$A_{4[y/3]}$ & 9 & 3 & & 0 & 0 & 0 & \\
+$A_{4[y/6]}$ & 9 & 6 & & 1 & 0 & 0 & \\
+$A_{4[y/9]}$ & 9 & 9 & & 1 & 1 & 1 & \\ 
+\hline
+$A_{4[y/3][x/3]}$ & 3 & 3 & 0 & & & & \\
+$A_{4[y/3][x/6]}$ & 6 & 3 & 0 & & & & \\
+$A_{4[y/3][x/9]}$ & 9 & 3 & 0 & & & & \\
+\hline
+$A_{4[y/6][x/3]}$ & 3 & 6 & 0 & & & & \\
+$A_{4[y/6][x/6]}$ & 6 & 6 & 1 & & & & \\
+$A_{4[y/6][x/9]}$ & 9 & 6 & 1 & & & & \\
+\hline
+$A_{4[y/9][x/3]}$ & 3 & 9 & 1 & & & & \\
+$A_{4[y/9][x/6]}$ & 6 & 9 & 1 & & & & \\
+$A_{4[y/9][x/9]}$ & 9 & 9 & 1 & & & & \\
+\end{tabular}
+\end{document}

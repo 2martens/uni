@@ -1,0 +1,144 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows}
+\pagenumbering{arabic}
+\def\thesection{3.\arabic{section})}
+\def\thesubsection{(\alph{subsection})}
+\def\thesubsubsection{(\arabic{subsubsection})}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\hyphenation{Nach-komma-stel-len}
+
+\begin{document}
+\author{Jim Martens (Matrikelnummer 6420323) \and Marlo Kornblum (Matrikelnummer 6427301)}
+\title{Rechnerstrukturen Aufgabenblatt 3}
+\maketitle
+
+\section{}%3.1
+\subsection{}
+\begin{alignat}{3}
+&\; 1385_{10} &-&\: 532_{10} &=&\: x\\
+\intertext{Bildung des 10-Komplements des Subtrahenden:}
+\Leftrightarrow &\; 1385_{10} &+&\: K_{10}(532)_{10} &=&\: x\\
+\Leftrightarrow &\; 1385_{10} &+&\: 9467_{10} &=&\: 10852_{10}\\
+\intertext{Streichen der führenden Eins}
+\Leftrightarrow &\; 1385_{10} &-&\: 532_{10} &=&\: \underline{\underline{0852_{10}}}
+\end{alignat}
+\subsection{}
+\begin{alignat}{3}
+&\; 372_{10} &-&\: 687_{10} &=&\: x\\
+\intertext{Bildung des 10-Komplements des Subtrahenden:}
+\Leftrightarrow &\; 372_{10} &+&\: K_{10}(0687)_{10} &=&\: x\\
+\Leftrightarrow &\; 372_{10} &+&\: 9313_{10} &=&\: 9685_{10}\\
+\intertext{Bildung des 10-Komplements des Ergebnisses}
+\Leftrightarrow &\; K_{10}(9685)_{10} &=&\: \underline{\underline{-0315_{10}}}
+\end{alignat}
+\subsection{}
+\begin{alignat}{3}
+&\; 1385_{10} &-&\: 532_{10} &=&\: x\\
+\intertext{Umwandlung in Dualzahlen:}
+&\; 10101101001_{2} &-&\: 1000010100_{2} &=&\: x\\
+\intertext{Bildung des 2-Komplements des Subtrahenden:}
+\Leftrightarrow &\; 10101101001_{2} &+&\: K_{2}(001000010100)_{2} &=&\: x\\
+\Leftrightarrow &\; 10101101001_{2} &+&\: 110111101100_{2} &=&\: 101101010101_{2}\\
+\intertext{Streichen der führenden Eins}
+\Leftrightarrow &\; 10101101001_{2} &-&\: 001000010100_{2} &=&\: \underline{\underline{001101010101_{2}}}
+\end{alignat}
+\subsection{}
+\begin{alignat}{3}
+&\; 372_{10} &-&\: 687_{10} &=&\: x\\
+\intertext{Umwandlung in Dualzahlen:}
+&\; 101110100_{2} &-&\: 1010101111_{2} &=&\: x\\
+\intertext{Bildung des 2-Komplements:}
+\Leftrightarrow &\; 101110100_{2} &+&\: K_{2}(001010101111)_{2} &=&\: x\\
+\Leftrightarrow &\; 000101110100_{2} &+&\: 110101010001_{2} &=&\: 111011000101_{2}\\
+\intertext{Bildung des 2-Komplements des Ergebnisses}
+\Leftrightarrow &\; K_{2}(111011000101)_{2} &=&\: \underline{\underline{000100111011_{2}}}
+\end{alignat}
+\section{}%3.2 _todo
+\subsection{}
+$(6,9242 \mid 4)_{10}$
+\subsection{}
+$(-1,100101 \mid -10)_{2}$
+\subsection{}
+$(-2,D4A \mid B)_{16}$
+\section{}%3.3
+\subsection{}
+\begin{tikzpicture}
+\draw (0,0) -- +(8,0); %untere Kante
+\draw (0,0) -- +(0,0.5); %linke Kante
+\draw (0,0.5) -- +(8,0); %obere Kante
+\draw (8,0) -- +(0,0.5); %rechte Kante
+\draw (0.25,0) -- +(0,0.5); %rechte Kante von Vorzeichen
+\draw (2.25,0) -- +(0,0.5); %rechte Kante des Exponenten
+\node at ++(0.15,0.2) (sign) {$0$}; %Vorzeichen
+\node at ++(1.25,0.2) (exp) {$0000\, 0110$}; %Exponent
+\node at ++(5.125,0.2) (mantisse) {$011\, 0110\, 0000\, 0000\, 0000\, 0000$}; %Mantisse
+\end{tikzpicture}
+\subsection{}
+\begin{tikzpicture}
+\draw (0,0) -- +(8,0); %untere Kante
+\draw (0,0) -- +(0,0.5); %linke Kante
+\draw (0,0.5) -- +(8,0); %obere Kante
+\draw (8,0) -- +(0,0.5); %rechte Kante
+\draw (0.25,0) -- +(0,0.5); %rechte Kante von Vorzeichen
+\draw (2.25,0) -- +(0,0.5); %rechte Kante des Exponenten
+\node at ++(0.15,0.2) (sign) {$1$}; %Vorzeichen
+\node at ++(1.25,0.2) (exp) {$0000\, 0111$}; %Exponent
+\node at ++(5.125,0.2) (mantisse) {$010\, 1000\, 1010\, 0000\, 0000\, 0000$}; %Mantisse
+\end{tikzpicture}
+\section{}%3.4
+$8,626 \cdot 10^{5} + 9,9442 \cdot 10^{7}$\\
+
+\subsection{}
+Skalierung des kleineren Summanden, bis beide Exponenten gleich sind:
+$0,08626 \cdot 10^{7} + 9,9442 \cdot 10^{7}$.\\
+Daraus folgt:
+\begin{alignat}{2}
+&\; 0,08626 \cdot 10^{7} + 9,9442 \cdot 10^{7} &=&\: x\\
+\Leftrightarrow &\; 0,08626 \cdot 10^{7} + 9,94420 \cdot 10^{7} &=&\: 10,03046 \cdot 10^{7}
+\end{alignat}
+Daraus ergibt sich dieses normalisierte Ergebnis:\\
+$1,003046 \cdot 10^{8}$\\
+Gerundet ergibt sich:\\
+$1,0030 \cdot 10^{8}$\\
+\subsection{}
+Skalierung des kleineren Summanden, bis beide Exponenten gleich sind:
+$0,0863 \cdot 10^{7} + 9,9442 \cdot 10^{7}$.\\
+Daraus folgt:
+\begin{alignat}{2}
+&\; 0,0863 \cdot 10^{7} + 9,9442 \cdot 10^{7} &=&\: x\\
+\Leftrightarrow &\; 0,0863 \cdot 10^{7} + 9,9442 \cdot 10^{7} &=&\: 10,0305 \cdot 10^{7}
+\end{alignat}
+Daraus ergibt sich dieses normalisierte Ergebnis:\\
+$1,00305 \cdot 10^{8}$\\
+Gerundet ergibt sich:\\
+$1,0031 \cdot 10^{8}$\\
+\subsection{}
+Bei Zahlen mit vielen Nachkommastellen ist eine Rundung nach jedem Schritt vorteilhafter, weil dadurch kompletter Präzisionsverlust vermieden werden kann (mehr Nachkommastellen als sinnvoll darstellbar).
+
+Bei Zahlen mit wenigen Nachkommastellen eignet sich das Verfahren mit einmaliger Rundung am Ende besser, da hierbei ohne Genauigkeitsverlust (zu viele Nachkommastellen) ein relativ gutes Ergebnis ermittelt werde kann.
+
+Anhand des Beispiels wird sichtbar, dass die Entscheidung Auswirkungen auf das Ergebnis haben können (in diesem Fall im Wert von $10000$), welche je nach Kontext trivial sind oder bereits katastrophale Ausmaße annehmen können.
+
+Von daher hängt die Wahl des "`perfekten"' Verfahrens davon ab, was man machen muss. 
+\section{}%3.5
+$5,6538 \cdot 10^{7} * 3,1415 \cdot 10^{4}$\\
+Daraus ergibt sich:\\
+\begin{alignat}{2}
+&\; 5,6538 \cdot 10^{7} * 3,1415 \cdot 10^{4} &=&\: x\\
+\Leftrightarrow &\; 5,6538 \cdot 10^{7} * 3,1415 \cdot 10^{4} &=& (5,6538 \cdot 3,1415) \cdot 10^{7+4}\\
+\Leftrightarrow &\; 5,6538 \cdot 10^{7} * 3,1415 \cdot 10^{4} &=& 17,7614127 \cdot 10^{11}
+\end{alignat}
+Daraus ergibt sich dieses normalisierte Ergebnis:\\
+$1,77614127 \cdot 10^{12}$\\
+Gerundet ergibt sich:\\
+$1,7761 \cdot 10^{12}$
+\end{document}

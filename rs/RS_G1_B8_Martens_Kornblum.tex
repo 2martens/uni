@@ -1,0 +1,154 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{qtree}
+\usepackage[locale=DE,exponent-product=\cdot ,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage[scaled=0.78]{luximono}
+\usepackage{listings}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,decorations.text,arrows}
+\pagenumbering{arabic}
+\def\thesection{8.\arabic{section})}
+\def\thesubsection{(\alph{subsection})}
+\def\thesubsubsection{(\arabic{subsubsection})}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\hyphenation{Nach-komma-stel-len}
+\lstnewenvironment{java}[1][]{%
+	\lstset{basicstyle=\ttfamily ,backgroundcolor=\color[gray]{.95},columns=flexible,fontadjust=true,language=Java,tabsize=4,numbers=none,#1}%
+}{%
+}
+\graphicspath{{D:/Users/Jim-Studium/Pictures/Studium/RS/}}
+
+\tikzstyle{huffmanNodes}=[matrix of nodes,
+	nodes={circle,thin,draw=black!20,minimum size=10mm,text height=1.5ex,text depth=.25ex,inner sep=-10pt}]
+\tikzstyle{huffmanBase}=[matrix of nodes,
+	nodes={minimum size=10mm,text height=1.5ex,text depth=.25ex,inner sep=-10pt}]
+\begin{document}
+\author{Jim Martens (Matrikelnummer 6420323) \and Marlo Kornblum (Matrikelnummer 6427301)}
+\title{Rechnerstrukturen Aufgabenblatt 8}
+\maketitle
+
+\section{} %8.1
+1-bit Volladdierer nur mit 2:1 Multiplexern:\\
+\begin{alignat*}{2}
+	s &=& a \oplus b \oplus c_{i} \\
+	  &=& ((a \vee b) \wedge (\overline{a \wedge b})) \oplus c_{i} \\
+	  &=& (((a \vee b) \wedge (\overline{a \wedge b})) \vee c_{i}) \wedge (\overline{((a \vee b) \wedge (\overline{a \wedge b})) \wedge c_{i}}) \\
+	c_{0} &=& (ab) \vee (a \vee b)c_{i}
+\end{alignat*}
+
+\includegraphics[scale=.5]{Uebung8-Schaltplan.png}
+\section{} %8.2
+\subsection{} %a
+\begin{tabular}{r|ccccc}
+dez.& $x_{3}$	& $x_{2}$	& $x_{1}$	& $x_{0}$	& A \\
+\hline
+0	& 0 		& 0			& 0			& 0		  	& 1 \\
+1	& 0			& 0			& 0			& 1		  	& 1 \\
+2	& 0			& 0			& 1			& 0			& 1 \\
+3	& 0			& 0			& 1			& 1			& 1 \\
+4	& 0			& 1			& 0			& 0			& 1 \\
+5	& 0			& 1			& 0 		& 1			& 0 \\
+6	& 0			& 1			& 1			& 0			& 0 \\
+7	& 0			& 1			& 1			& 1			& 0 \\
+8	& 1			& 0			& 0			& 0			& 1 \\
+9	& 1			& 0			& 0			& 1			& 1 \\
+10	& 1			& 0			& 1			& 0			& 1 \\
+11	& 1			& 0			& 1 		& 1			& 1 \\
+12	& 1			& 1			& 0			& 0			& 1 \\
+13 	& 1			& 1			& 0			& 1			& 1 \\
+14	& 1			& 1			& 1			& 0			& 1 \\
+15	& 1			& 1			& 1			& 1			& 1
+\end{tabular}
+\begin{tikzpicture}
+	\draw (0,0) -- +(2,0); %obere Kante
+	\draw (0,0) -- +(0,-2); %linke Kante
+	\draw (1,0) -- +(0,-2); %mittlere vertikale Kante 
+	\draw (0,-1) -- +(2,0); %mittlere horizontale Kante
+	\draw (0,-2) -- +(2,0); %untere Kante
+	\draw (2,0) -- +(0,-2); %rechte Kante
+	\draw (0.5,0) -- +(0,-2); %linke mittlere Kante
+	\draw (1.5,0) -- +(0,-2); %rechte mittlere Kante
+	\draw (0,-0.5) -- +(2,0); %obere mittlere Kante
+	\draw (0,-1.5) -- +(2,0); %untere mittlere Kante
+	\draw (0,0) -- +(-0.5,0.5); %schräger Strich
+	
+	\node at ++(0.2,0.25) (start11) {$00$}; %Variablenzeile 0
+	\node at ++(0.7,0.25) (start12) {$01$};
+	\node at ++(1.2,0.25) (start13) {$11$};
+	\node at ++(1.7,0.25) (start14) {$10$};
+	
+	\node at ++(-0.25,-0.2) (start10) {$00$}; %Variablenspalte 0
+	\node at ++(-0.25,-0.7) (start20) {$01$};
+	\node at ++(-0.25,-1.2) (start30) {$11$};
+	\node at ++(-0.25,-1.7) (start40) {$10$};
+	
+	\node at ++(-0.8,0.2) (var1) {$x3\,x2$};
+	\node at ++(0.0,0.6) (var1) {$x1\,x0$};
+	
+	\node at ++(0.25, -0.25) (row11) {$1$}; %erste Zeile
+	\node at ++(0.75, -0.25) (row12) {$1$};
+	\node at ++(1.25, -0.25) (row13) {$1$};
+	\node at ++(1.75, -0.25) (row14) {$1$};
+	
+	\node at ++(0.25, -0.75) (row21) {$1$}; %zweite Zeile
+	\node at ++(0.75, -0.75) (row22) {$0$};
+	\node at ++(1.25, -0.75) (row23) {$0$};
+	\node at ++(1.75, -0.75) (row24) {$0$};
+	
+	\node at ++(0.25, -1.25) (row31) {$1$}; %dritte Zeile
+	\node at ++(0.75, -1.25) (row32) {$1$};
+	\node at ++(1.25, -1.25) (row33) {$1$};
+	\node at ++(1.75, -1.25) (row34) {$1$};
+	
+	\node at ++(0.25, -1.75) (row41) {$1$}; %vierte Zeile
+	\node at ++(0.75, -1.75) (row42) {$1$};
+	\node at ++(1.25, -1.75) (row43) {$1$};
+	\node at ++(1.75, -1.75) (row44) {$1$};
+\end{tikzpicture}
+\subsection{} %b
+disjunktiv:\\
+Es lassen sich die erste und vierte Zeile als eine Schleife einzeichnen. Außerdem kann die erste Spalte als eine Schleife genommen werden. Zusätzlich können die die dritte und vierte Zeile komplett als eine Schleife realisiert werden. Es ergibt sich:
+\begin{equation*}
+f(x_{3},x_{2},x_{1},x_{0}) = \overline{x_{2}} \vee (\overline{x_{1}}\overline{x_{0}}) \vee x_{3}
+\end{equation*}
+
+konjunktiv:\\
+Die zwei rechten Nullen und die zwei linken Nullen können jeweils in eine Schleife gepackt werden. Es ergibt sich:
+\begin{equation*}
+f(x_{3},x_{2},x_{1},x_{0}) = (x_{3} \vee \overline{x_{2}} \vee \overline{x_{0}}) \wedge (x_{3} \vee \overline{x_{2}} \vee \overline{x_{1}})
+\end{equation*}
+\subsection{} %c
+disjunktiv:\\
+\includegraphics[scale=.5]{Uebung8_2_c1-Schaltplan.png}
+
+konjunktiv:\\
+\includegraphics[scale=.5]{Uebung8_2_c2-Schaltplan.png}
+\section{} %8.3
+\subsection{} %a
+\includegraphics[scale=1.0]{Uebung8-Impulsdiagramm.png}
+
+Es tritt ein statischer 1-Hazard beim Ausgang x auf. Beim Ausgang y tritt kein Hazard auf.
+\subsection{} %b
+\includegraphics[scale=1.0]{Uebung8-Impulsdiagramm2.png}
+
+Es treten keine Hazards auf.
+\section{} %8.4
+\subsection{} %a
+Für $n$ Bits ergibt sich folgende Formel für die Zeitschritte T: $T(n) = 2 \cdot \log_{2} (n) + 4$.
+\subsection{} %b
+Dieser Addierer benötigt $\frac{n}{m} + 1$ Zeitschritte für die Blöcke und daher insgesamt $m \cdot (2 \cdot \frac{n}{m} + 1)$ Zeitschritte.
+
+Um die Verzögerung zu minimieren muss $m = \lfloor \sqrt{n} \rfloor$ gelten.
+\subsection{} %c
+Für $n=64$ ergeben sich für den Ripple-Carry-Addierer $64$ Zeiteinheiten und damit $64 \cdot 35ps=2240ps$. Der Carry-Lookahead-Addierer benötigt $2 \cdot \log_{2} (64) + 4 = 2 \cdot 6 + 4 = 12 + 4 = 16$ Zeiteinheiten und damit $16 \cdot 35ps=560ps$.
+Mit dem Carry-Select-Addierer erreicht man $8 \cdot (2\cdot 8 + 1) = 8 \cdot (16 + 1) = 8 \cdot 17 = 136$ Zeiteinheiten. Somit ergeben sich $136 \cdot 35ps=4760ps$.
+
+Für $n=256$ ergeben sich für den Ripple-Carry-Addierer $256$ Zeiteinheiten und damit $256 \cdot 35ps=8960ps$. Der Carry-Lookahead-Addierer benötigt $2 \cdot \log_{2} (256) + 4 = 2 \cdot 8 + 4 = 16 + 4 = 20$ Zeiteinheiten und damit $20 \cdot 35ps=700ps$.
+Mit dem Carry-Select-Addierer erreicht man $16 \cdot (2 \cdot 16 + 1) = 16 \cdot (32 + 1) = 16 \cdot 33 = 528$ Zeiteinheiten. Somit ergeben sich $528 \cdot 35ps=18480ps$.
+\end{document}

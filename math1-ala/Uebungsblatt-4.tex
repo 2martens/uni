@@ -1,0 +1,284 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Hausaufgaben zum 2. Mai}
+\maketitle
+\section{} %1
+\subsection{} %a
+\subsubsection{} %i
+\begin{alignat*}{2}
+f(x) &=& 7x^{5} + 3x^{3} + x + 1 \\
+f'(x) &=& 35x^{4} + 9x^{2} + 1
+\end{alignat*}
+\subsubsection{} %ii
+\begin{alignat*}{2}
+f(x) &=& (3x^{7} - 4x^{3} + x^{2} - 3x + 1)^{8} \\
+f'(x) &=& 8 \cdot (3x^{7} - 4x^{3} + x^{2} - 3x + 1)^{7} \cdot (21x^{6} - 12x^{2} + 2x - 3)
+\end{alignat*}
+\subsubsection{} %iii
+\begin{alignat*}{2}
+f(x) &=& (3x^{4} + 2x) \cdot \sqrt{x^{2} + 1} \\
+f'(x) &=& (12x^{3} + 2) \cdot \sqrt{x^{2} + 1} + (3x^{4} + 2x) \cdot \frac{2x}{2 \cdot \sqrt{x^{2} + 1}}
+\end{alignat*}
+\subsubsection{} %iv
+\begin{alignat*}{2}
+f(x) &=& (x^{3} + 1) \cdot \ln (x^{4} + 3x^{2} + 1) \\
+f'(x) &=& 3x \cdot \ln (x^{4} + 3x^{2} + 1) + (x^{3} + 1) \cdot \frac{4x^{3} + 6x}{x^{4} + 3x^{2} + 1}
+\end{alignat*}
+\subsubsection{} %v
+\begin{alignat*}{2}
+f(x) &=& e^{x^{3} + x^{2} + 1} \cdot \sqrt{x} \\
+f'(x) &=& e^{x^{3} + x^{2} + 1} \cdot (3x^{2} + 2x) \cdot \sqrt{x} + e^{x^{3} + x^{2} + 1} \cdot \frac{1}{2 \cdot \sqrt{x}} 
+\end{alignat*}
+\subsubsection{} %vi
+\begin{alignat*}{2}
+f(x) &=& \sqrt{x^{4} + 1} \cdot \ln x \\
+f'(x) &=& \frac{4x^{3}}{2 \cdot \sqrt{x^{4} + 1}} \cdot \ln x + \sqrt{x^{4} + 1} \cdot \frac{1}{x}
+\end{alignat*}
+\subsection{} %b
+\begin{alignat*}{2}
+q(x) &=& \frac{5x^{2} + 1}{x - 3} \\
+q'(x) &=& \frac{10x \cdot (x-3) - (5x^{2} + 1) \cdot 1}{(x-3)^{2}} \\
+\intertext{Ausmultiplizieren}
+&=& \frac{10x^{2} - 30x - (5x^{2} + 1)}{x^{2} - 6x + 9}\\
+\intertext{Zusammenfassen}
+&=& \frac{5x^{2} - 30x - 1}{x^{2} - 6x + 9}\\
+q''(x) &=& \frac{(10x-30) \cdot (x^{2} - 6x + 9) - (5x^{2} - 30x - 1) \cdot (2x - 6)}{(x^{2} - 6x + 9)^{2}} \\
+\intertext{Ausmultiplizieren}
+&=& \frac{10x^{3} - 60x^{2} + 90x - 30x^{2} + 180x - 270 - (10x^{3} - 30x^{2} - 60x^{2} + 180x -x^{2} - 9)}{x^{4} - 6x^{3} + 9x^{2} - 6x^{3} + 36x^{2} - 54x + 9x^{2} - 54x + 81} \\
+\intertext{Zusammenfassen}
+&=& \frac{10x^{3} - 90x^{2} + 270x - 270 -10x^{3} + 91x^{2} - 180x + 9}{x^{4} - 12x^{3} + 54x^{2} - 108x + 81} \\
+\intertext{Zusammenfassen}
+&=& \frac{x^{2} + 90x - 261}{x^{4} - 12x^{3} + 54x^{2} - 108x + 81} \\
+q'''(x) &=& \frac{(2x + 90) \cdot (x^{4} - 12x^{3} + 54x^{2} - 108x + 81) - (x^{2} + 90x - 261) \cdot (4x^{3} - 36x^{2} + 108x - 108)}{(x^{4} - 12x^{3} + 54x^{2} - 108x + 81)^{2}} \\
+\intertext{Ausmultiplizieren und Zusammenfassen}
+&=& \frac{-2x^{5} - 258x^{4} + 3204x^{3} - 14364x^{2} +28350x - 20898}{x^{8} - 24x^{7} + 252x^{6} -1404x^{5} +5670x^{4} - 13716x^{3} + 20412x^{2} -8748x - 2187}
+\end{alignat*}
+\section{} %2
+\begin{alignat*}{2}
+f(x) &=& \left| 3 - \frac{1}{2}x \right| \\
+\intertext{Sei $x_{n} = 6 + \frac{1}{n} : n \in \mathbb{N}$}
+\underset{n \rightarrow \infty}{\text{lim}} \frac{f(x_{n}) - f(x_{0})}{x_{n} - x_{0}} &=& \underset{n \rightarrow \infty}{\text{lim}} \frac{\left| 3 - \frac{1}{2} \cdot (6 + \frac{1}{n}) \right| - \left| 3 - \frac{1}{2} \cdot 6 \right|}{6 + \frac{1}{n} - 6} \\
+&=& \underset{n \rightarrow \infty}{\text{lim}} \frac{\left| 3 - 3 - \frac{1}{2n} \right| - \left| 3 - 3 \right|}{\frac{1}{n}} \\
+&=& \underset{n \rightarrow \infty}{\text{lim}} \frac{\left|-\frac{1}{2n} \right|}{\frac{1}{n}} \\
+&=& \underset{n \rightarrow \infty}{\text{lim}} \frac{\frac{1}{2n}}{\frac{1}{n}} \\
+&=& \underset{n \rightarrow \infty}{\text{lim}} \frac{n}{2n} = \frac{1}{2} \\
+\intertext{Sei $x_{n} = 6 - \frac{1}{n} : n \in \mathbb{N}$}
+\underset{n \rightarrow \infty}{\text{lim}} \frac{f(x_{n}) - f(x_{0})}{x_{n} - x_{0}} &=& \underset{n \rightarrow \infty}{\text{lim}} \frac{\left| 3 - \frac{1}{2} \cdot (6 - \frac{1}{n}) \right| - \left| 3 - \frac{1}{2} \cdot 6 \right|}{6 - \frac{1}{n} - 6} \\
+&=& \underset{n \rightarrow \infty}{\text{lim}} \frac{\left| 3 - 3 + \frac{1}{2n} \right| - \left| 3 - 3 \right|}{-\frac{1}{n}} \\
+&=& \underset{n \rightarrow \infty}{\text{lim}} \frac{\left|\frac{1}{2n} \right|}{-\frac{1}{n}} \\
+&=& \underset{n \rightarrow \infty}{\text{lim}} \frac{\frac{1}{2n}}{-\frac{1}{n}} \\
+&=& \underset{n \rightarrow \infty}{\text{lim}} -\frac{n}{2n} = -\frac{1}{2}
+\end{alignat*}
+Der Grenzwert existiert an der Stelle $x _{0} = 6$ nicht. Daher ist die Funktion $f$ an der Stelle $x_{0} = 6$ nicht differenzierbar.
+
+\begin{tikzpicture}[>=stealth]
+\begin{axis}[
+	ymin=-10,ymax=10,
+	x=1em,
+	y=1em,
+	axis x line=middle,
+	axis y line=middle,
+	axis line style=->,
+	xlabel={$x$},
+	ylabel={$y$},
+	]
+\addplot[no marks, black, -] expression[domain=-10:6,samples=100]{3 - (1/2)*x} node[pos=0.65,anchor=north]{};
+\addplot[no marks, black, -] expression[domain=6:10,samples=100]{-1*(3 - (1/2)*x)} node[pos=0.65,anchor=north]{};
+
+\draw (16em, 10em) circle (2pt);
+\end{axis}
+\end{tikzpicture}
+\section{} %3
+\subsection{} %a
+\begin{alignat*}{2}
+f(x) &=& (x^{4}+1)^{x+2} \\
+&=& e^{ln\left((x^{4}+1)^{x+2}\right)} \\
+&=& e^{(x+2) \cdot \ln(x^{4}+1)} \\
+f'(x) &=& e^{(x+2) \cdot \ln(x^{4}+1)} \cdot \left((x+2) \cdot \ln(x^{4}+1)\right)' \\
+&=& e^{(x+2) \cdot \ln(x^{4}+1)} \cdot \left((x+2)' \cdot \ln(x^{4}+1) + (x+2) \cdot \ln(x^{4}+1)'\right) \\
+&=& e^{(x+2) \cdot \ln(x^{4}+1)} \cdot \left(1 \cdot \ln(x^{4}+1) + (x+2) \cdot \frac{1}{x^{4}+1} \cdot (x^{4}+1)'\right) \\
+&=& (x^{4}+1)^{x+2} \cdot \left(\ln(x^{4}+1) + (x+2) \cdot \frac{4x^{3}}{x^{4}+1}\right)
+\end{alignat*}
+\subsection{} %b
+\begin{alignat*}{2}
+f(x) &=& x^{\frac{1}{2}} \\
+&=& e^{\ln \left(x^{\frac{1}{2}} \right)} \\
+&=& e^{\frac{1}{2} \cdot \ln (x)} \\
+f'(x) &=& e^{\frac{1}{2} \cdot \ln (x)} \cdot \left(\frac{1}{2} \cdot \ln (x) \right)' \\
+&=& e^{\frac{1}{2} \cdot \ln (x)} \cdot \frac{1}{2} \cdot \frac{1}{x} \cdot (x)' \\
+&=& e^{\frac{1}{2} \cdot \ln (x)} \cdot \frac{1}{2x} \\
+&=& x^{\frac{1}{2}} \cdot \frac{1}{2x} \\
+&=& \frac{1}{2} \cdot \frac{x^{\frac{1}{2}}}{x} \\
+&=& \frac{1}{2} \cdot x^{-\frac{1}{2}} \\
+g(x) &=& \left( \frac{1}{2}\right)^{x} \\
+&=& e^{\ln \left( \left( \frac{1}{2}\right)^{x} \right)} \\
+&=& e^{x \cdot \ln \left( \frac{1}{2}\right)} \\
+g'(x) &=& e^{x \cdot \ln \left( \frac{1}{2}\right)} \cdot \left(x \cdot \ln \left( \frac{1}{2}\right) \right)' \\
+&=& e^{x \cdot \ln \left( \frac{1}{2}\right)} \cdot (x)' \cdot \ln \left( \frac{1}{2}\right) \\
+&=& e^{x \cdot \ln \left( \frac{1}{2}\right)} \cdot 1 \cdot \ln \left( \frac{1}{2}\right) \\
+&=& \left( \frac{1}{2}\right)^{x} \cdot \ln \left( \frac{1}{2}\right)
+\end{alignat*}
+\subsection{} %c
+\subsubsection{} %i
+\begin{alignat*}{2}
+g(x) &=& (x^{2}+1)^{4x+1} \\
+&=& e^{\ln \left( (x^{2}+1)^{4x+1}\right)} \\
+&=& e^{(4x+1) \cdot \ln (x^{2}+1)} \\
+g'(x) &=& e^{(4x+1) \cdot \ln (x^{2}+1)} \cdot \left((4x+1) \cdot \ln (x^{2}+1) \right)' \\
+&=& e^{(4x+1) \cdot \ln (x^{2}+1)} \cdot \left((4x+1)' \cdot \ln (x^{2}+1) + (4x+1) \cdot \ln (x^{2}+1)' \right) \\
+&=& e^{(4x+1) \cdot \ln (x^{2}+1)} \cdot \left(4 \cdot \ln (x^{2}+1) + (4x+1) \cdot \frac{1}{x^{2}+1} \cdot (x^{2}+1)' \right) \\
+&=& e^{(4x+1) \cdot \ln (x^{2}+1)} \cdot \left(4 \cdot \ln (x^{2}+1) + (4x+1) \cdot \frac{2x}{x^{2}+1} \right) \\
+&=& (x^{2}+1)^{4x+1} \cdot \left(4 \cdot \ln (x^{2}+1) + \frac{8x^{2} + 2x}{x^{2}+1} \right)
+\end{alignat*}
+\subsubsection{} %ii
+\begin{alignat*}{2}
+h(x) = (x-3)^{3x^{4}+5} \\
+&=& e^{\ln \left((x-3)^{3x^{4}+5} \right)} \\
+&=& e^{(3x^{4}+5) \cdot \ln (x-3)} \\
+h'(x) &=& e^{(3x^{4}+5) \cdot \ln (x-3)} \cdot \left((3x^{4}+5) \cdot \ln (x-3) \right)' \\
+&=& e^{(3x^{4}+5) \cdot \ln (x-3)} \cdot \left((3x^{4}+5)' \cdot \ln (x-3) + (3x^{4}+5) \cdot \ln (x-3)' \right) \\
+&=& e^{(3x^{4}+5) \cdot \ln (x-3)} \cdot \left(12x^{3} \cdot \ln (x-3) + (3x^{4}+5) \cdot \frac{1}{x-3} \cdot (x-3)' \right) \\
+&=& e^{(3x^{4}+5) \cdot \ln (x-3)} \cdot \left(12x^{3} \cdot \ln (x-3) + (3x^{4}+5) \cdot \frac{1}{x-3} \right) \\
+&=& (x-3)^{3x^{4}+5} \cdot \left(12x^{3} \cdot \ln (x-3) + \frac{3x^{4}+5}{x-3} \right)
+\end{alignat*}
+\section{} %4
+\subsection{} %a
+\begin{alignat*}{2}
+g(p) &=& 10^{5} \cdot \left( \frac{1}{p} - \frac{3}{p^{2}} \right) \\
+&=& 10^{5} \cdot \left( p^{-1} - 3p^{-2} \right) \\
+g'(p) &=& 10^{5} \cdot \left( p^{-1} - 3p^{-2} \right)' \\
+&=& 10^{5} \cdot \left((p^{-1})' - (3p^{-2})' \right) \\
+&=& 10^{5} \cdot \left(-p^{-2} - (-6p^{-3}) \right) \\
+&=& 10^{5} \cdot \left(-p^{-2} + 6p^{-3} \right) \\
+&=& 10^{5} \cdot \left(-\frac{1}{p^{2}} + \frac{6}{p^{3}} \right) \\
+g''(p) &=& 10^{5} \cdot \left(-p^{-2} + 6p^{-3} \right)' \\
+&=& 10^{5} \cdot \left((-p^{-2})' + (6p^{-3})' \right) \\
+&=& 10^{5} \cdot \left(2p^{-3} - 18p^{-4} \right) \\
+&=& 10^{5} \cdot \left(\frac{2}{p^{3}} - \frac{18}{p^{4}} \right)
+\end{alignat*}
+\begin{enumerate}
+	\item Bestimmung der Nullstellen der 1. Ableitung:
+	\begin{alignat*}{2}
+		-\frac{1}{p^{2}} + \frac{6}{p^{3}} &=& 0 \\
+		-\frac{1}{p^{2}} &=& - \frac{6}{p^{3}} \\
+		\frac{1}{p^{2}} &=& \frac{6}{p^{3}} \\
+		\frac{p^{3}}{p^{2}} &=& 6  \\
+		p &=& 6 \\
+		\intertext{Einsetzen in $g'(p)$}
+		0 &=& 10^{5} \cdot \left(-\frac{1}{6^{2}} + \frac{6}{6^{3}} \right) \\
+		  &=& 10^{5} \cdot \left(-\frac{1}{36} + \frac{6}{216} \right) \\
+		  &=& 10^{5} \cdot \left(-\frac{1}{36} + \frac{1}{36} \right) \\
+		  &=& 10^{5} \cdot 0 = 0
+	\end{alignat*} \\
+	\item Einsetzen von $p=6$ in $g''(p)$:
+	\begin{alignat*}{2}
+		g''(6) &=& 10^{5} \cdot \left(\frac{2}{6^{3}} - \frac{18}{6^{4}} \right) \\
+			   &=& 10^{5} \cdot \left(\frac{2}{216} - \frac{18}{1296} \right) \\
+			   &=& 10^{5} \cdot \left(\frac{2}{216} - \frac{3}{216} \right) \\
+			  &=& 10^{5} \cdot \left(- \frac{1}{216} \right) = -\frac{10^{5}}{216} 
+	\end{alignat*}
+	Daraus ergibt sich, dass $p=6$ ein lokales Maximum der Funktion $g(p)$ ist. Es bleibt noch festzustellen, dass es auch das globale Maximum ist. \\
+	\item Feststellung des globalen Maximums:\\
+	Da es nur eine Nullstelle für die erste Ableitung gibt, kann es insofern nur einen Extrempunkt geben. Da der Funktionswert der 2. Ableitung für diese Stelle negativ ist, liegt an der Stelle ein Maximum. Der Funktionswert von $g(p)$ für die Stelle wird wie folgt berechnet:
+	\begin{alignat*}{2}
+		g(p) &=& 10^{5} \cdot \left(\frac{1}{p} - \frac{3}{p^{2}} \right) \\
+		g(6) &=& 10^{5} \cdot \left( \frac{1}{6} - \frac{3}{3^{2}} \right) \\
+		&=& 10^{5} \cdot \left( \frac{1}{6} - \frac{3}{9} \right) \\
+		&=& 10^{5} \cdot \left( \frac{1}{6} - \frac{2}{6} \right) \\
+		&=& 10^{5} \cdot \left(- \frac{1}{6} \right) \\
+		&=& -\frac{10^{5}}{6} = \frac{5000}{3} \\
+		&=& \frac{4998}{3} + \frac{2}{3} \\
+		&=& 1666 + \frac{2}{3}
+	\end{alignat*} \\\\\\
+	Zuletzt muss noch geprüft werden, ob die Grenzen des Definitionsbereiches einen höheren Wert aufweisen.
+	\begin{alignat*}{2}
+		g(p) &=& 10^{5} \cdot \left(\frac{1}{p} - \frac{3}{p^{2}} \right) \\
+		g(3) &=& 10^{5} \cdot \left(\frac{1}{3} - \frac{3}{3^{2}} \right) \\
+		&=& 10^{5} \cdot \left(\frac{1}{3} - \frac{3}{9} \right) \\
+		&=& 10^{5} \cdot \left(\frac{1}{3} - \frac{1}{3} \right) \\
+		&=& 10^{5} \cdot 0 = 0 \\
+		g(100) &=& 10^{5} \cdot \left(\frac{1}{100} - \frac{3}{100^{2}} \right) \\
+		&=& 10^{5} \cdot \left(\frac{1}{100} - \frac{3}{10000} \right) \\
+		&=& 10^{5} \cdot \left(\frac{100}{10000} - \frac{3}{10000} \right) \\
+		&=& 10^{5} \cdot \frac{97}{10000} \\
+		&=& 970
+	\end{alignat*}
+	Die Funktion hat nur einen Extrempunkt und die beiden Definitionsgrenzen weisen einen niedrigeren Funktionswert auf, als der zuvor bestimmte lokale Extrempunkt mit $p = 6$. Somit ist der einzige lokale Extrempunkt auch der globale Extrempunkt. Da es sich bei dem Extrempunkt um ein Maximum handelt, ist er somit das globale Maximum.
+\end{enumerate}
+\subsection{} %b
+\subsubsection{} %i
+Bestimmung der Nullstellen von $f, f'$ und $f''$:\\
+\begin{alignat*}{2}
+f(x) &=& -2x^{3} - x + 25 \\
+f'(x) &=& -6x^{2} - 1 \\
+f''(x) &=& -18x \\
+f'''(x) &=& -18 \\
+f(2) &=& -2 \cdot 2^{3} - 2 + 25 \\
+&=& -2 \cdot 8 +23 \\
+&=& -16 + 23 = 7 \\
+f(3) &=& -2 \cdot 3^{3} - 3 + 25 \\
+&=& -2 \cdot 27 + 22 \\
+&=& -54 + 22 \\
+&=& -32 \\
+f'(0) &=& -6 \cdot 0^{2} - 1 \\
+&=& 0 -1 = -1 \\
+f''(0) &=& -18 \cdot 0 = 0
+\end{alignat*}
+Die Nullstelle von $f(x)$ liegt zwischen $x=2$ und $x=3$. $f'(x)$ hat keine Nullstelle. Der höchste erreichbare Wert ist $-1$. 
+$f''(x)$ hat eine Nullstelle, welche nachweislich bei $x=0$ liegt.
+$f'''(x)$ hat offensichtlich keine Nullstelle.\\
+\\
+$f(x) > 0$ für $x \leq 2$ und $f(x) < 0$ für $x \geq 3$. $f'(x) < 0$ für alle $x \in \mathbb{R} \wedge x \geq -5 \wedge x \leq 5$. $f''(x) < 0$ für $x < 0$ und $f''(x) > 0$ für $x > 0$. $f'''(x) > 0$ für alle $x \in \mathbb{R} \wedge x \geq -5 \wedge x \leq 5$. \\
+Es gibt keine Maxima oder Minima. Allerdings gibt es einen Wendepunkt bei $x=0$, da $f''(0) = 0$ und $f'''(0) \neq 0$. \\
+Da es keine Nullstellen der ersten Ableitung gibt und $f(2) > f(3)$ gilt, ist $f(x)$ auf dem gesamten Intervall streng monoton fallend. Der höchste Punkt ist demnach am Beginn des Definitionsbereiches, der niedrigste am Ende.
+Daraus ergibt sich:\\
+\begin{alignat*}{2}
+f(-5) &=& -2 \cdot (-5)^{3} - (-5) + 25 \\
+&=& -2 \cdot (-125) + 30 \\
+&=& 250 + 30 = 280 \\
+f(5) &=& -2 \cdot 5^{3} - 5 + 25 \\
+&=& -2 \cdot 125 + 20 \\
+&=& -250 + 20 = -230
+\end{alignat*}
+$f(x)$ nimmt das globale Maximum bei $x=-5$ und das globale Minimum bei $x=5$ an.
+\subsubsection{} %ii
+\begin{alignat*}{2}
+g(x) &=& x^{3} - 6x^{2} + 3x + 8 \\
+g'(x) &=& 3x^{2} - 12x + 3 \\
+g''(x) &=& 6x - 12 \\
+g'''(x) &=& 6
+\end{alignat*}
+\subsubsection{} %iii
+\begin{alignat*}{2}
+h(x) &=& e^{2x-3} - e^{x+2} \\
+h'(x) &=& e^{2x-3} \cdot 2 -  e^{x+2} \\
+h''(x) &=& e^{2x-3} \cdot 4 -  e^{x+2} \\
+h'''(x) &=& e^{2x-3} \cdot 8 -  e^{x+2}
+\end{alignat*}
+\end{document}

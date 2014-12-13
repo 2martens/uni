@@ -1,0 +1,187 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{stmaryrd}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pagenumbering{arabic}
+\def\thesection{9.\arabic{section})}
+\def\thesubsection{\arabic{subsection}.}
+\def\thesubsubsection{(\alph{subsubsection})}
+\setcounter{section}{1}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\addtolength{\parskip}{\baselineskip}
+
+\begin{document}
+\author{Jim Martens}
+\title{Hausaufgaben zum 11. Juni}
+\maketitle
+
+\section{} %9.2
+\subsection{} %1.
+\subsubsection{} %(a)
+Anna wohnt in Aachen oder Bernd wohnt in Berlin oder Carl wohnt in Chemnitz.
+\subsubsection{} %(b)
+Bernd wohnt in Berlin oder Carl wohnt in Chemnitz oder Anna wohnt in Aachen.
+\subsubsection{} %(c)
+Wenn Anna in Aachen wohnt, dann wohnt Bernd in Berlin oder Carl wohnt in Chemnitz.
+\subsubsection{} %(d)
+Wenn Anna in Aachen wohnt und Bernd in Berlin wohnt, dann wohnt Carl in Chemnitz.
+\subsubsection{} %(e)
+Wenn Anna in Aachen wohnt, dann wohnt Carl in Chemnitz, wenn Bernd in Berlin wohnt.
+\subsubsection{} %(v)
+Bernd wohnt genau dann in Berlin, wenn Anna in Aachen wohnt und Carl in Chemnitz wohnt.
+\subsection{} %2.
+\begin{enumerate}
+	\item A$\, \Rightarrow \,$A
+	Die Formel ist allgemeingültig und erfüllbar (siehe 9.2 (a)).
+	\item A$\, \Rightarrow \,\neg$A
+	Die Formel ist erfüllbar, falsifizierbar und kontingent (siehe 9.2 (b)).
+	\item A$\, \Leftrightarrow \,\neg$A
+	Die Formel ist falsifizierbar und unerfüllbar (siehe 9.2 (c)).
+	\item A$\, \vee \,\neg$A
+	Die Formel ist allgemeingültig und erfüllbar. Egal welche Belegung A hat, eine der beiden Teilformeln (A, $\neg$A) ist immer wahr.
+	\item A$\, \wedge \,\neg$A
+	Die Formel ist unerfüllbar und falsifizierbar. Egal welche Belegung A hat, nur eine der beiden Teilformeln (A, $\neg$A) kann wahr sein.
+	\item A$\, \wedge \,$A
+	Die Formel ist erfüllbar, falsifizierbar und kontingent. Je nach Belegung ist die Formel entweder falsifiziert (falsch und falsch) oder erfüllt (wahr und wahr).
+	\item A$\, \vee \,$A
+	Die Formel ist erfüllbar, falsifizierbar und kontingent. Je nach Belegung ist die Formel entweder falsifiziert (falsch oder falsch) oder erfüllt (wahr oder wahr).
+	\item A$\, \Leftrightarrow \,$A
+	Die Formel ist allgemeingültig und erfüllbar. Je nach Belegung ergibt sich entweder (wahr biimpliziert wahr) oder (falsch biimpliziert falsch). In beiden Fällen ist die Formel erfüllt.
+	\item (A$\, \vee \,\neg$A)$\, \Rightarrow \,$(A$\, \wedge \neg$A)
+	Die Formel ist unerfüllbar und falsifizierbar. Die linke Teilformel wurde bereits als allgemeingültig gezeigt. Die rechte Teilformel wurde bereits als unerfüllbar gezeigt. Damit ist auch die ganze Formel unerfüllbar.
+	\item 	(A$\, \wedge \neg$A)$\, \Rightarrow \,$(A$\, \vee \,\neg$A)
+	Die Formel ist allgemeingültig und erfüllbar. Die linke Teilformel wurde bereits als unerfüllbar gezeigt und die rechte Teilformel wurde bereits als allgemeingültig gezeigt. Damit ist auch die ganze Formel allgemeingültig.
+	\item A$\, \Leftarrow \,\neg$A
+	Die Formel ist erfüllbar, falsifizierbar und kontingent. Je nach Belegung ergibt sich falsifiziert (wahr impliziert falsch) oder erfüllt (falsch impliziert wahr). Da die Formel kontingent ist, kann sie nicht allgemeingültig oder unerfüllbar sein.
+	\item (A$\, \Leftrightarrow \,$A)$\, \Rightarrow \,$(A$\, \Leftrightarrow \,\neg$A)
+	Die Formel ist unerfüllbar und falsifizierbar. Die linke Teilformel wurde bereits als allgemeingültig gezeigt. Die rechte Teilformel wurde bereits als unerfüllbar gezeigt. Damit ist auch die ganze Formel unerfüllbar.
+\end{enumerate}
+\subsection{} %3.
+\subsubsection{} %(a)
+Die Formel kann erfüllbar, allgemeingültig und eine Tautologie sein. Sie kann nicht falsifizierbar, unerfüllbar, kontingent und damit auch keine Kontradiktion sein.
+
+Da T allgemeingültig ist, ist somit die Formel C $\, \Rightarrow \,$T immer erfüllt und demnach ebenso allgemeingültig. Da sie allgemeingültig ist, ist sie eine Tautologie, erfüllbar, nicht falsifizierbar, nicht kontingent, nicht unerfüllbar und keine Kontradiktion.
+\subsubsection{} %(b)
+Die Formel kann erfüllbar, falsifizierbar, allgemeingültig, eine Tautologie und kontingent sein. Sie kann nicht unerfüllbar und damit auch keine Kontradiktion sein.
+
+Da T allgemeingültig ist, hängt der Wahrheitswert der Formel von E ab. Da E erfüllbar ist, ist die Formel auf jeden Fall nicht unerfüllbar und damit auch keine Kontradiktion. Allerdings kann E auch falsifizierbar und damit kontingent oder allgemeingültig und eine Tautologie sein. 
+\subsubsection{} %(c)
+Die Formel kann allgemeingültig, erfüllbar und eine Tautologie sein. Sie kann nicht falsifizierbar, unerfüllbar oder kontingent sein und ist damit auch keine Kontradiktion.
+
+K und U sind beide unerfüllbar und eine Kontradiktion, da diese beiden Eigenschaften äquivalent sind. Da beide Formeln somit unabhängig von der Belegung immer falsch ergeben, ist die Aussage K$\, \Leftrightarrow \,$ U wiederum immer richtig, womit die Formel erfüllbar, allgemeingültig und damit eine Tautologie ist. Damit ist die Formel nicht unerfüllbar, keine Kontradiktion, nicht falsifizierbar und nicht kontingent. 
+\subsubsection{} %(d)
+Die Formel kann erfüllbar, falsifizierbar und kontingent sein. Sie kann nicht allgemeingültig, unerfüllbar und damit auch keine Tautologie oder Kontradiktion sein.
+
+Da A allgemeingültig ist, hängt der Wahrheitswert von C ab. Da C kontingent ist, kann die Formel sowohl erfüllt als auch falsifiziert werden. Wenn C durch eine Belegung falsifiziert wird, dann auch die Formel A$\, \Rightarrow \,$C und wenn C erfüllt wird, dann auch die Formel A$\, \Rightarrow \,$C.
+Somit ist die Formel weder allgemeingültig und eine Tautologie noch unerfüllbar und eine Kontradiktion.
+\subsubsection{} %(e)
+Die Formel kann falsifizierbar, unerfüllbar und damit eine Kontradiktion sein. Sie kann nicht erfüllbar, kontingent, allgemeingültig und damit auch keine Tautologie sein.
+
+Da U unerfüllbar ist, wird die Formel immer falsifiziert. Daher ist die Formel falsifizierbar, unerfüllbar und eine Kontradiktion. Deswegen ist sie nicht erfüllbar, kontingent, allgemeingültig und damit auch keine Tautologie.
+\subsubsection{} %(f)
+Die Formel kann erfüllbar, falsifizierbar, kontingent, unerfüllbar und eine Kontradiktion sein. Sie kann nicht allgemeingültig und damit eine Tautologie sein.
+
+Da U unerfüllbar ist, hängt der Wahrheitswert von E ab. Ist E erfüllt, ist die Formel E$\, \Rightarrow \,$U falsifiziert. Wenn E allgemeingültig ist, dann ist die Formel unerfüllbar. Ist E hingegen kontingent, dann ist die Formel auch erfüllbar und ebenso kontingent. Allgemeingültig kann die Formel jedoch auf keinen Fall sein.
+\subsubsection{} %(g)
+Die Formel kann erfüllbar, falsifizierbar, kontingent und allgemeingültig und damit eine Tautologie sein. Sie kann nicht unerfüllbar und eine Kontradiktion sein.
+
+Da E und C beide erfüllbar sind, gibt es mindestens eine Belegung, bei der die Formel erfüllt ist. Wenn E allgemeingültig ist, dann ist auch die Formel allgemeingültig. Wenn E kontingent ist, dann ist die Formel falsifizierbar und damit selber kontingent. 
+Unerfüllbar ist die Formel nicht.
+\section{} %9.3
+\subsection{} %1.
+\begin{tabular}{lr}
+A$\, \Leftrightarrow \,$B & Elimination $\Leftrightarrow$ \\
+$\equiv ($A$\, \Rightarrow \,$B$) \wedge ($B$ \, \Rightarrow \,$A$)$ & Elimination $\Rightarrow$ \\
+$\equiv (\neg$A$\, \vee \,$B$) \wedge (\neg$B$\, \vee \,$A$)$ & KNF \\
+A$\, \Leftrightarrow \,$B & Elimination $\Leftrightarrow$ \\
+$\equiv ($A$\, \wedge \,$B$) \vee (\neg$A$\, \wedge \neg$B$)$ & DNF \\
+A$\, \Leftrightarrow \,$C & Elimination $\Leftrightarrow$ \\
+$\equiv ($A$\, \Rightarrow \,$C$) \wedge ($C$ \, \Rightarrow \,$A$)$ & Elimination $\Rightarrow$ \\
+$\equiv (\neg$A$\, \vee \,$C$) \wedge (\neg$C$\, \vee \,$A$)$ & KNF \\
+A$\, \Leftrightarrow \,$C & Elimination $\Leftrightarrow$ \\
+$\equiv ($A$\, \wedge \,$C$) \vee (\neg$A$\, \wedge \neg$C$)$ & DNF \\
+KNF-Erzeugung: \\
+$($A$\, \Leftrightarrow \,$B$) \Rightarrow ($A$\, \Leftrightarrow \,$C$)$ & Elimination $\Rightarrow$ \\
+$\equiv \neg(($A$\, \Leftrightarrow \,$B$) \wedge \neg($A$\, \Leftrightarrow \,$C$))$ \\
+Ich bearbeite jetzt die beiden Teile der Konjunktion getrennt, \\
+mit dem Ziel, für diese KNFen zu erzeugen:\\
+$($A$\, \Leftrightarrow \,$B$)$ & Einsetzung der KNF \\
+$\equiv (\neg$A$\, \vee \,$B$) \wedge (\neg$B$\, \vee \,$A$)$ & KNF\\
+$\neg($A$\, \Leftrightarrow \,$C$)$ & Einsetzung der DNF \\
+$\equiv \neg(($A$\, \wedge \,$C$) \vee (\neg$A$\, \wedge \neg$C$))$ & de Morgan, Doppelte Negation \\
+$\equiv (\neg$A$\, \vee \neg$C$) \wedge ($A$\, \vee \,$C$)$ & KNF \\
+Die Verknüpfung dieser beiden Teilresultate ergibt: \\
+$\neg(($A$\, \Leftrightarrow \,$B$) \wedge \neg($A$\, \Leftrightarrow \,$C$))$ \\
+$\neg((\neg$A$\, \vee \,$B$) \wedge (\neg$B$\, \vee \,$A$) \wedge (\neg$A$\, \vee \neg$C$) \wedge ($A$\, \vee \,$C$)) = \,$G & KNF \\
+DNF-Erzeugung: \\
+$($A$\, \Leftrightarrow \,$B$) \Rightarrow ($A$\, \Leftrightarrow \,$C$)$ & Elimination $\Rightarrow$ \\
+$\equiv \neg($A$\, \Leftrightarrow \,$B$) \vee ($A$\, \Leftrightarrow \,$C$)$ \\
+Ich bearbeite jetzt die beiden Teile der Disjunktion getrennt,\\ 
+mit dem Ziel, für diese DNFen zu erzeugen:\\
+$\neg($A$\, \Leftrightarrow \,$B$)$ & Einsetzung der KNF \\
+$\equiv \neg((\neg$A$\, \vee \,$B$) \wedge (\neg$B$\, \vee \,$A$))$ & de Morgan, Doppelte Negation \\
+$\equiv ($A$\, \wedge \neg$B$) \vee ($B$\, \wedge \, \neg$A$)$ & DNF \\
+$($A$\, \Leftrightarrow \,$C$)$ & Einsetzung der DNF \\
+$\equiv ($A$\, \wedge \,$C$) \vee (\neg$A$\, \wedge \neg$C$)$ & DNF \\
+Die Verknüpfung dieser beiden Teilresultate ergibt: \\
+$\neg($A$\, \Leftrightarrow \,$B$) \vee ($A$\, \Leftrightarrow \,$C$)$ \\
+$\equiv ($A$\, \wedge \neg$B$) \vee ($B$\, \wedge \, \neg$A$) \vee ($A$\, \wedge \,$C$) \vee (\neg$A$\, \wedge \neg$C$) = \,$F & DNF
+\end{tabular}
+\subsection{} %2.
+\begin{tabular}{c|ccc|ccc}
+ & A & B & C & (A$\, \Leftrightarrow \,$B) & (A$\, \Leftrightarrow \,$C) & ((A$\, \Leftrightarrow \,$B)$\, \Rightarrow \,$(A$\, \Leftrightarrow \,$C)) \\
+\hline
+$\mathcal{A}_{0}$ & 0 & 0 & 0 & 1 & 1 & 1 \\
+$\mathcal{A}_{1}$ & 0 & 0 & 1 & 1 & 0 & 0 \\
+$\mathcal{A}_{2}$ & 0 & 1 & 0 & 0 & 1 & 1 \\
+$\mathcal{A}_{3}$ & 0 & 1 & 1 & 0 & 0 & 1 \\
+$\mathcal{A}_{4}$ & 1 & 0 & 0 & 0 & 0 & 1 \\
+$\mathcal{A}_{5}$ & 1 & 0 & 1 & 0 & 1 & 1 \\
+$\mathcal{A}_{6}$ & 1 & 1 & 0 & 1 & 0 & 0 \\
+$\mathcal{A}_{7}$ & 1 & 1 & 1 & 1 & 1 & 1
+\end{tabular}\\
+\\
+\begin{tabular}{c|ccc|ccccc}
+ & A & B & C & $(\neg$A$\, \vee \,$B$)$ & $(\neg$B$\, \vee \,$A$)$ & $(\neg$A$\, \vee \neg$C$)$ & $($A$\, \vee \,$C$)$ & G \\
+\hline
+$\mathcal{A}_{0}$ & 0 & 0 & 0 & 1 & 1 & 1 & 0 & 1 \\
+$\mathcal{A}_{1}$ & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 0 \\
+$\mathcal{A}_{2}$ & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 \\
+$\mathcal{A}_{3}$ & 0 & 1 & 1 & 1 & 0 & 1 & 1 & 1 \\
+$\mathcal{A}_{4}$ & 1 & 0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+$\mathcal{A}_{5}$ & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 1 \\
+$\mathcal{A}_{6}$ & 1 & 1 & 0 & 1 & 1 & 1 & 1 & 0 \\
+$\mathcal{A}_{7}$ & 1 & 1 & 1 & 1 & 1 & 0 & 1 & 1 
+\end{tabular}\\
+\\
+\begin{tabular}{c|ccc|ccccc}
+ & A & B & C & $($A$\, \wedge \neg$B$)$ & $($B$\, \wedge \, \neg$A$)$ & $($A$\, \wedge \,$C$)$ & $(\neg$A$\, \wedge \neg$C$)$ & F \\
+\hline
+$\mathcal{A}_{0}$ & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 \\
+$\mathcal{A}_{1}$ & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+$\mathcal{A}_{2}$ & 0 & 1 & 0 & 0 & 1 & 0 & 1 & 1 \\
+$\mathcal{A}_{3}$ & 0 & 1 & 1 & 0 & 1 & 0 & 0 & 1 \\
+$\mathcal{A}_{4}$ & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 1 \\
+$\mathcal{A}_{5}$ & 1 & 0 & 1 & 1 & 0 & 1 & 0 & 1 \\
+$\mathcal{A}_{6}$ & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+$\mathcal{A}_{7}$ & 1 & 1 & 1 & 0 & 0 & 1 & 0 & 1 
+\end{tabular}\\
+Der Wahrheitswert in den drei jeweils letzten Spalten ist identisch. Entsprechend sind die drei Formeln äquivalent.
+\subsection{} %3.
+\end{document}

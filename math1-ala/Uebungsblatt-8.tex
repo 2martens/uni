@@ -1,0 +1,297 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Hausaufgaben zum 13. Juni}
+\maketitle
+\section{} %1
+\subsection{} %a
+\begin{alignat*}{2}
+\intertext{Anwenden der Limes-Version des Wurzelkriteriums}
+\lim\limits_{i \rightarrow \infty} \sqrt[i]{\left| \frac{i}{2^{i}}\right|} &=& \lim\limits_{i \rightarrow \infty} \frac{\sqrt[i]{\left| i \right|}}{\sqrt[i]{\left| 2^{i}\right|}} \\
+&=& \lim\limits_{i \rightarrow \infty} \frac{\sqrt[i]{|i|}}{2} \\
+\intertext{Anwenden, dass $\sqrt[i]{|i|} \rightarrow 1$ für $i \rightarrow \infty$ gilt}
+&=& \frac{1}{2} < 1 \Rightarrow \text{ Konvergenz}
+\end{alignat*}
+\subsection{} %b
+\begin{alignat*}{2}
+\intertext{Anwenden der Limes-Version des Quotientenkriteriums}
+\lim\limits_{i \rightarrow \infty}  \left|\frac{\frac{(-1)^{i+1} \cdot (i+1)!}{(i+1)^{i+1}}}{\frac{(-1)^{i} \cdot i!}{i^{i}}} \right| &=& \lim\limits_{i \rightarrow \infty} \left| \frac{(-1)^{i+1} \cdot (i+1)! \cdot i^{i}}{(i+1)^{i+1} \cdot (-1)^{i} \cdot i!}\right| \\
+&=& \lim\limits_{i \rightarrow \infty} \left| \frac{(-1)^{i+1} \cdot (i+1)! \cdot i^{i}}{(-1)^{i} \cdot i! \cdot (i+1)^{i+1}}\right| \\
+\intertext{Kürzen}
+&=& \lim\limits_{i \rightarrow \infty} \left| \frac{(-1) \cdot (i+1) \cdot i^{i}}{(i+1)^{i+1}}\right|  \\
+\intertext{Kürzen}
+&=& \lim\limits_{i \rightarrow \infty} \left| \frac{(-1) \cdot i^{i}}{(i+1)^{i}}\right| \\
+\intertext{Ausklammern von $i^{i}$ im Nenner, Nullfolgen werden durch $...$ symbolisiert}
+&=& \lim\limits_{i \rightarrow \infty} \left| \frac{(-1) \cdot i^{i}}{(1 + ...) \cdot i^{i}}\right| \\
+&=& \lim\limits_{i \rightarrow \infty} \left| \frac{-1}{(1 + ...)}\right| \\
+&=& \left|\frac{-1}{1}\right| = 1 \Rightarrow \text{ Keine Aussage möglich}
+\end{alignat*}
+\subsection{} %c
+\subsubsection{} %i
+\begin{alignat*}{2}
+\intertext{Es sei $x \in \mathbb{R}$ eine beliebig fest gewählte Zahl.}
+\lim\limits_{i \rightarrow \infty} \left|\frac{(i+1)^{2}2^{i+1}x^{i+1}}{i^{2}2^{i}x^{i}} \right| &=& \lim\limits_{i \rightarrow \infty} \left|\frac{(i+1)^{2} \cdot 2x}{i^{2}} \right| \\
+&=& \lim\limits_{i \rightarrow \infty} \left|\frac{(i+1)^{2}}{i^{2}} \cdot 2x \right| \\
+&=& \lim\limits_{i \rightarrow \infty} \left(\left|\frac{(i+1)^{2}}{i^{2}}\right| \cdot |2x| \right) \\
+\intertext{Anwenden, dass $x$ fest gewählt ist}
+&=& 2|x| \cdot \lim\limits_{i \rightarrow \infty} \left|\frac{(i+1)^{2}}{i^{2}}\right| \\
+&=& 2|x| \cdot \lim\limits_{i \rightarrow \infty} \left|\frac{i^{2} + 2i + 1}{i^{2}}\right| \\
+\intertext{Ausklammern von $i^{2}$ im Zähler und Nenner, anschließend kürzen}
+&=& 2|x| \cdot \lim\limits_{i \rightarrow \infty} \left|\frac{1 + \frac{2}{i} + \frac{1}{i^{2}}}{1}\right| \\
+&=& 2|x| \cdot 1 = 2|x|
+\end{alignat*}
+\begin{alignat*}{2}
+2|x| < 1 &\Longleftrightarrow & |x| < \frac{1}{2} \\
+2|x| > 1 &\Longleftrightarrow & |x| > \frac{1}{2}
+\end{alignat*}
+Demzufolge liegt Konvergenz vor, falls $|x| < \frac{1}{2}$ gilt; Divergenz liegt vor, falls $|x| > \frac{1}{2}$ gilt. Also gilt $R = \frac{1}{2}$.
+\subsubsection{} %ii
+\begin{alignat*}{2}
+\intertext{Es sei $x \in \mathbb{R}$ eine beliebig fest gewählte Zahl.}
+\lim\limits_{i \rightarrow \infty} \sqrt[i]{\left| i^{2} \cdot 2^{i} \cdot x^{i} \right|} &=& \lim\limits_{i \rightarrow \infty} \left( \sqrt[i]{\left| i^{2} \right|} \cdot \sqrt[i]{\left| 2^{i} \right|} \cdot \sqrt[i]{\left| x^{i} \right|} \right) \\
+&=& \lim\limits_{i \rightarrow \infty} \left( \sqrt[i]{\left| i^{2} \right|} \cdot |2| \cdot |x| \right) \\
+\intertext{Anwenden, dass $x$ fest gewählt ist}
+&=& 2 \cdot |x| \cdot \lim\limits_{i \rightarrow \infty} \sqrt[i]{\left| i^{2} \right|} \\
+&=& 2 \cdot |x| \cdot \lim\limits_{i \rightarrow \infty} \sqrt[i]{|i|} \cdot \lim\limits_{i \rightarrow \infty} \sqrt[i]{|i|} \\
+\intertext{Anwenden, dass $\sqrt[i]{|i|} \rightarrow 1$ für $i \rightarrow \infty$ gilt}
+&=& 2 \cdot |x| \cdot 1 \cdot 1 = 2|x|
+\end{alignat*}
+\begin{alignat*}{2}
+2|x| < 1 &\Longleftrightarrow & |x| < \frac{1}{2} \\
+2|x| > 1 &\Longleftrightarrow & |x| > \frac{1}{2}
+\end{alignat*}
+Demzufolge liegt Konvergenz vor, falls $|x| < \frac{1}{2}$ gilt; Divergenz liegt vor, falls $|x| > \frac{1}{2}$ gilt. Also gilt $R = \frac{1}{2}$.
+\section{} %2
+\setcounter{subsubsection}{0}
+\subsubsection{} %i
+\begin{alignat*}{2}
+\lim\limits_{i \rightarrow \infty} \left|\frac{\frac{-1}{2^{i+2}}}{\frac{-1}{2^{i+1}}} \right| &=& \lim\limits_{i \rightarrow \infty} \left|\frac{(-1) \cdot 2^{i+1}}{2^{i+2} \cdot (-1)} \right| \\
+\intertext{Kürzen}
+&=& \lim\limits_{i \rightarrow \infty} \left|\frac{1}{2} \right| \\
+&=& \frac{1}{2} < 1 \Rightarrow \text{ Konvergenz}
+\end{alignat*}
+\begin{alignat*}{2}
+\intertext{Berechnen des Grenzwertes}
+\sum\limits_{i=1}^{\infty} \frac{-1}{2^{i+1}} &=& - \sum\limits_{i=1}^{\infty} \frac{1}{2^{i+1}} \\
+&=& - \sum\limits_{i=1}^{\infty} \frac{1^{i+1}}{2^{i+1}} \\
+&=& - \sum\limits_{i=1}^{\infty} \left(\frac{1}{2}\right)^{i+1} \\
+&=& - \sum\limits_{i=2}^{\infty} \left(\frac{1}{2}\right)^{i} \\
+&=& -\left( \sum\limits_{i=0}^{\infty} \left(\frac{1}{2}\right)^{i} - \left(\frac{1}{2}\right)^{0} - \left(\frac{1}{2}\right)^{1} \right) \\
+&=& -\left( \frac{1}{1 - \frac{1}{2}} - 1 - \frac{1}{2} \right) \\
+&=& -\left( 2 - 1 - \frac{1}{2} \right) \\
+&=& -\left( \frac{1}{2} \right)
+\end{alignat*}
+\subsubsection{} %ii
+\begin{alignat*}{2}
+\sum\limits_{i=1}^{\infty} \frac{(-1)^{i} \cdot i}{2(i+1)} &=& \sum\limits_{i=0}^{\infty} \frac{(-1)^{i} \cdot i}{2(i+1)} - \frac{(-1)^{0} \cdot 0}{2(0+1)} \\
+&=& \sum\limits_{i=0}^{\infty} \frac{(-1)^{i} \cdot i}{2(i+1)} - 0 \\
+&=& \sum\limits_{i=0}^{\infty} (-1)^{i} \cdot \frac{i}{2(i+1)} \\
+\intertext{Die Glieder der Reihe werden betragsmäßig immer größer und bilden daher keine Nullfolge. Deswegen divergiert die Reihe.}
+a_{0} &=& 0 \\
+a_{1} &=& \frac{1}{4} \\
+a_{2} &=& \frac{1}{3} = \frac{8}{24} \\
+a_{3} &=& \frac{3}{8} = \frac{9}{24} = \frac{15}{40}\\
+a_{4} &=& \frac{2}{5} = \frac{16}{40}
+\end{alignat*}
+\subsubsection{} %iii
+\begin{alignat*}{2}
+\sum\limits_{i=1}^{\infty} \frac{1}{2(i+1)} &=& \frac{1}{2} \cdot \sum\limits_{i=2}^{\infty} \frac{1}{i} \\
+&=& \frac{1}{2} \cdot \left( \sum\limits_{i=1}^{\infty} \frac{1}{i} - 1\right)
+\intertext{Die Harmonische Reihe divergiert. Damit divergiert auch jede Reihe, die durch Hinzufügen, Weglassen oder Abändern endlich vieler Glieder entsteht.
+Daher divergiert diese Reihe.}
+\end{alignat*}
+\subsubsection{} %iv
+\begin{alignat*}{2}
+\sum\limits_{i=1}^{\infty} \frac{(-1)^{i+1}}{2^{i}} &=& \sum\limits_{i=0}^{\infty} \frac{(-1)^{i+1}}{2^{i}} - \frac{(-1)^{0+1}}{2^{0}} \\
+&=& \sum\limits_{i=0}^{\infty} \frac{(-1)^{i+1}}{2^{i}} - \frac{-1}{1} \\
+&=& \sum\limits_{i=0}^{\infty} \frac{(-1)^{i+1}}{2^{i}} + 1
+\end{alignat*}
+\begin{alignat*}{2}
+\lim\limits_{i \rightarrow \infty} \sqrt[i]{\left|\frac{(-1)^{i+1}}{2^{i}} \right|} &=& \lim\limits_{i \rightarrow \infty} \frac{\sqrt[i]{\left|(-1)^{i+1}\right|}}{\sqrt[i]{|2^{i}|}} \\
+&=& \lim\limits_{i \rightarrow \infty} \frac{\sqrt[i]{|(-1)^{i}| \cdot |(-1)|}}{2} \\
+&=& \lim\limits_{i \rightarrow \infty} \frac{\sqrt[i]{|(-1)^{i}|} \cdot \sqrt[i]{|-1|}}{2} \\
+&=& \frac{1}{2} < 1 \Rightarrow \text{ Konvergenz}
+\end{alignat*}
+\begin{alignat*}{2}
+\sum\limits_{i=0}^{\infty} \frac{(-1)^{i+1}}{2^{i}} + 1 &=& \sum\limits_{i=0}^{\infty} (-1) \cdot \frac{(-1)^{i}}{2^{i}} + 1 \\
+&=& \sum\limits_{i=0}^{\infty} (-1) \cdot \left(-\frac{1}{2}\right)^{i} + 1 \\
+&=& -\sum\limits_{i=0}^{\infty} \left(-\frac{1}{2}\right)^{i} + 1 \\
+&=& -\left(\frac{1}{1 + \frac{1}{2}} \right) + 1 \\
+&=& -\left(\frac{1}{\frac{3}{2}} \right) + 1 \\
+&=& -\frac{2}{3} + 1 \\
+&=& \frac{1}{3}
+\end{alignat*}
+\subsubsection{} %v
+\begin{alignat*}{2}
+\sum\limits_{i=0}^{\infty} \frac{(-1)^{i}}{2i+1} &=& \sum\limits_{i=0}^{\infty} (-1)^{i} \cdot \frac{1}{2i+1} \\
+\intertext{Nach dem Leibnitz-Kriterium konvergiert diese Reihe, da die Reihenglieder $a_{i} = \frac{1}{2i+1}$ eine monotone Nullfolge bilden.}
+s_{0} &=& 1 \\
+s_{1} &=& 1 - \frac{1}{3} = \frac{2}{3}\\
+s_{2} &=& 1 - \frac{1}{3} + \frac{1}{5} = \frac{13}{15} \approx 0.867 \\
+s_{3} &=& \frac{13}{15} - \frac{1}{7} = \frac{91}{105} - \frac{15}{105} = \frac{76}{105} \approx 0.724
+\intertext{Der Grenzwert könnte $\approx 0.7853$ sein.}
+\end{alignat*}
+\subsubsection{} %vi
+\begin{alignat*}{2}
+\sum\limits_{i=1}^{\infty} \frac{(-1)^{i}}{2i} &=& \sum\limits_{i=1}^{\infty} (-1)^{i} \cdot \frac{1}{2i} \\
+\intertext{Nach dem Leibnitz-Kriterium ist diese Reihe konvergent.}
+s_{0} &=& -\frac{1}{2} \\
+s_{1} &=& -\frac{1}{2} + \frac{1}{4} =  -\frac{1}{4} \\
+s_{2} &=& -\frac{1}{4} - \frac{1}{6} = -\frac{10}{24} = -\frac{5}{12} \approx -0.4166667 \\
+s_{3} &=& -\frac{5}{12} + \frac{1}{8} = -\frac{40}{96} + \frac{12}{96} = -\frac{28}{96} \approx -0.2916667
+\intertext{Der Grenzwert könnte $\approx -0.3541667$ sein.}
+\end{alignat*}
+\section{} %3
+\subsection{} %a
+\begin{tikzpicture}[>=stealth]
+\begin{axis}[
+	ymin=0,ymax=10,
+	x=1cm,
+	y=1cm,
+	axis x line=middle,
+	axis y line=middle,
+	axis line style=->,
+	xlabel={$x$},
+	ylabel={$f(x)$},
+	xmin=0,xmax=10
+	]
+
+\addplot[no marks, black, -] expression[domain=0:10,samples=100]{1/x} node[pos=0.65,anchor=north]{};
+\addplot[no marks, black, -] expression[domain=1:2,samples]{1} node[pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:1,1) -- (axis cs:1,0) node [pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:2,1) -- (axis cs:2,0) node [pos=0.65,anchor=north]{};
+\addplot[no marks, black, -] expression[domain=2:3,samples]{1/2} node[pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:3,0.5) -- (axis cs:3,0) node [pos=0.65,anchor=north]{};
+\addplot[no marks, black, -] expression[domain=3:4,samples]{1/3} node[pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:4,0.3333333333333) -- (axis cs:4,0) node [pos=0.65,anchor=north]{};
+\addplot[no marks, black, -] expression[domain=4:5,samples]{1/4} node[pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:5,0.25) -- (axis cs:5,0) node [pos=0.65,anchor=north]{};
+\addplot[no marks, black, -] expression[domain=5:6,samples]{1/5} node[pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:6,0.2) -- (axis cs:6,0) node [pos=0.65,anchor=north]{};
+\addplot[no marks, black, -] expression[domain=6:7,samples]{1/6} node[pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:7,0.1666666667) -- (axis cs:7,0) node [pos=0.65,anchor=north]{};
+\addplot[no marks, black, -] expression[domain=7:8,samples]{1/7} node[pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:8,0.142857142857) -- (axis cs:8,0) node [pos=0.65,anchor=north]{};
+\addplot[no marks, black, -] expression[domain=8:9,samples]{1/8} node[pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:9,0.125) -- (axis cs:9,0) node [pos=0.65,anchor=north]{};
+\addplot[no marks, black, -] expression[domain=9:10,samples]{1/9} node[pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:10,0.111111111) -- (axis cs:10,0) node [pos=0.65,anchor=north]{};
+
+\node at (axis cs: 1.5,1.25) {1};
+\node at (axis cs: 2.5,0.75) {$\frac{1}{2}$};
+\node at (axis cs: 3.5,0.5833333) {$\frac{1}{3}$};
+\node at (axis cs: 4.5,0.5) {$\frac{1}{4}$};
+\node at (axis cs: 5.5,0.45) {$\frac{1}{5}$};
+\node at (axis cs: 6.5,0.4166667) {$\frac{1}{6}$};
+\node at (axis cs: 7.5,0.392857142857) {$\frac{1}{7}$};
+\node at (axis cs: 8.5,0.375) {$\frac{1}{8}$};
+\node at (axis cs: 9.5,0.36111111) {$\frac{1}{9}$};
+\end{axis}
+\end{tikzpicture}\\
+Anhand der Skizze erkennt man:\\
+\begin{alignat*}{3}
+H_{n} &\geq & \int\limits_{1}^{n+1} \frac{1}{x}\,dx &=& [\ln x]_{1}^{n+1} \\
+&\geq & &=& \ln (n+1) - \ln 1 \\
+&\geq & &=& \ln (n+1) \\
+\end{alignat*}
+\subsection{} %b
+Der Logarithmus $\ln$ ist divergent. Da die harmonische Reihe nach entsprechender Formel größer oder gleich dem natürlichen Logarithmus ist, wächst somit die harmonische Reihe ebenfalls über alle Schranken.
+\section{} %4
+\subsection{} %a
+Aus Aufgabe 3 ist bekannt, dass Folgendes gilt:\\
+\begin{alignat*}{2}
+\ln(n+1) &\leq & H_{n} \; (n = 1,2,...)\\
+\intertext{Da der natürliche Logarithmus monoton wachsend ist, gilt somit auch dies:}
+\ln(n) &\leq & H_{n} \; (n = 1,2,...)
+\end{alignat*}
+\begin{tikzpicture}[>=stealth]
+\begin{axis}[
+	ymin=0,ymax=10,
+	x=1cm,
+	y=1cm,
+	axis x line=middle,
+	axis y line=middle,
+	axis line style=->,
+	xlabel={$x$},
+	ylabel={$f(x)$},
+	xmin=0,xmax=9
+	]
+
+\addplot[no marks, black, -] expression[domain=0:9,samples=100]{1/x} node[pos=0.65,anchor=north]{};
+\addplot[no marks, black, -] expression[domain=1:2,samples=100]{1/2} node[pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:1,0.5) -- (axis cs:1,0) node [pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:2,0.5) -- (axis cs:2,0) node [pos=0.65,anchor=north]{};
+\addplot[no marks, black, -] expression[domain=2:3,samples=100]{1/3} node[pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:3,0.3333333333333) -- (axis cs:3,0) node [pos=0.65,anchor=north]{};
+\addplot[no marks, black, -] expression[domain=3:4,samples=100]{1/4} node[pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:4,0.25) -- (axis cs:4,0) node [pos=0.65,anchor=north]{};
+\addplot[no marks, black, -] expression[domain=4:5,samples=100]{1/5} node[pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:5,0.2) -- (axis cs:5,0) node [pos=0.65,anchor=north]{};
+\addplot[no marks, black, -] expression[domain=5:6,samples=100]{1/6} node[pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:6,0.1666666667) -- (axis cs:6,0) node [pos=0.65,anchor=north]{};
+\addplot[no marks, black, -] expression[domain=6:7,samples=100]{1/7} node[pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:7,0.142857142857) -- (axis cs:7,0) node [pos=0.65,anchor=north]{};
+\addplot[no marks, black, -] expression[domain=7:8,samples=100]{1/8} node[pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:8,0.125) -- (axis cs:8,0) node [pos=0.65,anchor=north]{};
+\addplot[no marks, black, -] expression[domain=8:9,samples=100]{1/9} node[pos=0.65,anchor=north]{};
+\draw[>=stealth] (axis cs:9,0.111111111) -- (axis cs:9,0) node [pos=0.65,anchor=north]{};
+%\addplot[no marks, black, -] expression[domain=9:10,samples=100]{1/10} node[pos=0.65,anchor=north]{};
+%\draw[>=stealth] (axis cs:10,0.1) -- (axis cs:10,0) node [pos=0.65,anchor=north]{};
+
+\node at (axis cs: 1.5,0.75) {$\frac{1}{2}$};
+\node at (axis cs: 2.5,0.5833333) {$\frac{1}{3}$};
+\node at (axis cs: 3.5,0.5) {$\frac{1}{4}$};
+\node at (axis cs: 4.5,0.45) {$\frac{1}{5}$};
+\node at (axis cs: 5.5,0.4166667) {$\frac{1}{6}$};
+\node at (axis cs: 6.5,0.392857142857) {$\frac{1}{7}$};
+\node at (axis cs: 7.5,0.375) {$\frac{1}{8}$};
+\node at (axis cs: 8.5,0.36111111) {$\frac{1}{9}$};
+%\node at (axis cs: 9.5,0.35) {$\frac{1}{10}$};
+\end{axis}
+\end{tikzpicture}\\
+Anhand der Skizze erkennt man:\\
+\begin{alignat*}{3}
+H_{n} - 1 &\leq & \int\limits_{1}^{n} \frac{1}{x}\,dx &=& [\ln x]_{1}^{n} \\
+&\leq & &=& \ln (n) - \ln 1 \\
+&\leq & &=& \ln (n)
+\end{alignat*}
+\begin{alignat*}{3}
+\intertext{Daraus ergibt sich:}
+H_{n} - 1 &\leq & \ln(n) &\leq & H_{n}
+\end{alignat*}
+\subsection{} %b
+\begin{alignat*}{3}
+\intertext{Aus a) ergibt sich:}
+\lim\limits_{n \rightarrow \infty} \frac{H_{n}-1}{H_{n}} &\leq & \lim\limits_{n \rightarrow \infty} \frac{\ln(n)}{H_{n}} &\leq & \lim\limits_{n \rightarrow \infty} \frac{H_{n}}{H_{n}} \\
+\lim\limits_{n \rightarrow \infty} \frac{H_{n}}{H_{n}} - \frac{1}{H_{n}} &\leq & \lim\limits_{n \rightarrow \infty} \frac{\ln(n)}{H_{n}} &\leq & 1 \\
+1 - 0 &\leq & \lim\limits_{n \rightarrow \infty} \frac{\ln(n)}{H_{n}} &\leq & 1 \\
+1 &\leq & \lim\limits_{n \rightarrow \infty} \frac{\ln(n)}{H_{n}} &\leq & 1
+\intertext{Nach dem Einschließungssatz muss der Grenzwert von $\lim\limits_{n \rightarrow \infty} \frac{\ln(n)}{H_{n}}$ $1$ sein.}
+\end{alignat*}
+\end{document}

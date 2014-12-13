@@ -1,0 +1,148 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{stmaryrd}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pagenumbering{arabic}
+\def\thesection{10.\arabic{section})}
+\def\thesubsection{\arabic{subsection}.}
+\def\thesubsubsection{(\alph{subsubsection})}
+\setcounter{section}{2}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\addtolength{\parskip}{\baselineskip}
+
+\begin{document}
+\author{Jim Martens}
+\title{Hausaufgaben zum 11. Juni}
+\maketitle
+
+\section{} %10.3
+\subsection{} %1.
+\subsubsection{} %a
+Es ist zu zeigen, dass F aus der angegebenen Formelmenge M folgt. Nach Definition 5.1 folgt F genau dann aus M, wenn alle Modelle von M auch Modelle von F sind. Nach Satz 5.11 sind die Modelle einer Formelmenge identisch mit den Modellen einer Konjunktion aller Mengenglieder.\\
+Daraus ergibt sich, dass eine Belegung diese Formel erfüllen muss, um ein Modell von M zu sein:\\
+$G = ((B \Rightarrow D) \Rightarrow (A \vee C)) \wedge ((A \vee C) \Rightarrow E) \wedge (B \Rightarrow (D \vee E)) \wedge (E \Rightarrow F)$\\
+Daraus folgt wiederum, dass eine Belegung M nur erfüllt, wenn $(E \Rightarrow F)$ erfüllt ist. Diese Teilformel ist wiederum erfüllt, wenn E falsch oder F wahr ist. 
+M kann nur erfüllt sein, wenn E wahr ist, denn sonst müsste auch $(A \vee C)$ und damit $(B \Rightarrow D)$ falsch sein. Letzteres würde voraussetzen, dass B wahr und D falsch sind. Daraus würde folgen, dass $(B \Rightarrow (D \vee E))$ falsch ergäbe, da hier nun B wahr und sowohl D als auch E falsch wären. Damit wiederum wäre die Formel G nicht erfüllt.\\
+Daraus folgt also, dass E und damit auch F wahr sein müssen, damit eine Belegung ein Modell von M sein kann. Daher ist immer wahr, wenn eine Belegung ein Modell von M ist, womit diese Belegung auch ein Modell von F ist.
+\subsubsection{} %b
+In diesem Fall kann E falsch sein. Damit müssten auch $(A \vee C)$ und $\neg(B \Rightarrow D)$ falsch sein. $(B \Rightarrow D)$ wiederum müsste wahr sein, was durch den Wahrheitswert falsch für B erreicht werden kann. Damit kann eine Belegung M erfüllen, wenn E falsch ist. Wenn E falsch ist, dann muss F nicht wahr sein, damit $(E \Rightarrow F)$ wahr ist, womit nicht alle Modelle von M auch Modelle von F sind.
+\subsection{} %2.
+F folgt genau dann aus M, wenn jede Belegung, die M wahr macht, auch F wahr macht. Damit folgt F genau dann aus M, wenn jede Belegung, die alle Formeln aus M wahr macht, $\neg F$ falsch macht. Daher kann F nicht aus $M \cup \{\neg F\}$ folgen, da jede Belegung, die diese Menge erfüllt, F falsifiziert. Wenn F nicht aus $M \cup \{\neg F\}$, dann darf F auch nicht aus M folgen. Dies ist nur möglich, wenn M unerfüllbar ist.
+\section{} %10.4
+\subsection{} %1.
+\setcounter{subsubsection}{0}
+\subsubsection{} %a
+\begin{alignat*}{2}
+\text{sub}_{1a}(A) &=& (A \Rightarrow \neg B) \\
+\text{sub}_{1a}(B) &=& (D \wedge A) \\
+\text{sub}_{1a}(C) &=& (C \vee D) \\
+\intertext{Für alle anderen Aussagensymbole $A_{i}$ sei $sub_{1a}(A_{i}) = A_{i}$}
+sub_{1a}(F_{a}) &=& (((A \Rightarrow \neg B) \Rightarrow \neg(D \wedge A)) \wedge (C \vee D)) = G_{a}
+\end{alignat*}
+\subsubsection{} %b
+\begin{alignat*}{2}
+\text{sub}_{1b}(A) &=& (\neg(B \vee C) \wedge E) \\
+\text{sub}_{1b}(D) &=& \neg(B \vee C) \\
+\intertext{Für alle anderen Aussagensymbole $A_{i}$ sei $sub_{1b}(A_{i}) = A_{i}$}
+sub_{1b}(F_{b}) &=& ((\neg(B \vee C) \wedge E) \Leftrightarrow \neg(B \vee C)) \\ 
+&=& ((\neg(B \vee C) \wedge E) \Leftrightarrow \neg(B \vee C)) = sub_{1b}(G_{b})
+\end{alignat*}
+\subsection{} %2.
+\subsubsection{} %a
+$R_{a} = \frac{\neg A}{A \Rightarrow B}$\\
+\begin{tabular}{c|cc|cc}
+ & F & G & $\neg$F & $(F \Rightarrow G)$ \\
+ \hline
+$\mathcal{A}_{0}$ & 0 & 0 & 1 & 1 \\
+$\mathcal{A}_{1}$ & 0 & 1 & 1 & 1 \\
+$\mathcal{A}_{2}$ & 1 & 0 & 0 & 0 \\
+$\mathcal{A}_{3}$ & 1 & 1 & 0 & 1
+\end{tabular}\\
+Für alle Belegungen mit $\mathcal{A}(\neg F) = 1$ gilt auch $\mathcal{A}((F \Rightarrow G)) = 1$.\\
+Falls M eine Formelmenge ist und $M \vdash_{R_{a}} G$, dann $M \models G$. \\
+Daher ist die Regel korrekt.
+\subsubsection{} %b
+$R_{b} = \frac{A \Leftrightarrow B}{A}$\\
+\begin{tabular}{c|cc|c}
+ & F & G & $(F \Leftrightarrow G)$ \\
+ \hline
+$\mathcal{A}_{0}$ & 0 & 0 & 1 \\
+$\mathcal{A}_{1}$ & 0 & 1 & 0 \\
+$\mathcal{A}_{2}$ & 1 & 0 & 0 \\
+$\mathcal{A}_{3}$ & 1 & 1 & 1
+\end{tabular}\\
+Für die Belegung $\mathcal{A}_{0}$ mit $\mathcal{A}((F \Leftrightarrow G)) = 1$ gilt nicht $\mathcal{A}(F) = 1$. Demzufolge ist nicht jedes Modell von $(F \Leftrightarrow G)$ auch eines von $F$. Daher ist die Regel nicht korrekt.
+\subsubsection{} %c
+$R_{c} = \frac{A \vee B, B \vee C}{A \vee C}$\\
+\begin{tabular}{c|ccc|ccc}
+ & F & G & H & $(F \vee G)$ & $(G \vee H)$ & $(F \vee H)$ \\
+ \hline
+$\mathcal{A}_{0}$ & 0 & 0 & 0 & 0 & 0 & 0\\
+$\mathcal{A}_{1}$ & 0 & 0 & 1 & 0 & 1 & 1\\
+$\mathcal{A}_{2}$ & 0 & 1 & 0 & 1 & 1 & 0\\
+$\mathcal{A}_{3}$ & 0 & 1 & 1 & 1 & 1 & 1\\
+$\mathcal{A}_{4}$ & 1 & 0 & 0 & 1 & 0 & 1\\
+$\mathcal{A}_{5}$ & 1 & 0 & 1 & 1 & 1 & 1\\
+$\mathcal{A}_{6}$ & 1 & 1 & 0 & 1 & 1 & 1\\
+$\mathcal{A}_{7}$ & 1 & 1 & 1 & 1 & 1 & 1\\
+\end{tabular}\\
+Für die Belegung $\mathcal{A}_{2}$ mit $\mathcal{A}((F \vee G)) = 1$ und $\mathcal{A}((G \vee H)) = 1$ gilt nicht $\mathcal{A}((F \vee H)) = 1$.\\
+Demzufolge erfüllt nicht jede Belegung, die $(F \vee G)$ und $(G \vee H)$ erfüllt, auch $(F \vee H)$. Daher ist die Regel nicht korrekt.
+\subsection{} %3.
+\def\thesubsubsection{(\arabic{subsubsection})}
+\subsubsection{} %1
+Annahme aus M
+\subsubsection{} %2
+Axiom $H_{6b}$ \\
+$sub_{2}(A) = (G \Rightarrow H)$ \\
+$sub_{2}(B) = (H \Rightarrow F)$
+\subsubsection{} %3
+Modus ponens\\
+$sub_{3}(A) = (G \Rightarrow H) \wedge (H \Rightarrow F)$ \\
+$sub_{3}(B) = (H \Rightarrow F)$
+\subsubsection{} %4
+Axiom $H_{1}$ \\
+$sub_{4}(A) = (H \Rightarrow F)$\\
+$sub_{4}(B) = G$
+\subsubsection{} %5
+Modus ponens\\
+$sub_{5}(A) = (H \Rightarrow F)$\\
+$sub_{5}(B) = (G \Rightarrow (H \Rightarrow F))$
+\subsubsection{} %6
+Axiom $H_{6a}$\\
+$sub_{6}(A) = (G \Rightarrow H)$\\
+$sub_{6}(B) = (H \Rightarrow F)$
+\subsubsection{} %7
+Modus ponens\\
+$sub_{7}(A) = (G \Rightarrow (H \Rightarrow F))$ \\
+$sub_{7}(B) = (G \Rightarrow H)$
+\subsubsection{} %8
+Axiom $H_{2}$\\
+$sub_{8}(A) = G$\\
+$sub_{8}(B) = H$\\
+$sub_{8}(C) = F$
+\subsubsection{} %9
+Modus ponens\\
+$sub_{9}(A) = (G \Rightarrow H)$\\
+$sub_{9}(B) = ((G \Rightarrow (H \Rightarrow F)) \Rightarrow (G \Rightarrow F))$
+\subsubsection{} %10
+Modus ponens\\
+$sub_{10}(A) = (G \Rightarrow (H \Rightarrow F))$\\
+$sub_{10}(B) = (G \Rightarrow F)$
+\end{document}

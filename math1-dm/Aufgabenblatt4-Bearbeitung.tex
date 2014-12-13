@@ -1,0 +1,185 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\arabic{subsubsection})}
+
+\begin{document}
+\author{Jim Martens}
+\title{Hausaufgaben zum 15./16. November}
+\maketitle
+\section{} %1
+\subsection{} %a
+Wie viele Abbildungen $g: X \rightarrow Y$ gibt es?\\
+Es gibt $7^{5}$ mögliche Abbildungen. Da die Belegung egal ist und jedes $x \in X$ sieben $y \in Y$ zur Auswahl hat, ergibt sich $7 \cdot 7 \cdot 7 \cdot 7 \cdot 7 = 7^{5}=16807$.\\\\
+Wie viele davon sind injektiv?\\
+Es sind $7 \cdot 6 \cdot 5 \cdot 4 \cdot 3=\frac{7!}{(7-5)!}=\frac{7!}{2!}=2520$ Abbildungen, weil zwei unterschiedliche Elemente $x \in X$ auf zwei unterschiedliche $y \in Y$ abbilden müssen. Das erste $x$ kann allen sieben $y$ zugeordnet werden. Das zweite $x$ nur noch sechs. Das dritte $x$ kann fünf $y$ zugeordnet werden, das vierte $x$ kann vier $y$ zugeordnet werden und das fünfte $x$ kann nur noch drei $y$ zugeordnet werden.
+\subsection{} %b
+Lotto funktioniert nach dem Prinzip Ziehen ohne Zurücklegen, ohne Beachtung der Reihenfolge. 
+Das entspricht $\binom{n}{k}$. In diesem Fall gilt $n=49$ und $k=6$. Es ergibt sich also: $\binom{49}{6}$. Dies entspricht dem Ergebnis $13983816$.
+Es gibt also $13983816$ verschiedene Tipps beim Lotto.
+\subsection{} %c
+Es sei die Menge $M$ mit $|M| = 1000$ und $T$ die Anzahl der Teilmengen mit mindestens $997$ Elementen. Wie viele Teilmengen mit mindestens $997$ Elementen besitzt $M$?\\
+Zu den Teilmengen gehört auf jeden Fall die Menge $M$ selber, da diese mehr als $997$ Elemente hat. Die restliche Anzahl an Teilmengen lässt sich mithilfe der Binomialkoeffizienten $\binom{n}{k}$ lösen.
+
+In diesem Fall gilt $n=1000$ und $k_{1}=997,k_{2}=998,k_{3}=999$. Daraus ergibt sich folgende Rechnung:
+
+\begin{alignat}{2}
+&\; T &=& \binom{1000}{997} + \binom{1000}{998} + \binom{1000}{999} + 1 \\
+\Leftrightarrow &\; T &=& 166167000 + 499500 + 1000 + 1 \\
+\Leftrightarrow &\; T &=& 166667501
+\end{alignat}
+$M$ besitzt $166667501$ Teilmengen mit mindestens $997$ Elementen.
+\section{} %2
+\subsection{} %a
+Zur Lösung der Aufgabe wird der Multinomialsatz angewendet. 
+
+Wie lautet der Koeffizient von $x^{5}y^{11}$ in $(x+y)^{16}$?
+
+\begin{alignat}{2}
+&\; \binom{16}{5,11} &=& \frac{16!}{5! \cdot 11!} \\
+\intertext{Teilen durch $5!$}
+\Leftrightarrow &\; \binom{16}{5,11} &=& \frac{6 \cdot 7 \cdot 8 \cdot 9 \cdot 10 \cdot 11 \cdot 12 \cdot 13 \cdot 14 \cdot 15 \cdot 16}{11!} \\
+\intertext{Teilen durch $11!$}
+\Leftrightarrow &\; \binom{16}{5,11} &=& \frac{12 \cdot 13 \cdot 14 \cdot 15 \cdot 16}{1 \cdot 2 \cdot 3 \cdot 4 \cdot 5} \\
+\intertext{Kürzen von 14 mit 2, 12 mit 3, 16 mit 4 und 15 mit 5}
+\Leftrightarrow &\; \binom{16}{5,11} &=& 4 \cdot 13 \cdot 7 \cdot 3 \cdot 4 \\
+\Leftrightarrow &\; \binom{16}{5,11} &=& 4368
+\end{alignat}
+Der Koeffizient von $x^{5}y^{11}$ in $(x+y)^{16}$ lautet $4368$.
+
+Wie lautet der Koeffizient von $x^{3}y^{5}z^{2}$ in $(x+y+z)^{10}$?
+
+\begin{alignat}{2}
+&\; \binom{10}{3,5,2} &=& \frac{10!}{3! \cdot 5! \cdot 2!} \\
+\intertext{Teilen durch $5!$}
+\Leftrightarrow &\; \binom{10}{3,5,2} &=& \frac{6 \cdot 7 \cdot 8 \cdot 9 \cdot 10}{3! \cdot 2!} \\
+\Leftrightarrow &\; \binom{10}{3,5,2} &=& \frac{6 \cdot 7 \cdot 8 \cdot 9 \cdot 10}{6 \cdot 2!} \\
+\intertext{Teilen durch 6}
+\Leftrightarrow &\; \binom{10}{3,5,2} &=& \frac{7 \cdot 8 \cdot 9 \cdot 10}{2} \\
+\intertext{Kürzen der $8$ mit der $2$ auf $4$}
+\Leftrightarrow &\; \binom{10}{3,5,2} &=& 7 \cdot 4 \cdot 9 \cdot 10 \\
+\Leftrightarrow &\; \binom{10}{3,5,2} &=& 2520
+\end{alignat}
+Der Koeffizient von $x^{3}y^{5}z^{2}$ in $(x+y+z)^{10}$ lautet $2520$.
+
+\subsection{} %b
+Diese Aufgabe lässt sich mit der fünften Grundaufgabe der Kombinatorik lösen.
+
+Das Wort CAPPUCINO besteht aus $9$ Buchstaben, wobei es das C und das P zweimal gibt. Es ergibt sich daher nach der fünften Grundaufgabe folgende Gleichung:
+
+\begin{alignat}{2}
+&\; \binom{8}{2,2,1,1,1,1,1} &=& \frac{8!}{2! \cdot 2!} \\
+\intertext{Teilen durch $2!$}
+\Leftrightarrow &\; \binom{8}{2,2,1,1,1,1,1} &=& \frac{3 \cdot 4 \cdot 5 \cdot 6 \cdot 7 \cdot 8}{2 \cdot 1} \\
+\intertext{Kürzen der $4$ mit $2$ auf $2$}
+\Leftrightarrow &\; \binom{8}{2,2,1,1,1,1,1} &=& 3 \cdot 2 \cdot 5 \cdot 6 \cdot 7 \cdot 8 \\
+\Leftrightarrow &\; \binom{8}{2,2,1,1,1,1,1} &=& 10080
+\end{alignat}
+Es lassen sich also $10080$ verschiedene (sinnlose oder sinvolle) Wörter mit $8$ Buchstaben aus dem Wort CAPPUCINO bilden.
+
+Bei dem Wort MANGOLASSI verhält es sich analog. Insgesamt gibt es hier $10$ Buchstaben, wobei das A und das S zweimal vorkommen. Aus der fünften Grundaufgabe ergibt sich folgende Gleichung:
+
+\begin{alignat}{2}
+&\; \binom{10}{2,2,1,1,1,1,1,1} &=& \frac{10!}{2! \cdot 2!} \\
+\intertext{Teilen durch $2!$}
+\Leftrightarrow &\; \binom{10}{2,2,1,1,1,1,1,1} &=& \frac{3 \cdot 4 \cdot 5 \cdot 6 \cdot 7 \cdot 8 \cdot 9 \cdot 10}{2 \cdot 1} \\
+\intertext{Kürzen der $4$ mit $2$ auf $2$}
+\Leftrightarrow &\; \binom{10}{2,2,1,1,1,1,1,1} &=& 3 \cdot 2 \cdot 5 \cdot 6 \cdot 7 \cdot 8 \cdot 9 \cdot 10 \\
+\Leftrightarrow &\; \binom{10}{2,2,1,1,1,1,1,1} &=& 907200
+\end{alignat}
+Es lassen sich also $907200$ verschiedene (sinnlose oder sinnvolle) Wörter mit $10$ Buchstaben aus dem Wort MANGOLASSI bilden.
+
+Bei dem Wort SELTERWASSER verhält es sich analog. Insgesamt gibt es hier $12$ Buchstaben, wobei E und S dreimal und das R zweimal vorkommen. Aus der fünften Grundaufgabe ergibt sich folgende Gleichung:
+
+\begin{alignat}{2}
+&\; \binom{12}{3,3,2,1,1,1,1} &=& \frac{12!}{3! \cdot 3! \cdot 2!} \\
+\intertext{Teilen durch $3!$}
+\Leftrightarrow &\; \binom{12}{3,3,2,1,1,1,1} &=& \frac{4 \cdot 5 \cdot 6 \cdot 7 \cdot 8 \cdot 9 \cdot 10 \cdot 11 \cdot 12}{3 \cdot 2 \cdot 1 \cdot 2 \cdot 1} \\
+\Leftrightarrow &\; \binom{12}{3,3,2,1,1,1,1} &=& \frac{4 \cdot 5 \cdot 6 \cdot 7 \cdot 8 \cdot 9 \cdot 10 \cdot 11 \cdot 12}{6 \cdot 2} \\
+\intertext{Teilen durch $6$}
+\Leftrightarrow &\; \binom{12}{3,3,2,1,1,1,1} &=& \frac{4 \cdot 5 \cdot 7 \cdot 8 \cdot 9 \cdot 10 \cdot 11 \cdot 12}{2} \\
+\intertext{Kürzen der $4$ mit $2$ auf $2$}
+\Leftrightarrow &\; \binom{12}{3,3,2,1,1,1,1} &=& 2 \cdot 5 \cdot 7 \cdot 8 \cdot 9 \cdot 10 \cdot 11 \cdot 12 \\
+\Leftrightarrow &\; \binom{12}{3,3,2,1,1,1,1} &=& 6652800
+\end{alignat}
+Es lassen sich also $6652800$ verschiedene (sinnlose oder sinnvolle) Wörter mit $12$ Buchstaben aus dem Wort SELTERWASSER bilden.
+
+\subsection{} %c
+Es gibt $10$ verschiedene Sorten zu je mindestens $6$ Flaschen. Wie viele Möglichkeiten gibt es einen Getränkekarton mit $6$ Flaschen zusammenzustellen?
+
+Diese Aufgabe entspricht einem Ziehen mit Zurücklegen ohne Beachtung der Reihenfolge (Grundaufgabe 4). Es gibt $10$ Sorten, also gilt $n=10$. Aus diesen $10$ müssen nun $6$ gezogen werden. Es gilt demnach $k=6$. Mithilfe der vierten Grundaufgabe ergibt sich daraus folgendes:
+
+\begin{alignat}{4}
+&\; \binom{6+10-1}{6} &=& \binom{15}{6} &=& \binom{15}{15-6} &=& \binom{15}{9} \\
+\Leftrightarrow &\; \binom{6+10-1}{6} &=& 5005
+\end{alignat}
+
+Es gibt also $5005$ Möglichkeiten einen Getränkekarton mit $6$ Flaschen zusammenzustellen.
+\section{} %3
+\textbf{Behauptung:} Die folgende Aussage gilt für alle $n \in \mathbb{N},n \geq 3$:
+\begin{alignat}{2}
+\sum_{i=3}^{n} \binom{i}{i-3} &=& \binom{n+1}{4} \label{eq:1} 
+\end{alignat}
+\textbf{Beweis:} Durch vollständige Induktion.\\
+Mit $A(n)$ sei die Aussage \eqref{eq:1} bezeichnet.\\\\
+\underline{Induktionsanfang:} \\
+$A(3)$ ist richtig, da folgendes gilt:
+\begin{alignat}{2}
+&\; \sum_{i=3}^{3} \binom{i}{i-3} &=& \binom{3+1}{4} \\
+\Leftrightarrow &\; \sum_{i=3}^{3} \binom{i}{i-3} &=& \binom{4}{4} \\
+\Leftrightarrow &\; \sum_{i=3}^{3} \binom{i}{i-3} &=& 1 = \binom{3}{0} = 1
+\end{alignat}
+\underline{Induktionsannahme:}\\
+Die Aussage \eqref{eq:1} gilt für ein beliebig fest gewähltes $n \in \mathbb{N}, n \geq 3$.\\\\
+\\
+\underline{Zu zeigen:}\\
+$A(n+1)$ gilt, d. h. folgende Gleichung gilt:
+\begin{alignat}{2}
+\sum_{i=3}^{n+1} \binom{i}{i-3} &=& \binom{(n+1)+1}{4} \label{eq:2} 
+\end{alignat}
+\underline{Induktionsschluss:}\\
+Aus \eqref{eq:2} folgt folgendes:
+
+\begin{alignat}{2}
+&\; \sum_{i=3}^{n} \binom{i}{i-3} + \binom{n+1}{(n+1)-3} &=& \binom{(n+1)+1}{4} \\
+\intertext{Anwendung der Induktionsannahme:}
+\Leftrightarrow &\; \sum_{i=3}^{n} \binom{i}{i-3} + \binom{n+1}{(n+1)-3} &=& \binom{n+1}{4} + \binom{n+1}{(n+1)-3} \\
+\Leftrightarrow &\; \sum_{i=3}^{n} \binom{i}{i-3} + \binom{n+1}{(n+1)-3} &=& \binom{n+1}{4} + \binom{n+1}{n-2} \\
+\intertext{Aufgrund der Symmetrie des Pascalschen Dreiecks gilt:}
+\Leftrightarrow &\; \sum_{i=3}^{n} \binom{i}{i-3} + \binom{n+1}{(n+1)-3} &=& \binom{n+1}{n-3} + \binom{n+1}{n-2} \\
+\intertext{Durch Anwendung der Rekursionsformel ergibt sich:}
+\Leftrightarrow &\; \sum_{i=3}^{n} \binom{i}{i-3} + \binom{n+1}{(n+1)-3} &=& \binom{n+2}{n-2} \\
+\intertext{Aufgrund der Symmetrie des Pascalschen Dreiecks gilt:}
+\Leftrightarrow &\; \sum_{i=3}^{n} \binom{i}{i-3} + \binom{n+1}{(n+1)-3} &=& \binom{n+2}{4}
+\end{alignat}
+Nach dem Induktionsprinzip folgt aus dem Induktionsanfang und dem Induktionsschluss die Behauptung. \hfill $\Box$
+
+\section{} %4
+\subsection{} %a
+Es sei $S = {k \in \mathbb{N} : 1 \leq k \leq 2000}$. Es soll die Anzahl derjenigen $k \in S$ bestimmt werden, die weder durch 3 noch durch 5 noch durch 7 teilbar sind.
+
+Es sei $A_{1} = \{k \in S : 3 \mid k\}, A_{2} = \{k \in S : 5 \mid k\}, A_{3} = \{k \in S : 7 \mid k\}$. Es folgt $N = |S| = 2000$, sowie $|A_{1}| =  \lfloor\frac{2000}{3}\rfloor = 666, |A_{2}| = \frac{2000}{5} = 400, |A_{3}| = \lfloor\frac{2000}{7}\rfloor = 285$.
+
+Ferner gilt $A_{1} \cap A_{2} = \{k \in S : 15 \mid k\}, A_{1} \cap A_{3} = \{k \in S : 21 \mid k\}, A_{2} \cap A_{3} = \{k \in S : 35 \mid k\}$ und $A_{1} \cap A_{2} \cap A_{3} = \{k \in S : 105 \mid k\}$. Also gilt $|A_{1} \cap A_{2}| = \lfloor\frac{2000}{15}\rfloor = 133, |A_{1} \cap A_{3}| = \lfloor\frac{2000}{21}\rfloor = 95, |A_{2} \cap A_{3}| = \lfloor\frac{2000}{35}\rfloor = 57, |A_{1} \cap A_{2} \cap A_{3}| = \lfloor\frac{2000}{105}\rfloor = 19$.
+
+Insgesamt erhält man $|S \setminus (A_{1} \cup A_{2} \cup A_{3})| = 2000 - (666 + 400 + 285) + 133 + 95 + 57 - 19 = \underline{\underline{915}}$.
+\subsection{} %b
+Es sei $S = {k \in \mathbb{N} : 1 \leq k \leq 1000}$. Es soll die Anzahl derjenigen $k \in S$ bestimmt werden, die weder durch 3 noch durch 5 noch durch 7 noch durch 11 teilbar sind.
+
+Es sei $A_{1} = \{k \in S : 3 \mid k\}, A_{2} = \{k \in S : 5 \mid k\}, A_{3} = \{k \in S : 7 \mid k\}, A_{4} = \{k \in S : 11 \mid k\}$. Es folgt $N = |S| = 1000$, sowie $|A_{1}| =  \lfloor\frac{1000}{3}\rfloor = 333, |A_{2}| = \frac{1000}{5} = 200, |A_{3}| = \lfloor\frac{1000}{7}\rfloor = 142, |A_{4}| = \lfloor\frac{2000}{11}\rfloor = 90$.
+
+Ferner gilt $A_{1} \cap A_{2} = \{k \in S : 15 \mid k\}, A_{1} \cap A_{3} = \{k \in S : 21 \mid k\}, A_{1} \cap A_{4} = \{k \in S : 33 \mid k\}, A_{2} \cap A_{3} = \{k \in S : 35 \mid k\}, A_{2} \cap A_{4} = \{k \in S : 55 \mid k\}, A_{3} \cap A_{4} = \{k \in S : 77 \mid k\}$ und $A_{1} \cap A_{2} \cap A_{3} \cap A_{4} = \{k \in S : 1155 \mid k\}$. Also gilt $|A_{1} \cap A_{2}| = \lfloor\frac{1000}{15}\rfloor = 66, |A_{1} \cap A_{3}| = \lfloor\frac{1000}{21}\rfloor = 47, |A_{1} \cap A_{4}| = \lfloor\frac{1000}{33}\rfloor = 30, |A_{2} \cap A_{3}| = \lfloor\frac{1000}{35}\rfloor = 28, |A_{2} \cap A_{4}| = \lfloor\frac{1000}{55}\rfloor = 18, |A_{3} \cap A_{4}| = \lfloor\frac{1000}{77}\rfloor = 12, |A_{1} \cap A_{2} \cap A_{3} \cap A_{4}| = \lfloor\frac{1000}{1155}\rfloor = 0$.
+
+Insgesamt erhält man $|S \setminus (A_{1} \cup A_{2} \cup A_{3} \cup A_{4})| = 1000 - (333 + 200 + 142 + 90) + 66 + 47 + 30 +28 + 18 + 12 - 0 = \underline{\underline{436}}$.
+\end{document}

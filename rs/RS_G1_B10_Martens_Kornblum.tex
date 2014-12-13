@@ -1,0 +1,134 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{qtree}
+\usepackage[locale=DE,exponent-product=\cdot ,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage[scaled=0.78]{luximono}
+\usepackage{listings}
+\usepackage{subfigure}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,decorations.text,arrows}
+\pagenumbering{arabic}
+\def\thesection{10.\arabic{section})}
+\def\thesubsection{(\alph{subsection})}
+\def\thesubsubsection{(\arabic{subsubsection})}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\hyphenation{Nach-komma-stel-len}
+\lstnewenvironment{java}[1][]{%
+	\lstset{basicstyle=\ttfamily ,backgroundcolor=\color[gray]{.95},columns=flexible,fontadjust=true,language=Java,tabsize=4,numbers=none,#1}%
+}{%
+}
+\graphicspath{{D:/Users/Jim-Studium/Pictures/Studium/RS/}}
+
+\tikzstyle{huffmanNodes}=[matrix of nodes,
+	nodes={circle,thin,draw=black!20,minimum size=10mm,text height=1.5ex,text depth=.25ex,inner sep=-10pt}]
+\tikzstyle{huffmanBase}=[matrix of nodes,
+	nodes={minimum size=10mm,text height=1.5ex,text depth=.25ex,inner sep=-10pt}]
+\begin{document}
+\author{Jim Martens (Matrikelnummer 6420323) \and Marlo Kornblum (Matrikelnummer 6427301)}
+\title{Rechnerstrukturen Aufgabenblatt 10}
+\maketitle
+
+\section{} %10.1
+\subsection{} %a
+Der Ampelautomat gibt den Befehl zum Zurücksetzen des Zählers an den Zähler. Der Zähler wiederum gibt den Zählerstand an den Ampelautomat.
+\subsection{} %b
+Wenn sich der Hauptautomat im Zustand rot-gelb befindet, dann erfährt er bei der nächsten Taktflanke vom Zähler den aktuellen Stand. Auf diesen kann er aber erst bei der nächsten Vorderflanke reagieren und einen Reset schicken, falls der eingestellte Maximalwert erreicht wurde. 
+Gleichzeitig wird er also bei der zweiten Taktvorderflanke, falls dem so war, in den Zustand grün wechseln und dem Zähler einen neuen Zählauftrag geben. Dieser erfährt davon erst im darauffolgenden Takt und startet dann den Zähler.
+In jedem Takt gibt der Zähler den Zählerstand an den Hauptautomaten. Dieser kann darauf erst im nachfolgenden Takt reagieren.
+
+Sind die $30$ Sekunden vorbei, dann wird der Zähler erst im nachfolgenden Takt diese Info weitergeben können und der Hauptautomat erst im darauffolgenden Takt darauf reagieren können und somit grün verlassen.
+\subsection{} %c
+Der Zähler arbeitet mit der Vorderflanke und der Hauptautomat mit der Rückflanke.
+
+Der Hauptautomat befindet sich in der Phase rot-gelb und wartet auf das Erreichen des Maximalwertes vom Zähler. In der Vorderflanke meldet der Zähler den Zählerstand. In der Rückflanke prüft der Hauptautomat diesen auf Erreichen des Maximalwertes. Falls dem so ist, schaltet er auf grün und setzt den Zähler mit einem neuen Maximalwert zurück. Diesen bekommt der Zähler bei der nächsten Vorderflanke.
+
+Somit liegt der Zähler auch hier einen Takt hinten, da er die Lücke zwischen zwei Takten noch gar nicht mitzählen konnte. Der Hauptautomat erfährt nun, dass der Zähler bei $30$ angelangt ist und schaltet auf gelb. Gleichzeitig wird der Zähler erneut zurückgesetzt.
+\subsection{} %d
+\begin{tikzpicture}[shorten >=1pt,node distance=2.0cm,on grid,auto,/tikz/initial text=,>=stealth']
+	\tikzset{every state/.style={minimum size=5.0em}}
+	\node[state,initial] (Z0) {$Z_{0}$};
+	\node[state] (Z1) [below right=2.6 and 3 of Z0] {$Z_{1}$};
+	\node[state] (Z2) [below left=2.6 and 3 of Z1] {$Z_{2}$};
+	\node[state] (Z3) [above left=2.6 and 3 of Z2] {$Z_{3}$};
+	
+	\node (z0) [below=0.2 of Z0] {\tiny{$00$}};
+	\node (z1) [below=0.2 of Z1] {\tiny{$01$}};
+	\node (z2) [below=0.2 of Z2] {\tiny{$10$}};
+	\node (z3) [below=0.2 of Z3] {\tiny{$11$}};
+	
+	\path[every node/.style={font=\scriptsize}] 
+	(Z0) edge[loop above,->] node [near start] {$i<30000$} (Z0)	
+	(Z0) edge[->] node [near start] {$i=30000;$ reset i} (Z1)
+	(Z1) edge[loop right,->] node [near start] {$i<3000$} (Z1)
+	(Z1) edge[->] node [near start] {$i=3000;$ reset i} (Z2)
+	(Z2) edge[loop below,->] node [near start] {$i<35000$} (Z2)
+	(Z2) edge[->] node [near start] {$i=35000;$ reset i} (Z3)
+	(Z3) edge[loop left,->] node [near start] {$i<5000$} (Z3)
+	(Z3) edge[->] node [near start] {$i=5000;$ reset i} (Z0);
+	
+	\draw (-0.8,-0.3) -- +(1.67,0);
+	\draw (2.2,-2.9) -- +(1.67,0);
+	\draw (-0.80,-5.5) -- +(1.67,0);
+	\draw (-3.83,-2.9) -- +(1.67,0);
+	
+	\node (z00) [below=0.45 of Z0] {\small{$r;i++$}};
+	\node (z01) [below=0.45 of Z1] {\small{$r,ge;i++$}};
+	\node (z02) [below=0.45 of Z2] {\small{$gr;i++$}};
+	\node (z03) [below=0.45 of Z3] {\small{$ge;i++$}};
+\end{tikzpicture}
+
+\section{} %10.2
+\subsection{} %a
+\begin{tabular}{cccc||cc}
+$z_{1}$	& $z_{0}$ & $x_{1}$  & $x_{0}$ & $z_{1}^{+}$ & $z_{0}^{+}$ \\
+\hline
+0 & 0 & * & 1 & 0 & 0 \\
+0 & 0 & * & 0 & 0 & 1 \\
+0 & 1 & * & 0 & 0 & 1 \\
+0 & 1 & 1 & 1 & 1 & 0 \\
+0 & 1 & 0 & 1 & 1 & 1 \\
+1 & 0 & 1 & * & 1 & 0 \\
+1 & 0 & 0 & 0 & 0 & 1 \\
+1 & 0 & 0 & 1 & 0 & 0 \\
+1 & 1 & * & 1 & 1 & 1 \\
+1 & 1 & * & 0 & 1 & 0 \\
+\end{tabular}
+
+\begin{alignat*}{2}
+\delta(Z_{0}, x_{0}) &=& Z_{0}\\
+\delta(Z_{0}, \overline{x_{0}}) &=& Z_{1}\\
+\delta(Z_{1}, \overline{x_{1}}, x_{0}) &=& Z_{3}\\
+\delta(Z_{1}, x_{1}, x_{0}) &=& Z_{2}\\
+\delta(Z_{1}, \overline{x_{0}}) &=& Z_{1}\\
+\delta(Z_{2}, \overline{x_{1}}, x_{0}) &=& Z_{0}\\
+\delta(Z_{2}, \overline{x_{1}}, \overline{x_{0}}) &=& Z_{1}\\
+\delta(Z_{2}, x_{1}) &=& Z_{2}\\
+\delta(Z_{3}, x_{0}) &=& Z_{3}\\
+\delta(Z_{3}, \overline{x_{0}}) &=& Z_{2}
+\end{alignat*}
+\subsection{} %b
+\begin{tabular}{cc||cc}
+$z_{1}$	& $z_{0}$ & $y_{1}$ & $y_{0}$ \\
+\hline
+0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 1 \\
+1 & 0 & 0 & 1 \\
+1 & 1 & 1 & 1 \\
+\end{tabular}
+
+\begin{alignat*}{2}
+\lambda(Z) &=& (y_{1}, y_{0}) \\
+\lambda(Z_{0}) &=& (1, 0) \\
+\lambda(Z_{1}) &=& (0, 1) \\
+\lambda(Z_{2}) &=& (0, 1) \\
+\lambda(Z_{3}) &=& (1, 1) \\
+\end{alignat*}
+\subsection{} %c
+In allen Zuständen gibt es mindestens einen Übergang für eine Eingangsbelegung und ebenso maximal eine. Demzufolge gibt es genau einen Übergang pro Eingangsbelegung. Unabhängig davon ist es jedoch möglich, dass mehrere Belegungen den gleichen Ausgang benutzen.
+\end{document}

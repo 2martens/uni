@@ -1,0 +1,146 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pagenumbering{arabic}
+\def\thesection{2.\arabic{section})}
+\def\thesubsection{\arabic{subsection}.}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setcounter{section}{3}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jim Martens}
+\title{Hausaufgaben zum 16. April}
+\maketitle
+\section{} %2.4
+Der NFA ergibt sich folgendermaßen:\\
+\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm,on grid]
+\node (00) {$0,0$};
+\node (01) [below=of 00] {$0,1$};
+\node (02) [below=of 01] {$0,2$};
+\node (10) [left=of 00] {$1,0$};
+\node (11) [left=of 01] {$1,1$};
+\node (12) [below=of 11] {$1,2$};
+\node (21) [left=of 11] {$2,1$};
+\node (20) [left=of 21] {$2,0$};
+\node (22) [left=of 12] {$2,2$};
+\node (30) [left=of 20] {$3,0$};
+\node (32) [left=of 22] {$3,2$};
+\node (31) [left=of 32] {$3,1$};
+\path[every node/.style={font=\scriptsize}] 
+	(00) edge[->] node [below left=0.05 and 0.15 of 00] {1} (01)
+	(01) edge[->] node [below left=0.15 and 0.0005 of 01] {0} (11)
+	(01) edge[->] node [below right=0.05 and 0.15 of 01] {1} (02)
+	(02) edge[->,bend right=45] node [above right=0.15 and 0.1 of 02] {1} (00)
+	(11) edge[->] node [below left=0.1 and 0.1 of 11] {1} (12)
+	(02) edge[->] node [below right=0.1 and 0.1 of 02] {0} (12)
+	(11) edge[->] node [below left=0.15 and 0.0005 of 11] {0} (21)
+	(12) edge[->] node [below left=0.15 and 0.0005 of 12] {0} (22)
+	(21) edge[->] node [below left=0.1 and 0.1 of 21] {1} (22)
+	(12) edge[->,bend left=125] node [above left=1.0 and 0.1 of 12] {1} (10)
+	(00) edge[->] node [above left=0.15 and 0.0005 of 00] {0} (10)
+	(10) edge[->] node [below right=0.05 and 0.15 of 10] {1} (11)
+	(22) edge[->] node [below left=0.1 and 0.1 of 22] {1} (20)
+	(10) edge[->] node [above left=0.1 and 0.1 of 10] {0} (20)
+	(20) edge[->] node [below right=0.15 and 0.0005 of 20] {1} (21)
+	(22) edge[->] node [below left=0.15 and 0.0005 of 22] {0} (32)
+	(32) edge[->,bend right=45] node [below right=0.15 and 0.15 of 32] {0} (02)
+	(32) edge[->] node [below left=0.1 and 0.1 of 32] {1} (30)
+	(20) edge[->] node [below left=0.15 and 0.0005 of 20] {0} (30)
+	(30) edge[->,bend left=45] node [above left=0.15 and 0.1 of 30] {0} (00)
+	(30) edge[->] node [below left=0.05 and 0.15 of 30] {1} (31)
+	(31) edge[->] node [below right=0.15 and 0.005 of 31] {1} (32)
+	(31) edge[->,bend right=45] node [below right=0.15 and 0.0005 of 31] {0} (01);
+\end{tikzpicture}
+\section{} %2.5
+\subsection{} %1.
+\begin{alignat*}{2}
+\hat{\Delta}(\{z_{s}, z_{0}\}, 01) &=& \hat{\Delta}(\underset{p \in \{z_{s}, z_{0}\}}{\bigcup} \Delta(p,0),1) \\
+&=& \hat{\Delta}(\Delta(z_{s},0) \cup \Delta(z_{0},0),1) \\
+&=& \hat{\Delta}(\{z_{s},z_{0}\} \cup \{z_{e}\},1) \\
+&=& \hat{\Delta}(\{z_{s},z_{0},z_{e}\},1) \\
+&=& \hat{\Delta}(\underset{p \in \{z_{s},z_{0},z_{e}\}}{\bigcup} \Delta(p,1), \lambda) \\
+&=& \hat{\Delta}(\Delta(z_{s},1) \cup \Delta(z_{0},1) \cup \Delta(z_{e},1),\lambda) \\
+&=& \hat{\Delta}(\{z_{s}\} \cup \emptyset \cup \{z_{e}\},\lambda) \\
+&=& \hat{\Delta}(\{z_{s},z_{e}\},\lambda) \\
+&=& \{z_{s},z_{e}\}
+\end{alignat*}
+\begin{alignat*}{2}
+\hat{\Delta}(\{z_{0}, z_{1}\}, 01) &=& \hat{\Delta}(\underset{p \in \{z_{0}, z_{1}\}}{\bigcup} \Delta(p,0),1) \\
+&=& \hat{\Delta}(\Delta(z_{0},0) \cup \Delta(z_{1},0),1) \\
+&=& \hat{\Delta}(\{z_{e}\} \cup \emptyset ,1) \\
+&=& \hat{\Delta}(\{z_{e}\},1) \\
+&=& \hat{\Delta}(\underset{p \in \{z_{e}\}}{\bigcup} \Delta(p,1), \lambda) \\
+&=& \hat{\Delta}(\Delta(z_{e},1),\lambda) \\
+&=& \hat{\Delta}(\{z_{e}\},\lambda) \\
+&=& \{z_{e}\}
+\end{alignat*}
+\subsection{} %2.
+\begin{tikzpicture}[shorten >=1pt,node distance=2.8cm,on grid]
+\node[initial,state] (zs) {$\{z_{s}\}$};
+\node[state] (zsz0) [below=2.0 of zs] {$\{z_{s},z_{0}\}$};
+\node[state] (zsz1) [below right=2.0 and 2.0 of zs] {$\{z_{s},z_{1}\}$};
+\node[state,accepting] (zsz0ze) [below=2.0 of zsz0] {$\{z_{s},z_{0},z_{e}\}$};
+\node[state,accepting] (zsze) [below=2.0 of zsz0ze] {$\{z_{s},z_{e}\}$};
+\node[state,accepting] (zsz1ze) [below=2.0 of zsz1] {$\{z_{s},z_{1},z_{e}\}$};
+
+\path[every node/.style={font=\scriptsize}] 
+	(zs) edge[->] node [below left=0.05 and 0.15 of zs] {0} (zsz0)
+	(zs) edge[->] node [below right=0.1 and 0.2 of zs] {1} (zsz1)
+	(zsz1) edge[->,bend right=45] node [above right=0.1 and 0.2 of zsz1] {0} (zs)
+	(zsz0) edge[->,bend left=45] node [above left=0.1 and 0.2 of zsz0] {1} (zs)
+	(zsz0) edge[->] node [below left=0.05 and 0.1 of zsz0] {0} (zsz0ze)
+	(zsz1) edge[->] node [below right=0.05 and 0.1 of zsz1] {1} (zsz1ze)
+	(zsz0ze) edge[->,loop left] node [left=0.1 of zsz0ze] {0} (zsz0ze)
+	(zsz1ze) edge[->,loop right] node [right=0.1 of zsz1ze] {1} (zsz1ze)
+	(zsz0ze) edge[->] node [below left=0.05 and 0.15 of zsz0ze] {1} (zsze)
+	(zsz1ze) edge[->] node [below right=0.1 and 0.1 of zsz1ze] {0} (zsze)
+	(zsze) edge[->,bend left=45] node [above left=0.1 and 0.1 of zsze] {0} (zsz0ze)
+	(zsze) edge[->,bend right=45] node [above right=0.1 and 0.25 of zsze] {1} (zsz1ze);
+\end{tikzpicture}
+\subsection{} %3.
+\begin{tikzpicture}[shorten >=1pt,node distance=1.1cm,on grid]
+\node (z0) {$z_{0}$};
+\node (z1) [below=of z0] {$z_{1}$};
+\node (z2) [right=of z0] {$z_{2}$};
+\node (z3) [below=of z2] {$z_{3}$};
+
+\path[every node/.style={font=\scriptsize}] 
+	(z0) edge[->] node [above right=0.15 and 0.0005 of z0] {a} (z2)
+	(z0) edge[->,loop left] node [left=0.15 of z0] {a} (z0)
+	(z1) edge[->] node [below right=0.15 and 0.0005 of z1] {a} (z3)
+	(z1) edge[->] node [below right=0.1 and 0.1 of z1] {a} (z2)
+	(z2) edge[->,bend right=45] node [above left=0.2 and 0.0005 of z2] {b} (z0)
+	(z2) edge[->] node [below right=0.15 and 0.15 of z2] {b} (z3)
+	(z3) edge[->,loop right] node [right=0.15 of z3] {b} (z3);
+\end{tikzpicture}\\
+Es lässt sich nicht rekonstruieren, welche Zustände Start- bzw. Endzustände sind. Ebenso lässt sich nicht rekonstruieren ob es eine Kante von $z_{1}$ aus gibt, die mit einem b benutzt wird. Außerdem fehlen Infos über mögliche a-Kanten der Zustände $z_{2}$ und $z_{3}$.
+\section{} %2.6
+\textbf{Behauptung:} Die Aussage $L(A_{1}) = \{ab\}\{cb\}^{*} =: M_{1}$ gilt für den Automaten $A_{1}$.\\
+\textbf{Beweis:} Durch vollständige Induktion. \\
+Mit $A(n)$ sei die Aussage $L(A_{1}) = \{ab(cb)^{n}|n \in \mathbb{N} \} =: M_{1}$ bezeichnet. \\
+\underline{Induktionsanfang:} $A(0)$ ist wahr, da $ab$ ein vom Automaten $A_{1}$ akzeptiertes Wort ist und sich der Automat nach dem Lesen des Wortes im Endzustand befindet.\\\\
+\underline{Induktionsannahme:} Für ein beliebig fest gewähltes $n \in \mathbb{N}$ gilt $A(n)$, d. h. es gelte $L(A_{1}) = \{ab(cb)^{n}|n \in \mathbb{N} \} =: M_{1}$.\\\\
+\underline{Zu zeigen:} $A(n+1)$ gilt, d. h. $L(A_{1}) = \{ab(cb)^{n+1}|n \in \mathbb{N} \} =: M_{1}$ gilt.\\\\
+\underline{Induktionsschluss:}\\
+Sei $L(A_{1}) = \{ab(cb)^{n+1}|n \in \mathbb{N} \} =: M_{1}$. Dann gilt analog $L(A_{1}) = \{ab(cb)^{n}(cb)|n \in \mathbb{N} \} =: M_{1}$ bzw. $L(A_{1}) = \{ab(cb)^{n}|n \in \mathbb{N} \}\{cb\} =: M_{1}$. \\
+Dabei gilt $L(A_{1}) = \{ab(cb)^{n}|n \in \mathbb{N} \}$ aufgrund der Induktionsannahme.\\
+Demnach befindet sich der Automat nach Lesen des Wortes $ab(cb)^{n}, n \in \mathbb{N}$ im Endzustand. Liest man nun ein weiteres $cb$, so befindet sich der Automat wieder im Endzustand. Somit gilt $L(A_{1}) = \{ab(cb)^{n+1}|n \in \mathbb{N} \} =: M_{1}$.\\\\
+Aus dem Induktionsanfang und dem Induktionsschritt ergibt sich nach dem Induktionsprinzip die Behauptung. \hfill $\Box$.
+\end{document}

@@ -1,0 +1,116 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows}
+\pagenumbering{arabic}
+\def\thesection{4.\arabic{section})}
+\def\thesubsection{(\alph{subsection})}
+\def\thesubsubsection{(\arabic{subsubsection})}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\hyphenation{Nach-komma-stel-len}
+
+\begin{document}
+\author{Jim Martens (Matrikelnummer 6420323) \and Marlo Kornblum (Matrikelnummer 6427301)}
+\title{Rechnerstrukturen Aufgabenblatt 4}
+\maketitle
+
+\section{}%4.1
+\subsection{} %a
+Der Nachteil dieser Methode liegt offensichtlich darin, dass in Zahlenbereichen mit vielen darstellbaren Zahlen zwei ganz unterschiedliche Zahlen als gleich angesehen werden.
+
+Außerdem hängt die Feststellung der Gleichheit vom jeweiligen Nutzer ab, wodurch auf zwei unterschiedlichen Rechnern mit unterschiedlichen festgelegten Toleranzgrenzen die gleichen Zahlen unterschiedliche Vergleichsergebnisse liefern.
+
+Ein Vergleich ist demzufolge also nicht eindeutig, sondern hängt von anderen Faktoren ab.
+\subsection{} %b
+Die relative Abweichung lässt sich wie folgt berechnen:
+\begin{alignat*}{2}
+y &=& |\frac{x - rd(x)}{x}|
+\end{alignat*}
+Bei diesem Beispiel sei $x$ die echte Gleitkommazahl und $rd(x)$ die gerundete Gleitkommazahl.
+
+Als gleich können beide Werte angesehen werden, wenn folgendes gilt:
+\begin{alignat*}{2}
+y &\leq & \varepsilon = 0.5 \cdot b^{-t-1}
+\end{alignat*}
+$t$ sei die Anzahl der Bits für die Mantisse (bei Float $23$ und bei Double $52$) und $b$ die Basis der Gleitkommadarstellung.
+
+\subsection{} %c
+Dieses Verfahren hat den großen Nachteil, dass die Anzahl an Nachkommastellen bei der Berechnung der relativen Abweichung sehr groß wird.
+
+%todo, beheben
+\section{}%4.2
+\subsection{} %a
+Die CRLF SP Lösung CRLF SP SP der CRLF SP SP SP Übungsaufgabe CRLF SP SP SP SP liegt CRLF SP SP SP SP SP vor CRLF SP SP SP SP SP SP Ihnen!
+\subsection{} %b
+Der Rechner wurde auf Windows erstellt, da Unix-basierte Rechner nur LF nutzen, wohingegen Windows CRLF nutzt. Ab Mac OS X wird dort auch LF genutzt, vorher (bis Mac OS 9) wurde CR genutzt.
+\section{}%4.3
+\subsection{} %a
+Bei Kodierung nach ISO-8559-1 belegt dieser Text $1 \cdot 800000 = 800000$ Byte, da jedes Zeichen mit einem Byte kodiert wird. In direkter Unicode-Kodierung belegt der Text $2 \cdot 800000 = 1600000$ Byte, da Unicode jedes Zeichen mit zwei Byte kodiert.
+
+In UTF-8 werden Zeichen mit Vielfachen von $8$ Bit kodiert. Dabei werden alle Zeichen, die auch im ISO-8559-1 vorhanden sind mit einem Byte kodiert ($8$ Bits) und alle deutschen Sonderzeichen (Umlaute, ß) mit zwei Byte.
+
+Demnach ergeben sich $814240$ Byte.
+\subsection{} %b
+Der Bereich für CJK-Symbole umfasst $3400_{16}$ bis $4DBF_{16}$ und $4E00_{16}$ bis $9FCF_{16}$. Das sind $27536$ Symbole.
+\subsection{} %c
+Bei direkter Unicode-Kodierung belegt der chinesische Text $2 \cdot 800000 = 1600000$ Bytes, da hier jedes Zeichen mit zwei Byte kodiert ist.
+
+Bei UTF-8 belegt ein chinesisches Zeichen 3 Byte. Demzufolge belegt der Text in UTF-8-Kodierung $3 \cdot 800000 = 2400000$ Byte.
+\section{}%4.4
+\subsection{} %a
+$y = (x \ll 3) + (x \ll 1)$
+\subsection{} %b
+$y = (x \ll 4) + (x \ll 3) + (x \ll 2) + (x \ll 1)$
+\subsection{} %c
+$y = (x \ll 4) - (x \ll 6)$
+\subsection{} %d
+$a = (x+6)$\\
+$y = 60 \cdot a$\\
+$y = (a \ll 5) + (a \ll 4) + (a \ll 3) + (a \ll 2)$\\
+%$y = ((x+6) \ll 5) + ((x+6) \ll 4) + ((x+6) \ll 3) + ((x+6) \ll 2)$
+\section{}%4.5
+\subsection{} %a
+$\text{bitNor}(x,y) := \sim x \, \& \sim y$
+\subsection{} %b
+$\text{bitXor}(x,y) := \sim(\sim(\sim x \,\&\, y) \,\&\, \sim(\sim y \,\&\, x))$
+\subsection{} %c
+$\text{rotateRight}(x,n) := (x\ggg n)_{2} \,|\, (x\ll (0111111_{2} \& (100000_{2} + (\sim n + 1)_{2})))$
+\subsection{} %d
+$\text{abs}(x) := (x \: \hat{} \: (x \gg 31)) + \sim (x \gg 31) + 1$ %todo
+
+Die Funktion liefert für den Eingabewert $-2^{31}$ wieder denselben Wert. Das liegt daran, dass die größte positive darstellbare Zahl bei 32-bit und 2-Komplement $2^{31}-1$ ist. Bei der angegebenen Funktion wird zunächst der Wert mithilfe des Arithmetic Shift Right um 31 bit nach rechts verschoben. Ist die Zahl positiv ist die entstehende Bitmaske 0...0 und andernfalls 1...1. Diese Bitmaske wird nun xor mit dem Ausgangswert genommen. Dadurch wird der Ausgangswert wenn er negativ ist negiert und andernfalls so belassen, wie er ist.
+
+Anschließend wird das 2-Komplement der vorher erzeugten Bitmaske addiert. Ist der Ausgangswert positiv, dann wird $0$ addiert, wodurch der Ausgangswert bestehen bleibt. Ist der Ausgangswert negativ, dann bekommt man dadurch den positiven Wert. Dies funktioniert für alle negativen Zahlen größer oder gleich $-2^{31}+1$. Noch einmal an den Beispielen $-2^{31}$(1) und $-1$(2) veranschaulicht:
+
+Beispiel (1)
+\begin{alignat*}{2}
+&\; x &=& 10...0 \\
+&\; a &=& x \gg 31 \\
+\Leftrightarrow &\; a &=& 11...1 \\
+&\; b &=& a \, \hat{}\, x \\
+\Leftrightarrow &\; b &=& 01...1 \\
+&\; c &=& b + K_{2}(a)_{2} \\
+\Leftrightarrow &\; c &=& 01...1 + 00...01 \\
+\Leftrightarrow &\; c &=& 10...0
+\end{alignat*}
+
+Beispiel (2)
+\begin{alignat*}{2}
+&\; x &=& 11...1 \\
+&\; a &=& x \gg 31 \\
+\Leftrightarrow &\; a &=& 11...1 \\
+&\; b &=& a \, \hat{}\, x \\
+\Leftrightarrow &\; b &=& 00...0 \\
+&\; c &=& b + K_{2}(a)_{2} \\
+\Leftrightarrow &\; c &=& 00...0 + 00...01 \\
+\Leftrightarrow &\; c &=& 00...01
+\end{alignat*}
+
+\end{document}

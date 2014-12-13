@@ -1,0 +1,165 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jim Martens}
+\title{Hausaufgaben zum 11. April}
+\maketitle
+\section{} %1
+\begin{equation*}
+\frac{3}{x+5} \geq 3
+\end{equation*}
+1. Fall $x > -5$:\\
+\begin{alignat*}{3}
+&& \frac{3}{x+5} &\geq & 3 \\
+\Leftrightarrow && 3 &\geq & 3(x+5) \\
+\Leftrightarrow && 3 &\geq & 3x + 15 \\
+\Leftrightarrow && -12 &\geq & 3x \\
+\Leftrightarrow && -4 &\geq & x
+\end{alignat*}
+\\
+2. Fall $x < -5$:\\
+\begin{alignat*}{3}
+&& \frac{3}{x+5} &\geq & 3 \\
+\Leftrightarrow && 3 &\leq & 3(x+5) \\
+\Leftrightarrow && 3 &\leq & 3x + 15 \\
+\Leftrightarrow && -12 &\leq & 3x \\
+\Leftrightarrow && -4 &\leq & x
+\end{alignat*}
+\\
+$L = [-4]$
+\section{} %2
+\begin{equation*}
+|3x-4| \geq 2
+\end{equation*}
+1. Fall $x \geq \frac{4}{3}$:\\
+\begin{alignat*}{3}
+&& |3x-4| &\geq & 2 \\
+\Leftrightarrow && 3x-4 &\geq & 2 \\
+\Leftrightarrow && 3x &\geq & 6 \\
+\Leftrightarrow && x &\geq & 2
+\end{alignat*}
+\\
+2. Fall $x < \frac{4}{3}$:\\
+\begin{alignat*}{3}
+&& |3x-4| &\geq & 2 \\
+\Leftrightarrow && -(3x-4) &\geq & 2 \\
+\Leftrightarrow && -3x + 4 &\geq & 2 \\
+\Leftrightarrow && -3x &\geq & -2 \\
+\Leftrightarrow && x &\leq & \frac{2}{3}
+\end{alignat*}
+\\
+$L = (-\infty,\frac{2}{3}] \cup [2,\infty)$
+\section{} %3
+\subsection{} %a
+\begin{alignat*}{3}
+&& |a_{n} - a| &=& |\frac{2n-1}{n+3} - 2| \\
+\Leftrightarrow && &=& |\frac{2n-1}{n+3} - \frac{2(n+3)}{n+3}| \\
+\Leftrightarrow && &=& |\frac{2n-1 - 2n - 6}{n+3}| \\
+\Leftrightarrow && &=& |\frac{-7}{n+3}| \\
+\Leftrightarrow && &=& \frac{7}{n+3}
+\end{alignat*}
+\subsection{} %b
+Es sei $\varepsilon > 0$. Aufgrund von a) gilt:\\
+\begin{alignat*}{3}
+&& |a_{n} - a| &<& \varepsilon \label{eq:1}\tag{1}\\
+\Leftrightarrow && |a_{n} - a| = |\frac{-7}{n+3}| = \frac{7}{n+3} &<& \varepsilon \\
+\Leftrightarrow && -7 &<& \varepsilon (n+3) \\
+\Leftrightarrow && \frac{-7}{\varepsilon} &<& n+3 \\
+\Leftrightarrow && \frac{-7}{\varepsilon} - 3 &<& n
+\end{alignat*}
+\\
+Wählt man $N > \frac{-7}{\varepsilon} - 3$, so ergibt sich aus \eqref{eq:1}, dass $|a_{n} - a| < \varepsilon$ für alle $n \geq N$ gilt. Das zeigt $(a_{n}) \rightarrow a = 2$.
+\subsection{} %c
+Es sei $\varepsilon = \frac{1}{10}$:\\
+\begin{alignat*}{3}
+&& \frac{-7}{\frac{1}{10}} - 3 &<& n \\
+\Leftrightarrow && -70 - 3 &<& n \\
+\Leftrightarrow && -73 &<& n
+\end{alignat*}
+Wählt man $N = -72$, so ergibt sich aus \eqref{eq:1}, dass $|a_{n} - a| < \varepsilon$ für alle $n \geq N$ gilt.\\
+\\
+Es sei $\varepsilon = \frac{1}{100}$:\\
+\begin{alignat*}{3}
+&& \frac{-7}{\frac{1}{100}} - 3 &<& n \\
+\Leftrightarrow && -700 - 3 &<& n \\
+\Leftrightarrow && -703 &<& n
+\end{alignat*}
+Wählt man $N = -702$, so ergibt sich aus \eqref{eq:1}, dass $|a_{n} - a| < \varepsilon$ für alle $n \geq N$ gilt.\\
+\\
+Es sei $\varepsilon = \frac{1}{100000}$:\\
+\begin{alignat*}{3}
+&& \frac{-7}{\frac{1}{100000}} - 3 &<& n \\
+\Leftrightarrow && -700000 - 3 &<& n \\
+\Leftrightarrow && -700003 &<& n
+\end{alignat*}
+Wählt man $N = -700002$, so ergibt sich aus \eqref{eq:1}, dass $|a_{n} - a| < \varepsilon$ für alle $n \geq N$ gilt.
+\section{} %4
+\textbf{Behauptung:} Die folgende Aussage gilt für alle $n \in \mathbb{N}$:\\
+\begin{equation*}
+0 \leq a_{n} < \frac{1}{2} \label{eq:2}\tag{2}
+\end{equation*}\\
+Die Folge ($a_{n}$) sei rekursiv definiert durch \\
+\begin{alignat*}{2}
+a_{1} &=& \frac{2}{5} \label{eq:3}\tag{3}\\
+a_{n+1} &=& a_{n}^{2} + \frac{1}{4} \label{eq:4}\tag{4}
+\end{alignat*} 
+\textbf{Beweis:} Durch vollständige Induktion.\\
+Mit $A(n)$ sei die Aussage \eqref{eq:2} bezeichnet.\\\\
+\underline{Induktionsanfang:} \\
+$A(1)$ ist richtig, da die Aussage \eqref{eq:2} für \eqref{eq:3} wie folgt gilt: 
+\begin{alignat*}{2}
+0 \leq \frac{2}{5} = \frac{4}{10} < \frac{1}{2} = \frac{5}{10} 
+\end{alignat*}\\
+\underline{Induktionsannahme:}\\
+Die Aussage \eqref{eq:2} gilt für ein beliebig fest gewähltes $n \in \mathbb{N}$.\\\\
+\underline{Zu zeigen:}\\
+$A(n+1)$ gilt, d. h. Folgendes gilt für die Aussage \eqref{eq:4}:\\
+\begin{equation*}
+0 \leq a_{n+1} < \frac{1}{2} \label{eq:5}\tag{5}
+\end{equation*}
+\underline{Induktionsschluss:}\\
+Aus \eqref{eq:5} folgt für $0 \leq a_{n+1}$ Folgendes:\\
+\begin{alignat*}{3}
+&& 0 &\leq & a_{n}^{2} + \frac{1}{4}
+\end{alignat*}
+Diese Aussage gilt, da $\frac{1}{4}$ auf triviale Weise die Aussage erfüllt und $a_{n}^{2}$ immer positiv oder gleich Null sein muss, da eine beliebige Zahl zum Quadrat immer größer gleich Null ist.\\
+Für $a_{n+1} < \frac{1}{2}$ ergibt sich Folgendes:\\
+\begin{alignat*}{5}
+&& a_{n}^{2} + \frac{1}{4} &<& \frac{1}{2} && \;&|& -\frac{1}{4} \\
+\Leftrightarrow && a_{n}^{2} &<& \frac{1}{4} && && \\
+\Leftrightarrow && a_{n} \cdot a_{n} &<& \frac{1}{4} && &&
+\end{alignat*}
+Aufgrund der Induktionsannahme gilt $a_{n} < \frac{1}{2}$. Daher ist das Quadrat von $a_{n}$ auf jeden Fall kleiner als $\frac{1}{4}$.\\
+Nach dem Induktionsprinzip folgt aus dem Induktionsanfang und dem Induktionsschluss die Behauptung. \hfill $\Box$\\
+Es ist zu zeigen, dass $a_{n+1} \geq a_{n}$ für alle $n \in \mathbb{N}$ gilt. Es ergibt sich Folgendes:\\
+\begin{alignat*}{5}
+&& a_{n+1} &\geq & a_{n} && && \\
+\Leftrightarrow && a_{n}^{2} + \frac{1}{4} &\geq & a_{n} && \;&|& -a_{n} \\
+\Leftrightarrow && a_{n}^{2} - a_{n} + \frac{1}{4} &\geq & 0 && \;&|& \text{Binomische Formel erzeugen} \\
+\Leftrightarrow && (a_{n} - \frac{1}{2})^{2} &\geq & 0 && &&
+\end{alignat*}
+Diese Aussage gilt, da ein Quadrat einer beliebigen Zahl immer größer gleich Null ist.
+\end{document}

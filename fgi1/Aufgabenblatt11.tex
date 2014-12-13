@@ -1,0 +1,171 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{stmaryrd}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pagenumbering{arabic}
+\def\thesection{11.\arabic{section})}
+\def\thesubsection{\arabic{subsection}.}
+\def\thesubsubsection{(\alph{subsubsection})}
+\setcounter{section}{2}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\addtolength{\parskip}{\baselineskip}
+
+\begin{document}
+\author{Jim Martens}
+\title{Hausaufgaben zum 25. Juni}
+\maketitle
+
+\section{} %11.3
+\subsection{} %1.
+\subsubsection{} %a
+$M = \{\{A\}\}$\\
+\begin{tabular}{c|cc}
+ & A \\
+ \hline
+$\mathcal{A}_{0}$ & 0 \\
+$\mathcal{A}_{1}$ & 1
+\end{tabular}
+\subsubsection{} %b
+$M = \{\{A,B,C\}\}$\\
+\begin{tabular}{c|ccc|ccc}
+& A & B & C & $\{A,B,C\}$ & $\{\{A,B,C\}\}$ & $A \vee (B \vee C)$\\
+\hline
+$\mathcal{A}_{0}$ & 0 & 0 & 0 & 0 & 0 & 0 \\
+$\mathcal{A}_{1}$ & 0 & 0 & 1 & 1 & 1 & 1 \\
+$\mathcal{A}_{2}$ & 0 & 1 & 0 & 1 & 1 & 1\\
+$\mathcal{A}_{3}$ & 0 & 1 & 1 & 1 & 1 & 1\\
+$\mathcal{A}_{4}$ & 1 & 0 & 0 & 1 & 1 & 1\\
+$\mathcal{A}_{5}$ & 1 & 0 & 1 & 1 & 1 & 1\\
+$\mathcal{A}_{6}$ & 1 & 1 & 0 & 1 & 1 & 1\\
+$\mathcal{A}_{7}$ & 1 & 1 & 1 & 1 & 1 & 1\\
+\end{tabular}
+\subsubsection{} %c
+$M = \{\{A\}, \{B\}, \{C\}\}$\\
+\begin{tabular}{c|ccc|ccc|cc}
+& A & B & C & $\{A\}$ & $\{B\}$ & $\{C\}$ & $\{\{A\}, \{B\}, \{C\}\}$ & $A \wedge (B \wedge C)$\\
+\hline
+$\mathcal{A}_{0}$ & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+$\mathcal{A}_{1}$ & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 \\
+$\mathcal{A}_{2}$ & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 0\\
+$\mathcal{A}_{3}$ & 0 & 1 & 1 & 0 & 1 & 1 & 0 & 0\\
+$\mathcal{A}_{4}$ & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
+$\mathcal{A}_{5}$ & 1 & 0 & 1 & 1 & 0 & 1 & 0 & 0\\
+$\mathcal{A}_{6}$ & 1 & 1 & 0 & 1 & 1 & 0 & 0 & 0\\
+$\mathcal{A}_{7}$ & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+\end{tabular}
+\subsection{} %2.
+\begin{alignat*}{2}
+M_{1} &= \{\{A\}\} \\
+M_{2} &= \{\{\neg A\}\} \\
+M_{3} &= \{\{A, \neg A\}\} \\
+M_{4} &= \{\{A\}, \{\neg A\}\} \\
+M_{5} &= \{\{A\}, \{A, \neg A\}\} \\
+M_{6} &= \{\{\neg A\}, \{A, \neg A\}\} \\
+M_{7} &= \{\{A\}, \{\neg A\}, \{A, \neg A\}\}
+\end{alignat*}\\
+$M_{3}$ ist allgemeingültig. $M_{4}$ und $M_{7}$ sind unerfüllbar. $M_{1}$ und $M_{5}$, sowie $M_{2}$ und $M_{6}$ sind äquivalent zueinander.
+
+%\begin{tabular}{c|c|ccccccc}
+%& A & $\{\{A\}\}$ & $\{\{\neg A\}\}$ & $\{\{A, \neg A\}\}$ & $\{\{A\}, \{\neg A\}\}$ & $\{\{A\}, \{A, \neg A\}\}$ & $\{\{\neg A\}, \{A, \neg A\}\}$ & $\{\{A\}, \{\neg A\}, \{A, \neg A\}\}$\\
+%\hline
+%$\mathcal{A}_{0}$ & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 0 \\
+%$\mathcal{A}_{1}$ & 1 & 1 & 0 & 1 & 0 & 1 & 0 & 0
+%\end{tabular}
+\subsection{} %3.
+Behauptung: $M \cup \{K\}$ ist genau dann erfüllbar, wenn M erfüllbar ist.\\
+Beweis:\\
+Es ist zu zeigen, dass (1) $M \cup \{K\}$ erfüllbar ist, wenn M erfüllbar ist und dass (2) M erfüllbar ist, wenn $M \cup \{K\}$ erfüllbar ist.\\
+\\
+Teilbeweis von (1):\\
+M sei erfüllbar.\\
+$M \cup \{K\}$ ist erfüllbar, wenn es mindestens eine Belegung gibt, für die sowohl M als auch K erfüllt sind.\\
+K ist erfüllt, wenn mindestens eines der Literale in K erfüllt ist.\\
+\\
+Es gilt $A, \neg A \in K$. Unabhängig von der Belegung von A ist K daher immer erfüllt, denn für $\mathcal{A}(A) = 0$ gilt $\mathcal{A}(\neg A) = 1$ und für $\mathcal{A}(A) = 1$ gilt $\mathcal{A}(A) = 1$.\\
+Da K immer erfüllt ist, stellt es bei der Vereinigung mit M keine einschränkende Bedingung dar. Ob die vereinigte Menge erfüllbar ist, hängt damit von M ab. Da M aufgrund der Annahme erfüllbar ist, ist somit auch $M \cup \{K\}$ erfüllbar.\\
+\\
+Teilbeweis für (2):\\
+$M \cup \{K\}$ sei erfüllbar.\\
+$M \cup \{K\}$ ist erfüllbar, wenn es mindestens eine Belegung gibt, für die sowohl M als auch K erfüllt sind. Wie bereits gezeigt, ist K für jede Belegung erfüllt. Damit stellt K keine zusätzliche Bedingung und $M \cup \{K\}$ ist erfüllbar, wenn M erfüllbar ist.\\
+Aufgrund der Annahme ist $M \cup \{K\}$ erfüllbar, womit M ebenfalls erfüllbar ist.\\
+\\
+Es konnten beide Richtungen gezeigt werden, womit die Behauptung bewiesen ist.
+\section{} %11.4
+\subsection{} %1.
+\setcounter{subsubsection}{0}
+\subsubsection{} %a
+\begin{alignat*}{2}
+F_{3} &=& C \wedge (\neg A \vee \neg E \vee D) \wedge E \wedge (\neg C \vee B) \wedge (\neg E  \vee \neg B \vee A) \wedge (\neg D \vee \neg C \vee \neg A) \\
+\intertext{Umformen in Implikationsschreibweise}
+&=& (T \Rightarrow C) \wedge ((A \wedge E) \Rightarrow D) \wedge (T \Rightarrow E) \wedge (C \Rightarrow B) \wedge ((E \wedge B) \Rightarrow A) \wedge ((D \wedge C \wedge A) \Rightarrow \perp) \\
+\intertext{Anwenden des Markierungsalgorithmus}
+&=& (T \Rightarrow C^{1}) \wedge ((A^{3} \wedge E^{1}) \Rightarrow D^{4}) \wedge (T \Rightarrow E^{1}) \wedge (C^{1} \Rightarrow B^{2}) \wedge ((E^{1} \wedge B^{2}) \Rightarrow A^{3}) \wedge ((D^{4} \wedge C^{1} \wedge A^{3}) \Rightarrow \perp) \\
+\intertext{Die Formel ist unerfüllbar.}
+\end{alignat*}\\
+\\\\\\
+Anwenden der P-Resolution:\\
+\begin{tabular}{cccccc}
+($\neg D \vee \neg C \vee \neg A$) & C & ($\neg C \vee B$) & ($\neg E \vee \neg B \vee A$) & E & ($\neg A \vee \neg E \vee D$)  \\
+& ($\neg D \vee \neg A$) & B & ($\neg B \vee A$) & & ($\neg A \vee D$) \\
+& & & A & & \\
+& & $\neg D$ & & D & \\
+& & & $\Box$ & &
+\end{tabular} \\
+Die Formel ist auch nach der P-Resolution unerfüllbar.
+\subsubsection{} %b
+\begin{alignat*}{2}
+F_{4} &=& \neg A \wedge (\neg A \vee C \vee \neg E) \wedge (A \vee \neg C \vee \neg E) \wedge B \wedge (\neg B \vee D) \wedge (\neg B \vee \neg D \vee E) \\
+\intertext{Umformen in Implikationsschreibweise}
+&=& (A \Rightarrow \perp) \wedge ((A \wedge E) \Rightarrow C) \wedge ((C \wedge E) \Rightarrow A) \wedge (T \Rightarrow B) \wedge (B \Rightarrow D) \wedge ((B \wedge D) \Rightarrow E) \\
+\intertext{Anwenden des Markierungsalgorithmus}
+&=& (A \Rightarrow \perp) \wedge ((A \wedge E^{3}) \Rightarrow C) \wedge ((C \wedge E^{3}) \Rightarrow A) \wedge (T \Rightarrow B^{1}) \wedge (B^{1} \Rightarrow D^{2}) \wedge ((B^{1} \wedge D^{2}) \Rightarrow E^{3}) \\
+\intertext{Die Formel ist erfüllbar.}
+\end{alignat*}\\
+Anwenden der P-Resolution:\\
+\begin{tabular}{cccccc}
+($\neg A \vee C \vee \neg E$) & ($\neg B \vee D$) & B & ($\neg B \vee \neg D \vee E$) & ($A \vee \neg C \vee \neg E$) \\
+& D & & ($\neg D \vee E$) & & \\
+& & E & & & \\
+& ($\neg A \vee C$) & & ($A \vee \neg C$) & &
+\end{tabular}\\
+Es können keine weiteren Resolventen mit der P-Resolution gebildet werden. Die Formel ist daher nicht unerfüllbar und damit erfüllbar.
+\subsection{} %2.
+\begin{alignat*}{2}
+F_{5} &=& (A \vee B) \wedge (A \vee D) \wedge (C \vee D) \wedge (\neg A \vee \neg C) \wedge (\neg B \vee \neg D) \wedge (B \vee \neg A \vee \neg D)
+\end{alignat*}\\
+Anwenden der P-Resolution:\\
+\begin{tabular}{cccccc}
+\{A,B\} & \{$\neg B, \neg D$\} & \{A,D\} & \{$\neg A, \neg C$\} & \{C,D\} & \{$B, \neg A, \neg D$\} \\
+& & \{$A, \neg B$\} & & & \\
+& \{A\} & & & & \\
+& & \{$\neg C$\} & & \{$B, \neg D$\} & \\
+& & & \{D\} & & \\
+& \{$\neg B$\} & & & \{B\} & \\
+& & & $\Box$ & &
+\end{tabular}\\
+Die Formel ist nach der P-Resolution unerfüllbar.
+\subsection{} %3.
+\begin{alignat*}{2}
+F_{6} &=& (A \Rightarrow C) \Rightarrow ((B \Rightarrow C) \Rightarrow ((A \vee B) \Rightarrow C)) \\
+\intertext{Eliminieren von Implikationen}
+&=& \neg(\neg A \vee C) \vee (\neg(\neg B \vee C) \vee (\neg(A \vee B) \vee C)) \\
+\intertext{Negationen nach innen ziehen}
+&=& (A \wedge \neg C) \vee ((B \wedge \neg C) \vee ((\neg A \wedge \neg B) \vee C))
+\end{alignat*}\\
+\end{document}

@@ -1,0 +1,286 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\arabic{subsubsection})}
+
+\begin{document}
+\author{Jim Martens}
+\title{Hausaufgaben zum 22./23. November}
+\maketitle
+\section{} %1
+\subsection{} %a
+\begin{tikzpicture}
+	\draw[->] (3, 0) node [below] {a} -- +(-0.5,0.5) node [left] {b};
+	\draw[->] (2.5,0.6) -- +(0.5,0.5) node [above] {c};
+	\draw[->] (3.1,1.1) -- +(0.5,0) node [right] {d};
+	\draw[->] (2.6,0.55) -- +(2,0.35) node [right] {e};
+	\draw[->] (4.6,0.8) -- +(0,-0.5) node [below] {f};
+\end{tikzpicture}
+\\
+\\
+\\
+\begin{tikzpicture}
+	\matrix (firstMatrix) [matrix of nodes] 
+		{ \ & a & b & c & d & e & f \\ 
+		  a & 0 & 1 & 0 & 0 & 0 & 0 \\
+		  b & 0 & 0 & 1 & 0 & 1 & 0 \\
+		  c & 0 & 0 & 0 & 1 & 0 & 0 \\
+		  d & 0 & 0 & 0 & 0 & 0 & 0 \\
+		  e & 0 & 0 & 0 & 0 & 0 & 1 \\
+		  f & 0 & 0 & 0 & 0 & 0 & 0 \\		  
+		};
+	\draw (-1.1,-1.6) -- +(0, 3.2);
+	\draw (-1.5,1.2) -- +(3, 0);
+\end{tikzpicture}
+\subsection{} %b
+Es müssen aufgrund der geforderten Reflexivität folgende Paare hinzugefügt werden:
+(a,a), (b,b), (c,c), (d,d), (e,e), (f,f)
+
+Wegen der geforderten Transitivität sind folgende Paare hinzuzufügen:
+(a,c), (a,e), (a,f), (b,d), (b,f)
+\subsection{} %c
+$R^{+}$:\\
+\begin{tikzpicture}
+	\node (a) {a};
+	\node (b) [above left=0.4cm of a] {b};
+	\node (c) [above right=0.5cm of b] {c};
+	\node (d) [above right=0.4cm of c] {d};
+	\node (e) [below right=0.3cm of d] {e};
+	\node (f) [above=0.5cm of e] {f};
+	\draw (a) -- (b);
+	\draw (b) -- (c);
+	\draw (c) -- (d);
+	\draw (b) -- (e);
+	\draw (e) -- (f);
+\end{tikzpicture}
+\subsection{} %d
+$R$:\\
+\begin{tikzpicture}
+	\node (a) {a};
+	\node (b) [above left=0.4cm of a] {b};
+	\node (c) [above right=0.5cm of b] {c};
+	\node (d) [right=of c] {d};
+	\node (e) [below right=0.4cm of d] {e};
+	\draw[->] (a) -- (b);
+	\draw[->] (b) -- (c);
+	\draw[->] (c) -- (d);
+	\draw[->] (b) -- (e);
+\end{tikzpicture}\\
+Um die Bedingungen einer Äquivalenzrelation zu erfüllen, müssen folgende Paare hinzugefügt werden:\\
+reflexiv: (a,a), (b,b), (c,c), (d,d), (e,e)\\
+symmetrisch und transitiv: (a,c), (a,d), (a,e), (b,a), (b,d), (c,a), (c,b), (d,a), (d,b), (d,c), (d,e), (e,a), (e,b), (e,c), (e,d)\\
+Kurz geschrieben schreibt man $S = A \times A$.
+\section{} %2
+\subsubsection{} %(1)
+\begin{tikzpicture}
+	\node (a) {a};
+	\node (b) [above left=0.5cm of a] {b};
+	\node (c) [above right=0.4cm of b] {c};
+	\node (d) [right=0.5cm of c] {d};
+	\node (e) [right=0.5cm of d] {e};
+	\node (f) [below right=0.4cm of e] {f};
+	\draw[->] (a) -- (b);
+	\draw[->] (b) -- (d);
+	\draw[->] (e) -- (f);
+\end{tikzpicture}
+\\
+\\
+\\
+\begin{tikzpicture}
+	\matrix (secondMatrix) [matrix of nodes] 
+		{ \ & a & b & c & d & e & f \\ 
+		  a & 0 & 1 & 0 & 0 & 0 & 0 \\
+		  b & 0 & 0 & 0 & 1 & 0 & 0 \\
+		  c & 0 & 0 & 0 & 0 & 0 & 0 \\
+		  d & 0 & 0 & 0 & 0 & 0 & 0 \\
+		  e & 0 & 0 & 0 & 0 & 0 & 1 \\
+		  f & 0 & 0 & 0 & 0 & 0 & 0 \\		  
+		};
+	\draw (-1.1,-1.6) -- +(0, 3.2);
+	\draw (-1.5,1.2) -- +(3, 0);
+\end{tikzpicture}
+\subsubsection{} %(2)
+Um die Bedingungen zu erfüllen müssen folgende Paare hinzugefügt werden:\\
+reflexiv: (a,a), (b,b), (c,c), (d,d), (e,e), (f,f)\\
+transitiv: (a,d)
+\subsubsection{} %(3)
+\begin{tikzpicture}
+	\node (a) {a};
+	\node (b) [above left=0.5cm of a] {b};
+	\node (c) [above right=0.4cm of b] {c};
+	\node (d) [right=0.4cm of c] {d};
+	\node (e) [right=of d] {e};
+	\node (f) [above right=0.4cm of e] {f};
+	\draw (a) -- (b);
+	\draw (b) -- (d);
+	\draw (e) -- (f);
+\end{tikzpicture}
+\subsubsection{} %(4)
+Um die Bedingungen zu erfüllen müssen folgende Paare hinzugefügt werden:\\
+reflexiv: (a,a), (b,b), (c,c), (d,d), (e,e), (f,f)\\
+symmetrisch: (b,a), (d,a), (d,b), (f,e)\\
+transitiv: (a,d)\\
+Verkürzt kann folgendes geschrieben werden: \\
+\begin{equation*}
+S = R \,\cup\, \{(a,a), (a,d), (b,a), (b,b), (c,c), (d,a), (d,b), (d,d), (e,e), (f,e), (f,f)\}
+\end{equation*}
+\section{} %3
+\subsection{} %a
+R = {(a,a), (a,b), (b,a), (b,b), (b,c), (c,b), (c,c), (d,d)}
+
+\begin{tikzpicture}
+	\node (a) {a};
+	\node (b) [above left=0.4cm of a] {b};
+	\node (c) [above right=0.5cm of b] {c};
+	\node (d) [below right=0.4cm of c] {d};
+	\path (a) edge[loop below] (a);
+	\draw[->] (a) to[->,out=135,in=315] (b);
+	\draw[->] (b) to[->,out=270,in=180] (a);
+	\path (b) edge[loop left] (b);
+	\draw[->] (b) to[->,out=90,in=180] (c);
+	\draw[->] (c) to[->,out=225,in=45] (b);
+	\path (c) edge[loop above] (c);
+	\path (d) edge[loop right] (d);
+\end{tikzpicture}
+
+Es gibt eine Kante von a nach b und von b nach c, aber nicht von a nach c, also ist diese Relation nicht transitiv. Jedes Element der Grundmenge steht in Relation zu sich selbst, also ist die Relation reflexiv. Zu jeder Kante x nach y gibt es eine Rückkante y nach x, also ist R symmetrisch.
+\subsection{} %b
+R = {(a,a), (a,b), (b,b), (c,c), (d,d)}
+
+\begin{tikzpicture}
+	\node (a) {a};
+	\node (b) [above left=0.4cm of a] {b};
+	\node (c) [above right=0.5cm of b] {c};
+	\node (d) [below right=0.4cm of c] {d};
+	\path (a) edge[loop below] (a);
+	\draw[->] (a) to[->,out=135,in=315] (b);
+	\path (b) edge[loop left] (b);
+	\path (c) edge[loop above] (c);
+	\path (d) edge[loop right] (d);
+\end{tikzpicture}
+
+Man kommt von a nach b, aber nicht von b nach a, also ist die Relation nicht symmetrisch. Jedes Element der Grundmenge steht in Relation zu sich selbst, also ist die Relation reflexiv. Es gibt keine Kanten x nach y und y nach z, für die keine Kante x nach z existiert, also ist die Relation transitiv.
+\subsection{} %c
+R = {(a,a), (a,b), (b,a), (b,b)}
+
+\begin{tikzpicture}
+	\node (a) {a};
+	\node (b) [above left=0.4cm of a] {b};
+	\node (c) [above right=0.5cm of b] {c};
+	\node (d) [below right=0.4cm of c] {d};
+	\path (a) edge[loop below] (a);
+	\draw[->] (a) to[->,out=135,in=315] (b);
+	\draw[->] (b) to[->,out=270,in=180] (a);
+	\path (b) edge[loop left] (b);
+\end{tikzpicture}
+
+Nicht jedes Element der Grundmenge steht in Relation mit sich selbst, also ist die Relation nicht reflexiv. Zu jeder Kante x nach y gibt es eine Rückkante y nach x, also ist die Relation symmetrisch. Es gibt keine Kanten x nach y und y nach z, für die keine Kante x nach z existiert, also ist die Relation transitiv.
+\section{} %4
+\subsection{} %a
+R = {(1,1), (1,2), (1,3), (1,4), (1,5), (1,6), (2,2), (2,4), (2,6), (3,3), (3,6), (4,4), (5,5), (6,6)}
+
+Graph:\\
+\begin{tikzpicture}
+	\node (1) {1};
+	\node (2) [above left=0.4cm of 1] {2};
+	\node (3) [above=0.4cm of 2] {3};
+	\node (4) [above right=0.4cm of 3] {4};
+	\node (5) [below right=0.4cm of 4] {5};
+	\node (6) [above right=0.4cm of 1] {6};
+	\path (1) edge[loop below] (1);
+	\draw[->] (1) -- (2);
+	\draw[->] (1) -- (3);
+	\draw[->] (1) -- (4);
+	\draw[->] (1) -- (5);
+	\draw[->] (1) -- (6);
+	\path (2) edge[loop left] (2);
+	\draw[->] (2) -- (4);
+	\draw[->] (2) -- (6);
+	\path (3) edge[loop left] (3);
+	\draw[->] (3) -- (6);
+	\path (4) edge[loop above] (4);
+	\path (5) edge[loop right] (5);
+	\path (6) edge[loop right] (6);
+\end{tikzpicture}
+
+Hasse-Diagramm:\\
+\begin{tikzpicture}
+	\node (1) {1};
+	\node (2) [above left=0.4cm of 1] {2};
+	\node (3) [above right=0.4cm of 1] {3};
+	\node (4) [above=0.4cm of 2] {4};
+	\node (5) [right=0.5cm of 3] {5};
+	\node (6) [above right=0.4cm of 4] {6};
+	\draw (1) -- (2);
+	\draw (1) -- (3);
+	\draw (1) -- (5);
+	\draw (2) -- (4);
+	\draw (2) -- (6);
+	\draw (3) -- (6);
+\end{tikzpicture}
+
+\subsection{} %b
+Graph:\\
+\begin{tikzpicture}
+	\node (0) {$\emptyset$};
+	\node (1) [above left=2.5 of 0] {$\{1\}$};
+	\node (2) [above right=2.5 of 0] {$\{2\}$};
+	\node (3) [above=4 of 0] {$\{1,2\}$};
+	\path (0) edge[loop below] (0);
+	\draw[->] (0) -- (1);
+	\draw[->] (0) -- (2);
+	\draw[->] (0) -- (3);
+	\path (1) edge[loop left] (1);
+	\draw[->] (1) -- (3);
+	\path (2) edge[loop right] (2);
+	\draw[->] (2) -- (3);
+	\path (3) edge[loop above] (3);
+\end{tikzpicture}
+
+Hasse-Diagramm:\\
+\begin{tikzpicture}
+	\node (0) {$\emptyset$};
+	\node (1) [above left=2.5 of 0] {$\{1\}$};
+	\node (2) [above right=2.5 of 0] {$\{2\}$};
+	\node (3) [above=4 of 0] {$\{1,2\}$};
+	\draw (0) -- (1);
+	\draw (0) -- (2);
+	\draw (1) -- (3);
+	\draw (2) -- (3);
+\end{tikzpicture}
+\subsection{} %c
+$A = P(M) = \{\emptyset, \{1\}, \{2\}, \{3\}, \{1,2\}, \{1,3\}, \{2,3\}, \{1,2,3\}\}$
+\begin{tikzpicture}
+	\node (0) {$\emptyset$};
+	\node (1) [above left=2.5 of 0] {$\{1\}$};
+	\node (2) [above right=2.5 of 0] {$\{2\}$};
+	\node (3) [above=1.5 of 2] {$\{3\}$};
+	\node (4) [above=1.5 of 1] {$\{1,2\}$};
+	\node (5) [above=1.5 of 3] {$\{1,3\}$};
+	\node (6) [above=1.5 of 4] {$\{2,3\}$};
+	\node (7) [above=6.5 of 0] {$\{1,2,3\}$};
+	\draw (0) -- (1);
+	\draw (0) -- (2);
+	\draw (0) -- (3);
+	\draw (1) -- (4);
+	\draw (1) -- (5);
+	\draw (2) -- (4);
+	\draw (2) -- (6);
+	\draw (3) -- (5);
+	\draw (3) -- (6);
+	\draw (4) -- (7);
+	\draw (5) -- (7);
+	\draw (6) -- (7);
+\end{tikzpicture}
+\end{document}

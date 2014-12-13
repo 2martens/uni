@@ -1,11 +1,10 @@
 %!TEX encoding = UTF-8 Unicode
 \documentclass[12pt]{scrartcl}
-%\usepackage[applemac]{inputenc} % Mac-Umlaute direkt verwenden öäüß
-%\usepackage[isolatin]{inputenc} % PC-Umlaute direkt verwenden 
 \usepackage[utf8]{inputenc} % Unicode funktioniert unter Windows, Linux und Mac
 \usepackage[T1]{fontenc}
 \usepackage{times}
 \usepackage[ngerman]{babel}
+\usepackage{fancyref}
 \usepackage{csquotes}
 \usepackage[
 backend=biber,
@@ -19,7 +18,6 @@ citestyle=ieee
 \usepackage[scaled]{helvet}
 \usepackage{a4wide}
 \usepackage{rotating}
-\usepackage[german]{fancyref}
 \usepackage{listings}\lstset{breaklines=true,breakatwhitespace=true,frame=leftline,captionpos=b,xleftmargin=6ex,tabsize=4,numbers=left,numberstyle=\ttfamily\footnotesize,basicstyle=\ttfamily\footnotesize}
 \sloppy
 \setlength{\parindent}{0em}
@@ -28,6 +26,7 @@ citestyle=ieee
 \addbibresource{sem.bib}
 
 \begin{document}
+\hyphenation{in-te-res-sant in-te-res-san-te}
 
 \newpage
 \thispagestyle{empty}
@@ -56,31 +55,27 @@ Betreuer: Hannes Federrath \par
 
 \newpage
 \section{Vorbemerkung}
-Problem: VPN (Virtual Private Network) aufsetzen
-Relevanz: sichere Kommunikation zwischen zwei privaten Netzwerken
+Mit den Enthüllungen von Edward Snowden hat sichere Kommunikation eine ganz neue Bedeutung bekommen. War es vorher hauptsächlich für Informatiker und Unternehmen von Interesse, so ist sichere Kommunikation mittlerweile im Bewusstsein der meisten Menschen angekommen. Doch wie sieht sichere Kommunikation überhaupt aus? Eine Möglichkeit ist die Verschlüsselung von E-Mails zur Sicherung der darin enthaltenen Korrespondenz. Dieses zugegeben sehr interessante Themengebiet wird uns aber in diesem Paper nicht beschäftigen. Stattdessen schauen wir uns die sichere Kommunikation zwischen zwei Rechnern an. Diese ist nämlich im Gegensatz zu E-Mail-Verschlüsselung nicht so offensichtlich und kann auf unterschiedliche Weise realisiert werden. Bei räumlich nicht weit entfernten Rechnern kann die Kommunikation über ein LAN-Kabel und nicht über das Internet erfolgen. Damit ist die Kommunikation solange sicher, wie die beiden Rechner und die Verbindung physisch sicher sind. Doch in den meisten Fällen stehen die beiden Rechner so weit voneinander entfernt, dass die Kommunikation über das Internet läuft. Doch spätestens am Router haben wir keine Kontrolle mehr über die Verbindungsstrecke und die Gegenstelle hat erst wieder am dem Router eine Kontrolle über die Verbindung. Wie also die unkontrollierbare Zwischenstrecke nutzen und gleichzeitig sicher kommunizieren? Geht das überhaupt? Die Lösung ist, wie bei E-Mail-Verschlüsselung, eine Ende-zu-Ende-Verschlüsselung, wobei das Ende hier nicht zwei Mailprogramme sind, sondern zwei Rechner.
+
+Eine solche durch Verschlüsselung gesicherte Kommunikation zwischen zwei Rechnern über ein unsicheres Zwischennetz wird auch Virtual Private Network oder kurz VPN genannt. In diesem Paper werden wir uns mit zwei VPN-Lösungen beschäftigen: IPSec und OpenVPN. Im nächsten Abschnitt werden zunächst ein paar Grundbegriffe geklärt, um dann genauer in IPSec und anschließend in OpenVPN einzusteigen. Diesen beiden Vorstellungen folgt ein Vergleich, um dann mit den Schlussbemerkungen zu schließen.
+
 \section{Grundlagen}
-Was sind VPNs? Warum braucht man sie? Wozu werden sie verwendet?
-Was ist das OSI-Referenzmodell? Wie ist es aufgebaut?
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
-\subsection{Begrifferklärung: VPN}
-VPN ist eine Abkürzung für Virtual Private Network. Was ein private network, also ein privates Netwerk ist, sollte klar sein. Man kann kontrollieren wer auf dieses Netzwerk einen Zugriff haben soll und die Anzahl der Menschen die Zugriff haben ist außerdem örtlich begrenzt. Das heißt also der Vorteil eines privaten Netzwerkes ist, dass man einfach kontrollieren kann wer Zugriff haben soll, und dass der Datenaustausch nicht nach außen dringt.
+Ein VPN ist eine gesicherte Kommunikationsverbindung zwischen zwei privaten Netzwerken. Das in der Vorbemerkung genannte Beispiel mit den zwei Rechnern ist eine Verkürzung, wenngleich sie korrekt ist. Der Internetzugang wird in den allermeisten Fällen durch Router sichergestellt. Diese sind selber kleine Computer und stehen im Internet repräsentativ für das Netzwerk, dem sie angehören. Daher passt dann auch wieder das in der Vorbemerkung genannte Beispiel mit den zwei Rechnern. 
 
-Nun gibt es aber Fälle in denen man Zugriff auf ein privates Netzwerk und dessen Ressourcen haben möchte, obwohl man nicht vor Ort ist. Ein gutes Beispiel ist hier der Zugriff auf das Netzwerk vom Arbeitsplatz, da dies häufig benötigt wird, wenn man von zu Hause aus arbeiten möchte.
+Die VPN-Verbindung zwischen zwei privaten Netzwerken funktioniert in einer Weise, dass beide Netzwerke so miteinander verbunden werden, dass sie für Rechner in einer der beiden Netze wie ein großes privates Netz wirken. Daher ist auch der Zugriff auf die Rechner des anderen Netzes mit ihren privaten IP-Adressen (Adressen aus dem nicht-öffentlichen Bereich, meistens mit 192.168 beginnend) möglich. Dabei ist der Weg, den die IP-Pakete von einem Netz zum anderen nehmen, für die Rechner auf beiden Seiten irrelevant.
 
-Ein VPN kann nun genau dafür verwendet werden. Um das ganze noch einmal zu verbildlichen, kann man sich das nun als ein sehr langes LAN-Kabel vorstellen. Es wird also eine Verbindung über das Internet mit dem privaten Netzwerk hergestellt. Verschiedene Aspekte eines privaten Netzwerkes können dabei unterschiedlich erreicht werden. Die Kontrolle wer auf das Netzwerk Zugriff hat kann z.B. erreicht werden, indem man die Identität beim Verbinden überprüft und unerwünschten Menschen den Zutritt verwehrt. So kann der Nutzer identifiziert werden und Fremde werden ausgeschlossen. Da die Daten nun über das Internet ausgetauscht werden, ist die Vertraulichkeit der Daten natürlich bedroht, was aber durch die Verschlüsselung dieser verhindert werden kann.
+VPNs werden für verschiedenste Dinge eingesetzt. Bei Unternehmen kommen sie häufig zum Einsatz, um Inhalte aus dem Intranet auch von zu Hause oder unterwegs aus abrufen zu können. Diese Verwendung macht sich zunutze, dass die IP-Pakete mit der IP-Adresse der Endstelle des VPNs unterwegs sind (in diesem Fall der Router im Netzwerk des Unternehmens. Für z.B. den Webserver scheint es so, als ob man sich innerhalb des Netzwerks befindet, obgleich man physisch einige hundert Kilometer entfernt sein kann.
 
-Durch dieses verschiedenen Maßnahmen hat man also die Vorteile eines privaten Netzwerkes Orts-unabhängig.
+Diese gleiche Eigenschaft wird auch genutzt, um IP-Sperren zu umgehen. Viele Streamingdienste bieten unterschiedliche Produkte je geographischer Region an. Die Separierung geschieht durch die Kontrolle der IP-Adressräume, da jede geographische Region gewisse IP-Adressräume zur Verfügung hat. Mithilfe des VPNs kann nun bspw. von Europa aus eine Verbindung in die USA aufgebaut werden, sodass auf die USA beschränkte Angebote plötzlich sichtbar werden. Eine verwandte Anwendung ist die Umgehung von staatlichen Zensurmaßnahmen, in dem durch eine VPN-Verbindung aus dem abgeschotteten Netz "`ausgebrochen"' werden kann. Allerdings hängt der Erfolg davon stark von den staatlichen Gegenmaßnahmen ab. Ist VPN-Verkehr als solcher zu erkennen, dann kann dieser gezielt geblockt werden, auch wenn der Inhalt nicht erkannt wird.
 
-Es gibt aber noch viel mehr Einsatzmöglichkeiten. 
-VPN werden oft benutzt, um den eigenen Traffic im Internet zu verschleiern. Ist man mit einem VPN verbunden, so können die Daten, die man aus dem Internet bezieht zunächst zum privaten Netzwerk geleitet werden und dann erst zum eigentlichen Ziel. So erreicht man, dass für die Außenwelt nur IP-Adresse des privaten Netzwerks sichtbar ist, nicht aber die eigene.
-Diesen Umstand kann man beispielsweise auch für Services nutzen, die nur in bestimmten Ländern verfügbar sind, z.B. verschiedene Musik- und Video-Streamingdienste. Eine VPN-Verbindung in das entsprechende Land, kann diese Sperre umgehen. 
-IPSec und OpenVPN sind zwei Lösungen, um ein solches Netzwerk zu errichten. Im Folgenden werden wir näher darauf eingehen, wie dies jeweils technisch umgesetzt ist.
+Es ist erkennbar, dass es eine Reihe von Anwendungsmöglichkeiten gibt. Die konkrete Umsetzung der VPN-Verbindung hängt jedoch stark von der verwendeten Technologie, in unserem Fall IPSec und OpenVPN ab. Im Folgenden daher eine Vorstellung von IPSec und OpenVPN.
 
 \section{IPSec}
+%TODO Referenzen
 \subsection{Entstehungsgeschichte}
 IPSec ist unter der Aufsicht eines Komitees entstanden. Diese Vorgehensweise wurde dabei gezwungenermaßen auferlegt und erschwerte nach Ansicht vieler Mitwirkender die Arbeit erheblich. \footnote{Ferguson, Niels, and Bruce Schneier. ``A cryptographic evaluation of IPsec."' Counterpane Internet Security, Inc 3031 (2000).} 
 
-Die Entstehungsweise führte dazu, dass IPSec unnötig kompliziert wurde. Die einen Mitglieder wollten die eine Lösung implementieren und andere plädierten für eine andere Lösung, was dazu führte, dass beide Lösungen implementiert wurden. Dies geht jedoch zu Lasten der Nutzbarkeit. Zu viele Optionen führen nicht nur zur Verwirrung und Komplizierung der Implementation von IPSec, es kann vor allem auch zu Sicherheitslücken führen. Experten bemängelten diese Komplexität.
+Die Entstehungsweise führte dazu, dass IPSec unnötig kompliziert wurde. Die einen Mitglieder wollten die eine Lösung implementieren und andere plädierten für eine andere Lösung, was dazu führte, dass beide Lösungen implementiert wurden. Dies geht jedoch zu Lasten der Nutzbarkeit. Zu viele Optionen führen nicht nur zur Verwirrung und Komplizierung der Implementation von IPSec bei den Nutzern, es kann vor allem auch zu Sicherheitslücken führen. Experten bemängelten diese Komplexität.
 
 Die erste Version von IPSec ist 1995\cite{RFC1825} spezifiziert worden. Doch über die Jahre ist der Standard immer weiter entwickelt worden und so gibt es eine zweite Version aus 1998\cite{RFC2401} und eine dritte aus 2005\cite{RFC4301}. Diese gelten zwar allgemein als V2 und V3, jedoch sind verschiedene Aspekte von IPSec in verschiedenen sogenannten ``Request for Comments"', kurz RFC, spezifiziert. So gibt es beispielsweise ein RFC, dass sich allgemein auf IPSec bezieht, aktuell RFC 4301 aus 2005, und es gibt beispielsweise ein RFC, dass sich auf die zu verwendenden Verschlüsselungsalgorithmen bezieht, aktuell RFC 7321 bereits aus 2014. So ist gewährleistet, dass IPSec weiterhin auf dem neuesten Stand gehalten werden kann, ohne dass man jedes mal die komplette Spezifikation überarbeiten muss.
 
@@ -93,7 +88,7 @@ Die folgenden RFCs sind für IPSec relevant:
 \item RFC 5996: Beschreibt das Internet Key Exchange Protocol Version 2 (IKEv2)\cite{RFC5996}
 \item RFC 4307: Gibt vor welche Algorithmen für IKEv2 verwendet werden sollten\cite{RFC4307}
 \end{itemize}
-Es gibt noch weitere RFCs, die man IPSec zuordnen kann, doch dies sind die Wichtigsten. Im folgenden Abschnitt werden wir näher auf die technischen Aspekte von IPSec eingehen und die Themen der einzelnen RFCs näher betrachten.
+Es gibt noch viel mehr RFCs die man IPSec zuordnen kann, doch dies sind die wichtigsten. Im folgenden Abschnitt werden wir näher auf die technischen Aspekte von IPSec eingehen und die Themen der einzelnen RFCs näher betrachten.
 
 \subsection{Technischer Aufbau}
 \subsubsection{Tunnel Modus und Transport Modus}
@@ -152,22 +147,25 @@ Nachfolgende Kommunikation bezüglich IKE wird CREATE\_CHILD\_SA genannt und kan
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{OpenVPN}
 %\input{VPN}
+%TODO insgesamt gesehen: Referenzen
 Was ist OpenVPN? Wer ist dafür verantwortlich? Wie funktioniert es?
-\subsection{Was ist ein VPN?}
-Man stellt sich unter einem Netzwerk immer Verbindungen zwischen einzelnen Computern in Form von Verkabelungen vor. Ein VPN verbindet hingegen Rechner oder ganze Netzwerke über bereits vorhandene Netzwerke hinweg.
 
-Virtuelle Private Netzwerke (VPN) erlauben eine sichere, stabile und preisgünstige Kommunikation über das Internet. Mit ihrer Hilfe können verteilte Unternehmensnetze verbunden werden oder Außendienstmitarbeiter auf Ressourcen und Daten in dem Unternehmensnetz zugreifen. Sie bieten eine kostengünstige und sichere Anbindung von Filialen an eine Zentrale und erlauben den Einsatz von Telearbeitsplätzen, bei denen die Angestellten ihre Arbeit zu Hause erledigen.
+\subsection{Was ist OpenVPN?}
+%TODO hier müsste eher stehen was OpenVPN technisch gesehen ist
+Beispielsweise:
+Open VPN ist eine VPN-Lösung, die TLS-basiert ist und im OSI-Referenzmodell in der Anwendungsschicht angesiedelt ist. Unter den TLS-basierten VPN-Implementationen ist Open VPN eine sehr weit verbreitete Implementation, die plattformübergreifend verfügbar ist.
 
-\subsection{Was ist ein OpenVPN?}
+%TODO auch interessant wäre (gerade im Gegensatz zu IPSec), wer für Open VPN verantwortlich zeichnet (Komitee, Firma, Entwicklercommunity)
 
 Open VPN ist eine VPN-Lösung, die unter Linux, Windows und vielen weiteren Betriebssystemen eingesetzt werden kann.
 Open VPN ist eine freie Software und steht unter der GPL ( GNU General Public License ).
 
 \subsection{Verschlüsselung bei OpenVPN}
 
+%TODO auf TLS eingehen in technischer Sicht -> Wie funktioniert die Verschlüsselung mit TLS (z.B. Handshake)
 OpenVPN benutzt zur Authentifizierung und Verschlüsselung der Daten kryptografische Verfahren auf Basis von TLS (Transport Layer Security). TLS ist ein Verschlüsselungsprotokoll zur Datenübertragung und der Nachfolger vom bekannteren SSL (Secure Sockets Layer).Die meisten Internetbrowser unterstützen TLS-Verbindungen. Dieses Protokoll wird im Internet u.a. zum Aufbau von sicheren Verbindungen  (HTTPS-Verbindungen) bei Banken oder Shopsystemen  eingesetzt. Daran erkennt man , dass dies allgemein anerkannte und vor allem auch ausgereifte  Standardverfahren sind.
 
-Da OpenVPN diese Verfahren benutzt, kann kein IPSec eingesetzt werden! Dies bedeutet, dass man die Windows-internen Funktionen zum Herstellen einer Verbindung nicht verwenden kann. Das können wir als Nachteil, aber auch als Vorteil sehen. Der Nachteil ist, dass wir auf jedem Rechner OpenVPN instalieren müssen und mit Betriebssystemen, für die es nicht zur Verfügung steht, keine Verbindung herstellen können.Der Vorteil ist, dass wir sich nicht wirklich mit dem Einrichten von VPNs auf "fremden" Systemen auskennen müssen. Es wird ja immer OpenVPN benutzt. Weiterhin ist man auch nicht von eventuell auftretenden Problemen bei Updates des Systems betroffen.
+Da OpenVPN diese Verfahren benutzt, kann kein IPSec eingesetzt werden! Dies bedeutet, dass man die Windows-internen Funktionen zum Herstellen einer Verbindung nicht verwenden kann. Das können wir als Nachteil, aber auch als Vorteil sehen. Der Nachteil ist, dass wir auf jedem Rechner OpenVPN instalieren müssen und mit Betriebssystemen, für die es nicht zur Verfügung steht, keine Verbindung herstellen können.Der Vorteil ist, dass wir sich nicht wirklich mit dem Einrichten von VPNs auf fremden Systemen auskennen müssen. Es wird ja immer OpenVPN benutzt. Weiterhin ist man auch nicht von eventuell auftretenden Problemen bei Updates des Systems betroffen.
 
 Zur Authentifizierung können statische Schlüssel (Preshared Keys) oder Zertifikate benutzt werden. Statische Schlüssel gelten im Vergleich mit Zertifikaten  als weniger sicher, sind aber einfacher zu erstellen und zu verwalten. Zertifikate kann man sich selbst ausstellen oder bei so genannten Zertifizierungsstellen beantragen. Für Firmen ist dies allerdings meist mit Kosten verbunden. Der Vorteil von Zertifizierungsstellen ist, dass die Zertifikate weltweit einsetzbar sind und ihre Echtheit von diesen Stellen bestätigt wird. Zum Aufbau von firmeninternen Verbindungen sind diese Echtheitsbestätigungen aber nicht zwingend erforderlich.
 
@@ -188,9 +186,6 @@ Im Routing-Modus wird eine Verbindung zwischen zwei Gegenstellen über das IP-Pr
 * Bridging-Modus : 
 
 Beim Bridging-Modus werden zwei Netzwerke miteinander verbunden. Hierbei spielt das benutzte Protokoll der Netzwerke keine Rolle. Allerdings wird auch der komplette Netzwerkverkehr übermittelt. Daher hat man im Gegensatz zum Routing-Modus einen höheren Datendurchsatz.
-
-
-
 
 \section{Vergleich von IPSec mit OpenVPN}
 
@@ -226,7 +221,10 @@ Ein weiterer Punkt bei der Vertraulichkeit ist die Authentifizierungsmethode. IP
 
 Bei den Authentifizierungsalgorithmen hat jedoch IPSec einen Vorteil, denn es wird sowohl die Nutzung einer digitalen Signatur als auch die Verwendung eines Algorithmus, der auf einem geheimen Schlüssel basiert, ermöglicht. TLS benötigt hingegen zwangsweise eine digitale Signatur. Sollten alle Algorithmen mit digitaler Signatur ausfallen, kann IPSec weiterhin implementiert werden, TLS jedoch nicht.\cite{Alshamsi2005}
 
-Zusammenfassend kann für den Bereich der Vertraulichkeit gesagt werden, dass sowohl IPSec als auch TLS hinreichende Vertraulichkeit bieten.
+Abseits der Verschlüsselung selber ist jedoch auch die Reichweite der Verschlüsselung von Interesse. Hier vergleichen wir IPSec mit OpenVPN. Bei IPSec werden die Pakete verschlüsselt, nicht jedoch ihr Inhalt. Werden zwei Netze verbunden, so ist nur der VPN-Tunnel selber vor einem Angriff geschützt. Aber der Weg von der Anwendung zum VPN-Tunnel und vom VPN-Tunnel zur Anwendung ist nicht geschützt. Sobald sich also ein Angreifer innerhalb eines der beiden Netzwerke befindet, ist IPSec ohne Schutzwirkung.
+Im Gegensatz dazu verschlüsselt OpenVPN von Anwendung zu Anwendung und damit wirklich Ende-zu-Ende. Da ist es dann auch nicht mehr wichtig, ob sich der Angreifer im Netzwerk befindet, da er nur verschlüsselte Daten sehen kann.\cite{Sun2011}
+
+Zusammenfassend kann für den Bereich der Vertraulichkeit gesagt werden, dass sowohl IPSec als auch TLS hinreichende Vertraulichkeit bieten. Allerdings unterliegt IPSec bei der Effizienz der Vertraulichkeit ganz klar OpenVPN.
 
 \subsection{Integrität}
 Neben der Vertraulichkeit ist auch die Integrität wichtig. Daher werden wir im folgenden Abschnitt vergleichen, welche Methoden von IPSec und OpenVPN zur Wahrung der Integrität verwendet werden.
@@ -240,20 +238,14 @@ Als Fazit für die Integrität kann gelten, dass es keine wirklichen Unterschied
 \subsection{Verfügbarkeit}
 Das dritte Schutzziel ist Verfügbarkeit. Traditionell fallen Dinge wie DDOS-Angriffe\footnote{Distributed-Denial-of-Service-Angriffe} unter dieses Schutzziel bzw. beeinträchtigen es. In unserem Zusammenhang ist die Durchlässigkeit bei Firewalls von Interesse, also ob ein VPN durch eine der beiden Technologien gezielt geblockt werden kann. Auch die Verbreitung spielt eine Rolle, denn eine weit verbreitete Technologie macht es intuitiv gesehen erst einmal "`einfacher"' eine Verbindung zwischen zwei Netzen aufzubauen.
 
-Beginnen wir bei Firewalls. Dort gilt, dass IPSec in geringem Maße im Nachteil ist, da es feste Protokolle und Ports benötigt. Ein gezieltes Blocken von IPSec-basierten VPNs ist daher praktikabel. Im Vergleich dazu kann OpenVPN auf jedem Port mit UDP oder TCP laufen. Um restriktive Firewalls zu überwinden, kann der Port 443 und TCP benutzt werden. Dadurch sieht der Traffic von OpenVPN wie normaler HTTPS-Traffic aus und kann nicht gezielt gefiltert werden.\cite{ivpn.net}
+Beginnen wir bei Firewalls. Dort gilt, dass IPSec in geringem Maße im Nachteil ist, da es feste Protokolle und Ports benötigt. Ein gezieltes Blocken von IPSec-basierten VPNs ist daher praktikabel. Im Vergleich dazu kann OpenVPN auf jedem Port mit UDP oder TCP laufen. Um restriktive Firewalls zu überwinden, kann der Port 443 und TCP benutzt werden. Dadurch sieht der Traffic von OpenVPN wie normaler HTTPS-Traffic aus und kann nicht gezielt gefiltert werden.\cite{Sun2011}
 
-Bei der Verbreitung hat IPSec wiederum einen leichten Vorsprung, denn die meisten Betriebssysteme unterstützen es nativ. Für OpenVPN muss hingegen jeweils ein Client installiert werden. Die Form des Client unterscheidet sich je nach Betriebssystem und ist in den meisten Fällen innerhalb von 5 Minuten erledigt.\cite{ivpn.net}
+Bei der Verfügbarkeit auf unterschiedlichen Betriebssystemen und Implementationen ist zu beachten, wofür das VPN eingesetzt wird. Wenn es für eine Remoteverbindung genutzt wird, dann liegt IPSec hinten, da es auf beiden Geräten der Verbindung einen entsprechenden Client benötigt. OpenVPN bedarf nur der Einrichtung in dem privaten Netz, auf das man zugreifen möchte. Für den Remotezugriff muss keine extra Software installiert werden. Wird das VPN stattdessen für eine feste Verbindung zwischen zwei Endpunkten mit statischen IP-Adressen verwendet (z.B. zwei Router), dann ist IPSec aufgrund der Standardisierung und vielen Möglichkeiten im Vorteil.\cite{Sun2011} 
 
-Für die Verwendung hinter hochrestriktiven Firewalls ist OpenVPN im Vorteil, da es die zu 99\% immer offenen Ports 80 und 443 mitbenutzen kann und somit nicht von normalem Browsertraffic zu unterscheiden ist. Bei allen Nutzungsszenarien spielt es jedoch keine Rolle, ob IPSec oder OpenVPN eingesetzt werden.
+Vor diesem Hintergrund gewinnte OpenVPN eindeutig das Rennen, wenn es um Remoteverbindungen geht. Bei Verbindungen zwischen zwei festen Endpunkten hat IPSec jedoch die Nase vorn, da es beidseitig hohe Standards voraussetzt.
 
 \subsection{Performance}
 Nachdem wir IPSec und OpenVPN bezüglich der Schutzziele verglichen haben, widmen wir uns jetzt der Performance.
-
-Dabei beziehen wir uns auf den bereits genannten Vergleich von Kotuliak\cite{Kotuliak2011}. Zum Vergleich wurden zwei Rechner genommen, die über ein 1 GBit Ethernet verbunden waren. Auf beiden Rechnern lief Windows Vista. Zusätzlich lief auf beiden eine virtuelle Maschine von Debian mit der VM-Software VMware. Die beiden virtuellen Maschinen waren mit Ausnahme der IP und des Rechnernamens identisch.
-
-Aufgrund des höheren Rechenaufwands durch eine virtuelle Maschine können minimale Unterschiede besser erkannt werden. Diese Unterschiede sind vor allem technischer Natur: IPSec benötigt einen low-level Zugriff auf das Netzwerkinterface, um die Pakete zu manipulieren. Dafür operiert IPSec im Ring0 des Kernel-Space.\cite{Kotuliak2011}
-
-Der Kernel-Space ist in Ringe unterteilt, wobei Ring0 für den Kernel und andere essentielle Prozesse reserviert ist. Ring1 ist für andere Systemprozesse reserviert, die low-level Zugriff auf Hardware benötigen. Je weiter man sich von Ring0 entfernt, desto weniger Privilegien haben die Prozesse. In Ring3 findet man schließlich die meisten Userprozesse, u.a. auch TLS-Implementationen. Prozesse in Ringen mit höheren Nummern können Prozesse aus Ringen mit niedrigeren Ringen nicht stören.\cite{Kotuliak2011}
 
 Mit diesem technischen Hintergrundwissen ausgestattet, können wir die Ergebnisse des Vergleichs betrachten. Der durchschnittliche Durchsatz kann in \fref{tab:tp} gesehen werden. Es fällt auf, dass der Durchsatz ohne Verschlüsselung weit über dem der Verschlüsselung liegt. Allerdings ist das auch nicht anders zu erwarten. Zum Verständnis ist jedoch noch wichtig, dass die verwendete Ethernetverbindung nicht für die Verwendung von Jumbo-Frames eingerichtet wurde. Ohne diese Frames ist solch eine Gigabit-Verbindung jedoch erheblich langsamer als der theoretische Wert (1 GBit/s).\cite{Kotuliak2011}
 
@@ -278,6 +270,7 @@ IPSec AES & 142 \\
 IPSec Blowfish & 121,76
 \end{tabular}
 \end{table}
+
 \subsection{Kompatibilität}
 Abschließend gehen wir auf die Kompatibilität der Implementationen verschiedener Hersteller untereinander ein. Uns war es nicht möglich eigene Vergleiche hinsichtlich der Kompatibilität durchzuführen, daher werden wir nur oberflächlich darauf eingehen.
 
@@ -288,7 +281,11 @@ Bei IPSec sieht das anders aus. Zwar ist auch IPSec standardisiert, ebenso wie T
 Bezüglich der Kompatibilität kommen wir zu dem Fazit, dass IPSec noch im Vergleich zu TLS aufholen muss, allerdings bereits viele der anfänglichen Kompatibilitätsprobleme überwunden hat.
 
 \section{Schlussbemerkungen}
-Ausblick: (weitere) Vereinfachung von IPSec?, unterschiedliche Ansätze, Vor- und Nachteile bei beiden
+Aus dem Vergleich geht hervor, dass IPSec und OpenVPN abhängig von dem Verwendungsszenario des VPN unterschiedlich gut abschneiden. Für Remoteverbindungen zwischen einem einzelnen Rechner und einem Netzwerk ist OpenVPN die bessere Wahl, da Ende-zu-Ende verschlüsselt wird, obgleich die Verschlüsselung selber bei IPSec und OpenVPN sich nicht viel gibt. Im Bereich der Performance hat IPSec aufgrund der Kernelnähe die Nase vorn. Im Bereich der Kompatibilität bestätigt IPSec nur zum Teil das Vorurteil der Inkompatibilität. Gleichwohl gibt es noch Aufholpotential.
+
+Für die Zukunft können wir uns vorstellen, dass es eine weitere Überarbeitung von IPSec geben wird, um es leichter verständlich zu machen. Außerdem sind wir der Meinung, dass sich die teilweise noch bestehenden Kompatibilitätsprobleme auflösen werden, sodass es für eine immer größere Menge von Leuten möglich sein wird sichere Verbindungen zwischen zwei Netzwerken aufzubauen.
+
+Aus wissenschaftlicher Sicht wäre ein umfassender Vergleich zwischen allen existierenden VPN-Lösungen wünschenswert, um für ein komplettes Bild nicht auf teilweise bereits veraltete Daten zurückgreifen zu müssen. Darüber hinaus wäre eine zentrale Anlaufstelle hilfreich, über die entsprechende Forschung koordiniert wird, um doppelte Arbeit zu vermeiden.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage

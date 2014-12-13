@@ -1,0 +1,204 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\arabic{subsubsection})}
+
+\begin{document}
+\author{Jim Martens}
+\title{Hausaufgaben zum 08./09. November}
+\maketitle
+\section{} 
+\subsection{}
+\begin{enumerate}[(i)]
+\item $177 \equiv 18$ (mod 5) \\
+Falsch, da $177-18=169$ ergibt und $169\, \text{mod}\, 5 \neq 0$.
+\item $177 \equiv -18$ (mod 5) \\
+Wahr, da $177-(-18)=195$ ergibt und $195\, \text{mod}\, 5 = 0$.
+\item $-89 \equiv -12$ (mod 6) \\
+Falsch, da $-89-(-12)=-77$ ergibt und $-77\, \text{mod}\, 6 \neq 0$.
+\item $-123 \equiv 33$ (mod 13) \\
+Wahr, da $-123-33=-156$ ergibt und $-156\, \text{mod}\, 13 = 0$.
+\item $39 \equiv -1$ (mod 40) \\
+ Wahr, da $39-(-1)=40$ ergibt und $40\, \text{mod}\, 40 = 0$.
+\item $77 \equiv 0$ (mod 11) \\
+Wahr, da $77-0=77$ ergibt und $77\, \text{mod}\, 11 = 0$.
+\item $2^{51} \equiv 51$ (mod 2) \\
+Falsch, da $2^{x}$ immer eine gerade Zahl ergibt und bei Addition/Subtraktion einer ungeraden Zahl immer eine ungerade Zahl herauskommt. $51$ ist eine ungerade Zahl, wodurch $2^{51}-51$ nicht durch $2$ restlos teilbar ist.
+\end{enumerate}
+\subsection{}
+\begin{alignat}{4}
+7293& =&\: 19 &\: \cdot &\: 378& \indent\text{Rest}&\indent 111\\
+378& =&\: 3 &\: \cdot &\: 111& \indent\text{Rest}&\indent 45\\
+111& =&\: 2 &\: \cdot &\: 45& \indent\text{Rest}&\indent 21\\
+45& =&\: 2 &\: \cdot &\: 21& \indent\text{Rest}&\indent 3\\
+21& =&\: 7 &\: \cdot &\: 3& \indent\text{Rest}&\indent 0
+\end{alignat}
+Der $ggt(7293,378)$ ist $3$.
+\subsection{}
+\begin{enumerate}
+\item $\lceil \sqrt{7} \rceil$ \\
+Da $2^{2}=4$ und $3^{2}=9$ gelten, liegt die Quadratwurzel von $7$ zwischen $2$ und $3$. Durch die oberen Gaußklammern wird auf die nächsthöhere ganze Zahl aufgerundet. Daher ergibt sich $\lceil \sqrt{7} \rceil=3$.
+\item $\lfloor \sqrt{7} \rfloor$ \\
+Bei den unteren Gaußklammern wird auf die nächstniedrigere ganze Zahl abgerundet. Durch das eben Festgestellte gilt hier $\lfloor \sqrt{7} \rfloor = 2$.
+\item $\lceil 7.1 \rceil = 8$ \\
+Gilt aufgrund der eben festgestellten Sachverhalte.
+\item $\lfloor 7.1 \rfloor = 7$ \\
+Gilt analog.
+\item $\lceil -7.1 \rceil = -7$ \\
+Gilt analog.
+\item $\lfloor -7.1 \rfloor = -8$ \\
+Gilt analog.
+\item $\lceil -7 \rceil = -7$ \\
+Gilt analog.
+\item $\lfloor -7 \rfloor = -8$ \\
+Gilt analog.
+\end{enumerate}
+
+\section{}
+\addtocounter{subsubsection}{1}
+\subsubsection{}
+\textbf{Behauptung:} Aus $b_{1} \mid a_{1}$ und $b_{2} \mid a_{2}$ folgt $b_{1} \cdot b_{2} \mid a_{1} \cdot a_{2}$. \\
+\textbf{Beweis:}\\
+$b_{1} \mid a_{1}$ bedeutet, dass $a_{1}=c \cdot b_{1}$ für ein $c \in \mathbb{Z}$ gilt; $b_{2} \mid a_{2}$ bedeutet, dass $a_{2}=d \cdot b_{2}$ für ein $d \in \mathbb{Z}$ gilt. \\
+Multipliziert man die beiden Gleichungen, so ergibt sich: $a_{1} \cdot a_{2} = c \cdot d \cdot b_{1} \cdot b_{2}$. Damit ist klar, dass $b_{1} \cdot b_{2} \mid a_{1} \cdot a_{2}$ gilt.\hfill $\Box$
+
+\subsubsection{}
+\textbf{Behauptung:} Aus $c \cdot b \mid c \cdot a$ (für $c \neq 0$) folgt $b \mid a$.\\
+\textbf{Beweis:}\\
+$c \cdot b \mid c \cdot a$ bedeutet, dass $c \cdot a = d\cdot c \cdot b$ für ein $d \in \mathbb{Z}$ gilt. Nach teilen durch $c$ ergibt sich $a = d \cdot b$. Damit ist klar, dass $b \mid a$ gilt.\hfill $\Box$
+
+\subsubsection{}
+\textbf{Behauptung:} Aus $b \mid a_{1}$ und $b \mid a_{2}$ folgt $b \mid c_{1} \cdot a_{1} + c_{2} \cdot a_{2}$ für beliebige ganze Zahlen $c_{1}$ und $c_{2}$.\\
+\textbf{Beweis:}\\
+$b \mid a_{1}$ bedeutet, dass $a_{1} = c \cdot b$ für ein $c \in \mathbb{Z}$ gilt; $b \mid a_{2}$ bedeutet, dass $a_{2} = d \cdot b$ für ein $d \in \mathbb{Z}$ gilt.\\
+Durch Multiplikation mit $c_{1}$ bzw. $c_{2}$ ergibt sich: $a_{1} \cdot c_{1} = c_{1} \cdot c \cdot b$ bzw. $a_{2} \cdot c_{2} = c_{2} \cdot d \cdot b$.\\
+Addiert man die beiden Gleichungen ergibt sich $a_{1} \cdot c_{1} + a_{2} \cdot c_{2} = c_{1} \cdot c \cdot b + c_{2} \cdot d \cdot b$.\\
+Durch Ausklammern des $b$ ergibt sich: $a_{1} \cdot c_{1} + a_{2} \cdot c_{2} = b \cdot (c_{1} \cdot c + c_{2} \cdot d)$.\\
+Daher gilt $b \mid c_{1} \cdot a_{1} + c_{2} \cdot a_{2}$.\hfill $\Box$
+
+\section{}
+\subsection{}
+\textbf{Behauptung:} Die Aussage $3 \mid (n^{3} + 2n)$ gilt für alle $n \geq 0$ mit $n \in \mathbb{Z}$.\\
+\textbf{Beweis:} Durch vollständige Induktion.\\
+Mit $A(n)$ sei die Aussage $3 \mid (n^{3} + 2 \cdot n)$ bezeichnet.\\
+\underline{Induktionsanfang:} $A(0)$ ist richtig, da $3 \mid (0^{3} + 2 \cdot 0)$ bzw. $3 \mid 0$ gilt.\\\\
+\underline{Induktionsannahme:} Für ein beliebig fest gewähltes $n \in \mathbb{Z}$ mit $n \geq 0$ gilt $A(n)$, d. h. es gelte $3 \mid (n^{3} + 2 \cdot n)$.\\\\
+\underline{Zu zeigen:} $A(n+1)$ gilt, d. h. $3 \mid ((n+1)^{3} + 2 \cdot (n+1))$ gilt.\\\\
+\underline{Induktionsschluss:}\\
+Sei $3 \mid (n^{3} + 2 \cdot n)$, d. h. es gibt $c \in \mathbb{Z}$, sodass $n^3 + 2 \cdot n = 3 \cdot c$.
+
+\begin{alignat}{2}
+ &\: (n+1)^{3} + 2 \cdot (n+1) &=&\: n^{3} + 1^{3} + 2n + 2\\
+\Leftrightarrow &\: (n+1)^{3} + 2 \cdot (n+1) &=&\: n^{3} + 2n + 1^{3} + 2\\
+\intertext{Anwendung der Induktionsannahme}
+\Leftrightarrow &\: (n+1)^{3} + 2 \cdot (n+1) &=&\: 3 \cdot c + 3\\
+\Leftrightarrow &\: (n+1)^{3} + 2 \cdot (n+1) &=&\: 3 \cdot (c + 1)
+\end{alignat}
+Nach dem Induktionsprinzip folgt aus dem Induktionsanfang und dem Induktionsschluss die Behauptung.\hfill $\Box$
+
+\subsection{}
+\textbf{Behauptung:} Für alle $n \in \mathbb{N}$ gilt, dass ein Schachfeld der Größe $2^{n} \cdot 2^{n}$ überdeckungsfrei mit L-Stücken der Größe 3 so belegt werden kann, dass nur das Feld oben rechts frei bleibt.\\
+\textbf{Beweis:} Mit vollständiger Induktion.\\
+\underline{Induktionsanfang:} Für $n=1$ ist die Aussage wahr, da bei $4$ Feldern das L-Stück die Felder oben links, unten links und unten rechts bedeckt.
+\begin{tikzpicture}
+\draw (0,0) -- +(0,1); %linke Kante
+\draw (0,1) -- +(1,0); %obere Kante
+\draw (0,0) -- +(1,0); %untere Kante
+\draw (1,0) -- +(0,1); %rechte Kante
+\draw (0.5,0) -- +(0,1); %vertikaler mittlerer Strich
+\draw (0,0.5) -- +(1,0); %horizontaler mittlerer Strich
+\draw (0.25,0.25) -- +(0,0.5); %linker Teil des L
+\draw (0.25,0.25) -- +(0.5,0); %rechter Teil des L
+\end{tikzpicture}
+\\\\
+\underline{Induktionsannahme:} Für ein beliebig fest gewähltes $n \in \mathbb{N}$ gilt die Behauptung, d. h. es gelte, dass ein Schachfeld der Größe $2^{n} \cdot 2^{n}$ überdeckungsfrei mit L-Stücken belegt werden kann, sodass nur das Feld oben rechts frei bleibt.\\\\
+\underline{Zu zeigen:} Die Behauptung gilt auch für $n+1$.\\\\
+\underline{Induktionsschluss:}\\
+Sei $2^{n} \cdot 2^{n}$ ein Schachfeld mit den Kantenlängen $2^{n+1}$. Dieses kann in vier gleichgroße Teile mit der Kantenlänge $2^{n}$ aufgeteilt werden. Auf diese wende ich die Induktionsannahme an. Nun habe ich vier Mal ein Feld oben rechts frei.
+\begin{tikzpicture}
+\draw (0,0) -- +(0,1); %linke Kante
+\draw (0,1) -- +(1,0); %obere Kante
+\draw (0,0) -- +(1,0); %untere Kante
+\draw (1,0) -- +(0,1); %rechte Kante
+\draw (0.5,0) -- +(0,1); %vertikaler mittlerer Strich
+\draw (0,0.5) -- +(1,0); %horizontaler mittlerer Strich
+\draw (0.4,0.9) -- +(0,0.1); %linke Kante des oberen linken freien Feldes
+\draw (0.4,0.9) -- +(0.1,0); %untere Kante des oberen linken freien Feldes
+\draw (0.4,0.4) -- +(0,0.1); %linke Kante des unteren linken freien Feldes
+\draw (0.4,0.4) -- +(0.1,0); %untere Kante des unteren linken freien Feldes
+\draw (0.9,0.9) -- +(0,0.1); %linke Kante des oberen rechten freien Feldes
+\draw (0.9,0.9) -- +(0.1,0); %untere Kante des oberen rechten freien Feldes
+\draw (0.9,0.4) -- +(0,0.1); %linke Kante des unteren rechten freien Feldes
+\draw (0.9,0.4) -- +(0.1,0); %untere Kante des unteren rechten freien Feldes
+\end{tikzpicture}
+
+Durch Rotation des oberen linken Teils um $90$ Grad nach rechts und des unteren rechten Teiles um $90$ Grad nach links, entstehen drei freie Felder in der Mitte. Diese können mit einem weiteren L-Stück belegt werden, sodass nur das Feld oben rechts frei bleibt.
+
+\begin{tikzpicture}
+\draw (0,0) -- +(0,1); %linke Kante
+\draw (0,1) -- +(1,0); %obere Kante
+\draw (0,0) -- +(1,0); %untere Kante
+\draw (1,0) -- +(0,1); %rechte Kante
+\draw (0.5,0) -- +(0,1); %vertikaler mittlerer Strich
+\draw (0,0.5) -- +(1,0); %horizontaler mittlerer Strich
+\draw (0.4,0.6) -- +(0,-0.1); %linke Kante des oberen linken freien Feldes
+\draw (0.4,0.6) -- +(0.1,0); %untere Kante des oberen linken freien Feldes
+\draw (0.4,0.4) -- +(0,0.1); %linke Kante des unteren linken freien Feldes
+\draw (0.4,0.4) -- +(0.1,0); %untere Kante des unteren linken freien Feldes
+\draw (0.9,0.9) -- +(0,0.1); %linke Kante des oberen rechten freien Feldes
+\draw (0.9,0.9) -- +(0.1,0); %untere Kante des oberen rechten freien Feldes
+\draw (0.6,0.4) -- +(0,0.1); %linke Kante des unteren rechten freien Feldes
+\draw (0.6,0.4) -- +(-0.1,0); %untere Kante des unteren rechten freien Feldes
+
+\draw (0.45,0.45) -- +(0,0.1); %linker Strich des L
+\draw (0.45,0.45) -- +(0.1,0); %rechter Strich des L
+\end{tikzpicture}
+
+Nach dem Induktionsprinzip ergibt sich aus dem Induktionsanfang und dem Induktionsschluss die Behauptung. \hfill $\Box$
+
+\section{}
+\subsection{}
+\textbf{Behauptung:} $g(x,y)$ mit $(x,y) \in \mathbb{Q} \times \mathbb{Q}, \mathbb{Q} \times \mathbb{Q} \rightarrow \mathbb{Q} \times \mathbb{Q} \times \mathbb{Q}$ ist injektiv.\\
+\textbf{Beweis:} Durch Widerspruch.\\
+Angenommen $g(x,y)$ sei nicht injektiv, dann gilt $(x,y) \neq (a,b)$ mit $(x,y),(a,b) \in \mathbb{Q} \times \mathbb{Q}$ und $g(x,y) = g(a,b)$.\\
+Daraus ergibt sich:
+$g(x,y) = g(a,b) = (xy^{2},xy^{2}-3x,(x^{2}-2)y) = (ab^{2},ab^{2}-3a,(a^{2}-2)b)$.\\
+Es ergeben sich drei Gleichungen:
+\begin{alignat}{2}
+\label{eq:1} xy^{2} &=& ab^{2} \\
+\label{eq:2} xy^{2}-3x &=& ab^{2}-3a \\
+(x^{2}-2)y &=& (a^{2}-2)b \\
+\intertext{Subtrahiere \eqref{eq:2} von \eqref{eq:1}:}
+-3x &=& -3a \\
+\intertext{Geteilt durch (-3) ergibt sich:}
+\label{eq:3} x &=& a\\
+\intertext{Wegen \eqref{eq:3} ergibt sich:}
+(a^{2}-2)y &=& (a^{2}-2)b \\
+\intertext{Geteilt durch $(a^{2}-2)$ ($\neq 0$ wg. $\pm \sqrt{2} \not\in \mathbb{Q}$) ergibt sich:}
+y &=& b
+\end{alignat}
+Damit würde $(x,y) = (a,b)$ gelten, was im Widerspruch zur Annahme steht. Also ist $g(x,y)$ injektiv. \hfill $\Box$
+
+\subsection{}
+\textbf{Behauptung:} $h(z)$ mit $z \in \mathbb{Z}, \mathbb{Z} \rightarrow \mathbb{Z} \times \mathbb{Z}$ ist nicht surjektiv.\\
+\textbf{Beweis:}\\
+Es sei $h(z) = (0,0)$. Daraus ergeben sich folgende Gleichungen:
+\begin{alignat}{2}
+\label{eq:4} 0 &=& z+2 \\
+\label{eq:5} 0 &=& z-1 \\
+\intertext{\eqref{eq:4} - \eqref{eq:5} ergibt:}
+0 &=& 3
+\end{alignat}
+Also ist $h(z)$ nicht surjektiv. \hfill $\Box$
+\end{document}

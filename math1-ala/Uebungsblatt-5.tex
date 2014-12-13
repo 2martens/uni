@@ -1,0 +1,349 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Hausaufgaben zum 16. Mai}
+\maketitle
+\section{} %1
+\subsubsection{} %i
+\begin{alignat*}{2}
+f(x) &=& \frac{1}{\sqrt[4]{x^{5}}} \cdot \sqrt[3]{\sqrt{x^{7}}} \\
+\intertext{Wurzeln umformen}
+&=& \frac{1}{(x^{5})^{\frac{1}{4}}} \cdot (\sqrt{x^{7}})^{\frac{1}{3}} \\
+\intertext{Wurzeln umformen}
+&=& \frac{1}{(x^{5})^{\frac{1}{4}}} \cdot ((x^{7})^{\frac{1}{2}})^{\frac{1}{3}} \\
+\intertext{Zusammenfassen}
+&=& \frac{1}{x^{\frac{5}{4}}} \cdot x^{\frac{7}{6}} \\
+\intertext{Umformen}
+&=& x^{-\frac{5}{4}} \cdot x^{\frac{7}{6}} \\
+\intertext{Zusammenfassen}
+&=& x^{\frac{7}{6} - \frac{5}{4}} \\
+\intertext{Auf selben Nenner bringen}
+\intertext{Zusammenfassen}
+&=& x^{\frac{14 - 15}{12}} \\
+&=& x^{-\frac{1}{12}} \\
+f'(x) &=& -\frac{1}{12}x^{-\frac{13}{12}}
+\end{alignat*}
+\subsubsection{} %ii
+\begin{alignat*}{2}
+f(x) &=& \sin (x^{2}) \\
+f'(x) &=& \cos (x^{2}) \cdot 2x
+\end{alignat*}
+\subsubsection{} %iii
+\begin{alignat*}{2}
+f(x) &=& \sin ^{2} x \\
+&=& \sin x \cdot \sin x \\
+f'(x) &=& \cos x \cdot \sin x + \sin x \cdot \cos x
+\end{alignat*}
+\subsubsection{} %iv
+\begin{alignat*}{2}
+f(x) &=& \sin x \cdot \cos x \\
+f'(x) &=& \cos x \cdot \cos x + \sin x \cdot (- \sin x) \\
+&=& \cos x \cdot \cos x - \sin x \cdot + \sin x)
+\end{alignat*}
+\subsubsection{} %v
+\begin{alignat*}{2}
+f(x) &=& \arcsin (\sqrt{x}) \\
+f'(x) &=& \frac{1}{\sqrt{1 - \sqrt{x}}} \cdot (\sqrt{x})' \\
+&=& \frac{1}{\sqrt{1 - \sqrt{x}}} \cdot \frac{1}{2 \sqrt{x}}
+\end{alignat*}
+\subsubsection{} %vi
+\begin{alignat*}{2}
+f(x) &=& (x^{3}-1)^{\arctan x} \\
+&=& e^{\ln \left((x^{3}-1)^{\arctan x} \right)} \\
+&=& e^{\left(\arctan x \right) \cdot \ln \left(x^{3}-1 \right)} \\
+f'(x) &=& e^{\left(\arctan x \right) \cdot \ln \left(x^{3}-1 \right)} \cdot \left( \left(\arctan x \right) \cdot \ln \left(x^{3}-1 \right)\right)' \\
+&=& e^{\left(\arctan x \right) \cdot \ln \left(x^{3}-1 \right)} \cdot \left( \left(\arctan x \right)' \cdot \ln \left(x^{3}-1 \right) + \left(\arctan x \right) \cdot \ln \left(x^{3}-1 \right)' \right) \\
+&=& e^{\left(\arctan x \right) \cdot \ln \left(x^{3}-1 \right)} \cdot \left( \frac{1}{\sqrt{1 - x}} \cdot \ln \left(x^{3}-1 \right) + \left(\arctan x \right) \cdot \frac{1}{x^{3}-1} \cdot (x^{3}-1)' \right) \\
+&=& e^{\left(\arctan x \right) \cdot \ln \left(x^{3}-1 \right)} \cdot \left( \frac{1}{\sqrt{1 - x}} \cdot \ln \left(x^{3}-1 \right) + \left(\arctan x \right) \cdot \frac{3x^{2}}{x^{3}-1}\right) \\
+&=& (x^{3}-1)^{\arctan x} \cdot \left( \frac{1}{\sqrt{1 - x}} \cdot \ln \left(x^{3}-1 \right) + \left(\arctan x \right) \cdot \frac{3x^{2}}{x^{3}-1}\right)
+\end{alignat*}
+\section{} %2
+\begin{alignat*}{2}
+f(x) &=& \frac{2x}{1+x^{2}} \\
+f'(x) &=& \frac{2 \cdot (1+x^{2}) - 2x \cdot 2x}{\left(1+x^{2} \right)^{2}} \\
+&=& \frac{2 \cdot (1+x^{2}) - 4x^{2}}{\left(1+x^{2} \right)^{2}} \\
+f''(x) &=& \frac{\left(2 \cdot (1+x^{2}) - 4x^{2} \right)' \cdot \left(1+x^{2} \right)^{2} - ((2 \cdot (1+x^{2}) - 4x^{2}) \cdot \left(\left(1+x^{2} \right)^{2} \right)'}{\left(1+x^{2} \right)^{4}} \\
+&=& \frac{(4x-8x) \cdot \left(1+x^{2} \right)^{2} - (2 \cdot (1+x^{2}) - 4x^{2}) \cdot 2 \cdot (1+x^{2}) \cdot 2x}{\left(1+x^{2} \right)^{4}} \\
+\intertext{$(1+x^{2})$ ausklammern und kürzen}
+&=& \frac{-4x \cdot \left(1+x^{2} \right) - (2 \cdot (1+x^{2}) - 4x^{2}) \cdot 2 \cdot 2x}{\left(1+x^{2} \right)^{3}} \\
+&=& \frac{4x \cdot \left( -\left(1+x^{2} \right) - (2 \cdot (1+x^{2}) - 4x^{2})\right)}{\left(1+x^{2} \right)^{3}} \\
+&=& -\frac{4x \cdot \left(1+x^{2} + (2 \cdot (1+x^{2}) - 4x^{2}\right)}{\left(1+x^{2} \right)^{3}} \\
+\intertext{Zusammenfassen}
+&=& -\frac{4x \cdot \left(3-x^{2}\right)}{\left(1+x^{2} \right)^{3}}
+\end{alignat*}
+\begin{enumerate}
+	\item $x \in \mathbb{R}$
+	\item 
+	\begin{alignat*}{2}
+	f(x) &=& 0 \\
+	\intertext{$f(x)$ mit Zähler ersetzen, da der über Nullstelle bestimmt}
+	2x &=& 0 \\
+	\intertext{geteilt durch $2$}
+	x &=& 0 \\
+	f'(x) &=& 0 \\
+	\intertext{$f'(x)$ mit Zähler ersetzen, da der über Nullstelle bestimmt}
+	2 - 2x^{2} &=& 0 \\
+	\intertext{$2$ subtrahieren}
+	-2x^{2} &=& -2 \\
+	\intertext{geteilt durch $-2$}
+	x^{2} &=& 1 \\
+	\intertext{Wurzel ziehen}
+	x_{1} &=& 1 \\
+	x_{2} &=& -1 \\
+	f''(x) &=& 0 \\
+	\intertext{$f''(x)$ mit Zähler ersetzen, da der über Nullstelle bestimmt}
+	-4x \cdot \left(3-x^{2}\right) &=& 0 \\
+	&\Rightarrow & x_{1} = 0, x_{2} = \sqrt{3}, x_{3} = - \sqrt{3}
+	\end{alignat*}
+	\item Es gibt keine Randpunkte des Definitionsbereiches.
+	\item 
+	\begin{alignat*}{2}
+	f(-1) &=& \frac{2\cdot (-1)}{1 + (-1)^{2}} \\
+	&=& \frac{-2}{2} = -1 \\
+	f(1) &=& \frac{2 \cdot 1}{1 + 1^{2}} \\
+	&=& \frac{2}{2} = 1 \\
+	f'(-2) &=& \frac{2 - 2 \cdot (-2)^{2}}{\left(1+ (-2)^{2} \right)^{2}} \\
+	&=& \frac{2 - 2 \cdot 4}{\left(1+ 4 \right)^{2}} \\
+	&=& \frac{-6}{\left(5 \right)^{2}} \\
+	&=& \frac{-6}{25} \\
+	f'(0) &=& \frac{2 - 2 \cdot 0^{2}}{\left(1+ 0^{2} \right)^{2}} \\
+	&=& \frac{2}{1} = 2 \\
+	f'(2) &=& \frac{2 - 2 \cdot 2^{2}}{\left(1+ 2^{2} \right)^{2}} \\
+	&=& \frac{2 - 8}{\left(5 \right)^{2}} \\
+	&=& \frac{-6}{25}
+	\end{alignat*}\\
+	\begin{alignat*}{2}
+	f''(-2) &=& -\frac{4 \cdot (-2) \cdot \left(3- (-2)^{2}\right)}{\left(1+ (-2)^{2} \right)^{3}} \\
+	&=& -\frac{-8 \cdot \left(3- 4 \right)}{\left(1+ 4 \right)^{3}} \\
+	&=& -\frac{-8 \cdot -1}{5^{3}} \\
+	&=& -\frac{8}{125} \\
+	f''(-1) &=& -\frac{4 \cdot (-1) \cdot \left(3- (-1)^{2}\right)}{\left(1+ (-1)^{2} \right)^{3}} \\
+	&=& -\frac{-4 \cdot \left(3- 1\right)}{\left(1+ 1 \right)^{3}} \\
+	&=& -\frac{-4 \cdot 2}{2^{3}} \\
+	&=& -\frac{-8}{8} \\
+	&=& 1 \\
+	f''(1) &=& -\frac{4 \cdot 1 \cdot \left(3- 1^{2}\right)}{\left(1+ 1^{2} \right)^{3}} \\
+	&=& -\frac{4 \cdot 2}{2^{3}} \\
+	&=& -\frac{8}{8} \\
+	&=& -1 \\
+	f''(2) &=& -\frac{4 \cdot 2 \cdot \left(3- 2^{2}\right)}{\left(1+ 2^{2} \right)^{3}} \\
+	&=& -\frac{8 \cdot \left(3- 4\right)}{\left(1+ 4 \right)^{3}} \\
+	&=& -\frac{8 \cdot -1}{5^{3}} \\
+	&=& -\frac{-8}{125} \\
+	&=& \frac{8}{125}
+	\end{alignat*}\\
+	$f(x)$ ist negativ für $x < 0$ und positiv für $x > 0$. $f$ ist streng monoton fallend für $x < -1$, streng monoton steigend für $-1 < x < 1$ und streng monoton fallend für $x > 1$. $f$ ist streng konkav für $x < -\sqrt{3}$, streng konvex für $- \sqrt{3} < x < 0$, streng konkav für $0 < x < \sqrt{3}$ und streng konvex für $x > \sqrt{3}$.
+	\label{enum:1}
+	\item Aus \ref{enum:1}\text{.} ergibt sich: $f$ hat ein Minimum an $x=-1$, ein Maximum an $x=1$, Wendepunkte an $x=-\sqrt{3}, x=0$ und $x=\sqrt{3}$.
+	\item Mithilfe von Satz 22 zeige ich, dass $f$ für $x \rightarrow \infty$ eine Asymptote $g(x) =ax +b$ besitzt und berechne diese:\\
+	\begin{alignat*}{2}
+	a = \lim_{x \rightarrow \infty} \left( \frac{f(x)}{x} \right) &=& \lim_{x \rightarrow \infty} \left(\frac{2x}{x+x^{3}} \right) \\
+	&=& \lim_{x \rightarrow \infty} \left(\frac{(2) \cdot x}{(\frac{1}{x^{2}}+1) \cdot x^{3}} \right) \\
+	&=& \lim_{x \rightarrow \infty} \left(\frac{2}{(\frac{1}{x^{2}}+1) \cdot x^{2}} \right) \\
+	\intertext{Der Nenner geht gegen unendlich, der Zähler ist konstant, daher geht der Ausdruck gegen Null.}
+	&=& 0\\
+	\\
+	b = \lim_{x \rightarrow \infty} \left( f(x) - ax \right) &=& \lim_{x \rightarrow \infty} \left( \frac{2x}{1+x^{2}} - 0 \right) \\
+	&=& \lim_{x \rightarrow \infty} \left( \frac{(2) \cdot x}{(\frac{1}{x^{2}}+1) \cdot x^{2}} \right) \\
+	\lim_{x \rightarrow \infty} \left( \frac{2}{(\frac{1}{x^{2}}+1) \cdot x} \right) \\
+	\intertext{Der Nenner geht gegen unendlich, der Zähler ist konstant, daher geht der Ausdruck gegen Null.}
+	&=& 0
+	\end{alignat*}\\
+	Also besitzt $f$ für $x \rightarrow \infty$ die Asymptote $g(x)=0$. Eine ähnliche Überlegung ergibt, dass $f$ für $x \rightarrow -\infty$ ebenfalls die Asymptote $g(x)=0$ besitzt.\\
+	Es gibt einen Schnittpunkt von $f$ mit der Asymptote bei $x=0$, da\\
+	\begin{alignat*}{2}
+	\frac{2x}{1+x^{2}} &=& 0 \\
+	\intertext{Mit $1+x^{2}$ multiplizieren geht, da der Term nie gleich 0 sein kann.}
+	2x &=& 0 \\
+	x &=& 0
+	\end{alignat*}\\
+	gilt.
+	\item 
+	\begin{alignat*}{2}
+	f(0) &=& \frac{2 \cdot 0}{1 + 0^{2}} \\
+	&=& \frac{0}{1} = 0\\
+	f(-1) &=& \frac{2 \cdot -1}{1 + (-1)^{2}} \\
+	&=& \frac{-2}{2} = -1 \\
+	f(1) &=& \frac{2 \cdot 1}{1 + 1^{2}} \\
+	&=& \frac{2}{2} = 1 \\
+	f(-\sqrt{3}) &=& \frac{2 \cdot (-\sqrt{3})}{1 + (-\sqrt{3})^{2}} \\
+	&=& \frac{-2\sqrt{3}}{1 + 3} \\
+	&=& \frac{-2\sqrt{3}}{4} \\
+	&=& -\frac{\sqrt{3}}{2} \\
+	f(\sqrt{3}) &=& \frac{2 \cdot \sqrt{3}}{1 + \sqrt{3}^{2}} \\
+	&=& \frac{2\sqrt{3}}{1 + 3} \\
+	&=& \frac{2\sqrt{3}}{4} \\
+	&=& \frac{\sqrt{3}}{2}
+	\end{alignat*}
+	
+	\begin{tikzpicture}[>=stealth]
+\begin{axis}[
+	ymin=-5,ymax=5,
+	x=1em,
+	y=1em,
+	axis x line=middle,
+	axis y line=middle,
+	axis line style=->,
+	xlabel={$x$},
+	ylabel={$y$},
+	]
+\addplot[no marks, black, -] expression[domain=-10:10,samples=100]{(2*x)/(1+(x*x))} node[pos=0.65,anchor=north]{};
+\end{axis}
+	\end{tikzpicture}
+\end{enumerate}
+\section{} %3
+\begin{alignat*}{2}
+f(x) &=& 4x^{3} - 10x +5 \\
+f'(x) &=& 12x^{2} - 10 \\
+\intertext{Die Berechnung der Näherungswerte erfolgt durch folgende Formel:}
+x_{n+1} &=& x_{n} - \frac{f(x_{n})}{f'(x_{n})} \\
+\intertext{Exemplarische Berechnung von $f(x)$ für $x=2$:}
+f(2) &=& 4 \cdot 2^{3} - 10 \cdot 2 +5 \\
+&=& 4 \cdot 8 - 20 + 5 \\
+&=& 32 -15 \\
+&=& 17 \\
+\intertext{Exemplarische Berechnung von $f'(x)$ für $x=2$:}
+f'(2) &=& 12 \cdot 2^{2} -10 \\
+&=& 48 - 10 \\
+&=& 38 \\
+\intertext{Berechnung der Näherungswerte:}
+x_{1} &=& 2 - \frac{17}{38} \\
+&=& \frac{76 -17}{38} \\
+&=& \frac{59}{38} \\
+x_{2} &=& \frac{59}{38} - \frac{f(\frac{59}{38})}{f'(\frac{59}{38})} \\
+&\approx & 1.317784436 \\
+x_{3} &\approx & 1.317784436 - \frac{f(1.317784436)}{f'(1.317784436)} \\
+&\approx & 1.227756731 \\
+x_{4} &\approx & 1.227756731 - \frac{f(1.227756731)}{f'(1.227756731)} \\
+&\approx & 1.212272195 \\
+x_{5} &\approx & 1.212272195 - \frac{f(1.212272195)}{f'(1.212272195)} \\
+&\approx & 1.211811475 \\
+x_{6} &\approx & 1.211811475 - \frac{f(1.211811475)}{f'(1.211811475)} \\
+&\approx & 1.21181107 \\
+x_{7} &=& 1.21181107 - \frac{f(1.21181107)}{f'(1.21181107)} \\
+&=& 1.21181107
+\end{alignat*}
+\section{} %4
+Die Länge der Schnur berechnet sie wie folgt:\\
+\begin{alignat*}{2}
+L &=& 2x + y \\
+\intertext{Nach y umgestellt ergibt sich}
+y &=& L - 2x \\
+\intertext{Eingesetzt in die Formel für den Flächeninhalt von Rechtecken ergibt sich:}
+A(x) &=& x \cdot (L-2x) \\
+&=& -2x^{2} + Lx \\
+A'(x) &=& -4x + L \\
+A''(x) &=& -4 \\
+\intertext{Gleichsetzen von $A'(x)$ mit Null}
+0 &=& -4x + L \\
+4x &=& L \\
+x &=& \frac{L}{4} \\
+\intertext{Einsetzen in zweite Ableitung}
+A''(\frac{L}{4}) &=& -4 \Rightarrow \text{$< 0$, daher Maximum}
+\end{alignat*}
+Daraus folgt, dass die beiden gleichlangen Seiten des Rechtecks, die von der Schnur begrenzt werden, jeweils ein Viertel der Schnur ausmachen. Die dritte von der Schnur begrenzte Seite ist folglich halb so lang wie die Schnur.
+\section{} %5
+\subsection{} %a
+Die Oberfläche ($A$) und das Volumen ($V$) der Dose sei durch folgende Formeln gegeben:\\
+\begin{alignat*}{2}
+A &=& 2\pi r^{2} + 2\pi rh \\
+V &=& 1000 cm^{3} = \pi r^{2}h \\
+\intertext{Umstellen von $V$ nach $h$}
+h &=& \frac{1000 cm^{3}}{\pi r^{2}} \\
+\intertext{Einsetzen in $A$}
+A(r) &=& 2 \pi r^{2} + 2 \pi r \cdot \frac{1000 cm^{3}}{\pi r^{2}} \\
+\intertext{Kürzen}
+&=& 2 \pi r^{2} + 2 \cdot \frac{1000 cm^{3}}{r} \\
+\intertext{Zusammenfassen}
+&=& 2 \pi r^{2} + 2000 cm^{3} \cdot r^{-1} \\
+A'(r) &=& 4 \pi r - 2000 cm^{3} \cdot r^{-2} \\
+A''(r) &=& 4 \pi + 4000 cm^{3} \cdot r^{-3} \\
+\intertext{Erste Ableitung mit Null gleichsetzen}
+0 &=& 4 \pi r - 2000 cm^{3} \cdot r^{-2} \\
+2000 cm^{3} \cdot r^{-2} &=& 4 \pi r \\
+2000 cm^{3} &=& 4 \pi r^{3} \\
+\frac{2000 cm^{3}}{4 \pi} &=& r^{3} \\
+\frac{500 cm^{3}}{\pi} &=& r^{3} \\
+\intertext{Dritte Wurzel ziehen}
+\sqrt[3]{\frac{500 cm^{3}}{\pi}} &=& r \\
+\intertext{Einsetzen in zweite Ableitung}
+A''\left(\sqrt[3]{\frac{500 cm^{3}}{\pi}} \right) &=& 4 \pi + 4000 cm^{3} \cdot \left(\sqrt[3]{\frac{500 cm^{3}}{\pi}}\right)^{-3} \\
+\intertext{Umformen}
+&=& 4 \pi + 4000 cm^{3} \cdot \frac{1}{\left(\sqrt[3]{\frac{500 cm^{3}}{\pi}} \right)^{3}} \\
+\intertext{Auflösen der Wurzel}
+&=& 4 \pi + 4000 cm^{3} \cdot \frac{1}{\frac{500 cm^{3}}{\pi}} \\
+\intertext{Auflösen Doppelbruch}
+&=& 4 \pi + 4000 cm^{3} \cdot \frac{\pi}{500 cm^{3}} \\
+\intertext{Kürzen}
+&=& 4 \pi + 8 \cdot \pi \\
+&=& 12 \pi \Rightarrow \text{$>0$, daher Minimum} \\
+\intertext{Einsetzen des Radius in Formel für $h$}
+h &=& \frac{1000 cm^{3}}{\pi \cdot  \left(\sqrt[3]{\frac{500 cm^{3}}{\pi}} \right)^{2}} \\
+\intertext{Umformen}
+&=& \frac{1000 cm^{3}}{\pi \cdot  \left(\sqrt[3]{500 cm^{3}\pi^{-1}} \right)^{2}} \\
+\intertext{Umformen}
+&=& \frac{1000 cm^{3}}{\pi \cdot  \left(\left(500 cm^{3}\pi^{-1}\right)^{\frac{1}{3}} \right)^{2}} \\
+\intertext{innere Klammer auflösen}
+&=& \frac{1000 cm^{3}}{\pi \cdot \left((500 cm^{3})^{\frac{1}{3}} \cdot \pi^{-\frac{1}{3}} \right)^{2}} \\
+\intertext{Klammer auflösen}
+&=& \frac{1000 cm^{3}}{\pi \cdot (500 cm^{3})^{\frac{2}{3}} \cdot \pi^{-\frac{2}{3}}} \\
+\intertext{Zusammenfassen und Bruch auseinanderziehen}
+&=& \frac{1000 cm^{3}}{(500 cm^{3})^{\frac{2}{3}} } \cdot \frac{1}{\pi^{\frac{1}{3}}}
+\end{alignat*}
+\subsection{} %b
+Die Oberfläche $A$ wird in diesem Fall ähnlich berechnet. Allerdings muss die Grundfläche nur einmal eingerechnet werden:\\
+\begin{alignat*}{2}
+A &=& \pi r^{2} + 2 \pi r h \\
+\intertext{Die Berechnung von r ist analog. Lediglich der Faktor vor dem $\pi r^{2}$ ist anders. Daraus folgt für $A(r)$:}
+A(r) &=& \pi r^{2} + 2000 cm^{3} \cdot r^{-1} \\
+A'(r) &=& 2 \pi r - 2000 cm^{3} \cdot r^{-2} \\
+\intertext{Aufgrund der Änderung ergibt sich nach umstellen nach r folgendes:}
+\frac{2000 cm^{3}}{2 \pi} &=& r^{3} \\
+\intertext{Durch Kürzen ergibt sich:}
+\frac{1000 cm^{3}}{\pi} &=& r^{3} \\
+\intertext{Ziehen der dritten Wurzel:}
+\sqrt[3]{\frac{1000 cm^{3}}{\pi}} &=& r \\
+\intertext{Beim Einsetzen in die zweite Ableitung verändert sich nicht viel:}
+A''\left(\sqrt[3]{\frac{1000 cm^{3}}{\pi}} \right) = 2 \pi + 4000 cm^{3} \cdot \left(\sqrt[3]{\frac{1000 cm^{3}}{\pi}} \right)^{-3} \\
+&=& 2 \pi + 4000 cm^{3} \cdot \frac{1}{ \left(\sqrt[3]{\frac{1000 cm^{3}}{\pi}} \right)^{3}} \\
+&=& 2 \pi + 4000 cm^{3} \cdot \frac{1}{ \frac{1000 cm^{3}}{\pi}} \\
+&=& 2 \pi + 4000 cm^{3} \cdot \frac{\pi}{ 1000 cm^{3}} \\
+&=& 2 \pi + 4 \pi \\
+&=& 6 \pi \Rightarrow \text{$>0$, daher Minimum}\\
+\intertext{Durch Einsetzen in Gleichung von $h$ ergibt sich nun:}
+h &=& \frac{1000 cm^{3}}{\pi \cdot  \left(\sqrt[3]{\frac{1000 cm^{3}}{\pi}} \right)^{2}} \\
+&=& \frac{1000 cm^{3}}{\pi \cdot  \left(\left(\frac{1000 cm^{3}}{\pi}\right)^{\frac{1}{3}} \right)^{2}} \\
+&=& \frac{1000 cm^{3}}{\pi \cdot  \left(\left(1000 cm^{3} \cdot \pi^{-1} \right)^{\frac{1}{3}} \right)^{2}} \\
+&=& \frac{1000 cm^{3}}{\pi \cdot  \left((1000 cm^{3})^{\frac{1}{3}} \cdot \pi^{-\frac{1}{3}}\right)^{2}} \\
+&=& \frac{1000 cm^{3}}{\pi \cdot (1000 cm^{3})^{\frac{2}{3}} \cdot \pi^{-\frac{2}{3}}} \\
+&=& \frac{1000 cm^{3}}{(1000 cm^{3})^{\frac{2}{3}} \cdot \pi^{\frac{1}{3}}} \\
+&=& \frac{1000 cm^{3}}{(1000 cm^{3})^{\frac{2}{3}}} \cdot \frac{1}{\pi^{\frac{1}{3}}} \\
+\intertext{Kürzen}
+&=& (1000 cm^{3})^{-\frac{1}{3}} \cdot \frac{1}{\pi^{\frac{1}{3}}}
+\end{alignat*}
+\end{document}

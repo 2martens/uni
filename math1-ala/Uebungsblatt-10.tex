@@ -1,0 +1,253 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Hausaufgaben zum 27. Juni}
+\maketitle
+\section{} %1
+\subsubsection{} %i
+\begin{alignat*}{2}
+f(x,y) &=& 2x^{2}y^{2} - 3xy + 4x + 2 \\
+f_{x} &=& 4xy^{2} - 3y + 4 \\
+f_{y} &=& 4x^{2}y - 3x
+\end{alignat*}
+\subsubsection{} %ii
+\begin{alignat*}{2}
+f(x,y) &=& \cos(x^{2}y) \cdot e^{xy} \\
+f_{x} &=& -\sin(x^{2}y) \cdot 2xy + \cos(x^{2}y) \cdot e^{xy} \cdot y \\
+f_{y} &=& -\sin(x^{2}y) \cdot x^{2} + \cos(x^{2}y) \cdot e^{xy} \cdot x \\
+\end{alignat*}
+\subsubsection{} %iii
+\begin{alignat*}{2}
+f(x,y) &=& \frac{\sin x + \cos y}{x^{2} + y^{2}} \\
+f_{x} &=& \frac{\cos x \cdot (x^{2} + y^{2}) - (\sin x + \cos y) \cdot 2x}{(x^{2} + y^{2})^{2}} \\
+f_{y} &=& \frac{-\sin y \cdot (x^{2} + y^{2}) - (\sin x + \cos y) \cdot 2y}{(x^{2} + y^{2})^{2}}
+\end{alignat*}
+\subsubsection{} %iv
+\begin{alignat*}{2}
+f(x,y) &=& \sqrt{1 - x^{2} - y^{2}} = (1 - x^{2} - y^{2})^{\frac{1}{2}} \\
+f_{x} &=& \frac{1}{2}(1 - x^{2} - y^{2})^{-\frac{1}{2}} \cdot (-2x) \\
+f_{y} &=& \frac{1}{2}(1 - x^{2} - y^{2})^{-\frac{1}{2}} \cdot (-2y)
+\end{alignat*}
+\section{} %2
+\begin{alignat*}{2}
+f(x,y) &=& x^{2}y^{3} + y \cdot e^{x^{2}y} \\
+f_{x} &=& 2xy^{3} + y \cdot e^{x^{2}y} \cdot 2xy\\
+&=& 2xy^{3} + e^{x^{2}y} \cdot 2xy^{2} \\
+f_{y} &=& 3x^{2}y^{2} + e^{x^{2}y} + y \cdot e^{x^{2}y} \cdot x^{2} \\
+f_{xx} &=& 2y^{3} + e^{x^{2}y} \cdot 2xy \cdot 2xy^{2} + e^{x^{2}y} \cdot 2y^{2}\\ 
+&=& 2y^{3} + e^{x^{2}y} \cdot 4x^{2}y^{3} + e^{x^{2}y} \cdot 2y^{2} \\
+f_{yx} &=& 6xy^{2} + e^{x^{2}y} \cdot x^{2} \cdot 2xy^{2} + e^{x^{2}y} \cdot 4xy\\ 
+&=& 6xy^{2} + e^{x^{2}y} \cdot 2x^{3}y^{2} + e^{x^{2}y} \cdot 4xy \\
+f_{xy} &=& 6xy^{2} + e^{x^{2}y} \cdot 2xy + y \cdot (e^{x^{2}y} \cdot 2xy \cdot x^{2} + e^{x^{2}y} \cdot 2x)\\ 
+&=& 6xy^{2} + e^{x^{2}y} \cdot 2x^{3}y^{2} + e^{x^{2}y} \cdot 4xy \\
+f_{yy} &=& 6x^{2}y + e^{x^{2}y} \cdot x^{2} + e^{x^{2}y} \cdot x^{2} + y \cdot e^{x^{2}y} \cdot x^{2} \cdot x^{2} \\
+&=& 6x^{2}y + e^{x^{2}y} \cdot 2x^{2} + e^{x^{2}y} \cdot x^{4}y
+\end{alignat*}
+\section{} %3
+\setcounter{subsubsection}{0}
+\subsubsection{} %i
+\begin{alignat*}{2}
+f(x,y) &=& 2x^{2} + y^{2} - 2xy -2x -4y + 5 \\
+I f_{x} &=& 4x - 2y - 2 = 0 \\
+II f_{y} &=& 2y - 2x - 4 = 0 \\
+f_{xx} &=& 4 \\
+f_{xy} &=& - 2 \\
+f_{yx} &=& - 2 \\
+f_{yy} &=& 2 \\
+I + II &=& 2x -6 = 0 \\
+&\Leftrightarrow & 2x = 6 \\
+&\Leftrightarrow & x = 3 \\
+\intertext{in II einsetzen}
+&\Rightarrow & 2y - 2 \cdot 3 -4 = 0 \\
+&\Leftrightarrow & 2y - 6 - 4 = 0 \\
+&\Leftrightarrow & 2y - 10 = 0 \\
+&\Leftrightarrow & 2y = 10 \\
+&\Leftrightarrow & y = 5 \\
+\intertext{Einsetzen von beiden Werten in I} 
+&\Rightarrow & 4 \cdot 3 - 2 \cdot 5 - 2 = 0 \\
+&\Leftrightarrow & 12 - 10 - 2 = 0 \\
+&\Leftrightarrow & 0 = 0 \\
+\intertext{Die einzige kritische Stelle befindet sich an (3,5). Aufstellen der Hesse-Matrix}
+H &=& \begin{pmatrix} 4 & -2 \\
+-2 & 2 \end{pmatrix} \\
+\bigtriangleup_{1} &=& 4 > 0 \\
+\bigtriangleup_{2} &=& 4 > 0 \\
+\intertext{Die Hesse-Matrix ist positiv definit und damit befindet sich an der kritischen Stelle ein lokales Minimum.}
+\end{alignat*}
+\subsubsection{} %ii
+\begin{alignat*}{2}
+f(x,y) &=& x^{2} + 2y^{2} - 3xy -x -y +7 \\
+I f_{x} &=& 2x - 3y - 1 = 0 \\
+II f_{y} &=& 4y - 3x - 1 = 0 \\
+f_{xx} &=& 2 \\
+f_{xy} &=& -3 \\
+f_{yx} &=& -3 \\
+f_{yy} &=& 4 \\
+II + I &=& -x + y -2 = 0 \\
+&\Leftrightarrow & y = x + 2 \\
+\intertext{Einsetzen in I}
+&\Rightarrow & 2x - 3(x+2) - 1 = 0 \\
+&\Leftrightarrow & 2x - 3x - 6 - 1 = 0 \\
+&\Leftrightarrow & -x - 7 = 0 \\
+&\Leftrightarrow & x = -7 \\
+\intertext{Einsetzen in I}
+&\Rightarrow & 2 \cdot (-7) - 3y - 1 = 0 \\
+&\Leftrightarrow & -14 - 3y - 1 = 0 \\
+&\Leftrightarrow & 3y = -15 \\
+&\Leftrightarrow & y = -5 \\
+\intertext{Einsetzen beider Werte in II}
+&\Rightarrow & 4 \cdot (-5) - 3 \cdot (-7) - 1 = 0 \\
+&\Leftrightarrow & -20 + 21 - 1 = 0 \\
+&\Leftrightarrow & 0 = 0 \\
+\intertext{Die einzige kritische Stelle befindet sich an (-7, -5). Aufstellen der Hesse-Matrix}
+H &=& \begin{pmatrix} 2 & -3 \\
+-3 & 4 \end{pmatrix} \\
+\bigtriangleup_{1} &=& 2 > 0 \\
+\bigtriangleup_{2} &=& -1 < 0 \\
+\intertext{Die Hesse-Matrix ist damit weder positiv noch negativ definit und daher infinit. Daher liegt an der kritischen Stelle kein lokales Extremum vor.}
+\end{alignat*}
+\subsubsection{} %iii
+\begin{alignat*}{2}
+f(x,y) &=& 2x^{3} + y^{3} - 12x -27y +2 \\
+I f_{x} &=& 6x^{2} -12 = 0\\
+II f_{y} &=& 3y^{2} - 27 = 0\\
+f_{xx} &=& 12x \\
+f_{xy} &=& 0 \\
+f_{yx} &=& 0 \\
+f_{yy} &=& 6y \\
+I &\Rightarrow & 6x^{2} - 12 = 0 \\
+&\Leftrightarrow & 6x^{2} = 12 \\
+&\Leftrightarrow & x^{2} = 2 \\
+&\Rightarrow & x_{1} = \sqrt{2} \\
+&\Rightarrow & x_{2} = -\sqrt{2} \\
+I + II &=& 6x^{2} + 3y^{2} - 39 = 0 \\
+\intertext{Einsetzen von den x-Werten und berechnen von y}
+x_{1} &\Rightarrow & 6 \cdot 2 + 3y^{2} -39 = 0 \\
+&\Leftrightarrow & 3y^{2} - 27 = 0 \\
+&\Leftrightarrow & 3y^{2} = 27 \\
+&\Leftrightarrow & y^{2} = 9 \\
+&\Leftrightarrow & y \pm 3 \\
+x_{2} &\Rightarrow & 6 \cdot 2 + 3y^{2} - 39 = 0 \\
+&\Leftrightarrow & 3y^{2} = 27 \\
+&\Leftrightarrow & y \pm 3 \\
+\intertext{Es gibt also vier kritische Stellen: $(\sqrt{2}, 3), (\sqrt{2}, -3), (-\sqrt{2}, 3)$ und $(-\sqrt{2},-3)$. Aufstellen der Hesse-Matrix}
+H &=& \begin{pmatrix}12x & 0 \\
+0 & 6y\end{pmatrix} \\
+\intertext{Berechnen der Definitheit für erste kritische Stelle:}
+\bigtriangleup_{1} &=& 12 \cdot \sqrt{2} > 0 \\
+\bigtriangleup_{2} &=& 12 \cdot \sqrt{2} \cdot 18 \\
+&=& 216 \cdot \sqrt{2} > 0 \\
+\intertext{Die Hesse-Matrix ist für die erste kritische Stelle positiv definit. An der ersten kritischen Stelle liegt also ein lokales Minimum vor. Berechnen der Definitheit für die zweite kritische Stelle:}
+\bigtriangleup_{1} &=& 12 \cdot \sqrt{2} > 0 \\
+\bigtriangleup_{2} &=& 12 \cdot \sqrt{2} \cdot (-18) \\
+&=& -216 \cdot \sqrt{2} < 0 \\
+\intertext{Die Hesse-Matrix ist für die zweite kritische Stelle infinit. An der zweiten kritischen Stelle liegt also kein lokales Extremum vor. Berechnen der Definitheit für die dritte kritische Stelle:}
+\bigtriangleup_{1} &=& -12 \cdot \sqrt{2} < 0 \\
+\bigtriangleup_{2} &=& -12 \cdot \sqrt{2} \cdot 18 \\
+&=& -216 \cdot \sqrt{2} < 0 \\
+\intertext{Die Hesse-Matrix ist für die dritte kritische Stelle infinit. An der dritten kritischen Stelle liegt also kein lokales Extremum vor. Berechnen der Definitheit für die vierte kritische Stelle:}
+\bigtriangleup_{1} &=& -12 \cdot \sqrt{2} < 0 \\
+\bigtriangleup_{2} &=& -12 \cdot \sqrt{2} \cdot (-18) \\
+&=& 216 \cdot \sqrt{2} > 0 \\
+\intertext{Die Hesse-Matrix ist für die vierte kritische Stelle negativ definit. An der vierten kritischen Stelle liegt also ein lokales Maximum vor.}
+\end{alignat*}
+\section{} %4
+\subsection{} %a
+\begin{alignat*}{2}
+C(x,y) &=& 0.01x^{2} + 0.02xy + 0.16y^{2} + 5x + 6y + 120 \\
+&=& \frac{1}{100}x^{2} + \frac{1}{50}xy + \frac{4}{25}y^{2} + 5x + 6y + 120 \\
+\intertext{Aufstellen der Gewinnfunktion}
+G(x,y) &=& 12x + 28y - C(x,y) \\
+&=& 12x + 28y - \frac{1}{100}x^{2} - \frac{1}{50}xy - \frac{4}{25}y^{2} - 5x - 6y - 120 \\
+&=& -\frac{1}{100}x^{2} - \frac{4}{25}y^{2} - \frac{1}{50}xy + 7x + 22y - 120 \\
+I\, G_{x} &=& -\frac{1}{50}x - \frac{1}{50}y + 7 = 0 \\
+II\, G_{y} &=& -\frac{8}{25}y - \frac{1}{50}x + 22 = 0 \\
+G_{xx} &=& -\frac{1}{50} \\
+G_{xy} &=& 0 \\
+G_{yx} &=& 0 \\
+G_{yy} &=& -\frac{8}{25} \\
+I &\Rightarrow & -\frac{1}{50}x - \frac{1}{50}y + 7 = 0 \\
+&\Leftrightarrow & \frac{1}{50}x = 7 - \frac{1}{50}y \\
+&\Leftrightarrow & x = 350 - y \\
+\intertext{Einsetzen in II}
+II &\Rightarrow & -\frac{8}{25}y - \frac{1}{50} (350-y) + 22 = 0 \\
+&\Leftrightarrow & \frac{8}{25}y = 22 - \frac{1}{50} (350 - y) \\
+&\Leftrightarrow & \frac{8}{25}y = 22 - 7 + \frac{1}{50}y \\
+&\Leftrightarrow & \frac{15}{50}y = 15 \\
+&\Leftrightarrow & \frac{3}{10}y = 15 \\
+&\Leftrightarrow & y = 50 \\
+\intertext{Einsetzen in I}
+&\Rightarrow & x = 350 - 50 = 300
+\intertext{Die einige kritische Stelle von G(x,y) befindet sich an $\left(300, 50\right)$. Aufstellen der Hesse-Matrix:}
+H &=& \begin{pmatrix}-\frac{1}{50} & 0 \\
+0 & -\frac{8}{25} \end{pmatrix} \\
+\bigtriangleup_{1} &=& -\frac{1}{50} < 0 \\
+\bigtriangleup_{2} &=& \frac{4}{625} > 0 \\
+\intertext{Die Hesse-Matrix ist an der kritischen Stelle negativ definit. An der kritischen Stelle befindet sich daher ein Maximum. Der höchste Gewinn ist demnach mit 300 Einheiten des Gutes A und 50 Einheiten des Gutes B zu erreichen.}
+\end{alignat*}
+\subsection{} %b
+\begin{alignat*}{2}
+G(x,y) &=& -\frac{1}{100}x^{2} - \frac{4}{25}y^{2} - \frac{1}{50}xy + 7x + 22y - 120 \\
+n(x,y) &=& x + 2y = 320 \\
+&\Leftrightarrow & x= 320 - 2y \\
+\intertext{Einsetzen in G(x,y)}
+G(y) &=& -\frac{1}{100} \cdot (320-2y)^{2} - \frac{4}{25}y^{2} - \frac{1}{50} \cdot (320 - 2y)y + 7(320-2y) + 22y - 120 \\
+&=& -\frac{1}{100} \cdot (102400 -1280y + 4y^{2}) - \frac{4}{25}y^{2} - \frac{1}{50} \cdot (320y -2y^{2}) + 2240 - 14y + 22y - 120 \\
+&=& -1024 + \frac{128}{10}y - \frac{1}{25}y^{2} - \frac{4}{25}y^{2} - \frac{32}{5}y + \frac{1}{25}y^{2} + 8y + 2120 \\
+&=& \frac{64}{5}y - \frac{5}{25}y^{2} - \frac{32}{5} + \frac{1}{25}y^{2} + 1096 + 8y \\
+&=& -\frac{4}{25}y^{2} + \frac{72}{5}y + 1096 \\
+G'(y) &=& -\frac{8}{25}y + \frac{72}{5} = 0 \\
+&\Leftrightarrow & \frac{8}{25}y = \frac{72}{5} \\
+&\Leftrightarrow & y = 45 \\
+G''(y) &=& -\frac{8}{25} < 0 \\
+\intertext{Unter der Nebenbedingung n(x,y) gibt es ein lokales Maximum für 45 Einheiten von Gut B.
+Einsetzen von y in die Nebenbedingung:}
+n(x) &=& x + 2 \cdot 45 = 320 \\
+&\Leftrightarrow & x + 90 = 320 \\
+&\Leftrightarrow & x = 230
+\intertext{Die optimalen Mengen des Outputs liegen bei 230 Einheiten von Gut A und 45 Einheiten von Gut B.}
+\end{alignat*}
+\subsection{} %c
+Berechnen des maximalen Gewinns für Fall a)\\
+\begin{alignat*}{2}
+G(300,50) &=& -\frac{1}{100} \cdot 300^{2} - \frac{4}{25} \cdot 50^{2} - \frac{1}{50} \cdot 300 \cdot 50 + 7 \cdot 300 + 22 \cdot 50 - 120 \\
+&=& -900 - \frac{4}{25} \cdot 2500 - 300 + 2100 + 1100 - 120 \\
+&=& 1880 - 400 \\
+&=& 1480 \\
+\intertext{Der maximale Gewinn im Fall a) beträgt 1480 Geldeinheiten.}
+\end{alignat*}\\
+Berechnen des maximalen Gewinns für Fall b)\\
+\begin{alignat*}{2}
+G(230,45) &=& -\frac{1}{100} \cdot 230^{2} - \frac{4}{25} \cdot 45^{2} - \frac{1}{50} \cdot 230 \cdot 45 + 7 \cdot 230 + 22 \cdot 45 - 120 \\
+&=& -529 - \frac{4}{25} \cdot 2025 - \frac{1}{50} \cdot 10350 + 1610 + 990 - 120 \\
+&=& 1951 - 324 - 207 \\
+&=& 1420
+\intertext{Der maximale Gewinn im Fall b) beträgt 1420 Geldeinheiten.}
+\end{alignat*}
+\end{document}

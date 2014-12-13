@@ -1,0 +1,112 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage[locale=DE,exponent-product=\cdot ,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage[scaled=0.78]{luximono}
+\usepackage{listings}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,decorations.text,arrows}
+\pagenumbering{arabic}
+\def\thesection{6.\arabic{section})}
+\def\thesubsection{(\alph{subsection})}
+\def\thesubsubsection{(\arabic{subsubsection})}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\hyphenation{Nach-komma-stel-len}
+\lstnewenvironment{java}[1][]{%
+	\lstset{basicstyle=\ttfamily ,backgroundcolor=\color[gray]{.95},columns=flexible,fontadjust=true,language=Java,tabsize=4,numbers=none,#1}%
+}{%
+}
+
+\tikzstyle{huffmanNodes}=[matrix of nodes,
+	nodes={circle,thin,draw=black!20,minimum size=10mm,text height=1.5ex,text depth=.25ex,inner sep=-10pt}]
+\tikzstyle{huffmanBase}=[matrix of nodes,
+	nodes={minimum size=10mm,text height=1.5ex,text depth=.25ex,inner sep=-10pt}]
+\begin{document}
+\author{Jim Martens (Matrikelnummer 6420323) \and Marlo Kornblum (Matrikelnummer 6427301)}
+\title{Rechnerstrukturen Aufgabenblatt 6}
+\maketitle
+
+\section{}%6.1
+Ein zyklisch-einschrittiger Code hat die Voraussetzung, dass pro Schritt nur ein Bit verändert wird. Zusätzlich dürfen das erste und letzte Codewort ebenfalls nur ein Bit auseinanderliegen. 
+
+Bei einem Binärcode ergibt sich die Bedingung, dass die Parität pro Schritt wechselt. Startet man mit 0 und damit gerader Parität, muss als nächstes eine ungerade Parität folgen. Darauf wieder eine gerade und so weiter.
+
+Die Eigenschaft des zyklischen Codes besagt, dass man an jeder beliebigen Stelle anfangen kann und immer die Bedingung erfüllt ist. Hätte man einen Code mit einer ungeraden Anzahl von Codewörtern, dann würde entweder eine gerade Parität auf eine gerade Parität folgen oder eine ungerade Parität auf eine ungerade Parität, womit der Abstand an mindestens einer Stelle von eins verschieden sein.
+
+\section{}%6.2
+\subsection{} %a
+Die Minimaldistanz $d$ dieses Codes ist $4$, da $4$ Bits geändert werden müssen, um ein neues gültiges Codewort zu erzeugen. Man stelle sich einen Code vor, bei dem überall eine $0$ steht. Setzt man nun ein Datenbit auf $1$, so muss das zugehörige Zeilen- und Spaltenparitätsbit auf $1$ gesetzt werden und das Paritätsbit über die Spaltenparitätsbits muss auch auf $1$ gesetzt werden. Es werden also $4$ Bits verändert.
+\subsection{} %b
+Es können nur 1-bit Fehler erkannt und korrigiert werden. Dies liegt daran, dass nur solche Fehler eindeutig lokalisierbar sind. Zweibit- und 3-bit Fehler können noch erkannt werden, aber nicht mehr korrigiert. Dies liegt daran, dass schon bei 2-bit Fehlern mehrere Fehlerkonstellationen zum selben Ergebnis führen.
+
+4-bit Fehler können nur noch teilweise erkannt werden. Rechteckige 4-bit Fehler können gar nicht mehr erkannt werden.
+\subsection{} %c
+Ein Beispiel eines nicht erkannten 4-bit Fehlers ist ein Fehler in den Bits $d_{0,0},d_{0,1},d_{1,0},d_{1,1}$.
+\subsection{} %d
+Es gibt $81 \cdot 16 \cdot 16 \cdot 1 = 20736$ Möglichkeiten 4-bit Fehler zu erzeugen, die nicht erkannt werden. 
+
+Das liegt daran, dass das erste Fehlerbit komplett frei in $81$ Feldern gesetzt werden kann. Das zweite Bit hat nun von jeweils $9$ Zeilen und $9$ Spalten noch $8$ Zeilen bzw. $8$ Spalten zur Verfügung. Demzufolge bleiben also $16$ Möglichkeiten. Das dritte Bit hat nun noch je nach Wahl des zweiten Bits $8$ Zeilen und $2$ Spalten zur Verfügung oder $8$ Spalten und $2$ Zeilen. Dies sind also $16$ Möglichkeiten. Das letzte Bit hat nur noch eine einzige mögliche Position.
+
+Insgesamt gibt es $\binom{81}{4} = 1663740$ Möglichkeiten einen 4-bit Fehler zu erzeugen. In Relation zur Gesamtzahl der möglichen 4-bit Fehler machen die nicht erkennbaren Fehler $\frac{20736}{1663740} \cdot 100 \approx 1.2$ Prozent aus.
+
+\section{}%6.3
+\subsection{} %a
+Anhand eines Beispiels werden wir zeigen, wie ein auftretender 1-bit Fehler lokalisiert und damit korrigiert werden kann. Dazu werden die Codewortstelle $c_{7}$ des 9. Codewortes verfälscht und anschließend die Prüfbits gebildet.\\\\
+Legende:\\
+R bedeutet richtig. FoP bedeutet Fehler ohne aktualisierte Prüfbits und FmP bedeutet Fehler mit aktualisierten Prüfbits.
+
+\begin{tabular}{cccccccc}
+& $c_{1}$ & $c_{2}$ & $c_{3}$ & $c_{4}$ & $c_{5}$ & $c_{6}$ & $c_{7}$ \\
+Nr. & $p_{1}$ & $p_{2}$ & $d_{1}$ & $p_{3}$ & $d_{2}$ & $d_{3}$ & $d_{4}$ \\
+\hline
+8R & 1 & 1 & 1 & 0 & 0 & 0 & 0 \\
+8FoP & 1 & 1 & 1 & 0 & 0 & 0 & 1 \\
+8FmP & 0 & 0 & 1 & 1 & 0 & 0 & 1
+\end{tabular}
+
+Das Prüfwort gebildet von 8FoP: $x_{a} = 1, x_{b} = 1, x_{c} = 1$.
+
+Anhand des Prüfwortes lässt sich die Stelle des Fehlers bestimmen. Nimmt man $x_{a}$ als $2^{0}$-Stelle, $x_{b}$ als $2^{1}$ und $x_{c}$ als $2^{2}$ Stelle an, so ergibt sich immer die binäre Ganzzahl der betroffenen Stelle.
+
+Wichtig hierbei ist, dass das Prüfwort von dem fehlerhaften Code gebildet wird, bei dem die Prüfbits nicht angepasst wurden.
+\subsection{} %b
+Mithilfe des angegebenen Schemas für Hamming-Codes kann sowohl die Generatormatrix als auch die Prüfmatrix abgelesen werden.
+
+Dazu muss man wissen, dass die Prüfbits so gebildet werden:
+
+Das erste Prüfbit $p_{1}$ enthält auf diesem Schema alle Datenbits, die mit einem roten Punkt markiert sind.
+
+Das zweite Prüfbit enthält auf diesem Schema alle Datenbits, die mit einem grünen Punkt markiert sind.
+
+Das dritte Prüfbit enthält auf diesem Schema alle Datenbits, die mit einem dunkelblauen Punkt markiert sind.
+
+Die Generatormatrix bildet sich zeilenweise über die angegebenen Prüf- und Datenbits. Die erste Zeile entspricht dem ersten Prüfbit, die zweite Zeile dem zweiten Prüfbit, die dritte Zeile dem ersten Datenbit, und so weiter.
+
+Die Einsen in jeder Zeile markieren welche Datenbits enthalten sind. In den Datenbitzeilen gibt es logischerweise nur eine Eins und zwar bei der Zeile des jeweiligen Datenbits, welches sich selbst enthält. In den Prüfbitzeilen gibt es dort Einsen, wo Datenbits in die Berechnung einfließen.
+
+Als Generatormatrix ergibt sich bei einem ($7,4$)-Hamming-Code demnach also folgende Matrix:
+
+\begin{equation*}
+G := \begin{pmatrix} 1 & 1 & 0 & 1 \\ 1 & 0 & 1 & 1 \\ 1 & 0 & 0 & 0 \\ 0 & 1 & 1 & 1 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}
+\end{equation*}
+
+Die Kontrollmatrix lässt sich noch einfacher ablesen. In der ersten Zeile steht überall dort eine Eins, wo auf dem Schema ein roter Punkt ist. Der Rest der Zeile wir mit 0 aufgefüllt.
+
+In der zweiten Zeile steht überall dort eine Eins, wo auf dem Schema ein grüner Punkt ist. Der Rest der Zeile wir mit 0 aufgefüllt.
+
+In der dritten Zeile steht überall dort eine Eins, wo auf dem Schema ein dunkelblauer Punkt ist. Der Rest der Zeile wir mit 0 aufgefüllt.
+
+Daraus ergibt sich für ein ($7,4$)-Hamming-Code Folgendes:
+
+\begin{equation*}
+H := \begin{pmatrix} 1 & 0 & 1 & 0 & 1 & 0 & 1 \\ 0 & 1 & 1 & 0 & 0 & 1 & 1 \\ 0 & 0 & 0 & 1 & 1 & 1 & 1 \end{pmatrix}
+\end{equation*}
+
+Die Kontrollmatrix hat dabei so viele Spalten, wie die Generatormatrix Zeilen hat.
+
+\end{document}

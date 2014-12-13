@@ -1,0 +1,179 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{stmaryrd}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pagenumbering{arabic}
+\def\thesection{3.\arabic{section})}
+\def\thesubsection{\arabic{subsection}.}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setcounter{section}{3}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jim Martens}
+\title{Hausaufgaben zum 23. April}
+\maketitle
+\section{} %3.4
+\subsection{} %1.
+\begin{alignat*}{2}
+L_{1} &=& \{a^{2n}bcba^{2n} | n \geq 0 \}
+\end{alignat*}
+Angenommen $L_{1} \in REG$. Sei $n$ die PL-Zahl. Betrachte $z = a^{2n}bcba^{2n} \in L_{1}$. Also $|z| = 4n + 3 \geq n$. Also existiert eine Zerlegung $z = uvw$ mit (i), (ii) und (iii).\\
+\begin{enumerate}[i)]
+	\item $|uv| \leq n$ 
+	\item $|v| \geq 1$
+	\item $\forall i \in \mathbb{N}: uv^{i}w \in L$
+\end{enumerate}
+\begin{alignat*}{2}
+\overset{i)}{\Rightarrow} uv \in \{a\}^{*} &\Rightarrow & u,v \in \{a\}^{*} \\
+&\overset{ii)}{\Rightarrow} & v \in \{a\}^{+} \text{ d.h. } v=a^{m} \text{ für } 1 \leq m \leq n
+\end{alignat*}\\
+Mit iii) folgt für $i = 0$, dass $uv^{i}w = a^{2n-m}bcba^{2n} \not\in L_{1} \lightning$.\\
+Also $L_{1} \not\in REG$.
+\subsection{} %2.
+\begin{alignat*}{2}
+L_{2} &=& \{w \in \{0,1\}^{*} | |w|_{1} = 2 \cdot |w|_{0} \}
+\end{alignat*}
+Angenommen $L_{2} \in REG$. Sei $n$ die PL-Zahl. Betrachte $z = 0^{n}1^{2n} \in L_{2}$. Also $|z| = 3n \geq n$. Also existiert eine Zerlegung $z = uvw$ mit (i), (ii) und (iii).\\
+\begin{enumerate}[i)]
+	\item $|uv| \leq n$ 
+	\item $|v| \geq 1$
+	\item $\forall i \in \mathbb{N}: uv^{i}w \in L$
+\end{enumerate}
+\begin{alignat*}{2}
+\overset{i)}{\Rightarrow} uv \in \{0\}^{*} &\Rightarrow & u,v \in \{0\}^{*} \\
+&\overset{ii)}{\Rightarrow} & v \in \{0\}^{+} \text{ d.h. } v=a^{m} \text{ für } 1 \leq m \leq n
+\end{alignat*}\\
+Mit iii) folgt für $i = 0$, dass $uv^{i}w = 0^{n-m}1^{2n} \not\in L \lightning$.\\
+Also $L \not\in REG$.
+\section{} %3.5
+\subsection{} %1.
+Die Menge $\overline{\{a\}^{*}}$ lässt sich über dem Alphabet $\Sigma$ auch so schreiben: $\Sigma^{*} \setminus \{a\}^{*}$. Die regulären Ausdrücke $A = (a|b)^{*}$ und $B = a^{*}$ beschreiben jeweils $\Sigma^{*}$ und $\{a\}^{*}$.
+Der Ausdruck $C = B \cdot b^{+} \cdot A$ beschreibt die gesuchte Menge $\overline{\{a\}^{*}}$.\\
+Dieser Ausdruck akzeptiert beliebig viele $a$ am Anfang (auch keine), erwartet dann mindestens ein $b$ aber auch nicht mehr und gibt einem danach die freie Wahl zwischen beliebig vielen $a$ und $b$ ohne Beschränkung. Dadurch ist gewährleistet, dass in jedem Ausdruck mindestens ein $b$ vorkommt, womit weder das leere Wort noch eine Zeichenkette, die nur aus dem Buchstaben $a$ besteht, akzeptiert werden. Somit wird kein Element von $\{a\}^{*}$ akzeptiert, welches dem Komplement eben dieser Menge entspricht.
+\subsection{} %2.
+Berechnung eines regulären Ausdruckes für den gegebenen DFA mithilfe des Kleene-Verfahrens.
+\begin{alignat*}{2}
+R_{1,1}^{0} &=& \{\epsilon , b\} \\
+R_{1,2}^{0} &=& \{a\} \\
+R_{1,3}^{0} &=& R_{2,1}^{0} = R_{3,1}^{0} = \emptyset \\
+R_{2,2}^{0} &=& \{\epsilon \} \\
+R_{2,3}^{0} &=& \{a\} \\
+R_{3,2}^{0} &=& \{b\} \\
+R_{3,3}^{0} &=& \{\epsilon \} \end{alignat*}
+\begin{alignat*}{2}
+R_{1,2}^{1} &=& R_{1,2}^{0} \cup R_{1,1}^{0} \cdot (R_{1,1}^{0})^{*} \cdot R_{1,2}^{0} \\
+&=& R_{1,2}^{0} \cup (R_{1,1}^{0})^{+} \cdot R_{1,2}^{0} \\
+&=& (R_{1,1}^{0})^{+} \cdot R_{1,2}^{0} \cup R_{1,2}^{0} \\
+&=& (R_{1,1}^{0})^{+} \cdot R_{1,2}^{0} \\
+&=& \{\epsilon , b \}^{+} \cdot \{a\} \\
+&=& \{b\}^{*} \cdot \{a\} \\
+&\overset{\sim}{=}& ((b)^{*} \cdot a) \\
+%
+R_{2,3}^{1} &=& R_{2,3}^{0} \cup R_{2,1}^{0} \cdot (R_{1,1}^{0})^{*} \cdot R_{1,3}^{0} \\
+&=& R_{2,3}^{0} \cup R_{2,1}^{0} \cdot (R_{1,1}^{0})^{*} \cdot R_{1,3}^{0} \\
+&=& \{a\} \cup \emptyset \cdot \{\epsilon , b\}^{*} \cdot \emptyset \\
+&=& \{a\} \cup \emptyset \\
+&=& \{a\} \\
+&\overset{\sim}{=}& a \\
+%
+R_{3,2}^{1} &=& R_{3,2}^{0} \cup R_{3,1}^{0} \cdot (R_{1,1}^{0})^{*} \cdot R_{1,3}^{0} \\
+&=& \{b\} \cup \emptyset \cdot \{\epsilon , b\}^{*} \cdot \emptyset \\
+&=& \{b\} \cup \emptyset \cdot \{b\}^{*} \cdot \emptyset \\
+&=& \{b\} \cup \emptyset \\
+&=& \{b\} \\
+&\overset{\sim}{=}& b \\
+%
+R_{2,2}^{1} &=& R_{2,2}^{0} \cup R_{2,1}^{0} \cdot (R_{1,1}^{0})^{*} \cdot R_{1,2}^{0} \\
+&=& \{\epsilon \} \cup (\emptyset \cdot \{\epsilon , b\}^{*} \cdot \{a\}) \\
+&=& \{\epsilon \} \cup (\emptyset \cdot \{b\}^{*} \cdot \{a\}) \\
+&=& \{\epsilon \} \cup \emptyset \\
+&=& \{\epsilon \} \\
+&\overset{\sim}{=}& \emptyset^{*} \\
+%
+R_{3,3}^{1} &=& R_{3,3}^{0} \cup R_{3,1}^{0} \cdot (R_{1,1}^{0})^{*} \cdot R_{1,3}^{0} \\
+&=& \{\epsilon \} \cup \emptyset \cdot \{\epsilon , b\}^{*} \cdot \emptyset \\
+&=& \{\epsilon \} \cup \emptyset \cdot \{b\}^{*} \cdot \emptyset \\
+&=& \{\epsilon \} \cup \emptyset \\
+&=& \{\epsilon \} \\
+&\overset{\sim}{=}& \emptyset^{*}
+\end{alignat*}\\
+\begin{alignat*}{2}
+R_{1,3}^{1} &=& R_{1,3}^{0} \cup R_{1,1}^{0} \cdot (R_{1,1}^{0})^{*} \cdot R_{1,3}^{0} \\
+&=& R_{1,3}^{0} \cup (R_{1,1}^{0})^{+} \cdot R_{1,3}^{0} \\
+&=& (R_{1,1}^{0})^{+} \cdot R_{1,3}^{0} \cup R_{1,3}^{0}\\
+&=& (R_{1,1}^{0})^{+} \cdot R_{1,3}^{0}\\
+&=& \{\epsilon , b \}^{+} \cdot \emptyset \\
+&=& \{b \}^{*} \cdot \emptyset \\
+&=& \emptyset \\
+%
+R_{1,2}^{2} &=& R_{1,2}^{1} \cup R_{1,2}^{1} \cdot (R_{2,2}^{1})^{*} \cdot R_{2,2}^{1}) \\
+&=& R_{1,2}^{1} \cdot (\{\epsilon \} \cup (R_{2,2}^{1})^{*} \cdot R_{2,2}^{1}) \\
+&=& R_{1,2}^{1} \cdot (\{\epsilon \} \cup (R_{2,2}^{1})^{+}) \\
+&=& R_{1,2}^{1} \cdot (R_{2,2}^{1})^{*} \\
+&=& (\{b\}^{*} \cdot \{a\}) \cdot \{\epsilon \}^{*} \\
+&=& \{b\}^{*} \cdot \{a\}\\
+&\overset{\sim}{=}& ((b)^{*} \cdot a) \\
+%
+R_{1,3}^{2} &=& R_{1,3}^{1} \cup R_{1,2}^{1} \cdot (R_{2,2}^{1})^{*} \cdot R_{2,3}^{1} \\
+&=& \emptyset \cup (\{a\} \cdot \{\epsilon \}^{*} \cdot \{a\}) \\
+&=& \emptyset \cup (\{a\} \cdot \{a\}) \\
+&=& \emptyset \cup \{aa\} \\
+&=& \{aa\} \\
+&\overset{\sim}{=}& aa \\
+%
+R_{3,3}^{2} &=& R_{3,3}^{1} \cup R_{3,2}^{1} \cdot (R_{2,2}^{1})^{*} \cdot R_{2,3}^{1} \\
+&=& \{\epsilon \} \cup (\{b\} \cdot \{\epsilon \}^{*} \cdot \{a\}) \\
+&=& \{\epsilon \} \cup (\{b\} \cdot \{a\}) \\
+&=& \{\epsilon \} \cup \{ba\} \\
+&=& \{\epsilon , ba\} \\
+&\overset{\sim}{=}& \emptyset^{*} + b \cdot a
+\end{alignat*}\\
+\begin{alignat*}{2}
+R_{3,2}^{2} &=& R_{3,2}^{1} \cup R_{3,2}^{1} \cdot (R_{2,2}^{1})^{*} \cdot R_{2,2}^{1} \\
+&=& R_{3,2}^{1} \cdot (\{\epsilon \} \cup (R_{2,2}^{1})^{*} \cdot R_{2,2}^{1}) \\
+&=& R_{3,2}^{1} \cdot (\{\epsilon \} \cup (R_{2,2}^{1})^{+}) \\
+&=& R_{3,2}^{1} \cdot (R_{2,2}^{1})^{*} \\
+&=& \{b\} \cdot \{\epsilon \}^{*} \\
+&=& \{b\} \\
+&\overset{\sim}{=}& b \\
+%
+R_{1,3}^{3} &=& R_{1,3}^{2} \cup R_{1,3}^{2} \cdot (R_{3,3}^{2})^{*} \cdot R_{3,3}^{2} \\
+&=& R_{1,3}^{2} \cdot (\{\epsilon \} \cup (R_{3,3}^{2})^{*} \cdot R_{3,3}^{2}) \\
+&=& R_{1,3}^{2} \cdot (\{\epsilon \} \cup (R_{3,3}^{2})^{+}) \\
+&=& R_{1,3}^{2} \cdot (R_{3,3}^{2})^{*} \\
+&=& \{aa\} \cdot \{\epsilon , ba\}^{*} \\
+&=& \{aa\} \cdot \{ba\}^{*} \\
+&\overset{\sim}{=}& a \cdot a \cdot (b \cdot a)^{*} \\
+%
+R_{1,2}^{3} &=& R_{1,2}^{2} \cup R_{1,3}^{2} \cdot (R_{3,3}^{2})^{*} \cdot R_{3,2}^{2} \\
+&=& (\{b\}^{*} \cdot \{a\}) \cup (\{aa\} \cdot \{\epsilon , ba\}^{*} \cdot \{b\}) \\
+&=& (\{b\}^{*} \cdot \{a\}) \cup (\{aa\} \cdot \{ba\}^{*} \cdot \{b\}) \\
+&\overset{\sim}{=}& (b^{*} \cdot a) + (aa \cdot (b \cdot a)^{*} \cdot b) \\
+\end{alignat*}
+Der reguläre Ausdruck ergibt sich aus der Vereinigung von $R_{1,3}^{3}$ und $R_{1,2}^{3}$. Es ergibt sich daher folgendes:\\
+\begin{alignat*}{2}
+R_{1,3}^{3} \cup R_{1,2}^{3} &=& (\{aa\} \cdot \{ba\}^{*}) \cup ((\{b\}^{*} \cdot \{a\}) \cup (\{aa\} \cdot \{ba\}^{*} \cdot \{b\})) \\
+&\overset{\sim}{=}& (aa \cdot (ba)^{*}) + (b^{*} \cdot a) + (aa \cdot (ba)^{*} \cdot b)
+\end{alignat*}
+Der reguläre Ausdruck ist $(aa \cdot (ba)^{*}) + (b^{*} \cdot a) + (aa \cdot (ba)^{*} \cdot b)$.
+\section{} %3.6
+\subsection{} %1.
+\subsection{} %2.
+\end{document}

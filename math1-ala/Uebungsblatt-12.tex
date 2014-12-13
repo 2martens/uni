@@ -1,0 +1,102 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Hausaufgaben zum 11. Juli}
+\maketitle
+\section{} %1
+\begin{alignat*}{2}
+\iint\limits_{I} f(x,y)\, d(x,y) &=& \iint\limits_{I} (2x^{2}y)\, d(x,y) \\
+\intertext{Version 1}
+&=& \int\limits_{1}^{2} \left( \int\limits_{-1}^{3} (2x^{2}y) \, dy \right) \, dx \\
+&=& \int\limits_{1}^{2} \left( 2x^{2} \int\limits_{-1}^{3} y \, dy \right)\, dx \\
+&=& \int\limits_{1}^{2} \left( 2x^{2} \left[\frac{1}{2}y^{2}\right]_{-1}^{3} \right)\, dx \\
+&=& \int\limits_{1}^{2} \left( 2x^{2} \left[\frac{9}{2} - \frac{1}{2}\right] \right)\, dx \\
+&=& \int\limits_{1}^{2} \left( 2x^{2} \cdot 4 \right)\, dx \\
+&=& 8 \int\limits_{1}^{2} x^{2}\, dx \\
+&=& 8 \left[\frac{1}{3}x^{3} \right]_{1}^{2} \\
+&=& 8 \left[\frac{8}{3} - \frac{1}{3} \right] \\
+&=& 8 \cdot \frac{7}{3} = \frac{56}{3} \\
+\intertext{Version 2}
+&=& \int\limits_{-1}^{3} \left( \int\limits_{1}^{2} (2x^{2}y) \, dx \right) \, dy \\
+&=& \int\limits_{-1}^{3} \left( 2y\int\limits_{1}^{2} x^{2} \, dx \right) \, dy \\
+&=& \int\limits_{-1}^{3} \left( 2y\left[\frac{1}{3}x^{3} \right]_{1}^{2} \right) \, dy \\
+&=& \int\limits_{-1}^{3} \left( 2y\left[\frac{8}{3} - \frac{1}{3} \right] \right) \, dy \\
+&=& \int\limits_{-1}^{3} \left( 2y \cdot \frac{7}{3} \right) \, dy \\
+&=& \frac{14}{3}\int\limits_{-1}^{3} y  \, dy \\
+&=& \frac{14}{3}\left[\frac{1}{2}y^{2}\right]_{-1}^{3} \\
+&=& \frac{14}{3}\left[\frac{9}{2} - \frac{1}{2}\right] \\
+&=& \frac{14}{3} \cdot 4 = \frac{56}{3}
+\end{alignat*}
+\section{} %2
+\subsubsection{} %i
+\begin{alignat*}{2}
+\iint\limits_{G} f(x,y) \, d(x,y) &=& \iint\limits_{G} (xy^{2}) \, d(x,y) \\
+&=& \int\limits_{0}^{1} \left(\int\limits_{0}^{3x} xy^{2}\, dy \right) \, dx \\
+&=& \int\limits_{0}^{1} \left(x\int\limits_{0}^{3x} y^{2}\, dy \right) \, dx \\
+&=& \int\limits_{0}^{1} \left(x \left[\frac{1}{3}y^{3} \right]_{0}^{3x} \right) \, dx \\
+&=& \int\limits_{0}^{1} \left(x \left[\frac{1}{3} \cdot 27x^{3} \right] \right) \, dx \\
+&=&  \int\limits_{0}^{1} \left(x \cdot 9x^{3} \right) \, dx \\
+&=&  \int\limits_{0}^{1} \left(9x^{4} \right) \, dx \\
+&=& 9\int\limits_{0}^{1} x^{4} \, dx \\
+&=& 9\left[\frac{1}{5}x^{5} \right]_{0}^{1} \\
+&=& 9 \cdot \frac{1}{5} = \frac{9}{5}
+\end{alignat*}
+\subsubsection{} %ii
+\begin{alignat*}{2}
+\iint\limits_{G} f(x,y) \, d(x,y) &=& \iint\limits_{G} (xy^{2}) \, d(x,y) \\
+&=& \int\limits_{0}^{1} \left(\int\limits_{3x}^{3} xy^{2} \, dy \right)\, dx \\
+&=& \int\limits_{0}^{1} \left(x\int\limits_{3x}^{3} y^{2} \, dy \right)\, dx \\
+&=& \int\limits_{0}^{1} \left(x \left[\frac{1}{3}y^{3} \right]_{3x}^{3} \right)\, dx \\
+&=& \int\limits_{0}^{1} \left(x \left[\frac{27}{3} - \frac{27}{3}x^{3} \right] \right)\, dx \\
+&=& \int\limits_{0}^{1} \left(9x - 9x^{4} \right)\, dx \\
+&=& \int\limits_{0}^{1} \left(9(x - x^{4}) \right)\, dx \\
+&=& 9\int\limits_{0}^{1} x - x^{4}\, dx \\
+&=& 9\int\limits_{0}^{1} x \, dx - 9\int\limits_{0}^{1} x^{4}\, dx \\
+&=& 9 \left[\frac{1}{2}x^{2} \right]_{0}^{1} - 9\left[\frac{1}{5}x^{5} \right]_{0}^{1} \\
+&=& 9  \cdot \frac{1}{2} - 9 \cdot \frac{1}{5} \\
+&=& \frac{9}{2} - \frac{9}{5} \\
+&=& \frac{45}{10} - \frac{18}{10} = \frac{27}{10}
+\end{alignat*}
+\section{} %3
+\subsection{} %a
+Klarerweise gilt $f_{4}(n) = O(f_{5}(n))$. Ebenfalls gilt $f_{3}(n) = O(f_{1}(n))$. Außerdem ist klar, dass $f_{1}(n) = O(f_{4}(n))$ gilt.
+Damit ergibt sich die Reihenfolge $f_{3}, f_{1}, f_{4}, f_{5}$.
+Es müssen noch $f_{2}$ und $f_{6}$ eingeordnet werden. $f_{2}(n) = O(f_{1}(n))$ gilt ebenso wie $f_{3}(n) = O(f_{2}(n))$. $f_{2}$ kann demnach zwischen $f_{3}$ und $f_{1}$ eingeordnet werden, womit sich die Reihenfolge $f_{3}, f_{2}, f_{1}, f_{4}, f_{5}$ ergibt.
+
+Abschließend muss noch $f_{6}(n)$ eingeordnet werden. $n^{2}$ kommt als Faktor auch in $f_{1}$ vor. Es bleibt daher die Frage, ob $\sqrt{n}$ schneller wächst als $\log_{2}(n)$. Dem ist so, da Wurzelfunktionen allgemein schneller wachsen als Logarithmusfunktionen. Daher gilt $f_{6}(n) = O(f_{1}(n))$. Gleichzeitig gilt, dass $\sqrt{2n}$ langsamer wächst als $f_{6}(n)$, womit auch $f_{2}(n) = O(f_{6}(n))$ gilt. Die fertige Reihenfolge ist daher $f_{3}, f_{2}, f_{6}, f_{1}, f_{4}, f_{5}$.
+\subsection{} %b
+\section{} %4
+\subsection{} %a
+\subsection{} %b
+\begin{alignat*}{2}
+\intertext{Es gilt $n = \lfloor x \rfloor, x \geq 1$ für beide Funktionen:}
+f(n) &=& n \\
+g(n) &=& n^{1+ \lceil \sin (x) \rceil}
+\end{alignat*}
+\end{document}

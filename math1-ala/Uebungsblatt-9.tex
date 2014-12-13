@@ -1,0 +1,185 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Hausaufgaben zum 20. Juni}
+\maketitle
+\section{} %1
+\subsection{} %a
+\begin{alignat*}{2}
+T_{8}(x) &=&& 1 - \frac{1}{2}x^{2} + \frac{1}{24}x^{4} - \frac{1}{720}x^{6} + \frac{1}{40320}x^{8} \\
+T_{9}(x) &=&& 1 - \frac{1}{2}x^{2} + \frac{1}{24}x^{4} - \frac{1}{720}x^{6} + \frac{1}{40320}x^{8} \\
+T_{10}(x) &=&& 1 - \frac{1}{2}x^{2} + \frac{1}{24}x^{4} - \frac{1}{720}x^{6} + \frac{1}{40320}x^{8} - \frac{1}{10!}x^{10}\\
+T_{11}(x) &=&& 1 - \frac{1}{2}x^{2} + \frac{1}{24}x^{4} - \frac{1}{720}x^{6} + \frac{1}{40320}x^{8} - \frac{1}{10!}x^{10} \\
+T_{12}(x) &=&& 1 - \frac{1}{2}x^{2} + \frac{1}{24}x^{4} - \frac{1}{720}x^{6} + \frac{1}{40320}x^{8} - \frac{1}{10!}x^{10} + \frac{1}{12!}x^{12}\\
+T_{13}(x) &=&& 1 - \frac{1}{2}x^{2} + \frac{1}{24}x^{4} - \frac{1}{720}x^{6} + \frac{1}{40320}x^{8} - \frac{1}{10!}x^{10} + \frac{1}{12!}x^{12}
+\end{alignat*}
+\begin{alignat*}{2}
+T_{9}(1) &=& 1 - \frac{1}{2} \cdot 1^{2} + \frac{1}{24} \cdot 1^{4} - \frac{1}{720} \cdot 1^{6} + \frac{1}{40320} \cdot 1^{8} \\
+&\approx & 0.5403026  \\
+T_{11}(1) &=& 1 - \frac{1}{2} \cdot 1^{2} + \frac{1}{24} \cdot 1^{4} - \frac{1}{720} \cdot 1^{6} + \frac{1}{40320} \cdot 1^{8} - \frac{1}{10!} \cdot 1^{10} \\
+&\approx & 0.5403023 \\
+T_{13}(1) &=& 1 - \frac{1}{2} \cdot 1^{2} + \frac{1}{24} \cdot 1^{4} - \frac{1}{720} \cdot 1^{6} + \frac{1}{40320} \cdot 1^{8} - \frac{1}{10!} \cdot 1^{10} + \frac{1}{12!} \cdot 1^{12} \\
+&\approx & 0.5403023
+\end{alignat*}
+\subsection{} %b
+\begin{alignat*}{2}
+f(x) &=& \sqrt{1+x} = (1+x)^{\frac{1}{2}} \\
+f'(x) &=& \frac{1}{2} \cdot (1+x)^{-\frac{1}{2}} \\
+f''(x) &=& -\frac{1}{4} \cdot (1+x)^{-\frac{3}{2}} \\
+f'''(x) &=& \frac{3}{8} \cdot (1+x)^{-\frac{5}{2}} \\
+f^{(4)}(x) &=& -\frac{15}{16} \cdot (1+x)^{-\frac{7}{2}}
+\end{alignat*}
+\begin{alignat*}{2}
+T_{0}(x) &=&& 1 \\
+T_{1}(x) &=&& 1 + \frac{1}{2}x \\
+T_{2}(x) &=&& 1 + \frac{1}{2}x - \frac{1}{8}x^{2}\\
+T_{3}(x) &=&& 1 + \frac{1}{2}x - \frac{1}{8}x^{2} + \frac{3}{48}x^{3} \\
+T_{4}(x) &=&& 1 + \frac{1}{2}x - \frac{1}{8}x^{2} + \frac{3}{48}x^{3} - \frac{15}{384}x^{4}
+\end{alignat*}
+\begin{alignat*}{2}
+g(x) &=& \sqrt[3]{1+x} = (1+x)^{\frac{1}{3}} \\
+g'(x) &=& \frac{1}{3} \cdot (1+x)^{-\frac{2}{3}} \\
+g''(x) &=& -\frac{2}{9} \cdot (1+x)^{-\frac{5}{3}} \\
+g'''(x) &=& \frac{10}{27} \cdot (1+x)^{-\frac{8}{3}} \\
+g^{(4)}(x) &=& -\frac{80}{81} \cdot (1+x)^{-\frac{11}{3}}
+\end{alignat*}
+\begin{alignat*}{2}
+T_{0}(x) &=&& 1 \\
+T_{1}(x) &=&& 1 + \frac{1}{3}x \\
+T_{2}(x) &=&& 1 + \frac{1}{3}x - \frac{1}{9}x^{2} \\
+T_{3}(x) &=&& 1 + \frac{1}{3}x - \frac{1}{9}x^{2} + \frac{5}{81}x^{3} \\
+T_{4}(x) &=&& 1 + \frac{1}{3}x - \frac{1}{9}x^{2} + \frac{5}{81}x^{3} - \frac{10}{243}x^{4}
+\end{alignat*}
+\subsection{} %c
+\begin{alignat*}{2}
+f(x) &=& e^{x} \cdot \sin x \\
+f'(x) &=& e^{x} \cdot \cos x \\
+f''(x) &=& -e^{x} \cdot \sin x \\
+f'''(x) &=& -e^{x} \cdot \cos x \\
+f^{(4)}(x) &=& e^{x} \cdot \sin x \\
+f^{(5)}(x) &=& e^{x} \cdot \cos x
+\end{alignat*}
+\begin{alignat*}{2}
+T_{5}(x) &=& 0 + x - 0x^{2} - \frac{1}{6}x^{3} + 0x^{4} + \frac{1}{120}x^{5} \\
+&=& x - \frac{1}{6}x^{3} + \frac{1}{120}x^{5}
+\end{alignat*}
+\section{} %2
+\subsubsection{} %i
+\begin{alignat*}{2}
+\lim\limits_{x \rightarrow 1} \left(\frac{x^{3}-3x^{2}+x+2}{x^{2}-5x+6} \right) &=& \frac{1-3+1+2}{1-5+6} \\
+&=& \frac{1}{2}
+\end{alignat*}
+\subsubsection{} %ii
+\begin{alignat*}{3}
+\lim\limits_{x \rightarrow 2} \left(\frac{x^{3}-3x^{2}+x+2}{x^{2}-5x+6} \right) &=& \lim\limits_{x \rightarrow 2} \left(\frac{3x^{2} - 6x + 1}{2x - 5} \right) &=& \frac{3 \cdot 2^{2} - 6 \cdot 2 + 1}{2 \cdot 2 - 5} \\
+&& &=& \frac{12 - 12 + 1}{4 - 5} \\
+&& &=& \frac{1}{-1} \\
+&& &=& -1
+\end{alignat*}
+\subsubsection{} %iii
+\begin{alignat*}{2}
+\lim\limits_{x \rightarrow 0} (1+3x)^{\frac{1}{2x}}
+\end{alignat*}
+\subsubsection{} %iv
+\begin{alignat*}{2}
+\lim\limits_{x \rightarrow 0} \left(\frac{1}{e^{x} - 1} - \frac{1}{\sin x} \right)
+\end{alignat*}
+\section{} %3
+\subsection{} %a
+\begin{alignat*}{2}
+f(x) &=& 3^{x} \\
+f'(x) &=& 3^{x} \cdot \ln 3 \\
+t'(x) = f'(2) &=& 9 \cdot \ln 3 \\
+&\approx & 9.88751 \\
+\intertext{Die Steigung der Tangente beträgt $9 \cdot \ln 3$ oder rund $9.88751$.}
+t(x) &=& \ln (3) \cdot 9x + b \\
+\intertext{Bestimmen des Schnittpunkts mit der y-Achse}
+b &=& t(x) - \ln (3) \cdot 9x \\
+&=& t(2) - \ln (3) \cdot 18 \\
+&=& 9 - \ln (3) \cdot 18 \\
+&\approx & -10.77502  \\
+t(x) &=& \ln 3 \cdot 9x + 9 - \ln (3) \cdot 18 \\
+\intertext{Bestimmen des Schnittpunkts mit der x-Achse}
+0 &=& \ln (3) \cdot 9x + 9 - \ln (3) \cdot 18 \\
+\ln (3) \cdot 18 - 9 &=& \ln (3) \cdot 9x \\
+\frac{\ln (3) \cdot 18 - 9}{\ln 3} &=& 9x \\
+\frac{\ln (3) \cdot 18 - 9}{\ln (3) \cdot 9} &=& x \\
+x &\approx & 1.08976
+\end{alignat*}
+\subsection{} %b
+\begin{alignat*}{2}
+f(x) &=& \sqrt[7]{x+2} \\
+&=& (x+2)^{\frac{1}{7}} \\
+f'(x) &=& \frac{1}{7} \cdot (x+2)^{-\frac{6}{7}} \\
+f''(x) &=& -\frac{6}{49} \cdot (x+2)^{-\frac{13}{7}}
+\end{alignat*}
+\begin{alignat*}{2}
+T_{0} &=&& 2^{\frac{1}{7}} \\
+T_{1} &=&& 2^{\frac{1}{7}} + \frac{1}{7} \cdot 2^{-\frac{6}{7}}x \\
+T_{2} &=&& 2^{\frac{1}{7}} + \frac{1}{7} \cdot 2^{-\frac{6}{7}}x - \frac{3}{49} \cdot 2^{-\frac{13}{7}}
+\end{alignat*}
+\subsection{} %c
+\begin{alignat*}{2}
+x_{n} &=& \frac{1}{2\pi n} \\
+\lim\limits_{n\rightarrow \infty} f(x_{n}) = \lim\limits_{n\rightarrow \infty} \cos \left(\frac{1}{x_{n}} \right) &=&  \lim\limits_{n\rightarrow \infty} \cos \left(\frac{1}{\frac{1}{2 \pi n}} \right) \\
+&=& \lim\limits_{n\rightarrow \infty} \cos (2 \pi n) = 1
+\end{alignat*} \\
+Der mögliche Grenzwert 1 stimmt nicht mit dem Funktionswert überein. Daher ist $h(x)$ im Punkt $x_{0}=0$ nicht stetig.
+\subsection{} %d
+\setcounter{subsubsection}{0}
+\subsubsection{} %i
+$\mathcal{B}$ enthält alle Folgen, die gegen eine reelle Zahl konvergieren, als auch solche, die zwischen zwei Werten oszillieren.
+Lediglich uneigentlich konvergente Folgen sind nicht enthalten.
+\subsubsection{} %ii
+Aus $i)$ ergibt sich, dass nicht jede Folge in $\mathcal{B}$ konvergiert. Oszillierende Folgen konvergieren nicht, allerdings erfüllen sie die Bedingungen von $\mathcal{B}$.
+\section{} %4
+\subsection{} %a
+\begin{alignat*}{2}
+\lim\limits_{x \rightarrow \infty} \left(\frac{a^{x}}{x^{n}}\right) &=& \lim\limits_{x \rightarrow \infty} \left(\frac{a^{x} \cdot \ln a}{n \cdot x^{n-1}}\right) \\
+\intertext{Nach n Ableitungen}
+&=& \lim\limits_{x \rightarrow \infty} \left(\frac{a^{x} \cdot (\ln a)^{n}}{n! \cdot x^{0}}\right) \\
+\intertext{Zähler geht gegen unendlich, Nenner gegen konstante Zahl $n!$. Daher existiert der Grenzwert nicht.}
+&=& \lim\limits_{x \rightarrow \infty} \left(\frac{a^{x} \cdot (\ln a)^{n}}{n!}\right) = \infty
+\end{alignat*}
+\subsection{} %b
+\begin{alignat*}{2}
+\lim\limits_{x \rightarrow \infty} \left(\frac{x^{r}}{\ln^{k} x} \right) &=& \lim\limits_{x \rightarrow \infty} \left(\frac{rx^{r-1}}{k \cdot \ln^{k-1} x \cdot \frac{1}{x}} \right) \\
+&=& \lim\limits_{x \rightarrow \infty} \left(\frac{rx^{r}}{k \cdot \ln^{k-1} x} \right) \\
+\intertext{Nach der k-ten Ableitung sieht es so aus}
+&=& \lim\limits_{x \rightarrow \infty} \left(\frac{r^{k} \cdot x^{r}}{k! \cdot \ln x} \right) \\
+\intertext{Herausziehen der Konstanten}
+&=& \frac{r^{k}}{k!} \cdot \lim\limits_{x \rightarrow \infty} \left(\frac{x^{r}}{\ln x} \right) \\
+\intertext{Nach Satz 27 im Skript, existiert der Grenzwert $\lim\limits_{x \rightarrow \infty} \left(\frac{x^{r}}{\ln x} \right)$ nicht bzw. ist unendlich. Unendlich mal eine Konstante ist immer noch unendlich.}
+&=& \infty
+\end{alignat*}
+\subsection{} %c
+\setcounter{subsubsection}{0}
+\subsubsection{} %i
+\subsubsection{} %ii
+\end{document}

@@ -1,0 +1,105 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Hausaufgaben zum 25. April}
+\maketitle
+\section{} %1
+\subsection{} %a
+\vspace{11cm}
+Die Unstetigkeitsstellen sind $x=2$ und $x=6$.
+\subsection{} %b
+\vspace{4cm}
+Die Funktion $g(x)$ ist periodisch. Betrachtet man die Periode für $x=0$ bis $x=1$, so ist ersichtlich, dass sowohl $x=0$ als auch $x=1$ Unstetigkeitsstellen sind. Nähert man sich an die beiden Stellen von links an, so stimmt der Grenzwert nicht mit dem Funktionswert überein. Nähert man sich von rechts an, stimmt er überein.\\
+Stetigkeit erfordert jedoch, dass der Grenzwert existiert und gleich dem Funktionswert ist, unabhängig von der Folge mit der man sich annähert.
+Daher ist $g(x)$ in diesen beiden Stellen unstetig. Aufgrund der Periodizität der Funktion ist $g(x)$ an allen Stellen $x \in \mathbb{Z}$ unstetig.\\
+\\
+Betrachtet man hingegen eine andere Stelle in der Periode, so stimmen Grenzwert und Funktionswert überein, unabhängig davon ob man sich von rechts oder links annähert. Daher ist $g(x)$ in allen Stellen der Periode mit $x \neq 0$ und $x \neq 1$ stetig. Aufgrund der Periodizität der Funktion ist $g(x)$ an allen Stellen $x \not\in \mathbb{Z}$ stetig.
+\section{} %2
+\subsection{} %a
+\begin{alignat*}{2}
+\underset{n \rightarrow \infty}{\text{lim}} a_{n} &=& \underset{n \rightarrow \infty}{\text{lim}} \frac{\sqrt{3n^{2}-2n+5}-\sqrt{n}}{\sqrt{n^{2}-n+1}+4n} \\
+\intertext{Ausklammern von $n^{2}$ unterhalb der Wurzeln}
+&=& \underset{n \rightarrow \infty}{\text{lim}} \frac{\sqrt{n^{2} (3 - \frac{2}{n} + \frac{5}{n^{2}})} - \sqrt{n^{2} \cdot \frac{1}{n}}}{\sqrt{n^{2} (1 -\frac{1}{n} + \frac{1}{n^{2}})} + 4n} \\
+\intertext{Wurzelgesetze anwenden}
+&=& \underset{n \rightarrow \infty}{\text{lim}} \frac{\sqrt{n^{2}} \cdot \sqrt{3 - \frac{2}{n} + \frac{5}{n^{2}}} - \sqrt{n^{2}} \cdot \sqrt{\frac{1}{n}}}{\sqrt{n^{2}} \cdot \sqrt{1 -\frac{1}{n} + \frac{1}{n^{2}}} + 4n} \\
+\intertext{Wurzel auflösen}
+&=& \underset{n \rightarrow \infty}{\text{lim}} \frac{n \cdot \sqrt{3 - \frac{2}{n} + \frac{5}{n^{2}}} - n \cdot \sqrt{\frac{1}{n}}}{n \cdot \sqrt{1 -\frac{1}{n} + \frac{1}{n^{2}}} + 4n} \\
+\intertext{$n$ ausklammern}
+&=& \underset{n \rightarrow \infty}{\text{lim}} \frac{n \cdot (\sqrt{3 - \frac{2}{n} + \frac{5}{n^{2}}} - \sqrt{\frac{1}{n}})}{n \cdot (\sqrt{1 -\frac{1}{n} + \frac{1}{n^{2}}} + 4)} \\
+\intertext{$n$ kürzen}
+&=& \underset{n \rightarrow \infty}{\text{lim}} \frac{\sqrt{3 - \frac{2}{n} + \frac{5}{n^{2}}} - \sqrt{\frac{1}{n}}}{\sqrt{1 -\frac{1}{n} + \frac{1}{n^{2}}} + 4} \\
+\intertext{lim mit Wurzelfunktion vertauschen, da Wurzelfunktion stetig}
+&=& \frac{\sqrt{\underset{n \rightarrow \infty}{\text{lim}} (3 - \frac{2}{n} + \frac{5}{n^{2}})} - \sqrt{\underset{n \rightarrow \infty}{\text{lim}}(\frac{1}{n})}}{\sqrt{\underset{n \rightarrow \infty}{\text{lim}} (1 -\frac{1}{n} + \frac{1}{n^{2}})} + 4} \\
+\intertext{limes anwenden und Nullfolgen entfernen}
+&=& \frac{\sqrt{3} - \sqrt{0}}{\sqrt{1} + 4} \\
+\intertext{Zusammenfassen}
+&=& \frac{\sqrt{3}}{5}
+\end{alignat*}
+\subsection{} %b
+\begin{alignat*}{2}
+&& \underset{n \rightarrow \infty}{\text{lim}} \left( \text{cos} \left( \frac{\sqrt{10n^{2}-n}-n}{2n+3} \right) \right) \\
+\intertext{Ausklammern von $n^{2}$ unter der Wurzel}
+&=& \underset{n \rightarrow \infty}{\text{lim}} \left( \text{cos} \left( \frac{\sqrt{n^{2} (10-\frac{1}{n})}-n}{2n+3} \right) \right) \\
+\intertext{Wurzelgesetze anwenden}
+&=& \underset{n \rightarrow \infty}{\text{lim}} \left( \text{cos} \left( \frac{\sqrt{n^{2}} \cdot \sqrt{10-\frac{1}{n}}-n}{2n+3} \right) \right) \\
+\intertext{Wurzel auflösen}
+&=& \underset{n \rightarrow \infty}{\text{lim}} \left( \text{cos} \left( \frac{n \cdot \sqrt{10-\frac{1}{n}}-n}{2n+3} \right) \right) \\
+\intertext{Ausklammern von $n$ in Zähler und Nenner}
+&=& \underset{n \rightarrow \infty}{\text{lim}} \left( \text{cos} \left( \frac{n \cdot (\sqrt{10 - \frac{1}{n}} - 1)}{n \cdot (2 + \frac{3}{n})} \right) \right) \\
+\intertext{Kürzen von $n$}
+&=& \underset{n \rightarrow \infty}{\text{lim}} \left( \text{cos} \left( \frac{\sqrt{10 - \frac{1}{n}} - 1}{2 + \frac{3}{n}} \right) \right) \\
+\intertext{cos mit lim vertauschen, da Cosinusfunktion stetig}
+&=& \text{cos} \left( \underset{n \rightarrow \infty}{\text{lim}} \left( \frac{\sqrt{10 - \frac{1}{n}} - 1}{2 + \frac{3}{n}} \right) \right) \\
+\intertext{lim in Wurzel ziehen, da Wurzelfunktion stetig}
+&=& \text{cos} \left( \frac{\sqrt{\underset{n \rightarrow \infty}{\text{lim}} (10 - \frac{1}{n})} - \underset{n \rightarrow \infty}{\text{lim}} (1) }{\underset{n \rightarrow \infty}{\text{lim}} (2 + \frac{3}{n})} \right) \\
+&=& \text{cos} \left( \frac{\sqrt{10} - 1}{2} \right)\\
+&\approx & 0.47 
+\end{alignat*}
+\section{} %3
+$g \circ f$ kann auch so geschrieben werden $g(f(x))$. Vereinfacht gesagt, liefert $g$ den Funktionswert an der Stelle, die dem Funktionswert von $f$ an der Stelle $x$ entspricht.\\
+Das berücksichtigend wissen wir, dass $f$ an der Stelle $x_{0}$ stetig ist. Der Funktionswert für diese Stelle ist $f(x_{0}) = y_{0}$. Wir wissen ferner, dass $g$ an der Stelle $y_{0}$ stetig ist.\\
+\\
+Da der Funktionswert von $f$ an der Stelle $x_{0}$ der Stelle entspricht, an der $g$ bekanntermaßen stetig ist, werden hier zwei stetige Funktionen nacheinander ausgeführt. Und die Nacheinanderausführung von zwei stetigen Funktionen ist selbst wiederum stetig.\\
+Es ist somit ersichtlich, dass $g(f(x_{0}))$ den soeben beschrieben Fall darstellt und damit klarstellt, dass $g \circ f$ ebenfalls an der Stelle $x_{0}$ stetig ist.
+\section{} %4
+$g(x)$:\\
+\begin{alignat*}{2}
+\underset{x \rightarrow 0}{\text{lim}} g(x) &\Rightarrow & \underset{x \rightarrow 0}{\text{lim}} (x^{2} \cdot 1 ) \geq \underset{x \rightarrow 0}{\text{lim}} \left(x^{2} \cdot \text{sin} \left(\frac{1}{x}\right) \right) \geq \underset{x \rightarrow 0}{\text{lim}} (x^{2} \cdot -1) \\
+&\Rightarrow & 0 \geq \underset{x \rightarrow 0}{\text{lim}} \left(x^{2} \cdot \text{sin} \left(\frac{1}{x} \right) \right) \geq 0
+\end{alignat*}
+Daraus folgt, dass $g(x)$ für alle $x \in \mathbb{R}$ stetig ist. \\
+
+$h(x)$:\\
+\begin{alignat*}{2}
+\underset{n \rightarrow \infty}{\text{lim}} h(x_{n}) &=& \underset{n \rightarrow \infty}{\text{lim}} \text{sin} \left( \frac{1}{x_{n}} \right) \\
+\intertext{$x_{n}$ sei $\frac{1}{2\pi n}, n \in \mathbb{N}$}
+&=& \underset{n \rightarrow \infty}{\text{lim}} \text{sin} \left(\frac{1}{\frac{1}{2 \pi n}}\right) \\
+&=& \underset{n \rightarrow \infty}{\text{lim}} \text{sin} (2 \pi n) \\
+&=& \text{sin} \left( \underset{n \rightarrow \infty}{\text{lim}} (2 \pi n) \right) = 0
+\end{alignat*}
+$h(x)$ ist stetig für alle $x = x_{n} = \frac{1}{2\pi n}$. Die Funktion ist nicht stetig für andere $x$.
+\end{document}

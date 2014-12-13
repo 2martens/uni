@@ -5,10 +5,11 @@
 @Inproceedings{Alshamsi2005,
   Title                    = {A {T}echnical {C}omparison of {IPSec} and {SSL}},
   Author                   = {Alshamsi, AbdelNasir and Saito, Takamichi},
-  Booktitle                = {Proceedings. 19th International Conference on Advanced Information Networking and Applications},
-  Year                     = {2005},
-  Month                    = {Mar},
+  Booktitle                = {19th International Conference on Advanced Information Networking and Applications},
+  Date                     = {2005-03-28/2005-03-30},
+  Organization             = {IEEE},
   Pages                    = {395--398},
+  Volume                   = {2},
 
   Owner                    = {jim},
   Timestamp                = {2014.10.24}
@@ -445,14 +446,8 @@
   Pages                    = {217--221},
 
   Abstract                 = {IPSec is faster than OpenVPN with the same setup and cipher.
-
-Details:
-IPSec AES > OpenVPN AES
-IPSec Blowfish > OpenVPN Blowfish
-IPSec 3DES < OpenVPN 3DES
-
+Details: IPSec AES > OpenVPN AES IPSec Blowfish > OpenVPN Blowfish IPSec 3DES < OpenVPN 3DES
 3DES is a cipher of the past and should not be used anymore. AES and Blowfish have similar results under IPSec and OpenVPN. AES is standardized and has more support than Blowfish.
-
 IPSec however is far more complex and difficult to set up while setting up OpenVPN is child's play.},
   Owner                    = {jim},
   Timestamp                = {2014.11.28}
@@ -535,7 +530,7 @@ IPSec however is far more complex and difficult to set up while setting up OpenV
   Title                    = {Artificial intelligence: A Modern Approach},
   Author                   = {Russel, Stuart J. and Norvig, Peter},
   Booktitle                = {Artificial intelligence: A Modern Approach},
-  Date                     = {December 11},
+  Date                     = {2009-12-11},
   Year                     = {2009},
   Bookauthor               = {Russel, Stuart J. and Norvig, Peter},
   Chapter                  = {23},
@@ -587,13 +582,29 @@ IPSec however is far more complex and difficult to set up while setting up OpenV
   Title                    = {Dependency Parsing by Belief Propagation},
   Author                   = {Smith, David A. and Eisner, Jason},
   Booktitle                = {Conference on Empirical Methods in Natural Language Processing},
-  Date                     = {October 25 - October 27},
+  Date                     = {2008-10-25/2008-10-27},
   Year                     = {2008},
   Pages                    = {145-156},
 
   Owner                    = {jim},
   Quality                  = {1},
   Timestamp                = {2013.10.29}
+}
+
+@Inproceedings{Sun2011,
+  Title                    = {The advantages and the implementation of {SSL} {VPN}},
+  Author                   = {Sun, Su Hua},
+  Booktitle                = {2nd {I}nternational {C}onference on Software {E}ngineering and {S}ervice {S}cience (ICSESS)},
+  Date                     = {2011-07-15/2011-07-17},
+  Location                 = {Beijing},
+  Organization             = {IEEE},
+  Pages                    = {548--551},
+
+  Abstract                 = {SSL/TLS VPN is the better choice for remote access to a private network, while IPSec is better for the connection between two fixed endpoints.
+
+With IPSec the data is transported unencrypted between the application and the VPN start point and from the VPN end point to the application. In a remote access example, all the data would be readable from inside the target network. Furthermore an attacker only needs access to the client computer and can then use the connection, without being authenticated. With SSL VPN the encryption is application to application and the authentication and authorization happens for each connection. Access to a connection is unequally more difficult than access to a computer.},
+  Owner                    = {jim},
+  Timestamp                = {2014.12.13}
 }
 
 @Article{Venkateswaran2001,
