@@ -15,6 +15,30 @@
   Timestamp                = {2014.10.24}
 }
 
+@Techreport{RFC1825,
+  Title                    = {Security {Architecture} for the {Internet} {Protocol}},
+  Author                   = {Atkinson, R.},
+  Institution              = {IETF},
+  Year                     = {1995},
+  Type                     = {RFC},
+
+  Organization             = {BBN Technologies},
+  Owner                    = {jim},
+  Timestamp                = {2014.12.13}
+}
+
+@Techreport{RFC2401,
+  Title                    = {Security {Architecture} for the {Internet} {Protocol}},
+  Author                   = {Atkinson, R. and Kent, S.},
+  Institution              = {IETF},
+  Year                     = {1998},
+  Type                     = {RFC},
+
+  Organization             = {BBN Technologies},
+  Owner                    = {jim},
+  Timestamp                = {2014.12.13}
+}
+
 @Inproceedings{Berger2006,
   Title                    = {Analysis of {C}urrent {VPN} {T}echnologies},
   Author                   = {Berger, Thomas},
@@ -127,6 +151,18 @@
   Numpages                 = {14},
   Owner                    = {jim},
   Timestamp                = {2014.10.18}
+}
+
+@Techreport{RFC5996,
+  Title                    = {Internet {K}ey {E}xchange {P}rotocol {V}ersion 2 ({IKE}v2)},
+  Author                   = {Eronen, P. and Kaufman, C. and Nir, Y. and Hoffman, P.},
+  Institution              = {IETF},
+  Year                     = {2010},
+  Type                     = {RFC},
+
+  Organization             = {Microsoft and VPN Consortium and Check Point and Independent},
+  Owner                    = {jim},
+  Timestamp                = {2014.12.13}
 }
 
 @Techreport{Ferguson2000,
@@ -304,21 +340,9 @@
   Timestamp                = {2013.11.17}
 }
 
-@Techreport{Kent2005,
-  Title                    = {Security {Architecture} for the {Internet} {Protocol}},
-  Author                   = {Kent, S. and Seo, K.},
-  Institution              = {IETF},
-  Year                     = {2005},
-  Type                     = {RFC},
-
-  Organization             = {BBN Technologies},
-  Owner                    = {jim},
-  Timestamp                = {2014.10.24}
-}
-
-@Techreport{RFC1825,
-  Title                    = {Security {Architecture} for the {Internet} {Protocol}},
-  Author                   = {Atkinson, R.},
+@Techreport{RFC4302,
+  Title                    = {{IP} {A}uthentication {H}eader},
+  Author                   = {Kent, S.},
   Institution              = {IETF},
   Year                     = {2005},
   Type                     = {RFC},
@@ -328,11 +352,11 @@
   Timestamp                = {2014.12.13}
 }
 
-@Techreport{RFC2401,
-  Title                    = {Security {Architecture} for the {Internet} {Protocol}},
-  Author                   = {Kent, S. and Aktinson, R.},
+@Techreport{RFC4303,
+  Title                    = {{IP} {E}ncapsulating {P}ayload (ESP)},
+  Author                   = {Kent, S.},
   Institution              = {IETF},
-  Year                     = {1998},
+  Year                     = {2005},
   Type                     = {RFC},
 
   Organization             = {BBN Technologies},
@@ -348,66 +372,6 @@
   Type                     = {RFC},
 
   Organization             = {BBN Technologies},
-  Owner                    = {jim},
-  Timestamp                = {2014.12.13}
-}
-
-@Techreport{RFC4302,
-  Title                    = {IP Authentication Header},
-  Author                   = {Kent, S.},
-  Institution              = {IETF},
-  Year                     = {2005},
-  Type                     = {RFC},
-
-  Organization             = {BBN Technologies},
-  Owner                    = {jim},
-  Timestamp                = {2014.12.13}
-}
-
-@Techreport{RFC4303,
-  Title                    = {IP Encapsulating Payload (ESP)},
-  Author                   = {Kent, S.},
-  Institution              = {IETF},
-  Year                     = {2005},
-  Type                     = {RFC},
-
-  Organization             = {BBN Technologies},
-  Owner                    = {jim},
-  Timestamp                = {2014.12.13}
-}
-
-@Techreport{RFC7321,
-  Title                    = {Cryptographic Algorithm Implementation Requirements and Usage Guidance},
-  Author                   = {McGrew, D. and Hoffman, P.},
-  Institution              = {IETF},
-  Year                     = {2014},
-  Type                     = {RFC},
-
-  Organization             = {Cisco Systems and VPN Consortium},
-  Owner                    = {jim},
-  Timestamp                = {2014.12.13}
-}
-
-@Techreport{RFC5996,
-  Title                    = {Internet Key Exchange Protocol Version 2 (IKEv2)},
-  Author                   = {Kaufman C. and Hoffman, P. and Nir, Y. and Eronen, P.},
-  Institution              = {IETF},
-  Year                     = {2010},
-  Type                     = {RFC},
-
-  Organization             = {Microsoft and VPN Consortium and Check Point and Independent},
-  Owner                    = {jim},
-  Timestamp                = {2014.12.13}
-}
-
-@Techreport{RFC4307,
-  Title                    = {Cryptographic Algorithms for Use in the Internet Key Exchange Version 2 (IKEv2)},
-  Author                   = {Schiller, J.},
-  Institution              = {IETF},
-  Year                     = {2005},
-  Type                     = {RFC},
-
-  Organization             = {Massachusetts Instutute of Technology},
   Owner                    = {jim},
   Timestamp                = {2014.12.13}
 }
@@ -445,10 +409,7 @@
   Organization             = {IEEE},
   Pages                    = {217--221},
 
-  Abstract                 = {IPSec is faster than OpenVPN with the same setup and cipher.
-Details: IPSec AES > OpenVPN AES IPSec Blowfish > OpenVPN Blowfish IPSec 3DES < OpenVPN 3DES
-3DES is a cipher of the past and should not be used anymore. AES and Blowfish have similar results under IPSec and OpenVPN. AES is standardized and has more support than Blowfish.
-IPSec however is far more complex and difficult to set up while setting up OpenVPN is child's play.},
+  Abstract                 = {IPSec is faster than OpenVPN with the same setup and cipher. Details: IPSec AES > OpenVPN AES IPSec Blowfish > OpenVPN Blowfish IPSec 3DES < OpenVPN 3DES 3DES is a cipher of the past and should not be used anymore. AES and Blowfish have similar results under IPSec and OpenVPN. AES is standardized and has more support than Blowfish. IPSec however is far more complex and difficult to set up while setting up OpenVPN is child's play.},
   Owner                    = {jim},
   Timestamp                = {2014.11.28}
 }
@@ -474,6 +435,18 @@ IPSec however is far more complex and difficult to set up while setting up OpenV
   Journal                  = {Ruperto Carola},
   Owner                    = {jim},
   Timestamp                = {2014.10.26}
+}
+
+@Techreport{RFC7321,
+  Title                    = {Cryptographic {A}lgorithm {I}mplementation {R}equirements and {U}sage {G}uidance for {E}ncapsulating {S}ecurity {P}ayload ({ESP}) and {A}uthentication {H}eader ({AH})},
+  Author                   = {McGrew, D. and Hoffman, P.},
+  Institution              = {IETF},
+  Year                     = {2014},
+  Type                     = {RFC},
+
+  Organization             = {Cisco Systems and VPN Consortium},
+  Owner                    = {jim},
+  Timestamp                = {2014.12.13}
 }
 
 @Techreport{Paskin2001,
@@ -544,6 +517,18 @@ IPSec however is far more complex and difficult to set up while setting up OpenV
   Timestamp                = {2013.10.24}
 }
 
+@Techreport{RFC4307,
+  Title                    = {Cryptographic algorithms for use in the {I}nternet {K}ey {E}xchange version 2 ({IKE}v2)},
+  Author                   = {Schiller, J.},
+  Institution              = {IETF},
+  Year                     = {2005},
+  Type                     = {RFC},
+
+  Organization             = {Massachusetts Instutute of Technology},
+  Owner                    = {jim},
+  Timestamp                = {2014.12.13}
+}
+
 @Inproceedings{Scott1921,
   Title                    = {The Conference of 1907},
   Author                   = {Scott, James Brown},
@@ -601,7 +586,6 @@ IPSec however is far more complex and difficult to set up while setting up OpenV
   Pages                    = {548--551},
 
   Abstract                 = {SSL/TLS VPN is the better choice for remote access to a private network, while IPSec is better for the connection between two fixed endpoints.
-
 With IPSec the data is transported unencrypted between the application and the VPN start point and from the VPN end point to the application. In a remote access example, all the data would be readable from inside the target network. Furthermore an attacker only needs access to the client computer and can then use the connection, without being authenticated. With SSL VPN the encryption is application to application and the authentication and authorization happens for each connection. Access to a connection is unequally more difficult than access to a computer.},
   Owner                    = {jim},
   Timestamp                = {2014.12.13}
