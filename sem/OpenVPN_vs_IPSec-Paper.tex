@@ -148,17 +148,31 @@ Nachfolgende Kommunikation bezüglich IKE wird CREATE\_CHILD\_SA genannt und kan
 \section{OpenVPN}
 %\input{VPN}
 %TODO insgesamt gesehen: Referenzen
-Was ist OpenVPN? Wer ist dafür verantwortlich? Wie funktioniert es?
+%Was ist OpenVPN? Wer ist dafür verantwortlich? Wie funktioniert es?
 
 \subsection{Was ist OpenVPN?}
+
 %TODO hier müsste eher stehen was OpenVPN technisch gesehen ist
-Beispielsweise:
-Open VPN ist eine VPN-Lösung, die TLS-basiert ist und im OSI-Referenzmodell in der Anwendungsschicht angesiedelt ist. Unter den TLS-basierten VPN-Implementationen ist Open VPN eine sehr weit verbreitete Implementation, die plattformübergreifend verfügbar ist.
+
+Open VPN ist eine VPN-Lösung, die TLS-basiert ist und im OSI-Referenzmodell in der Anwendungsschicht angesiedelt ist. Unter den TLS-basierten VPN-Implementationen ist OpenVPN eine sehr weit verbreitete Implementation, die plattformübergreifend verfügbar ist.
+
+OpenVPN ist freie Software unter der GNU GPL und unterstützt die Betriebssysteme Linux, Solaris, OpenBSD, FreeBSD, NetBSD, Mac OS X, QNX, Windows 2000/XP/Vista/7, Android, iOS, Maemo und MeeGo sowie das Router-Linux OpenWRT, weiterhin stehen angepasste Implementierungen für eine Vielzahl von Linux-basierten Endgeräten, wie z. B. Settop-Boxen der Firma Dream Multimedia oder für Router der FRITZ!Box-Linie der Firma AVM zur Verfügung.
 
 %TODO auch interessant wäre (gerade im Gegensatz zu IPSec), wer für Open VPN verantwortlich zeichnet (Komitee, Firma, Entwicklercommunity)
+\subsection{Wie entstand OpenVPN/History}
 
-Open VPN ist eine VPN-Lösung, die unter Linux, Windows und vielen weiteren Betriebssystemen eingesetzt werden kann.
-Open VPN ist eine freie Software und steht unter der GPL ( GNU General Public License ).
+Laut eines Interviews welches in 2003 veröffentlicht wurde unter http://linuxsecurity.com ist James Yonan in der Zeit vor den Tagen des 11. Sep. 2001 durch zentral Asien gereist und hat sich über russische oder asiatische Internet-Provider mit seinem Büro vernetzt. Die Tatsache, dass diese Verbindungen über Länder mit einer sehr zweifelhaften Sicherheit geschah, machte ihn aufmerksam auf die Probleme der Internetsicherheit. 
+
+Seine Untersuchengen zeigten, dass es zwei Haupt-Streams gab, eins war die Sicherheit und das andere war die Verwendbarkeit. Keine der Lösungen, die zu dieser Zeit vorhanden waren, boten eine gute Mischung dieser beiden.
+IPSec  und seine Anwendungen waren schwer zu installieren, boten aber eine akzeptable Sicherheit an. Allerdings machte seine komplexe Struktur es angreifbar für Attacken, Viren und Sicherheitslücken. 
+
+Aus diesem Grund fand Yonen die Netzwerkherangehensweise die er in einigen der Lösungen der Anhänger der Nutzbarkeit gefunden hat, sinnvoller. Diese Lösungen führten ihn zu einem modularen Netzwerkkonfiguration Modell welches TUN/TAP virtuellen Netzwerkgeräten benutzt, die von Linux angeboten werden.
+
+"Nach einigen Recherchen  im open source VPN Feld, war mein Fazit dass die "Nutzbarkeit zu erst" Anhänger die richtigen Ideen hatten, über Netzwerken und das vernetzte tunneln und die andere Seite SSH, SSL/TLS und IPSec halten das angemessene Level an Bedeutsamkeit über die tiefen Verschlüsselungsthemen. Das war der Basis-Startpunkt für meine Arbeit über OpenVPN".
+  
+Die Wahl der TUN/TAP Geräteals Netzwerkmodell boten umgehend eine Flexibilität, die andere VPN Lösungen nicht aufbringen konnten. Während andere SSL/TLS basierende VPN Lösungen einen Browser brauchten, um Verbindungen herzustellen, konnte OpenVPN fast reale (aber immer noch virtuelle) Netzwerkgeräte vorbereiten, auf denen fast alle Netzwerkaktivitäten ausgeführt werden können.
+
+Yonen hat dann den Namen OpenVPN ausgewählt mit Bezug auf die Bibliotheken und Programme des OpenSSL Projekt und aufgrund der klaren Aussage dass dies eine open source und freie Software ist.
 
 \subsection{Verschlüsselung bei OpenVPN}
 
@@ -168,6 +182,30 @@ OpenVPN benutzt zur Authentifizierung und Verschlüsselung der Daten kryptografi
 Da OpenVPN diese Verfahren benutzt, kann kein IPSec eingesetzt werden! Dies bedeutet, dass man die Windows-internen Funktionen zum Herstellen einer Verbindung nicht verwenden kann. Das können wir als Nachteil, aber auch als Vorteil sehen. Der Nachteil ist, dass wir auf jedem Rechner OpenVPN instalieren müssen und mit Betriebssystemen, für die es nicht zur Verfügung steht, keine Verbindung herstellen können.Der Vorteil ist, dass wir sich nicht wirklich mit dem Einrichten von VPNs auf fremden Systemen auskennen müssen. Es wird ja immer OpenVPN benutzt. Weiterhin ist man auch nicht von eventuell auftretenden Problemen bei Updates des Systems betroffen.
 
 Zur Authentifizierung können statische Schlüssel (Preshared Keys) oder Zertifikate benutzt werden. Statische Schlüssel gelten im Vergleich mit Zertifikaten  als weniger sicher, sind aber einfacher zu erstellen und zu verwalten. Zertifikate kann man sich selbst ausstellen oder bei so genannten Zertifizierungsstellen beantragen. Für Firmen ist dies allerdings meist mit Kosten verbunden. Der Vorteil von Zertifizierungsstellen ist, dass die Zertifikate weltweit einsetzbar sind und ihre Echtheit von diesen Stellen bestätigt wird. Zum Aufbau von firmeninternen Verbindungen sind diese Echtheitsbestätigungen aber nicht zwingend erforderlich.
+
+\subsubsection{Was ist TLS/SSL?}
+
+Bei TLS (Transport Layer Security) oder SSL (Secure Sockets Layer) handelt es sich um ein Verschlüsselungsprotokoll zur Datenübertragung im Internet bzw. um eine verschlüsselte Netzverbindung zwischen Server und Client, über die auch unverschlüsselte Anwendungsprotokolle (z.B. HTTP, POP3, IMAP, SMTP, NNTP, SIP, ...) sicher transportiert werden können. TLS/SSL sorgt also dafür, dass die Daten verschlüsselt über das Netz geschickt werden und somit vor unerwünschten Zugriffen und Manipulationen geschützt sind. Es sichert jedoch nur den Übertragungsweg zwischen Server und Client; auf alles, was davor oder danach mit den Daten geschieht, hat TLS/SSL keinen Einfluss. 
+
+\subsubsection{Warum zwei Namen?}
+
+SSL Version 1.0 wurde 1994 von der Firma Netscape entwickelt. Als SSL 3.0 schließlich 1999 vom Standardisierungs-Gremium IETF (Internet Engineering Task Force) im RFC 22461) als Proposed Standard festgelegt wurde, benannte man es auf TLS um. Die Unterschiede zwischen SSL 3.0 und TLS sind minimal; umgangssprachlich wird daher meistens weiterhin der Begriff SSL verwendet.
+
+\subsubsection{Wie funktioniert SSL?}
+
+Bei SSL kommen verschiedene kryptographische Methoden zum Einsatz: 
+
+* Symmetrische Verschlüsselung: Hierbei wird für die Ver- und Entschlüsselung der Daten derselbe Schlüssel  verwendet.
+
+* Asymmetrische Verschlüsselung: Asymmetrische Verfahren benutzen zwei verschiedene Schlüssel zum Ver- und Entschlüsseln - einen öffentlichen (Public Key) und einen geheimen (Private Key).
+
+* Hash-Funktion: Damit wird ein "digitaler Fingerabdruck" mit einer konstanten Länge (128 bis 512 Bit, abhängig vom verwendeten Algorithmus) erstellt, anhand dessen kontrolliert werden kann, ob die übermittelten Daten am Weg zum Empfänger verändert wurden.
+
+Das SSL-Protokoll selbst besteht aus zwei übereinanderliegenden Schichten:
+
+* Auf der unteren Schicht befindet sich das SSL Record Protocol. Dieses prüft, ob die übertragenen Daten vollständig und unverändert ihren jeweiligen Empfänger erreichen und verschlüsselt, sofern dies gewünscht wird, die Daten mit einem symmetrischen Verfahren. Der dabei verwendete Schlüssel wird über das SSL Handshake Protocol vereinbart.
+
+* Die obere Schicht enthält unter anderem das SSL Handshake Protocol. Dieses baut auf dem SSL Record Protocol auf und wird einerseits zum Aushandeln der verwendeten kryptographischen Algorithmen und Schlüssel benötigt, andererseits zur Identifikation und Authentifizierung der Kommunikationspartner mit Hilfe asymmetrischer Verschlüsselungsverfahren (in der Regel authentifiziert sich zumindest der Server gegenüber dem Client).
 
 \subsection{Verbindungsarten}
 
