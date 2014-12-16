@@ -1,0 +1,134 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings,petri,shapes}
+\usepackage{polynom}
+\usepackage{multirow}
+\usepackage[german]{fancyref}
+\usepackage{morefloats}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+\def\thesection{10.\arabic{section})}
+\def\thesubsection{\arabic{subsection}.}
+\def\thesubsubsection{(\alph{subsubsection})}
+% some matrix magic
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\tikzset{
+    place/.style={
+        circle,
+        thick,
+        draw=black,
+        fill=white,
+        minimum size=6mm,
+        font=\bfseries
+    },
+    transitionH/.style={
+        rectangle,
+        thick,
+        draw=black,
+        fill=white,
+        minimum width=8mm,
+        inner ysep=4pt,
+        font=\bfseries
+    },
+    transitionV/.style={
+        rectangle,
+        thick,
+        fill=black,
+        minimum height=8mm,
+        inner xsep=2pt
+    }
+}
+
+\renewcommand{\vec}[1]{\underline{#1}}
+
+\begin{document}
+\author{Benjamin Kuffel, Jim Martens\\Gruppe 6}
+\title{Hausaufgaben zum 05. Januar}
+\maketitle
+
+\setcounter{section}{2}
+\section{} %10.3
+\subsection{}
+Um die T-Invarianten bestimmen zu können, stellen wir zunächst die Inzidenzmatrix auf.
+
+Inzidenzmatrix \(\Delta_N\) vom Netz \(N_{10.3}\):
+\[
+	\begin{vmatrix}
+		-1 & -1 & 3 & 2 & -1 \\
+		0 & -1 & 3 & 0 & 0 \\
+		0 & 1 & -3 & 0 & 0 \\
+		1 & 2 & -6 & -2 & 1
+	\end{vmatrix}
+\]
+
+Eine T-Invariante \(\textbf{j}\) muss diese Gleichung erfüllen: \(\Delta_N \cdot \textbf{j} = \vec{0}\)
+
+Daraus ergibt sich folgendes lineares Gleichungssystem:
+\begin{alignat*}{7}
+	\text{I} && \; -j_a &-& j_b &+& 3j_c &+& 2j_d &-& j_e &= 0 \\
+	\text{II} && && -j_b &+& 3j_c && && &= 0 \\
+	\text{III} && && j_b &-& 3j_c && && &= 0 \\
+	\text{IV} && \; j_a &+& 2j_b &-& 6j_c &-& 2j_d &+& j_e &= 0
+\end{alignat*}
+
+Dieses Gleichungssystem kann schnell reduziert werden. Es wird \(\text{I} = \text{I} + \text{IV}\), sowie \(\text{II} = \text{II} + \text{III}\) ausgeführt.
+
+\begin{alignat*}{7}
+	\text{I} && \; 0j_a &+& j_b &-& 3j_c &+& 0j_d &+& 0j_e &= 0 \\
+	\text{II} && && 0j_b &+& 0j_c && && &= 0 \\
+	\text{III} && && j_b &-& 3j_c && && &= 0 \\
+	\text{IV} && \; j_a &+& 2j_b &-& 6j_c &-& 2j_d &+& j_e &= 0
+\end{alignat*}
+
+Somit stellt II keine Bedingung mehr auf und I und III sind identisch. Wir verbleiben also mit III und IV. III kann so umgestellt werden: \(j_b = 3j_c\). Im Folgenden können wir also \(j_b\) durch \(3j_c\) ersetzen.
+
+\begin{alignat*}{7}
+	\text{I} && && 3j_c &-& 3j_c && && &= 0 \\
+	\text{II} && && && && && 0 &= 0 \\
+	\text{III} && && 3j_c &-& 3j_c && && &= 0 \\
+	\text{IV} && \; j_a &+& 2(3j_c) &-& 6j_c &-& 2j_d &+& j_e &= 0
+\end{alignat*}
+
+Aus IV ergibt sich nach Auflösen und Zusammenfassen folgende Gleichung: \(j_a - 2j_d + j_e = 0\). Nach Umstellen nach \(j_d\) ergibt sich daraus \(2j_d = j_a + j_e\). Aus dieser Gleichung ergibt sich, dass die Summe von \(j_a\) und \(j_e\) eine gerade Zahl sein muss. Dies ist dann der Fall, wenn beide Summanden gerade oder ungerade sind. Wenn die Summanden gerade sind, dann muss einer der beiden 2 sein oder sie können solange durch 2 geteilt werden bis dies gilt.
+
+Aus diesen Gleichungen ergeben sich folgende Bedingungen für die einzelnen Werte:
+\begin{itemize}
+	\item \(j_c\) beliebig
+	\item \(j_b = 3j_c\)
+	\item \(j_d\) beliebig
+	\item \(0 < j_a < 2j_d\) beliebig unter dieser Bedingung
+	\item \(j_e = 2j_d - j_a\)
+\end{itemize}
+
+Als Menge der T-Invarianten ergibt sich daher: \(\{(a,3c,c,d,e)^{tr} | a,c,d,e \in \mathbb{N}^+ \wedge a < 2d \wedge e = 2d -a\}\).
+
+\subsection{}
+Es sei \(\psi = (1, 3, 1, 1, 1)^{tr}\). Die Startmarkierung \(\textbf{m}_0\) sei \((3, 3, 0, 0)^{tr}\). Daraus ergibt sich die Schaltfolge \(w = b^3caed\). Mit den erreichten Zwischenmarkierungen sieht die Schaltfolge dann so aus:
+\begin{alignat*}{2}
+	\textbf{m}_0 &\overset{b}{\rightarrow} (2, 2, 1, 2)^{tr} \overset{b}{\rightarrow} (1, 1, 2, 4)^{tr} \overset{b}{\rightarrow} (0, 0, 3, 6)^{tr} \overset{c}{\rightarrow} (3, 3, 0, 0)^{tr} \overset{a}{\rightarrow} (2, 3, 0, 1)^{tr} \\
+	&\overset{e}{\rightarrow} (1, 3, 0, 2)^{tr} \overset{d}{\rightarrow} (3, 3, 0, 0)^{tr}
+\end{alignat*}
+\section{} %10.4
+\section{} %10.5
+\end{document}
