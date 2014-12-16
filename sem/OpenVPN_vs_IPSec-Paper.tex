@@ -70,7 +70,15 @@ Die VPN-Verbindung zwischen zwei privaten Netzwerken funktioniert in einer Weise
 
 VPNs werden für verschiedenste Dinge eingesetzt. Bei Unternehmen kommen sie häufig zum Einsatz, um Inhalte aus dem Intranet auch von zu Hause oder unterwegs aus abrufen zu können. Diese Verwendung macht sich zunutze, dass die IP-Pakete mit der IP-Adresse der Endstelle des VPNs unterwegs sind (in diesem Fall der Router im Netzwerk des Unternehmens. Für z.B. den Webserver scheint es so, als ob man sich innerhalb des Netzwerks befindet, obgleich man physisch einige hundert Kilometer entfernt sein kann.
 
+Diese gleiche Eigenschaft wird auch genutzt, um IP-Sperren zu umgehen. Viele Streamingdienste bieten unterschiedliche Produkte je geographischer Region an. DEin VPN ist eine gesicherte Kommunikationsverbindung zwischen zwei privaten Netzwerken. Das in der Vorbemerkung genannte Beispiel mit den zwei Rechnern ist eine Verkürzung, wenngleich sie korrekt ist. Der Internetzugang wird in den allermeisten Fällen durch Router sichergestellt. Diese sind selber kleine Computer und stehen im Internet repräsentativ für das Netzwerk, dem sie angehören. Daher passt dann auch wieder das in der Vorbemerkung genannte Beispiel mit den zwei Rechnern. 
+
+Die VPN-Verbindung zwischen zwei privaten Netzwerken funktioniert in einer Weise, dass beide Netzwerke so miteinander verbunden werden, dass sie für Rechner in einer der beiden Netze wie ein großes privates Netz wirken. Daher ist auch der Zugriff auf die Rechner des anderen Netzes mit ihren privaten IP-Adressen (Adressen aus dem nicht-öffentlichen Bereich, meistens mit 192.168 beginnend) möglich. Dabei ist der Weg, den die IP-Pakete von einem Netz zum anderen nehmen, für die Rechner auf beiden Seiten irrelevant.
+
+VPNs werden für verschiedenste Dinge eingesetzt. Bei Unternehmen kommen sie häufig zum Einsatz, um Inhalte aus dem Intranet auch von zu Hause oder unterwegs aus abrufen zu können. Diese Verwendung macht sich zunutze, dass die IP-Pakete mit der IP-Adresse der Endstelle des VPNs unterwegs sind (in diesem Fall der Router im Netzwerk des Unternehmens. Für z.B. den Webserver scheint es so, als ob man sich innerhalb des Netzwerks befindet, obgleich man physisch einige hundert Kilometer entfernt sein kann.
+
 Diese gleiche Eigenschaft wird auch genutzt, um IP-Sperren zu umgehen. Viele Streamingdienste bieten unterschiedliche Produkte je geographischer Region an. Die Separierung geschieht durch die Kontrolle der IP-Adressräume, da jede geographische Region gewisse IP-Adressräume zur Verfügung hat. Mithilfe des VPNs kann nun bspw. von Europa aus eine Verbindung in die USA aufgebaut werden, sodass auf die USA beschränkte Angebote plötzlich sichtbar werden. Eine verwandte Anwendung ist die Umgehung von staatlichen Zensurmaßnahmen, in dem durch eine VPN-Verbindung aus dem abgeschotteten Netz "`ausgebrochen"' werden kann. Allerdings hängt der Erfolg davon stark von den staatlichen Gegenmaßnahmen ab. Ist VPN-Verkehr als solcher zu erkennen, dann kann dieser gezielt geblockt werden, auch wenn der Inhalt nicht erkannt wird.
+
+Es ist erkennbar, dass es eine Reihe von Anwendungsmöglichkeiten gibt. Die konkrete Umsetzung der VPN-Verbindung hängt jedoch stark von der verwendeten Technologie, in unserem Fall IPSec und OpenVPN ab. Im Folgenden daher eine Vorstellung von IPSec und OpenVPN.ie Separierung geschieht durch die Kontrolle der IP-Adressräume, da jede geographische Region gewisse IP-Adressräume zur Verfügung hat. Mithilfe des VPNs kann nun bspw. von Europa aus eine Verbindung in die USA aufgebaut werden, sodass auf die USA beschränkte Angebote plötzlich sichtbar werden. Eine verwandte Anwendung ist die Umgehung von staatlichen Zensurmaßnahmen, in dem durch eine VPN-Verbindung aus dem abgeschotteten Netz "`ausgebrochen"' werden kann. Allerdings hängt der Erfolg davon stark von den staatlichen Gegenmaßnahmen ab. Ist VPN-Verkehr als solcher zu erkennen, dann kann dieser gezielt geblockt werden, auch wenn der Inhalt nicht erkannt wird.
 
 Es ist erkennbar, dass es eine Reihe von Anwendungsmöglichkeiten gibt. Die konkrete Umsetzung der VPN-Verbindung hängt jedoch stark von der verwendeten Technologie, in unserem Fall IPSec und OpenVPN ab. Im Folgenden daher eine Vorstellung von IPSec und OpenVPN.
 
@@ -105,12 +113,12 @@ Im Transport Modus ist die Sicherheit vom einen zum anderen Ende gewährleistet.
 \subsubsection{Authentication Header}
 Der Authentication Header, kurz AH, kann dazu verwendet werden, um die Authentizität und Integrität von Daten zu gewährleisten, und außerdem um Replay-Angriffe abzuwehren. Er ist in RFC 4302 spezifiziert.\cite{RFC4302} Er muss im Gegensatz zur Alternative "`Encapsulating Security Payload"' jedoch nicht von IPSec Implementationen unterstützt werden.\footnote{RFC 4301 3.2.  How IPsec Works} Der Grund hierfür ist, dass ESP neben dem, was der AH leistet, zusätzlich noch die Vertraulichkeit der Pakete sicherstellt. Der Authentication Header wird dabei an die IP-Pakete angehängt und sieht wie folgt aus:
 
-%\begin{figure}[htbp] 
-%  \centering
-%     \includegraphics[width=0.7\textwidth]{AH-Aufbau.png}
-%  \caption{Aufbau des Authentication Headers aus RFC 4302}
-%  \label{AH-Aufbau}
-%\end{figure}
+\begin{figure}[htbp] 
+  \centering
+     \includegraphics[width=0.7\textwidth]{AH-Aufbau.png}
+  \caption{Aufbau des Authentication Headers aus RFC 4302}
+  \label{AH-Aufbau}
+\end{figure}
 
 Das 8 Bit lange Feld "`Next Header"' gibt an welche Art Nutzdaten nach dem AH folgen. Eine 4 bedeutet zum Beispiel IPv4 und eine 41 IPv6.\\ 
 Das 8 Bit lange Feld "`Payload Length"' gibt die Länge des AH in 4 Byte Worten - 2 an. Das 16 Bit lange Feld "`Reserved"' ist reserviert, damit man es in Zukunft nutzen kann, falls es benötigt wird.\\ 
@@ -121,7 +129,12 @@ Das Feld "`Integrity Check Value"' (ICV) enthält den MAC-Wert. Da dieser je nac
 \subsubsection{Encapsulating Security Payload}
 Die Alternative zum AH ist "`Encapsulating Security Payload"', kurz ESP. Wie schon erwähnt muss ESP von IPSec-Implementationen unterstützt werden. ESP ist in RFC 4303 spezifiziert.\cite{RFC4303}
 ESP schützt auch wie AH die Integrität und Authentizität der Daten. Zusätzlich bietet es auch noch einen Schutz der Vertraulichkeit. Um dies zu erreichen können die Daten verschlüsselt werden. Der Aufbau von ESP ist wie folgt:
-%Abbild Aufbau des ESP
+\begin{figure}[htbp] 
+  \centering
+     \includegraphics[width=0.7\textwidth]{ESP-Aufbau.png}
+  \caption{Aufbau von ESP aus RFC 4303}
+  \label{AH-Aufbau}
+\end{figure}
 Im Allgemeinen wird zwischen dem Header, der vor den Nutzdaten kommt, dem Trailer, welcher nach den Nutzdaten angelegt ist, und dem Feld zum Prüfen der Authentizität unterschieden. Das heißt beim ESP sind die Nutzdaten, wie der Name schon schließen lässt, von diesen Feldern umgeben.
 
 Das 32 Bit lange Feld "`Security Parameters Index"' (SPI) wird genau wie beim AH verwendet. Das 32 Bit lange Feld "`Sequence Numbers"' ist ebenfalls sehr ähnlich zu dem entsprechenden Feld im AH, allerdings muss die Empfänger die Nummer ignorieren, wenn der Algorithmus zur Überprüfung der Integrität Null ist. Es gibt auch die Option zu einer Erweiterung zu einem 64 Bit langem Feld.\\
@@ -152,31 +165,17 @@ Nachfolgende Kommunikation bezüglich IKE wird CREATE\_CHILD\_SA genannt und kan
 \section{OpenVPN}
 %\input{VPN}
 %TODO insgesamt gesehen: Referenzen
-%Was ist OpenVPN? Wer ist dafür verantwortlich? Wie funktioniert es?
+Was ist OpenVPN? Wer ist dafür verantwortlich? Wie funktioniert es?
 
 \subsection{Was ist OpenVPN?}
-
 %TODO hier müsste eher stehen was OpenVPN technisch gesehen ist
-
-Open VPN ist eine VPN-Lösung, die TLS-basiert ist und im OSI-Referenzmodell in der Anwendungsschicht angesiedelt ist. Unter den TLS-basierten VPN-Implementationen ist OpenVPN eine sehr weit verbreitete Implementation, die plattformübergreifend verfügbar ist.
-
-OpenVPN ist freie Software unter der GNU GPL und unterstützt die Betriebssysteme Linux, Solaris, OpenBSD, FreeBSD, NetBSD, Mac OS X, QNX, Windows 2000/XP/Vista/7, Android, iOS, Maemo und MeeGo sowie das Router-Linux OpenWRT, weiterhin stehen angepasste Implementierungen für eine Vielzahl von Linux-basierten Endgeräten, wie z. B. Settop-Boxen der Firma Dream Multimedia oder für Router der FRITZ!Box-Linie der Firma AVM zur Verfügung.
+Beispielsweise:
+Open VPN ist eine VPN-Lösung, die TLS-basiert ist und im OSI-Referenzmodell in der Anwendungsschicht angesiedelt ist. Unter den TLS-basierten VPN-Implementationen ist Open VPN eine sehr weit verbreitete Implementation, die plattformübergreifend verfügbar ist.
 
 %TODO auch interessant wäre (gerade im Gegensatz zu IPSec), wer für Open VPN verantwortlich zeichnet (Komitee, Firma, Entwicklercommunity)
-\subsection{Wie entstand OpenVPN/History}
 
-Laut eines Interviews welches in 2003 veröffentlicht wurde unter http://linuxsecurity.com ist James Yonan in der Zeit vor den Tagen des 11. Sep. 2001 durch zentral Asien gereist und hat sich über russische oder asiatische Internet-Provider mit seinem Büro vernetzt. Die Tatsache, dass diese Verbindungen über Länder mit einer sehr zweifelhaften Sicherheit geschah, machte ihn aufmerksam auf die Probleme der Internetsicherheit. 
-
-Seine Untersuchengen zeigten, dass es zwei Haupt-Streams gab, eins war die Sicherheit und das andere war die Verwendbarkeit. Keine der Lösungen, die zu dieser Zeit vorhanden waren, boten eine gute Mischung dieser beiden.
-IPSec  und seine Anwendungen waren schwer zu installieren, boten aber eine akzeptable Sicherheit an. Allerdings machte seine komplexe Struktur es angreifbar für Attacken, Viren und Sicherheitslücken. 
-
-Aus diesem Grund fand Yonen die Netzwerkherangehensweise die er in einigen der Lösungen der Anhänger der Nutzbarkeit gefunden hat, sinnvoller. Diese Lösungen führten ihn zu einem modularen Netzwerkkonfiguration Modell welches TUN/TAP virtuellen Netzwerkgeräten benutzt, die von Linux angeboten werden.
-
-"Nach einigen Recherchen  im open source VPN Feld, war mein Fazit dass die "Nutzbarkeit zu erst" Anhänger die richtigen Ideen hatten, über Netzwerken und das vernetzte tunneln und die andere Seite SSH, SSL/TLS und IPSec halten das angemessene Level an Bedeutsamkeit über die tiefen Verschlüsselungsthemen. Das war der Basis-Startpunkt für meine Arbeit über OpenVPN".
-  
-Die Wahl der TUN/TAP Geräteals Netzwerkmodell boten umgehend eine Flexibilität, die andere VPN Lösungen nicht aufbringen konnten. Während andere SSL/TLS basierende VPN Lösungen einen Browser brauchten, um Verbindungen herzustellen, konnte OpenVPN fast reale (aber immer noch virtuelle) Netzwerkgeräte vorbereiten, auf denen fast alle Netzwerkaktivitäten ausgeführt werden können.
-
-Yonen hat dann den Namen OpenVPN ausgewählt mit Bezug auf die Bibliotheken und Programme des OpenSSL Projekt und aufgrund der klaren Aussage dass dies eine open source und freie Software ist.
+Open VPN ist eine VPN-Lösung, die unter Linux, Windows und vielen weiteren Betriebssystemen eingesetzt werden kann.
+Open VPN ist eine freie Software und steht unter der GPL ( GNU General Public License ).
 
 \subsection{Verschlüsselung bei OpenVPN}
 
@@ -186,30 +185,6 @@ OpenVPN benutzt zur Authentifizierung und Verschlüsselung der Daten kryptografi
 Da OpenVPN diese Verfahren benutzt, kann kein IPSec eingesetzt werden! Dies bedeutet, dass man die Windows-internen Funktionen zum Herstellen einer Verbindung nicht verwenden kann. Das können wir als Nachteil, aber auch als Vorteil sehen. Der Nachteil ist, dass wir auf jedem Rechner OpenVPN instalieren müssen und mit Betriebssystemen, für die es nicht zur Verfügung steht, keine Verbindung herstellen können.Der Vorteil ist, dass wir sich nicht wirklich mit dem Einrichten von VPNs auf fremden Systemen auskennen müssen. Es wird ja immer OpenVPN benutzt. Weiterhin ist man auch nicht von eventuell auftretenden Problemen bei Updates des Systems betroffen.
 
 Zur Authentifizierung können statische Schlüssel (Preshared Keys) oder Zertifikate benutzt werden. Statische Schlüssel gelten im Vergleich mit Zertifikaten  als weniger sicher, sind aber einfacher zu erstellen und zu verwalten. Zertifikate kann man sich selbst ausstellen oder bei so genannten Zertifizierungsstellen beantragen. Für Firmen ist dies allerdings meist mit Kosten verbunden. Der Vorteil von Zertifizierungsstellen ist, dass die Zertifikate weltweit einsetzbar sind und ihre Echtheit von diesen Stellen bestätigt wird. Zum Aufbau von firmeninternen Verbindungen sind diese Echtheitsbestätigungen aber nicht zwingend erforderlich.
-
-\subsubsection{Was ist TLS/SSL?}
-
-Bei TLS (Transport Layer Security) oder SSL (Secure Sockets Layer) handelt es sich um ein Verschlüsselungsprotokoll zur Datenübertragung im Internet bzw. um eine verschlüsselte Netzverbindung zwischen Server und Client, über die auch unverschlüsselte Anwendungsprotokolle (z.B. HTTP, POP3, IMAP, SMTP, NNTP, SIP, ...) sicher transportiert werden können. TLS/SSL sorgt also dafür, dass die Daten verschlüsselt über das Netz geschickt werden und somit vor unerwünschten Zugriffen und Manipulationen geschützt sind. Es sichert jedoch nur den Übertragungsweg zwischen Server und Client; auf alles, was davor oder danach mit den Daten geschieht, hat TLS/SSL keinen Einfluss. 
-
-\subsubsection{Warum zwei Namen?}
-
-SSL Version 1.0 wurde 1994 von der Firma Netscape entwickelt. Als SSL 3.0 schließlich 1999 vom Standardisierungs-Gremium IETF (Internet Engineering Task Force) im RFC 22461) als Proposed Standard festgelegt wurde, benannte man es auf TLS um. Die Unterschiede zwischen SSL 3.0 und TLS sind minimal; umgangssprachlich wird daher meistens weiterhin der Begriff SSL verwendet.
-
-\subsubsection{Wie funktioniert SSL?}
-
-Bei SSL kommen verschiedene kryptographische Methoden zum Einsatz: 
-
-* Symmetrische Verschlüsselung: Hierbei wird für die Ver- und Entschlüsselung der Daten derselbe Schlüssel  verwendet.
-
-* Asymmetrische Verschlüsselung: Asymmetrische Verfahren benutzen zwei verschiedene Schlüssel zum Ver- und Entschlüsseln - einen öffentlichen (Public Key) und einen geheimen (Private Key).
-
-* Hash-Funktion: Damit wird ein "digitaler Fingerabdruck" mit einer konstanten Länge (128 bis 512 Bit, abhängig vom verwendeten Algorithmus) erstellt, anhand dessen kontrolliert werden kann, ob die übermittelten Daten am Weg zum Empfänger verändert wurden.
-
-Das SSL-Protokoll selbst besteht aus zwei übereinanderliegenden Schichten:
-
-* Auf der unteren Schicht befindet sich das SSL Record Protocol. Dieses prüft, ob die übertragenen Daten vollständig und unverändert ihren jeweiligen Empfänger erreichen und verschlüsselt, sofern dies gewünscht wird, die Daten mit einem symmetrischen Verfahren. Der dabei verwendete Schlüssel wird über das SSL Handshake Protocol vereinbart.
-
-* Die obere Schicht enthält unter anderem das SSL Handshake Protocol. Dieses baut auf dem SSL Record Protocol auf und wird einerseits zum Aushandeln der verwendeten kryptographischen Algorithmen und Schlüssel benötigt, andererseits zur Identifikation und Authentifizierung der Kommunikationspartner mit Hilfe asymmetrischer Verschlüsselungsverfahren (in der Regel authentifiziert sich zumindest der Server gegenüber dem Client).
 
 \subsection{Verbindungsarten}
 
