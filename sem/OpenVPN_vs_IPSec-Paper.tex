@@ -78,8 +78,6 @@ VPNs werden für verschiedenste Dinge eingesetzt. Bei Unternehmen kommen sie hä
 
 Diese gleiche Eigenschaft wird auch genutzt, um IP-Sperren zu umgehen. Viele Streamingdienste bieten unterschiedliche Produkte je geographischer Region an. Die Separierung geschieht durch die Kontrolle der IP-Adressräume, da jede geographische Region gewisse IP-Adressräume zur Verfügung hat. Mithilfe des VPNs kann nun bspw. von Europa aus eine Verbindung in die USA aufgebaut werden, sodass auf die USA beschränkte Angebote plötzlich sichtbar werden. Eine verwandte Anwendung ist die Umgehung von staatlichen Zensurmaßnahmen, in dem durch eine VPN-Verbindung aus dem abgeschotteten Netz "`ausgebrochen"' werden kann. Allerdings hängt der Erfolg davon stark von den staatlichen Gegenmaßnahmen ab. Ist VPN-Verkehr als solcher zu erkennen, dann kann dieser gezielt geblockt werden, auch wenn der Inhalt nicht erkannt wird.
 
-Es ist erkennbar, dass es eine Reihe von Anwendungsmöglichkeiten gibt. Die konkrete Umsetzung der VPN-Verbindung hängt jedoch stark von der verwendeten Technologie, in unserem Fall IPSec und OpenVPN ab. Im Folgenden daher eine Vorstellung von IPSec und OpenVPN.ie Separierung geschieht durch die Kontrolle der IP-Adressräume, da jede geographische Region gewisse IP-Adressräume zur Verfügung hat. Mithilfe des VPNs kann nun bspw. von Europa aus eine Verbindung in die USA aufgebaut werden, sodass auf die USA beschränkte Angebote plötzlich sichtbar werden. Eine verwandte Anwendung ist die Umgehung von staatlichen Zensurmaßnahmen, in dem durch eine VPN-Verbindung aus dem abgeschotteten Netz "`ausgebrochen"' werden kann. Allerdings hängt der Erfolg davon stark von den staatlichen Gegenmaßnahmen ab. Ist VPN-Verkehr als solcher zu erkennen, dann kann dieser gezielt geblockt werden, auch wenn der Inhalt nicht erkannt wird.
-
 Es ist erkennbar, dass es eine Reihe von Anwendungsmöglichkeiten gibt. Die konkrete Umsetzung der VPN-Verbindung hängt jedoch stark von der verwendeten Technologie, in unserem Fall IPSec und OpenVPN ab. Im Folgenden daher eine Vorstellung von IPSec und OpenVPN.
 
 \section{IPSec}
@@ -133,7 +131,7 @@ ESP schützt auch wie AH die Integrität und Authentizität der Daten. Zusätzli
   \centering
      \includegraphics[width=0.7\textwidth]{ESP-Aufbau.png}
   \caption{Aufbau von ESP aus RFC 4303}
-  \label{AH-Aufbau}
+  \label{ESP-Aufbau}
 \end{figure}
 Im Allgemeinen wird zwischen dem Header, der vor den Nutzdaten kommt, dem Trailer, welcher nach den Nutzdaten angelegt ist, und dem Feld zum Prüfen der Authentizität unterschieden. Das heißt beim ESP sind die Nutzdaten, wie der Name schon schließen lässt, von diesen Feldern umgeben.
 
