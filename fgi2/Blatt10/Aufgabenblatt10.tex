@@ -130,5 +130,36 @@ Es sei \(\psi = (1, 3, 1, 1, 1)^{tr}\). Die Startmarkierung \(\textbf{m}_0\) sei
 	&\overset{e}{\rightarrow} (1, 3, 0, 2)^{tr} \overset{d}{\rightarrow} (3, 3, 0, 0)^{tr}
 \end{alignat*}
 \section{} %10.4
+\subsection{}
+Es ist zu zeigen, dass ein in der Startmarkierung unmarkierter Siphon, dies auch in allen von der Startmarkierung aus erreichbaren Markierungen bleibt.
+
+Als Grundlage wird die zugehörige Definition 7.45 herangezogen. Jede Transition die Marken in den Syphon hineinlegt, benötigt Marken aus dem Syphon. Ist ein solcher Syphon nun unmarkiert, dann hat er keine Marken. Daher kann auch keine Transition schalten, die Marken in den Syphon legen würde. Demzufolge muss ein unmarkierter Syphon für immer unmarkiert bleiben. Daraus folgt, dass ein in der Startmarkierung unmarkierter Syphon auch in allen erreichbaren Markierungen unmarkiert bleibt.
+
+\subsection{}
+Im Folgenden sind zwei Siphons des gegebenen Netzes gelistet:
+\begin{itemize}
+	\item p4
+	\item p4, p5
+\end{itemize}
+
+Die Fallen sind nachfolgend gelistet:
+\begin{itemize}
+	\item p2, p3
+	\item p1, p2, p3
+	\item p1, p3, p5
+	\item p2, p3, p4
+	\item p2, p3, p5
+	\item p1, p2, p3, p4
+	\item p1, p2, p3, p5	
+	\item p1, p3, p4, p5
+	\item p2, p3, p4, p5
+	\item p1, p2, p3, p4, p5
+\end{itemize}
+
+\subsection{}
+Es sei \(\textbf{m}_0 = (0, 1, 1, 1, 0)^{tr}\) die Startmarkierung. Es ergeben sich folgende Schaltfolgen zur Aktivierung der jeweiligen Transitionen:
+\[
+	\sigma_a = d, \sigma_b = da, \sigma_c = da, \sigma_d = \epsilon, \sigma_e = da
+\]
 \section{} %10.5
 \end{document}
