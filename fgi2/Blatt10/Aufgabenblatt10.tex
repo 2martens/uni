@@ -162,4 +162,34 @@ Es sei \(\textbf{m}_0 = (0, 1, 1, 1, 0)^{tr}\) die Startmarkierung. Es ergeben s
 	\sigma_a = d, \sigma_b = da, \sigma_c = da, \sigma_d = \epsilon, \sigma_e = da
 \]
 \section{} %10.5
+\begin{tikzpicture}[node distance=1cm]
+	\node[place] (sleep) {};
+	\node[transition] (sleepT) [below=2 of sleep,align=left] {\((x="k1" \wedge y="b1" \wedge z_1="p1" \wedge z_2="p2") \vee\) \\ 
+		\((x="k2" \wedge y="b2" \wedge z_1="p2" \wedge z_2="p3") \vee\) \\
+		\((x="k3" \wedge y="b3" \wedge z_1="p3" \wedge z_2="p1")\)};
+	\node[place] (beds) [below=of sleepT,align=left] {"b1"\\ "b2"\\ "b3"\ };
+	\node[transition] (eatT) [right=2 of beds,align=left] {\((x="k1" \wedge y="b1") \vee \) \\
+	\((x="k2" \wedge y="b2") \vee \) \\
+	\((x="k3" \wedge y="b3")\)};
+	\node[place] (eat) [below=of beds,align=left] {"k1"\\ "k2"\\ "k3"\ };
+	\node[place] (puppets) [below=of eat,align=left] {"p1"\\ "p2"\\ "p3"\ };
+	\node[transition] (playT) [right=2 of puppets,align=left] {\((x="k1" \wedge y="p1" \wedge z="p2") \vee \)\\
+		\((x="k2" \wedge y="p2" \wedge z="p3") \vee \) \\
+		\((x="k3" \wedge y="p3" \wedge z="p1")\)};
+	\node[place] (play) [below=2 of puppets] {};
+	\path[->] (sleepT) edge node[right] {x} (sleep)
+		(beds) edge node[right] {y} (sleepT)
+		(eatT) edge[bend left=5] node[below right] {x} (eat)
+		(sleep) edge[bend left] node[above right] {x} (eatT)
+		(eatT) edge node[above] {y} (beds)
+		(eat) edge[bend left] node[above right] {x} (playT)
+		(playT) edge[bend left] node[below right] {x} (play)
+		(puppets) edge[bend left] node[above] {y} (playT)
+		(puppets) edge[bend right] node[below] {z} (playT)
+		(sleepT) edge[bend right=75] node[right] {\(z_1\)} (puppets)
+		(sleepT) edge[bend right=80] node[right] {\(z_2\)} (puppets)
+		(play) edge[bend left=85] node[left] {x} (sleepT);
+	
+\end{tikzpicture}
+
 \end{document}
