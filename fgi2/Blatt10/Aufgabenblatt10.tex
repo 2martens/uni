@@ -209,5 +209,29 @@ Es sei \(\textbf{m}_0 = (0, 1, 1, 1, 0)^{tr}\) die Startmarkierung. Es ergeben s
 	dom(z_1) = dom(z_2) = Puppen
 \end{alignat*}
 
+\subsection{}
+Die erste Markierungs-Invarianzeigenschaft beschreibt die Kinder:
+\[
+	\textbf{m}(Essen) + \textbf{m}(Schlafen) + \textbf{m}(Spielen) = 3
+\]
+
+Dabei ist \(k_p\) für alle nicht aufgeführten Stellen gleich 0 und für die aufgeführten Stellen gleich 1.
+
+Die zweite Markierungs-Invarianzeigenschaft beschreibt die Beziehung zwischen Betten und Kindern:
+\[
+	\textbf{m}(Schlafen) + \textbf{m}(Betten) = 3
+\]
+
+Ähnlich wie bei der ersten Eigenschaft gilt hier \(k_p=0\) für alle nicht aufgeführten Stellen und \(k_p=1\) für alle aufgeführten Stellen.
+
+Die dritte Eigenschaft beschreibt die Beziehung zwischen Puppen und Kindern:
+\[
+	\textbf{m}(Puppen) + 2 \cdot \textbf{m}(Spielen) = 3
+\]
+
+Für alle nicht aufgeführten Stellen gilt \(k_p=0\) und für die Stelle namens Puppen gilt \(k_p=1\).
+
+Das Netz ist verklemmungsfrei, da zu jedem Zeitpunkt mindestens eine Transition schalten kann: Wenn ein Kind schläft, so kann auf jeden Fall die Transition schalten, die dafür sorgt, dass das Kind isst. Wenn ein Kind isst und keines spielt, dann kann auf jeden Fall die Transition schalten, die dafür sorgt, dass ein Kind spielt. Wenn ein Kind spielt, dann kann auf jeden Fall die Transition schalten, die dafür sorgt, dass dieses Kind schläft.
 
 \end{document}
+
