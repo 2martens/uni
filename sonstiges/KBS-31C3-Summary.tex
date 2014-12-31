@@ -1,0 +1,130 @@
+\RequirePackage{pdf14}
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+%\usepackage{paralist}
+%\useoutertheme{infolines} 
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usetheme{Warsaw}
+\usecolortheme{crane}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setbeamertemplate{navigation symbols}{}
+\graphicspath{ {src/} {/home/jim/Pictures/Studium/KBS/} }
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygray},    % comment style
+  deletekeywords={},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=PHP,                 % the language of the code
+  morekeywords={class, function, return, protected, public, private, const, static, new, extends, namespace, null},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mygreen},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\hypersetup{
+	pdfauthor=Jim Martens,
+	pdfstartview=Fit
+}
+
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+	\raggedleft \insertframenumber\,/\,\inserttotalframenumber\;}
+
+\begin{document}
+\author{Jim 2martens}
+\title{Goals for 2015}
+\date{30. Januar 2015}
+
+	% Introduction
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	\begin{frame}{Looking back}
+		\begin{itemize}
+			\item 2014-12-27
+			\item<2-> 2014-12-28
+				\begin{itemize}
+					\item Laura Poitras
+					\item Jacob Appelbaum
+				\end{itemize}
+			\item<3-> 2015-01-??
+				\begin{itemize}
+					\item further reveals
+				\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Summary}
+		\begin{itemize}
+			\item situation is f*cked up
+			\item a bit of hope
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Consequences}
+		\begin{itemize}
+			\item give 'em hell
+			\begin{itemize}
+				\item use TrueCrypt \&\&
+				\item use Tor \&\&
+				\item use PGP \&\&
+				\item use OTR				
+			\end{itemize}
+			\item<2-> don't make it easy
+			\begin{itemize}
+				\item<3-> DON'T USE Windows \&\&
+				\item<4-> DON'T USE iSomething \&\&
+				\item<5-> DON'T USE Amazon Kindle \&\&
+				\item<6-> ...
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Quotes}
+		\begin{quotation}
+			Those who would give up essential Liberty, to purchase a little temporary Safety, deserve neither Liberty nor Safety. (Benjamin Franklin)
+		\end{quotation}
+		
+		\begin{quotation}
+			Bravery is not an absence of fear. It is continuing to do things even when you are afraid - because you know it is the right thing to do. (Jacob Appelbaum)
+		\end{quotation}
+	\end{frame}
+	
+	\begin{frame}{Goals for 2015}
+		\begin{itemize}
+			\item every student on mafia@ uses mail encryption
+			\item every teacher at the department uses mail encryption
+			\item make (practical) mail encryption a part of the curriculum (instead of IKON 1/2?)
+			\item key signing parties more regularly (4+ times a year) 
+		\end{itemize}
+	\end{frame}
+\end{document}
+
