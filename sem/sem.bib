@@ -61,6 +61,11 @@
   Publisher                = {Hanser},
   Titleaddon               = {Kommunikationssicherheit in VPN- und IP-Netzen über GPRS und WLAN},
 
+  Abstract                 = {SSL ursprünglich von Netscape entwickelt. Ein entsprechender RFC wurde von der IETF als veraltet markiert. SSL 3.0 wurde dann jedoch als TLS 1.0 mit einigen Anpassungen als Internetstandard verabschiedet. TLS befindet sich in der Anwendungsschicht im OSI-Referenzmodell. Anwendungen müssen darauf ausgelegt sein TLS zu benutzen.
+
+Es gibt SSL-Connections und SSL-Sessions. Jede Connection ist an eine Session gebunden. Eine Session kann jedoch auch mehrere Connections enthalten. Wann immer Daten von der Anwendungsschicht zu einem Server gesendet werden, passieren diese die SSl-Schicht. Dort werden sie durch das Record-Protokoll in mehrere Blöcke fragmentiert, bei Bedarf komprimiert und mit einem MAC versehen. Als MAC kann SHA-1 eingesetzt werden (MD5 zwar auch, ist aber definitiv broken). Anschließend werden die Daten mit einer symmetrischen Verschlüsselung gesichert versendet. Dabei werden die notwendigen Daten für die Verschlüsselung über das Handshake-Protokoll vorher ausgetauscht.
+
+Das Handshake-Protokoll unterteilt sich in mehrere Phasen. Im Verlauf des Protokolls werden mehrere Nachrichten zwischen Client und Server versendet. Jede Nachricht enthält ein Typenfeld mit 1-Byte-Länge, ein Feld welches die Länge der Nachricht angibt (3 Byte) und ein Inhaltsfeld mit mindestens einem Byte, welches die Parameter des Typenfeldes enthält.},
   Owner                    = {jim},
   Timestamp                = {2014.10.27}
 }
