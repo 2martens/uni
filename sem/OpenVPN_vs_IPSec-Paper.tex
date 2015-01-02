@@ -158,10 +158,40 @@ Nachfolgende Kommunikation bezüglich IKE wird CREATE\_CHILD\_SA genannt und kan
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{OpenVPN}
 
-In dem folgenden Abschnitt wird OpenVPN vorgestellt. Es ist eine konkrete Implementation eines SSL/TLS-basierten VPNs. Im Gegensatz zu IPsec wird die eigentliche Arbeit daher von TLS übernommen, weswegen es im Gegensatz zu IPsec auch nicht so einfach ist die technische Hintergrundstruktur darzulegen. Aus diesem Grund werden wir die Grundlagen von TLS erklären, damit dem nachfolgenden Vergleich besser gefolgt werden kann. Dabei folgen wir größtenteils Böhmer\cite{Boehmer2005}, da er eine gut verständliche Beschreibung von TLS bietet. Obwohl das Buch von 2005 ist, hat dies in diesem Zusammenhang keine negativen Auswirkungen, da wir uns lediglich auf die Beschreibung des Standards beziehen und sich dieser nicht wesentlich geändert hat.
+In dem folgenden Abschnitt wird OpenVPN vorgestellt. Es ist eine konkrete Implementation eines SSL/TLS-basierten VPNs. Die eigentliche Arbeit wird daher von TLS übernommen, weswegen es im Gegensatz zu IPsec auch nicht so einfach ist die technischen Hintergründe darzulegen -- zumindest ohne auf TLS einzugehen. Aus diesem Grund werden wir die Grundlagen von TLS erklären, damit dem späteren Vergleich besser gefolgt werden kann. Dabei folgen wir größtenteils Böhmer\cite{Boehmer2005}, da er eine gut verständliche Beschreibung von TLS bietet. Obwohl das Buch von 2005 ist, hat dies in diesem Zusammenhang keine negativen Auswirkungen, da wir uns lediglich auf die Beschreibung des Standards beziehen und sich dieser nicht wesentlich geändert hat.
+
+Wir werden zunächst die Konzepte, die einer TLS-Verbindung zugrundeliegen, vorstellen, um dann das Handshake-Protokoll und abschließend das Record-Protokoll vorzustellen.
+
+\subsection{TLS-Verbindung}
+
+Eine TLS-Verbindung oder auch TLS-Connection ist im Sinne des OSI-Referenzmodells eine Transportverbindung. In diesem Fall ist es eine transparente Punkt-zu-Punkt-Verbindung, die durch mehrere Parameter bestimmt ist:
+
+\begin{itemize}
+	\item Connection-Kennung
+	\item Bytes-Sequence (von Server und Client ausgewählt)
+	\item geheime Schlüssel (MAC-Secrets) für Integritätsüberprüfungen
+	\item symmetrische Schlüssel (server write key, client write key) zur Ver- bzw. Entschlüsselung
+	\item Initialisierungsvektor (IV) bei Benutzung von Blockverschlüsselung im CBC-Modus
+	\item Message-Sequence-Number (mehrere Nachrichten können ausgetauscht werden)
+\end{itemize}
+
+Jede TLS-Verbindung ist an eine TLS-Session gekoppelt.
+
+\subsection{TLS-Session}
+
+Eine TLS-Session stellt die Verbindung zwischen einem Browser und einem Webserver dar und wird durch das Handshake-Protokoll ausgehandelt. Sie legt die kryptographischen Parameter fest, die für mehrere TLS-Connections gültig sind. Dadurch kann verhindert werden, dass bei einem wiederholten Verbindungsaufbau alle Sicherheitsparameter neu ausgehandelt werden müssen. Jede Session ist durch die folgenden Parameter gekennzeichnet:
+
+\begin{itemize}
+	\item Session Identifier (aus willkürlicher Byte-Sequence vom Server erzeugt)
+	\item X.509v3-Zertifikat (kann ungenutzt bleiben)
+	\item compression method (Algorithmus zur Datenkompression)
+	\item Schlüsselspezifikation (cipher spec.)
+	\item Session-Schlüssel (Master-Secret)
+	\item Flag, ob die Session für Initiierung von neuer TLS-Connection genutzt werden kann
+\end{itemize}
 
 \subsection{TLS Handshake}
-Einer der wichtigsten Schritte ist das Herstellen der Verbindung. Dabei kommt das TLS-Handshake-Protokoll zum Einsatz. Der Ablauf ist dabei in mehrere Phasen unterteilt. Während der Phasen werden Nachrichten zwischen Server und Client versendet, die nach einem bestimmten Muster aufgebaut sind. Jede Nachricht enthält ein Typenfeld von 1 Byte Länge, ein Feld, welches die Länge der Nachricht angibt, von 3 Byte Länge und ein Inhaltsfeld von mindestens einem Byte Länge, welches die Parameter des Typenfeldes enthält. In der \fref{tab:handshake-1} sind die verschiedenen Nachrichtentypen und ihre Parameter zu sehen.
+Bevor Daten von einer Anwendung über TLS zum Server transportiert werden können, muss zunächst die Verbindung aufgebaut werden. Dabei kommt das TLS-Handshake-Protokoll zum Einsatz. Der Ablauf ist dabei in mehrere Phasen unterteilt. Während der Phasen werden Nachrichten zwischen Server und Client versendet, die nach einem bestimmten Muster aufgebaut sind. Jede Nachricht enthält ein Typenfeld von 1 Byte Länge, ein Feld, welches die Länge der Nachricht angibt, von 3 Byte Länge und ein Inhaltsfeld von mindestens einem Byte Länge, welches die Parameter des Typenfeldes enthält. In der \fref{tab:handshake-1} sind die verschiedenen Nachrichtentypen und ihre Parameter zu sehen.
 
 \begin{table}
 	\caption{Unterschiedliche Nachrichtentypen, die im TLS-Handshake-Protokoll während der Phasen zwischen Client und Server ausgetauscht werden}
@@ -186,14 +216,23 @@ Einer der wichtigsten Schritte ist das Herstellen der Verbindung. Dabei kommt da
 	\end{tabular}
 \end{table}
 
-In Phase 1 sendet der Client die \texttt{client\_hello} Nachricht an den Server. In Phase 2 erfolgt die Server-Identifizierung mithilfe der \texttt{server\_hello} Nachricht. Zusätzlich sendet der Server die \texttt{certificate}, \texttt{server\_key\_exchange} und \texttt{certificate\_request} Nachrichten. Abschließend sendet der Server die \texttt{server\_hello\_done} Nachricht. 
+In Phase 1 sendet der Client die \texttt{client\_hello}-Nachricht an den Server. In Phase 2 erfolgt die Server-Identifizierung mithilfe der \texttt{server\_hello}-Nachricht. Zusätzlich sendet der Server die \texttt{certificate}, \texttt{server\_key\_exchange} und \texttt{certificate\_request} Nachrichten. Abschließend sendet der Server die \texttt{server\_hello\_done} Nachricht. 
 
-Es folgt Phase 3, die der Client-Identifizierung dient. In dieser Phase verifiziert der Client die vom Server geschickten Zertifikate und überprüft die in der \texttt{server\_hello} mitgeschickten Parameter. Sofern keine Probleme auftreten, schickt der Client einige Nachrichten an den Server. Hat der Server nach einem Zertifikat gefragt, dann wird eine \texttt{certificate} Nachricht an den Server gesandt. Kann der Client diese Anfrage nicht erfüllen, erfolgt eine \texttt{no\_certificate\_alert}-Meldung. 
+Es folgt Phase 3, die der Client-Identifizierung dient. In dieser Phase verifiziert der Client die vom Server geschickten Zertifikate und überprüft die in der \texttt{server\_hello} mitgeschickten Parameter. Sofern keine Probleme auftreten, schickt der Client einige Nachrichten an den Server. Hat der Server nach einem Zertifikat gefragt, dann wird eine \texttt{certificate}-Nachricht an den Server gesandt. Kann der Client diese Anfrage nicht erfüllen, erfolgt eine \texttt{no\_certificate\_alert}-Meldung. 
 
 In jedem Fall wird die \texttt{client\_key\_exchange}-Nachricht zurückgesendet. Deren Inhalt hängt vom verwendeten Austauschverfahren ab: Bei RSA wird ein 48-Byte großer Zwischenschlüssel (Pre-Master-Secret) und bei Ephemeral Diffie-Hellman bzw. Anonymous Diffie-Hellman werden die globalen Diffie-Hellman-Parameter (g, p) geschickt. Im Fall von Fixed Diffie-Hellman wurden die globalen Parameter bereits in der \texttt{certificate}-Nachricht verschickt, sodass der Inhalt der Nachricht null ist.
 
 Abschließend kann optional die \texttt{certificate\_verify}-Nachricht mitgeschickt werden, um das Client-Zertifikat explizit zu überprüfen. Dies ist jedoch nur möglich, wenn das Client-Zertifikat eine Signatur erstellen kann, was außer bei Fixed Diffie-Hellman jedoch bei allen Zertifikaten möglich ist.
 
+In den meisten Fällen endet der Handshake hier. Wurde aber vom Client zusätzlich noch eine \texttt{change\_cipher\_spec}-Nachricht mitgeschickt, dann schließt sich noch eine Phase 4 an. In dieser Phase aktualisieren Server und Client ihre Informationen über die kryptographischen Spezifikationen. So schickt der Server ebenfalls eine \texttt{change\_cipher\_spec}-Nachricht zum Client. Zum Abschluss wird die \texttt{finished}-Nachricht versendet, die die aktuellen Algorithmen, Schlüssel und Geheimnisse enthält. Noch einmal werden der Schlüsselaustausch und der erfolgreiche Authentifizierungsprozess überprüft. Der Server sendet die gleiche Überprüfungsnachricht zum Client.
+
+\subsection{Record-Protokoll}
+
+Nachdem eine TLS-Verbindung erfolgreich aufgebaut wurde, kommt das Record-Protokoll zum Einsatz, um die Anwendungsdaten sicher zum Server zu transportieren. Die Daten werden in Blöcke geeigneter Größe aufgeteilt und bei Bedarf komprimiert. Anschließend wird der MAC hinzugefügt und der Verbund aus MAC und Datenblock mit dem im Handshake-Protokoll vereinbarten Algorithmus verschlüsselt. Abschließend wird ein Header hinzugefügt, der den Content-Type, die Major- und Minor-Version und die Länge des komprimierten Inhalts enthält. Dieses fertige Paket wird dann dem TCP übergeben. Auf der Gegenseite läuft das Protokoll in umgekehrter Reihenfolge ab.
+
+Auf diese Weise bietet das Record-Protokoll die beiden Schutzziele Vertraulichkeit und Integrität. Die Vertraulichkeit ist durch den gemeinsam ausgehandelten Sitzungsschlüssel und den dazugehörigen Verschlüsselungsmechanismus sichergestellt.
+
+Die Integrität ist durch den gemeinsam ausgehandelten Sitzungsschlüssel, der für die Generierung der MACs verwendet wird, gegeben.
 
 \section{Vergleich von IPsec mit OpenVPN}
 
