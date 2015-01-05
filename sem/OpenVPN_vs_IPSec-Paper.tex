@@ -107,7 +107,7 @@ Im Tunnel Modus werden die IP-Pakete als Nutzlast neuen Paketen mit anderen Head
 Im Transport Modus ist die Sicherheit vom einen zum anderen Ende gewährleistet. Dabei werden die eigentlichen IP-Pakete beibehalten und einige sicherheitsrelevante Felder hinzugefügt.
 
 \subsubsection{Authentication Header}
-Der Authentication Header (kurz: AH) kann dazu verwendet werden, die Authentizität und Integrität von Daten zu gewährleisten und Replay-Angriffe abzuwehren. Er ist in RFC 4302 spezifiziert.\cite{RFC4302} Er muss jedoch im Gegensatz zur Alternative Encapsulating Security Payload (kurz: ESP) nicht von IPsec-Implementationen unterstützt werden.\cite{RFC4301} Der Grund hierfür ist, dass ESP neben dem was AH leistet, zusätzlich noch die Vertraulichkeit der Pakete sicherstellt. Der Authentication Header wird an die IP-Pakete angehängt und sieht wie folgendermaßen aus:
+Der Authentication Header (kurz: AH) kann dazu verwendet werden, die Authentizität und Integrität von Daten zu gewährleisten und Replay-Angriffe abzuwehren. Er ist in RFC 4302 spezifiziert.\cite{RFC4302} Er muss jedoch im Gegensatz zur Alternative Encapsulating Security Payload (kurz: ESP) nicht von IPsec-Implementationen unterstützt werden.\cite{RFC4301} Der Grund hierfür ist, dass ESP neben dem was AH leistet, zusätzlich noch die Vertraulichkeit der Pakete sicherstellt. Der Authentication Header wird an die IP-Pakete angehängt und sieht wie folgendermaßen aus (entnommen aus \cite{RFC4302}):
 
 \begin{addmargin}[-2em]{0em}
 \begin{verbatim}
@@ -134,7 +134,7 @@ Das Feld "`Integrity Check Value"' (ICV) enthält den MAC-Wert. Da dieser je nac
 
 \subsubsection{Encapsulating Security Payload}
 Die Alternative zum AH ist "`Encapsulating Security Payload"', kurz ESP. Wie schon erwähnt muss ESP von IPsec-Implementationen unterstützt werden. ESP ist in RFC 4303 spezifiziert.\cite{RFC4303}
-ESP schützt auch wie AH die Integrität und Authentizität der Daten. Zusätzlich bietet es auch noch einen Schutz der Vertraulichkeit. Um dies zu erreichen können die Daten verschlüsselt werden. Der Aufbau von ESP ist wie folgt:
+ESP schützt auch wie AH die Integrität und Authentizität der Daten. Zusätzlich bietet es auch noch einen Schutz der Vertraulichkeit. Um dies zu erreichen können die Daten verschlüsselt werden. Der Aufbau von ESP ist wie folgt (entnommen aus \cite{RFC4303}):
 
 \begin{addmargin}[-1em]{0em}
 \begin{verbatim}
