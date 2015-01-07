@@ -1,0 +1,81 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings,petri,shapes}
+\usepackage{polynom}
+\usepackage{multirow}
+\usepackage[german]{fancyref}
+\usepackage{morefloats}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+\def\thesection{11.\arabic{section})}
+\def\thesubsection{\arabic{subsection}.}
+\def\thesubsubsection{(\alph{subsubsection})}
+% some matrix magic
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\tikzset{
+    place/.style={
+        circle,
+        thick,
+        draw=black,
+        fill=white,
+        minimum size=6mm,
+        font=\bfseries
+    },
+    transitionH/.style={
+        rectangle,
+        thick,
+        draw=black,
+        fill=white,
+        minimum width=8mm,
+        inner ysep=4pt,
+        font=\bfseries
+    },
+    transitionV/.style={
+        rectangle,
+        thick,
+        fill=black,
+        minimum height=8mm,
+        inner xsep=2pt
+    }
+}
+
+\renewcommand{\vec}[1]{\underline{#1}}
+
+\begin{document}
+\author{Benjamin Kuffel, Jim Martens\\Gruppe 6}
+\title{Hausaufgaben zum 12. Januar}
+\maketitle
+
+\setcounter{section}{2}
+\section{} %11.3
+\subsection{}
+Mithilfe der Regeln können Workflownetze soweit vergröbert werden, bis nur noch der Start- und Endplatz und eine Transition übrig bleiben. Lässt sich ein Netz nicht in einer solchen Weise mit den gegebenen Regeln vergröbern, dann ist es kein Workflownetz.
+
+\subsection{}
+Das kleinste korrekte Workflownetz besteht aus zwei Plätzen und einer Transition, wobei die beiden Plätze den Start- bzw. Endplatz darstellen.
+
+
+\section{} %11.4
+\end{document}
+
