@@ -75,6 +75,81 @@ Mithilfe der Regeln können Workflownetze soweit vergröbert werden, bis nur noc
 \subsection{}
 Das kleinste korrekte Workflownetz besteht aus zwei Plätzen und einer Transition, wobei die beiden Plätze den Start- bzw. Endplatz darstellen.
 
+\setcounter{subsection}{3}
+\subsection{}
+\begin{tabular}{l|l|l}
+    Nr. & Transformationsregel & Hinzugekommene Elemente \\
+    \hline
+    0 & - & p17 \\
+    1 & P-Seq & p16, t9 \\
+    2 & P-Seq & p14, t8 \\
+    3 & Par & p15 \\
+    4 & P-Seq & p6, t7 \\
+    5 & Par & p13 \\
+    6 & P-Seq & a, t1 \\
+    7 & Par & p12 \\
+    8 & P-Seq & p8, t6 \\
+    9 & Par & p11 \\
+    10 & P-Seq & p3, t4 \\
+    11 & Par & p10 \\
+    12 & P-Seq & p7, t5 \\
+    13 & Par & p9 \\
+    14 & P-Seq & p2, t2 \\
+    15 & Par & p5 \\
+    16 & P-Seq & p4, t3
+\end{tabular}
+
+\setcounter{subsection}{5}
+\subsection{}
+\begin{tabular}{l|l|l|l}
+    Nr. & Transformationsregel & Verbliebene Knoten & Entfernte Knoten \\
+    \hline
+   1 & Zusammenfassung & p17,t10,t11,p18,p19,t12,p20,t15,p23 & t14,p22,t21,p31,t22,p32 \\
+   & & p24,t16,t17,p25,p26,t13,p21,t18,p27 & p33,t23,p34,t25\\
+   & & t19,p28,p29,t20,p30,t24,p35,t26,p36,t28,e & \\
+   \hline
+   2 & P-Seq & p17,t10,t11,p18,p19,t12,p20,t15,p23 & t19,p27 \\
+   & & p24,t16,t17,p25,p26,t13,p21,t18,p28 &\\
+   & & p29,t20,p30,t24,p35,t26,p36,t28,e & \\
+   \hline
+   3 & Par & p17,t10,t11,p18,p19,t12,p20,t15,p23 & p28 \\
+   & & p24,t16,t17,p25,p26,t13,p21,t18,p29 &\\
+   & & t20,p30,t24,p35,t26,p36,t28,e & \\
+   \hline
+   4 & P-Seq & p17,t10,t11,p18,p19,t12,p20,t15,p23,p24 & p29,t20 \\
+   & & t16,t17,p25,p26,t13,p21,t18 &\\
+   & & p30,t24,p35,t26,p36,t28,e & \\
+   \hline
+   5 & P-Seq & p17,t10,t11,p18,p19,t12,p20,t15,p23,p24 & p30,t24 \\
+   & & t16,t17,p25,p26,t13,p21,t18 &\\
+   & & p35,t26,p36,t28,e &\\
+   \hline
+   6 & T-Seq & p17,t10,t11,p18,p19,t12,p20,t15,p23,p24 & p35,t26 \\
+   & & t16,t17,p25,p26,t13,p21,t18 &\\
+   & & p36,t28,e &\\
+   \hline
+   7 & P-Seq & p17,t10,t11,p18,p19,t12,p20,t15,p24 & p23,t16 \\
+   & & t17,p25,p26,t13,p21,t18 &\\
+   & & p36,t28,e &\\
+   \hline
+   8 & Par & p17,t10,t11,p18,p19,t12,p20,t15,p24 & p25 \\
+   & & t17,p26,t13,p21,t18 &\\
+   & & p36,t28,e &\\
+   \hline
+   9 & Zusammenfassen & p17,t10,p18,t12,p20,t13,p21 & t11,p19,t15,p24 \\
+   & & t18,p36,t28,e &t17,p26,t27\\
+   \hline
+   10 & T-Seq & p17,t10,p18,t12,p20,t13,p21 & p36,t28 \\
+   & & t18,e &\\
+   \hline
+   11 & T-Seq & p17,t10,p18,t12,p21,t18,e & p20,t13 \\
+   \hline
+   12 & T-Seq & p17,t10,p21,t18,e & p18,t12 \\
+   \hline
+   13 & T-Seq & p17,t10,e & p21,t18 \\
+   \hline
+   14 & P-Seq & e & p17,t10
+\end{tabular}
 
 \section{} %11.4
 \end{document}
