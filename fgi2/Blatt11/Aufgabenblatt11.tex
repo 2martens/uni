@@ -153,6 +153,14 @@ Das kleinste korrekte Workflownetz besteht aus zwei Plätzen und einer Transitio
 
 \subsection{}
 Es ist nicht möglich die Korrektheit mit den bekannten Regeln nachzuweisen, da bei keiner Regel mehr als zwei Transitionen beteiligt sind. Im Fall von p37 sind aber genau drei Transitionen beteiligt, wodurch keine der Regeln angewendet werden kann.
+
+\subsection{}
+Es lässt sich ebenso die Definition 8.17 zur Korrektheit von Workflow-Netzen anwenden. Diese Definition stellt drei Bedingungen auf, die alle erfüllt sein müssen, damit das Netz korrekt ist.
+
+Die erste Bedingung verlangt, dass es von jeder erreichbaren Markierung aus eine Schaltfolge gibt, mit der das Netz in die Endmarkierung gelangt und damit terminiert. Die zweite Bedingung besagt für jede erreichbare Markierung, dass wenn in dieser Markierung eine Marke in der letzten Stelle liegt, die Markierung gleich mit der Endmarkierung sein muss. Die dritte Bedingung schließlich verlangt, dass es für jede Transition mindestens eine erreichbare Markierung gibt, in der die Transition schalten kann.
+
+Das vorliegende Netz kann einfach daraufhin überprüft werden. Da das Netz \(N_{11.3.5}\) korrekt ist (siehe Lösung zu 11.3.5), erfüllt es alle drei Bedingungen der Definition. Die zusätzliche Stelle p37 im Netz \(N_{11.3.7}\) zerstört die Korrektheit nicht. Dafür schauen wir uns die Transitionen t12, t18 und t21 an. In t12 wird eine zusätzliche Marke erzeugt und in p37 gelegt. Sowohl in t18 als auch t21 wird eine weitere Marke aus dem Vorbereich benötigt. Diese Marke liegt bereits in p37. Ansonsten ist das Verhalten des Netzes unverändert. Daher erfüllt es weiterhin die drei Bedingungen für ein korrektes Workflownetz.
+
 \section{} %11.4
 \end{document}
 
