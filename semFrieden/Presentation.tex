@@ -1,0 +1,267 @@
+\RequirePackage{pdf14}
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{csquotes}
+\usepackage[
+backend=biber,
+bibstyle=ieee,
+citestyle=ieee
+]{biblatex}
+%\usepackage{paralist}
+%\useoutertheme{infolines} 
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usetheme{Warsaw}
+\usecolortheme{crane}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setbeamertemplate{navigation symbols}{}
+\graphicspath{ {src/} {/home/jim/Pictures/} }
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygray},    % comment style
+  deletekeywords={},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=PHP,                 % the language of the code
+  morekeywords={class, function, return, protected, public, private, const, static, new, extends, namespace, null},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mygreen},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\hypersetup{
+	pdfauthor=Jim Martens,
+	pdfstartview=Fit
+}
+
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+	\raggedleft \insertframenumber\,/\,\inserttotalframenumber\;}
+
+\addbibresource{semFrieden.bib}
+
+\begin{document}
+\author{Jim Martens}
+\title{Haager Landkriegsordnung}
+\date{13. Januar 2015}
+
+% Title page
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Agenda}
+    \tableofcontents
+\end{frame}
+
+\section{Weg zu den Konferenzen}
+\begin{frame}{Voraussetzungen}
+    \begin{itemize}
+        \item diszipliniertes Heer
+        \item Versorgung des Heeres durch eigenes Land
+        \item Strikte Trennung zwischen Zivilbevölkerung und Kämpfern
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Zeitliche Entwicklung}
+    Die zeitliche Entwicklung wurde größtenteils entnommen aus Buß\cite{Buss1992}.
+    \begin{itemize}
+        \item Römische Armee
+        \item Ritter
+        \item Schweizer Haufen
+        \item Francisco de Vitoria (1532)
+        \item Wilhelm von Oranien (Unabhängigkeitskrieg gegen Spanien)
+        \item Dreißigjähriger Krieg
+        \item Hugo Grotius (freiwilliges Völkerrecht)
+        \item Westfälischer Frieden (1648)
+        \item Lieber Code
+        \item Brüsseler Konferenz (1874)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Vorbereitungen zur Ersten Konferenz}
+    \begin{itemize}
+        \item Oxford Manual
+        \item Einladung durch russ. Außenminister Graf Mouravieff
+        \item Teilnehmer:
+          \begin{itemize}
+              \item Deutschland, England, Frankreich, Italien, Österreich-Ungarn, Russland
+              \item Belgien, Bulgarien, Dänemark, Griechenland, Luxemburg, Montenegro, die Niederlande, Portugal, Rumänien, Schweden-Norwegen, die Schweiz, Serbien, Spanien, Türkei
+              \item China, Japan, Persien, Siam
+              \item USA, Mexiko
+          \end{itemize}
+        \item insgesamt 26 Teilnehmer
+    \end{itemize}
+\end{frame}
+
+\section{Erste Friedenskonferenz}
+\begin{frame}{Zielsetzung}
+    \begin{itemize}
+        \item Hauptziel: Entwicklung von Instrumenten zur friedlichen Streibeilegung und Verhinderung von Kriegen
+        \item Rüstungsbeschränkung daher auch ein Ziel
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Schlüsselelemente}
+    \begin{itemize}
+        \item Martens'sche Klausel
+        \item Levée en masse (Artikel 1 und 2)
+        \item Nichtkombattanten in einer Armee (Artikel 3)
+    \end{itemize}
+\end{frame}
+\begin{frame}{Martens'sche Klausel}
+    Zitiert aus den Proceedings der ersten Konferenz\cite{Scott1920}:
+    \begin{quotation}
+      Until a perfectly complete code of the laws of war is issued, the Conference thinks it right to declare that in cases not included in the present arrangement, populations and belligerents remain under the protection and empire of the principles of international law, as they result from the usages established between civilized nations, from the laws of humanity, and the requirements of public conscience.
+    \end{quotation}
+\end{frame}
+\begin{frame}[allowframebreaks]{Levée en masse}
+    Zitiert aus der Haager Landkriegsordnung, Artikel 1\cite{DeutschesReich2010}:
+    \begin{quotation}
+      Die Gesetze, die Rechte und die Pflichten des Krieges gelten nicht nur für das Heer, sondern auch für die Milizen und Freiwilligen-Korps, wenn sie folgende Bedingungen in sich vereinigen:
+      
+1. daß jemand an ihrer Spitze steht, der für seine Untergebenen verantwortlich ist,
+
+2. daß sie ein bestimmtes aus der Ferne erkennbares Abzeichen tragen,
+
+3. daß sie die Waffen offen führen und
+
+4. daß sie bei ihren Unternehmungen die Gesetze und Gebräuche des Krieges beobachten.
+    \end{quotation}
+    
+    \begin{quotation}
+        In den Ländern, in denen Milizen oder Freiwilligen-Korps das Heer oder einen Bestandteil des Heeres bilden, sind diese unter der Bezeichnung "`Heer"' einbegriffen.
+    \end{quotation}
+    
+    Zitiert aus der Haager Landkriegsordnung, Artikel 2\cite{DeutschesReich2010}:
+    \begin{quotation}
+      Die Bevölkerung eines nicht besetzten Gebiets, die beim Herannahen des Feindes aus eigenem Antriebe zu den Waffen greift, um die eindringenden Truppen zu bekämpfen, ohne Zeit gehabt zu haben, sich nach Artikel 1 zu organisieren, wird als kriegführend betrachtet, wenn sie die Waffen offen führt und die Gesetze und Gebräuche des Krieges beobachtet.
+    \end{quotation}
+\end{frame}
+\begin{frame}{Nichtkombattanten}
+    Zitiert aus der Haager Landkriegsordnung, Artikel 3\cite{DeutschesReich2010}:
+    \begin{quotation}
+        Die bewaffnete Macht der Kriegsparteien kann sich zusammensetzen aus Kombattanten und Nichtkombattanten. Im Falle der Gefangennahme durch den Feind haben die einen wie die anderen Anspruch auf Behandlung als Kriegsgefangene.
+    \end{quotation}
+\end{frame}
+
+\section{Zweite Friedenskonferenz}
+\begin{frame}{Vorbereitung zweite Konferenz}
+    \begin{itemize}
+        \item Initiative von USA
+        \item Einladung durch russ. Zaren
+        \item zusätzliche Teilnehmer:
+          \begin{itemize}
+              \item Argentinien, Bolivien, Brasilien, Chile, Dom. Rep., Equador, Guatemala, Haiti, Kolumbien, Nicaragua, Panama, Paraguay, El Salvador, Uruguay, Venezuela und Norwegen
+          \end{itemize}
+        \item insgesamt 44 Teilnehmer
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Schlüsselpunkte}
+    Entnommen aus den Proceedings der zweiten Konferenz\cite{Scott-V1-1921}:
+    \begin{itemize}
+        \item Erweiterung der Regeln zum Landkrieg
+        \item Fassung einer Regelung zum Seekrieg
+    \end{itemize}
+\end{frame}
+
+\section{Landkriegsordnung}
+\begin{frame}{Geltung}
+    Sogenannte Allbeteiligungsklausel:
+    \begin{quotation}
+      Die Bestimmungen der im Artikel 1 angeführten Ordnung sowie des vorliegenden Abkommens finden nur zwischen den Vertragsmächten Anwendung und nur dann, wenn die Kriegführenden sämtlich Vertragsparteien sind.
+    \end{quotation}
+\end{frame}
+
+\begin{frame}{Einschränkung der Waffenwahl}
+    \begin{itemize}
+        \item Artikel 22 - Grundsatz
+        \item Artikel 23 - verbotene Aktionen
+        \item Artikel 24 - Kriegslisten
+        \item Artikel 25 - unverteidigtes Gebiet
+        \item Artikel 26 - Warnung des Gegners vor Angriff
+        \item Artikel 27 - Schutz von Kulturgütern
+        \item Artikel 28 - Verbot der Plünderung
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Artikel 22}
+    Zitiert aus der Haager Landkriegsordnung\cite{DeutschesReich2010}:
+    \begin{quotation}
+      Die Kriegführenden haben kein unbeschränktes Recht in der Wahl der Mittel zur Schädigung des Feindes.
+    \end{quotation}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Artikel 23}
+    Zitiert aus der Haager Landkriegsordnung\cite{DeutschesReich2010}:
+    \begin{quotation}
+      Abgesehen von den durch Sonderverträge aufgestellten Verboten, ist namentlich untersagt:
+
+a) die Verwendung von Gift oder vergifteten Waffen,
+
+b) die meuchlerische Tötung oder Verwundung von Angehörigen des feindlichen Volkes oder Heeres,
+
+c) die Tötung oder Verwundung eines die Waffen streckenden oder wehrlosen Feindes, der sich auf Gnade oder Ungnade ergeben hat,
+
+d) die Erklärung, daß kein Pardon gegeben wird,
+
+e) der Gebrauch von Waffen, Geschossen oder Stoffen, die geeignet sind, unnötig Leiden zu verursachen,
+    \end{quotation}
+
+    \begin{quotation}
+      f) der Mißbrauch der Parlamentärflagge, der Nationalflagge oder der militärischen Abzeichen oder der Uniform des Feindes sowie der besonderen Abzeichen des Genfer Abkommens,
+
+g) die Zerstörung oder Wegnahme feindlichen Eigentums außer in den Fällen, wo diese Zerstörung oder Wegnahme durch die Erfordernisse des Krieges dringend erheischt wird,
+
+h) die Aufhebung oder zeitweilige Außerkraftsetzung der Rechte und Forderungen von Angehörigen der Gegenpartei oder die Ausschließung ihrer Klagbarkeit.
+    \end{quotation}
+
+    \begin{quotation}
+      Den Kriegführenden ist ebenfalls untersagt, Angehörige der Gegenpartei zur Teilnahme an den Kriegsunternehmungen gegen ihr Land zu zwingen; dies gilt auch für den Fall, daß sie vor Ausbruch des Krieges angeworben waren.
+    \end{quotation}
+\end{frame}
+
+\section{Auswertung}
+\begin{frame}{Auswertung}
+    \begin{itemize}
+        \item gelungene Kodifikation des geltenden Kriegsgewohnheitsrechts
+        \item bis heute in Teilen gültig
+    \end{itemize}
+\end{frame}
+\begin{frame}{Erster Weltkrieg}
+    \begin{itemize}
+        \item Regeln zum Kombattantenstatus größtenteils eingehalten
+        \item Allbeteiligungsklausel nicht problematisch
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Literaturverzeichnis}    
+    \printbibliography
+\end{frame}
+\end{document}
