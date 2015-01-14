@@ -146,6 +146,50 @@
         bb + a \overset{a}{\rightarrow} \sqrt{} \;&&\; (T^{\sqrt{}}_{+L}), y = a, v = a, x = bb \\
         (bb + a) \cdot b \overset{a}{\rightarrow} b \;&&\; (T^{\sqrt{}}), x = (bb + a), v = a, y = b
     \end{alignat*}
+
+    \subsection{}
+    Der Prozessgraph für \(t_5\) ist auf \fref{fig:t5-graph} sichtbar. Der Prozessgraph für \(t_6\) ist auf \fref{fig:t6-graph} sichtbar.
+
+    Die Knoten \(f\) in beiden Graphen, \((c + d)f\) in beiden Graphen, sowie \(cf + df\) im Graph von \(t_5\) und die beiden Wurzelknoten sind jeweils bisimilar.
+    \begin{figure}
+        \begin{tikzpicture}[node distance=1cm]
+            \node (t5-start) {\(b(cf + df) + a(c + d)f\)};
+            % left side
+            \node (t5-b-left) [below left=of t5-start] {\(cf + df\)};
+            \node (t5-finish-left) [below=of t5-b-left] {\(\sqrt{}\)};
+            % right side
+            \node (t5-a-right) [below right=of t5-start] {\((c + d)f\)};
+            \node (t5-f-right) [below=of t5-a-right] {\(f\)};
+            \node (t5-finish-right) [below=of t5-f-right] {\(\sqrt{}\)};
+
+            \path[->] (t5-start) edge node[above left] {b} (t5-b-left)
+                (t5-b-left) edge[bend right] node[left] {cf} (t5-finish-left)
+                (t5-b-left) edge[bend left] node[right] {df} (t5-finish-left)
+                (t5-start) edge node[above right] {a} (t5-a-right)
+                (t5-a-right) edge[bend right] node[left] {c} (t5-f-right)
+                (t5-a-right) edge[bend left] node[right] {d} (t5-f-right)
+                (t5-f-right) edge node[right] {f} (t5-finish-right);
+        \end{tikzpicture}
+        \caption{Prozessgraph für \(t_5\)}
+        \label{fig:t5-graph}
+    \end{figure}
+
+    \begin{figure}
+        \begin{tikzpicture}[node distance=1cm]
+            \node (t6-start) {\((a + b)(c + d)f\)};
+            \node (t6-c-plus-d-f) [below=of t6-start] {\((c + d)f\)};
+            \node (t6-f) [below=of t6-c-plus-d-f] {\(f\)};
+            \node (t6-finish) [below=of t6-f] {\(\sqrt{}\)};
+
+            \path[->] (t6-start) edge[bend right] node[left] {a} (t6-c-plus-d-f)
+                (t6-start) edge[bend left] node[right] {b} (t6-c-plus-d-f)
+                (t6-c-plus-d-f) edge[bend right] node[left] {c} (t6-f)
+                (t6-c-plus-d-f) edge[bend left] node[right] {d} (t6-f)
+                (t6-f) edge node[right] {f} (t6-finish);
+        \end{tikzpicture}
+        \caption{Prozessgraph für \(t_6\)}
+        \label{fig:t6-graph}
+    \end{figure}
 \section{} %12.4
 \end{document}
 
