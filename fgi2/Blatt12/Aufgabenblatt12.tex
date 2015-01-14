@@ -1,0 +1,151 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings,petri,shapes}
+\usepackage{polynom}
+\usepackage{multirow}
+\usepackage[german]{fancyref}
+\usepackage{morefloats}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+\def\thesection{12.\arabic{section})}
+\def\thesubsection{\arabic{subsection}.}
+\def\thesubsubsection{(\alph{subsubsection})}
+% some matrix magic
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\tikzset{
+    place/.style={
+        circle,
+        thick,
+        draw=black,
+        fill=white,
+        minimum size=6mm,
+        font=\bfseries
+    },
+    transitionH/.style={
+        rectangle,
+        thick,
+        draw=black,
+        fill=white,
+        minimum width=8mm,
+        inner ysep=4pt,
+        font=\bfseries
+    },
+    transitionV/.style={
+        rectangle,
+        thick,
+        fill=black,
+        minimum height=8mm,
+        inner xsep=2pt
+    }
+}
+
+\renewcommand{\vec}[1]{\underline{#1}}
+
+\begin{document}
+\author{Benjamin Kuffel, Jim Martens\\Gruppe 6}
+\title{Hausaufgaben zum 19. Januar}
+\maketitle
+
+\setcounter{section}{2}
+\section{} %12.3
+    \subsection{}
+    Der Prozessgraph für \(t_3\) ist auf \fref{fig:t3-graph} sichtbar. Der Prozessgraph für \(t_4\) ist auf \fref{fig:t4-graph} sichtbar.
+    \begin{figure}
+        \begin{tikzpicture}[node distance=1cm]
+            \node (t3-start) {\(a \cdot (bb + a) \cdot b + a \cdot (b + (b + bb))\)};
+            % left side
+            \node (t3-a-left) [below left=of t3-start] {\((bb + a) \cdot b\)};
+            \node (t3-b-left) [below=of t3-a-left] {\(b\)};
+            \node (t3-finish-left) [below=of t3-b-left] {\(\sqrt{}\)};
+            % right side
+            \node (t3-a-right) [below right=of t3-start] {\(b + (b + bb)\)};
+            \node (t3-finish-right) [below=2.0 of t3-a-right] {\(\sqrt{}\)};
+
+            \path[->] (t3-start) edge node[above left] {a} (t3-a-left)
+                (t3-a-left) edge[bend right] node[left] {bb} (t3-b-left)
+                (t3-a-left) edge[bend left] node[right] {a} (t3-b-left)
+                (t3-b-left) edge node[left] {b} (t3-finish-left)
+                (t3-start) edge node[above right] {a} (t3-a-right)
+                (t3-a-right) edge[bend right] node[left] {b} (t3-finish-right)
+                (t3-a-right) edge node[left] {b} (t3-finish-right)
+                (t3-a-right) edge[bend left] node[right] {bb} (t3-finish-right);
+        \end{tikzpicture}
+        \caption{Prozessgraph für \(t_3\)}
+        \label{fig:t3-graph}
+    \end{figure}
+
+
+    \begin{figure}
+        \begin{tikzpicture}[node distance=1cm]
+            \node (t4-start) {\(a \cdot (bbb + (ab + b) \cdot (b + b))\)};
+            \node (t4-a) [below=of t4-start] {\(bbb + (ab + b) \cdot (b + b)\)};
+            % left side
+            \node (t4-finish-left) [below left=of t4-a] {\(\sqrt{}\)};
+            % right side
+            \node (t4-b-plus-b-right) [below=of t4-a] {\(b + b\)};
+            \node (t4-finish-right) [below=of t4-b-plus-b-right] {\(\sqrt{}\)};
+
+            \path[->] (t4-start) edge node[left] {a} (t4-a)
+                (t4-a) edge node[above left] {bbb} (t4-finish-left)
+                (t4-a) edge[bend right] node[left] {ab} (t4-b-plus-b-right)
+                (t4-a) edge[bend left] node[right] {b} (t4-b-plus-b-right)
+                (t4-b-plus-b-right) edge[bend right] node[left] {b} (t4-finish-right)
+                (t4-b-plus-b-right) edge[bend left] node[right] {b} (t4-finish-right);
+        \end{tikzpicture}
+        \caption{Prozessgraph für \(t_4\)}
+        \label{fig:t4-graph}
+    \end{figure}
+
+    \subsection{}
+    Die Knoten \(b + b\) im Graph von \(t_4\) und \(b\) im Graph von \(t_3\) sind bisimilar. Alle anderen Knoten sind nicht bisimilar.
+
+    \subsection{}
+    \(t_3\) und \(t_4\) sind nicht bisimilar.
+
+    \subsection{}
+    Erste Ableitung:
+    \begin{alignat*}{2}
+        a \overset{a}{\rightarrow} \sqrt{} \;&&\; (A_0), x = a, v = a \\
+        a \cdot (b + (b + bb)) \overset{a}{\rightarrow} b + (b + bb) \;&&\; (T^{\sqrt{}}), x = a, v = a, y = b + (b + bb) \\
+        a \cdot (bb + a) \cdot b + a \cdot (b + (b + bb)) \overset{a}{\rightarrow} b + (b + bb) \;&&\; (T_{+L}), v = a, y = a \cdot (b + (b + bb))\\
+        &&\; x =  a \cdot (bb + a) \cdot b, y' = b + (b + bb)
+    \end{alignat*}
+
+    Zweite Ableitung:
+    \begin{alignat*}{2}
+        a \overset{a}{\rightarrow} \sqrt{} \;&&\; (A_0), x = a, v = a \\
+        a \cdot (bb + a) \cdot b \overset{a}{\rightarrow} (bb + a) \cdot b \;&&\; (T^{\sqrt{}}), x = a, v = a, y = (bb + a) \cdot b \\
+        a \cdot (bb + a) \cdot b + a \cdot (b + (b + bb)) \overset{a}{\rightarrow} (bb + a) \cdot b \;&&\; (T_{+R}), x = a \cdot (bb + a) \cdot b, v = a \\
+        &&\; y = a \cdot (b + (b + bb)), x' = (bb + a) \cdot b
+    \end{alignat*}
+
+    Dritte Ableitung:
+    \begin{alignat*}{2}
+        a \overset{a}{\rightarrow} \sqrt{} \;&&\; (A_0), x = a, v = a \\
+        bb + a \overset{a}{\rightarrow} \sqrt{} \;&&\; (T^{\sqrt{}}_{+L}), y = a, v = a, x = bb \\
+        (bb + a) \cdot b \overset{a}{\rightarrow} b \;&&\; (T^{\sqrt{}}), x = (bb + a), v = a, y = b
+    \end{alignat*}
+\section{} %12.4
+\end{document}
+
