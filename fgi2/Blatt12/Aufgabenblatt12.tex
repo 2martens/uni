@@ -156,15 +156,19 @@
             \node (t5-start) {\(b(cf + df) + a(c + d)f\)};
             % left side
             \node (t5-b-left) [below left=of t5-start] {\(cf + df\)};
-            \node (t5-finish-left) [below=of t5-b-left] {\(\sqrt{}\)};
+            \node (t5-f1-left) [below left=of t5-b-left] {\(f\)};
+            \node (t5-f2-left) [below right=of t5-b-left] {\(f\)};
+            \node (t5-finish-left) [below=2 of t5-b-left] {\(\sqrt{}\)};
             % right side
             \node (t5-a-right) [below right=of t5-start] {\((c + d)f\)};
             \node (t5-f-right) [below=of t5-a-right] {\(f\)};
             \node (t5-finish-right) [below=of t5-f-right] {\(\sqrt{}\)};
 
             \path[->] (t5-start) edge node[above left] {b} (t5-b-left)
-                (t5-b-left) edge[bend right] node[left] {cf} (t5-finish-left)
-                (t5-b-left) edge[bend left] node[right] {df} (t5-finish-left)
+                (t5-b-left) edge node[above left] {c} (t5-f1-left)
+                (t5-b-left) edge node[above right] {d} (t5-f2-left)
+                (t5-f1-left) edge node[below left] {f} (t5-finish-left)
+                (t5-f2-left) edge node[below right] {f} (t5-finish-left)
                 (t5-start) edge node[above right] {a} (t5-a-right)
                 (t5-a-right) edge[bend right] node[left] {c} (t5-f-right)
                 (t5-a-right) edge[bend left] node[right] {d} (t5-f-right)
