@@ -1,0 +1,113 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings,petri,shapes}
+\usepackage{polynom}
+\usepackage{multirow}
+\usepackage[german]{fancyref}
+\usepackage{morefloats}
+\usepackage{lmerge}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+\def\thesection{13.\arabic{section})}
+\def\thesubsection{\arabic{subsection}.}
+\def\thesubsubsection{(\alph{subsubsection})}
+% some matrix magic
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\tikzset{
+    place/.style={
+        circle,
+        thick,
+        draw=black,
+        fill=white,
+        minimum size=6mm,
+        font=\bfseries
+    },
+    transitionH/.style={
+        rectangle,
+        thick,
+        draw=black,
+        fill=white,
+        minimum width=8mm,
+        inner ysep=4pt,
+        font=\bfseries
+    },
+    transitionV/.style={
+        rectangle,
+        thick,
+        fill=black,
+        minimum height=8mm,
+        inner xsep=2pt
+    }
+}
+
+\renewcommand{\vec}[1]{\underline{#1}}
+
+\begin{document}
+\author{Benjamin Kuffel, Jim Martens\\Gruppe 6}
+\title{Hausaufgaben zum 26. Januar}
+\maketitle
+
+\setcounter{section}{3}
+\section{} % 13.4
+    \subsection{}
+    Die Prozessgraphen für \(t_6\) und \(t_7\) befinden sich auf \fref{fig:t6-graph} bzw. \fref{fig:t7-graph}.
+    \begin{figure}
+        \begin{tikzpicture}[node distance=1cm]
+            \node (t6-start) {\((a + b) \leftmerge (b \cdot c)\)};
+            \node (bc) [below=of t6-start] {\(b \cdot c\)};
+            \node (c) [below=of bc] {\(c\)};
+            \node (finish) [below=of c] {\(\surd\)};
+
+            \path[->] (t6-start) edge[bend right] node[left] {\(a\)} (bc)
+                (t6-start) edge[bend left] node[right] {\(b\)} (bc)
+                (bc) edge node[right] {\(b\)} (c)
+                (c) edge node[right] {\(c\)} (finish);
+        \end{tikzpicture}
+        \caption{Prozessgraph von \(t_6\)}
+        \label{fig:t6-graph}
+    \end{figure}
+
+    \begin{figure}
+        \begin{tikzpicture}[node distance=1cm]
+            \node (start) {\(\partial_H((a \leftmerge (b + b) + (d \parallel e) \cdot b) \cdot c)\)};
+            \node (a-left) [below left=of start] {\(\partial_H((b + b) \cdot c)\)};
+            \node (de-right) [below right=of start] {\(\partial_H(b \cdot c)\)};
+            \node (c) [below=3 of start] {\(\partial_H(c)\)};
+            \node (finish) [below=of c] {\(\surd\)};
+
+            \path[->] (start) edge node[above left] {\(a\)} (a-left)
+                (start) edge node[above right] {\(f\)} (de-right)
+                (a-left) edge[bend right] node[below left] {\(b\)} (c)
+                (a-left) edge[bend left] node[above right] {\(b\)} (c)
+                (de-right) edge node[above left] {\(b\)} (c)
+                (c) edge node[right] {\(c\)} (finish);
+        \end{tikzpicture}
+        \caption{Prozessgraph von \(t_7\)}
+        \label{fig:t7-graph}
+    \end{figure}
+
+\setcounter{section}{5}
+\section{} % 13.6
+
+\end{document}
