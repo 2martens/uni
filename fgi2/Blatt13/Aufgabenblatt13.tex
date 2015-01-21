@@ -72,6 +72,8 @@
 \section{} % 13.4
     \subsection{}
     Die Prozessgraphen für \(t_6\) und \(t_7\) befinden sich auf \fref{fig:t6-graph} bzw. \fref{fig:t7-graph}.
+
+    Es existiert dabei folgende Bisimulationsrelation: \(\mathbb{B} = \{(c, \partial_H(c)), (b \cdot c, \partial_H(b \cdot c)), (b \cdot c, \partial_H((b + b) \cdot c)), ((a + b) \leftmerge (b \cdot c), \partial_H((a \leftmerge (b + b) + (d \parallel e) \cdot b) \cdot c))\}\)
     \begin{figure}
         \begin{tikzpicture}[node distance=1cm]
             \node (t6-start) {\((a + b) \leftmerge (b \cdot c)\)};
