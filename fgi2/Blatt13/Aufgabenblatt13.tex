@@ -110,10 +110,20 @@
     \end{figure}
 
     \subsection{}
+    Nachweis des ersten Übergangs:
     \begin{alignat*}{2}
         &\; a \overset{a}{\rightarrow} \surd \\
         T^{\surd}_{+R} &\; a + b \overset{a}{\rightarrow} \surd \\
         T^{\surd}_{\leftmerge} &\; (a + b) \leftmerge b \cdot c \overset{a}{\rightarrow} b \cdot c
+    \end{alignat*}
+
+    Nachweis des zweiten Übergangs:
+    \begin{alignat*}{2}
+        T_{\parallel \gamma}^{\surd \surd} &&\; d \parallel e \overset{f}{\rightarrow} \surd \\
+        T^{\surd}_{.} &&\; (d \parallel e) \cdot b \overset{f}{\rightarrow} b \\
+        T_{+L} &&\; a \leftmerge (b + b) + (d \parallel e) \cdot b \overset{f}{\rightarrow} b \\
+        T_{.} &&\; (a \leftmerge (b + b) + (d \parallel e) \cdot b) \cdot c \overset{f}{\rightarrow} b \cdot c \\
+        T_{\partial} &&\; \partial_H((a \leftmerge (b + b) + (d \parallel e) \cdot b) \cdot c) \overset{f}{\rightarrow} \partial_H(b \cdot c)
     \end{alignat*}
 
 \setcounter{section}{5}
