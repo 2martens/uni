@@ -126,6 +126,18 @@
         T_{\partial} &&\; \partial_H((a \leftmerge (b + b) + (d \parallel e) \cdot b) \cdot c) \overset{f}{\rightarrow} \partial_H(b \cdot c)
     \end{alignat*}
 
+    \subsection{}
+    Die folgende Umformung wurde so weit es möglich war gezeigt.
+    \begin{alignat*}{2}
+        && (a + b) \leftmerge (b \cdot c) \\
+        &\overset{LM2}{=}& (a + b) \cdot (b \cdot c) \\
+        &\overset{A5}{=}& ((a + b) \cdot b) \cdot c \\
+        &\overset{A4}{=}& (a \cdot b + b \cdot b) \cdot c \\
+        &\overset{LM2}{=}& (a \leftmerge b + b \cdot b) \cdot c \\
+        &\overset{A3}{=}& (a \leftmerge (b + b) + (b \cdot b + b \cdot b)) \cdot c \\
+        &\overset{LM2}{=}& (a \leftmerge (b + b) + (b \leftmerge b + b \leftmerge b)) \cdot c
+    \end{alignat*}
+
 \setcounter{section}{5}
 \section{} % 13.6
 
