@@ -153,4 +153,20 @@
         Y &=& (a \cdot Y + b \cdot Y + c \cdot X) \cdot d + e
     \end{alignat*}
     \(Y\) lässt sich nicht in die notwendige Form überführen. Daher ist \(E\) keine geschützte rekursive Spezifikation.
+
+    \subsection{}
+    \begin{tikzpicture}[node distance=1cm]
+        \node (start) {\(\langle X|E \rangle\)};
+        \node (y) [right=of start] {\(\langle Y|E \rangle\)};
+        \node (finish) [below=of y] {\(\surd\)};
+
+        \path[->] (start) edge[bend left] node[above] {\(a\)} (y)
+            (start) edge[bend right] node[below] {\(b\)} (y)
+            (start) edge[loop left] node[left] {\(c\)} (start)
+            (y) edge node[right] {\(e\)} (finish)
+            (y) edge[loop above] node[above] {\(a\)} (y)
+            (y) edge[loop right] node[right] {\(b\)} (y)
+            (y) edge[bend left=90] node[below] {\(c\)} (start);
+    \end{tikzpicture}
 \end{document}
+ 
