@@ -140,5 +140,17 @@
 
 \setcounter{section}{5}
 \section{} % 13.6
+    \subsection{}
+    Umformen von \(X\):
+    \begin{alignat*}{2}
+        X &=& (a + b) \cdot Y + c \cdot X \\
+        X &=& a \cdot Y + b \cdot Y + c \cdot X
+    \end{alignat*}
 
+    Umformen von \(Y\):
+    \begin{alignat*}{2}
+        Y &=& X \cdot d + e \\
+        Y &=& (a \cdot Y + b \cdot Y + c \cdot X) \cdot d + e
+    \end{alignat*}
+    \(Y\) lässt sich nicht in die notwendige Form überführen. Daher ist \(E\) keine geschützte rekursive Spezifikation.
 \end{document}
