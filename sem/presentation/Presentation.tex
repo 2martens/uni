@@ -133,6 +133,44 @@
 	\end{itemize}
 \end{frame}
 
+\section{Grundlagen von VPNs}
+\begin{frame}
+	\frametitle{Grundlagen von VPNs}
+	\begin{itemize}
+		\vfill
+		\item VPN \(\widehat{=}\) Virtual Private Network
+		\vfill
+		\item gesicherte Verbindung durch unsichere Umgebung ("`Tunnel"')
+		\vfill
+		\item Sichere Verbindung zu lokalem Netzwerk über das Internet
+		\vfill
+		\item Vorteile eines privaten Netwerkes über das Internet
+		\vfill
+	\end{itemize}
+\end{frame}
+
+\section{VPN-Varianten}
+\begin{frame}
+	\frametitle{VPN-Varianten}
+	\vfill
+	\includegraphics[width=1\textwidth]{ipsec.png}
+\end{frame}
+
+\section{Anwendung}
+\begin{frame}
+	\frametitle{Anwendung}
+	\begin{itemize}
+		\vfill
+		\item Zugriff auf den Arbeitsplatz
+		\vfill
+		\item Uni
+		\vfill
+		\item Umgehen von Sperren
+		\vfill
+		\item Youtube/Netflix
+	\end{itemize}
+\end{frame}
+
 \section{NSA's War on Terror}
 \begin{frame}
 	\frametitle{NSA's War on Terror}
@@ -149,9 +187,97 @@
 	\only<3>{\(\Rightarrow\) noch mehr Überwachung nötig, um Terror zu bekämpfen}
 \end{frame}
 
-\section{IPsec}
+\section{IPsec-Entstehung}
 \begin{frame}
 	\frametitle{IPsec}
+	\begin{itemize}
+		\vfill
+		\item von oben herab beschlossen
+		\vfill
+		\item viele verschiedene Einflüsse
+		\vfill
+		\item dadurch viele verschiedene Lösungen für das selbe Problem
+		\vfill
+		\item Komplexität steigt, Sicherheit nimmt ab
+		\vfill
+		\item IPsec wird in Request for Comments (RFCs) festgehalten
+		\vfill
+	\end{itemize}
+\end{frame}
+
+\section{Tunnel- und Transport-Modus}
+\begin{frame}
+	\frametitle{Tunnel- und Transport-Modus}
+	\begin{itemize}
+		\vfill
+		\item Tunnel-Modus verschlüsselt von Gateway zu Gateway
+		\item Vorteil: Für den Nutzer transparent
+		\vfill
+		\item Transport-Modus verschlüsselt von Ende zu Ende %Am besten Bild zur verdeutlichung verwenden/selbst erstellen
+		\vfill
+	\end{itemize}
+\end{frame}
+
+\section{Authentication Header}
+\begin{frame}
+	\frametitle{Authentication Header}
+	\begin{itemize}
+		\vfill
+		\item Nutzt Keyed-Hash Message Authentication Code
+		\vfill
+		\item Schutz vor Replay-Angriffen
+		\vfill
+		\item Keine Verschlüsselung
+		\vfill
+		\item Daher muss der AH nicht mehr implementiert werden
+		\vfill
+	\end{itemize}
+\end{frame}
+
+\section{Encapsulating Security Payload}
+\begin{frame}
+	\frametitle{Encapsulating Security Payload}
+	\begin{itemize}
+		\vfill
+		\item Nutzt ebenfalls Keyed-Hash Message Authentication Code und schützt vor Replay-Angriffen
+		\vfill
+		\item Zusätzlich Verschlüsselung
+		\vfill
+		\item Muss daher implementiert werden
+		\vfill
+	\end{itemize}
+\end{frame}
+
+\section{Vertraulichkeit, Authentizität und Integrität}
+\begin{frame}
+	\frametitle{Vertraulichkeit, Authentizität und Integrität}
+	\begin{itemize}
+		\vfill
+		\item Vertraulichkeit durch Verschlüsselung
+		\vfill
+		\item Authentizität und Integrität durch Message Authentication Code (MAC)
+		\vfill
+		\item RFC hält fest wie stark welche Verfahren unterstützt werden müssen
+		\vfill
+	\end{itemize}
+\end{frame}
+
+\section{IKEv2}
+\begin{frame}
+	\frametitle{IKEv2}
+	\begin{itemize}
+		\vfill
+		\item Alternative zum manuellen eintragen von Schlüsseln
+		\vfill
+		\item Wird genutzt um die Verbindung zu etablieren
+		\vfill
+		\item Erstellen von Schlüsseln mit Diffie Hellman Verfahren
+		\vfill
+		\item Beweisen der Identität
+		\vfill
+		\item Erstellen von Security Associations für AH und ESP
+		\vfill
+	\end{itemize}
 \end{frame}
 
 \section{NSA-Enthüllungen}
