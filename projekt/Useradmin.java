@@ -1,6 +1,8 @@
 import java.io.*;
+import java.math.BigInteger;
 import java.nio.file.*;
 import java.nio.charset.*;
+import java.security.*;
 import java.util.List;
 
 class Useradmin {
@@ -29,9 +31,9 @@ class Useradmin {
 	}
 
 	public void addUser(String username, char[] password) {
-		char[] hashedPW = password;
-		String hashedPWString = String.valueOf(hashedPW);
-		String format = username + ":" + hashedPWString;
+		String salt = genSalt();
+		String hashedPW = generateHash(String.valueOf(password), salt);
+		String format = username + ":" + hashedPW;
 		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("passwords.txt", true)))) {
 		    out.println(format);
 		    System.out.println("User has been created");
@@ -41,8 +43,6 @@ class Useradmin {
 	}
 
 	public boolean checkUser(String username, char[] password) {
-		char[] hashedPW = password;
-		String hashedPWString = String.valueOf(hashedPW);
 		boolean result = false;
 		try {
 			List<String> passwords = Files.readAllLines(Paths.get("passwords.txt"), StandardCharsets.UTF_8);
@@ -50,8 +50,12 @@ class Useradmin {
 			for (String uidPW : passwords) {
 				int indexOfColon = uidPW.indexOf(':');
 				String user = uidPW.substring(0, indexOfColon);
-				String pw = uidPW.substring(indexOfColon + 1);
-				if (user.equals(username) && pw.equals(hashedPWString)) {
+				String pwSalt = uidPW.substring(indexOfColon + 1);
+				indexOfColon = pwSalt.indexOf(':');
+				String salt = pwSalt.substring(0, indexOfColon);
+				String hashedPWString = generateHash(String.valueOf(password), salt);
+
+				if (user.equals(username) && pwSalt.equals(hashedPWString)) {
 					result = true;
 				}
 			}
@@ -60,5 +64,30 @@ class Useradmin {
 
 		}
 		return result;
+	}
+
+	private String generateHash(String str, String salt) {
+	  	String hashValue = salt + str;
+		for (int i = 0; i < 4200; i++) {
+			 hashValue = hash(hashValue); 
+		}
+		return salt + ":" + hashValue;
+	}
+
+	private String hash(String str) {
+	 try {
+		byte[] plain = str.getBytes(StandardCharsets.UTF_8);
+		MessageDigest md = MessageDigest.getInstance("SHA-512");
+		md.update(plain);
+		return new BigInteger(1, md.digest()).toString(16);
+      } catch (NoSuchAlgorithmException e) {
+		  throw new UnsupportedOperationException(e);
+	  }
+
+	}
+
+	private String genSalt() {
+    	SecureRandom random = new SecureRandom();
+    	return new BigInteger(32, random).toString(32);
 	}
 }
