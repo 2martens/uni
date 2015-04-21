@@ -40,4 +40,4 @@
 *.xdy
 *.tdo
 *.zip
-~
+build/
