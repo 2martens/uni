@@ -6,8 +6,8 @@ int timesPressedPlus = 0;
 int timesPressedMinus = 0;
 int vergleichswert = 60;
 int rc = 10499;
-boolean increased = false;
-boolean decreased = false;
+bool increased = false;
+bool decreased = false;
 
 void setup() {
   // put your setup code here, to run once:
