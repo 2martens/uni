@@ -60,8 +60,8 @@ void decrement() {
 void TC0_Handler()
 {
   TC_GetStatus(TC0, 0);
-  boolean tasteGedruecktPlus = (digitalRead(buttonPlusPin) == LOW);
-  boolean tasteGedruecktMinus = (digitalRead(buttonMinusPin) == LOW);
+  bool tasteGedruecktPlus = (digitalRead(buttonPlusPin) == LOW);
+  bool tasteGedruecktMinus = (digitalRead(buttonMinusPin) == LOW);
 
   if (tasteGedruecktPlus){
     ++timesPressedPlus;
