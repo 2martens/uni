@@ -12,8 +12,12 @@ int buttonTwoPin = 3;
 int compareValue = 60;
 int rc = 10499;
 
-// this variable is affected by the buttonOne and buttonTwo actions
-int volatile counter = 0;
+// this variables are affected by the buttonOne and buttonTwo actions
+// represents the motor state, can be 0 (clockwise rotation), 1 (anti-clockwise rotation) or 2 (motor stopped)
+int volatile motorState = 0;
+// represents the power of the motor (range from 0 to 100)
+int volatile motorPower = 0;
+bool volatile motorPowerMaxReached = false;
 
 // these values are used by the TC0_Handler
 // do not use them at all
@@ -67,8 +71,11 @@ void loop() {
  * Has to be changed for the specific use case.
  */
 void buttonOneAction() {
-  if (counter < 255) {
-    counter += 1;
+  if (motorState < 2) {
+    motorState += 1;
+  }
+  else {
+    motorState = 0;
   }
 }
 
@@ -78,8 +85,17 @@ void buttonOneAction() {
  * Has to be changed for the specific use case.
  */
 void buttonTwoAction() {
-  if (counter > 0)  {
-    counter -= 1;
+  if (!motorPowerMaxReached && motorPower < 100) {
+    motorPower += 1;
+  }
+  if (motorPowerMaxReached && motorPower > 0) {
+    motorPower -= 1;
+  }
+  if (motorPowerMaxReached && motorPower == 0) {
+    motorPowerMaxReached = false;
+  }
+  if (!motorPowerMaxReached && motorPower == 100) {
+    motorPowerMaxReached = true;
   }
 }
 
