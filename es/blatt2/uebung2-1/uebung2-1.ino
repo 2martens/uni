@@ -2,10 +2,10 @@
 // adjust them when you use other pins
 // hardware pin for the LED
 int ledPin = 7;
-// hardware pin for the plus button
-int buttonPlusPin = 5;
-// hardware pin for the minus button
-int buttonMinusPin = 3;
+// hardware pin for button 1
+int buttonOnePin = 5;
+// hardware pin for button 2
+int buttonTwoPin = 3;
 
 // used to achieve a 1kHz frequency
 // don't touch them
@@ -14,10 +14,12 @@ int rc = 10499;
 
 // these values are used by the TC0_Handler
 // do not write into them within the loop/setup
-// only the counter should be used within the loop
+// only the counter, buttonOnePressed and buttonTwoPressed should be used within the loop
 int volatile counter = 0;
-int timesPressedPlus = 0;
-int timesPressedMinus = 0;
+bool volatile buttonOnePressed = false;
+bool volatile buttonTwoPressed = false;
+int timesPressedOne = 0;
+int timesPressedTwo = 0;
 bool increased = false;
 bool decreased = false;
 
@@ -42,8 +44,8 @@ void setup() {
   TC_Start(TC0, 0);
 
   // Configure button pins for input mode
-  pinMode(buttonPlusPin, INPUT);
-  pinMode(buttonMinusPin, INPUT);
+  pinMode(buttonOnePin, INPUT);
+  pinMode(buttonTwoPin, INPUT);
 
   // initialize serial port
   Serial.begin(9600);
@@ -90,46 +92,46 @@ void TC0_Handler()
   // request static for some magic behind the curtain
   TC_GetStatus(TC0, 0);
   // variables used to determine if the corresponding button is pressed
-  bool buttonPressedPlus = (digitalRead(buttonPlusPin) == LOW);
-  bool buttonPressedMinus = (digitalRead(buttonMinusPin) == LOW);
+  bool buttonPressedOne = (digitalRead(buttonOnePin) == LOW);
+  bool buttonPressedTwo = (digitalRead(buttonTwoPin) == LOW);
 
   // handles the plus button
-  if (buttonPressedPlus){
-    ++timesPressedPlus;
+  if (buttonPressedOne){
+    ++timesPressedOne;
   }
   else {
     if (increased) {
       increased = false;
     }
-    timesPressedPlus = 0 ;
+    timesPressedOne = 0 ;
   }
 
   // handles the minus button
-  if (buttonPressedMinus){
-    ++timesPressedMinus;
+  if (buttonPressedTwo){
+    ++timesPressedTwo;
   }
   else {
     if (decreased) {
       decreased = false;
     }
-    timesPressedMinus = 0 ;
+    timesPressedTwo = 0 ;
   }
 
   // increases counter if button has been pressed long enough
-  if (timesPressedPlus >= compareValue) {
+  if (timesPressedOne >= compareValue) {
     if (!increased) {
       increment();
     }
     increased = true;
-    timesPressedPlus = 0;
+    timesPressedOne = 0;
   }
 
   // decreases counter if button has been pressed long enough
-  if (timesPressedMinus >= compareValue) {
+  if (timesPressedTwo >= compareValue) {
     if (!decreased) {
       decrement();
     }
     decreased = true;
-    timesPressedMinus = 0;
+    timesPressedTwo = 0;
   }
 }
