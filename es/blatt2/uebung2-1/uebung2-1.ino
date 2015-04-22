@@ -12,16 +12,15 @@ int buttonTwoPin = 3;
 int compareValue = 60;
 int rc = 10499;
 
-// these values are used by the TC0_Handler
-// do not write into them within the loop/setup
-// only the counter, buttonOnePressed and buttonTwoPressed should be used within the loop
+// this variable is affected by the buttonOne and buttonTwo actions
 int volatile counter = 0;
-bool volatile buttonOnePressed = false;
-bool volatile buttonTwoPressed = false;
+
+// these values are used by the TC0_Handler
+// do not use them at all
 int timesPressedOne = 0;
 int timesPressedTwo = 0;
-bool increased = false;
-bool decreased = false;
+bool buttonOneActionPerformed = false;
+bool buttonTwoActionPerformed = false;
 
 /**
  * Setup function for initial setup code
@@ -63,22 +62,22 @@ void loop() {
 }
 
 /**
- * Increases the counter by 1.
+ * Performs the action for button one.
  *
- * The highest possible value of the counter is 255.
+ * Has to be changed for the specific use case.
  */
-void increment() {
+void buttonOneAction() {
   if (counter < 255) {
     counter += 1;
   }
 }
 
 /**
- * Decreases the counter by 1.
+ * Performs the action for button two.
  *
- * The lowest possible value of the counter is 0.
+ * Has to be changed for the specific use case.
  */
-void decrement() {
+void buttonTwoAction() {
   if (counter > 0)  {
     counter -= 1;
   }
@@ -97,41 +96,41 @@ void TC0_Handler()
 
   // handles the plus button
   if (buttonPressedOne){
-    ++timesPressedOne;
+    timesPressedOne += 1;
   }
   else {
-    if (increased) {
-      increased = false;
+    if (buttonOneActionPerformed) {
+      buttonOneActionPerformed = false;
     }
     timesPressedOne = 0 ;
   }
 
   // handles the minus button
   if (buttonPressedTwo){
-    ++timesPressedTwo;
+    timesPressedTwo += 1;
   }
   else {
-    if (decreased) {
-      decreased = false;
+    if (buttonTwoActionPerformed) {
+      buttonTwoActionPerformed = false;
     }
     timesPressedTwo = 0 ;
   }
 
-  // increases counter if button has been pressed long enough
+  // performs button one action if button has been pressed long enough
   if (timesPressedOne >= compareValue) {
-    if (!increased) {
-      increment();
+    if (!buttonOneActionPerformed) {
+      buttonOneAction();
     }
-    increased = true;
+    buttonOneActionPerformed = true;
     timesPressedOne = 0;
   }
 
-  // decreases counter if button has been pressed long enough
+  // performs button two action if button has been pressed long enough
   if (timesPressedTwo >= compareValue) {
-    if (!decreased) {
-      decrement();
+    if (!buttonTwoActionPerformed) {
+      buttonTwoAction();
     }
-    decreased = true;
+    buttonTwoActionPerformed = true;
     timesPressedTwo = 0;
   }
 }
