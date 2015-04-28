@@ -2,13 +2,13 @@
 // adjust them when you use other pins
 // hardware pins
 int pwm = 5;
-int cw = 3;
-int ccw = 4;
+int cw = 4;
+int ccw = 3;
 int standby = 2;
 
 // this variables are affected by the buttonOne and buttonTwo actions
 // represents the motor state, can be 0 (clockwise rotation), 1 (counter-clockwise rotation) or 2 (motor stopped)
-int volatile motorState = 2;
+int volatile motorState = 0;
 // represents the power of the motor (range from 0 to 100)
 int volatile motorPower = 0;
 bool volatile motorPowerMaxReached = false;
@@ -18,8 +18,8 @@ bool volatile motorPowerMaxReached = false;
 int compareValue = 60;
 int rc = 10499;
 
-int buttonOnePin = 8;
-int buttonTwoPin = 9;
+int buttonOnePin;
+int buttonTwoPin;
 
 // these values are used by the TC0_Handler
 // do not use them at all
@@ -46,19 +46,18 @@ void setup() {
   NVIC_EnableIRQ(TC0_IRQn);
 
   // start hardware timer
-  TC_Start(TC0, 0);
+  //TC_Start(TC0, 0);
 
   // Configure button pins for input mode
-  pinMode(buttonOnePin, INPUT);
-  pinMode(buttonTwoPin, INPUT);
+  //pinMode(buttonOnePin, INPUT);
+  //pinMode(buttonTwoPin, INPUT);
   
   // configure pins
   pinMode(pwm, OUTPUT);
   pinMode(cw, OUTPUT);
   pinMode(ccw, OUTPUT);
   pinMode(standby, OUTPUT);
-  digitalWrite(standby, LOW);
-  analogWrite(pwm, motorPower);
+  digitalWrite(standby, HIGH);
 
   // initialize serial port
   Serial.begin(9600);
@@ -68,11 +67,42 @@ void setup() {
  * Loop function for main code
  */
 void loop() {
-  Serial.print("buttonTwo: ");
-  Serial.println(motorPower);
-  Serial.print("buttonOne: ");
-  Serial.println(motorState);
+  slowStart();
+  slowStop();
+  turnaround();
 }
+
+void slowStart() {
+  for (int i = 0; i < 255; i++) {
+    analogWrite(pwm, i);
+    motorPower++;
+    delay(20);
+  }
+}
+
+void slowStop() {
+  for (motorPower; motorPower >= 0; motorPower--) {
+    analogWrite(pwm, motorPower);
+    delay(8);
+  }
+}
+
+void turnaround() {
+  switch (motorState) {
+    case 0: 
+      motorState = 1;
+      digitalWrite(cw, false);
+      digitalWrite(ccw, true);
+      break;
+    case 1: 
+      motorState = 0;
+      digitalWrite(cw, true);
+      digitalWrite(ccw, false);
+      break;
+  }
+  
+}
+    
 
 /**
  * Performs the action for button one.
@@ -84,39 +114,7 @@ void buttonOneAction() {
     motorState += 1;
   }
   else {
-    motorPower = 0;
     motorState = 0;
-  }
-  
-  turnaround();  
-}
-
-void turnaround() {
-  int power = motorPower;
-  for (motorPower; motorPower > 0; motorPower--) {
-    analogWrite(pwm, motorPower);
-  }
-  
-  switch (motorState) {
-    case 0:
-      digitalWrite(standby, HIGH);
-      digitalWrite(cw, true);
-      digitalWrite(ccw, false);      
-      break;
-    case 1:
-      digitalWrite(standby, HIGH);
-      digitalWrite(cw, false);
-      digitalWrite(ccw, true);      
-      break;
-    case 2:
-      digitalWrite(standby, LOW);
-      break;
-  }
-  
-  if (motorState < 2) {
-    for (motorPower; motorPower < power; motorPower++) {
-      analogWrite(pwm, motorPower);
-    }
   }
 }
 
@@ -126,7 +124,7 @@ void turnaround() {
  * Has to be changed for the specific use case.
  */
 void buttonTwoAction() {
-  if (!motorPowerMaxReached && motorPower < 254) {
+  if (!motorPowerMaxReached && motorPower < 100) {
     motorPower += 1;
   }
   if (motorPowerMaxReached && motorPower > 0) {
@@ -135,10 +133,9 @@ void buttonTwoAction() {
   if (motorPowerMaxReached && motorPower == 0) {
     motorPowerMaxReached = false;
   }
-  if (!motorPowerMaxReached && motorPower == 254) {
+  if (!motorPowerMaxReached && motorPower == 100) {
     motorPowerMaxReached = true;
   }
-  analogWrite(pwm, motorPower);
 }
 
 /**
