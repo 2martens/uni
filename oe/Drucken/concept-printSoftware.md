@@ -38,6 +38,12 @@ defines multiple builds. Each build is roughly structured like this:
 * numbers for each identifier (how many times the file should be printed)
 * print options for each file (like collate=true, sides=one-sided)
 
+Alternatively a build can contain other builds (chain build). The corresponding
+structure:
+
+* build
+* number of prints
+
 The final command could look like this:
 ./oe-print --printer=d116_sw <build> <number of prints>
 
