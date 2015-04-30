@@ -16,8 +16,9 @@ def main():
     parser.add_argument('prints', metavar='numberOfPrints', type=int, help='how often the build is printed')
     parser.add_argument('--printer', dest='printer', help='a valid printer name like d116_sw', default='d116_sw')
     arguments = parser.parse_args()
-    config = Config()
+    config = Config('config/config.json')
     build_data = config.load_build(arguments.build)
+    print(build_data)
     # TODO add actual functionality
 
 if __name__ == '__main__':
