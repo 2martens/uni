@@ -1,0 +1,12 @@
+{
+  "infodesk": {
+    "files": [
+      {
+        "identifier": "test",
+        "prints": 1,
+        "options": "sides=one-sided"
+      }
+    ],
+    "builds": []
+  }
+}
