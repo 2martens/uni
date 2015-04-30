@@ -12,18 +12,21 @@ class Config:
 
     def load_build(self, build):
         """
-        Loads the data of a particular build
+        Loads the data of a particular build or an empty object if no such build exists
         :type build: str
-        :rtype: object
+        :rtype: dict
         """
-        build_data = self.config_data[build]
+        if build in self.config_data:
+            build_data = self.config_data[build]
+        else:
+            build_data = {}
         return build_data
 
     def load_json_file(self):
         """
         Loads the JSON configuration file
         :type self: config.Config
-        :rtype : object
+        :rtype : dict
         """
         file = open(self.config_file, 'r', encoding='utf-8')
         json_data = json.load(file)
