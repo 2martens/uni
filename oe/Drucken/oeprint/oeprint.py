@@ -1,5 +1,12 @@
 #!/usr/bin/python3
+
+"""oeprint.py: The main file of the print tool"""
+
+__author__ = 'Jim Martens'
+
 import argparse
+
+from config import Config
 
 
 def main():
@@ -9,6 +16,8 @@ def main():
     parser.add_argument('prints', metavar='numberOfPrints', type=int, help='how often the build is printed')
     parser.add_argument('--printer', dest='printer', help='a valid printer name like d116_sw', default='d116_sw')
     arguments = parser.parse_args()
+    config = Config()
+    build_data = config.load_build(arguments.build)
     # TODO add actual functionality
 
 if __name__ == '__main__':
