@@ -21,8 +21,8 @@ class Config:
 
     def load_json_file(self):
         """
-        Loads the JSON config file
-        :type self: oeprint.config.Config
+        Loads the JSON configuration file
+        :type self: config.Config
         :rtype : object
         """
         file = open(self.config_file, 'r', encoding='utf-8')
