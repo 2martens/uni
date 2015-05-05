@@ -6,3 +6,4 @@ Project(es C CXX)
 
 add_subdirectory(blatt1)
 add_subdirectory(blatt2)
+add_subdirectory(blatt3)
