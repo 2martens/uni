@@ -16,7 +16,7 @@ bool volatile motorPowerMaxReached = false;
 // used to achieve a 1kHz frequency
 // don't touch them
 int compareValue = 60;
-int rc = 10499;
+long rc = 10499;
 
 int buttonOnePin = 8;
 int buttonTwoPin = 9;

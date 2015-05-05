@@ -9,7 +9,7 @@ int vref = A0;
 
 // used to achieve a 10 Hz frequency
 // don't touch them
-int rc = 1049999;
+long rc = 1049999;
 
 bool volatile read_ready = false;
 

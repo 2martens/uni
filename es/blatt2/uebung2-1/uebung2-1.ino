@@ -10,7 +10,7 @@ int buttonTwoPin = 3;
 // used to achieve a 1kHz frequency
 // don't touch them
 int compareValue = 60;
-int rc = 10499;
+long rc = 10499;
 
 // this variable is affected by the buttonOne and buttonTwo actions
 int volatile counter = 0;
