@@ -1,4 +1,4 @@
-#include <Servo>
+#include <Servo.h>
 
 // these variables describe the used hardware pins
 // adjust them when you use other pins
@@ -11,6 +11,9 @@ Servo ourServo;
 // used to achieve a 10 Hz frequency
 // don't touch them
 long rc = 1049999;
+
+// borders
+int currentMax = 25;
 
 /**
  * Setup function for initial setup code
@@ -28,19 +31,43 @@ void setup() {
  * Loop function for main code
  */
 void loop() {
-  for (int i = 90; i <= 180; ++i) {
-    ourServo.write(i);
-    delay(10);
+  while (currentMax < 70) {
+    move();
+    Serial.print("currentMax: ");
+    Serial.println(currentMax);
+    if (currentMax < 70) {
+      currentMax += 5;
+    }
   }
+  currentMax = 65;
+  while (currentMax > 20) {
+    move();
+    Serial.print("currentMax: ");
+    Serial.println(currentMax);
+    if (currentMax > 20) {
+      currentMax -= 5;
+    }
+  }
+  currentMax = 25;
   delay(1000);
-  for (int i = 180; i >= 0; --i) {
-    ourServo.write(i);
+}
+
+void move() {
+  int currentPos = 90;
+  int currentMin = 90 - currentMax;
+  for (int i = 0; i <= currentMax; ++i) {
+    ourServo.write(90 + i);
+    currentPos = 90 + i;
     delay(10);
   }
-  delay(1000);
-  for (int i = 0; i <= 90; ++i) {
+  for (int i = currentPos; i >= currentMin; --i) {
     ourServo.write(i);
+    currentPos = i;
     delay(10);
   }
-  delay(2000);
+  for (int i = currentPos; i <= 90; ++i) {
+    ourServo.write(i);
+    currentPos = i;
+    delay(10);
+  }
 }
