@@ -26,9 +26,9 @@ bool volatile read_ready = false;
 /**
  * Validates the new servo position.
  *
- * @param int newServoPos
+ * @param long newServoPos
  */
-int validate_new_servo_pos(int newServoPos) {
+int validate_new_servo_pos(long newServoPos) {
 
     if (newServoPos > 159) {
         newServoPos = 159;
@@ -42,7 +42,9 @@ int validate_new_servo_pos(int newServoPos) {
         lightLED = true;
     }
 
-    return newServoPos;
+    int validatedServoPos = (int) newServoPos;
+
+    return validatedServoPos;
 }
 
 /**
@@ -50,11 +52,13 @@ int validate_new_servo_pos(int newServoPos) {
  *
  * @param char command
  */
-int parse_angle(char* command) {
-    // get position of ( and extract string until position of )
-    char angle[5];
+long parse_angle(char* command) {
+    char* angle;
 
-    return (int) angle;
+    angle = strtok(command, "()");
+    angle = strtok(NULL, "()");
+
+    return strtol(angle, NULL, 10);
 }
 
 /**
@@ -91,7 +95,7 @@ void loop() {
         }
         command[i] = '\0';
 
-        int servoPos = parse_angle(command);
+        long servoPos = parse_angle(command);
         int validatedServoPos = validate_new_servo_pos(servoPos);
 
         ourServo.write(validatedServoPos);
