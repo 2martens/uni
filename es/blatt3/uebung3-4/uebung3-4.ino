@@ -94,7 +94,7 @@ void loop() {
       bool readable = true;
       while (readable) {
         currentChar = Serial.read();
-        readable = (currentChar == -1);
+        readable = (currentChar != -1);
         command[i] = currentChar;
         i++;
       }
