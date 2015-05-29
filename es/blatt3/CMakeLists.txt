@@ -16,3 +16,7 @@ generate_arduino_firmware(uebung3-3
 generate_arduino_firmware(uebung3-4
     SKETCH uebung3-4
     PROGRAMMER usbtinyisp)
+
+generate_arduino_firmware(uebung3-5
+    SKETCH uebung3-5
+    PROGRAMMER usbtinyisp)
