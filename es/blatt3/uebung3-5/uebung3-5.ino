@@ -90,8 +90,10 @@ void loop() {
         while (readable) {
             currentChar = Serial.read();
             readable = (currentChar != -1);
-            command[i] = currentChar;
-            i++;
+            if (readable) {
+                command[i] = currentChar;
+                i++;
+            }
         }
         command[i] = '\0';
 
