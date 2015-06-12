@@ -4,8 +4,8 @@
 int az = 50;
 
 int xout = A1;
-int zout = A3;
-int vref = A0;
+int zout = A2;
+int vref = A3;
 
 // used to achieve a 10 Hz frequency
 // don't touch them
@@ -55,8 +55,8 @@ void loop() {
     double differenceXRef = xAxis - ref;
     double differenceZRef = zAxis - ref;
     
-    double drehrateX = differenceXRef / 9.1;
-    double drehrateZ = differenceZRef / 9.1;
+    double drehrateX = ((differenceXRef * 5000) / 1024) / 9.1;
+    double drehrateZ = ((differenceZRef * 5000) / 1024) / 9.1;
   
     Serial.print("x:");
     Serial.println(xAxis);

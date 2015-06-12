@@ -24,31 +24,7 @@ bool volatile ccwMaxReached = false;
 bool volatile lightLED = false;
 
 bool volatile read_ready = false;
-
-
-/**
- * Calculates the servo position.
- *
- * @param int currentServoPos
- * @param int rotationZ
- */
-int calculate_new_servo_pos(int currentServoPos, int rotationZ) {
-    int newServoPos = currentServoPos + rotationZ;
-
-    if (newServoPos > 159) {
-        newServoPos = 159;
-        cwMaxReached = true;
-        lightLED = true;
-    }
-
-    if (newServoPos < 25) {
-        newServoPos = 25;
-        ccwMaxReached = true;
-        lightLED = true;
-    }
-
-    return newServoPos;
-}
+  
 
 /**
  * Setup function for initial setup code
@@ -88,27 +64,17 @@ void setup() {
  */
 void loop() {
     if (Serial.available() > 0) {
-        char command[8];
-        char currentChar;
-        int i = 0;
-        bool readable = true;
-        while (readable) {
-            currentChar = Serial.read();
-            readable = (currentChar != -1);
-            if (readable) {
-                command[i] = currentChar;
-                i++;
-            }
-        }
-        command[i] = '\0';
-
-        if (strcmp(command, "LED_on") == 0) {
-            digitalWrite(ledPin, HIGH);
-        }
-        else {
-            digitalWrite(ledPin, LOW);
-        }
-        Serial.println(command);
+      String command;
+      command = Serial.readString();
+      String ledOn = "LED_on";
+      String ledOff = "LED_off";
+      
+      if (command == ledOn) {
+        digitalWrite(ledPin, HIGH);
+      }
+      else if (command == ledOff) {
+        digitalWrite(ledPin, LOW);
+      }
     }
 }
 
