@@ -94,9 +94,9 @@ void flushBuffer()
  */
 void resetBuffer()
 {
-    for (int i = 0; i < maxBufferIndex; i++) {
-        screenBuffer[i] = 0x0;
-    }
+  for (int i = 0; i < maxBufferIndex; i++) {
+    screenBuffer[i] = 0x0;
+  }
 }
 
 /**
