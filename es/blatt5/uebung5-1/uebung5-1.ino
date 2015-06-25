@@ -52,6 +52,13 @@ void loop()
     flushBuffer();
     delay(20);
   }
+  for (int y = 0; y < 84; y++) {
+    for (int x = 0; x < 48; x++) {
+      setPixel(x, y, 0);
+    }
+    flushBuffer();
+    delay(20);
+  }
   //flushBuffer();
   //delay(20);
   Serial.println("fertig");
