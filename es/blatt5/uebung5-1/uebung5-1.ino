@@ -37,9 +37,7 @@ void setup()
     digitalWrite(dcPin, HIGH);
     
     // initialize screen buffer
-    for (int i = 0; i < maxBufferIndex; i++) {
-      screenBuffer[i] = 0x0;
-    }
+    resetBuffer();
 }
 
 /**
@@ -60,6 +58,9 @@ void loop()
   
 }
 
+/**
+ * Resets display.
+ */
 void resetDisplay()
 {
   digitalWrite(rstPin, LOW);
@@ -67,11 +68,28 @@ void resetDisplay()
   digitalWrite(rstPin, HIGH);
 }
 
+/**
+ * Writes the screen buffer into the display.
+ *
+ * It does NOT reset the buffer.
+ */
 void flushBuffer()
 {
   for (int i = 0; i < maxBufferIndex; i++) {
     SPI.transfer(slaveSelectPin, screenBuffer[i]);
   }
+}
+
+/**
+ * Resets the buffer.
+ *
+ * Writes 0 in all fields.
+ */
+void resetBuffer()
+{
+    for (int i = 0; i < maxBufferIndex; i++) {
+        screenBuffer[i] = 0x0;
+    }
 }
 
 /**
