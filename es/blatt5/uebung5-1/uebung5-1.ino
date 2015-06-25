@@ -7,10 +7,10 @@ int dcPin = 5;
 
 // constants
 int divider = 84;
-int maxBufferIndex = 288;
+int maxBufferIndex = 504;
 
 // buffer
-char screenBuffer[288];
+char screenBuffer[504];
 
 void setup()
 {
@@ -84,7 +84,7 @@ void setPixel(int x, int y, int value)
 {
   int bank = x / 8;
   int relativeRow = x - bank * 8;
-  int bankStartIndex = bank * 48;
+  int bankStartIndex = bank * 84;
   int index = bankStartIndex + y;
   char bitValue = 0x0;
   
