@@ -5,7 +5,6 @@
 // hardware pins
 int ledPin = 13;
 int analogLevel = 0;
-
 int slaveAddress = 4;
 
 /**
@@ -14,10 +13,16 @@ int slaveAddress = 4;
 void setup() {
     // Configure pins
     Wire.begin();
-    Wire.onReceive(receiveEvent);
-
+    pinMode(ledPin, OUTPUT);
+    digitalWrite(ledPin, LOW);
     // initialize serial port
     Serial.begin(9600);
+}
+
+void writeResult(bool result)
+{
+  Serial.print("Result: ");
+  Serial.println(result ? "on" : "off");
 }
 
 /**
@@ -28,23 +33,21 @@ void loop() {
   Wire.write(1);
   Wire.endTransmission();
   delay(100);
-  Wire.beginTransmission(slaveAddress);
-  Wire.write('r');
-  Wire.endTransmission();
+  Wire.requestFrom(slaveAddress, 1);
+  if (Wire.available()) {
+    int x = Wire.read();
+    writeResult((bool) x);
+  }
   delay(1900);
   Wire.beginTransmission(slaveAddress);
   Wire.write(0);
   Wire.endTransmission();
   delay(100);
-  Wire.beginTransmission(slaveAddress);
-  Wire.write('r');
-  Wire.endTransmission();
+  Wire.requestFrom(slaveAddress, 1);
+  if (Wire.available()) {
+    int x = Wire.read();
+    writeResult((bool) x);
+  }
   delay(1900);
 }
 
-void receiveEvent(int readBytes)
-{
-  int x = Wire.read();
-  Serial.print("Result: ");
-  Serial.println(x ? "on" : "off");
-}
