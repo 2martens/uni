@@ -125,27 +125,5 @@ void setPixel(int x, int y, int value)
   
   char finalExistingValue = existingValue & invMask;
   char finalValue = finalExistingValue | newValue;
-
-  Serial.print("bank:");
-  Serial.println(bank);
-  Serial.print("relRow:");
-  Serial.println(relativeRow);  
-  Serial.print("index:");
-  Serial.println(index);
-  Serial.print("value:");
-  Serial.println(value);
-  Serial.print("existingValue:");
-  Serial.println(existingValue, BIN);
-  Serial.print("finalExistingValue:");
-  Serial.println(finalExistingValue, BIN);
-  Serial.print("pixelMask:");
-  Serial.println(pixelMask, BIN);
-  Serial.print("invMask:");
-  Serial.println(invMask, BIN);
-  Serial.print("newValue:");
-  Serial.println(newValue, BIN);
-  Serial.print("finalValue:");
-  Serial.println(finalValue, BIN);
-  Serial.println("-----");
   screenBuffer[index] = finalValue;
 }

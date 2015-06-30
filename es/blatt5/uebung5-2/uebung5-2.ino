@@ -197,6 +197,13 @@ void setPixel(int x, int y, int value)
   int index = bankStartIndex + y;
   char bitValue = 0x0;
   
+  Serial.print("x:");
+  Serial.println(x);
+  Serial.print("y:");
+  Serial.println(y);
+  Serial.print("value:");
+  Serial.println(value);
+  
   if (value == 1) {
     bitValue = 0xff;
   }
@@ -237,8 +244,13 @@ int printChar(int x, int y, char value)
     char data = font[arrayIndex][i];
     for (int _x = 0; _x < 8; _x++) {
       char bitmask = 1 << _x;
-      int pixel = bitmask & data;
-      setPixel(x + _x, y + i, pixel);
+      bitmask = 0x0 | bitmask;
+      char pixel = bitmask & data;
+      int pixelInt = 0;
+      if (pixel != 0x0) {
+        pixelInt = 1;
+      }
+      setPixel(x + _x, y + i, pixelInt);
     }
   }
 

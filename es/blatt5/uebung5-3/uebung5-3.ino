@@ -164,6 +164,37 @@ void loop()
   printChar(29, 51, '2');
   printChar(29, 57, '3');
   flushBuffer();
+  resetBuffer();
+  delay(5000);
+  // write his data
+  printChar(9, 21, 'J');
+  printChar(9, 27, 'o');
+  printChar(9, 33, 'a');
+  printChar(9, 39, 'c');
+  printChar(9, 45, 'h');
+  printChar(9, 51, 'i');
+  printChar(9, 57, 'm');
+  printChar(19, 6, 'S');
+  printChar(19, 12, 'c');
+  printChar(19, 18, 'h');
+  printChar(19, 24, 'm');
+  printChar(19, 30, 'i');
+  printChar(19, 36, 'd');
+  printChar(19, 42, 'b');
+  printChar(19, 48, 'e');
+  printChar(19, 54, 'r');
+  printChar(19, 60, 'g');
+  printChar(19, 66, 'e');
+  printChar(19, 72, 'r');
+  printChar(29, 21, '6');
+  printChar(29, 27, '5');
+  printChar(29, 33, '3');
+  printChar(29, 39, '6');
+  printChar(29, 45, '4');
+  printChar(29, 51, '9');
+  printChar(29, 57, '6');
+  flushBuffer();
+  resetBuffer();
   delay(5000);
 }
 
@@ -255,10 +286,20 @@ int printChar(int x, int y, char value)
     char data = font[arrayIndex][i];
     for (int _x = 0; _x < 8; _x++) {
       char bitmask = 1 << _x;
-      int pixel = bitmask & data;
-      setPixel(x + _x, y + i, pixel);
+      bitmask = 0x0 | bitmask;
+      char pixel = bitmask & data;
+      int pixelInt = 0;
+      if (pixel != 0x0) {
+        pixelInt = 1;
+      }
+      setPixel(x + _x, y + i, pixelInt);
     }
   }
 
   return 0;
+}
+
+void printString(int x, int y, String text)
+{
+  
 }
