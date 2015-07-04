@@ -117,7 +117,7 @@ void setup()
 {
     Serial.begin(9600);
     
-    // intialize SPI
+    // initialize SPI
     SPI.begin(slaveSelectPin);
     SPI.setClockDivider(slaveSelectPin, divider);
     
