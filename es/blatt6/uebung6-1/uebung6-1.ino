@@ -146,53 +146,16 @@ void setup()
 void loop()
 {
   // write my data
-  printChar(9, 33, 'J');
-  printChar(9, 39, 'i');
-  printChar(9, 45, 'm');
-  printChar(19, 21, 'M');
-  printChar(19, 27, 'a');
-  printChar(19, 33, 'r');
-  printChar(19, 39, 't');
-  printChar(19, 45, 'e');
-  printChar(19, 51, 'n');
-  printChar(19, 57, 's');
-  printChar(29, 21, '6');
-  printChar(29, 27, '4');
-  printChar(29, 33, '2');
-  printChar(29, 39, '0');
-  printChar(29, 45, '3');
-  printChar(29, 51, '2');
-  printChar(29, 57, '3');
+  printString(9, 33, "Jim");
+  printString(19, 21, "Martens");
+  printString(29, 21, "6420323");
   flushBuffer();
   resetBuffer();
   delay(5000);
   // write his data
-  printChar(9, 21, 'J');
-  printChar(9, 27, 'o');
-  printChar(9, 33, 'a');
-  printChar(9, 39, 'c');
-  printChar(9, 45, 'h');
-  printChar(9, 51, 'i');
-  printChar(9, 57, 'm');
-  printChar(19, 6, 'S');
-  printChar(19, 12, 'c');
-  printChar(19, 18, 'h');
-  printChar(19, 24, 'm');
-  printChar(19, 30, 'i');
-  printChar(19, 36, 'd');
-  printChar(19, 42, 'b');
-  printChar(19, 48, 'e');
-  printChar(19, 54, 'r');
-  printChar(19, 60, 'g');
-  printChar(19, 66, 'e');
-  printChar(19, 72, 'r');
-  printChar(29, 21, '6');
-  printChar(29, 27, '5');
-  printChar(29, 33, '3');
-  printChar(29, 39, '6');
-  printChar(29, 45, '4');
-  printChar(29, 51, '9');
-  printChar(29, 57, '6');
+  printString(9, 21, "Joachim");
+  printString(19, 6, "Schmidberger");
+  printString(29, 21, "6536496");
   flushBuffer();
   resetBuffer();
   delay(5000);
@@ -297,7 +260,47 @@ int printChar(int x, int y, char value)
   return 0;
 }
 
-void printString(int x, int y, String text)
+/**
+ * Prints a string.
+ *
+ * @param int x
+ * @param int y
+ * @param char* text
+ * @param int textLength
+ */
+int printString(int x, int y, const char* text, int textLength)
 {
-  
+  // guardians
+  if (x > 40 || y > 78) {
+    // absolute guardian
+    return -1;
+  }
+
+  int actualY = y;
+  int actualX = x;
+  bool writeError = false;
+  for (int i = 0; i < textLength; i++) {
+    char character = text[i];
+    actualY++;
+    // write dash
+    if (actualY > 72) {
+      printChar(actualX, actualY, '-');
+      actualX += 10;
+      actualY = y;
+    }
+
+    int result = printChar(actualX, actualY, character);
+    if (!result) {
+      // the character would be out of the display x bounds
+      writeError = true;
+      break;
+    }
+  }
+
+  if (writeError) {
+    resetBuffer();
+    printString(3, 20, "Too long text", 13);
+  }
+
+  return 0;
 }
