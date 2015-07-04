@@ -252,7 +252,6 @@ void setPixel(int x, int y, int value)
   
   char existingValue = screenBuffer[index];
   char pixelMask = 1 << relativeRow;
-  pixelMask = 0x0 | pixelMask;
   char invMask = ~ pixelMask;
   char newValue = pixelMask & bitValue;
   
@@ -286,7 +285,6 @@ int printChar(int x, int y, char value)
     char data = font[arrayIndex][i];
     for (int _x = 0; _x < 8; _x++) {
       char bitmask = 1 << _x;
-      bitmask = 0x0 | bitmask;
       char pixel = bitmask & data;
       int pixelInt = 0;
       if (pixel != 0x0) {
