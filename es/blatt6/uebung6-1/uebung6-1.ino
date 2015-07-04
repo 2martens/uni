@@ -113,6 +113,9 @@ unsigned char font[95][6] =
         { 0x10, 0x08, 0x08, 0x10, 0x08, 0x00 } // ~
     };
 
+// tmp vars
+int readStringLength = 0;
+
 void setup()
 {
     Serial.begin(9600);
@@ -147,16 +150,16 @@ void setup()
 void loop()
 {
   // write my data
-  printString(9, 33, "Jim");
-  printString(19, 21, "Martens");
-  printString(29, 21, "6420323");
+  printString(9, 33, "Jim", 3);
+  printString(19, 21, "Martens", 7);
+  printString(29, 21, "6420323", 7);
   flushBuffer();
   resetBuffer();
   delay(5000);
   // write his data
-  printString(9, 21, "Joachim");
-  printString(19, 6, "Schmidberger");
-  printString(29, 21, "6536496");
+  printString(9, 21, "Joachim", 7);
+  printString(19, 6, "Schmidberger", 12);
+  printString(29, 21, "6536496", 7);
   flushBuffer();
   resetBuffer();
   delay(5000);
@@ -330,6 +333,8 @@ const char* readString(File file)
       }
     }
 
+    readStringLength = i;
+
     return result;
   }
   else {
@@ -370,5 +375,29 @@ void handleCommand(String command)
 
   if (command2 == showCommand) {
     showFile(parameter);
+  }
+}
+
+/**
+ * Shows the given file.
+ *
+ * @param String fileName
+ */
+void showFile(String fileName)
+{
+  bool isTextFile = false;
+  int extPos = fileName.indexOf('.');
+  String ext = fileName.substring(extPos + 1);
+  isTextFile = (ext == "txt");
+
+  if (SD.exists(fileName)) {
+    File file = SD.open(fileName);
+    if (isTextFile) {
+      const char* text = readString(file);
+      printString(0, 0, text, readStringLength);
+    }
+    else {
+      // TODO handle image file
+    }
   }
 }
