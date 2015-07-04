@@ -337,3 +337,38 @@ const char* readString(File file)
     return "";
   }
 }
+
+/**
+ * Handles the command.
+ *
+ * @param String command
+ */
+void handleCommand(String command)
+{
+  String existCommand = "doesFileExist";
+  String showCommand = "showFile";
+
+  // determine command and parameter
+  int indexP1 = command.indexOf('(');
+  int indexP2 = command.indexOf(')');
+  String command2 = command;
+  command2.remove(indexP1);
+
+  if (command2 != existCommand && command2 != showCommand) {
+    Serial.println("Use doesFileExist(<file>) or showFile(<file>)");
+    return;
+  }
+
+  command.remove(indexP2);
+  String parameter = command.substring(indexP1 + 1);
+
+  if (command2 == existCommand) {
+    bool fileExists = SD.exists(parameter);
+    Serial.print("Does file exist? ");
+    Serial.println(fileExists ? "Yes" : "No");
+  }
+
+  if (command2 == showCommand) {
+    showFile(parameter);
+  }
+}
