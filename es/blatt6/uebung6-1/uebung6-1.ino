@@ -1,4 +1,5 @@
 #include <SPI.h>
+#include <SD.h>
 
 // pins
 int slaveSelectPin = 10;
@@ -303,4 +304,36 @@ int printString(int x, int y, const char* text, int textLength)
   }
 
   return 0;
+}
+
+/**
+ * Reads the contents of a text file into a string.
+ *
+ * Returns an empty string on failure.
+ *
+ * @param File file
+ */
+const char* readString(File file)
+{
+  if (file) {
+    unsigned long fileSize = file.size();
+    char result[fileSize];
+    int i = 0;
+    while (file.available()) {
+      char c = file.read();
+      if (c != '\n') {
+        result[i] = c;
+        i++;
+      }
+      else {
+        result[i] = '\0';
+      }
+    }
+
+    return result;
+  }
+  else {
+    // something happened
+    return "";
+  }
 }
