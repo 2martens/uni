@@ -3,6 +3,7 @@
 
 // pins
 int slaveSelectPin = 10;
+int SDslaveSelectPin = 4;
 int rstPin = 6;
 int dcPin = 5;
 
@@ -118,30 +119,33 @@ int readStringLength = 0;
 
 void setup()
 {
-    Serial.begin(9600);
-    
-    // initialize SPI
-    SPI.begin(slaveSelectPin);
-    SPI.setClockDivider(slaveSelectPin, divider);
-    
-    // initialize pins
-    pinMode(dcPin, OUTPUT);
-    pinMode(rstPin, OUTPUT);
-    
-    // initial reset of display
-    resetDisplay();
-    
-    // initialization of display
-    digitalWrite(dcPin, LOW);
-    SPI.transfer(slaveSelectPin, 0x21);
-    SPI.transfer(slaveSelectPin, 0x14);
-    SPI.transfer(slaveSelectPin, 0xb0);
-    SPI.transfer(slaveSelectPin, 0x20);
-    SPI.transfer(slaveSelectPin, 0x0c);
-    digitalWrite(dcPin, HIGH);
-    
-    // initialize screen buffer
-    resetBuffer();
+  Serial.begin(9600);
+
+  // initialize SPI
+  SPI.begin(slaveSelectPin);
+  SPI.setClockDivider(slaveSelectPin, divider);
+
+  // initialize SD
+  SD.begin(SDslaveSelectPin);
+
+  // initialize pins
+  pinMode(dcPin, OUTPUT);
+  pinMode(rstPin, OUTPUT);
+
+  // initial reset of display
+  resetDisplay();
+
+  // initialization of display
+  digitalWrite(dcPin, LOW);
+  SPI.transfer(slaveSelectPin, 0x21);
+  SPI.transfer(slaveSelectPin, 0x14);
+  SPI.transfer(slaveSelectPin, 0xb0);
+  SPI.transfer(slaveSelectPin, 0x20);
+  SPI.transfer(slaveSelectPin, 0x0c);
+  digitalWrite(dcPin, HIGH);
+
+  // initialize screen buffer
+resetBuffer();
 }
 
 /**
