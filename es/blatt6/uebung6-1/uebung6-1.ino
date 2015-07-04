@@ -145,7 +145,7 @@ void setup()
   digitalWrite(dcPin, HIGH);
 
   // initialize screen buffer
-resetBuffer();
+  resetBuffer();
 }
 
 /**
