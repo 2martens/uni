@@ -361,6 +361,7 @@ const char* readString(File file)
       }
       else {
         result[i] = '\0';
+        break; // allows for multiple calls of the method for iterative reading
       }
     }
 
@@ -372,6 +373,21 @@ const char* readString(File file)
     // something happened
     return "";
   }
+}
+
+/**
+ * Explodes the string into an integer array.
+ *
+ * @param const int* input
+ * @param int length
+ */
+const int* explodeString(const char* input, int length)
+{
+  int result[length] = {};
+
+  // TODO do some magic
+
+  return result;
 }
 
 /**
@@ -428,7 +444,24 @@ void showFile(String fileName)
       printString(0, 0, text, readStringLength);
     }
     else {
-      // TODO handle image file
+      const char* dimensions = readString(file);
+      int dimensionsLength = readStringLength;
+      const char* pixels = readString(file);
+      int pixelsLength = readStringLength;
+
+      // parse dimensions and pixels
+      // TODO is there some kind of explode? - that is exactly what we need
+      const int* dimensionsInt = explodeString(dimensions, dimensionsLength);
+      const int* pixelsInt = explodeString(pixels, pixelsLength);
+      // calculate x and y start positions
+      int rows = dimensionsInt[0];
+      int cols = dimensionsInt[1];
+      int x = (48 - rows) / 2;
+      int y = (84 - cols) / 2;
+
+      printImage(x, y, rows, cols, pixelsInt);
     }
+
+    // TODO Closing the file?
   }
 }
