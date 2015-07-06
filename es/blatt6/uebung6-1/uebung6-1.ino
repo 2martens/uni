@@ -314,6 +314,33 @@ int printString(int x, int y, const char* text, int textLength)
 }
 
 /**
+ * Prints an image with given parameters.
+ *
+ * @param int x
+ * @param int y
+ * @param int rows
+ * @param int cols
+ * @param const int* pixels
+ */
+void printImage(int x, int y, int rows, int cols, const int* pixels)
+{
+  int currentX = x;
+  int currentY = y;
+  int maxIndex = rows * cols;
+
+  for (int i = 0; i < maxIndex; i++) {
+    if (currentY == cols) {
+      currentX++;
+      currentY = y;
+    }
+
+    int pixel = pixels[i];
+    setPixel(currentX, currentY, pixel);
+    currentY++;
+  }
+}
+
+/**
  * Reads the contents of a text file into a string.
  *
  * Returns an empty string on failure.
