@@ -462,6 +462,6 @@ void showFile(String fileName)
       printImage(x, y, rows, cols, pixelsInt);
     }
 
-    // TODO Closing the file?
+    file.close();
   }
 }
