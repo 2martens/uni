@@ -352,20 +352,10 @@ const char* readString(File file)
   if (file) {
     unsigned long fileSize = file.size();
     char result[fileSize];
-    int i = 0;
-    while (file.available()) {
-      char c = file.read();
-      if (c != '\n') {
-        result[i] = c;
-        i++;
-      }
-      else {
-        result[i] = '\0';
-        break; // allows for multiple calls of the method for iterative reading
-      }
-    }
+    int readBytes = file.readBytesUntil('\n', result, fileSize);
+    result[readBytes] = '\0';
 
-    readStringLength = i;
+    readStringLength = readBytes + 1;
 
     return result;
   }
@@ -380,12 +370,30 @@ const char* readString(File file)
  *
  * @param const int* input
  * @param int length
+ * @param char delimeter
  */
-const int* explodeString(const char* input, int length)
+const int* explodeString(const char* input, int length, char delimeter)
 {
   int result[length] = {};
+  char tmp[length] = {};
+  int nthChar = 0;
+  int nthInt = 0;
 
-  // TODO do some magic
+  for (int i = 0; i < length; i++) {
+    char currentChar = input[i];
+    if (currentChar != delimeter) {
+      tmp[nthChar] = input[i];
+      nthChar++;
+    }
+    else {
+      char *end;
+      tmp[nthChar] = '\0';
+      result[nthInt] = (int) strtol(tmp, &end, 10);
+      nthChar = 0;
+      memset(&tmp[0], 0, sizeof(tmp));
+      nthInt++;
+    }
+  }
 
   return result;
 }
@@ -450,9 +458,8 @@ void showFile(String fileName)
       int pixelsLength = readStringLength;
 
       // parse dimensions and pixels
-      // TODO is there some kind of explode? - that is exactly what we need
-      const int* dimensionsInt = explodeString(dimensions, dimensionsLength);
-      const int* pixelsInt = explodeString(pixels, pixelsLength);
+      const int* dimensionsInt = explodeString(dimensions, dimensionsLength, ',');
+      const int* pixelsInt = explodeString(pixels, pixelsLength, ',');
       // calculate x and y start positions
       int rows = dimensionsInt[0];
       int cols = dimensionsInt[1];
