@@ -153,20 +153,13 @@ void setup()
  */
 void loop()
 {
-  // write my data
-  printString(9, 33, "Jim", 3);
-  printString(19, 21, "Martens", 7);
-  printString(29, 21, "6420323", 7);
-  flushBuffer();
-  resetBuffer();
-  delay(5000);
-  // write his data
-  printString(9, 21, "Joachim", 7);
-  printString(19, 6, "Schmidberger", 12);
-  printString(29, 21, "6536496", 7);
-  flushBuffer();
-  resetBuffer();
-  delay(5000);
+  if (Serial.available() > 0) {
+    String command = Serial.readString();
+    resetBuffer();
+    handleCommand(command);
+    flushBuffer();
+    delay(500);
+  }
 }
 
 /**
@@ -289,16 +282,21 @@ int printString(int x, int y, const char* text, int textLength)
   bool writeError = false;
   for (int i = 0; i < textLength; i++) {
     char character = text[i];
-    actualY++;
+    int result = 0;
+    
     // write dash
-    if (actualY > 72) {
+    if ((actualY + 6) > 72) {
       printChar(actualX, actualY, '-');
       actualX += 10;
       actualY = y;
+      result = printChar(actualX, actualY, character);
     }
-
-    int result = printChar(actualX, actualY, character);
-    if (!result) {
+    else {
+      result = printChar(actualX, actualY, character);
+    }
+    actualY += 6;
+    
+    if (result != 0) {
       // the character would be out of the display x bounds
       writeError = true;
       break;
@@ -306,8 +304,9 @@ int printString(int x, int y, const char* text, int textLength)
   }
 
   if (writeError) {
+    return 0;
     resetBuffer();
-    printString(3, 20, "Too long text", 13);
+    printString(3, 20, "Too long", 8);
   }
 
   return 0;
@@ -329,7 +328,7 @@ void printImage(int x, int y, int rows, int cols, const int* pixels)
   int maxIndex = rows * cols;
 
   for (int i = 0; i < maxIndex; i++) {
-    if (currentY == cols) {
+    if (currentY == (y + cols)) {
       currentX++;
       currentY = y;
     }
@@ -343,25 +342,16 @@ void printImage(int x, int y, int rows, int cols, const int* pixels)
 /**
  * Reads the contents of a text file into a string.
  *
- * Returns an empty string on failure.
- *
  * @param File file
+ * @param char* text
  */
-const char* readString(File file)
+void readString(File file, char* text, unsigned long fileSize)
 {
   if (file) {
-    unsigned long fileSize = file.size();
-    char result[fileSize];
-    int readBytes = file.readBytesUntil('\n', result, fileSize);
-    result[readBytes] = '\0';
+    int readBytes = file.readBytesUntil('\n', text, fileSize);
+    text[readBytes] = '\0';
 
-    readStringLength = readBytes + 1;
-
-    return result;
-  }
-  else {
-    // something happened
-    return "";
+    readStringLength = readBytes;
   }
 }
 
@@ -371,18 +361,18 @@ const char* readString(File file)
  * @param const int* input
  * @param int length
  * @param char delimeter
+ * @param int* result
  */
-const int* explodeString(const char* input, int length, char delimeter)
+void explodeString(const char* input, int length, char delimeter, int* result)
 {
-  int result[length] = {};
-  char tmp[length] = {};
+  char tmp[length];
   int nthChar = 0;
   int nthInt = 0;
 
   for (int i = 0; i < length; i++) {
     char currentChar = input[i];
     if (currentChar != delimeter) {
-      tmp[nthChar] = input[i];
+      tmp[nthChar] = currentChar;
       nthChar++;
     }
     else {
@@ -390,12 +380,17 @@ const int* explodeString(const char* input, int length, char delimeter)
       tmp[nthChar] = '\0';
       result[nthInt] = (int) strtol(tmp, &end, 10);
       nthChar = 0;
-      memset(&tmp[0], 0, sizeof(tmp));
+      memset(&tmp[0], 0, length);
       nthInt++;
     }
   }
-
-  return result;
+  
+  char *end;
+  tmp[nthChar] = '\0';
+  result[nthInt] = (int) strtol(tmp, &end, 10);
+  nthChar = 0;
+  memset(&tmp[0], 0, length);
+  nthInt++;
 }
 
 /**
@@ -413,7 +408,7 @@ void handleCommand(String command)
   int indexP2 = command.indexOf(')');
   String command2 = command;
   command2.remove(indexP1);
-
+  
   if (command2 != existCommand && command2 != showCommand) {
     Serial.println("Use doesFileExist(<file>) or showFile(<file>)");
     return;
@@ -421,9 +416,12 @@ void handleCommand(String command)
 
   command.remove(indexP2);
   String parameter = command.substring(indexP1 + 1);
+  char paramChar[parameter.length() + 1];
+  parameter.toCharArray(paramChar, parameter.length() + 1);
+  paramChar[parameter.length()] = '\0';
 
   if (command2 == existCommand) {
-    bool fileExists = SD.exists(parameter);
+    bool fileExists = SD.exists(paramChar);
     Serial.print("Does file exist? ");
     Serial.println(fileExists ? "Yes" : "No");
   }
@@ -444,27 +442,42 @@ void showFile(String fileName)
   int extPos = fileName.indexOf('.');
   String ext = fileName.substring(extPos + 1);
   isTextFile = (ext == "txt");
+  char fileNameChar[fileName.length() + 1];
+  fileName.toCharArray(fileNameChar, fileName.length() + 1);
+  fileNameChar[fileName.length()] = '\0';
 
-  if (SD.exists(fileName)) {
-    File file = SD.open(fileName);
+  if (SD.exists(fileNameChar)) {
+    File file = SD.open(fileNameChar);
+    unsigned long fileSize = file.size();
     if (isTextFile) {
-      const char* text = readString(file);
+      char text[fileSize];
+      readString(file, text, fileSize);
+      Serial.println(text);
       printString(0, 0, text, readStringLength);
     }
     else {
-      const char* dimensions = readString(file);
+      char dimensions[fileSize];
+      readString(file, dimensions, fileSize);
       int dimensionsLength = readStringLength;
-      const char* pixels = readString(file);
+      char pixels[fileSize];
+      readString(file, pixels, fileSize);
       int pixelsLength = readStringLength;
 
       // parse dimensions and pixels
-      const int* dimensionsInt = explodeString(dimensions, dimensionsLength, ',');
-      const int* pixelsInt = explodeString(pixels, pixelsLength, ',');
+      int dimensionsInt[2];
+      explodeString(dimensions, dimensionsLength, ',', dimensionsInt);
+      int pixelsInt[pixelsLength];
+      explodeString(pixels, pixelsLength, ',', pixelsInt);
       // calculate x and y start positions
       int rows = dimensionsInt[0];
       int cols = dimensionsInt[1];
       int x = (48 - rows) / 2;
       int y = (84 - cols) / 2;
+      
+      Serial.println(x);
+      Serial.println(y);
+      Serial.println(rows);
+      Serial.println(cols);
 
       printImage(x, y, rows, cols, pixelsInt);
     }
