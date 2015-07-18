@@ -101,7 +101,7 @@ folgende Eigenschaften aufweisen (Wunschliste):
 * Support für Anwendungsdomain
 * Lesbarkeit
 * Portabilität und Flexibilität
-* Termination - feasible to identify processed which will terminate from the specification
+* Termination - feasible to identify processes which will terminate from the specification
 * Support für ¬Standard I/O-Devices
 * ¬funktionale Eigenschaften
 * Support für Design von verlässlichen (dependable) Systemen
@@ -196,7 +196,7 @@ application areas:
 * low volume applications
 * realtime systems
 
-## Memories
+### Memories
 * großer Geschwindigkeitsunterschied zw. Prozessoren und Memories
 * kleinere Memories wichtig, da sie schnellere Zugriffszeiten bieten
 * mehrere kleine Speicher für häufig genutzte Instruktionen und Daten plus ein größerer Speicher für restliche Daten und Instruktionen bieten i.A. höhere Energieeffizienz
