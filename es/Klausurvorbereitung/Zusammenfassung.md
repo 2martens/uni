@@ -134,10 +134,28 @@ Kombinierte Modelle: Tatsächliche Sprachen kombinieren normalerweise ein Kommun
 
 Beispiele:
 * StateChart - kombiniert endliche Automaten mit shared memory
-* SDL - kombiniert asynchrones message passing with endlichen Automaten
+* SDL - kombiniert asynchrones message passing mit endlichen Automaten
 * ADA, CSP - kombinieren von-Neumann mit synchronem message passing
 
 Figure 2.7 page 34
+
+## Diskrete Event-basierte Sprachen
+
+### VHDL
+* kann in die 1980er Jahre zurückverfolgt werden
+* im VHSIC Programm entwickelt (vom DoD)
+* VHSIC hardware description language
+* IEEE standard
+
+Elemente:
+* Entitäten
+* Architekturen
+
+definieren von Verhalten und Struktur
+
+### SystemC
+
+* erlaubt Spezifikation von Hardwarestrukturen in Software
 
 # Hardware
 
@@ -165,6 +183,11 @@ Diskretisierung von Werten: A/D Konverter
 ** large number of comparators
 ** each comparator has two inputs (+ and -)
 ** if voltage at + larger than at - -> logical 1, otherwise logical 0
+** first comparator returns 1, if h(t) exceeds 3/4 Vref
+** second returns 1, for h(t) > 2/4 Vref
+** third returns 1, for h(t) > 1/4 Vref
+** encoder tries to identify most significant '1'
+* successive appriximation
 
 ## Processing Units
 
@@ -183,7 +206,7 @@ Diskretisierung von Werten: A/D Konverter
 ** power saving states (idle and sleep)
 ** changes between states
 * Dynamic voltage scaling
-** reduced voltage means significantly less power consumption
+** decreasing supply voltage reduces power quadratically
 ** only linear increase of runtime of algorithms
 * Code-size efficiency
 ** CISC machines (Complex Instruction Set Processors)
@@ -221,4 +244,159 @@ application areas:
 * Datenschutz
 
 ### Elektrische Robustheit
+
+* single-ended signaling
+** single ground wire
+** affected by external noise
+** difficult to establish high-quality ground signals
+* differential signaling
+** two wires for data transport
+** noise can be effectively removed
+** logic value only depends on polarity of voltage between two wires, magnitude can be affected without effect
+** quality of ground wire unimportant
+** no common ground wire required
+** larger throughput than single-ended signaling
+** used in standard Ethernet-based networks
+
+### Echtzeitverhalten garantieren
+
+* Nutzung von time division multiple access (TDMA)
+* jeder Kommunikationspartner bekommt festen Zeitslot
+* innerhalb dieses Slots darf gesendet werden
+* Zeit wird in Frames unterteilt
+* jedes Frame startet mit Synchronisierung und einem Gap, um dem Sender das ausschalten zu ermöglichen 
+
+carrier-sense multiple access/collision detect (CSMA/CD)
+* wenn mehrere Partner zur gleichen Zeit kommunizieren, wird für jeden eine zufällige Wartezeit bestimmt
+* sehr unwahrscheinlich, dass sich Szenario nach Wartezeit wiederholt
+* kann nicht für ES benutzt werden, da Laufzeit nicht bestimmt werden kann
+
+carrier-sense multiple access/collision avoidance (CSMA/CA)
+* jeder Partner bekommt Priorität zugewiesen
+* dies geschieht in Verhandlungsphasen
+* wenn Partner einen Partner mit höherer Priorität erkennt, muss Ersterer seine NUtzungsabsicht sofort zurückziehen
+* daher vorhersehbare Laufzeit für Partner mit höchster Priorität
+* für andere auch, wenn Partner mit höchster Prio nicht dauerhaft Zugang verlangt
+* Ethernet mit über 1GBit vermeidet ebenfalls Kollisionen
+
+### Beispiele
+
+* Sensor/actuator buses
+* field buses
+** Controler Area Network
+** Time-Triggered-Protocol (TTP)
+** FlexRay
+** LIN
+** MAP
+** EIB
+* Kabelgebundene Multimedia-Kommunikation
+* drahtlose Kommunikation
+
+## Output
+
+* Displays
+* Elektromechanische Geräte
+
+* analog input zu analog output:
+AA -> Sample & hold -> A/D conv. -> Verarbeitung -> D/A conv. -> filter
+
+### D/A Konverter
+
+* wandeln digital in analog um
+* benutzen Kirchhoffs Regeln
+
+### Sampling theorem
+
+* mithilfe der Shannon-Wittaker interpolation kann das ursprüngliche analoge Signal approximiert werden
+* ebenso wird die Fourier Transformation benutzt
+* ansonsten sehr viel Mathe
+
+# System Software
+
+## Embedded Operating Systems
+
+### Allgemeine Bedingungen
+
+* muss flexibel für Anwendungsbereich angepasst werden können
+* Konfigurabilität (configurability)
+** OO
+** Aspect-oriented Programming
+** konditioniertes Kompilieren
+** fortgeschrittene Kompilierzeit Evaluation
+** Linker-basiertes Entfernen von nicht genutzten Funktionen
+* Treiber sind vom OS getrennt
+* keine Schutzmechanismen (wie privilegierter Zugang) notwendig, da ungetestete Software nicht geladen wird
+* interrupts können mit jedem Prozess verbunden werden
+* viele ES sind Echtzeitsysteme und daher muss deren OS ein RTOS sein
+
+### Echtzeit OS
+
+* Zeitverhalten des OS muss vorhersagbar sein
+* OS muss das Scheduling der Tasks managen
+* einige Systeme erfordern Zeitmanagement durch das OS
+* OS muss schnell sein
+
+vorhandene RTOS können in drei Kategorien eingeteilt werden:
+* schnelle proprietäre Kernel
+* Echtzeiterweiterungen zu Standard-OS
+* Forschungssysteme
+
+Kernunterschied zu Standard OS:
+* es wird für den Worst Case optimiert
+
+### Resources access protocols
+
+#### Priority Inversion
+
+* Prozess mit geringerer Priorität blockt Prozess mit höherer Priorität
+
+#### Priority Inheritance
+* T1 hat Prio 1
+* T2 hat Prio 2
+* T3 hat Prio 3
+
+* T2 verlangt Zugang zu S
+* T1 verlangt Zugang zu S - wird blockiert
+* T2 erbt Prio von T1
+
+## Hardware abstraction layers
+
+* accessing hardware through hardware-independent API
+
+## Middleware
+
+* add communication functionality on top of OS
+
+### OSEK
+
+* für Autobranche benutzt
+
+### Corba (Common Object Request Broker Architecture)
+
+* standardisierter Zugriff auf Remote-Objekte
+* standardmäßig nicht für RTOS geeignet
+* separater Standard RT-CORBA für RTOS definiert
+
+### MPI (Message passing interface)
+
+* Alternative zu CORBA
+* Kommunikation zwischen Prozessoren
+
+### POSIX Threads (Pthreads)
+
+* API für Threads auf der OS-Ebene
+
+### OpenMP
+
+* explizite Parallelität
+* implizite Kommunikation, Synchronisation, etc.
+
+### UPnP, DPWS, JXTA
+
+* Universal Plug-and-Play
+** Erweiterung von PnP für Netzwerke
+* Devices Profile for Web Services (DPWS) allgemeiner als UPnP
+* JXTA ist eine OpenSource Peer-to-Peer Protokollspezifikation
+
+# Evaluation und Validierung
 
