@@ -400,3 +400,58 @@ Kernunterschied zu Standard OS:
 
 # Evaluation und Validierung
 
+* Validierung überprüft, ob ein Design alle Restriktionen erfüllt, wie erwartet funktionieren wird und für den Zweck angemessen ist
+* Validierung mit mathematischer Genauigkeit wird formale Validierung genannt
+* sehr wichtig während Designprozess
+* Evaluation ist Prozess des Berechnens von quantitativen Informationen von einigen Kern-Charakteristika eines bestimmten Designs
+
+Kopetz' Designprinzipien:
+* Safety muss möglicherweise als der zentrale Aspekt gesehen werden, von dem alles abhängt
+* präzise Spezifikationen von Designhypothesen müssen gleich zu Beginn gemacht werden (inklusive erwarteten Fehlern und deren Wahrscheinlichkeit)
+* "Fault containment regions" müssen erwogen werden
+** Fehler in einer solchen Region beeinflussen keine andere solche Region
+* konsistente Vorstellung von Zeit und Zustand muss etabliert werden
+* wohldefinierte Schnittstellen müssen die Interna von Komponenten verstecken
+* Komponenten müssen unabhängig voneinander versagen (kein Einfluss auf andere Komponenten)
+* Komponenten müssen sich selbst als korrekt annehmen bis mindestens zwei andere Komponenten das Gegenteil annehmen
+* Fehlertoleranz darf es nicht schwerer machen das Verhalten des Systems zu erklären; Fehlertoleranz Mechanismen sollten von der regulären Funktionalität entkoppelt sein
+* das System muss für Diagnose designed werden
+* man-machine interface muss intuitiv und vergebend sein; safety sollte trotz Fehler des Menschens weiter gewährleistet sein
+* jede Anomalie sollte aufgezeichnet werden; Aufzeichnung sollte auch interne Effekte beinhalten
+* provide never-give up strategy
+
+# Application mapping
+
+## Classification of scheduling algorithms
+
+* soft and hard deadlines
+* periodic vs. aperiodic tasks
+* preemptive vs. non-preemptive scheduling
+* static vs. dynamic scheduling
+* independent vs. dependent tasks
+* mono- vs. multi-processor scheduling
+* centralized vs. distributed scheduling
+
+## Scheduling algorithms
+
+### Aperiodic scheduling without precedence constraints
+* Earliest Due Date (identical arrival times)
+* Earliest Deadline First (different arrival times with preemption)
+* Least Laxity (deadline interval - execution time)
+
+### Aperiodic Scheduling with precedence constraints
+* LatestDeadlineFirst
+* ASAP
+* ALAP (as late as possible)
+* list scheduling
+* force-directed scheduling
+** goal: balanced utilization of resources
+** based on spring model
+** originally proposed for high-level synthesis
+
+### Periodic scheduling without precedence constraints
+
+* rate monotonic scheduling
+* Earliest deadline first
+
+
