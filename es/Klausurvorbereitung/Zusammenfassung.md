@@ -3,31 +3,31 @@
 ## Anwendungsgebiete
 
 * ES werden in unterschiedlichen Bereichen verwendet:
-** Autos
-** Flugzeuge
-** Züge
-** Mobiltelefone
-** Gesundheitssektor
-** Sicherheit
-** TVs
-** Fabriken
-** Intelligente Gebäude
-** Logistik (RFID) - Tracking von Objekten
-** Robotik
+  * Autos
+  * Flugzeuge
+  * Züge
+  * Mobiltelefone
+  * Gesundheitssektor
+  * Sicherheit
+  * TVs
+  * Fabriken
+  * Intelligente Gebäude
+  * Logistik (RFID) - Tracking von Objekten
+  * Robotik
 
 ## Wichtige Eigenschaften
 * dependable
-** Reliability - Probability that system will not fail
-** Maintainability - Probability that failing system can be repaired within certain timeframe
-** Availability - Probability that system is available
-** Safety - System will not cause any harm
-** Security - confidential data remains confidential and authentic communication is guaranteed
+  * Reliability - Probability that system will not fail
+  * Maintainability - Probability that failing system can be repaired within certain timeframe
+  * Availability - Probability that system is available
+  * Safety - System will not cause any harm
+  * Security - confidential data remains confidential and authentic communication is guaranteed
 * efficient
-** Energie
-** Laufzeiteffizienz
-** Codegröße
-** Gewicht/Masse der Hardware
-** Kosten
+  * Energie
+  * Laufzeiteffizienz
+  * Codegröße
+  * Gewicht/Masse der Hardware
+  * Kosten
 
 ES müssen oftmals Echtzeitbedingungen umsetzen.
 Zwei Arten:
@@ -42,9 +42,9 @@ weitere Eigenschaften
 ## Herausforderungen im Design von ES
 * Software muss auf Hardware abgestimmt werden
 * ¬funktionale Bedingungen müssen eingehalten werden
-** Echtzeitbedingungen
-** Energieeffizienz
-** Dependability - Verlässlichkeit
+  * Echtzeitbedingungen
+  * Energieeffizienz
+  * Dependability - Verlässlichkeit
 * Zeitmanagement ist eine der größten Herausforderungen
 * Concurrency (Nebenläufigkeit) ist essentiell
 * Kombinieren von Komponenten ist wichtig für Design
@@ -82,16 +82,16 @@ Modelle werden in Sprachen beschrieben. Sprachen sollten
 folgende Eigenschaften aufweisen (Wunschliste):
 
 * Hierarchie
-** Verhaltshierarchien - enthalten für Beschreibung des Systemverhaltens notwendige Objekte, z.B. Zustände, Events
-** Strukturhierarchien - beschreiben physische Komponenten des Systems
+  * Verhaltshierarchien - enthalten für Beschreibung des Systemverhaltens notwendige Objekte, z.B. Zustände, Events
+  * Strukturhierarchien - beschreiben physische Komponenten des Systems
 * Komponenten-basiertes Design - Verhalten des Systems muss von Verhalten der Komponenten ableitbar sein
 * Nebenläufigkeit
 * Synchronisation und Kommunikation
 * Zeitverhalten (timing behavior)
-** elapsed time (vergangene Zeit) seit X
-** Verzögern von Prozessen für spezifizierte Zeit
-** being able to specify timeouts
-** Fähigkeit Deadlines und Schedules zu spezifizieren
+  * elapsed time (vergangene Zeit) seit X
+  * Verzögern von Prozessen für spezifizierte Zeit
+  * being able to specify timeouts
+  * Fähigkeit Deadlines und Schedules zu spezifizieren
 * Zustandorientiertes Verhalten
 * Eventhandling
 * Ausnahmeorientiertes Verhalten
@@ -111,8 +111,8 @@ folgende Eigenschaften aufweisen (Wunschliste):
 ## Models of computation (Berechnungsmodelle)
 
 * MoCs definieren:
-** Komponenten
-** Kommunikationsprotokolle
+  * Komponenten
+  * Kommunikationsprotokolle
 
 Beziehungen zwischen diesen Punkten können in Graphen 
 festgehalten werden.
@@ -120,9 +120,9 @@ festgehalten werden.
 Models of Communication:
 * shared memory
 * message passing
-** async message passing - non-blocking communication
-** sync message passing - blocking communication, rendez-vous based communication
-** extended rendez-vous, remote invocation
+  * async message passing - non-blocking communication
+  * sync message passing - blocking communication, rendez-vous based communication
+  * extended rendez-vous, remote invocation
 
 Organisation von Berechnungen innerhalb der Komponenten
 * Von-Neumann Modell
@@ -180,13 +180,13 @@ Diskretisierung von Zeit: Sample-and-hold circuits
 
 Diskretisierung von Werten: A/D Konverter
 * Flash A/D converter
-** large number of comparators
-** each comparator has two inputs (+ and -)
-** if voltage at + larger than at - -> logical 1, otherwise logical 0
-** first comparator returns 1, if h(t) exceeds 3/4 Vref
-** second returns 1, for h(t) > 2/4 Vref
-** third returns 1, for h(t) > 1/4 Vref
-** encoder tries to identify most significant '1'
+  * large number of comparators
+  * each comparator has two inputs (+ and -)
+  * if voltage at + larger than at - -> logical 1, otherwise logical 0
+  * first comparator returns 1, if h(t) exceeds 3/4 Vref
+  * second returns 1, for h(t) > 2/4 Vref
+  * third returns 1, for h(t) > 1/4 Vref
+  * encoder tries to identify most significant '1'
 * successive appriximation
 
 ## Processing Units
@@ -203,14 +203,14 @@ Diskretisierung von Werten: A/D Konverter
 * Energieeffizienz ist wichtig - Compiler müssen so effizient sein wie möglich
 * müssen nicht kompatibel mit PC-Prozessoren sein
 * Dynamic power management
-** power saving states (idle and sleep)
-** changes between states
+  * power saving states (idle and sleep)
+  * changes between states
 * Dynamic voltage scaling
-** decreasing supply voltage reduces power quadratically
-** only linear increase of runtime of algorithms
+  * decreasing supply voltage reduces power quadratically
+  * only linear increase of runtime of algorithms
 * Code-size efficiency
-** CISC machines (Complex Instruction Set Processors)
-** Kompressionstechniken
+  * CISC machines (Complex Instruction Set Processors)
+  * Kompressionstechniken
 * Laufzeiteffizienz
 
 ### Reconfigurable Logic
@@ -229,9 +229,9 @@ application areas:
 * Informationen können durch Kanäle transportiert werden
 * physische Entitäten, die Kommunikation ermöglichen heißen Kommunikationsmedien
 * wichtige solche Medien:
-** drahtlose Medien (Infrarot, RFID)
-** optische Medien (Glasfaser)
-** Kabel
+  * drahtlose Medien (Infrarot, RFID)
+  * optische Medien (Glasfaser)
+  * Kabel
 
 ### Requirements
 * Echtzeitverhalten
@@ -246,17 +246,17 @@ application areas:
 ### Elektrische Robustheit
 
 * single-ended signaling
-** single ground wire
-** affected by external noise
-** difficult to establish high-quality ground signals
+  * single ground wire
+  * affected by external noise
+  * difficult to establish high-quality ground signals
 * differential signaling
-** two wires for data transport
-** noise can be effectively removed
-** logic value only depends on polarity of voltage between two wires, magnitude can be affected without effect
-** quality of ground wire unimportant
-** no common ground wire required
-** larger throughput than single-ended signaling
-** used in standard Ethernet-based networks
+  * two wires for data transport
+  * noise can be effectively removed
+  * logic value only depends on polarity of voltage between two wires, magnitude can be affected without effect
+  * quality of ground wire unimportant
+  * no common ground wire required
+  * larger throughput than single-ended signaling
+  * used in standard Ethernet-based networks
 
 ### Echtzeitverhalten garantieren
 
@@ -283,12 +283,12 @@ carrier-sense multiple access/collision avoidance (CSMA/CA)
 
 * Sensor/actuator buses
 * field buses
-** Controler Area Network
-** Time-Triggered-Protocol (TTP)
-** FlexRay
-** LIN
-** MAP
-** EIB
+  * Controler Area Network
+  * Time-Triggered-Protocol (TTP)
+  * FlexRay
+  * LIN
+  * MAP
+  * EIB
 * Kabelgebundene Multimedia-Kommunikation
 * drahtlose Kommunikation
 
@@ -319,11 +319,11 @@ AA -> Sample & hold -> A/D conv. -> Verarbeitung -> D/A conv. -> filter
 
 * muss flexibel für Anwendungsbereich angepasst werden können
 * Konfigurabilität (configurability)
-** OO
-** Aspect-oriented Programming
-** konditioniertes Kompilieren
-** fortgeschrittene Kompilierzeit Evaluation
-** Linker-basiertes Entfernen von nicht genutzten Funktionen
+  * OO
+  * Aspect-oriented Programming
+  * konditioniertes Kompilieren
+  * fortgeschrittene Kompilierzeit Evaluation
+  * Linker-basiertes Entfernen von nicht genutzten Funktionen
 * Treiber sind vom OS getrennt
 * keine Schutzmechanismen (wie privilegierter Zugang) notwendig, da ungetestete Software nicht geladen wird
 * interrupts können mit jedem Prozess verbunden werden
@@ -394,7 +394,7 @@ Kernunterschied zu Standard OS:
 ### UPnP, DPWS, JXTA
 
 * Universal Plug-and-Play
-** Erweiterung von PnP für Netzwerke
+  * Erweiterung von PnP für Netzwerke
 * Devices Profile for Web Services (DPWS) allgemeiner als UPnP
 * JXTA ist eine OpenSource Peer-to-Peer Protokollspezifikation
 
@@ -409,7 +409,7 @@ Kopetz' Designprinzipien:
 * Safety muss möglicherweise als der zentrale Aspekt gesehen werden, von dem alles abhängt
 * präzise Spezifikationen von Designhypothesen müssen gleich zu Beginn gemacht werden (inklusive erwarteten Fehlern und deren Wahrscheinlichkeit)
 * "Fault containment regions" müssen erwogen werden
-** Fehler in einer solchen Region beeinflussen keine andere solche Region
+  * Fehler in einer solchen Region beeinflussen keine andere solche Region
 * konsistente Vorstellung von Zeit und Zustand muss etabliert werden
 * wohldefinierte Schnittstellen müssen die Interna von Komponenten verstecken
 * Komponenten müssen unabhängig voneinander versagen (kein Einfluss auf andere Komponenten)
@@ -445,9 +445,9 @@ Kopetz' Designprinzipien:
 * ALAP (as late as possible)
 * list scheduling
 * force-directed scheduling
-** goal: balanced utilization of resources
-** based on spring model
-** originally proposed for high-level synthesis
+  * goal: balanced utilization of resources
+  * based on spring model
+  * originally proposed for high-level synthesis
 
 ### Periodic scheduling without precedence constraints
 
