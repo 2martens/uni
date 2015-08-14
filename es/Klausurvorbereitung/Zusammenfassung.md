@@ -59,13 +59,14 @@ weitere Eigenschaften
 -> HW components
 -> system software
 => design repository -> design -> [test]
-|				  |
+|                                 |
 [application mapping]
 * [optimization]
 * [evaluation & validation]
 * [test]
 
 * Figure 1.6 page 13
+* unbedingt die raw-Version ansehen hier
 
 # Spezifikationen und Modellierung
 
