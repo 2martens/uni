@@ -1,0 +1,924 @@
+\documentclass[a4paper,11pt]{scrartcl} % Dokumenttyp
+\usepackage[utf8x]{inputenc} % utf8
+\usepackage[T1]{fontenc} % Schriftart
+\usepackage{lmodern, textcomp} % Schriftart
+\usepackage[ngerman]{babel} % Deutsche Formatierung
+\usepackage{graphicx} % Grafiken
+\usepackage{tabularx} % Tabellen
+\usepackage{fancyhdr} % Kopfzeile
+\usepackage{wrapfig} % toc-wrapper
+\usepackage{wasysym} % für die Checkboxes
+\usepackage{multicol} % für zweispaltigen Text
+\usepackage[tocflat]{tocstyle} % um Punkte-Linie und di Einrückung im Inhaltsverzeichnis zu unterdrücken
+\usepackage[left=2.5cm,right=2.5cm,top=2cm,bottom=1cm,includeheadfoot]{geometry} % Seitenränder
+\usepackage[hidelinks]{hyperref}
+\usepackage{longtable}
+\usepackage{framed}
+\usepackage{hyperref}
+\usepackage{url}
+
+\pagestyle{fancyplain} % Kopfzeile anzeigen
+\setlength{\headheight}{30pt} % Abstände
+\pagenumbering{gobble} % Seitenzahlen unterdrücken
+\usetocstyle{noonewithdot} % Punkte-Linie im Inhaltsverzeichnis unterdrücken
+\graphicspath{{images/}} % Pfad für Bild-Dateien TODO Bild-Dateien im Unterordner ``images'' ablegen
+
+\newcommand{\AGName}{Selbstverwaltung-AG}
+\newenvironment{myitemize}{\begin{itemize}\itemsep -2pt}{\end{itemize}} % Zeilenabstand in Aufzählungen geringer
+
+\fancyhead[C]{\AGName} % Inhalt Kopfzeile mittig
+\fancyhead[R]{} % Inhalt Kopfzeile rechts leer
+\fancyhead[L]{} % Inhalt Kopfzeile rechts leer
+\fancypagestyle{firststyle}{\fancyhead[C]{}\fancyhead[L]{\huge\textbf{\AGName}}} % Inhalt Kopfzeile Seite 1
+
+\begin{document}
+\thispagestyle{firststyle}
+
+\begin{wrapfigure}{r}{130pt}
+\vspace{-45pt}
+  \fbox{
+  \begin{minipage}{140pt}
+   \tableofcontents
+  \end{minipage}
+  }
+\end{wrapfigure}
+
+\textbf{Version:} \#3, \today % TODO Version hochzählen, falls Paper aktualisiert wird
+
+\textbf{Ansprechpartner (OE-Woche):} Jim 2martens % TODO eintragen
+
+\section{Kurzbeschreibung}
+    Die Selbstverwaltungs AG kümmert sich um die 
+Gremienorientierung, die Gremienvorstellung und die damit 
+verbundene Organisation. Unter anderem fällt es in ihre 
+Zuständigkeit die externen Gremienvertreter (AStA, autonome 
+Referate, FAR, etc.), sofern gewünscht, einzuladen. In diesem 
+Paper erfahrt ihr alles notwendige Wissen, um die 
+Gremienorientierung erfolgreich durchzuführen.
+
+\section{Für den OE-Tutor}
+  \subsection{Checkliste: Material} % TODO Punkte ersetzen
+    \begin{multicols}{2}[]
+      \begin{myitemize}
+      \begin{raggedright}
+	\item[\Square] Materialien für FSR-Spiel
+	\item[\Square] dieses Paper
+	\item[\Square] Diskussionsleitfaden für HoPo-Diskussion
+      \end{raggedright}
+      \end{myitemize}
+    \end{multicols}
+  \subsection{Checkliste: Themen/Aufgaben} % TODO Punkte ersetzen; (chrono-)logisch
+      \begin{myitemize}
+    \item[\Square] dieses Paper gelesen  
+	\item[\Square] FSR-Spiel gespielt
+	\item[\Square] Ersties zu Gremienvorstellung gebracht
+	\item[\Square] Ersties zu HoPo-Vortrag gebracht
+	\item[\Square] HoPo-Diskussion durchgeführt
+      \end{myitemize}
+    
+\section{Beschreibung lang}
+
+Es gibt mehrere Einheiten, die von der Selbstverwaltungs-AG
+organisiert werden. Explizit sind dies die Gremienorientierung,
+die Gremienvorstellung, der HoPo-Vortrag, sowie die anschließende
+HoPo-Diskussion.
+
+Für die Gremienvorstellung kümmern wir uns bereits und ihr habt
+als Tutor keine andere Aufgabe, als eure Ersties pünktlich zum
+entsprechenden Raum zu bringen. Der HoPo-Vortrag wird erneut von
+Arne Köhn gehalten und dort müsst ihr ebenfalls nur auf die Anwesenheit
+eurer Gruppe achten.
+
+Lediglich für die Gremienorientierung und die HoPo-Diskussion seid
+ihr in der Pflicht die Einheit zu leiten. Da der konkrete Inhalt des
+HoPo-Vortrages noch nicht abschließend feststeht, werden wir uns in diesem
+Paper nur auf die Gremienorientierung beschränken. Die Infos für die
+HoPo-Diskussion werden nachgeliefert in Form eines Paper-Patches, sobald
+weitere Informationen zur Verfügung stehen.
+
+Der Kernteil der Gremienorientierung ist das FSR-Spiel, welches den
+Ersties spielerisch Wissen über den FSR und damit verbundene Gremien
+der studentischen Selbstverwaltung (StuPa, AStA) vermitteln soll. Damit
+ihr das Spiel auch vernünftig leiten könnt, erhaltet ihr alle notwendigen
+Infos im FSR-Bereich. Zusätzlich dazu gibt es noch eine Art Glossar mit Infos
+über die wichtigsten Gremien der akademischen und studentischen Selbstverwaltung.
+    
+\section{Durchführung}
+
+Die Einheit Gremienorientierung dauert ca eine Stunde. Zu Beginn 
+der Einheit wird der FSR grob vorgestellt und dann das FSR-Spiel 
+erläutert. Das FSR Spiel sollte etwa eine halbe Stunde dauern. Der 
+Tutor kann jedoch auch davon abweichen, wenn die Gruppe keine Lust 
+bzw. Konzentration mehr hat oder im Gegenteil noch super dabei ist und 
+weiter machen möchte.
+
+Danach können noch ungeklärte Dinge besprochen werden,
+weitere Gremien vorgestellt oder das Gremienschaubild
+durchgegangen werden. Wichtig hierbei ist jedoch, dass das FSR-Spiel
+der Hauptanteil der Einheit ist. Solange die Gruppe Spaß am Spiel
+hat und dieses weitermachen möchte, sollte es nicht unterbrochen werden,
+außer die Einheit selber ist zu Ende. Je nach Einschätzung des Tutors 
+kann natürlich zwischendurch eine Pause gemacht werden.
+
+
+\subsection{FSR-Spiel} Das Spiel dient der Simulation des FSR: Die 
+Ersties stellen den neuen FSR. Dabei müssen sie verschiedene Ereignisse 
+und Probleme besprechen, Lösungsideen diskutieren und ein 
+Handlungsvorhaben beschließen.
+
+Ziel des Spieles ist, dass sie eine Ahnung davon bekommen, was der 
+FSR macht, was dessen Aufgabenbereiche sind und was typische 
+Ereignisse/Probleme sind, auf die der FSR reagieren muss.
+
+Dazu gibt es Ereigniskarten, die zufällig gezogen werden (bis auf eine Endkarte (s.u.)), Erklärmaterial, das zufälligen Ersties
+ausgehändigt wird und das für das Verständnis einiger Karten benötigt 
+wird, sowie Zusatzmaterial für den Tutor, um weitere Fragen der Ersties
+zu beantworten oder einen erweiterten Lösungsvorschlag vorzustellen. 
+Es gibt zu jeder Karte einen Lösungsvorschlag.
+
+Das Spiel beginnt mit der Einleitung in die Simulation (s.u.). Danach 
+werden vier Ereigniskarten zufällig gezogen, die 
+diskutiert werden sollen (die Reihenfolge ist den Ersties überlassen).
+Alle vier Minuten tritt ein neues Ereignis ein, wird also eine neue 
+Karte gezogen. Wenn kein Doppeltutor vorhanden ist, kann z.B. ein Erstie 
+beauftragt werden auf die Zeit zu achten.
+
+Nach 30-40 Minuten wird dann als letzte Karte keine zufällige Karte 
+gezogen, sondern die Karte "`Semesterende"' gewählt. Diese sollte auch 
+noch diskutiert werden, ist aber als Abschluss der Simulation gedacht.
+
+Nun können oder sollten die Lösungen besprochen werden, gerade wenn 
+die Lösungen der Ersties stark von den Lösungsvorschlägen abweichen.
+Der Tutor kann sich auch die Lösungen der Ersties während des Spiels 
+aufschreiben (vielleicht haben sie ja bessere Ideen als der FSR) oder 
+in den gegebenen Lösungsvorschlägen markieren, auf welche Ideen sie nicht 
+gekommen sind.
+
+\subsubsection{Einleitung}
+{
+Dies soll ein Leitfaden sein, wie ihr die Ersties in die Simulation 
+einleitet.
+
+Zuerst solltet ihr klären, was die Fachschaft ist (zum Beispiel fragen, 
+was sie für Studiengänge kennen und dass die Studierenden von Inf, CIS, 
+MCI, SSE, ... die Fachschaft bilden).\\
+Weiterhin solltet ihr erzählen, dass der Fachschaftsrat (FSR)
+aus Studierenden besteht,  
+die Fachschaft vertritt und sich als Sprachrohr zwischen Studierenden und
+Verwaltung, Studienbüro, Lehrenden, etc. sieht und 
+die Fachschafträume (ct, Kicker, Mafia-Raum), sowie das Inventar 
+(Kühlschränke, Mikrowelle,..) verwaltet. \\
+
+Es sollte gesagt werden, dass die Ersties nun zum neuen FSR gewählt
+wurden. Normalerweise sollte auf einer der ersten Sitzungen eine 
+Wissensweitergabe stattfinden, bei der Alt-FSRler
+eingeladen werden. \\
+Da hier keine Wissensweitergabe derart stattfinden kann, haben
+verschiedene Ersties verschiedenes "`Hintergrundwissen"', in Form von 
+Material, das ihnen umgedreht ausgeteilt wird, sodass nur ein Stichwort
+darauf steht. Fällt dieses Stichwort (oder meinen sie, ihr Stichwort 
+könnte für das Thema relevant sein), dann können sie die Karte
+umdrehen und vorlesen. 
+
+$\Rightarrow$ Wissenskarten austeilen (jeder sollte
+eine Wissenskarte haben, möglichst so, dass jeder in etwa
+gleich viel Text hat. Es können auch Infos doppelt verteilt werden.) \\
+
+Als Einstieg sollte erwähnt werden, dass der Schatten-FSR
+dem FSR zu Seite steht und dass zu Beginn Ämter im FSR
+verteilt werden. Zu beiden Stichpunkten gibt es je eine Wissenskarte,
+die vorgelesen werden soll, damit die Ersties das Prinzip der
+Wissenskarten verstehen.
+}
+\subsubsection{Diskussionsphase}
+{
+Nun beginnt das Spiel bzw. das Semester und die ersten
+Probleme / Ereignisse tauchen auf
+$\Rightarrow$ Vier Ereigniskarten kommen in die Mitte.
+
+Die Ersties sollen jetzt beginnen zu diskutieren, was sie 
+zur Lösung der Probleme tun würden. Damit das nicht so lapidar geschieht,
+müssen sie sich auf eine Lösung bzw Handlungsvorhaben einigen
+und diese "`beschließen"'. Zum Beispiel indem sie am Ende das Gesagte zusammenfassen / 
+wiederholen, bevor die Karte als abgearbeitet gilt und weggelegt wird.
+Alternativ kann die Lösung auch auf die Rückseite der Karten
+geschrieben werden (von einem Erstie), was das Besprechen am Ende
+erleichtern könnte.
+
+Nun kommen alle vier Minuten neue Probleme hinzu. Es gibt mehr Karten,
+als in der Zeit besprochen werden können.
+
+So kann es auch sein, dass Wissenskarten nicht benötigt werden. Diese
+können nach dem "`Semesterende"' noch vorgelesen werden.
+}
+
+
+
+%\subsection{Material für Spielende}
+%{
+%\begin{itemize}
+%\item Ereigniskarten mit Ereignisssen
+%\item Zusätzliche Materialen die zu Ereigniskarten gehören, zum Beispiel
+%kommen einige Ereignisse in Form einer Mail
+%\item Karten mit zusätzlichen Informationen
+%\end{itemize}
+%}
+
+%\subsection{Material für den Tutor}
+%{
+%\begin{itemize}
+%\item Musterlösungen bzw Lösungsvorschläge zu den Ereigniskarten
+%\item Zusatzmaterial, falls die Ersties Genaueres wissen möchten
+%\end{itemize}
+%}
+
+\subsubsection{Ereigniskarten}
+Im Folgenden werden die Ereigniskarten und der dazugehörige 
+Lösungsvorschlag vorgestellt. Bis auf die Karte "`Semesterende"',
+die in jedem Fall besprochen werden sollte, sind
+die Karten alphabetisch sortiert.
+
+\begin{framed}
+\textit{Ereigniskarte} \\
+
+\textbf{Semesterende} \\
+Das Semester ist bald vorbei, es muss ein neuer FSR gewählt und 
+Gremien neu besetzt werden.
+\end{framed}
+
+\begin{framed}
+\textit{Lösungsvorschlag} \\
+
+Sie sollten sich überlegen eine Vollversammlung zu organisieren.
+Siehe auch Zusatzmaterial für den Tutor: Organisation einer VV.\\
+
+\textit{Wissenskarte: VV}
+\end{framed}
+
+
+\begin{framed}
+\textit{Ereigniskarte} \\
+
+\textbf{Antrag einer AG} \\
+Die Server-AG möchte sich neue Festplatten kaufen und fragt an, 
+ob ihr ihnen dafür Geld zur Verfügung stellen könnt.
+\end{framed}
+
+\begin{framed}
+\textit{Lösungsvorschlag} \\
+
+Sollte noch genug Geld im Asta-Budget sein und der FSR keine weiteren 
+größeren Anschaffungen vorhaben, können sie einen Antrag beim
+Asta stellen. Siehe Zusatzmaterial für Tutor: Antrag beim Asta \\
+
+\textit{Wissenskarte: -, (AStA)}
+\end{framed}
+
+\begin{framed}
+\textit{Ereigniskarte} \\
+
+\textbf{Berufungskommission} \\
+Eine Berufungskommission steht an. Es werden zwei Studierende gesucht, um 
+in der Kommission mitzuwirken.
+\end{framed}
+
+\begin{framed}
+\textit{Lösungsvorschlag} \\
+
+Sie sollen eine Mail an Mafia / Stud schreiben und fragen wer Interesse oder 
+Zeit hätte, sich an der Kommission zu beteiligen. \\
+
+\textit{Wissenskarte: Mailinglisten, Berufungskommission, 
+Zusatzmaterial für Tutor: Berufungskommission}
+\end{framed}
+
+\begin{framed}
+\textit{Ereigniskarte} \\
+
+\textbf{Beschmierte Türen} \\
+Unruhestifter haben Türen von studentischen Arbeitsräumen 
+vollgeschmiert. Das Service-Team hat euch darauf angesprochen.
+\end{framed}
+
+\begin{framed}
+\textit{Lösungsvorschlag} \\
+Eine Mail an Stud schreiben, eventuell Putzaktion organisieren \\
+
+\textit{Wissenskarte: Service-Team, Mailinglisten}
+\end{framed}
+
+\begin{framed}
+\textit{Ereigniskarte} \\
+
+\textbf{Beschwerde über ein Modul 1} \\
+Studierende sind auf euch zugekommen: In einem Modul stellt der 
+Dozent keine Materialien zum Lernen zur Verfügung (weder Skript 
+noch Vorlesungsfolien). 
+\end{framed}
+
+\begin{framed}
+\textit{Lösungsvorschlag} \\
+
+Sie sollten mit dem Dozenten reden, damit dieser Materialien bereitstellt.
+
+\end{framed}
+
+\begin{framed}
+\textit{Eregniskarte} \\
+
+\textbf{Beschwerde über ein Modul 2} \\
+Studierende sind auf euch zugekommen: In einem Modul wurde der
+Klausurtermin auf Samstag 17:00 verlegt. Die Dozentin reagiert 
+auf eure Email(s) nicht.
+\end{framed}
+
+\begin{framed}
+\textit{Lösungsvorschlag} \\
+
+Da die Dozentin nicht reagiert, sollten sie mit dem
+Studienbüro reden. Dies ist bei Klausurenterminen oft 
+generell der bessere Ansprechpartner. \\
+
+\textit{Wissenskarte: Studienbüro}
+\end{framed}
+
+
+\begin{framed}
+\textit{Ereigniskarte} \\
+
+\textbf{Dies Academicus} \\
+Ein Dies Academicus steht an. Dort wird es Vorträge und Workshops 
+geben, die sich mit der Universität als Bildungseinrichtung beschäftigen.
+\end{framed}
+
+\begin{framed}
+\textit{Lösungsvorschlag} \\
+
+Möglichst alle vom FSR sollten hingehen und in einer Mail an 
+Mafia / Stud dazu aufrufen sich am Dies zu beteiligen.\\
+
+\textit{Wissenskarte: Dies Academicus, Mailinglisten}
+\end{framed}
+
+\begin{framed}
+\textit{Ereigniskarte} \\
+
+\textbf{Eis} \\
+Studierende möchten gerne Eis im c.t. und fragen euch, ob ihr Eis im c.t. verkaufen könntet.
+\end{framed}
+
+\begin{framed}
+\textit{Lösungsvorschlag} \\
+
+Der FSR kann entweder selber Eis kaufen und Preise darauf schreiben / an die 
+Gefriertruhe hängen oder mit den Leuten, die Eis möchten und dieses dann kaufen, 
+abstimmen, wie die Preise festgelegt werden: Zum Beispiel indem aufgerundet 
+und 10-20 Cent draufgeschlagen wird (um eventuelle Verluste durch Diebstahl 
+auszugleichen). Sollten die Käufer nicht die Preise erhöhen wollen, ist 
+das auch in Ordnung und muss nicht vorgeschlagen werden. Sie müssen 
+schließlich nicht gleich davon ausgehen, dass Diebstahl vorkommt. 
+
+\end{framed}
+
+
+\begin{framed}
+\textit{Ereigniskarte} \\
+
+\textbf{Essen schimmelt} \\ 
+Im Kühlschrank stinkt es und ihr entdeckt, dass Essen schimmelt.
+\end{framed}
+
+\begin{framed}
+\textit{Lösungsvorschlag} \\
+
+Sie sollten das schimmelnde Essen wegschmeißen und möglichst eine 
+Mail an Mafia / Stud schreiben, dass die Leute regelmäßig 
+auf ihr Essen achten sollen oder alternativ regelmäßige Kontrollen vorschlagen.  \\
+
+\textit{Wissenskarte: Mailinglisten}
+\end{framed}
+
+\begin{framed}
+\textit{Ereigniskarte} \\
+
+\textbf{Getränke sind alle} \\
+Im c.t. gibt es keine Getränke mehr.
+\end{framed}
+
+\begin{framed}
+\textit{Lösungsvorschlag} \\
+
+Neue bestellen.
+Für mehr Infos siehe Zusatzmaterial: Getränkebestellung.
+\end{framed}
+
+\begin{framed}
+\textit{Ereigniskarte} \\
+
+\textbf{Jobangebot} \\
+Ihr habt Post: Es sind einige Jobangebote dabei.
+\end{framed}
+
+\begin{framed}
+\textit{Lösungsvorschlag} \\
+
+Sie sollten überprüfen, ob das Jobangebot den Richtlinien entspricht und
+wenn es dies tut, im c.t. und in der Umgebung aufhängen. \\
+
+\textit{Wissenskarte: Jobangebot, Zusatzmaterial für Tutor: Jobangebot}
+\end{framed}
+
+\begin{framed}
+\textit{Ereigniskarte} \\
+
+\textbf{kaputter Kühlschrank} \\
+Der Getränkekühlschrank im c.t. hat seinen Geist aufgegeben und 
+funktioniert nicht mehr.
+\end{framed}
+
+\begin{framed}
+\textit{Lösungsvorschlag} \\
+
+Auf Mafia rumfragen, ob jemand einen Kühlschrank abzugeben hat.
+Ansonsten, wenn noch genug Geld vom AStA da ist, einen neuen Kühlschrank kaufen.
+Anschließend muss der neue Kühlschrank vielleicht abgeholt werden und der Alte 
+auf einem Elektroschrottplatz entsorgt werden. \\
+
+\textit{Wissenskarte: (AStA), (Antrag beim AStA)}
+\end{framed}
+
+\begin{framed}
+\textit{Ereigniskarte} \\
+
+\textbf{Kein Internet} \\
+In den studentischen Arbeitsräumen gibt es kein Internet,
+Studierende beschweren sich.
+\end{framed}
+
+\begin{framed}
+\textit{Lösungsvorschlag} \\
+
+Herausfinden, woran es liegt (Netz ausgefallen, keine Leitungen gelegt, 
+Router ausgefallen, etc.). Herausfinden, wer dafür zuständig ist: Service-Team, 
+iRZ oder RRZ. Dort nachfragen. \\
+
+\textit{Wissenskarte: (Service-Team)}
+\end{framed}
+
+\begin{framed}
+\textit{Ereigniskarte} \\
+
+\textbf{Neuer Dozent} \\
+Eine Berufungskommission war erfolgreich und ab dem nächsten Semester
+wird ein neuer Dozent die Vorlesung halten.
+
+\end{framed}
+
+\begin{framed}
+\textit{Lösungsvorschlag} \\
+
+Sie sollten sich als FSR dem Dozenten vorstellen und am besten per Mail
+(evtl. über Sekretär*in) einen Termin ausmachen. \\
+
+
+\textit{Wissenskarte: Berufungskommission}
+\end{framed}
+
+\begin{framed}
+\textit{Ereigniskarte} \\
+
+\textbf{StuPa-Wahl} \\
+Die Wahl zum Studierendenparlament steht an.
+\end{framed}
+
+\begin{framed}
+\textit{Lösungsvorschlag} \\
+
+Sie sollten Infomails mit Aufruf zum Wählen an Stud schreiben. Dazu 
+muss die Urnenwahl für diejenigen, die nicht per Brief wählen, 
+organisiert werden. Dazu müssen Schichten besetzt und Waffen gebacken werden. \\
+
+\textit{Wissenskarte: StuPa, Mailingslisten. Zusatzmaterial für Tutor: 
+StuPa-Wahl}
+\end{framed}
+
+
+\begin{framed}
+\textit{Ereigniskarte} \\
+
+\textbf{Umzug}  \\
+Ihr seid nur temporär in den Räumen untergebracht und müsst in nächster 
+Zeit umziehen. Das Service-Team bzw. ein Umzugsunternehmen kann euch 
+dabei helfen.
+\end{framed}
+
+\begin{framed}
+\textit{Lösungsvorschlag} \\
+
+Sie müssen alle Sachen aus dem c.t., Kicker- und Mafia-Raum in Kartons 
+packen. Das möchte der FSR vielleicht nicht alleine machen und Hilfe 
+auf Mafia anfragen. \\
+
+\textit{Wissenskarte: Service-Team}
+\end{framed}
+
+\begin{framed}
+\textit{Ereigniskarte} \\
+
+\textbf{Weihnachtsfeier} \\
+Ihr wurdet angesprochen, ob es denn auch dieses Jahr eine 
+Weihnachtsfeier geben wird.
+\end{framed}
+
+\begin{framed}
+\textit{Lösungsvorschlag} \\
+
+Angenommen sie sind bereit eine Weihnachtsfeier zu organisieren, muss 
+Einiges geplant werden. 
+Siehe dazu: Zusatzmaterial für Tutor: Weihnachtsfeier-Howto.
+\end{framed} 
+
+%\rule{\textwidth}{1pt}
+
+%\noindent\makebox[\linewidth]{\rule{\paperwidth}{3pt}}
+
+\begin{center}
+\line(1,0){450}
+\end{center}
+
+\subsubsection{Wissenskarten}
+
+Diese Karten sollen den Ersties vor dem Spiel oder während der Einleitung 
+ausgeteilt werden. Darauf finden sie Informationen, 
+die sie zum Verstehen der Ereignisse brauchen.
+
+\begin{framed}
+\textit{Material (für Ersties): Ämter}\\
+
+\textbf{Ämter des FSR}\\
+Zur Zeit gibt es folgende Ämter beim FSR (es können aber noch weitere
+geschaffen werden, wenn ein FSR die Notwendigkeit sieht):
+\begin{itemize}
+\item Finanzbeauftragter: Kümmert sich um das Geld, das der FSR gestellt bekommt und begleicht Einkaufsrechnungen, wenn z.B. Waffeln gekauft werden.
+\item Getränkebeauftragter: Bestellt Getränke -- möglichst rechtzeitig. Achtet auf die Nachfrage. Muss am Ikum sein, wenn Getränke kommen (oder jmd. abstellen).
+\item Buttonbeauftragter: Weiß wo die Buttonmaschine ist und wie sie funktioniert. Beantwortet Anfragen bzgl. der Buttonmaschine.
+\item Mailbeauftragter: Achtet darauf, dass alle eingehenden Mails rechtzeitig beantwortet werden.
+\end{itemize}
+\end{framed}
+
+
+\begin{framed}
+\textit{Material (für Ersties): Der AStA}\\
+
+\textbf{AStA}\\
+\begin{itemize}
+\item Allgemeiner Studierendenausschuss 
+\item Interessensvertretung aller Studierenden der Uni Hamburg
+\item wird vom StuPa gewählt 
+\item ist in Referate aufgeteilt, die sich mit verschiedenen Themen befassen (z.B. HoPo, Finanzen, Ökologie und Nachhaltige Entwicklung) 
+\item bietet den Studierenden zum Beispiel Rechts- und Sozialberatung 
+\item organisiert thematische Veranstaltungen 
+\item verwaltet die Gelder der FSRe (1025€ pro Semester für FSR Informatik, kann für definierte Dinge ausgegeben werden.)
+\item Mehr Infos unter \url{wiki.mafiasi.de/Asta} oder \url{asta-uhh.de}
+\end{itemize}
+\end{framed}
+
+\begin{framed}
+\textit{Material (für Ersties): Dies Academicus } \\
+
+\textbf{Dies Academicus} \\
+\begin{itemize}
+\item uniweite Veranstaltung
+\item Ziel: Diskussionen und Anstöße für die Verbesserung von der Universität
+\item meistens zu einem bestimmten Thema, zum Beispiel Nachhaltigkeit
+\item beginnt mit Vorträgen, danach gibt es Workshops zu Unterthemen, über die diskutiert wird
+\item teilweise entstehen in Nachbereitung neue Konzepte für die Uni
+\item wichtig zur Mitgestaltung der Universität
+\end{itemize}
+\end{framed}
+
+\begin{framed}
+\textit{Material (für Ersties): Jobangebote}\\
+
+\textbf{Jobangebote}
+\begin{itemize}
+\item werden an den Pinnwänden vorm c.t. ausgehängt
+\item Richtlinien sind auf einer Wiki-Seite formuliert
+\item \url{wiki.mafiasi.de/Jobs}
+\end{itemize}
+\end{framed}
+\begin{framed}
+\textit{Material (für Ersties): Mailinglisten} \\
+
+\textbf{Mailinglisten}\\
+\begin{itemize}
+\item mafia@ : Menge aller fachschaftsinteressierten Aktivisten
+\item stud@: Studierende (Inf, Bioinf, Wiinf, CIS, MCI, SSE, IAS, ITMC) des FB Informatik
+\item fs-inf@: Alle Studierende der Fachschaft Informatik (z.B. stehen keine Wiinfs drauf)
+\item fbi-alle@: Alle Mitarbeiter
+\item campus@: Service-Team, weitere Leute am Campus
+\end{itemize}
+
+Mehr unter \url{https://mailhost.informatik.uni-hamburg.de/mailman/listinfo/}
+\end{framed}
+
+\begin{framed}
+\textit{Material (für Ersties): Der Schatten-FSR} \\
+
+\textbf{Schatten-FSR}\\ 
+
+Als Schatten-FSR werden die Menschen bezeichnet, 
+die auf der Mailingliste des FSR stehen, ohne 
+derzeit im FSR aktiv zu sein. Die Meisten waren früher im FSR oder 
+sind schon länger am Ikum und wissen meist Bescheid, was so am Ikum 
+passiert. Der Schatten-FSR ist eine Art Wissensweiterführung und 
+wer von ihnen gerade zu einem Thema des aktuellen FSR beitragen kann
+oder möchte, gibt Ratschläge oder einen Kommentar ab.
+
+\end{framed}
+
+\begin{framed}
+\textit{Material (für Ersties): Service-Team}\\
+
+\textbf{Das Service-Team} \\
+
+Neben den Pförtnern, den Mensa-Angestellten und den Putzkräften 
+gibt es am Ikum noch die Mitarbeiter des Service-Teams. Diese 
+halten das Ikum ordentlich, kümmern sich darum, dass der Rasen 
+gemäht wird, Bäume geschnitten werden, Haus G hergerichtet wird, etc. 
+\end{framed}
+
+\begin{framed}
+\textit{Material (für Ersties): StuPa} \\
+
+\textbf{StuPa} \\
+\begin{itemize}
+\item Studierenden-Parlament (kurz: StuPa) 
+\item höchstes gewähltes Organ der Verfassten Studierendenschaft
+\item wählt den AStA
+\item beschließt über die Haushalte (immerhin über 250.000 Euro pro Semester) 
+\item befasst sich mit aktuellen hochschulpolitischen Themen
+\item Mehr unter \url{wiki.mafias.de/stupa} \url{stupa-hh.de} 
+\end{itemize}
+\end{framed}
+
+\begin{framed}
+\textit{Material (für Ersties): VV} \\
+
+\textbf{Vollversammlung} \\
+\begin{itemize}
+\item zentrales Gremium der Fachschaft Informatik
+\item findet meist einmal im Semester statt
+\item dauert ca. zwei bis drei Stunden
+\item Fehlen in Übungen, Seminaren, etc. ist während der VV entschuldigt
+\item entlastet den alten FSR und wählt einen Neuen
+\item besetzt weitere Gremien
+\end{itemize}
+\end{framed}
+
+%\noindent\makebox[\linewidth]{\rule{\paperwidth}{3pt}}
+
+\begin{center}
+\line(1,0){450}
+\end{center}
+
+\subsubsection{Zusatzmaterial für Tutor}
+
+Diese Karten sind für den Fall gedacht, dass die Wissenskarten nicht
+alles Nötige abdecken oder die Ersties weitergehende Fragen haben,
+die ein Tutor ohne Selbstverwaltungswissen nicht beantworten kann.
+
+Zudem stellen einige Howtos Lösungsvorschläge dar.
+\begin{framed}
+\textit{Zusatzmaterial (für Tutor): Antrag beim AStA}\\
+
+\textbf{Finanzantrag beim AStA}\\
+\begin{itemize}
+\item Auf der Internetseite des AStA gibt es ein Formular
+\item Unter 100 Euro wird es meist einfach genehmigt
+\item Über 100 Euro sollte man Alternativen angeben oder erklären warum man (genau dieses) Produkt kaufen möchte
+\item Der übliche Weg ist, dass jemand etwas kauft und sich dann das Geld vom AStA wieder holt
+\item Bei höheren Beträgen ist es aber auch in Ordnung, zuerst das Geld zu beantragen,
+dann zu bezahlen und anschließend die Rechnung nachträglich einzureichen
+\item \url{asta-uhh.de/uploads/media/Finanzantrag_Vorlage.pdf}
+\end{itemize}
+\end{framed}
+
+\begin{framed}
+\textit{Zusatzmaterial (für Tutor): Berufungskommission} \\
+
+\textbf{Berufungskommission} 
+\begin{itemize} 
+\item hat die Aufgabe, eine Professur zu besetzen 
+\item Zusammensetzung: (meist) mehrere Professoren (meistens vier),
+zwei wissenschaftliche Mitarbeiter, zwei Studierende und ein ATM (administrativ-technischer Mitarbeiter)
+\item nach einer Ausschreibung wählt die Kommission aus eingehenden 
+Bewerbungen die besten Bewerber aus und lädt sie zu einem 
+Bewerbungsgespräch ein
+\item Das Bewerbungsgespräch besteht aus einem öffentlichen 
+Fachvortrag, in dem der Bewerber über seine aktuelle Forschung 
+referiert, einer ebenfalls öffentlichen Lehrprobe und einem 
+persönlichen Gespräch mit der 
+Berufungskommission, in dem konkrete Fragen über die Vorstellungen 
+und Ziele des Bewerbers gestellt werden.
+\item im Anschluss an diese Gespräche wählt die Kommission die aus 
+ihrer Sicht besten drei Bewerber aus, Gutachten werden angefordert
+\item Nachdem einige Institutionen die Reihenfolge und den ersten
+Bewerberbenden abgenickt habt, bekommt diese Person ein Angebot
+\item Lehnt die Person ab, bekommt die zweite Person ein Angebot. 
+Lehnen alle Ausgewählten ab, beginnt das Verfahren erneut.
+\end{itemize} 
+\end{framed}
+
+
+\begin{framed}
+\textit{Zusatzmaterial (für Tutor): Getränkebestellung}\\
+
+\textbf{Getränkebestellung}\\
+
+\begin{enumerate}
+\item Geld aus der c.t. Kasse auf das FSR-Konto einzahlen
+\item schauen, was an Getränken nachbestellt werden muss
+\item Kontostand prüfen
+\item ausrechnen (lassen), wieviel man bestellen kann
+\item bestellen
+\item sicherstellen, dass zum Zustelldatum jemand da ist, der Getränke und Rechnung in Empfang nehmen kann
+\item Rechnung überweisen
+\end{enumerate}
+\end{framed}
+
+
+\begin{framed}
+\textit{Zusatzmaterial (für Tutor): Auszug aus Wiki-Seite: Jobs} \\
+
+\textbf{Jobangebote} \\
+\begin{itemize}
+\item Der FSR Informatik hängt Stellenanzeigen für einen Monat 
+an den Fachschaftspinnwänden aus
+\item Stellenanzeige am besten postalisch. 
+\item Stellenangebote per Fax werden nicht akzeptiert. 
+\item Bitte nur die Größe einer DIN A4 Seite (davon gerne mehrere Exemplare)
+\item Mehrere Jobangebote können auf eine Seite, davon bis zu fünf Exemplare an uns
+\item Stellenangebote per e-Mail (studentenjobs@informatik.uni-hamburg.de) 
+werden an eine separate Mailingliste für arbeitssuchende Studis gesendet
+\item Weiterleitung an alle Studis ist grundsätzlich nicht möglich
+\item Aushänge, die uns per Mail zugeschickt werden, hängen wir nicht aus, da wir die 
+Druckkosten nicht tragen können bzw. wollen.
+\item Möglichst Anzeigen per Brief nicht knicken
+\end{itemize}
+
+\textbf{Was muss ich als Arbeitgeber beachten, wenn ich (Informatik-)Studierende beschäftigen will?}
+\begin{itemize}
+\item Das Studium geht vor
+\item Machen Sie sich attraktiv
+\item Bezahlen Sie fair
+\item Seien Sie nett
+\end{itemize}
+
+Wir behalten uns vor Stellenangebote nicht auszuhängen. Zum Beispiel wenn die Pinnwände voll sind oder Sie diese Seite offensichtlich nicht gelesen haben. 
+\end{framed}
+
+\begin{framed}
+\textit{Zusatzmaterial (für Tutor): StuPa-Wahl organisieren} \\
+
+\textbf{StuPa-Wahl organisieren} \\
+\begin{itemize}
+\item Anfang-Mitte Dezember: Infomail / Wahlaufruf für Briefwahl verschicken
+\item Anfang Januar: Wahlorganisationsseite im Wiki einrichten
+\item Direkt vor der Wahl: 
+\begin{itemize}
+\item Wahllokal aufbauen 
+\item Waffeln backen organisieren
+\item Rauchmelder ausschalten lassen
+\item Schichten besetzen
+\end{itemize}
+\end{itemize}
+\end{framed}
+
+\begin{framed}
+\textit{Zusatzmaterial (für Tutor): Howto Weihnachtsfeier}\\
+
+\textbf{Organisation einer Weihnachtsfeier}\\
+\begin{itemize}
+\item Beim Studienbüro einen Raum bis mindestens 0 Uhr buchen
+\item Raum und Zeitpunkt der Weihnachtsfeier dem Service-Team mitteilen
+\item Darum bitten die Rauchmelder auszuschalten
+\item Deko, Glühweinkocher, Spiele, etc. organisieren
+\item Einkaufen: Glühwein, Waffelzutaten, weitere Getränke, etc.
+\item Saubermachaktion vorher organisieren
+\end{itemize}
+\end{framed}
+
+
+\begin{framed}
+\textit{Zusatzmaterial (für Tutor): VV} \\
+
+\textbf{Vollversammlung} \\
+
+Die Vollversammlung ist das zentrale Gremium der Fachschaft 
+Informatik. Bisher fand sie immer einmal im Semester statt und 
+dauerte jeweils ca. 3 Stunden. 
+
+Nach Hochschulrahmengesetz (HRG) dürfen dir durch Mitwirkung in 
+der studentischen oder akademischen Selbstverwaltung keine 
+Nachteile entstehen. Darum gilt ein Fehlen in Übungen oder 
+Seminaren während der VV als entschuldigt. \\
+
+\textbf{Aufgaben und Befugnisse} \\
+
+Die Vollversammlung der Mitglieder der Fachschaft Informatik
+\begin{itemize}
+\item berät die Aufgaben des Fachschaftsrates gemäß §131 Absatz 4 HmbHG,
+\item nimmt den Rechenschaftsbericht des Fachschaftsrates entgegen,
+\item entlastet den Fachschaftsrat.
+\end{itemize}
+Neben diesen offiziellen Aufgaben der Vollversammlung werden meist auch
+\begin{itemize}
+\item Berichte aus den Gremien des Departments und den studentischen AGen erzählt.
+\item die studentischen Vertreter für die Gremien des Departments gewählt.
+\item Abstimmungen zu hochschulpolitischen Themen durchgeführt, um die Meinung der Fachschaft zu erfahren.
+\item Resolutionen der Fachschaft Informatik zu hochschulpolitischen und anderen Themen verabschiedet.
+\end{itemize}
+\end{framed}
+
+
+\begin{framed}
+\textit{Zusatzmaterial (für Tutor): Organisation einer VV} \\
+
+\textbf{Organisation einer VV}\\
+\begin{itemize}
+\item Termin mit dem Studienbüro absprechen, an dem möglichst viele Leute können
+\item Einladung an die Fachschaft schreiben
+\item Gremienmitglieder fragen, ob sie weitermachen möchten
+\begin{itemize} \item ggf. bitten kurz zu berichten, was sie getan haben \end{itemize}
+\item AGen bitten kurz zu berichten / sich vorzustellen
+\item Folien vom FSR aktualisieren
+\begin{itemize} \item Finanzbericht nicht vergessen \end{itemize}
+\item Erinnerungsmail an die Fachschaft schreiben
+\item Rechtzeitig vor der VV die freien Gremien-Posten kompilieren und Nachfolger suchen (ggf. per Rundmail an alle)
+\item Dozenten auf die VV hinweisen
+\item Einen bis drei zuverlässige Protokollierende finden
+\item Einen zuverlässigen Versammlungsleiter finden
+\end{itemize}
+\end{framed}
+
+%\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+
+\begin{center}
+\line(1,0){450}
+\end{center}
+
+\subsection{Kurzinformationen zu den Gremien} 
+\subsubsection{Präsidium} Das Präsidium besteht aus dem 
+Präsidenten, 2-5 Vizepräsidenten sowie einem Kanzler. Der 
+Präsident vertritt die Universität, er wird vom Hochschulrat 
+bestätigt und vom akademischen Senat gewählt. Die 
+Vizepräsidenten werden vom Präsidenten vorgeschlagen und durch den AS 
+gewählt. Der Kanzler wird vom Hochschulrat auf Vorschlag des 
+Präsidenten gewält. Er leitet die Verwaltung. In der 
+Gremienskizze ist dies nur vereinfacht dargestellt. Zu den 
+Aufgaben des Präsidiums gehören zum Beispiel, Wirtschaftspläne 
+zu beschließen, Vorschläge für den Struktur- und 
+Entwicklungsplan zu machen, sowie die Fakultäten zu 
+koordinieren.
+
+\subsubsection{Hochschulrat} Der Hochschulrat ist eine externe 
+Institution. Er bestätigt u.a. den Präsidenten, genehmigt die 
+Wirtschaftspläne, erstellt die Beschlussfassung des Struktur- 
+und Entwicklungsplans und gibt Empfehlungen zur Profilbildung 
+der Universität.
+
+\subsubsection{Akademischer Senat} Der AS wählt den Präsidenten und 
+die Vizepräsidenten. Er nimmt Stellung zu den Wirtschaftsplänen, 
+dem Struktur- und Entwicklungsplan, zu Berufungen etc. Er ist 
+das höchste demokratisch gewählte Gremium und wird per Briefwahl 
+gewählt.
+
+\subsubsection{Fakultätsrat (FAR)} Beschließt z.B. über die Lehre, 
+Finanzen und Personal in den Fachbereichen. Neue Studiengänge, 
+sowie die fachspezifischen Bestimmungen oder die 
+MIN-Prüfungsordnung werden hier beschlossen.
+
+\subsubsection{Ausschuss für Studium und Lehre (des FAR)} Der 
+MIN-ALSt ist der Ausschuss, der *-Ordnungen/Bestimmungen 
+erarbeitet, die die Studierenden in den jeweiligen Studiengängen 
+direkt betreffen. Er leistet also die Vorarbeit -- hier Einfluss 
+zu nehmen, ist daher besonders wichtig.
+
+\subsubsection{Allgemeiner Studierendenausschuss}
+Der AStA wird vom StuPa gewählt und ist in Referate aufgeteilt, die sich mit verschiedenen Themen befassen. 
+Er bietet den Studierenden zum Beispiel Rechts- und Sozialberatung und organisiert thematische Veranstaltungen. 
+
+\subsubsection{StuPa}
+Das Studierendenparlament wird immer im Wintersemester per Briefwahl und danach eine Woche an der Urne gewählt. Wer per Brief wählt, kann natürlich nicht mehr an der Urne wählen. Und man möchte an der Urne wählen, um der verfassten Studierendenschaft das Porto zu ersparen. Das StuPa hat Ausschüsse, die sich u.a. um den Haushalt der verfassten Studierendenschaft, die Geschäftsordnungen und Satzungen kümmern.
+
+\subsubsection{MIN-GV}
+MIN-GV steht für MIN-Generalversammlung. Es ist quasi ein Fachschaftsvernetzungstreffen auf dem sich verschiedene Fachschaften oder deren FSRe zum Austausch treffen. Allerdings ist es schon eine lange Zeit her, seit sich die MIN-GV zum letzten Mal getroffen hat.
+
+\subsubsection{Vollversammlung}
+Die Informatik-Studierenden treffen sich jedes Semester zur Vollversammlung, wo berichtet wird, was das Semester über passiert ist. Auch werden der FSR und die studentischen Vertreter in den Fachbereichsgremien gewählt. Es gibt Kaffee und Kekse und die Teilnehmer sind für Lehrveranstaltungen entschuldigt, wenn sie zur VV gehen.
+
+\subsubsection{FSR}
+Der Fachschaftsrat ist die auf der Vollversammlung gewählte Vertretung der Informatikstudierenden. Du kannst dich bei deinen Problemen an ihn wenden. Sie verwalten auch das Geld, das die Fachschaft bekommt.
+
+\end{document}
