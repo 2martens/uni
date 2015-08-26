@@ -1,0 +1,232 @@
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+%\usepackage{paralist}
+%\useoutertheme{infolines} 
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usetheme{Warsaw}
+\usecolortheme{crane}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setbeamertemplate{navigation symbols}{}
+\graphicspath{ {src/} {/home/jim/Pictures/} }
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygray},    % comment style
+  deletekeywords={},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=PHP,                 % the language of the code
+  morekeywords={class, function, return, protected, public, private, const, static, new, extends, namespace, null},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mygreen},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\hypersetup{
+	pdfauthor=Jim Martens,
+	pdfstartview=Fit
+}
+
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+	\raggedleft \insertframenumber\,/\,\inserttotalframenumber\;}
+
+\begin{document}
+\author{Jim 2martens}
+\title{Warum Informatik studieren?}
+\date{\today}
+
+\begin{frame}
+    \titlepage\end{frame}
+
+\begin{frame}
+    \tableofcontents
+\end{frame}
+
+\section{Introduction}
+\begin{frame}{About me}
+    \begin{itemize}
+      \item Abi 2012 am Gymnasium Ohmoor
+      \item PGW-Profil
+      \item Deutsch, Mathe, PGW und Informatik als Abifächer
+      \item Informatik als PP
+      \item Thema: "`Roboter für Senioren – sozialer Gewinn oder
+verantwortungsloser Leichtsinn"'
+      \item Studienbeginn 2012
+      \item Studiengang: BSc. Informatik
+      \item aktuelles Semester: 6
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Formalia}
+  \begin{itemize}
+    \item Anmeldephase Juni bis Juli (zu passender Zeit auf Uniseite nachsehen)
+    \item NC wird im Nachhinein festgelegt
+    \item beim letzten Mal (2014) <insert NC here>
+    \item weitere Infos siehe Uniseiten
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Schocktherapie}
+  \centering
+  MAATHEEE!!!
+\end{frame}
+\begin{frame}{Mathematik}
+  \begin{itemize}
+    \item es gibt \textbf{ein} verpflichtendes Mathemodul
+    \item Stoff baut teilweise auf Schulstoff auf (Analysis und Lineare Algebra)
+    \item zum Teil mit weniger Umfang als im erhöhtem Niveau in der Oberstufe (Matrizen und Vektoren)
+    \item sehr guter Dozent
+    \item absolut \textbf{KEIN} Grund sich nicht zu bewerben, wenn einen Informatik sonst interessiert
+  \end{itemize}
+\end{frame}
+
+\section{Informelles}
+\begin{frame}{Fachschaft}
+  \begin{itemize}
+    \item nett
+    \item hilfsbereit
+    \item for i=0;i<100;i++: füge freundliche Attribute ein
+    \item Kurzum: Super Fachschaft, wohl die beste in ganz Deutschland
+    \item MafiA: Menge aller fachschaftsinteressierten Aktivisten
+    \item alle fachschaftsaktiven Personen quasi wie erweiterte Familie
+  \end{itemize}
+\end{frame}
+\begin{frame}{(Arbeits-)klima am Fachbereich}
+  \begin{itemize}
+    \item gutes Verhältnis zu Profs und WiMis
+    \item super geiles Studienbüro
+    \item viele Privilegien für Studis
+    \begin{itemize}
+      \item Zugang zu Fachschaftsräumen und Gelände 16/7
+      \item unbeschränkter, unzensierter Internetzugang (vorbehaltlich gesetzlicher Regelungen)
+      \item Grillpartys und Weihnachts"`seminar"'
+      \item Getränkeverkauf im Fachschaftscafé
+    \end{itemize}
+    \item vernünftiges Verhalten vorausgesetzt
+    \begin{itemize}
+      \item Geschirr abwaschen
+      \item Müll raustragen
+      \item Don't be an asshole
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+\begin{frame}{Fachschaftsaktivitäten}
+  \begin{itemize}
+    \item KunterBuntesSeminar
+    \item Arbeitsgruppen
+    \item Fazit: von Studierenden, mit Studierenden, für Studierende
+  \end{itemize}
+\end{frame}
+
+% evtl. diesen Teil überspringen, da sehr trocken und noch nicht relevant für Schüler
+\section{Selbstverwaltung}
+\begin{frame}{FSR}
+  \begin{itemize}
+    \item wird auf Vollversammlung der Fachschaft für ein Semester gewählt
+    \item vertritt Fachschaft Informatik nach außen
+    \item organisiert u.a. Weihnachts"`seminar"'
+    \item verleiht Buttonmaschinen
+    \item uvm.
+  \end{itemize}
+\end{frame}
+\begin{frame}{StuPa}
+  \begin{itemize}
+    \item Vertretung der verfassten Studierendenschaft der Uni HH
+    \item 47 Parlamentarier*innen
+    \item wird jährlich gewählt
+    \item wählt AStA und hat damit Einfluss auf Position der Studierendenschaft
+  \end{itemize}
+\end{frame}
+\begin{frame}{AStA}
+  \begin{itemize}
+    \item verwaltet Geld der verfassten Studierendenschaft
+    \item (hochschul-)politische Vertretung der Studierendenschaft nach außen
+  \end{itemize}	
+\end{frame}
+
+\section{Informatik und Gesellschaft}
+\begin{frame}{31C3}
+  \begin{itemize}
+    \item Hacker- und Nerdkultur
+    \item letzten Dezember im CCH
+    \item veranstaltet vom CCC Hamburg
+    \item vier Tage lang geile Vorträge
+    \item viele Informatiker gehen hin
+  \end{itemize}
+\end{frame}
+\begin{frame}{31C3}% TODO: Foto von Appelbaum und Poitras einfügen
+  \begin{itemize}
+    \item live dabei sein, wenn Weltgeschichte geschrieben wird
+    \item Enthüllungen im Geheimdienstskandal - ausgelöst durch Edward Snowden
+    \item Screening von Citizenfour - Oscar for Best Documentary 2014
+  \end{itemize}
+\end{frame}
+\begin{frame}{Datenschutz und Überwachung}
+  \begin{itemize}
+    \item ein Kernkonflikt des 21. Jahrhunderts
+    \item Informatiker auf beiden Seiten des Konfliktes
+    \item große Verantwortung der Informatik
+    \item Einfluss auf Leben von Milliarden von Menschen
+    \item jeder kann sich für digitale Bürgerrechte einsetzen
+  \end{itemize}
+\end{frame}
+\begin{frame}{Freiheit statt Angst}
+  \begin{itemize}
+    % Bild von Demo einfügen
+    \item jährliche Demos gegen Massenüberwachung und für Datenschutz
+    \item FSR Informatik Teil des Hamburger Demobündnisses (TODO: spezifizieren)
+    \item viele Informatiker gehen hin
+    \item sei DU einer von ihnen
+  \end{itemize}
+\end{frame}
+\begin{frame}{Andere relevante Themen}
+  \begin{itemize}
+    \item Künstliche Intelligenz - Wieviel wollen wir?
+    \item Roboter/Drohnen im Militäreinsatz vs. Friedensforschung - In welche Richtung wollen wir?
+    \item Rationalisierung durch Automation - Fortschritt um jeden Preis?
+    \item Hochfrequenzhandel an Börsen - Wollen wir die Herrschaft des Geldes über die Vernunft?
+    \item Dauererreichbarkeit durch Smartphones - Wieviel Burnout ist OK?
+  \end{itemize}
+\end{frame}
+\section{Abschluss}
+\begin{frame}{Fazit}
+  Informatik...
+  \begin{itemize}
+    \item ...ist unglaublich spannend
+    \item ...macht sehr viel Spaß
+    \item ...wird dringend benötigt
+  \end{itemize}
+\end{frame}
+\begin{frame}{Fragen}
+  \centering
+  Q \& A
+\end{frame}
+
+\end{document}
+
