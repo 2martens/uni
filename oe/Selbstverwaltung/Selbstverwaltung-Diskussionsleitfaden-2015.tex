@@ -1,0 +1,102 @@
+\documentclass[a4paper,11pt]{scrartcl} % Dokumenttyp
+\usepackage[utf8x]{inputenc} % utf8
+\usepackage[T1]{fontenc} % Schriftart
+\usepackage{lmodern, textcomp} % Schriftart
+\usepackage[ngerman]{babel} % Deutsche Formatierung
+\usepackage{graphicx} % Grafiken
+\usepackage{tabularx} % Tabellen
+\usepackage{fancyhdr} % Kopfzeile
+\usepackage{wrapfig} % toc-wrapper
+\usepackage{wasysym} % für die Checkboxes
+\usepackage{multicol} % für zweispaltigen Text
+\usepackage[tocflat]{tocstyle} % um Punkte-Linie und di Einrückung im Inhaltsverzeichnis zu unterdrücken
+\usepackage[left=2.5cm,right=2.5cm,top=2cm,bottom=1cm,includeheadfoot]{geometry} % Seitenränder
+\usepackage[hidelinks]{hyperref}
+\usepackage{longtable}
+\usepackage{framed}
+\usepackage{hyperref}
+\usepackage{url}
+
+\pagestyle{fancyplain} % Kopfzeile anzeigen
+\setlength{\headheight}{30pt} % Abstände
+\pagenumbering{gobble} % Seitenzahlen unterdrücken
+\usetocstyle{noonewithdot} % Punkte-Linie im Inhaltsverzeichnis unterdrücken
+\graphicspath{{images/}} % Pfad für Bild-Dateien TODO Bild-Dateien im Unterordner ``images'' ablegen
+
+\newcommand{\AGName}{Diskussionsleitfaden} % TODO "Beispiel-AG" durch AG-Name ersetzen
+\newenvironment{myitemize}{\begin{itemize}\itemsep -2pt}{\end{itemize}} % Zeilenabstand in Aufzählungen geringer
+
+\fancyhead[C]{\AGName} % Inhalt Kopfzeile mittig
+\fancyhead[R]{} % Inhalt Kopfzeile rechts leer
+\fancyhead[L]{} % Inhalt Kopfzeile rechts leer
+\fancypagestyle{firststyle}{\fancyhead[C]{}\fancyhead[L]{\huge\textbf{\AGName}}} % Inhalt Kopfzeile Seite 1
+
+\begin{document}
+\thispagestyle{firststyle}
+
+\begin{wrapfigure}{r}{130pt}
+\vspace{-45pt}
+  \fbox{
+  \begin{minipage}{140pt}
+   \tableofcontents
+  \end{minipage}
+  }
+\end{wrapfigure}
+
+\textbf{Version:} \#1, \today % TODO Version hochzählen, falls Paper aktualisiert wird
+
+\section{Kurzbeschreibung} % TODO Text ersetzen
+    Dieser Diskussionleitfaden soll euch beim Führen der Diskussion
+    im Anschluss an den HoPo-Vortrag helfen. Die Ersties sollten nach 
+    der Einheit die folgende Message mitnehmen:
+    Die Hochschulpolitik ist relevant für die Studierenden und kann
+    direkten Einfluss auf ihr Studium haben.
+  
+ 
+\section{Situationsbeschreibung} 
+% TODO Optional Struktur ändern (subsections ändern, subsubsections einfügen etc.) 
+% Anmerkung: "subsection*{Titel}" erscheint nicht in der Inhaltsangabe; "\\" erzwingt einen Zeilenumbruch
+Die Ersties kommen gerade vom HoPo-Vortrag mit Arne Köhn und sollten daher noch im Thema sein.
+Der Vortrag handelt über den Wandel in der Hochschulpolitik in den letzten Jahren und soll
+im Prinzip zeigen, dass sich viele Dinge ändern und dass nichts in Stein gemeißelt ist.
+
+An sich gibt es im Vortrag keinen sehr polarisierenden Inhalt, es ist mehr ein Informationsvortrag.
+Eine Diskussion sollte dennoch möglich sein.
+
+\section{Diskussionsthemen}
+
+Es folgt eine Liste von Diskussionsthemen, über die unterschiedliche Meinungen vorherrschen können
+und die sich daher für eine Diskussion eignen.
+
+\begin{myitemize}
+  \item Engagement in Gremien: Vorteile erst für nachkommende "`Generationen"' - ein Problem?
+  \item Zivilklausel - gut oder schlecht?
+  \item Drittmittel - Beeinflussung der Lehre?
+\end{myitemize}
+
+Ansonsten kann man natürlich auch passend über die OE selber reden. Schließlich ist das im Grunde
+ein Paradebeispiel von Selbstverwaltung auf unterster Ebene. Die Studis organisieren ihre OE selber.
+
+\section{Troubleshooting}
+
+\subsection{Ersties haben kein Bock}
+
+Sollte deine Gruppe unmotiviert sein, versuche ein Gespräch über die OE zu führen. Nebenbei kannst
+du darauf hinweisen, dass sich viele Studis in ihrer Freizeit für die OE einsetzen, um den Ersties
+eine gute OE zu ermöglichen. Solch ein Gespräch sollte auch deshalb funktionieren, da es nicht explizit
+um "`Politik"' geht, sondern um Engagement.
+
+\subsection{"`Es ändert sich doch eh nichts"'}
+
+Wenn jemand aus deiner Gruppe der Meinung ist, dass ein Engagement ohnehin nichts bewirkt, dann kannst
+du auf die OE, aber auch auf den FSR hinweisen. In beiden Bereichen ändert sich bei entsprechendem
+Engagement durchaus etwas. Aber auch bspw. bei Berufungskommissionen kann man bedingt einen Einfluss darauf
+haben, wer für die Stelle in Betracht kommt.
+
+\subsection{"`Da sind so Spinner..."'}
+
+Sollte jemand die Position vertreten, dass in der Selbstverwaltung (in Teilen) nur "`Spinner"' tätig sind,
+dann kannst du diese Person darauf hinweisen, dass sich daran nur etwas ändern kann, wenn ¬"`Spinner"'
+in die Selbstverwaltung gehen.
+
+\end{document}
