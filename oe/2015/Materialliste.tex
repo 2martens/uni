@@ -1,0 +1,292 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{multirow}
+\pagenumbering{arabic}
+% ensures that paragraphs are separated by empty lines
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+% define how the sections are rendered
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+
+\begin{document}
+\author{Jim 2martens}
+\title{Materialliste}
+\maketitle
+
+\tableofcontents
+
+\section{Allgemeines}
+
+Je nach eurem Studiengang findet ihr die Materialien. Die Zahlen 
+sind final. Bitte nicht "`schlau"' sein und noch die Anzahl der 
+Tutoren addieren. Die ist bereits inkludiert. Für die 
+Doppeltutoren: nur bei den Materialien mit einem true müsst
+ihr noch 1 addieren, um auf die für euch finale Menge zu
+kommen.
+
+
+\section{InfSSE}
+
+	\begin{tabular}{c|c|c|c}
+		\textbf{Material} & \textbf{Anzahl} & \textbf{+1 für Doppeltutor?} & \textbf{vorhanden?} \\
+		\hline
+		Namensliste & 1 & false & \\
+		\hline
+		OWE-Anmeldung & 10 & false & \\
+		\hline
+		PO BSc & 7 & false & \\
+		\hline
+		leerer Stundenplan & 11 & true & \\
+		\hline
+		FSB Inf & 3 & false & \\
+		\hline
+		FSB SSE & 3 & false & \\
+		\hline
+		KVV InfSSE & 7 & false & \\
+		\hline
+		Musterstundenplan InfSSE & 11 & true & \\
+		\hline
+		Tetris A3 Inf & 1 & false & \\
+		\hline
+		Tetris A3 SSE & 1 & false & \\
+		\hline
+		Tetris A4 Master Inf & 1 & false & \\
+		\hline
+		Tetris A4 Master WiInf & 1 & false & \\
+		\hline
+		Tetris A4 IAS & 1 & false & \\
+		\hline
+		Tetris A4 ITMC & 1 & false & \\
+		\hline
+		Tetris A4 Bioinformatik & 1 & false & \\
+		\hline
+		Gremienskizze & 1 & false & \\
+		\hline
+		Ereigniskarten FSR-Spiel & 1 & false & \\
+		\hline
+		Wissenskarten FSR-Spiel & 1 & false & \\
+		\hline
+		Diskussionsleitfaden HoPo & 1 & true & \\
+		\hline
+		Fragebogen BSc Ersties & 10 & false & \\
+		\hline
+		Fragebogen BSc Tutoren & 1 & true & \\
+		\hline
+		Leitfragen für Sammeln von Feedback & 1 & false & \\
+		\hline
+		Stationsliste & 1 & true & \\
+		\hline
+		OE HVV Plan & 10 & false & \\
+		\hline
+		Flyer rund ums Studium & 11 & true & \\
+		\hline
+		Materialliste & 1 & false & ja, dieses Ding \\
+	\end{tabular}
+
+\section{MCI}
+
+	\begin{tabular}{c|c|c|c}
+		\textbf{Material} & \textbf{Anzahl} & \textbf{+1 für Doppeltutor?} & \textbf{vorhanden?} \\
+		\hline
+		Namensliste & 1 & false & \\
+		\hline
+		OWE-Anmeldung & 12 & false & \\
+		\hline
+		PO BSc & 7 & false & \\
+		\hline
+		leerer Stundenplan & 13 & true & \\
+		\hline
+		FSB MCI & 7 & false & \\
+		\hline
+		KVV MCI & 7 & false & \\
+		\hline
+		Musterstundenplan MCI & 13 & true & \\
+		\hline
+		Tetris A3 MCI & 1 & false & \\
+		\hline
+		Tetris A4 Master Inf & 1 & false & \\
+		\hline
+		Tetris A4 IAS & 1 & false & \\
+		\hline
+		Tetris A4 ITMC & 1 & false & \\
+		\hline
+		Gremienskizze & 1 & false & \\
+		\hline
+		Ereigniskarten FSR-Spiel & 1 & false & \\
+		\hline
+		Wissenskarten FSR-Spiel & 1 & false & \\
+		\hline
+		Diskussionsleitfaden HoPo & 1 & true & \\
+		\hline
+		Fragebogen BSc Ersties & 12 & false & \\
+		\hline
+		Fragebogen BSc Tutoren & 1 & true & \\
+		\hline
+		Leitfragen für Sammeln von Feedback & 1 & false & \\
+		\hline
+		Stationsliste & 1 & true & \\
+		\hline
+		OE HVV Plan & 12 & false & \\
+		\hline
+		Flyer rund ums Studium & 13 & true & \\
+		\hline
+		Materialliste & 1 & false & ja, dieses Ding \\
+	\end{tabular}
+
+\section{CIS}
+
+	\begin{tabular}{c|c|c|c}
+		\textbf{Material} & \textbf{Anzahl} & \textbf{+1 für Doppeltutor?} & \textbf{vorhanden?} \\
+		\hline
+		Namensliste & 1 & false & \\
+		\hline
+		OWE-Anmeldung & 14 & false & \\
+		\hline
+		PO BSc & 7 & false & \\
+		\hline
+		leerer Stundenplan & 15 & true & \\
+		\hline
+		FSB CIS & 7 & false & \\
+		\hline
+		KVV CIS & 7 & false & \\
+		\hline
+		Musterstundenplan CIS & 15 & true & \\
+		\hline
+		Tetris A3 CIS Physik & 1 & false & \\
+		\hline
+		Tetris A3 CIS Chemie & 1 & false & \\
+		\hline
+		Tetris A3 CIS Biochemie & 1 & false & \\
+		\hline
+		Tetris A4 Master Inf & 1 & false & \\
+		\hline
+		Tetris A4 Master Bioinformatik & 1 & false & \\
+		\hline
+		Physnet-Antrag & 5 & false & \\
+		\hline
+		Stundenplan Physik OE & 1 & false & \\
+		\hline
+		Gremienskizze & 1 & false & \\
+		\hline
+		Ereigniskarten FSR-Spiel & 1 & false & \\
+		\hline
+		Wissenskarten FSR-Spiel & 1 & false & \\
+		\hline
+		Diskussionsleitfaden HoPo & 1 & true & \\
+		\hline
+		Fragebogen BSc Ersties & 14 & false & \\
+		\hline
+		Fragebogen BSc Tutoren & 1 & true & \\
+		\hline
+		Leitfragen für Sammeln von Feedback & 1 & false & \\
+		\hline
+		Stationsliste & 1 & true & \\
+		\hline
+		OE HVV Plan & 14 & false & \\
+		\hline
+		Flyer rund ums Studium & 15 & true & \\
+		\hline
+		Materialliste & 1 & false & ja, dieses Ding \\
+	\end{tabular}
+
+\section{Master Inf}
+
+	\begin{tabular}{c|c|c|c}
+		\textbf{Material} & \textbf{Anzahl} & \textbf{+1 für Doppeltutor?} & \textbf{vorhanden?} \\
+		\hline
+		Namensliste & 1 & false & \\
+		\hline
+		PO MSc & 7 & false & \\
+		\hline
+		leerer Stundenplan & 21 & true & \\
+		\hline
+		FSB Master Inf & 7 & false & \\
+		\hline
+		KVV Master Inf & 7 & false & \\
+		\hline
+		Musterstundenplan Master Inf & 21 & true & \\
+		\hline
+		Tetris A3 Master Inf & 1 & false & \\
+		\hline
+		Gremienskizze & 1 & false & \\
+		\hline
+		Ereigniskarten FSR-Spiel & 1 & false & \\
+		\hline
+		Wissenskarten FSR-Spiel & 1 & false & \\
+		\hline
+		Fragebogen MSc Ersties & 20 & false & \\
+		\hline
+		Leitfragen für Sammeln von Feedback & 1 & false & \\
+		\hline
+		Stationsliste & 1 & true & \\
+		\hline
+		OE HVV Plan & 20 & false & \\
+		\hline
+		Flyer rund ums Studium & 21 & true & \\
+		\hline
+		Materialliste & 1 & false & ja, dieses Ding \\
+	\end{tabular}
+
+\section{IAS}
+
+	\begin{tabular}{c|c|c|c}
+		\textbf{Material} & \textbf{Anzahl} & \textbf{+1 für Doppeltutor?} & \textbf{vorhanden?} \\
+		\hline
+		PO MSc & 7 & false & \\
+		\hline
+		leerer Stundenplan & 14 & true & \\
+		\hline
+		FSB IAS & 7 & false & \\
+		\hline
+		KVV IAS & 7 & false & \\
+		\hline
+		Musterstundenplan IAS & 14 & true & \\
+		\hline
+		Tetris A3 IAS & 1 & false & \\
+		\hline
+		Gremienskizze engl. & 1 & false & \\
+		\hline
+		Fragebogen IAS Ersties & 13 & false & \\
+		\hline
+		Leitfragen für Sammeln von Feedback & 1 & false & \\
+		\hline
+		Stationsliste & 1 & true & \\
+		\hline
+		OE HVV Plan engl. & 13 & false & \\
+		\hline
+		Flyer rund ums Studium engl. & 14 & true & \\
+		\hline
+		Materialliste & 1 & false & ja, dieses Ding \\
+	\end{tabular}
+
+\section{Lehramt}
+
+	\begin{tabular}{c|c|c|c}
+		\textbf{Material} & \textbf{Anzahl} & \textbf{+1 für Doppeltutor?} & \textbf{vorhanden?} \\
+		\hline
+		Namensliste & 1 & false & \\
+		\hline
+		OWE-Anmeldung & 20 & false & \\
+		\hline
+		Tetris A4 Master Lehramt & 1 & false & \\
+		\hline
+		Stationsliste & 1 & true & \\
+		\hline
+		OE HVV Plan & 20 & false & \\
+		\hline
+		Flyer rund ums Studium & 21 & true & \\
+		\hline
+		Materialliste & 1 & false & ja, dieses Ding \\
+	\end{tabular}
+\end{document}
