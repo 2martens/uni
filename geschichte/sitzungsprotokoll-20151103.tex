@@ -1,0 +1,131 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bytefield}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+%\usepackage{algorithmic}
+%\usepackage{minted}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+%\def\thesection{\arabic{section})}
+%\def\thesubsection{(\alph{subsection})}
+%\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\newenvironment{myitemize}{\begin{itemize}\itemsep -2pt}{\end{itemize}} % Zeilenabstand in Aufzählungen geringer
+
+%switch starred and non-starred (auto-size)
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\makeatother
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{England im Spätmittelalter}
+\subtitle{Vorlesungsprotokoll vom 3. November 2015}
+\date{3. November 2015}
+\maketitle
+
+\section*{Regentschaft von Isabella und Mortimer}
+
+\begin{myitemize}
+	\item Eduard III. wurde 1327 König (war noch minderjährig) \(\rightarrow\) Regentschaft durch Mutter Isabella und Mortimer
+	\item nutzten Stellung, um sich zu bereichern
+	\item Kritik an Mortimer aufgrund von Außenpolitik zu Schottland
+	\item schlechter Kriegsverlauf zwang Mortimer dazu viele Zugeständnisse an Schottland zu machen
+	\item 1328 Friedensvertrag von Northampton: garantierte Schottlands Unabhängigkeit von England
+	\item Friedensvertrag wurde in England als Schwäche angesehen
+	\item anwachsen von Widerstand, welcher im Oktober 1330 unter Beteiligung Eduard III. die Regentschaft stürzt
+	\item im einberufenen Parlament wurde Mortimer wegen notorischem Hofverrates zum Tode verurteilt
+	\item Isabella durfte sich nicht mehr politisch beteiligen, ansonsten jedoch keine wirkliche Strafe
+	\item Ratgeber der Regentschaft fielen nicht in Ungnade
+	\item Übergang zwischen Regentschaft und Herrschaft Eduard III. dadurch relativ problemlos
+\end{myitemize}
+
+\section*{Anfänge der Regierung Eduard III. und Entwicklung innerer Verhältnisse}
+
+\begin{myitemize}
+	\item Sturz der Regentschaft landesweit begrüßt
+	\item Eduard III. wollte Verhältnis zu Baronen verbessern
+	\item 1333 erfolgreicher Feldzug gegen Schottland, dabei erstmals Einsatz der berühmten Langbögen
+	\item Konflikte mit Frankreich nehmen zu und führen zum Hundertjährigen Krieg
+	\item zunehmend schwierigere finanzielle Lage
+	\item mehrmals Auseinandersetzungen mit Parlament über Steuern und Abgaben
+	\item 1376 "`gutes Parlament"' mit vielen Zugeständnissen an Commons
+	\item Vorgang des Impeachment eingeführt
+	\item nach Abschluss des Parlaments wird vorheriger Status weitestgehend wiederhergestellt
+	\item Eduard III. stirbt kurz darauf
+\end{myitemize}
+
+\section*{1. Phase des Hundertjährigen Krieges bis Friedensverhandlungen unter Richard II.}
+\begin{myitemize}
+	\item 1337 öffentliche Erklärung des Anspruchs auf französische Krone
+	\item 1337-1341 Eduard III. baut auf Allianzen mit Flandern und deutschen Prinzen
+	\item 1342-1360 erfolgreich durch kleinere Feldzüge
+	\item 1361-1372 Ausweitung des Krieges, Stellvertreterkriege
+	\item 1340 Erfolg von Sluys, französische Flotte geschlagen
+	\item 1342 Kämpfe um Bretagne
+	\item 1343 Waffenstillstand
+	\item 1345/46 erneuter Angriff auf Frankreich geplant 
+	\item einige Erfolge im Westen (Bretagne, Gascogne), Landung in Normandie statt Flandern
+	\item unerwartet für Frankreich, sodass Eduard bis kurz vor Paris ziehen kann
+	\item deutlicher Sieg gegen Frankreich in einer Schlacht
+	\item Eduard III. marschiert nach Calais, welches 1347 kapituliert
+	\item schwarzer Prinz gewinnt Schlacht zahlenmäßig unterlegen \(\rightarrow\) Johann II. wird gefangen genommen
+	\item Oktober 1360 Frieden, Eduard III. verzichtet auf Anspruch und bekommt dafür Unabhängigkeit für Aquitanien
+	\item zwischenzeitlich Stellvertreterkriege in Kastilien, sowie Kreuzzug gegen Frankreich
+	\item 1390 28-jähriger Waffenstillstand
+\end{myitemize}
+
+\section*{Innere Geschichte Englands unter Richard II.}
+
+\begin{myitemize}
+	\item 1381 Bauernaufstand
+	\item Resultat: höheres Selbstbewusstsein Richard II., Kopfsteuer rotes Tuch in englischer Politik bis ins 20. Jhd.
+	\item Geschichtsbild verzerrt durch Lancaster-Geschichtsschreibung
+	\item 1388 "`gnadenloses Parlament"'
+	\item neues Verfahren: Appeal
+	\item 1397/98 stärkere Position Richard II. als vor Problemen mit Parlament
+	\item Heinrich v. Lancaster rebelliert und Richard II. wird abgesetzt
+	\item Heinrichs Einsetzung nicht unumstritten
+	\item einige sehen ihn als Ursupator
+	\item weitere Person mit Thronanspruch aus Haus York
+	\item wird später zu Rosenkriegen führen
+\end{myitemize}
+
+\end{document}
