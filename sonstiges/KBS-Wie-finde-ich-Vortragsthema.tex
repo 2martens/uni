@@ -1,0 +1,201 @@
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+%\usepackage{paralist}
+%\useoutertheme{infolines} 
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usetheme{Warsaw}
+\usecolortheme{crane}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setbeamertemplate{navigation symbols}{}
+\graphicspath{ {src/} {/home/jim/Pictures/} }
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+%\definecolor{craneorange}{RGB}{61,61,61}
+%\definecolor{craneblue}{RGB}{255,255,255}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygray},    % comment style
+  deletekeywords={},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=PHP,                 % the language of the code
+  morekeywords={class, function, return, protected, public, private, const, static, new, extends, namespace, null},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mygreen},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\hypersetup{
+    pdfauthor=Jim Martens,
+    pdfstartview=Fit
+}
+
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+    \raggedleft \insertframenumber\,/\,\inserttotalframenumber\;}
+
+\begin{document}
+\author{Jim 2martens}
+\title{Wie finde ich ein Vortragsthema?}
+\date{\today}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Motivation}
+    \centering
+    Warum ein Metatalk über das Finden eines Vortragsthemas?
+\end{frame}
+
+\begin{frame}{Motivation}
+    Viele Personen haben keine Ahnung...
+    \begin{itemize}
+        \item ...über welches Thema sie Vortrag halten sollen
+        \item ...ob Thema überhaupt für Publikum interessant ist
+        \item ...wie Vortrag gestaltet sein sollte
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Agenda} 
+    \tableofcontents
+\end{frame}
+
+\begin{frame}{Organisatorisches}
+    \begin{itemize}
+        \item Folieninhalte für den theoretischen Teil und zum Nachlesen
+        \item praktischer Teil zum Üben
+        \item Vortrag beschäftigt sich NICHT mit wissenschaftlichen Vorträgen
+    \end{itemize}
+\end{frame}
+
+\section{Themenfindung}
+    \subsection{Brainstorming}
+
+    \begin{frame}{Brainstorming} 
+        \begin{itemize}
+            \item alle (wirklich alle) Begriffe aufschreiben, die einem einfallen
+            \item noch keine Bewertung vornehmen
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Brainstorming}
+        \centering
+        Für 5 Minuten Begriffe aufschreiben (Zettel Papier oder Computer)
+    \end{frame}
+
+    \subsection{Gruppierung}
+
+    \begin{frame}{Gruppierung}
+        \begin{itemize}
+            \item Gruppieren
+            \item Kategorisieren
+            \item Kurzum: Überblick verschaffen
+        \end{itemize}
+    \end{frame}
+
+    \subsection{Bewertung}
+
+    \begin{frame}{Bewertung}
+        \begin{enumerate}
+            \item alle Themen wegstreichen, die einen selbst nicht interessieren
+            \item alle Themen wegstreichen, die unpassend für Publikum sind (z.B. Thema "`Sex"' bei Publikum aus Grundschulkindern)
+            \item übrige Themen, wo nötig, verallgemeinern (z.B. statt "`Syntax von Java 8"' einfach "`Java"')
+            \item aus übrigen Themen eines auswählen
+        \end{enumerate}
+    \end{frame}
+
+    \subsection{Niveau}
+
+    \begin{frame}{Niveau}
+        \begin{itemize}
+            \item Publikum bestimmt auf welchem Niveau Vortrag gehalten werden kann (voraussetzbares Vorwissen)
+            \item eigenes Wissen bestimmt auf welchem Niveau Vortrag gehalten werden kann
+            \item sollte eigenes Wissen unter dem voraussetzbaren Vorwissen des Publikums liegen: anderes Thema auswählen
+            \item Mehrwert für Publikum muss bestehen (weder zu geringes Niveau noch zu hohes)
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Unterthema}
+        \centering
+        Entsprechend dem Niveau ein geeignetes Unterthema wählen.
+    \end{frame}
+
+\section{Vortragsgestaltung}
+    
+    \subsection{Kernbotschaft}
+
+    \begin{frame}{Take-away Message}
+        \centering
+        Was ist das, was das Publikum mit nach Hause nehmen soll?
+    \end{frame}
+
+    \begin{frame}{Roter Faden}
+        \begin{itemize}
+            \item muss vorhanden und erkennbar sein
+            \item muss auf Kernbotschaft hinarbeiten
+            \item am Ende muss klar sein, was die Essenz des Vortrags ist
+            \item alles, was Vortrag unnötig aufbläht ohne auf Kernbotschaft hinzuarbeiten, ist wegzulassen
+        \end{itemize}
+    \end{frame}
+    
+    \subsection{Software}
+
+    \begin{frame}{Software}
+        \begin{itemize}
+            \item passende Software für Ziel des Vortrags auswählen
+            \item persönliche Vorliebe ebenso wichtig wie Eignung für Vortragsthema
+        \end{itemize}
+    \end{frame}
+
+    \subsection{Sinnabschnitte}
+
+    \begin{frame}{Gliederung}
+        \begin{itemize}
+            \item Vortrag in sinnvolle Abschnitte aufteilen
+            \item zu jeder Zeit sollte klar sein, worum es geht
+        \end{itemize}
+    \end{frame}
+
+\section{Abschluss}
+
+\begin{frame}{Zusammenfassung}
+    \begin{itemize}
+        \item Thema finden ist einfach
+        \item passendes Niveau für Publikum zu finden ist einfach
+        \item Unterthema finden ist einfach
+        \item Kernbotschaft finden ist einfach
+        \item Roten Faden finden ist einfach
+        \item Vortrag gestalten ist einfach
+        \item Kurzum: alles bis auf den Vortrag zu halten ist einfach
+        \item für das Halten des Vortrags hilft nur üben, üben und nochmals üben
+    \end{itemize}
+\end{frame}
+
+\end{document}
+
