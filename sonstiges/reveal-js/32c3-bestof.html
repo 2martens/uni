@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>32C3 Best-of</title>
+
+        <meta name="description" content="Best-of for the 32C3">
+        <meta name="author" content="Jim 2martens">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+        <!-- Code syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section data-markdown>
+                    <script type="text/template">
+                        # 32C3
+
+                        27.12-30.12.2015
+
+                        CCH, Hamburg
+                    </script>
+                </section>
+                <section data-background-video="file:///home/jim/Videos/32C3/32C3_intro.m4v">
+                </section>
+                <section data-markdown>
+                    <script type="text/template">
+                        # Day 1
+
+                        * Keynote
+                        * Dieselgate
+                        * NSA-Untersuchungsauschuss
+                        * RedStar OS
+                        * When hardware must "just work"
+                    </script>
+                </section>
+                <section data-markdown>
+                    <script type="text/template">
+                        # Day 2
+
+                        * Net Neutrality in Europe
+                        * Abgrund von Landesverrat
+                        * Lessons Learned: Freifunk für Flüchtlinge
+                        * One year of securitarian drift in France
+                        * Lets Encrypt
+                        * Ecuador: How an autoritarian regime is fooling the entire world
+                        * Unpatchable
+                        * Logjam: Diffie-Hellman, discrete logs, the NSA and you
+                    </script>
+                </section>
+                <section data-background-video="file:///home/jim/Videos/32C3/cyber_cyber.mp4">
+                </section>
+                <section data-markdown>
+                    <script type="text/template">
+                        # Day 3
+
+                        * Nach bestem Wissen und Gewissen
+                        * Tor Onion services: More useful than you think
+                        * State of the Onion
+                        * Safe Harbor
+                        * Ten years after we lost the war
+                        * Crypto ist Abwehr, IFG ist Angriff
+                        * Intelexit
+                        * Grundrechte gelten nicht im Weltall
+                    </script>
+                </section>
+                <section data-background-video="file:///home/jim/Videos/32C3/george_torwell.mp4">
+                </section>
+                <section data-markdown>
+                    <script type="text/template">
+                        # Price of Dissent
+
+                        * THE most important talk of 32C3
+                    </script>
+                </section>
+                <section>
+                    <video data-autoplay controls data-src="file:///home/jim/Videos/32C3/price_of_dissent.mp4#t=,0:07:20">
+                </section>
+                <section>
+                    <video data-autoplay controls data-src="file:///home/jim/Videos/32C3/price_of_dissent.mp4#t=0:40:00,0:48:30">
+                </section>
+                <section data-markdown>
+                    <script type="text/template">
+                        # Day 4
+
+                        * A new kid on the block (Diaspora)
+                        * Crypto Wars Part II
+                        * Microsoft Windows 10 Botnet
+                        * Security Nightmares 0x10
+                    </script>
+                </section>
+                <section data-markdown>
+                    <script type="text/template">
+                        # Ebola talk
+
+                        * Second most important talk
+                        * essentially 3 self-taught coders from Sierra Leone prevented loss of West Africa
+                        * with help of FOSS an ERP solution and mobile payment system was programmed/created in 2 weeks
+                        * prevented break down of health system by paying everybody on time
+                        * essentially got rid of corruption in health system
+                        * previously rampant corruption
+                    </script>
+                </section>
+
+                <section data-markdown>
+                    <script type="text/template">
+                        # 32C3 recordings
+
+                        https://media.ccc.de/c/32c3/
+
+                        Not all recordings yet available
+                    </script>
+                </section>
+            </div>
+
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // Full list of configuration options available at:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: false,
+                progress: true,
+                history: false,
+                center: true,
+
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+                // Optional reveal.js plugins
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true }
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>
