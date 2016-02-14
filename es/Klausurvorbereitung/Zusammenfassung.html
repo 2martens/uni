@@ -1,0 +1,1576 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>body {
+  width: 45em;
+  border: 1px solid #ddd;
+  outline: 1300px solid #fff;
+  margin: 16px auto;
+}
+
+body .markdown-body
+{
+  padding: 30px;
+}
+
+@font-face {
+  font-family: octicons-anchor;
+  src: url(data:font/woff;charset=utf-8;base64,d09GRgABAAAAAAYcAA0AAAAACjQAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABGRlRNAAABMAAAABwAAAAca8vGTk9TLzIAAAFMAAAARAAAAFZG1VHVY21hcAAAAZAAAAA+AAABQgAP9AdjdnQgAAAB0AAAAAQAAAAEACICiGdhc3AAAAHUAAAACAAAAAj//wADZ2x5ZgAAAdwAAADRAAABEKyikaNoZWFkAAACsAAAAC0AAAA2AtXoA2hoZWEAAALgAAAAHAAAACQHngNFaG10eAAAAvwAAAAQAAAAEAwAACJsb2NhAAADDAAAAAoAAAAKALIAVG1heHAAAAMYAAAAHwAAACABEAB2bmFtZQAAAzgAAALBAAAFu3I9x/Nwb3N0AAAF/AAAAB0AAAAvaoFvbwAAAAEAAAAAzBdyYwAAAADP2IQvAAAAAM/bz7t4nGNgZGFgnMDAysDB1Ml0hoGBoR9CM75mMGLkYGBgYmBlZsAKAtJcUxgcPsR8iGF2+O/AEMPsznAYKMwIkgMA5REMOXicY2BgYGaAYBkGRgYQsAHyGMF8FgYFIM0ChED+h5j//yEk/3KoSgZGNgYYk4GRCUgwMaACRoZhDwCs7QgGAAAAIgKIAAAAAf//AAJ4nHWMMQrCQBBF/0zWrCCIKUQsTDCL2EXMohYGSSmorScInsRGL2DOYJe0Ntp7BK+gJ1BxF1stZvjz/v8DRghQzEc4kIgKwiAppcA9LtzKLSkdNhKFY3HF4lK69ExKslx7Xa+vPRVS43G98vG1DnkDMIBUgFN0MDXflU8tbaZOUkXUH0+U27RoRpOIyCKjbMCVejwypzJJG4jIwb43rfl6wbwanocrJm9XFYfskuVC5K/TPyczNU7b84CXcbxks1Un6H6tLH9vf2LRnn8Ax7A5WQAAAHicY2BkYGAA4teL1+yI57f5ysDNwgAC529f0kOmWRiYVgEpDgYmEA8AUzEKsQAAAHicY2BkYGB2+O/AEMPCAAJAkpEBFbAAADgKAe0EAAAiAAAAAAQAAAAEAAAAAAAAKgAqACoAiAAAeJxjYGRgYGBhsGFgYgABEMkFhAwM/xn0QAIAD6YBhwB4nI1Ty07cMBS9QwKlQapQW3VXySvEqDCZGbGaHULiIQ1FKgjWMxknMfLEke2A+IJu+wntrt/QbVf9gG75jK577Lg8K1qQPCfnnnt8fX1NRC/pmjrk/zprC+8D7tBy9DHgBXoWfQ44Av8t4Bj4Z8CLtBL9CniJluPXASf0Lm4CXqFX8Q84dOLnMB17N4c7tBo1AS/Qi+hTwBH4rwHHwN8DXqQ30XXAS7QaLwSc0Gn8NuAVWou/gFmnjLrEaEh9GmDdDGgL3B4JsrRPDU2hTOiMSuJUIdKQQayiAth69r6akSSFqIJuA19TrzCIaY8sIoxyrNIrL//pw7A2iMygkX5vDj+G+kuoLdX4GlGK/8Lnlz6/h9MpmoO9rafrz7ILXEHHaAx95s9lsI7AHNMBWEZHULnfAXwG9/ZqdzLI08iuwRloXE8kfhXYAvE23+23DU3t626rbs8/8adv+9DWknsHp3E17oCf+Z48rvEQNZ78paYM38qfk3v/u3l3u3GXN2Dmvmvpf1Srwk3pB/VSsp512bA/GG5i2WJ7wu430yQ5K3nFGiOqgtmSB5pJVSizwaacmUZzZhXLlZTq8qGGFY2YcSkqbth6aW1tRmlaCFs2016m5qn36SbJrqosG4uMV4aP2PHBmB3tjtmgN2izkGQyLWprekbIntJFing32a5rKWCN/SdSoga45EJykyQ7asZvHQ8PTm6cslIpwyeyjbVltNikc2HTR7YKh9LBl9DADC0U/jLcBZDKrMhUBfQBvXRzLtFtjU9eNHKin0x5InTqb8lNpfKv1s1xHzTXRqgKzek/mb7nB8RZTCDhGEX3kK/8Q75AmUM/eLkfA+0Hi908Kx4eNsMgudg5GLdRD7a84npi+YxNr5i5KIbW5izXas7cHXIMAau1OueZhfj+cOcP3P8MNIWLyYOBuxL6DRylJ4cAAAB4nGNgYoAALjDJyIAOWMCiTIxMLDmZedkABtIBygAAAA==) format('woff');
+}
+
+.markdown-body {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  color: #333;
+  overflow: hidden;
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+.markdown-body a {
+  background: transparent;
+}
+
+.markdown-body a:active,
+.markdown-body a:hover {
+  outline: 0;
+}
+
+.markdown-body strong {
+  font-weight: bold;
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.markdown-body img {
+  border: 0;
+}
+
+.markdown-body hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+.markdown-body pre {
+  overflow: auto;
+}
+
+.markdown-body code,
+.markdown-body kbd,
+.markdown-body pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+.markdown-body input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+.markdown-body html input[disabled] {
+  cursor: default;
+}
+
+.markdown-body input {
+  line-height: normal;
+}
+
+.markdown-body input[type="checkbox"] {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.markdown-body table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.markdown-body td,
+.markdown-body th {
+  padding: 0;
+}
+
+.markdown-body * {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body input {
+  font: 13px/1.4 Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.markdown-body a {
+  color: #4183c4;
+  text-decoration: none;
+}
+
+.markdown-body a:hover,
+.markdown-body a:focus,
+.markdown-body a:active {
+  text-decoration: underline;
+}
+
+.markdown-body hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.markdown-body hr:before {
+  display: table;
+  content: "";
+}
+
+.markdown-body hr:after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  line-height: 1.1;
+}
+
+.markdown-body h1 {
+  font-size: 30px;
+}
+
+.markdown-body h2 {
+  font-size: 21px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+}
+
+.markdown-body h4 {
+  font-size: 14px;
+}
+
+.markdown-body h5 {
+  font-size: 12px;
+}
+
+.markdown-body h6 {
+  font-size: 11px;
+}
+
+.markdown-body blockquote {
+  margin: 0;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body ol ol,
+.markdown-body ul ol {
+  list-style-type: lower-roman;
+}
+
+.markdown-body ul ul ol,
+.markdown-body ul ol ol,
+.markdown-body ol ul ol,
+.markdown-body ol ol ol {
+  list-style-type: lower-alpha;
+}
+
+.markdown-body dd {
+  margin-left: 0;
+}
+
+.markdown-body code {
+  font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+  font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+.markdown-body .octicon {
+  font: normal normal 16px octicons-anchor;
+  line-height: 1;
+  display: inline-block;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.markdown-body .octicon-link:before {
+  content: '\f05c';
+}
+
+.markdown-body>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+.markdown-body .anchor {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  padding-right: 6px;
+  padding-left: 30px;
+  margin-left: -30px;
+}
+
+.markdown-body .anchor:focus {
+  outline: none;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  position: relative;
+  margin-top: 1em;
+  margin-bottom: 16px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.markdown-body h1 .octicon-link,
+.markdown-body h2 .octicon-link,
+.markdown-body h3 .octicon-link,
+.markdown-body h4 .octicon-link,
+.markdown-body h5 .octicon-link,
+.markdown-body h6 .octicon-link {
+  display: none;
+  color: #000;
+  vertical-align: middle;
+}
+
+.markdown-body h1:hover .anchor,
+.markdown-body h2:hover .anchor,
+.markdown-body h3:hover .anchor,
+.markdown-body h4:hover .anchor,
+.markdown-body h5:hover .anchor,
+.markdown-body h6:hover .anchor {
+  padding-left: 8px;
+  margin-left: -30px;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.markdown-body h1:hover .anchor .octicon-link,
+.markdown-body h2:hover .anchor .octicon-link,
+.markdown-body h3:hover .anchor .octicon-link,
+.markdown-body h4:hover .anchor .octicon-link,
+.markdown-body h5:hover .anchor .octicon-link,
+.markdown-body h6:hover .anchor .octicon-link {
+  display: inline-block;
+}
+
+.markdown-body h1 {
+  padding-bottom: 0.3em;
+  font-size: 2.25em;
+  line-height: 1.2;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.75em;
+  line-height: 1.225;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+
+.markdown-body h4 {
+  font-size: 1.25em;
+}
+
+.markdown-body h5 {
+  font-size: 1em;
+}
+
+.markdown-body h6 {
+  font-size: 1em;
+  color: #777;
+}
+
+.markdown-body p,
+.markdown-body blockquote,
+.markdown-body ul,
+.markdown-body ol,
+.markdown-body dl,
+.markdown-body table,
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.markdown-body hr {
+  height: 4px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 2em;
+}
+
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body li>p {
+  margin-top: 16px;
+}
+
+.markdown-body dl {
+  padding: 0;
+}
+
+.markdown-body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.markdown-body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.markdown-body blockquote {
+  padding: 0 15px;
+  color: #777;
+  border-left: 4px solid #ddd;
+}
+
+.markdown-body blockquote>:first-child {
+  margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+}
+
+.markdown-body table th {
+  font-weight: bold;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+.markdown-body table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+.markdown-body table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body code {
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(0,0,0,0.04);
+  border-radius: 3px;
+}
+
+.markdown-body code:before,
+.markdown-body code:after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+
+.markdown-body pre>code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.markdown-body .highlight {
+  margin-bottom: 16px;
+}
+
+.markdown-body .highlight pre,
+.markdown-body pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+}
+
+.markdown-body .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.markdown-body pre {
+  word-wrap: normal;
+}
+
+.markdown-body pre code {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+
+.markdown-body pre code:before,
+.markdown-body pre code:after {
+  content: normal;
+}
+
+.markdown-body .highlight {
+  background: #fff;
+}
+
+.markdown-body .highlight .h {
+  color: #333;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.markdown-body .highlight .mf,
+.markdown-body .highlight .mh,
+.markdown-body .highlight .mi,
+.markdown-body .highlight .mo,
+.markdown-body .highlight .il,
+.markdown-body .highlight .m {
+  color: #945277;
+}
+
+.markdown-body .highlight .s,
+.markdown-body .highlight .sb,
+.markdown-body .highlight .sc,
+.markdown-body .highlight .sd,
+.markdown-body .highlight .s2,
+.markdown-body .highlight .se,
+.markdown-body .highlight .sh,
+.markdown-body .highlight .si,
+.markdown-body .highlight .sx,
+.markdown-body .highlight .s1 {
+  color: #df5000;
+}
+
+.markdown-body .highlight .kc,
+.markdown-body .highlight .kd,
+.markdown-body .highlight .kn,
+.markdown-body .highlight .kp,
+.markdown-body .highlight .kr,
+.markdown-body .highlight .kt,
+.markdown-body .highlight .k,
+.markdown-body .highlight .o {
+  font-weight: bold;
+}
+
+.markdown-body .highlight .kt {
+  color: #458;
+}
+
+.markdown-body .highlight .c,
+.markdown-body .highlight .cm,
+.markdown-body .highlight .c1 {
+  color: #998;
+  font-style: italic;
+}
+
+.markdown-body .highlight .cp,
+.markdown-body .highlight .cs,
+.markdown-body .highlight .cp .h {
+  color: #999;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .cs {
+  font-style: italic;
+}
+
+.markdown-body .highlight .n {
+  color: #333;
+}
+
+.markdown-body .highlight .na,
+.markdown-body .highlight .nv,
+.markdown-body .highlight .vc,
+.markdown-body .highlight .vg,
+.markdown-body .highlight .vi {
+  color: #008080;
+}
+
+.markdown-body .highlight .nb {
+  color: #0086B3;
+}
+
+.markdown-body .highlight .nc {
+  color: #458;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .no {
+  color: #094e99;
+}
+
+.markdown-body .highlight .ni {
+  color: #800080;
+}
+
+.markdown-body .highlight .ne {
+  color: #990000;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .nf {
+  color: #945277;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .nn {
+  color: #555;
+}
+
+.markdown-body .highlight .nt {
+  color: #000080;
+}
+
+.markdown-body .highlight .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+
+.markdown-body .highlight .gd {
+  color: #000;
+  background-color: #fdd;
+}
+
+.markdown-body .highlight .gd .x {
+  color: #000;
+  background-color: #faa;
+}
+
+.markdown-body .highlight .ge {
+  font-style: italic;
+}
+
+.markdown-body .highlight .gr {
+  color: #aa0000;
+}
+
+.markdown-body .highlight .gh {
+  color: #999;
+}
+
+.markdown-body .highlight .gi {
+  color: #000;
+  background-color: #dfd;
+}
+
+.markdown-body .highlight .gi .x {
+  color: #000;
+  background-color: #afa;
+}
+
+.markdown-body .highlight .go {
+  color: #888;
+}
+
+.markdown-body .highlight .gp {
+  color: #555;
+}
+
+.markdown-body .highlight .gs {
+  font-weight: bold;
+}
+
+.markdown-body .highlight .gu {
+  color: #800080;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .gt {
+  color: #aa0000;
+}
+
+.markdown-body .highlight .ow {
+  font-weight: bold;
+}
+
+.markdown-body .highlight .w {
+  color: #bbb;
+}
+
+.markdown-body .highlight .sr {
+  color: #017936;
+}
+
+.markdown-body .highlight .ss {
+  color: #8b467f;
+}
+
+.markdown-body .highlight .bp {
+  color: #999;
+}
+
+.markdown-body .highlight .gc {
+  color: #999;
+  background-color: #EAF2F5;
+}
+
+.markdown-body kbd {
+  background-color: #e7e7e7;
+  background-image: -webkit-linear-gradient(#fefefe, #e7e7e7);
+  background-image: linear-gradient(#fefefe, #e7e7e7);
+  background-repeat: repeat-x;
+  display: inline-block;
+  padding: 3px 5px;
+  font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  line-height: 10px;
+  color: #000;
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+}
+
+.markdown-body .highlight .pl-coc,
+.markdown-body .highlight .pl-entm,
+.markdown-body .highlight .pl-eoa,
+.markdown-body .highlight .pl-mai .pl-sf,
+.markdown-body .highlight .pl-pdv,
+.markdown-body .highlight .pl-sc,
+.markdown-body .highlight .pl-sr,
+.markdown-body .highlight .pl-v,
+.markdown-body .highlight .pl-vpf {
+  color: #0086b3;
+}
+
+.markdown-body .highlight .pl-eoac,
+.markdown-body .highlight .pl-mdht,
+.markdown-body .highlight .pl-mi1,
+.markdown-body .highlight .pl-mri,
+.markdown-body .highlight .pl-va,
+.markdown-body .highlight .pl-vpu {
+  color: #008080;
+}
+
+.markdown-body .highlight .pl-c,
+.markdown-body .highlight .pl-pdc {
+  color: #b4b7b4;
+  font-style: italic;
+}
+
+.markdown-body .highlight .pl-k,
+.markdown-body .highlight .pl-ko,
+.markdown-body .highlight .pl-kolp,
+.markdown-body .highlight .pl-mc,
+.markdown-body .highlight .pl-mr,
+.markdown-body .highlight .pl-ms,
+.markdown-body .highlight .pl-s,
+.markdown-body .highlight .pl-sok,
+.markdown-body .highlight .pl-st {
+  color: #6e5494;
+}
+
+.markdown-body .highlight .pl-ef,
+.markdown-body .highlight .pl-enf,
+.markdown-body .highlight .pl-enm,
+.markdown-body .highlight .pl-entc,
+.markdown-body .highlight .pl-eoi,
+.markdown-body .highlight .pl-sf,
+.markdown-body .highlight .pl-smc {
+  color: #d12089;
+}
+
+.markdown-body .highlight .pl-ens,
+.markdown-body .highlight .pl-eoai,
+.markdown-body .highlight .pl-kos,
+.markdown-body .highlight .pl-mh .pl-pdh,
+.markdown-body .highlight .pl-mp,
+.markdown-body .highlight .pl-pde,
+.markdown-body .highlight .pl-stp {
+  color: #458;
+}
+
+.markdown-body .highlight .pl-enti {
+  color: #d12089;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .pl-cce,
+.markdown-body .highlight .pl-enc,
+.markdown-body .highlight .pl-kou,
+.markdown-body .highlight .pl-mq {
+  color: #f93;
+}
+
+.markdown-body .highlight .pl-mp1 .pl-sf {
+  color: #458;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .pl-cos,
+.markdown-body .highlight .pl-ent,
+.markdown-body .highlight .pl-md,
+.markdown-body .highlight .pl-mdhf,
+.markdown-body .highlight .pl-ml,
+.markdown-body .highlight .pl-pdc1,
+.markdown-body .highlight .pl-pds,
+.markdown-body .highlight .pl-s1,
+.markdown-body .highlight .pl-scp,
+.markdown-body .highlight .pl-sol {
+  color: #df5000;
+}
+
+.markdown-body .highlight .pl-c1,
+.markdown-body .highlight .pl-cn,
+.markdown-body .highlight .pl-pse,
+.markdown-body .highlight .pl-pse .pl-s2,
+.markdown-body .highlight .pl-vi {
+  color: #a31515;
+}
+
+.markdown-body .highlight .pl-mb,
+.markdown-body .highlight .pl-pdb {
+  color: #df5000;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .pl-mi,
+.markdown-body .highlight .pl-pdi {
+  color: #6e5494;
+  font-style: italic;
+}
+
+.markdown-body .highlight .pl-ms1 {
+  background-color: #f5f5f5;
+}
+
+.markdown-body .highlight .pl-mdh,
+.markdown-body .highlight .pl-mdi {
+  font-weight: bold;
+}
+
+.markdown-body .highlight .pl-mdr {
+  color: #0086b3;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .pl-s2 {
+  color: #333;
+}
+
+.markdown-body .highlight .pl-ii {
+  background-color: #df5000;
+  color: #fff;
+}
+
+.markdown-body .highlight .pl-ib {
+  background-color: #f93;
+}
+
+.markdown-body .highlight .pl-id {
+  background-color: #a31515;
+  color: #fff;
+}
+
+.markdown-body .highlight .pl-iu {
+  background-color: #b4b7b4;
+}
+
+.markdown-body .highlight .pl-mo {
+  color: #969896;
+}
+
+.markdown-body .task-list-item {
+  list-style-type: none;
+}
+
+.markdown-body .task-list-item+.task-list-item {
+  margin-top: 3px;
+}
+
+.markdown-body .task-list-item input {
+  float: left;
+  margin: 0.3em 0 0.25em -1.6em;
+  vertical-align: middle;
+}</style><title>Zusammenfassung</title></head><body><article class="markdown-body"><h1>
+<a id="user-content-einführung" class="anchor" href="#einf%C3%BChrung" aria-hidden="true"><span class="octicon octicon-link"></span></a>Einführung</h1>
+
+<h2>
+<a id="user-content-anwendungsgebiete" class="anchor" href="#anwendungsgebiete" aria-hidden="true"><span class="octicon octicon-link"></span></a>Anwendungsgebiete</h2>
+
+<ul>
+<li>ES werden in unterschiedlichen Bereichen verwendet:
+
+<ul>
+<li>Autos</li>
+<li>Flugzeuge</li>
+<li>Züge</li>
+<li>Mobiltelefone</li>
+<li>Gesundheitssektor</li>
+<li>Sicherheit</li>
+<li>TVs</li>
+<li>Fabriken</li>
+<li>Intelligente Gebäude</li>
+<li>Logistik (RFID) - Tracking von Objekten</li>
+<li>Robotik</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="user-content-wichtige-eigenschaften" class="anchor" href="#wichtige-eigenschaften" aria-hidden="true"><span class="octicon octicon-link"></span></a>Wichtige Eigenschaften</h2>
+
+<ul>
+<li>dependable
+
+<ul>
+<li>Reliability - Probability that system will not fail</li>
+<li>Maintainability - Probability that failing system can be repaired within certain timeframe</li>
+<li>Availability - Probability that system is available</li>
+<li>Safety - System will not cause any harm</li>
+<li>Security - confidential data remains confidential and authentic communication is guaranteed</li>
+</ul>
+</li>
+<li>efficient
+
+<ul>
+<li>Energie</li>
+<li>Laufzeiteffizienz</li>
+<li>Codegröße</li>
+<li>Gewicht/Masse der Hardware</li>
+<li>Kosten</li>
+</ul>
+</li>
+</ul>
+
+<p>ES müssen oftmals Echtzeitbedingungen umsetzen.
+Zwei Arten:</p>
+
+<ul>
+<li>harte Bedingungen - Nicht-Einhalten führt zu Katastrophe</li>
+<li>weiche Bedingungen - alle anderen Zeitbedingungen</li>
+</ul>
+
+<p>weitere Eigenschaften</p>
+
+<ul>
+<li>reaktiv</li>
+<li>hybrid - analoge und digitale Bestandteile</li>
+<li>DUI - dedicated user interface</li>
+</ul>
+
+<h2>
+<a id="user-content-herausforderungen-im-design-von-es" class="anchor" href="#herausforderungen-im-design-von-es" aria-hidden="true"><span class="octicon octicon-link"></span></a>Herausforderungen im Design von ES</h2>
+
+<ul>
+<li>Software muss auf Hardware abgestimmt werden</li>
+<li>¬funktionale Bedingungen müssen eingehalten werden
+
+<ul>
+<li>Echtzeitbedingungen</li>
+<li>Energieeffizienz</li>
+<li>Dependability - Verlässlichkeit</li>
+</ul>
+</li>
+<li>Zeitmanagement ist eine der größten Herausforderungen</li>
+<li>Concurrency (Nebenläufigkeit) ist essentiell</li>
+<li>Kombinieren von Komponenten ist wichtig für Design</li>
+<li>traditionelle sequentielle Prog.Sprachen sind nicht ideal</li>
+</ul>
+
+<h2>
+<a id="user-content-designflow" class="anchor" href="#designflow" aria-hidden="true"><span class="octicon octicon-link"></span></a>Designflow</h2>
+
+<ul>
+<li>rounded boxes - stored info</li>
+<li>rectangles - transformations on data</li>
+<li>application knowledge
+-&gt; specification
+-&gt; HW components
+-&gt; system software
+=&gt; design repository -&gt; design -&gt; [test]
+|                 |
+[application mapping]</li>
+<li>[optimization]</li>
+<li>[evaluation &amp; validation]</li>
+<li><p>[test]</p></li>
+<li><p>Figure 1.6 page 13</p></li>
+</ul>
+
+<h1>
+<a id="user-content-spezifikationen-und-modellierung" class="anchor" href="#spezifikationen-und-modellierung" aria-hidden="true"><span class="octicon octicon-link"></span></a>Spezifikationen und Modellierung</h1>
+
+<h2>
+<a id="user-content-bedingungen" class="anchor" href="#bedingungen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bedingungen</h2>
+
+<ul>
+<li>Model: Simplification of another entity, which can be a 
+physical thing or another model. The model contains exactly those 
+characteristics and properties of the modeled entity that are 
+relevant for a given task. A model is minimal with respect to a 
+task if it does not contain any other characteristics than those 
+relevant for the task.</li>
+</ul>
+
+<p>Modelle werden in Sprachen beschrieben. Sprachen sollten
+folgende Eigenschaften aufweisen (Wunschliste):</p>
+
+<ul>
+<li>Hierarchie
+
+<ul>
+<li>Verhaltshierarchien - enthalten für Beschreibung des Systemverhaltens notwendige Objekte, z.B. Zustände, Events</li>
+<li>Strukturhierarchien - beschreiben physische Komponenten des Systems</li>
+</ul>
+</li>
+<li>Komponenten-basiertes Design - Verhalten des Systems muss von Verhalten der Komponenten ableitbar sein</li>
+<li>Nebenläufigkeit</li>
+<li>Synchronisation und Kommunikation</li>
+<li>Zeitverhalten (timing behavior)
+
+<ul>
+<li>elapsed time (vergangene Zeit) seit X</li>
+<li>Verzögern von Prozessen für spezifizierte Zeit</li>
+<li>being able to specify timeouts</li>
+<li>Fähigkeit Deadlines und Schedules zu spezifizieren</li>
+</ul>
+</li>
+<li>Zustandorientiertes Verhalten</li>
+<li>Eventhandling</li>
+<li>Ausnahmeorientiertes Verhalten</li>
+<li>Vorhandensein von Programmierelementen</li>
+<li>Ausführbarkeit</li>
+<li>Support für Design großer Systeme</li>
+<li>Support für Anwendungsdomain</li>
+<li>Lesbarkeit</li>
+<li>Portabilität und Flexibilität</li>
+<li>Termination - feasible to identify processes which will terminate from the specification</li>
+<li>Support für ¬Standard I/O-Devices</li>
+<li>¬funktionale Eigenschaften</li>
+<li>Support für Design von verlässlichen (dependable) Systemen</li>
+<li>keine Hindernisse für Generierung effizienter Implementierungen</li>
+<li>angemessenes MoC (Model of Computation)</li>
+</ul>
+
+<h2>
+<a id="user-content-models-of-computation-berechnungsmodelle" class="anchor" href="#models-of-computation-berechnungsmodelle" aria-hidden="true"><span class="octicon octicon-link"></span></a>Models of computation (Berechnungsmodelle)</h2>
+
+<ul>
+<li>MoCs definieren:
+
+<ul>
+<li>Komponenten</li>
+<li>Kommunikationsprotokolle</li>
+</ul>
+</li>
+</ul>
+
+<p>Beziehungen zwischen diesen Punkten können in Graphen 
+festgehalten werden.</p>
+
+<p>Models of Communication:</p>
+
+<ul>
+<li>shared memory</li>
+<li>message passing
+
+<ul>
+<li>async message passing - non-blocking communication</li>
+<li>sync message passing - blocking communication, rendez-vous based communication</li>
+<li>extended rendez-vous, remote invocation</li>
+</ul>
+</li>
+</ul>
+
+<p>Organisation von Berechnungen innerhalb der Komponenten</p>
+
+<ul>
+<li>Von-Neumann Modell</li>
+<li>discrete event model</li>
+<li>endliche Automaten</li>
+<li>Differentialgleichungen</li>
+</ul>
+
+<p>Kombinierte Modelle: Tatsächliche Sprachen kombinieren normalerweise ein Kommunikationsmodell mit einer Organisation von Berechnungen innerhalb der Komponenten.</p>
+
+<p>Beispiele:</p>
+
+<ul>
+<li>StateChart - kombiniert endliche Automaten mit shared memory</li>
+<li>SDL - kombiniert asynchrones message passing mit endlichen Automaten</li>
+<li>ADA, CSP - kombinieren von-Neumann mit synchronem message passing</li>
+</ul>
+
+<p>Figure 2.7 page 34</p>
+
+<h2>
+<a id="user-content-diskrete-event-basierte-sprachen" class="anchor" href="#diskrete-event-basierte-sprachen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Diskrete Event-basierte Sprachen</h2>
+
+<h3>
+<a id="user-content-vhdl" class="anchor" href="#vhdl" aria-hidden="true"><span class="octicon octicon-link"></span></a>VHDL</h3>
+
+<ul>
+<li>kann in die 1980er Jahre zurückverfolgt werden</li>
+<li>im VHSIC Programm entwickelt (vom DoD)</li>
+<li>VHSIC hardware description language</li>
+<li>IEEE standard</li>
+</ul>
+
+<p>Elemente:</p>
+
+<ul>
+<li>Entitäten</li>
+<li>Architekturen</li>
+</ul>
+
+<p>definieren von Verhalten und Struktur</p>
+
+<h3>
+<a id="user-content-systemc" class="anchor" href="#systemc" aria-hidden="true"><span class="octicon octicon-link"></span></a>SystemC</h3>
+
+<ul>
+<li>erlaubt Spezifikation von Hardwarestrukturen in Software</li>
+</ul>
+
+<h1>
+<a id="user-content-hardware" class="anchor" href="#hardware" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hardware</h1>
+
+<h2>
+<a id="user-content-input" class="anchor" href="#input" aria-hidden="true"><span class="octicon octicon-link"></span></a>Input</h2>
+
+<p>Sensoren:</p>
+
+<ul>
+<li>Beschleunigungssensoren</li>
+<li>Regensensoren</li>
+<li>Bildsensoren (charge-coupled devices und CMOS)</li>
+<li>biometrische Sensoren</li>
+<li>künstliche Augen</li>
+<li>RFID</li>
+<li>andere Sensoren</li>
+</ul>
+
+<p>Sensoren erzeugen Signale.</p>
+
+<p>Diskretisierung von Zeit: Sample-and-hold circuits</p>
+
+<ul>
+<li>messen eines Wertes aus dem kontinuierlichen Zeitspektrum</li>
+<li>gemessener Wert wird für bestimmte Zeitdauer weitergeleitet</li>
+<li>danach zurück zur Messung des Wertes</li>
+<li>Output gleicht damit diskreten Werten (gleicher Wert für bestimmte Zeitdauer)</li>
+</ul>
+
+<p>Diskretisierung von Werten: A/D Konverter</p>
+
+<ul>
+<li>Flash A/D converter
+
+<ul>
+<li>large number of comparators</li>
+<li>each comparator has two inputs (+ and -)</li>
+<li>if voltage at + larger than at - -&gt; logical 1, otherwise logical 0</li>
+<li>first comparator returns 1, if h(t) exceeds 3/4 Vref</li>
+<li>second returns 1, for h(t) &gt; 2/4 Vref</li>
+<li>third returns 1, for h(t) &gt; 1/4 Vref</li>
+<li>encoder tries to identify most significant '1'</li>
+</ul>
+</li>
+<li>successive appriximation</li>
+</ul>
+
+<h2>
+<a id="user-content-processing-units" class="anchor" href="#processing-units" aria-hidden="true"><span class="octicon octicon-link"></span></a>Processing Units</h2>
+
+<ul>
+<li>Energie"verbrauch" ist wichtigste Beschränkung in ES</li>
+</ul>
+
+<h3>
+<a id="user-content-asics-application-specific-circuits" class="anchor" href="#asics-application-specific-circuits" aria-hidden="true"><span class="octicon octicon-link"></span></a>ASICs (Application-specific circuits)</h3>
+
+<ul>
+<li>hohe Kosten</li>
+<li>sehr gute Performance für sehr kleinen Anwendungsbereich</li>
+<li>keine Flexibilität</li>
+</ul>
+
+<h3>
+<a id="user-content-prozessoren" class="anchor" href="#prozessoren" aria-hidden="true"><span class="octicon octicon-link"></span></a>Prozessoren</h3>
+
+<ul>
+<li>Flexibilität</li>
+<li>Energieeffizienz ist wichtig - Compiler müssen so effizient sein wie möglich</li>
+<li>müssen nicht kompatibel mit PC-Prozessoren sein</li>
+<li>Dynamic power management
+
+<ul>
+<li>power saving states (idle and sleep)</li>
+<li>changes between states</li>
+</ul>
+</li>
+<li>Dynamic voltage scaling
+
+<ul>
+<li>decreasing supply voltage reduces power quadratically</li>
+<li>only linear increase of runtime of algorithms</li>
+</ul>
+</li>
+<li>Code-size efficiency
+
+<ul>
+<li>CISC machines (Complex Instruction Set Processors)</li>
+<li>Kompressionstechniken</li>
+</ul>
+</li>
+<li>Laufzeiteffizienz</li>
+</ul>
+
+<h3>
+<a id="user-content-reconfigurable-logic" class="anchor" href="#reconfigurable-logic" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reconfigurable Logic</h3>
+
+<p>application areas:</p>
+
+<ul>
+<li>fast prototyping</li>
+<li>low volume applications</li>
+<li>realtime systems</li>
+</ul>
+
+<h3>
+<a id="user-content-memories" class="anchor" href="#memories" aria-hidden="true"><span class="octicon octicon-link"></span></a>Memories</h3>
+
+<ul>
+<li>großer Geschwindigkeitsunterschied zw. Prozessoren und Memories</li>
+<li>kleinere Memories wichtig, da sie schnellere Zugriffszeiten bieten</li>
+<li>mehrere kleine Speicher für häufig genutzte Instruktionen und Daten plus ein größerer Speicher für restliche Daten und Instruktionen bieten i.A. höhere Energieeffizienz</li>
+<li>Scratch Pad memories (SPMs) als Alternative zu Caches</li>
+</ul>
+
+<h2>
+<a id="user-content-communication" class="anchor" href="#communication" aria-hidden="true"><span class="octicon octicon-link"></span></a>Communication</h2>
+
+<ul>
+<li>Informationen können durch Kanäle transportiert werden</li>
+<li>physische Entitäten, die Kommunikation ermöglichen heißen Kommunikationsmedien</li>
+<li>wichtige solche Medien:
+
+<ul>
+<li>drahtlose Medien (Infrarot, RFID)</li>
+<li>optische Medien (Glasfaser)</li>
+<li>Kabel</li>
+</ul>
+</li>
+</ul>
+
+<h3>
+<a id="user-content-requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h3>
+
+<ul>
+<li>Echtzeitverhalten</li>
+<li>Effizienz</li>
+<li>angemessende Bandbreite und Kommunikationsverzögerung</li>
+<li>Support für eventbasierte Kommunikation</li>
+<li>Robustheit</li>
+<li>Fehlertoleranz</li>
+<li>Wartbarkeit, Diagnosefähigkeit</li>
+<li>Datenschutz</li>
+</ul>
+
+<h3>
+<a id="user-content-elektrische-robustheit" class="anchor" href="#elektrische-robustheit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Elektrische Robustheit</h3>
+
+<ul>
+<li>single-ended signaling
+
+<ul>
+<li>single ground wire</li>
+<li>affected by external noise</li>
+<li>difficult to establish high-quality ground signals</li>
+</ul>
+</li>
+<li>differential signaling
+
+<ul>
+<li>two wires for data transport</li>
+<li>noise can be effectively removed</li>
+<li>logic value only depends on polarity of voltage between two wires, magnitude can be affected without effect</li>
+<li>quality of ground wire unimportant</li>
+<li>no common ground wire required</li>
+<li>larger throughput than single-ended signaling</li>
+<li>used in standard Ethernet-based networks</li>
+</ul>
+</li>
+</ul>
+
+<h3>
+<a id="user-content-echtzeitverhalten-garantieren" class="anchor" href="#echtzeitverhalten-garantieren" aria-hidden="true"><span class="octicon octicon-link"></span></a>Echtzeitverhalten garantieren</h3>
+
+<ul>
+<li>Nutzung von time division multiple access (TDMA)</li>
+<li>jeder Kommunikationspartner bekommt festen Zeitslot</li>
+<li>innerhalb dieses Slots darf gesendet werden</li>
+<li>Zeit wird in Frames unterteilt</li>
+<li>jedes Frame startet mit Synchronisierung und einem Gap, um dem Sender das ausschalten zu ermöglichen </li>
+</ul>
+
+<p>carrier-sense multiple access/collision detect (CSMA/CD)</p>
+
+<ul>
+<li>wenn mehrere Partner zur gleichen Zeit kommunizieren, wird für jeden eine zufällige Wartezeit bestimmt</li>
+<li>sehr unwahrscheinlich, dass sich Szenario nach Wartezeit wiederholt</li>
+<li>kann nicht für ES benutzt werden, da Laufzeit nicht bestimmt werden kann</li>
+</ul>
+
+<p>carrier-sense multiple access/collision avoidance (CSMA/CA)</p>
+
+<ul>
+<li>jeder Partner bekommt Priorität zugewiesen</li>
+<li>dies geschieht in Verhandlungsphasen</li>
+<li>wenn Partner einen Partner mit höherer Priorität erkennt, muss Ersterer seine NUtzungsabsicht sofort zurückziehen</li>
+<li>daher vorhersehbare Laufzeit für Partner mit höchster Priorität</li>
+<li>für andere auch, wenn Partner mit höchster Prio nicht dauerhaft Zugang verlangt</li>
+<li>Ethernet mit über 1GBit vermeidet ebenfalls Kollisionen</li>
+</ul>
+
+<h3>
+<a id="user-content-beispiele" class="anchor" href="#beispiele" aria-hidden="true"><span class="octicon octicon-link"></span></a>Beispiele</h3>
+
+<ul>
+<li>Sensor/actuator buses</li>
+<li>field buses
+
+<ul>
+<li>Controler Area Network</li>
+<li>Time-Triggered-Protocol (TTP)</li>
+<li>FlexRay</li>
+<li>LIN</li>
+<li>MAP</li>
+<li>EIB</li>
+</ul>
+</li>
+<li>Kabelgebundene Multimedia-Kommunikation</li>
+<li>drahtlose Kommunikation</li>
+</ul>
+
+<h2>
+<a id="user-content-output" class="anchor" href="#output" aria-hidden="true"><span class="octicon octicon-link"></span></a>Output</h2>
+
+<ul>
+<li>Displays</li>
+<li><p>Elektromechanische Geräte</p></li>
+<li><p>analog input zu analog output:
+AA -&gt; Sample &amp; hold -&gt; A/D conv. -&gt; Verarbeitung -&gt; D/A conv. -&gt; filter</p></li>
+</ul>
+
+<h3>
+<a id="user-content-da-konverter" class="anchor" href="#da-konverter" aria-hidden="true"><span class="octicon octicon-link"></span></a>D/A Konverter</h3>
+
+<ul>
+<li>wandeln digital in analog um</li>
+<li>benutzen Kirchhoffs Regeln</li>
+</ul>
+
+<h3>
+<a id="user-content-sampling-theorem" class="anchor" href="#sampling-theorem" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sampling theorem</h3>
+
+<ul>
+<li>mithilfe der Shannon-Wittaker interpolation kann das ursprüngliche analoge Signal approximiert werden</li>
+<li>ebenso wird die Fourier Transformation benutzt</li>
+<li>ansonsten sehr viel Mathe</li>
+</ul>
+
+<h1>
+<a id="user-content-system-software" class="anchor" href="#system-software" aria-hidden="true"><span class="octicon octicon-link"></span></a>System Software</h1>
+
+<h2>
+<a id="user-content-embedded-operating-systems" class="anchor" href="#embedded-operating-systems" aria-hidden="true"><span class="octicon octicon-link"></span></a>Embedded Operating Systems</h2>
+
+<h3>
+<a id="user-content-allgemeine-bedingungen" class="anchor" href="#allgemeine-bedingungen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Allgemeine Bedingungen</h3>
+
+<ul>
+<li>muss flexibel für Anwendungsbereich angepasst werden können</li>
+<li>Konfigurabilität (configurability)
+
+<ul>
+<li>OO</li>
+<li>Aspect-oriented Programming</li>
+<li>konditioniertes Kompilieren</li>
+<li>fortgeschrittene Kompilierzeit Evaluation</li>
+<li>Linker-basiertes Entfernen von nicht genutzten Funktionen</li>
+</ul>
+</li>
+<li>Treiber sind vom OS getrennt</li>
+<li>keine Schutzmechanismen (wie privilegierter Zugang) notwendig, da ungetestete Software nicht geladen wird</li>
+<li>interrupts können mit jedem Prozess verbunden werden</li>
+<li>viele ES sind Echtzeitsysteme und daher muss deren OS ein RTOS sein</li>
+</ul>
+
+<h3>
+<a id="user-content-echtzeit-os" class="anchor" href="#echtzeit-os" aria-hidden="true"><span class="octicon octicon-link"></span></a>Echtzeit OS</h3>
+
+<ul>
+<li>Zeitverhalten des OS muss vorhersagbar sein</li>
+<li>OS muss das Scheduling der Tasks managen</li>
+<li>einige Systeme erfordern Zeitmanagement durch das OS</li>
+<li>OS muss schnell sein</li>
+</ul>
+
+<p>vorhandene RTOS können in drei Kategorien eingeteilt werden:</p>
+
+<ul>
+<li>schnelle proprietäre Kernel</li>
+<li>Echtzeiterweiterungen zu Standard-OS</li>
+<li>Forschungssysteme</li>
+</ul>
+
+<p>Kernunterschied zu Standard OS:</p>
+
+<ul>
+<li>es wird für den Worst Case optimiert</li>
+</ul>
+
+<h3>
+<a id="user-content-resources-access-protocols" class="anchor" href="#resources-access-protocols" aria-hidden="true"><span class="octicon octicon-link"></span></a>Resources access protocols</h3>
+
+<h4>
+<a id="user-content-priority-inversion" class="anchor" href="#priority-inversion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Priority Inversion</h4>
+
+<ul>
+<li>Prozess mit geringerer Priorität blockt Prozess mit höherer Priorität</li>
+</ul>
+
+<h4>
+<a id="user-content-priority-inheritance" class="anchor" href="#priority-inheritance" aria-hidden="true"><span class="octicon octicon-link"></span></a>Priority Inheritance</h4>
+
+<ul>
+<li>T1 hat Prio 1</li>
+<li>T2 hat Prio 2</li>
+<li><p>T3 hat Prio 3</p></li>
+<li><p>T2 verlangt Zugang zu S</p></li>
+<li>T1 verlangt Zugang zu S - wird blockiert</li>
+<li>T2 erbt Prio von T1</li>
+</ul>
+
+<h2>
+<a id="user-content-hardware-abstraction-layers" class="anchor" href="#hardware-abstraction-layers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hardware abstraction layers</h2>
+
+<ul>
+<li>accessing hardware through hardware-independent API</li>
+</ul>
+
+<h2>
+<a id="user-content-middleware" class="anchor" href="#middleware" aria-hidden="true"><span class="octicon octicon-link"></span></a>Middleware</h2>
+
+<ul>
+<li>add communication functionality on top of OS</li>
+</ul>
+
+<h3>
+<a id="user-content-osek" class="anchor" href="#osek" aria-hidden="true"><span class="octicon octicon-link"></span></a>OSEK</h3>
+
+<ul>
+<li>für Autobranche benutzt</li>
+</ul>
+
+<h3>
+<a id="user-content-corba-common-object-request-broker-architecture" class="anchor" href="#corba-common-object-request-broker-architecture" aria-hidden="true"><span class="octicon octicon-link"></span></a>Corba (Common Object Request Broker Architecture)</h3>
+
+<ul>
+<li>standardisierter Zugriff auf Remote-Objekte</li>
+<li>standardmäßig nicht für RTOS geeignet</li>
+<li>separater Standard RT-CORBA für RTOS definiert</li>
+</ul>
+
+<h3>
+<a id="user-content-mpi-message-passing-interface" class="anchor" href="#mpi-message-passing-interface" aria-hidden="true"><span class="octicon octicon-link"></span></a>MPI (Message passing interface)</h3>
+
+<ul>
+<li>Alternative zu CORBA</li>
+<li>Kommunikation zwischen Prozessoren</li>
+</ul>
+
+<h3>
+<a id="user-content-posix-threads-pthreads" class="anchor" href="#posix-threads-pthreads" aria-hidden="true"><span class="octicon octicon-link"></span></a>POSIX Threads (Pthreads)</h3>
+
+<ul>
+<li>API für Threads auf der OS-Ebene</li>
+</ul>
+
+<h3>
+<a id="user-content-openmp" class="anchor" href="#openmp" aria-hidden="true"><span class="octicon octicon-link"></span></a>OpenMP</h3>
+
+<ul>
+<li>explizite Parallelität</li>
+<li>implizite Kommunikation, Synchronisation, etc.</li>
+</ul>
+
+<h3>
+<a id="user-content-upnp-dpws-jxta" class="anchor" href="#upnp-dpws-jxta" aria-hidden="true"><span class="octicon octicon-link"></span></a>UPnP, DPWS, JXTA</h3>
+
+<ul>
+<li>Universal Plug-and-Play
+
+<ul>
+<li>Erweiterung von PnP für Netzwerke</li>
+</ul>
+</li>
+<li>Devices Profile for Web Services (DPWS) allgemeiner als UPnP</li>
+<li>JXTA ist eine OpenSource Peer-to-Peer Protokollspezifikation</li>
+</ul>
+
+<h1>
+<a id="user-content-evaluation-und-validierung" class="anchor" href="#evaluation-und-validierung" aria-hidden="true"><span class="octicon octicon-link"></span></a>Evaluation und Validierung</h1>
+
+<ul>
+<li>Validierung überprüft, ob ein Design alle Restriktionen erfüllt, wie erwartet funktionieren wird und für den Zweck angemessen ist</li>
+<li>Validierung mit mathematischer Genauigkeit wird formale Validierung genannt</li>
+<li>sehr wichtig während Designprozess</li>
+<li>Evaluation ist Prozess des Berechnens von quantitativen Informationen von einigen Kern-Charakteristika eines bestimmten Designs</li>
+</ul>
+
+<p>Kopetz' Designprinzipien:</p>
+
+<ul>
+<li>Safety muss möglicherweise als der zentrale Aspekt gesehen werden, von dem alles abhängt</li>
+<li>präzise Spezifikationen von Designhypothesen müssen gleich zu Beginn gemacht werden (inklusive erwarteten Fehlern und deren Wahrscheinlichkeit)</li>
+<li>"Fault containment regions" müssen erwogen werden
+
+<ul>
+<li>Fehler in einer solchen Region beeinflussen keine andere solche Region</li>
+</ul>
+</li>
+<li>konsistente Vorstellung von Zeit und Zustand muss etabliert werden</li>
+<li>wohldefinierte Schnittstellen müssen die Interna von Komponenten verstecken</li>
+<li>Komponenten müssen unabhängig voneinander versagen (kein Einfluss auf andere Komponenten)</li>
+<li>Komponenten müssen sich selbst als korrekt annehmen bis mindestens zwei andere Komponenten das Gegenteil annehmen</li>
+<li>Fehlertoleranz darf es nicht schwerer machen das Verhalten des Systems zu erklären; Fehlertoleranz Mechanismen sollten von der regulären Funktionalität entkoppelt sein</li>
+<li>das System muss für Diagnose designed werden</li>
+<li>man-machine interface muss intuitiv und vergebend sein; safety sollte trotz Fehler des Menschens weiter gewährleistet sein</li>
+<li>jede Anomalie sollte aufgezeichnet werden; Aufzeichnung sollte auch interne Effekte beinhalten</li>
+<li>provide never-give up strategy</li>
+</ul>
+
+<h1>
+<a id="user-content-application-mapping" class="anchor" href="#application-mapping" aria-hidden="true"><span class="octicon octicon-link"></span></a>Application mapping</h1>
+
+<h2>
+<a id="user-content-classification-of-scheduling-algorithms" class="anchor" href="#classification-of-scheduling-algorithms" aria-hidden="true"><span class="octicon octicon-link"></span></a>Classification of scheduling algorithms</h2>
+
+<ul>
+<li>soft and hard deadlines</li>
+<li>periodic vs. aperiodic tasks</li>
+<li>preemptive vs. non-preemptive scheduling</li>
+<li>static vs. dynamic scheduling</li>
+<li>independent vs. dependent tasks</li>
+<li>mono- vs. multi-processor scheduling</li>
+<li>centralized vs. distributed scheduling</li>
+</ul>
+
+<h2>
+<a id="user-content-scheduling-algorithms" class="anchor" href="#scheduling-algorithms" aria-hidden="true"><span class="octicon octicon-link"></span></a>Scheduling algorithms</h2>
+
+<h3>
+<a id="user-content-aperiodic-scheduling-without-precedence-constraints" class="anchor" href="#aperiodic-scheduling-without-precedence-constraints" aria-hidden="true"><span class="octicon octicon-link"></span></a>Aperiodic scheduling without precedence constraints</h3>
+
+<ul>
+<li>Earliest Due Date (identical arrival times)</li>
+<li>Earliest Deadline First (different arrival times with preemption)</li>
+<li>Least Laxity (deadline interval - execution time)</li>
+</ul>
+
+<h3>
+<a id="user-content-aperiodic-scheduling-with-precedence-constraints" class="anchor" href="#aperiodic-scheduling-with-precedence-constraints" aria-hidden="true"><span class="octicon octicon-link"></span></a>Aperiodic Scheduling with precedence constraints</h3>
+
+<ul>
+<li>LatestDeadlineFirst</li>
+<li>ASAP</li>
+<li>ALAP (as late as possible)</li>
+<li>list scheduling</li>
+<li>force-directed scheduling
+
+<ul>
+<li>goal: balanced utilization of resources</li>
+<li>based on spring model</li>
+<li>originally proposed for high-level synthesis</li>
+</ul>
+</li>
+</ul>
+
+<h3>
+<a id="user-content-periodic-scheduling-without-precedence-constraints" class="anchor" href="#periodic-scheduling-without-precedence-constraints" aria-hidden="true"><span class="octicon octicon-link"></span></a>Periodic scheduling without precedence constraints</h3>
+
+<ul>
+<li>rate monotonic scheduling</li>
+<li>Earliest deadline first</li>
+</ul>
+</article></body></html>
