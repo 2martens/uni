@@ -1,0 +1,91 @@
+\documentclass[tikz]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+%\usetikzlibrary{...}% tikz package already loaded by 'tikz' option
+
+\definecolor{informatik}{HTML}{73A1EC}
+\definecolor{wahlpflicht}{HTML}{EEEEEE}
+\definecolor{wahl}{HTML}{DDDDDD}
+\definecolor{methodik}{HTML}{FFFF77}
+\definecolor{sonstige}{HTML}{FF9966}
+\definecolor{neben1}{HTML}{77AA44}
+\definecolor{neben2}{HTML}{FFBB44}
+\definecolor{neben3}{HTML}{4477AA}
+\definecolor{cis-natinf}{HTML}{FFBB44}
+\definecolor{cis-nat}{HTML}{E23E38}
+\definecolor{abschluss}{HTML}{0055AA}
+\definecolor{grau}{HTML}{CCCCCC}
+
+
+\tikzset{
+    modul/.style={
+        line width=1mm,
+        font={\scriptsize\bf\sffamily},
+        align=center
+    },
+    big/.style={
+        font={\large\sffamily},
+    },
+    box/.style={
+    },
+    semester/.style={
+        font={\bf\sffamily},
+        anchor=east,
+        yshift=0.5cm,
+        xshift=-0.2cm
+    }
+}
+
+\begin{document}
+    \begin{tikzpicture}[scale=1.0]
+        \draw[lightgray,thick] (0, 0) grid (10, 6);
+        \node[semester] at (0, 5) {WS1};
+        \path[box,fill=informatik]  (0.050000, 5.950000) rectangle (1.950000, 5.050000);
+        \path[box,fill=informatik]  (2.050000, 5.950000) rectangle (4.950000, 5.050000);
+        \path[box,fill=informatik]  (5.050000, 5.950000) rectangle (7.950000, 5.050000);
+        \path[box,fill=informatik]  (8.050000, 5.950000) rectangle (9.950000, 5.050000);
+        \node[semester] at (0, 4) {SS1};
+        \path[box,fill=informatik]  (0.050000, 4.950000) rectangle (1.950000, 4.050000);
+        \path[box,fill=informatik]  (2.050000, 4.950000) rectangle (4.950000, 4.050000);
+        \path[box,fill=informatik]  (2.050000, 5.100000) rectangle (4.950000, 4.900000);
+        \path[box,fill=methodik]  (5.050000, 4.950000) rectangle (5.950000, 4.050000);
+        \path[box,fill=methodik]  (6.050000, 4.950000) rectangle (6.950000, 4.050000);
+        \path[box,fill=informatik]  (7.050000, 4.950000) rectangle (9.950000, 4.050000);
+        \node[semester] at (0, 3) {WS2};
+        \path[box,fill=informatik]  (0.050000, 3.950000) rectangle (1.950000, 3.050000);
+        \path[box,fill=wahlpflicht]  (2.050000, 3.950000) rectangle (9.950000, 3.050000);
+        \node[semester] at (0, 2) {SS2};
+        \path[box,fill=sonstige]  (0.050000, 2.950000) rectangle (1.950000, 2.050000);
+        \path[box,fill=wahlpflicht]  (2.050000, 2.950000) rectangle (9.950000, 2.050000);
+        \node[semester] at (0, 1) {WS3};
+        \path[box,fill=wahlpflicht]  (0.050000, 1.950000) rectangle (2.950000, 1.050000);
+        \path[box,fill=wahl]  (3.050000, 1.950000) rectangle (5.950000, 1.050000);
+        \path[box,fill=sonstige]  (6.050000, 1.950000) rectangle (8.950000, 1.050000);
+        \path[box,fill=methodik]  (9.050000, 1.950000) rectangle (9.950000, 1.050000);
+        \node[semester] at (0, 0) {SS3};
+        \path[box,fill=wahlpflicht]  (0.050000, 0.950000) rectangle (2.950000, 0.050000);
+        \path[box,fill=wahl]  (3.050000, 0.950000) rectangle (5.950000, 0.050000);
+        \path[box,fill=abschluss]  (6.050000, 0.950000) rectangle (9.950000, 0.050000);
+        \node[modul] at (1.000000, 5.500000) {Software-\\entwicklung I};
+        \node[modul] at (1.000000, 4.500000) {Software-\\entwicklung II};
+        \node[modul] at (3.500000, 5.000000) {Mathematik für Studierende\\der Informatik};
+        \node[modul] at (6.500000, 5.500000) {Rechnerstrukturen};
+        \node[modul] at (9.000000, 5.500000) {Informatik im\\Kontext};
+        \node[modul] at (5.500000, 4.500000) {Meth.\\komp.};
+        \node[modul] at (6.500000, 4.500000) {Pro-\\seminar};
+        \node[modul] at (8.500000, 4.500000) {Formale Grundlagen\\der Informatik I};
+        \node[modul] at (1.000000, 3.500000) {Algorithmen \&\\Datenstrukturen};
+        \node[modul] at (6.000000, 3.500000) {Wahlpflicht 24 LP};
+        \node[modul] at (1.000000, 2.500000) {Praktikum};
+        \node[modul] at (6.000000, 2.500000) {Wahlpflicht 24 LP};
+        \node[modul] at (1.500000, 1.500000) {Wahlpflicht 9 LP};
+        \node[modul] at (4.500000, 1.500000) {Wahl};
+        \node[modul] at (7.500000, 1.500000) {Projekt};
+        \node[modul] at (9.500000, 1.500000) {Seminar};
+        \node[modul] at (1.500000, 0.500000) {Wahlpflicht 9 LP};
+        \node[modul] at (4.500000, 0.500000) {Wahl};
+        \node[modul] at (8.000000, 0.500000) {Abschlussmodul\\(Bachelorarbeit)};
+
+    \end{tikzpicture}
+\end{document}
