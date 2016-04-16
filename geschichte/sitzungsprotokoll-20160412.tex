@@ -1,0 +1,297 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bytefield}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+%\usepackage{algorithmic}
+%\usepackage{minted}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+%\def\thesection{\arabic{section})}
+%\def\thesubsection{(\alph{subsection})}
+%\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\newenvironment{myitemize}{\begin{itemize}\itemsep -2pt}{\end{itemize}} % Zeilenabstand in Aufzählungen geringer
+
+%switch starred and non-starred (auto-size)
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\makeatother
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Die Mittelalterliche Geschichte der Hanse}
+\subtitle{Vorlesungsprotokoll vom 12. April 2016}
+\date{12. April 2016}
+\maketitle
+
+\section*{Überblick über Geschichte Lübecks}
+
+\begin{myitemize}
+    \item Lübeck war zentral für die Hanse
+    \item spätestens im 14. Jhd. war Lübeck Hauptort der Hanse
+    \item Rolle u.a. durch geografische Position begründet
+    \item während einer Verfassungskrise in Lübeck ging die Führung an Hamburg
+    \item nachdem in Hamburg kurz darauf auch eine Krise ausbrach, ging Führung an Lüneburg
+    \item dies war auch keine dauerhafte Lösung, nach Ende der Krise in Lübeck ging Führung zurück an Lübeck
+    \item auf einem Hansetag wurde das Zusammenspiel zwischen Städten geregelt und Lübeck übernahm Geschäftsführung
+    \item Lübeck teilte diese Verantwortung mit englischen Städten
+    \item viele Hansetage fanden in Lübeck statt
+    \item Lübeck war Nachfolge für Schleswig und slawische Städte (u.a. für Alt-Lübeck)
+    \item von 1203 bis 1225 herrschten die Dänen über Lübeck
+\end{myitemize}
+
+\section*{Alt-Lübeck}
+
+\subsection*{Überblick}
+\begin{myitemize}
+    \item 1819 wurde Überreste einer slawischen Burg gefunden
+    \item befand sich näher am Meer, als das heutige Lübeck
+    \item unklar, welcher slawische Herrscher die Burg baute
+    \item unklar, warum die Burg erbaut wurde
+    \item es kann nicht von dauerhafter Nutzung der Burg ausgegangen werden
+    \item im späten 8. Jhd. und im 9. Jhd. war die Burganlage teilweise unbenutzt
+    \item im 11. Jhd. wurde die Burg erneuert und auch mit einem Kloster ausgestattet
+\end{myitemize}
+
+\subsection*{Herrschergeschichte}
+
+\begin{myitemize}
+    \item Gottschalk war der herrschende Fürst
+    \item wurde in einem Kloster christlich erzogen
+    \item nach Ermordung seines Vaters wandte er sich gegen Christen
+    \item wollte Rache für Ermordung seines Vaters
+    \item wurde nach England verbannt
+    \item heiratete später eine Dänin
+    \item kehrte nach einigen Jahren zurück in die Heimat
+    \item konnte Herrschaft festigen
+    \item 1066 gab es einen Aufstand gegen die Christianisierung durch Gottschalk
+    \item sein Sohn Heinrich floh während des Aufstandes nach Dänemark
+    \item Gottschalk wurde im weiteren Verlauf der Rebellion gegen ihn getötet
+    \item nach einigen Jahren konnte Heinrich zurückkehren und einige der väterlichen Ländereien bekommen
+    \item er überlistete seine Gegner
+    \item Heinrich residierte in Alt-Lübeck und nahm einige Burgen des früheren slawischen Fürsten ein
+    \item Alt-Lübeck wurde ausgebaut
+    \item Kaufleute aus dem HRE und aus Skandinavien wurden angezogen
+    \item Heinrich ging Bündnis mit Sachsen ein und kämpfte gegen Slawen
+    \item er dehnte sein Gebiet bis an untere Oder und Havel aus
+    \item zusammen mit christlicher Hilfe konnte er Belagerung von Alt-Lübeck zerschlagen
+    \item nach dem Tode Heinrichs stritten dessen Sööhne um die Macht
+    \item nach einiger Zeit starben beide Söhne und damit starb die Familie aus
+    \item Versuch einer Neubesetzung der Herrschaft scheiterte mit dem Tod des dänischen Königs 1131
+    \item im weiteren Verlauf wurde Alt-Lübeck zerstört und nicht wieder besiedelt
+\end{myitemize}
+
+\section*{Gründung Lübecks}
+
+\subsection*{Erster Anlauf}
+\begin{myitemize}
+    \item Sachsen fiel an die Welfen
+    \item es wird für Siedler geworben, die nach Sachsen ziehen sollen
+    \item Adolph war zuständig für Werbung
+    \item er suchte nach einem Siedlungsplatz für eine neue Stadt
+    \item einige Siedler siedelten bei slawischen Burgen (Lüneburg, Oldenburg)
+    \item an etwas südlicherer Stelle im Verhältnis zum früheren Alt-Lübeck wurde die neue Stadt Lübeck gegründet
+    \item wahrscheinlich wurde die Siedlung von Beginn an mit Rechten ausgestattet, ist aber nichts überliefert
+    \item Siedlung wuchs schnell
+    \item das Wachstum führte zum Streit zwischen dem Herzog und Adolph
+    \item 1127 wurde die Stadt zerstört
+\end{myitemize}
+
+\subsection*{Zweiter Anlauf}
+\begin{myitemize}
+    \item etwas weiter nördlich wurde neue Stadt durch den Herzog gegründet
+    \item diese war aber schlecht platziert
+    \item Adolph und Heinrich (Herzog) einigten sich
+    \item Kaufleute gingen zurück nach Lübeck und bauten Stadt wieder auf
+    \item Heinrich baut Lübeck als Handelsstadt aus und stattete sich mit Rechten aus
+    \item es wurden diplomatische Beziehungen u.a. mit Russland aufgenommen
+    \item 1161 Vertrag u.a. mit Russland, um freien Handel zu ermöglichen
+    \item die Übernahme der Stadtherrschaft durch Heinrich war nicht der Startschuss des Handels
+    \item entsprechende Beziehungen gab es bereits vorher
+\end{myitemize}
+
+\section*{Wachstum Lübecks}
+
+Das Wachstum Lübecks gründet sich auf drei Aspekte:
+
+\begin{myitemize}
+    \item Erstens: Feste Siedlung mit Fernhandelskaufleuten, anders als z.B. Schleswig
+    \item dadurch höhere Rechtssicherheit
+    \item Zweitens: Weg zur Ostsee verkürzte sich über Lübeck
+    \item Drittens: Lübeck lag an Handelsstraße, die Bardowick, slawische Dörfer und dänische Gebiete verband
+    \item dadurch konnte das Salz besser abgesetzt werden
+\end{myitemize}
+
+\section*{Wechselnde Machtverhältnisse}
+
+\subsection*{Freiheit der Stadt unter Kontrolle des Kaisers}
+
+\begin{myitemize}
+    \item Kaiser sah sich bei Feldzügen in Italien zu wenig von Heinrich unterstützt
+    \item hinzu kam Klage des Herrschers von Köln gegen Heinrich
+    \item Heinrich erschien nicht bei Gericht und wurde geächtet
+    \item 1180 verlor er all seine Lehen
+    \item Herzogtum Sachsen wurde aufgeteilt zwischen kölnischem Herrscher und neuem Herzog Sachsens
+    \item Heinrich hat Kontrolle aber nicht komplett abgegeben
+    \item Kaiser begann Reichskrieg gegen Heinrich
+    \item daraufhin baute Heinrich etliche Städte mit Mauern aus
+    \item 1160 übersiedelte der Bischof in Lübeck auf südliche Seite der Halbinsel Lübecks
+    \item 1172/75 Ausbau der Stadt Lübeck
+    \item Notwendigkeit der Befestigung wurde durch Belagerung der Stadt durch Kaiser offenbar
+    \item 1181 verlangte der Kaiser die Übergabe der Stadt
+    \item Bürger übergaben die Stadt nicht direkt, sondern verhandelten
+    \item zunächst wurden sie von Heinrich von der Pflicht befreit die Stadt weiter zu verteidigen
+    \item anschließend baten sie den Kaiser um Bestätigung der Freiheit der Stadt
+    \item Kaiser bestätigte die Rechte und betrat anschließend die Stadt
+    \item 1188 ließ Friedrich Barbarossa angeblich neue Privilegien folgen (Fälschung)
+\end{myitemize}
+
+\subsection*{Übergabe an holsteinischen Herzog}
+\begin{myitemize}
+    \item Stadt wurde durch mehrere Herrscher umklammert
+    \item Lübecker wandten sich an die Dänen, die durch den Heringsmarkt reich waren
+    \item 1191 gab es Überlegungen sich unter dänische Herrschaft zu stellen
+    \item zu der Zeit wurde Stadt durch holsteinischen Herzog belagert
+    \item Hälfte der Bürger wollte Stadt übergeben, andere Hälfte nicht
+    \item schließlich wurde Stadt durch den Kaiser an den holsteinischen Herzog übergeben
+    \item Siedlungsgebiet wurde ausgedehnt
+    \item Lübecker schufen sich immer neue eigene Strukturen
+\end{myitemize}
+
+\subsection*{Dänische Herrschaft}
+
+\begin{myitemize}
+    \item nach einem Krieg fiel Lübeck an die Dänen
+    \item Waldemar ging 1203 nach Lübeck und wurde begeistert empfangen
+    \item dänisches Reich war weit ausgedehnt
+    \item Waldemar bestätigte die Rechte der Stadt
+    \item zwischen 1203 und 1209 folgte die Privilegierung der Lübecker
+    \item 1216 ist Holstenbrücke erstmals erwähnt
+    \item 1217 wurden Mauern erneuert
+    \item 1220 wurde Lübeck vom Strandrecht befreit und Waldemar sperrte den Hafen
+\end{myitemize}
+
+\subsection*{Aufstieg zur Reichsstadt}
+\begin{myitemize}
+    \item 1226 wechselten die Lübecker während einem Krieg die Seiten und bekamen Reichsfreiheitsbrief
+    \item Lübeck wurde zur Reichsstadt
+    \item dem Privileg folgte der weitere Aufstieg der Stadt
+\end{myitemize}
+
+\section*{Anfänge des Gotlandhandels und des Kontors in Novgorod}
+
+- Anfänge des Gotlandhandels und des Kontors in Novgorod
+- Lübeck war Anfang von weiteren Stadtgründungen im Ostseeraum, die dann auch Lübecker Recht verwendeten
+- niederdeutsche Kaufleute kamen früh über Lübeck nach Gotland
+- es bildeten sich genossenschaftliche Strukturen
+
+# 60-69 min
+- deutsche Händler durften Niederlassung der gotländischen Kaufleute nutzen, bevor sie ihre eigenen Niederlassungen hatten
+- Novgoroder Kontor war nur zeitweilig besetzt
+- Anfänge des Gotlandhandels sind auf Heinrich dem Löwen zurückzuführen
+- Ansprechpartner waren nicht nur Dänemark, sondern auch Gotland
+- wann die Handelsbeziehungen mit Gotland begannen, ist nicht ganz klar
+- 1161 Artlenburger Vertrag
+- Handelsbeziehungen mit Gotland bestanden bereits vor Gründung von Lübeck
+- Vertrag verweist auf Konflikte zwischen deutschen und gotländischen Kaufleuten
+- unklar, ob es um Konflikte auf Gotland geht
+- umfassender Rechtsschutz für Gotländer, wenn deutsche Kaufleute die gleichen Rechte dort bekommen
+- Überlegung, dass dies als Vorbereitung für Handel mit Gotland gemacht wurde
+- 1170/90 wurde Kirche in Gotland vermutlich begonnen
+- 1225 gab es Weihbrief der Kirche, Kaufleute waren zu dem Zeitpunkt schon da
+- Zusammenhang zwischen Gotland und Novgorodfahrt
+- Wahrung der Rechte der dt. Kaufleute wird deren Gesandtem übergeben
+- dies beruht wieder auf Gegenseitigkeit
+
+# 70-79 min
+- deutsche Kaufleute, die nach Gotland gingen, waren wohl schon genossenschaftlich organisiert
+- man findet im Nord- und Ostseeraum Hinweise auf gotländische Kaufleute
+- in Urkunde der Herrscherin von Flandern finden sich entsprechende Hinweise
+- Kaufleute aus Gotland jedweder Nationalität waren nach außen mit einem Siegel vertreten
+- 1280 ein Siegel zeigt Gemeinschaft der in Gotland bleibenden dt. Kaufleute
+- man kann den Artlenburger Vertrag als Gründungsdokument der Gemeinschaft der Kaufleute ansehen
+- 1252 gab es angeblich Vertrag zwischen Schweden und Lübeck, der die Privilegierung der Kaufleute
+  in Visby(Gotland) bestätigt
+- baltischer Raum gewann im späten 12. Jhd. zunehmend an Bedeutung
+- Lübeck und Gotland stellten wichtige Ausgangspunkte fast jährlicher Kreuzzüge in Region Livland, Lettland, Estland
+- 1201 entstand mit Riga wichtiges städtisches Zentrum
+- 1211 war Riga gesichert
+- dt. Kaufleute bekamen Rechte und Privilegien und wurden vom Gottesurteil befreit
+
+# 80-89 min
+- ohne Zustimmung des Bischofs sollten die Kaufleute in Riga keine Gilde bauen
+- Stadt sollte eigenes Recht bekommen
+- Stadtmauern von Riga sind bis heute erhalten
+- Gilde in Gotland war Mittel alle Kaufleute zusammenzufassen
+- schwierig, ob man dies als Start der Hanse betrachten kann
+- 1188 gab es Verhandlungen mit Russland
+- man kann von einem gemeinsamen Agieren der Kaufleute in Gotland ausgehen
+- auch nach Ende der dänischen Vorherrschaft im Ostseeraum bestand der Gemeinschaft weiter
+- ein Vertrag berechtigt Kaufleute zur Errichtung eines Kontors in Smolensk
+- dieser Vertrag beinhaltet wieder Siegel der Kaufleute, welches auf genossenschaftliche Struktur
+  hinweist
+- gotländische Händler bereits Ende des 12. Jhd. in Bergen
+- in englischer Kämmerei finden sich nach 1226 immer wieder Verweise auf gotländische Kaufleute
+- dänische Krone hat genossenschaftliche Gruppe mehrfach privilegiert
+- 1226 verfügt Kaiser durch Reichsfreiheitsurkunde die Gleichheit der Lübecker Kaufleute mit anderen
+  Handelspartner
+- englischer König nahm Händler von Gotland unter seinen Schutz
+- engl. König hat Urkunden sowohl für Händler aus Gotland als auch für Händler aus HRE ausgestellt
+
+- Anfänge des Novgoroder Kontor angelehnt an Geschichte des Handels mit Gotland
+- Luxuswaren für russische Oberschicht wurden exportiert
+- Großgrundbesitzer hatten mehr Macht als Fürsten oder Versammlung in Novgorod
+- Novgorod war wichtigste Stadt für Hansisch-Russischen Handel
+- als dt. Kaufleute nach Novgorod kamen, waren skandinavische Händler bereits anwesend
+- 1165 gibt es Privileg für Bürger Kölns, die wegen Handel in Novgorod sind
+- aus 1191 stammt der älteste erhaltenste Vertrag mit russischem Landesherrn
+- Vertrag bezieht sich auf frühere Abmachungen
+
+# 90-99 min
+- gegenseitige Privilegien und Strafen zwischen novgorodischen und gotländischen/deutschen Kaufleuten
+- gleiche Strafen für gleiche Vergehen
+- Unterscheidung zwischen Sommer- und Winterfahrer nach Novgorod
+- 1231 heißt es, die deutschen Kaufleute hätten Stadt mittels Lieferung vor Hungersnot gerettet
+- ältere Statuten regeln Saisonalität des Handels
+- genossenschaftliche Strukturen erkennbar
+- 4 Schlüssel für Truhe
+    - Gotländer, Sooster, Lübecker und Dortmunder hatten Zugriff auf Truhe
+
+\end{document}
