@@ -1,0 +1,245 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bytefield}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+%\usepackage{algorithmic}
+%\usepackage{minted}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+%\def\thesection{\arabic{section})}
+%\def\thesubsection{(\alph{subsection})}
+%\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\newenvironment{myitemize}{\begin{itemize}\itemsep -8pt}{\end{itemize}} % Zeilenabstand in Aufzählungen geringer
+
+%switch starred and non-starred (auto-size)
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\makeatother
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Geschichte der USA von 1776-1945}
+\subtitle{Vorlesungsprotokoll vom 12. April 2016}
+\date{12. April 2016}
+\maketitle
+
+\section*{Hauptstadt}
+
+- letzte Woche mit Amt des Präsidenten beschäftigt
+- Ausgestaltung des Amtes durch George Washington
+- wie ist Personenkult erstanden
+- wie ist Hauptstadt namens Washington entstanden
+- durch Schaffung der Stadt hat sich Volk selber gefeiert
+- Washington D.C. entstand als Idee 1790, Bautätigkeit 1791/92,
+  Hauptstadt seit 1800
+- Washington ist Kongress direkt unterstellt
+- Entscheidung der Bennenung ist noch zu Lebzeiten Washingtons passiert (1791)
+- Columbia war Ableitung des Namens von Kolumbus
+- Columbia war poetische Bezeichnung der USA in dem 18. Jhd.
+- "Frau" Columbia wurde als Gegenstück zur Frau Britannia gefeiert
+- Washington D.C. liegt unmittelbar an Ostküste, 35km westlich
+  der Chessapea Bay, Mündung des Anacostia-Rivers?
+- gebildet durch Land abgetreten durch Maryland und Virginia
+- sollte städtebaulich durchgeplant und für damalige Verhältnisse
+  modern sein
+- entstand an ihrem Platz wegen der Nähe zum Atlantik
+- Washington hat Land an den Bund verkauft
+- Washington lebte nah an der Stadt
+
+# 10-19 min
+- Washington legte Wert auf gute Kutsche und gute Pferde
+- ursprünglicher Distrikt hatte Fläche von 100 Quadratmeilen
+- entsprach der Maximalgröße, die in der Verfassung vorgeschrieben waren
+- war ein Quadrat, deren Ecken in alle vier Himmelsrichtungen zeigten
+- ungenutzte Fläche wurde an Virginia zurückgegeben
+- besteht heutzutage nur noch aus ehemaligen Gebieten von Maryland
+- Linien zu den Ecken gehen vom Kapitol aus
+- diagonal verlaufene Straßen werden Avenues genannt
+- ost-west alphabetisch und nord-süd numerisch
+- Stadt wurde durch Architekt geplant
+    - Lonfont?
+- Jefferson legte dem Architekten mehrere Pläne vor
+    - diese stammten von dessen Europareise
+    - Städte: Frankfurt am Main, Karlsruhe, Amsterdam, Paris, Mailand
+- vieles der Verfassung ist aus dem HRE übernommen wurden
+- Architekt entwickelte basierend auf Plänen einen ersten Entwurf
+- es gab Überwürfnis mit Auftraggebern
+- Landvermesser hat Pläne des Architekten übernommen, aber auch einige
+  Änderungen vorgenommen
+- endgültige Planung weist Parallelen zu Karlsruhe auf
+- Bau des Weißen Hauses (13. Oktober 1792) begann zuerst
+    - anwesend: Washington, Jeffers, Daniel Carrol und Landvermesser
+- Kapitol seit 1793 bezugsfähig
+- John Adams siedelte im Juni 1800 mit Regierung nach Washington um
+- D.C. kam unter direkte Verwaltung des Kongresses
+- Bürger der Stadt sind in Wahlrechten eingeschränkt
+- erst seit 23. Verfassungszusatz 1961 dürfen Bewohner der Stadt
+  den Präsidenten mitwählen (3 Wahlmänner)
+- im Repräsentantenhaus ist District mit einem nicht stimmberechtigen
+  Mitglied vertreten, im Senat gar nicht
+
+# 20-29 min
+- mit Ausnahme der Wahl zum Präsidenten haben Bewohner keine garantierten
+  Wahlrechte
+- auf Autos finden sich häufig Slogans "taxations without representation"
+- Verbesserung der Wahlrechte gingen mit besserem Wahlergebnis für Demokraten einher
+- Republikaner wollen dies nicht
+- bei National Mall sind viele Museen angesiedelt
+    - Smithonian
+    - national gallery of art
+    - museum für geschichte der afroamericans
+    - museum für holocaust
+- Ostseite durch Kapitol bestimmt und Westseite durch Lincoln Memorial
+- Washington Memorial ist von überall zu sehen
+    - sollte in Sichtachse des Weißen Hauses sein
+    - ist nicht ganz der fall
+- Staat wird gefeiert im Kapitol
+- Personenkult im Washington Memorial gefeiert
+- Reunion im Lincoln Memorial gefeiert 
+- wichtige staatliche Akte werden auf der National Mall gefeiert
+- Gedanken der Planer sind in den Köpfen der Menschen angekommen
+
+# 30-39 min
+- Kapitel 2 die Flagge
+- keine Flagge ist so mit patriotischen Werten durchtränkt, wie die US-Flagge
+- in Smithonian-Umfrage gaben 2007 Amerikaner mehrheitlich an, tägliche die Flagge zur Schau zu stellen
+- nur knapp ein Fünftel der Befragten hat keine Flagge
+- 14. Juni gilt bis heute als National Flag Day
+- bei Gründungsvätern fand Flagge wenig Beachtung
+- Sterne vom Himmel, rot vom Mutterland, weiß für Freiheit geht nicht von Washington aus
+- Ursprünge des Flaggenkultes geht auf den zweiten Krieg der USA gegen UK zurück 1812-1814
+- es entstand ein Lied und die Flagge avancierte zum Verteidigungsobjekt
+- Lied wurde erst 1931 zur offiziellen Nationalhymne
+- Flagge wurde als spar-sprangled banner bezeichnet
+- Meta: Vorspielung des Liedes
+- 1777 Flagge wird entwickelt, lokales Phänomen
+- 1812 Flagge wird besungen, bleibt auf Maryland und Süden begrenzt
+- großer Schwung kommt erst 1861 im amerikanischen Bürgerkrieg
+- in dem Krieg offerten sich tausende Soldaten
+- je mehr starben, desto mehr wurden zerstörte Flaggen zum Relikt
+- Blut und Flagge wurde zum Symbol
+- Flagge wurde in damals bekannten Arten gefeiert (Lied und Gedicht)
+
+# 40-49 min
+- von 1800 bis 1880 schrieb jeder Gedichte
+- Franzis Lieber war deutscher Emigrant und wurde amerikanischer Patriot (seit 1859 in NYC)
+- schrieb ein Gedicht, welches er ein Lied nannte, und sollte zu einer europäischen Melodie gesungen werden
+  ("Ein freies Leben führen wir")
+  - rot: Blut, weiß: Reinheit, Wahrheit
+  - blau: See, die wir gerne durchpflügen, zwischen alter und noch älterer Welt
+  - feiert die Union und spricht alles Positive dem Süden ab
+- Meta: Vortragen des Gedichts
+- dieses Gedicht gehört zu einem der besten Gedichte von Lieber
+Flaggengesetz
+- Flagge besteht aus 7 roten und 6 weißen Streifen für die 13 Gründungsstaaten
+- weißer Sternenring trägt so viele Sterne wie es Staaten gibt
+- rot, weiß, blau wird auf Union Jack zurückgeführt
+- weiß: für Reinheit und Unschuld, rot: Tapferkeit und Widerstandsfähigkeit, blau: Beharrlichkeit und Gerechtigkeit
+- Kongress beschloss, dass Streifen nicht mehr werden sollten
+- anfangs gab es keine Richtlinien, wie Sterne erscheinen sollten
+- es gab daher etliche Flaggenvarianten
+- 1942 wurde vom Kongress der US Flag Codex beschlossen
+
+# 50-59 min
+- in diesem Codex ist sehr penibel geregelt
+- 1953 wurde entschieden, dass Streifenbanner über xy gehisst werden darf?
+- ausgefranzte Flagge muss verbrannt werden
+- Pledge of the Legion/Union muss von jedem Schulkind abgegeben werden
+- Kapitel 3 die Konstante Land
+- Was wird dargestellt auf Flagge?
+    - 13 Streifen für Gründungsstaaten
+    - Sterne für Bundesstaaten
+    - Landausdehnung
+- John Jey? empfand starke Bindung zwischen Bewohner der USA und dem Land in den Federalist Papers
+- er formulierte später, dass das Land für die US-Amerikaner geschaffen wurde
+- 1848 wurde es von Journalisten als "manifest destiny" gefasst
+- Henry Sourough? fand die "manifest destiny" nicht als die seinige
+- seitdem die USA von der UK anerkannt wurde, beschäftigte man sich auch mit Land
+
+# 60-69 min
+- es gab Disput um einige Gebiete
+- Ostküste wird als Bezugspunkt genommen
+- Northwest Territory wird als westlichster Endpunkt der Expansion gesehen
+- UK hat Northwest Territory als Pufferzone zwischen Louisiana (Spanien) und Kanada
+  angesehen und die Gebiete den indigenen Völkern zugesprochen
+--------
+- es gab etliche Konflikte zwischen den Kolonien und mit den indigenen Völkern
+- Kolonisten waren sehr landhungrig
+- ärgerten sich über Zurückhaltung der engl. Regierung
+- nach Unabhängigkeit tritt USA auch als binnenländische Kolonialmacht auf
+- Staaten übertrugen Anspruchsrechte an den Bund
+
+# 70-79 min
+- mehrere Landnahmestrategien:
+    - Besetzung
+    - Besiedlung
+    - Vertreibung, Tötung der Einwohner
+    - Erwerb in Verhandlungen
+    - Kauf
+- Land bildete wesentlichen Bestandteil der US-amerik. Politik
+- trotz Bedenken der Regierungsfähigkeit ging der Staat von Beginn an auf Expansionskurs
+- 1803 wurde das damalige Lousiana gekauft und war nach Westen offen
+- 1819 Florida
+- 1836 Oregon
+- 1848 xx Gebiete
+- 1850 Texas
+- 1850 Kalifornien
+- 1867 Alaska
+- 1890 schien "manifest destiny" erfüllt
+- 1890 fortführend auf Philippinen und Samoa engagiert
+- 1890 Krieg mit Kuba
+- in knapp 50 Jahren wandelte sich USA von Kolonie zur Hegemoniemacht
+- Verschiebung der Orientierung
+
+# 80-89 min
+- hat Auswirkungen für Landbesitz der Menschen, die in den USA leben
+- 2,3 Mio. km² zu Lebzeiten Washingtons
+- 1803: 4,4 Mio. km²
+- 1845: 5,6 Mio. km²
+- 1853: 7,8 Mio. km²
+- 1895: 9,5 Mio. km²
+- 75 Mio. Menschen damals in den USA
+- Land als konkreter Raum, als idelogische Vereinnahmung, als ästhetische Fläche eine
+  große Bedeutung für die Bevölkerung
+- es fehlt Beziehung zwischen konkreten Territorien und ideologischer Bedeutung
+
+
+\end{document}
