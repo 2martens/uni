@@ -4,6 +4,7 @@
 Computerbedienung
 Zehn-Finger-Schreiben
 Sublime
+Atom
 * LaTeX
 Markdown
 Das Internet
