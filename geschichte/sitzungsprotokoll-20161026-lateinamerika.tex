@@ -1,0 +1,105 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bytefield}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage[german=quotes]{csquotes}
+%\usepackage{algorithmic}
+%\usepackage{minted}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+%\def\thesection{\arabic{section})}
+%\def\thesubsection{(\alph{subsection})}
+%\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+\MakeOuterQuote{"}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\newenvironment{myitemize}{\begin{itemize}\itemsep -9pt}{\end{itemize}} % Zeilenabstand in Aufzählungen geringer
+
+%switch starred and non-starred (auto-size)
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\makeatother
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Vorlesung Geschichte Lateinamerikas}
+\subtitle{Vorlesungsprotokoll vom 26. Oktober 2016}
+\date{26. Oktober 2016}
+\maketitle
+
+
+\section*{Was ist das 20. Jahrhundert in Lateinamerika?}
+
+Die historische Einteilung in Jahrhunderte ist oftmals nicht übereinstimmend
+mit der kalendarischen. So wird in Bezug auf Europa häufig vom langen 19. Jahrhundert
+und kurzen 20. Jahrhundert geredet, obwohl beide kalendarisch 100 Jahre lang sind.
+Auf Lateinamerika bezogen ist die Abgrenzung zwischen dem 19. und 20. Jahrhundert
+allerdings nicht so einfach, wie bei Europa, da sich die einzelnen Länder unterschiedlich
+entwickelten.
+
+Im Fall Brasilien endete die Sklaverei 1888 und die Republik besteht seit 1891.
+Ein Schnittpunkt wäre somit 1891. In Argentinien gibt es erst seit 1912 das
+allgemeine Männerwahlrecht und 1916 hat die Union Civica Radical gewonnen.
+Demnach wäre 1912 bzw. 1916 ein Startpunkt für das 20. Jhd. In Mexiko begann
+1910/11 die Revolution und mündete 1917 in einer Verfassung. Daher wäre 1917
+ein möglicher Epochenwechsel für Mexiko. Daran wird deutlich, dass es keinen
+einheitlichen Start gegeben hat. Das Ende kann dagegen klar bestimmt werden:
+1989. Mit Beginn des Neoliberalismus endet eindeutig das 20. Jahrhundert.
+
+Auch die Rolle der USA dient nicht als Indikator, denn bis 1945 hatte die USA
+keinen nennenswerten Einfluss auf Lateinamerika und bis 1920 war noch Großbritannien
+der wichtigste Handelspartner.
+
+Daher gibt es eine alternative Gliederung für Lateinamerika bzgl. des 20. Jahrhunderts:
+
+\begin{myitemize}
+    \item ca. 1810/20 - ca. 1870/80 Konsolidierung der Nationalstaaten (Grenzen, politische
+          Systeme, etc.) bei geringer Einwanderung
+    \item ca. 1870/80 bis 1930 Blüte und Zerfall der alten Ordnung bei starker Einwanderung,
+          Beginn der Industrialisierung durch Eisenbahnbau ab 1870
+    \item ca. 1930-1989 Instabilität durch Modernisierung mit Beginn der Auswanderung,
+          zweiter Schub der Industrialisierung von 1940 bis 1970
+\end{myitemize}
+
+Neben der zeitlichen Einordnung stellt sich auch die Frage, wie sich das Jahrhundert
+charakterisiert. Das Zeitalter der Extreme passt auf Europa, aber nicht auf
+Lateinamerika. Es war in Bezug auf Lateinamerika auch nicht das Jahrhundert der
+USA. Vielleicht war es das Jahrhundert der Kinder und Frauen.
+
+\end{document}

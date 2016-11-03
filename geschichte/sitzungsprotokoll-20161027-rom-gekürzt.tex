@@ -1,0 +1,166 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bytefield}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage[german=quotes]{csquotes}
+%\usepackage{algorithmic}
+%\usepackage{minted}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+%\def\thesection{\arabic{section})}
+%\def\thesubsection{(\alph{subsection})}
+%\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+\MakeOuterQuote{"}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\newenvironment{myitemize}{\begin{itemize}\itemsep -9pt}{\end{itemize}} % Zeilenabstand in Aufzählungen geringer
+
+%switch starred and non-starred (auto-size)
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\makeatother
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Vorlesung Römische Geschichte 1: Römische Republik}
+\subtitle{Vorlesungsprotokoll vom 27. Oktober 2016}
+\date{27. Oktober 2016}
+\maketitle
+
+\section*{Quellen}
+\subsection*{Literarische Quellen}
+
+\begin{myitemize}
+    \item griechische Fragmente
+    \item Fasten
+    \item Werke von Cicero
+    \item Mythengeschichte
+    \item Werke von Livius
+    \item Werke von Plutarch
+    \item Werke von Plautus und Terenz (beide sind römische Komödienautoren)
+    \item Komödien sind wichtige Quellen für die Sozialstruktur in Rom
+    \item Werke von Naevius und Ennius (Epiker, "Nationaldichter")
+\end{myitemize}
+
+\subsubsection*{Geschichte der literarischen Quellen}
+\begin{myitemize}
+    \item Annalistik ist Form der Geschichtsschreibung (es wird nach den Konsuln datiert: Liste mit Jahr und den beiden Konsuln)
+    \item bekannte Autoren der Annalistik: Livius, Polybios, Plutarch
+    \item Latein war anfangs nicht als Literatursprache geeignet
+    \item römische Geschichtsschreibung fand daher zunächst in Griechisch statt
+    \item Römer beginnen später aus dem Griechischen zu übersetzen
+    \item Livius Antonius übersetzt die Odyssee ins Lateinische 
+\end{myitemize}
+
+\section*{Besiedlung Italiens}
+
+\begin{myitemize}
+    \item Etrusker sind ab dem 7 Jhd. v.Chr. in Italien greifbar und eine vorindoeuropäische Gruppe
+    \item Kernbereich von Rom im Süden bis Ano
+    \item von Küste im Westen bis Appinin(?) im Osten
+    \item ab 1000 vChr. sind indogermanische/indoeuropäische Gruppen in Italien belegt
+    \item aus latino-phaliskischer Sprachgruppe entsteht Rom
+    \item Griechen siedelten im Süden
+    \item Kelten siedelten im Norden
+    \item Griechen bringen Stadtkultur nach Italien (Polis)
+    \item Städte betreiben Ackerbau und Handel
+    \item es gab kein griechisches Reich
+    \item Magna Graecia ist kein Reich
+    \item Reichsgründung gab es erst unter den Hellenen (Alexander der Große)
+    \item Polis (plural?) untereinander in Konkurrenz, Krieg eher gegeneinander als zusammen
+    \item Sizilien wichtig für die Griechen
+    \item Katharger sitzen im Westen Siziliens und Griechen im Osten
+\end{myitemize}
+
+\subsection*{Etrusker}
+
+\begin{myitemize}
+    \item Etrusker betreiben Erzbergbau, Handel
+    \item unterschiedliche Theorien zur Herkunft von Etruskern
+    \item wichtige Städte sind Capua, Palestrina, Veji
+    \item Frauen genossen hohes Sozialprestige
+    \item im 6. Jhd. expandieren Etrusker nach Norden und Süden (Latium)
+    \item es wird ein Bündnis mit Kathargern gegen die Griechen eingegangen
+    \item erste Konflikte werden in Seeschlacht bei Aleria ausgetragen
+    \item große Niederlage gegen Griechen in Cumae
+    \item es kommt zu Machtverlust des etruskischen Adels in Roms
+    \item Nutznießer sind Römer, die sich von den Etruskern lösen
+    \item Galliereinfall zerstört etruskische Kulturgegenstände
+    \item Rom attackiert Veji
+    \item später zerstören Römer religiöses Zentrum der Etrusker
+    \item Zerfall der Etrusker zieht sich vom 5. Jhd. bis zum 3. Jhd. v.Chr.
+    \item etruskische Sprache nicht verständlich (vorindoeuropäisch)
+    \item etliche Fresken und Bilder der Etrusker (Formensprache griechisch)
+\end{myitemize}
+
+\subsection*{Gründung Roms}
+\begin{myitemize}
+    \item ist Rom allmählich gegründet worden oder gibt es eine feste Gründung (Synoikismos)?
+    \item Synoikismos: mehrere Häuser/Dörfer schließen sich bewusst zusammen
+    \item wenn feste Gründung überhaupt stattfand, geschah das erst gegen 600 v. Chr.
+    \item erste Funde am Forum Buarium, weitere am Südhang des Kapitols
+    \item weitere Funde am Forum Romanium
+    \item Rom liegt an Salzstraße bei Furt von Tiber
+    \item deutliche Siedlungsspuren auf dem Palatin (9. Jhd. v. Chr.)
+\end{myitemize}
+\section*{Etruskischer Einfluss}
+\begin{myitemize}
+    \item im 6. Jhd. gibt es wohlgeordnete Stadt etruskischen Zuschnitts
+    \item schon zu dieser Zeit ist das Kapitol ein zentrales religiöses Zentrums
+    \item Stadtwerdung ohne etruskischen Einfluss undenkbar
+    \item Geschlecht der Romulier ist rein etruskisch
+    \item seit dem 8. Jhd. Städtekultur in Etrurien
+    \item Etrusker sind Transmissionsrahmen für griechische Schrift
+    \item Römer bekamen Schrift von den Etruskern
+    \item dreigliedriges Namenssystem (Vorname . Beiname)
+    \item Schnabelschuhe (von Etruskern zu Römern zu Päpsten)
+    \item Gladiatorenkämpfe kommen aus dem etruskischen Gräberritual?
+    \item Idee eines Senats (Ältestenrats) kommen von den Etruskern
+    \item Konzept der Zukunftschau kommt von den Etruskern
+    \item Könige in Rom haben etruskische Namen
+    \item einer der Könige hat begonnen die Kurie zu bauen
+    \item Latiner werden von den Etruskern bevormundet aber nicht unterdrückt
+    \item Triumph könnte von den Etruskern kommen
+    \item archaische Sozialstruktur wird von den Etruskern übernommen
+    \item Senat ist Ältestenrat des Adels
+    \item etruskisches Erbe wird von den Römern gesehen und geachtet
+    \item Identität der Etrusker ging nicht verloren
+\end{myitemize}
+
+\end{document}

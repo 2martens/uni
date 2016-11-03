@@ -1,0 +1,10 @@
+                familia
+                    |
+                    |
+                  gens
+cliens/Plebejer-----|----------Adeliger (patricius)/patronus
+                    |
+                curia (30)
+                    |
+                    |
+                tribus (3)
