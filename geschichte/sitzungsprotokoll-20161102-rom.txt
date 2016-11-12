@@ -1,10 +1,22 @@
                 familia
                     |
                     |
-                  gens
+                  gens           patres
 cliens/Plebejer-----|----------Adeliger (patricius)/patronus
                     |
                 curia (30)
                     |
                     |
                 tribus (3)
+
+
+
+
+timokratische Heereseinteilung:
+equites
+classis
+infra classem
+
+- Heeresversammlung auf dem Marsfeld
+- nach Bevölkerungswachstum gibt es 4000 Mann im Heer, unterteilt in 40 Zenturien 
+à 100 Mann (Treffen ist comitia centuriata)
