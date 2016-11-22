@@ -52,7 +52,7 @@ turkeys_bw = turkeys;
 % dilate operation was necessary to connect the remaining dots in a way
 % that represents the turkeys.
 % ---
-% The last step is similar to the second exercise.
+% The last step is to apply bwlabel to the prepared bw image.
 for i = 1 : numel(turkeys_bw)
     if turkeys_bw(i) == 48
         turkeys_bw(i) = 255;
@@ -68,7 +68,6 @@ turkeys_opened = imopen(turkeys_bw, se);
 t_opened2 = imopen(turkeys_opened, se_4);
 t_opened3 = imopen(t_opened2, se_3);
 t_dilated = imdilate(t_opened3, se_2);
-cc_turkeys = bwconncomp(t_dilated);
-numObjects_turkeys = cc_turkeys.NumObjects;
+[labels_turkeys, num_turkeys] = bwlabel(t_dilated);
 figure (5), imshow(turkeys_bw);
 figure (6), imshow(t_dilated);
