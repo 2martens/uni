@@ -71,3 +71,10 @@ t_dilated = imdilate(t_opened3, se_2);
 [labels_turkeys, num_turkeys] = bwlabel(t_dilated);
 figure (5), imshow(turkeys_bw);
 figure (6), imshow(t_dilated);
+
+% 4.
+% I expect the two results to be equal. f shall be the box filter. g shall
+% be the result from convolving f with itself. h shall be the result from
+% convolving g with the image patch (i). Based on the associativity of
+% convolution j = (i * f) * f should be equal to i * (f * f). Combined with 
+% the commutativity j should be equal to (f * f) * i which is h.
