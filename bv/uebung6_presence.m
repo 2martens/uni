@@ -1,0 +1,34 @@
+coins = imread('coins.png');
+coins_sp = imnoise(coins, 'salt & pepper', 0.02);
+coins_median = medfilt2(coins_sp);
+boxfilter = ones(3, 3) / 9;
+coins_mean = imfilter(coins_sp, boxfilter);
+%figure (1), imshow(coins);
+%figure (2), imshow(coins_sp);
+%figure (3), imshow(coins_median);
+%figure (4), imshow(coins_mean);
+
+rice = imread('rice.png');
+rice_size = size(rice);
+imgPyramid = impyramid(rice, 'reduce');
+imgPyramid_size = size(imgPyramid);
+imgPyramid1 = impyramid(imgPyramid, 'reduce');
+imgPyramid1_size = size(imgPyramid1);
+imgPyramid2 = impyramid(imgPyramid1, 'reduce');
+imgPyramid2_size = size(imgPyramid2);
+%figure (5), imshow(rice);
+%figure (6), imshow(imgPyramid);
+%figure (7), imshow(imgPyramid1);
+%figure (8), imshow(imgPyramid2);
+
+circuit = imread('circuit.tif');
+circuit_edge1 = edge(circuit, 'Sobel');
+circuit_edge2 = edge(circuit, 'Prewitt');
+figure (9), imshow(circuit);
+figure (10), imshow(circuit_edge1);
+figure (11), imshow(circuit_edge2);
+coins_Sobel = edge(coins, 'Sobel');
+coins_Canny = edge(coins, 'Canny');
+figure (12), imshow(coins);
+figure (13), imshow(coins_Sobel);
+figure (14), imshow(coins_Canny);
