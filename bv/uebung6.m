@@ -23,15 +23,21 @@ figure (7), imshow(v_med_plus_d_med);
 
 % 3. 
 swans = imread('swans_gray.jpg');
-swans_size = size(swans);
-swans_lev1 = impyramid(swans, 'reduce');
-swans_lev1_size = size(swans_lev1);
-swans_lev2 = impyramid(swans_lev1, 'reduce');
-swans_lev2_size = size(swans_lev2);
-swans_lev3 = impyramid(swans_lev2, 'reduce');
-swans_lev3_size = size(swans_lev3);
+swans_gauss = imgaussfilt(swans, 3);
+swans_1 = swans - swans_gauss;
+swans_size = size(swans_1);
+swans_lev1 = impyramid(swans_1, 'reduce');
+swans_2 = swans_lev1 - imgaussfilt(swans_lev1, 3);
+swans_lev1_size = size(swans_2);
+swans_lev2 = impyramid(swans_2, 'reduce');
+swans_3 = swans_lev2 - imgaussfilt(swans_lev2, 3);
+swans_lev2_size = size(swans_3);
+swans_lev3 = impyramid(swans_3, 'reduce');
+swans_4 = swans_lev3 - imgaussfilt(swans_lev3, 3);
+swans_lev3_size = size(swans_4);
 
 figure (8), imshow(swans);
-figure (9), imshow(swans_lev1);
-figure (10), imshow(swans_lev2);
-figure (11), imshow(swans_lev3);
+figure (9), imshow(swans_1);
+figure (10), imshow(swans_2);
+figure (11), imshow(swans_3);
+figure (12), imshow(swans_4);
