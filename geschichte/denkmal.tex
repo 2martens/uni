@@ -1,0 +1,95 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bytefield}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage[german=quotes]{csquotes}
+%\usepackage{algorithmic}
+%\usepackage{minted}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+%\def\thesection{\arabic{section})}
+%\def\thesubsection{(\alph{subsection})}
+%\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+
+\MakeOuterQuote{"}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\newenvironment{myitemize}{\begin{itemize}\itemsep -2pt}{\end{itemize}} % Zeilenabstand in Aufzählungen geringer
+
+%switch starred and non-starred (auto-size)
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\makeatother
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Geschichte eines Hamburger Denkmals}
+\subtitle{"Pferdestall" am Allendeplatz 1}
+\date{3. Dezember 2016}
+\maketitle
+
+Der heutige "Pferdestall" am Allendeplatz 1 beinhaltet das soziologische Institut,
+die Pony-Bar und auch die T-Stube. Das Gebäude, welches früher dem Von-Melle-Park
+mit der Hausnummer 15 zugeordnet war, ist in einer Weise die ausgestreckte Hand
+der Universität hinein in das Grindelviertel. Auf der anderen Seite des nach dem
+früheren chilenischen Präsidenten Salvador Allende benannten Allendeplatzes steht
+ein ehemaliger Luftschutzbunker aus dem Zweiten Weltkrieg. Früher hieß der Platz
+Bornplatz und verband den "Pferdestall" mit der ehemaligen Synagoge am Bornplatz.
+Die Synagoge wurde am 9. November 1938 in der Reichspogromnacht niedergebrannt.
+Heute befindet sich an ihrer Stelle ein Platz, auf dem die Grundrisse der Synagoge
+zu sehen sind.
+
+Über den Grindelhof ist der "Pferdestall" innerhalb weniger Gehminuten mit der
+großen Grindelallee und damit einer der Hauptverkehrsachsen Hamburgs verbunden.
+Auf ihr verkehrt jeutzutage die Metrobuslinie 5, die das Zentrum Hamburgs mit
+Niendorf verbindet.
+In die andere Richtung ist in ähnlich kurzer Entfernung die Talmud-Tora-Gesamtschule
+erreicht.
+
+Nach den Entwürfen von Wilhelm Göhre wurde 1908 der heutige "Pferdestall" erbaut.
+Allerdings war das Gebäude nicht als Universitätsgebäude geplant, denn damals
+existierte die Universität Hamburg noch nicht einmal. Erst 1919 wurde sie gegründet
+und erst nach dem Zweiten Weltkrieg wurde der Campus am Von-Melle-Park erbaut.
+TODO:
+Stattdessen war das Gebäude damals tatsächlich ein Pferdestall.
+
+
+
+
+\end{document}
