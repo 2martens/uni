@@ -10,16 +10,15 @@
 The image has to be padded by 2 rows of zeros. The result of the correlation
 follows:
 
----------------
-| 1 | -2 |  1 |
----------------
-|-2 |  4 | -2 |
----------------
-| 1 | -2 |  1 |
----------------
+-------------
+| 0 | 1 | 0 |
+-------------
+| 1 |-4 | 1 |
+-------------
+| 0 | 1 | 0 |
+-------------
 
-The resulting filter is the result of the outer product of both used filters
-which makes it a separable filter. 
+The resulting filter is the Laplacian filter. 
 
 
 2.
