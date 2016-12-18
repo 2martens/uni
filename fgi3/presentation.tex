@@ -9,6 +9,7 @@
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{color}
+\usepackage[german=quotes]{csquotes}
 \usetheme{Warsaw}
 \usecolortheme{crane}
 \pagenumbering{arabic}
@@ -17,6 +18,8 @@
 \def\thesubsubsection{(\roman{subsubsection})}
 \setbeamertemplate{navigation symbols}{}
 \graphicspath{ {src/} {/home/jim/Pictures/Studium/KBS/} }
+
+\MakeOuterQuote{"}
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -109,13 +112,70 @@
                   erreicht werden
         \end{itemize}
     \end{frame}
-
+%Beweis einer oberen Laufzeitschranke hilft enorm
     \section{Motivation}
     \begin{frame}{Motivation}
         \begin{itemize}
-            \item Beweis einer oberen Laufzeitschranke hilft enorm
+            \item nützlich für Konsensfindung zwischen vielen Leuten
             \vfill
-            \item TODO
+            \item hat obere Laufzeitschranke
+            \vfill
+            \item Stabilisierung trotz Gegner möglich
+            \vfill
+            \item schönes Problem, "Wer möchte nicht gerne Konsenslösungen
+                  herbeiführen?"
         \end{itemize}
     \end{frame}
+
+    \section{Lösung}
+
+    \begin{frame}{Median-Verfahren}
+        \begin{itemize}
+            \item Ergebnis Teil der Anfangsmenge
+            \vfill
+            \item Ausreißer werden ignoriert
+            \vfill
+            \item in der Mitte stehender Wert in nach Größe sortierter
+                  Zahlenreihe
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Algorithmus}
+        \begin{itemize}
+            \item jeder Prozess wählt in jedem Zeitschritt 2 zufällige
+                  Prozesse aus Gesamtmenge der Prozesse (inklusive sich selbst)
+                  aus
+            \vfill
+            \item neuer Wert des Prozesses ist Median von sich selbst und den
+                  Werten, der zwei ausgewählten Prozesse
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Ergebnisse}
+        n Prozesse
+        \vfill
+        \begin{tabular}{c|c|c}
+            Eingabe & mit Gegner & ohne Gegner\\
+            \hline
+            worst-case 2 Werte & \(O(\log n)\) & \(O(\log n)\) \\
+            \hline
+            worst-case m Werte & \(O(\log m \log \log n + \log n)\) & \(O(\log n)\)
+        \end{tabular}
+    \end{frame}
+
+    \begin{frame}{Notation}
+        \begin{itemize}
+            \item Balls statt Prozesse (von 1 bis n nummeriert)
+            \vfill
+            \item Bins statt Werte (von 1 bis n nummeriert)
+            \vfill
+            \item \(b_{0,1}\) bis \(b_{0,n}\) initiale Zuweisungen
+            \vfill
+            \item \(t \in \mathbb{N}\) Zeitschritte
+            \vfill
+            \item \(m_t\) ist Bin, welche den Median-Ball in Schritt
+                  \(t\) enthält
+        \end{itemize}
+    \end{frame}
+    % weiter machen mit Notation und Herleitung/Erklärung der Ergebnisse
 \end{document}
