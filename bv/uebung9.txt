@@ -1,0 +1,215 @@
+1.
+
+a + b)
+x2y2:
+g_x = L(3,2) - L(1,2) = -1
+g_y = L(2,3) - L(2,1) = 1
+gradient = [-1,1]T
+theta(2,2) = arctan(-1/1) = -0.7854
+m(2,2) = sqrt((-1)^2 + 1^2) = sqrt(2)
+
+x2y4:
+g_x = L(3,4) - L(1,4) = 0
+g_y = L(2,5) - L(2,3) = 0
+gradient = [0,0]T
+theta(2,4) = arctan(0/0) = NaN
+m(2,4) = sqrt(0)
+
+x2y6:
+g_x = L(3,6) - L(1,6) = 0
+g_y = L(2,7) - L(2,5) = 0
+gradient = [0,0]T
+theta(2,6) = arctan(0/0) = NaN
+m(2,6) = sqrt(0)
+
+x2y8:
+g_x = L(3,8) - L(1,8) = 0
+g_y = L(2,9) - L(2,7) = 0
+gradient = [0,0]T
+theta(2,8) = arctan(0/0) = NaN
+m(2,8) = sqrt(0)
+
+x2y10:
+g_x = L(3,10) - L(1,10) = 0
+g_y = L(2,11) - L(2,9) = 0
+gradient = [0,0]T
+theta(2,10) = arctan(0/0) = NaN
+m(2,10) = sqrt(0)
+
+x4y2:
+g_x = L(5,2) - L(3,2) = 0
+g_y = L(4,3) - L(4,1) = 0
+gradient = [0,0]T
+theta(4,2) = arctan(0/0) = NaN
+m(4,2) = sqrt(0)
+
+x4y4:
+g_x = L(5,4) - L(3,4) = -1
+g_y = L(4,5) - L(4,3) = 1
+gradient = [-1,1]T
+theta(4,4) = arctan(-1/1) = -0.7854
+m(4,4) = sqrt((-1)^2 + 1^2) = sqrt(2)
+
+x4y6:
+g_x = L(5,6) - L(3,6) = 0
+g_y = L(4,7) - L(4,5) = 0
+gradient = [0,0]T
+theta(4,6) = arctan(0/0) = NaN
+m(4,6) = sqrt(0)
+
+x4y8:
+g_x = L(5,8) - L(3,8) = -1
+g_y = L(4,9) - L(4,7) = 0
+gradient = [-1,0]T
+theta(4,8) = arctan(-1/0) = NaN
+m(4,8) = sqrt((-1)^2) = sqrt(1) = 1
+
+x4y10:
+g_x = L(5,10) - L(3,10) = 0
+g_y = L(4,11) - L(4,9) = 0
+gradient = [0,0]T
+theta(4,10) = arctan(0/0) = NaN
+m(4,10) = sqrt(0)
+
+x6y2:
+g_x = L(7,2) - L(5,2) = 0
+g_y = L(6,3) - L(6,1) = 0
+gradient = [0,0]T
+theta(6,2) = arctan(0/0) = NaN
+m(6,2) = sqrt(0)
+
+x6y4:
+g_x = L(7,4) - L(5,4) = 0
+g_y = L(6,5) - L(6,3) = 0
+gradient = [0,0]T
+theta(6,4) = arctan(0/0) = NaN
+m(6,4) = sqrt(0)
+
+x6y6:
+g_x = L(7,6) - L(5,6) = -1
+g_y = L(6,7) - L(6,5) = 0
+gradient = [-1,0]T
+theta(6,6) = arctan(-1/0) = NaN
+m(6,6) = sqrt((-1)^2) = sqrt(1) = 1
+
+x6y8:
+g_x = L(7,8) - L(5,8) = 0
+g_y = L(6,9) - L(6,7) = 0
+gradient = [0,0]T
+theta(6,8) = arctan(0/0) = NaN
+m(6,8) = sqrt(0)
+
+x6y10:
+g_x = L(7,10) - L(5,10) = -1
+g_y = L(6,11) - L(6,9) = 1
+gradient = [-1,1]T
+theta(6,10) = arctan(-1/1) = -0.7854
+m(6,10) = sqrt((-1)^2 + 1^2) = sqrt(2)
+
+x8y2:
+g_x = L(9,2) - L(7,2) = 0
+g_y = L(8,3) - L(8,1) = 0
+gradient = [0,0]T
+theta(8,2) = arctan(0/0) = NaN
+m(8,2) = sqrt(0)
+
+x8y4:
+g_x = L(9,4) - L(7,4) = 0
+g_y = L(8,5) - L(8,3) = 0
+gradient = [0,0]T
+theta(8,4) = arctan(0/0) = NaN
+m(8,4) = sqrt(0)
+
+x8y6:
+g_x = L(9,6) - L(7,6) = 0
+g_y = L(8,7) - L(8,5) = 0
+gradient = [0,0]T
+theta(8,6) = arctan(0/0) = NaN
+m(8,6) = sqrt(0)
+
+x8y8:
+g_x = L(9,8) - L(7,8) = 0
+g_y = L(8,9) - L(8,7) = 0
+gradient = [0,0]T
+theta(8,8) = arctan(0/0) = NaN
+m(8,8) = sqrt(0)
+
+x8y10:
+g_x = L(9,10) - L(7,10) = 0
+g_y = L(8,11) - L(8,9) = 0
+gradient = [0,0]T
+theta(8,10) = arctan(0/0) = NaN
+m(8,10) = sqrt(0)
+
+x10y2:
+g_x = L(11,2) - L(9,2) = 0
+g_y = L(10,3) - L(10,1) = 0
+gradient = [0,0]T
+theta(10,2) = arctan(0/0) = NaN
+m(10,2) = sqrt(0)
+
+x10y4:
+g_x = L(11,4) - L(9,4) = 0
+g_y = L(10,5) - L(10,3) = 0
+gradient = [0,0]T
+theta(10,4) = arctan(0/0) = NaN
+m(10,4) = sqrt(0)
+
+x10y6:
+g_x = L(11,6) - L(9,6) = 0
+g_y = L(10,7) - L(10,5) = 0
+gradient = [0,0]T
+theta(10,6) = arctan(0/0) = NaN
+m(10,6) = sqrt(0)
+
+x10y8:
+g_x = L(11,8) - L(9,8) = 0
+g_y = L(10,9) - L(10,7) = 0
+gradient = [0,0]T
+theta(10,8) = arctan(0/0) = NaN
+m(10,8) = sqrt(0)
+
+x10y10:
+g_x = L(11,10) - L(9,10) = 0
+g_y = L(10,11) - L(10,9) = 0
+gradient = [0,0]T
+theta(10,10) = arctan(0/0) = NaN
+m(10,10) = sqrt(0)
+
+2.
+theta = 45
+p = 50 * cos(45) + 100 * sin(45) ~ 35,36 + 70,71 = 106,07
+
+theta = -45
+p = 50 * cos(-45) + 100 * sin(-45) ~ 35,36 - 70,71 = -35,35
+
+3.
+point 2 - horizontal
+theta = 0
+p = 0 * cos(0) + 100 * sin(0) = 0
+
+point 2 - vertical
+theta = 90 or theta = -90
+p = 0 * cos(90) + 100 * sin(90) = 100
+or
+p = 0 * cos(-90) + 100 * sin(-90) = -100
+
+point 3 - horizontal
+theta = 0
+p = 50 * cos(0) + 50 * sin(0) = 50
+
+point 3 - vertical
+theta = 90 or theta = -90
+p = 50 * cos(90) + 50 * sin(90) -50
+or
+p = 50* cos(-90) + 50 * sin(-90) = -50
+
+point 5 - horizontal
+theta = 0
+p = 100 * cos(0) + 100 * sin(0) = 100
+
+point 5 - vertical
+theta = 90 or theta = -90
+p = 100 * cos(90) + 100 * sin(90) = 100
+or
+p = 100 * cos(-90) + 100 * sin(-90) = -100
