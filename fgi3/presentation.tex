@@ -165,7 +165,7 @@
 
     \begin{frame}{Notation}
         \begin{itemize}
-            \item Balls statt Prozesse (von 1 bis n nummeriert)
+            \item Bälle statt Prozesse (von 1 bis n nummeriert)
             \vfill
             \item Bins statt Werte (von 1 bis n nummeriert)
             \vfill
@@ -176,6 +176,115 @@
             \item \(m_t\) ist Bin, welche den Median-Ball in Schritt
                   \(t\) enthält
         \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Notation}
+        \begin{itemize}
+            \item in der \(i\)-ten Iteration: \(I_{i,1}\) bis \(I_{i,n}\) und
+                  \(J_{i,1}\) bis \(J_{i,n}\) sind 2n zufällige Variablen
+            \vfill
+            \item \(j = 1,...,n\)
+            \vfill
+            \item Zuweisung der \(i\)-ten Iteration:
+                  \(b_{i,j} = median(b_{i-1,j}, b_{i-1,I_{i,j}}, b_{i-1,J_{i,j}})\)
+            \vfill
+            \item "mit hoher Wahrscheinlichkeit" meint Wahrscheinlichkeit von
+                  mindestens \(1 - n^{-c}\) für \(c > 1\)
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Zwei Bins mit Gegner}
+        \begin{itemize}
+            \item Grundlage, da Fälle mit mehr Bins auf diesen reduziert werden
+            \vfill
+            \item Gegner kann in jeder Runde Werte von bis zu\(\sqrt{n}\) Bällen
+                  ändern
+            \vfill
+            \item trotz Gegner wird stabiler Zustand mit \(n - \sqrt{n}\) Bällen
+                  in einer Bin erreicht
+            \vfill
+            \item Fall mit zwei Bins gleicht der "majority rule"
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Zwei Bins mit Gegner}
+        \begin{block}{Theorem 10}
+            Für jede initiale Verteilung der Bälle sind mit hoher Wahrscheinlichkeit
+            \(O(\log n)\) Runden der "majority rule" ausreichend, um
+            \(n - O(\sqrt{n})\) Bälle in die gleiche Bin zu bekommen.
+            Dies gilt selbst dann, wenn ein Gegner die zufälligen Entscheidungen
+            von bis zu \(O(\sqrt{n})\) Bällen manipulieren darf.
+        \end{block}
+    \end{frame}
+    \begin{frame}{Zwei Bins mit Gegner}
+        Sei \(L_t\) die Anzahl an Bällen in der linken Bin zum Zeitpunkt \(t\)
+        und \(R_t\) die Anzahl an Bällen in der rechten Bin zum Zeitpunkt \(t\).
+        Sei \(X_t = min(L_t, R_t)\) und \(Y_t = max(L_t, R_t)\). Angenommen \(n\)
+        ist gerade. Das Ungleichgewicht für Schritt \(t\) ist
+        \(\Delta_t = (Y_t - X_t) /2\). Das markierte Ungleichgewicht für Schritt
+        \(t\) ist \(\Psi_t = (R_t - L_t)/2\).
+        Basierend auf dem Ungleichgewicht wird zwischen drei Fällen unterschieden.
+    \end{frame}
+
+    \begin{frame}{Zwei Bins mit Gegner}
+        Fall 1: \(\Delta_0 \geq n/3\)
+
+        \begin{block}{Lemma 11}
+            Wenn \(\Delta_0 \geq cn\) gilt, wobei \(c > 0\) eine beliebige Konstante
+            ist, dann reichen mit hoher Wahrscheinlichkeit \(O(\log \log n)\)
+            Runden der "majority rule", um einen stabilen Konsens zu erreichen.
+        \end{block}
+
+        Fall 2: \(c \sqrt{n \ln n} \leq \Delta_0 < n/3\) für genügend großes \(c\)
+        \begin{block}{Lemma 12}
+            Wenn es einen Schritt \(t\) mit \(c\sqrt{n\ln n} \leq \Delta_0 < n/3\)
+            für ein genügend großes \(c\) gibt, dann reichen mit hoher Wahrscheinlichkeit
+            \(O(\log n)\) zusätzliche Runden der "majority rule", um in Fall 1
+            zu kommen.
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Zwei Bins mit Gegner}
+        Fall 3: \(\Delta_0 \leq c\sqrt{n \ln n}\)\\
+        Wenn \(Pr[Y \geq x] \geq Pr[Z \geq x]\) für zwei Zufallsvariablen Y und Z
+        und beliebige \(x\) gilt, dann wird Z stochastisch von Y dominiert. Dies
+        wird als \(Y \succeq Z\) geschrieben.
+        \begin{block}{Lemma 13}
+            Angenommen es gibt keinen Gegner und es gilt \(L_t \leq R_t \). Für
+            zwei beliebige markierte Ungleichgewichte \(\Psi_t\) und \(\Psi_t^{'}\),
+            für die \(\Psi_t > \Psi_t^{'}\) gilt, folgt
+            \(\Psi_{t+1} \succeq \Psi_{t+1}^{'}\).
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Zwei Bins mit Gegner}
+        Im nächsten Lemma wird das "Central Limit Theorem" angewendet, um zu zeigen,
+        dass mit konstanter Wahrscheinlichkeit ein genügend großes Ungleichgewicht
+        ungeachtet des vorherigen Ungleichgewichtes existiert.
+
+        \begin{block}{Lemma 14}
+            Angenommen es gibt keinen Gegner. Sei \(\varepsilon > 0\) eine beliebige
+            Konstante und sei \(c\) die Konstante von Lemma 12. Für jedes
+            \(\Psi_t \geq 0\) gilt
+            \(Pr[\Psi_{t+1} \geq c\sqrt{n}] \geq \frac{1}{\sqrt{2\pi}(1 + 4c/\sqrt{3})}e^{-8c^{2}/3}-\varepsilon\).
+        \end{block}
+        \begin{block}{Lemma 15}
+            Angenommen es gibt keinen Gegner. Wenn \(\Delta_t \geq c\sqrt{n}\) gilt,
+            wobei \(c\) die Konstante von Lemma 12 ist, dann gilt auch
+            \(Pr[\Delta_{t+1} \geq (4/3)\Delta_t] \geq 1 - exp(-\Theta(\Delta^2_t / n))\).
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Zwei Bins mit Gegner}
+        \begin{block}{Lemma 16}
+            Wenn initial \(\Delta_0 < c\sqrt{n \ln n}\) für das \(c\) aus Lemma 12
+            gilt, dann gilt mit hoher Wahrscheinlichkeit nach \(O(\log n)\)
+            Schritten \(\Delta_t \geq c\sqrt{n \ln n}\).
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Abschluss}
+        ausformulieren
     \end{frame}
     % weiter machen mit Notation und Herleitung/Erklärung der Ergebnisse
 \end{document}
