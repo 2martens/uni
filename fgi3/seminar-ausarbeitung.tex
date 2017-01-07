@@ -1,0 +1,197 @@
+\documentclass[11pt]{scrartcl}
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[round]{natbib}
+
+
+
+% mathematical environments
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{claim}[theorem]{Claim}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+
+
+
+
+% title & author
+\title{Über die Umfärbbarkeit\\ roter Gummibären}
+\subtitle{Eine informelle Einführung in die Iterationstheorie}
+\author{Michael Köhler-Bußmeier}
+\subject{\small
+	Hausarbeit im Modul FGI-3, WS 2023/2042\\
+	Fachbereich Informatik, Universität Hamburg
+}
+\date{\today}
+
+
+
+
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Rote Gummibären können die Welt retten!
+\end{abstract}
+
+\tableofcontents
+
+
+
+
+
+\section{Einleitung}
+Warum brach die 40-jährige Hegemonie der Sowjetunion in Mittel- und
+Osteuropa im Jahre 1989 innerhalb von wenigen Monaten zusammen?
+Dies liegt an den roten Gummibären!
+
+
+
+\subsection{Motivation}
+Warum sollte man sich mit der Theorie roter Gummibären beschäftigen?
+
+
+
+\subsection{Probleme und  Fragen}
+Will man sich mit roten Gummibären beschäftigen, dann treten folgende
+Probleme und Fragen auf:
+
+
+
+\subsection{Die Theorie der Iteration von Ensembles}
+Der Ansatz der hier betrachtet werden soll ist die Theorie der
+Iteration von Ensembles. Dabie handelt es sich um.....
+
+
+
+\subsection{Aufbau der Arbeit}
+Die Arbeit hat den folgenden Aufbau: Um zu einer Theorie der roten
+Gummibären zu gelangen, beschäftigen wir uns in
+Kapitel~\ref{sec:Iterierte-Umfärbungen} mit ....
+
+
+
+
+
+\section{Iterierte Umfärbungen }\label{sec:Iterierte-Umfärbungen}
+
+Im folgenden betrachten wir Umfärbungen von Tüten sowie deren
+Iteration.  Hierbei ist insbesondere der Grenzwertprozess von
+Interesse.
+
+
+
+\subsection{Iteration, Stabilisation}
+Wir nehmen eine vorgegebene Mengen an Farben $C$ an.  Der Einfachheit
+halber identifizieren wir eine Tüte $T$ mit $n$ Gummibären mit dem
+Intervall $[1, \ldots, n]$.
+
+\begin{definition}[Färbung]
+Eine \emph{Färbung} ist eine Abbildung $f: [1, \ldots, n] \to C$.
+
+Sei $F$  die Menge aller Färbungen
+\end{definition}
+
+Ein \emph{Funktional} ist eine Funktion, die Funktionen als Argumente
+hat, d.h. …
+
+\begin{definition}[Umfärbung]
+Eine \emph{Umfärbung} ist eine Funktional $u: F \to F$.
+\end{definition}
+
+\begin{definition}
+Sei die Färbung $f: [1, \ldots, n] \to C$ gegeben.
+Die Iteration einer Umfärbung $u: F \to F$ ist
+\begin{equation}
+\begin{array}{rcl}
+u^0(f) &:=& f \\
+u^{n+1}(f) &:=&     u(u^{n}(f))
+\end{array}
+\end{equation}
+\end{definition}
+
+Wir hätten es gerne, dass sich $u^{n}(f)$ für $n \to \infty$
+stabilisiert.
+
+
+
+\subsection{Ordnungen}
+In \citep{hans-riegel-1994} findet sich der folgende Satz:
+
+\begin{theorem}[Hans und Riegel, 1994]
+  Zu jeder wohlgeordneten Menge von Gummibärenfarben ...
+\end{theorem}
+
+Historisch betrachtet findet sich der Wohklordnungsbegriff aber
+bereits schon \citep{riegel-1993} angelegt.
+
+
+
+\subsection{Eindeutigkeit}
+Es gibt eine Besonderheit des Wohlordnungssatz auf Gummibärenfarben:
+Der Wohlordnungssatz auf Gummibärenfarben garantiert die
+Stabiliserung.  Er garantiert aber nicht die Eindeutigkeit des
+Endergebnisses.  Das Endergebnis hängt von der Auswahlfunktion $g:
+\mathbb{N} \to [1, \ldots, k]$ auf dem Umfärbungsensemble ab.  Es
+ergibt sich also sofort die Frage: Für welche Umfärbungsensembles ist
+auch das Endergebnis eindeutig?
+
+
+
+
+
+\section{Verwandte Arbeiten und Ansätze}
+Wir finden in der Literatur eine Reihe ähnlicher Ansätze, von denen
+wir einige vorstellen wollen.
+
+\paragraph{Ondulierten Umfärbung}
+\paragraph{Iterierte Verfärbung}
+\paragraph{Gefärbte Iteration}
+
+
+
+
+
+\section{Ausblick und Zusammenfassung}
+
+
+
+\subsection{ Zusammenfassung}
+
+
+
+\subsection{Ausblick}
+In dieser Hausarbeit habe ich einiges nur kurz angerissen bzw. ganz
+weggelassen, weil es den Rahmen des Seminars sprengt.
+
+Insbesondere habe ich nicht die Theorie der Umfärbung auf unendlich
+großen Tüten behandelt.  Diese Theorie basiert prinzipiell auch auf
+den hier behandelten Konzepten, wobei daruaf zu achten ist, dass....
+
+
+
+\subsection{Bezug zum M.Sc. Studium}
+Abschließend möchte ich die Relevanz des Themas für das weitere
+Studium im Master skizzieren....
+
+
+
+
+
+\bibliographystyle{dinat}
+\bibliography{references}
+\end{document}
