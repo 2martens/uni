@@ -1,0 +1,200 @@
+\documentclass[12pt,ngerman,a4paper]{scrartcl}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[round]{natbib}
+\usepackage[german=quotes]{csquotes}
+
+% mathematical environments
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{claim}[theorem]{Claim}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\MakeOuterQuote{"}
+
+% title & author
+\title{Stabilizing consensus with the power of two choices}
+%\subtitle{Eine informelle Einführung in die Iterationstheorie}
+\author{Jim Martens}
+\subject{\small
+	Hausarbeit im Modul FGI-3, WS 2016/2017\\
+	Fachbereich Informatik, Universität Hamburg
+}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+TODO
+\end{abstract}
+
+\tableofcontents
+
+\section{Einleitung}
+
+Als Konsens wird eine Lösung beschrieben, auf die sich alle Beteiligten einigen
+können. Mit einem Konsensproblem wird eine Situation beschrieben, in der das
+Erreichen eines Konsens das Ziel ist. Ein Problem ist es, weil das Erreichen
+dieses Konsens in diesen Fällen nicht offenkundig und/oder trivial, sondern
+oftmals schwierig ist. Eine Lösung eines solchen Problems ist dann
+beispielsweise ein Algorithmus, der in einer solchen Situation einen Konsens
+herbeiführt.
+
+Dabei gibt es viele solche Konsensprobleme im Alltag, sowohl zwischen Menschen
+als auch unter Einbindung von Technologie. Die menschlichen Probleme sind
+mittels theoretischer Betrachtungen nur schwer zu lösen, da dort auch unlogische
+Aspekte eine Rolle spielen. Für die technischen Probleme ist eine theoretische
+Betrachtung allerdings sehr wohl von Interesse und Bedeutung.
+
+Ein typisches
+Beispiel von einem Konsensproblem ist die Synchronisation von verteilten
+Prozessen, wie sie beispielsweise bei einem Multiplayerspiel über das Internet
+auftreten können. Dort muss der Zustand der Welt zwischen den Geräten
+synchronisiert werden, denn die Berechnung der Welt findet in aller Regel aus
+Performancegründen auf den einzelnen Geräten statt. Es gibt also $n$ verschiedene
+Weltzustände und natürlich sollen alle Geräte den gleichen benutzen, damit
+zum Beispiel Schüsse in allen Zuständen zur gleichen Zeit und in die gleiche
+Richtung gehen und auch das Gleiche treffen. Im Fall von Multiplayerspielen
+oder vergleichbaren Szenarien ist die Lösung oftmals die Ernennung eines "Leaders",
+der meistens auf Seiten des Servers ist und somit unter Kontrolle der
+Spieleentwickler oder unter allen Prozessen gewählt wird. Dessen Zustand wäre
+dann der Maßstab für alle anderen Prozesse, welche ihren eigenen Wert von diesem
+"Leader" kopieren würden.
+
+Wenn jedoch Prozesse manipuliert werden können, dann könnten im Falle einer freien
+Wahl des "Leaders" auch jener und damit alle Prozesse manipuliert werden. Daher
+ist die Lösung in diesem Fall erheblich schwieriger. Für den Fall, dass Nachrichten
+asynchron ausgetauscht werden, Prozesse nicht mit einer einheitlichen Uhr
+laufen und willkürlich unterschiedliche Geschwindigkeiten haben und ein Prozess
+zu jeder beliebigen Zeit einen Crash erleben kann, wurde gezeigt, dass die Lösung
+des Problems unmöglich ist.[Quelle] Aber auch wenn alle Prozesse synchron
+Nachrichten austauschen, die gleiche Uhr und Geschwindigkeit benutzen, ist es
+unmöglich, wenn mindestens ein Drittel aller Prozesse sogenannte byzantinische
+Fehler haben können.[Quelle] Dies gilt beides jedoch nur für deterministische
+Algorithmen.
+
+Als byzantinische Fehler werden solche bezeichnet, bei denen nicht klar ist, ob
+ein Fehler eingetreten ist. Es basiert auf dem Gedankenexperiment, dass es zwei
+byzantinische Armeen gibt, die sich nicht gegenseitig sehen oder hören können,
+aber über einen gemeinsamen Zeitpunkt zum Angriff austauschen müssen. Zwischen
+beiden Armeen befindet sich jedoch der Feind, sodass alle Botschaften zwischen
+den Armeen abgefangen oder manipuliert werden können. Keine der beiden Armeen
+kann daher wissen, ob die andere Seite nun eine Uhrzeit bestätigt hat. Ein
+alleiniger Angriff würde die Vernichtung der jeweils angreifenden Armee zur Folge
+haben.
+
+Es gibt randomisierte Algorithmen, die im asynchronen Fall das Problem mit einer
+Wahrscheinlichkeit nahezu 1 lösen können.[Quelle] Auf spezifische Ansätze mit
+randomisierten Algorithmen wird jedoch später näher eingegangen.
+
+In dieser Hausarbeit wird näher eine gewisse Abwandlung des Konsensproblems
+behandelt, die des stabilisierenden Konsensproblems. Der Unterschied ist, dass
+einzelne Prozesse nicht länger einen finalen Wert erreichen müssen. Wichtig ist
+allein, dass alle Prozesse schließlich einen gemeinsamen Wert haben, ohne dies
+notwendigerweise zu wissen, und diesen dann behalten. Aufgrund dieser Abwandlung
+ist der Startzustand der Prozesse egal. Die gesuchte Lösung ist also ein sich
+selbststabilisierendes Konsensprotokoll.
+
+\subsection{Aufbau der Arbeit}
+% auch ohne Subsection aufschreiben, abgetrennt, um es nicht zu vergessen
+TODO
+
+% Beginn Hauptinhalt
+\section{Iterierte Umfärbungen }\label{sec:Iterierte-Umfärbungen}
+
+Im folgenden betrachten wir Umfärbungen von Tüten sowie deren
+Iteration.  Hierbei ist insbesondere der Grenzwertprozess von
+Interesse.
+
+\subsection{Iteration, Stabilisation}
+Wir nehmen eine vorgegebene Mengen an Farben $C$ an.  Der Einfachheit
+halber identifizieren wir eine Tüte $T$ mit $n$ Gummibären mit dem
+Intervall $[1, \ldots, n]$.
+
+\begin{definition}[Färbung]
+Eine \emph{Färbung} ist eine Abbildung $f: [1, \ldots, n] \to C$.
+
+Sei $F$  die Menge aller Färbungen
+\end{definition}
+
+Ein \emph{Funktional} ist eine Funktion, die Funktionen als Argumente
+hat, d.h. …
+
+\begin{definition}[Umfärbung]
+Eine \emph{Umfärbung} ist eine Funktional $u: F \to F$.
+\end{definition}
+
+\begin{definition}
+    Sei die Färbung $f: [1, \ldots, n] \to C$ gegeben.
+    Die Iteration einer Umfärbung $u: F \to F$ ist
+    \begin{equation}
+        \begin{array}{rcl}
+            u^0(f) &:=& f \\
+            u^{n+1}(f) &:=&     u(u^{n}(f))
+        \end{array}
+    \end{equation}
+\end{definition}
+
+Wir hätten es gerne, dass sich $u^{n}(f)$ für $n \to \infty$
+stabilisiert.
+
+\subsection{Ordnungen}
+In \citep{hans-riegel-1994} findet sich der folgende Satz:
+
+\begin{theorem}[Hans und Riegel, 1994]
+  Zu jeder wohlgeordneten Menge von Gummibärenfarben ...
+\end{theorem}
+
+Historisch betrachtet findet sich der Wohklordnungsbegriff aber
+bereits schon \citep{riegel-1993} angelegt.
+
+\subsection{Eindeutigkeit}
+Es gibt eine Besonderheit des Wohlordnungssatz auf Gummibärenfarben:
+Der Wohlordnungssatz auf Gummibärenfarben garantiert die
+Stabiliserung.  Er garantiert aber nicht die Eindeutigkeit des
+Endergebnisses.  Das Endergebnis hängt von der Auswahlfunktion $g:
+\mathbb{N} \to [1, \ldots, k]$ auf dem Umfärbungsensemble ab.  Es
+ergibt sich also sofort die Frage: Für welche Umfärbungsensembles ist
+auch das Endergebnis eindeutig?
+
+\section{Verwandte Arbeiten und Ansätze}
+Wir finden in der Literatur eine Reihe ähnlicher Ansätze, von denen
+wir einige vorstellen wollen.
+
+\paragraph{Ondulierten Umfärbung}
+\paragraph{Iterierte Verfärbung}
+\paragraph{Gefärbte Iteration}
+
+\section{Ausblick und Zusammenfassung}
+
+\subsection{Zusammenfassung}
+
+\subsection{Ausblick}
+In dieser Hausarbeit habe ich einiges nur kurz angerissen bzw. ganz
+weggelassen, weil es den Rahmen des Seminars sprengt.
+
+Insbesondere habe ich nicht die Theorie der Umfärbung auf unendlich
+großen Tüten behandelt.  Diese Theorie basiert prinzipiell auch auf
+den hier behandelten Konzepten, wobei daruaf zu achten ist, dass....
+
+\subsection{Bezug zum M.Sc. Studium}
+Abschließend möchte ich die Relevanz des Themas für das weitere
+Studium im Master skizzieren....
+
+\bibliographystyle{dinat}
+\bibliography{references}
+
+\end{document}
