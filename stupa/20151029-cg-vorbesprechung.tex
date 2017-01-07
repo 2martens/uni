@@ -1,0 +1,85 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bytefield}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+%\usepackage{algorithmic}
+%\usepackage{minted}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+%\def\thesection{\arabic{section})}
+%\def\thesubsection{(\alph{subsection})}
+%\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+%switch starred and non-starred (auto-size)
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\makeatother
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\begin{document}
+\author{Jim Martens}
+\title{Ergebnis der CG-Vorbesprechung}
+\maketitle
+
+\section{Tagesordnung}
+
+TOP 5 ``70 Jahre Befreiung'' vor TOP 3 ``Bestätigung RIS-Referenten'' behandeln
+
+\section{Abstimmungen}
+
+\begin{description}
+	\item[Bestätigung RBCS-ReferentInnen] dafür
+	\item[Bestätigung der Wahlordnung Queer-Referat] 1. dafür, 2. dagegen, 3. dagegen
+	\item[Bestätigung der RIS-Referenten] dagegen
+	\item[Nachwahl Ausschuss gegen Rechts] dafür, außer es ist Elvis und Co.
+	\item[70 Jahre Befreiung] dafür
+	\item[Vollständige Genehmigung der Grundordnung] dafür, falls auf Tagesordnung
+	\item[Internationale Solidarität konkret] mit Änderungsanträgen (siehe unten): dafür, sonst: dagegen
+	\item[Vorbereitung StuPa-Wahl] dafür
+	\item[Allgemeine Stimmung im StuPa] dagegen
+	\item[Dies Academicus] mit Ersetzungsantrag von Geoffrey: dafür, sonst: dagegen
+	\item[Sitzungsraum] in aktueller Form: dagegen. Erst einmal ESA W 221 ausprobieren. Idee eines gleichbleibenden Sitzungsraumes jedoch gut.
+\end{description}
+
+\section{Internationale Solidarität}
+
+Zeile 26 "`der NATO-Staaten"' streichen und durch "`des Kapitals"' ersetzen\\
+Zeile 90 ersetzen durch "`alle offenen und versteckten Bildungsgebühren (z.B. Verwaltungskostenbeitrag, Laborkittel, Prepbestecke, unbezahlte Praktika)"'
+
+\end{document}
