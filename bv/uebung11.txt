@@ -1,0 +1,6 @@
+exercise 1:
+0: blue
+1-left,3: yellow
+1-top: red
+2,4-left,5,6,7: watershed
+4-right,8: green
