@@ -5,9 +5,15 @@
 \usepackage[ngerman]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[round]{natbib}
+\usepackage[
+backend=biber,
+bibstyle=ieee,
+citestyle=ieee
+]{biblatex}
+%\usepackage[round]{natbib}
 \usepackage[german=quotes]{csquotes}
 
+\addbibresource{literature.bib}
 % mathematical environments
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
@@ -21,6 +27,9 @@
 
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1.2ex plus 0.5ex minus 0.5ex}
 
 \MakeOuterQuote{"}
 
@@ -43,6 +52,7 @@ TODO
 
 \tableofcontents
 
+\newpage
 \section{Einleitung}
 
 Als Konsens wird eine Lösung beschrieben, auf die sich alle Beteiligten einigen
@@ -80,10 +90,10 @@ ist die Lösung in diesem Fall erheblich schwieriger. Für den Fall, dass Nachri
 asynchron ausgetauscht werden, Prozesse nicht mit einer einheitlichen Uhr
 laufen und willkürlich unterschiedliche Geschwindigkeiten haben und ein Prozess
 zu jeder beliebigen Zeit einen Crash erleben kann, wurde gezeigt, dass die Lösung
-des Problems unmöglich ist.[Quelle] Aber auch wenn alle Prozesse synchron
+des Problems unmöglich ist.\cite{Fischer1985} Aber auch wenn alle Prozesse synchron
 Nachrichten austauschen, die gleiche Uhr und Geschwindigkeit benutzen, ist es
 unmöglich, wenn mindestens ein Drittel aller Prozesse sogenannte byzantinische
-Fehler haben können.[Quelle] Dies gilt beides jedoch nur für deterministische
+Fehler haben können.\cite{Fischer1986} Dies gilt beides jedoch nur für deterministische
 Algorithmen.
 
 Als byzantinische Fehler werden solche bezeichnet, bei denen nicht klar ist, ob
@@ -97,7 +107,7 @@ alleiniger Angriff würde die Vernichtung der jeweils angreifenden Armee zur Fol
 haben.
 
 Es gibt randomisierte Algorithmen, die im asynchronen Fall das Problem mit einer
-Wahrscheinlichkeit nahezu 1 lösen können.[Quelle] Auf spezifische Ansätze mit
+Wahrscheinlichkeit nahezu 1 lösen können.\cite{Aspnes2003} Auf spezifische Ansätze mit
 randomisierten Algorithmen wird jedoch später näher eingegangen.
 
 In dieser Hausarbeit wird näher eine gewisse Abwandlung des Konsensproblems
@@ -106,95 +116,208 @@ einzelne Prozesse nicht länger einen finalen Wert erreichen müssen. Wichtig is
 allein, dass alle Prozesse schließlich einen gemeinsamen Wert haben, ohne dies
 notwendigerweise zu wissen, und diesen dann behalten. Aufgrund dieser Abwandlung
 ist der Startzustand der Prozesse egal. Die gesuchte Lösung ist also ein sich
-selbststabilisierendes Konsensprotokoll.
+selbst stabilisierendes Konsensprotokoll.
 
-\subsection{Aufbau der Arbeit}
-% auch ohne Subsection aufschreiben, abgetrennt, um es nicht zu vergessen
-TODO
+Im weiteren Verlauf dieser Arbeit wird zunächst der Algorithmus vorgestellt,
+welcher das soeben erwähnte Konsensprotokoll erfüllt. Daran anschließend werden
+die asymptotischen Laufzeiten präsentiert. %TODO weiter fortführen
 
 % Beginn Hauptinhalt
-\section{Iterierte Umfärbungen }\label{sec:Iterierte-Umfärbungen}
+\section{Selbststabilisierender Konsens}
 
-Im folgenden betrachten wir Umfärbungen von Tüten sowie deren
-Iteration.  Hierbei ist insbesondere der Grenzwertprozess von
-Interesse.
+Dieser Abschnitt wird sich mit einer Lösung zum Erreichen eines sich selbst
+stabilisierenden Konsenses beschäftigen.
+\subsection{Modell}
 
-\subsection{Iteration, Stabilisation}
-Wir nehmen eine vorgegebene Mengen an Farben $C$ an.  Der Einfachheit
-halber identifizieren wir eine Tüte $T$ mit $n$ Gummibären mit dem
-Intervall $[1, \ldots, n]$.
+Es kann angenommen werden, dass es $n$ Prozesse gibt, von denen in einem anonymen
+Netzwerk jeder Prozess mit allen anderen Prozessen verbunden ist. Es sind keine
+einzigartigen Prozess IDs bekannt. Stattdessen hat jeder Prozess seine eigene
+Numerierungstabelle für die anderen Prozesse. Der Einfachheit halber sei jedoch
+angenommen, dass die Prozesse insgesamt von 1 bis $n$ numeriert sind. Zu Beginn
+hat jeder Prozess einen Wert $v_i \in \mathrm{N}$. Am Ende sollen alle Prozesse
+einen gemeinsamen und stabilen Wert $v$ aus der initialen Wertemenge haben.
 
-\begin{definition}[Färbung]
-Eine \emph{Färbung} ist eine Abbildung $f: [1, \ldots, n] \to C$.
+Es kann angenommen werden, dass die Zeit in synchronisierten Runden abläuft.
+In jeder Runde kann jeder Prozess mit maximal einer logarithmischen Anzahl an
+Prozessen kommunizieren, maximal eine logarithmische Menge an Informationen
+austauschen und ein paar lokale Berechnungen vornehmen, um die erhaltenen
+Informationen zu verarbeiten. Sollte ein Prozess von mehr als einer logarithmischen
+Menge an anderen Prozessen kontaktiert werden, so werden nur logarithmisch viele
+Anfragen verarbeitet, während die anderen schlichtweg unbeantwortet bleiben.
+Die Selektion der verarbeiteten Anfragen kann durch einen Gegner beeinflusst
+werden.
 
-Sei $F$  die Menge aller Färbungen
-\end{definition}
+Wenn es keinen Gegner gibt, dann lässt sich das Konsensproblem relativ einfach
+mit der Minimum-Regel lösen: Jeder Prozess $i$ kontaktiert in einem Zeitschritt
+einen zufälligen Prozess $j$ und setzt seinen Wert auf das Ergebnis von der
+Operation $min(v_i, v_j)$. Mit einer hohen Wahrscheinlichkeit hätten somit alle
+Prozesse den gleichen Wert nach $O(\log n)$ Zeitschritten.
 
-Ein \emph{Funktional} ist eine Funktion, die Funktionen als Argumente
-hat, d.h. …
+Sollten Prozesse jedoch korrumpiert werden können, ist es signifikant schwerer
+einen gemeinsamen Wert zu finden und dort zu bleiben. Vom folgenden Gegnermodell
+kann ausgegangen werden: Ein $T$-starker Gegner kennt die gesamte Historie des
+Protokolls (sprich: welche Prozesse wann welche Werte hatten). Zu Beginn jedes
+Zeitschritts kann der Gegner die Werte von bis zu $T$ Prozessen willkürlich
+ändern unter der einzigen Bedingung, dass der neue Wert Teil der initialen
+Wertemenge ist.
 
-\begin{definition}[Umfärbung]
-Eine \emph{Umfärbung} ist eine Funktional $u: F \to F$.
-\end{definition}
+Dieser Gegner sorgt nun jedoch dafür, dass kein Zustand mit Sicherheit mehr
+erreicht werden kann, ab dem alle Prozesse einen gemeinsamen Wert haben. Daher
+ist eine Anpassung der Zielbedingung erforderlich. Für das Erreichen des Konsenses
+ist es nur noch nötig, dass es einen Zeitschritt $t$ und einen Wert
+$v \in \{v_1,...,v_n\}$ gibt, sodass für alle Zeitschritte nach $t$ gilt: Alle
+Prozesse bis auf $T$ haben den Wert $v$. Solch ein Zustand wird fast stabiler
+Konsens genannt. Die Herausforderung ist nun ein Protokoll zu finden, für das
+die Zahl $T$ möglichst hoch sein kann und ein solcher Konsens dennoch mit hoher
+Wahrscheinlichkeit erreicht werden kann.
 
-\begin{definition}
-    Sei die Färbung $f: [1, \ldots, n] \to C$ gegeben.
-    Die Iteration einer Umfärbung $u: F \to F$ ist
-    \begin{equation}
-        \begin{array}{rcl}
-            u^0(f) &:=& f \\
-            u^{n+1}(f) &:=&     u(u^{n}(f))
-        \end{array}
-    \end{equation}
-\end{definition}
+Die Minimumregel funktioniert mit einem solchen Gegner nicht mehr. Angenommen
+es gibt nur zwei Werte, 2 und 4. Maximal $T$ Prozesse haben den Wert 2. Dann kann
+der Gegner den Wert all dieser Prozesse auf 4 ändern und kein Prozess würde den
+Wert ändern. Dieser Zustand kann für einen beliebig langen Zeitraum aufrecht
+erhalten werden. Es ist aber kein fast stabiler Konsens, da der Gegner immer
+noch irgendwann mindestens einen Prozess auf 2 setzen kann, sodass schließlich
+alle Prozesse bei 2 ankommen und ein Konsens erreicht ist. Da dieser Konsens
+vom Gegner jedoch beliebig lange verzögert werden kann, ist in keiner zeitlichen
+Schranke gewährleistet, dass ein Konsens erreicht wird.
 
-Wir hätten es gerne, dass sich $u^{n}(f)$ für $n \to \infty$
-stabilisiert.
+Es bedarf also einer anderen Lösung. Das Konzept der Wahl eines Anführers unter
+den Prozessen, an dem sich dann alle anderen Prozesse orientieren, funktioniert
+jedoch auch nicht. Denn der Gegner kann schlichtweg nach der Wahl des Anführers
+diesen Anführer korrumpieren und somit alle anderen Prozesse ebenfalls.
 
-\subsection{Ordnungen}
-In \citep{hans-riegel-1994} findet sich der folgende Satz:
+Entgegen der Vermutung gibt es in der Tat ein einfaches Protokoll, welches eine
+begrenzte Laufzeit hat, für große $T$ funktioniert und mit jedem
+Startzustand ans Ziel kommt.
 
-\begin{theorem}[Hans und Riegel, 1994]
-  Zu jeder wohlgeordneten Menge von Gummibärenfarben ...
+\subsection{Protokoll}
+
+Die Medianregel ist ein Protokoll welches zugleich einfach ist und die im vorigen
+Abschnitt geschilderte Problematik auflöst. In jedem Zeitschritt wählt jeder
+Prozess $i$ zufällig und gleichverteilt zwei weitere Prozesse $j$ und $k$ aus,
+wobei der Prozess $i$ dabei auch sich selbst auswählen kann. Der Wert von $i$
+wird dann durch den Median der drei Werte $v_i, v_j, v_k$ ersetzt. Für die Werte
+1, 42, 100 wäre dann der Median 42.
+
+Klassische Strategien von Gegnern wie das Vertauschen von Werten oder das
+Verstecken von Werten für einen unbegrenzten Zeitraum (wie im Beispiel mit
+der Minimumregel angewendet) funktionieren mit der Medianregel nicht, welche
+trotz entsprechender Störung innerhalb kurzer Zeit zu einem Konsens konvergiert.
+
+Doerr et al\cite{Doerr2011} haben folgende Ergebnisse für den worst-case gezeigt.
+
+\begin{tabular}{c|c|c}
+    Eingabe & mit Gegner & ohne Gegner\\
+    \hline
+    worst-case 2 Werte & \(O(\log n)\) & \(O(\log n)\) \\
+    \hline
+    worst-case m Werte & \(O(\log m \log \log n + \log n)\) & \(O(\log n)\)
+\end{tabular}
+
+Diese Ergebnisse basieren auf den zugrundeliegenden Theoremen, welche hier ohne
+Beweis vorgestellt werden sollen. Dabei bedeutet "mit hoher Wahrscheinlichkeit"
+stets eine Wahrscheinlichkeit von $1 - n^{-c}$ für eine Konstante $c > 1$.
+
+\begin{theorem}
+Für jeden Startzustand gilt, dass die Medianregel ohne Gegner mit hoher
+Wahrscheinlichkeit einen stabilen Konsens nach $O(\log n)$ Zeitschritten
+erreicht.
 \end{theorem}
 
-Historisch betrachtet findet sich der Wohklordnungsbegriff aber
-bereits schon \citep{riegel-1993} angelegt.
+Dieses Theorem zeigt, dass die Medianregel im Fall ohne Gegner gleich gut wie
+die Minimumregel ist. Das ist auch das Erste, was gezeigt werden muss: Dass dieses
+Protokoll nicht schlechter als die als "schlecht" befundene Lösung ist.
 
-\subsection{Eindeutigkeit}
-Es gibt eine Besonderheit des Wohlordnungssatz auf Gummibärenfarben:
-Der Wohlordnungssatz auf Gummibärenfarben garantiert die
-Stabiliserung.  Er garantiert aber nicht die Eindeutigkeit des
-Endergebnisses.  Das Endergebnis hängt von der Auswahlfunktion $g:
-\mathbb{N} \to [1, \ldots, k]$ auf dem Umfärbungsensemble ab.  Es
-ergibt sich also sofort die Frage: Für welche Umfärbungsensembles ist
-auch das Endergebnis eindeutig?
+\begin{theorem}
+Für jeden Startzustand und eine konstante Zahl an unterschiedlichen Werten erreicht
+die Medianregel mit einem beliebigen T-starken Gegner mit $T \leq \sqrt{n}$ mit
+hoher Wahrscheinlichkeit einen fast stabilen Konsens nach $O(\log n)$
+Zeitschritten.
+\end{theorem}
+
+Dieses zweite Theorem besagt, dass die Medianregel das Problem löst, welches
+die Minimumregel nicht zu lösen imstande war, solange der Gegner nicht zu mächtig
+ist. Diese Einschränkung ist jedoch nicht extra vorteilhaft gewählt, sondern
+erlaubt dem Gegner gerade so viel Macht, dass das Protokoll noch zu einem
+Ergebnis kommt. Wenn stattdessen $T = \Omega(\sqrt{n})$ gelten würde, dann könnte
+Medianregel mit hoher Wahrscheinlichkeit keinen fast stabilen Konsens mehr
+erreichen, da der Gegner für eine mindestens polynomiell lange Zeit zwei
+gleichgroße Gruppen an Prozessen mit jeweils gleichen Werten in perfekter Balance
+halten könnte.
+
+\begin{theorem}
+Für jeden Startzustand mit $m$ unterschiedlichen Werten und einem beliebigen
+T-starken Gegner mit $T \leq \sqrt{n}$ erreicht die Medianregel mit hoher
+Wahrscheinlichkeit einen fast stabilen Konsens nach
+$O(\log m \cdot \log \log n + \log n)$ Zeitschritten.
+\end{theorem}
+
+Der Unterschied zwischen Theorem 2 und 3 ist die Anzahl an unterschiedlichen
+Werten. Theorem 3 deckt den allgemeineren Teil mit einer beliebigen Anzahl an
+unterschiedlichen Werten ab. Somit sind auch die theoretischen Fundamente für
+die vier in der Tabelle sichtbaren Ergebnisse gelegt. Theorem 1 liefert die
+Ergebnisse für die Fälle ohne Gegner. Theorem 2 liefert den Wert für den Fall
+mit nur 2 vorhandenen Werten und Theorem 3 liefert das Ergebnis für den Fall
+mit $m$ verschiedenen Werten.
+
+Damit ist unter Annahme der Korrektheit der Theoreme gezeigt, dass die Medianregel
+eindeutig besser ist als die Minimumregel und die aufgestellten Erfordernisse
+lösen kann.
+
+Doerr et al gehen noch auf einen average-case ein, der in dieser Ausarbeitung
+jedoch keine weitere Beachtung finden soll.
+
+\subsection{Beweis}
+
+An dieser Stelle könnte man aufhören. Allerdings geht es auch darum zu verstehen,
+warum diese Theoreme gelten bzw. die Beweise zu verstehen.
+
+Zum Zwecke der Beweisführung wird die Notation angepasst. Statt von Prozessen
+und Werten wird von Bällen und Eimern (engl.: balls and bins) geredet. Das ist
+nicht eine willkürliche Entscheidung von Doerr et al, weil sie gerade Lust auf
+eine Änderung der Begrifflichkeit hatten. Stattdessen gibt es eine tiefergehende
+theoretische Erwägung für die andere Notation. Denn das in Englisch balls-into-bins
+genannte Problem ist gut erprobt für Beweise, sodass auf vorhandene Erkenntnisse
+und Beweisstrukturen zurückgegriffen werden kann.
+
+Die Grobstruktur des Beweises für die drei Theoreme ist relativ einfach.
+Zunächst wird der Fall mit nur 2 Werten gezeigt. Anschließend wird der Fall für
+beliebig viele Werte darauf zurückgeführt.
+
+Für den Fall von nur 2 Fällen bzw. Eimern, gilt eine weitere Sache. In diesem
+Fall ist die Anwendung des Median gleichbedeutend mit der Mehrheitsregel. Die
+Mehrheitsregel besagt, dass der neue Eimer des aktuell betrachteten Balls derjenige
+wird, in dem die Mehrheit der drei dafür relevanten Bälle liegt. Diese drei Bälle
+setzen sich zusammen aus dem aktuell betrachteten Ball und zwei zufällig gewählten
+Bällen, wobei auch der betrachtete Ball gezogen werden kann.
+
+Bevor mit dem eigentlichen Beweis angefangen wird, folgt noch ein weiteres Theorem.
+
+\begin{theorem}
+Für jeden Startzustand mit zwei möglichen Werten (bzw. Eimern) reichen mit hoher
+Wahrscheinlichkeit $O(\log n)$ Zeitschritte unter Anwendung der Mehrheitsregel
+(Medianregel) aus, um bei einem $\sqrt{n}$-starken Gegner einen fast stabilen
+Konsens zu erreichen.
+\end{theorem}
+
+Bei genauerer Betrachtung entspricht dieses Theorem nahezu Theorem 2, nur dass
+hier explizit von zwei möglichen Werten statt von einer konstanten Menge an
+möglichen Werten die Rede ist.
+
+
 
 \section{Verwandte Arbeiten und Ansätze}
-Wir finden in der Literatur eine Reihe ähnlicher Ansätze, von denen
-wir einige vorstellen wollen.
-
-\paragraph{Ondulierten Umfärbung}
-\paragraph{Iterierte Verfärbung}
-\paragraph{Gefärbte Iteration}
 
 \section{Ausblick und Zusammenfassung}
 
 \subsection{Zusammenfassung}
 
 \subsection{Ausblick}
-In dieser Hausarbeit habe ich einiges nur kurz angerissen bzw. ganz
-weggelassen, weil es den Rahmen des Seminars sprengt.
-
-Insbesondere habe ich nicht die Theorie der Umfärbung auf unendlich
-großen Tüten behandelt.  Diese Theorie basiert prinzipiell auch auf
-den hier behandelten Konzepten, wobei daruaf zu achten ist, dass....
 
 \subsection{Bezug zum M.Sc. Studium}
-Abschließend möchte ich die Relevanz des Themas für das weitere
-Studium im Master skizzieren....
 
-\bibliographystyle{dinat}
-\bibliography{references}
+\newpage
+
+\printbibliography
 
 \end{document}
