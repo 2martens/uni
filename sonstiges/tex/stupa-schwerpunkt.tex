@@ -1,0 +1,318 @@
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+%\usepackage{paralist}
+%\useoutertheme{infolines}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{textcomp}
+\usetheme{Warsaw}
+\usecolortheme{crane}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setbeamertemplate{navigation symbols}{}
+\graphicspath{ {src/} {/home/jim/Pictures/} }
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+%\definecolor{craneorange}{RGB}{61,61,61}
+%\definecolor{craneblue}{RGB}{255,255,255}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygray},    % comment style
+  deletekeywords={},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=PHP,                 % the language of the code
+  morekeywords={class, function, return, protected, public, private, const, static, new, extends, namespace, null},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mygreen},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\hypersetup{
+	pdfauthor=Jim Martens,
+	pdfstartview=Fit
+}
+
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+	\raggedleft \insertframenumber\,/\,\inserttotalframenumber\;}
+
+\begin{document}
+\author{Jim 2martens}
+\title{StuPa}
+\date{\today}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \tableofcontents
+\end{frame}
+
+\section{Allgemeines}
+\begin{frame}{Erwartungen/Befürchtungen}
+    \centering
+    Was erwartet ihr? Was befürchtet ihr?
+\end{frame}
+\begin{frame}{Trivia}
+    \begin{itemize}
+        \item Wahl im Dezember/Januar
+        \item 47 Parlamentarier*innen
+        \item tagt i.d.R. alle 2 Wochen am Donnerstag in der Vorlesungszeit
+        \item CG hat 11 Sitze in der Legislatur 17/18
+        \item höchstes Gremium der studentischen Selbstverwaltung
+    \end{itemize}
+\end{frame}
+
+\section{Struktur}
+\subsection{Übersicht}
+
+\begin{frame}{Beziehungen}
+    \begin{itemize}
+        \item StuPa wählt Präsidium
+        \item StuPa wählt AStA-Vorsitzende
+        \item StuPa bestätigt AStA-Referent*innen
+        \item StuPa bestätigt Referent*innen und Wahlprotokolle der teilautonomen
+              Referate des AStA
+        \item StuPa wählt Ausschussmitglieder
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Aufgaben}
+    \begin{itemize}
+        \item Beschluss von Satzung, Wahlordnung, Wirtschaftsordnung,
+              Fachschaftsrahmenordnung, Beitragsordnung, Geschäftsordnung
+              (vergleichbar mit Gesetzen)
+        \item Beschluss vom Haushalt
+        \item Beschluss von einfachen Anträgen (fast alle Beschlüsse)
+    \end{itemize}
+\end{frame}
+
+\subsection{Präsidium}
+\begin{frame}{Aufgaben}
+    \begin{itemize}
+        \item Geschäftsführung des StuPa (Einladungen, Sitzungsleitung, Protokolle)
+        \item Wahlorganisation
+        \item Dienstleistungen (Hilfe bei FSR-Wahlen, Konstituierung der Ausschüsse)
+        \item Öffentlichkeitsarbeit
+        \item ...
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Arbeitsaufwand (SoSe)}
+    \begin{itemize}
+        \item 4h Präsidiumssitzung/Woche in Vorlesungszeit
+        \item Anwesenheit in allen StuPa-Sitzungen von Anfang bis Ende
+        \item ca. 2h/Woche für normale ToDos pro Woche
+        \item zweiwöchentliche Treffen in der vorlesungsfreien Zeit
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Arbeitsaufwand (WiSe)}
+    \begin{itemize}
+        \item 5h Präsidiumssitzung/Woche in Vorlesungszeit
+        \item Anwesenheit in allen StuPa-Sitzungen von Anfang bis Ende
+        \item ca. 2-4h/Woche für normale ToDos pro Woche
+        \item häufigere und längere Treffen ab November
+        \item Urnenwahlwoche mit 40h/Woche + Auszählung einplanen
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Privilegien}
+    \begin{itemize}
+        \item Gehalt + Aufwandsentschädigung = 636€/Monat
+        \item eigenes Büro am Hauptcampus
+        \item Erlernen von Zeitmanagement und Kooperationsfähigkeit
+        \item guter Punkt in Lebenslauf
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Voraussetzungen}
+    \begin{itemize}
+        \item StuPa-Mitglied
+        \item Zuverlässigkeit
+        \item Regelmäßige Anwesenheit in vorlesungsfreier Zeit (Urlaub ist möglich)
+        \item Interesse
+        \item Bereitschaft neue Sachen zu lernen (u.a. Websitenadministration)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{NICHT-Voraussetzungen}
+    \begin{itemize}
+        \item 3 Jahre Berufserfahrung
+        \item Diplom in Zeitmanagement
+        \item Informatikkenntnisse
+        \item männlich
+        \item Moderationserfahrung
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Chancen}
+    \begin{itemize}
+        \item Arbeitsabläufe verbessern
+        \item Öffentlichkeitsarbeit verbessern
+        \item Inhaltliche Konsenslinien herausarbeiten
+        \item Vorbild sein
+        \item junge Menschen für Politik begeistern
+    \end{itemize}
+\end{frame}
+
+\subsection{Ausschüsse}
+
+\begin{frame}{Voraussetzungen}
+    \begin{itemize}
+        \item Interesse
+        \item Zuverlässigkeit
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Wahlämter}
+    \begin{itemize}
+        \item Ausschussvorsitzende*r
+        \item Stellvertretende*r Ausschussvorsitzende*r
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{SWOGA}
+    \begin{itemize}
+        \item berät Satzungs-, Wahlordnungs- und Geschäftsordnungsvorlagen
+        \item tagt so häufig, wie es nötig ist
+        \item über aktive Mitarbeit kann viel umgesetzt werden
+        \item variabler Arbeitsaufwand
+        \item mind. 7 Mitglieder
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Haushalt}
+    \begin{itemize}
+        \item tagt nur im SoSe
+        \item berät die Haushaltsvorlagen vom AStA
+        \item über kurzen Zeitraum hoher Arbeitsaufwand
+        \item mind. 7 Mitglieder
+        \item Mitglieder dürfen nicht AStA-Mitglieder sein
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{gegen Rechts}
+    \begin{itemize}
+        \item tagt regelmäßig
+        \item macht gute Arbeit
+        \item kontinuierlicher Arbeitsaufwand
+        \item leidet tendenziell unter Beschlussunfähigkeit
+        \item mind. 7 Mitglieder
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Ältestenrat}
+    \begin{itemize}
+        \item Schiedsgericht der Verfassten Studierendenschaft
+        \item Streitigkeit über Zusammensetzung und Aufgabenspektrum
+        \item unregelmäßiger Arbeitsaufwand (abhängig von Fällen)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Wirtschaftsrat}
+    \begin{itemize}
+        \item genehmigt Haushalt der Verfassten Studierendenschaft
+        \item Mitglieder dürfen nicht dem AStA angehören
+        \item tagt im SoSe
+        \item 6 stud. Mitglieder (HV/SV), ein Paar von CG
+    \end{itemize}
+\end{frame}
+
+\subsection{Fraktion}
+
+\begin{frame}{Grundsätzliches}
+    \begin{itemize}
+        \item CGs Vertretung im Parlament
+        \item 11 Sitze in kommender Legislatur (Meike und Jim direkt)
+        \item für Profilbildung von CG in der Verfassten Studierendenschaft zuständig
+        \item AStA-tragende Fraktion
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Arbeit}
+    \begin{itemize}
+        \item (Änderungs-)Anträge schreiben
+        \item Anträge vorbesprechen
+        \item Debatten inhaltlich vorbereiten
+        \item taktische Verhandlungsstragie vorbesprechen (Nutzung von Fraktionspausen)
+        \item aktive Teilnahme im Parlament (bitte auch von ¬AStA- und ¬Präsidiumsmenschen)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Struktur (Vorschlag)}
+    \begin{itemize}
+        \item Person zuständig für Kommunikation nach "rechts"
+        \item Person zuständig für Kommunikation nach "links"
+        \item Person zuständig für Kommunikation nach innen
+        \item Nutzung von Fraktions-Mailingliste für Terminankündigungen
+    \end{itemize}
+\end{frame}
+
+\section{Strategische Planung}
+
+\begin{frame}{Präsidiumsbesetzung}
+    \begin{itemize}
+        \item Gunhild wird antreten (garantiert 7 Stimmen)
+        \item N.N. (Opposition) wird antreten (garantiert 15 Stimmen)
+        \item 14 ungebundene Stimmen (Medi*, UC, LISTE, AL, CC, Jusos)
+        \item N.N. (CG-unterstützt) wird antreten (garantiert 11 Stimmen)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Präsidiumsbesetzung}
+    \begin{itemize}
+        \item garantiert 3 Sitze/Liste (>= 38 Stimmen), nicht zu schaffen
+        \item garantiert 2 Sitze/Liste (>= 24 Stimmen)
+        \item garantiert 1 Sitz/Liste (>= 12 Stimmen), RCDS bekommt garantiert 1 Sitz
+        \item wir kriegen maximal 2 Leute rein
+        \item mit 14 ungebundenen Stimmen für unsere Liste bräuchten wir Gunhild
+              nicht
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Inhaltlicher Fahrplan}
+    \begin{itemize}
+        \item neue GO für das StuPa auf den Weg bringen (erste Aktion im SWOGA)
+        \item evtl. Satzung ändern und Präsidium gleichberechtigt machen
+              (mögliche Initiative vom BAE)
+        \item Fachschaftsrahmenordnung neufassen
+        \item Eigene Projekte über das StuPa in den AStA einbringen
+        \item Anträge zu anstehenden Themen
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Abschluss}
+    \begin{itemize}
+        \item Donnerstags ab 18 Uhr freihalten
+        \item Donnerstags von 11 - 13:30 evtl. Vorbereitung der Vorbesprechung
+        \item Donnerstags von 17-18 Uhr Vorbesprechung
+        \item Ausschusssitzungen idealerweise donnerstags in sitzungsfreien Wochen
+    \end{itemize}
+\end{frame}
+\end{document}
