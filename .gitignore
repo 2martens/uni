@@ -43,3 +43,4 @@
 *.tdo
 *.zip
 build/
+cmake-build-debug/
