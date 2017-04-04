@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 2.8)
+add_library(Rectangle Rectangle.cpp)
+project(sheet1)
+add_executable(main main.cpp)
+target_link_libraries(main Rectangle)
+add_executable(hello hello.cpp)
+add_executable(AskInteger AskInteger.cpp)
