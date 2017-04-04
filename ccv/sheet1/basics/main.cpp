@@ -5,7 +5,7 @@
 
 int main()
 {
-  Rectangle* rec = new Rectangle(20, 10);
-  rec->area();
+  Rectangle rec = Rectangle(20, 10);
+  rec.area();
   return 0;
 }
