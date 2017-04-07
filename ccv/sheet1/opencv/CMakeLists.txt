@@ -1,3 +1,5 @@
 find_package( OpenCV REQUIRED )
 add_executable(displayImage displayImage.cpp)
+add_executable(loadModifySave loadModifySaveImage.cpp)
 target_link_libraries( displayImage ${OpenCV_LIBS} )
+target_link_libraries( loadModifySave ${OpenCV_LIBS} )
