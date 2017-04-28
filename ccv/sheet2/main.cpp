@@ -4,7 +4,8 @@
 int main()
 {
   // exercise 1
-  cv::Mat M = (cv::Mat_<uchar>(4, 4) << 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+  float g[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+  cv::Mat M(4, 4, CV_8UC1, g);
   std::cout << M << std::endl << std::endl;
   // exercise 2
   M.at<uchar>(1, 2) = 100;
