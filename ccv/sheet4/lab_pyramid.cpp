@@ -1,5 +1,13 @@
 #include "lab_pyramid.h"
 
+int lab_pyramid::_number_of_layers = 0;
+std::vector<cv::Mat> lab_pyramid::_cs_contrast_l = std::vector<cv::Mat>();
+std::vector<cv::Mat> lab_pyramid::_sc_contrast_l = std::vector<cv::Mat>();
+std::vector<cv::Mat> lab_pyramid::_cs_contrast_a = std::vector<cv::Mat>();
+std::vector<cv::Mat> lab_pyramid::_sc_contrast_a = std::vector<cv::Mat>();
+std::vector<cv::Mat> lab_pyramid::_cs_contrast_b = std::vector<cv::Mat>();
+std::vector<cv::Mat> lab_pyramid::_sc_contrast_b = std::vector<cv::Mat>();
+
 lab_pyramid::lab_pyramid(cv::String image_filename) {
   cv::Mat image_rgb = cv::imread(image_filename, cv::IMREAD_COLOR);
   cv::cvtColor(image_rgb, _inputImage_lab, cv::COLOR_RGB2Lab);
@@ -34,8 +42,9 @@ gauss_pyramid lab_pyramid::get_pyramid(int channel)
   }
 }
 
-void static lab_pyramid::compute_dog(lab_pyramid center, lab_pyramid surround, int number_of_layers) {
+void lab_pyramid::compute_dog(lab_pyramid center, lab_pyramid surround, int number_of_layers) {
   _number_of_layers = number_of_layers;
+
   // L channel
   gauss_pyramid center_l = center.get_pyramid(COLOR_L);
   gauss_pyramid surround_l = surround.get_pyramid(COLOR_L);
@@ -58,7 +67,7 @@ void static lab_pyramid::compute_dog(lab_pyramid center, lab_pyramid surround, i
     _cs_contrast_l.push_back(dog_final);
     dog_raw = surround_layer_mat - center_layer_mat;
     cv::threshold(dog_raw, dog_final, 0, 1, cv::THRESH_TOZERO);
-    _sc_contrast_l.push_back(dog_final);
+    _cs_contrast_l.push_back(dog_final);
 
     // A channel
     center_layer_mat = center_a.get(layer);
@@ -82,7 +91,7 @@ void static lab_pyramid::compute_dog(lab_pyramid center, lab_pyramid surround, i
   }
 }
 
-void static lab_pyramid::visualize_dog() {
+void lab_pyramid::visualize_dog() {
   for (unsigned long layer = 0; layer < _number_of_layers; layer++) {
     cv::namedWindow("CS L");
     cv::namedWindow("SC L");
