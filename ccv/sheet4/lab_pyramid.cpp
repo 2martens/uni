@@ -33,3 +33,54 @@ gauss_pyramid lab_pyramid::get_pyramid(int channel)
       throw std::invalid_argument( "received invalid channel value, use COLOR_L, COLOR_A or COLOR_B" );
   }
 }
+
+void static lab_pyramid::compute_dog(lab_pyramid center, lab_pyramid surround, int number_of_layers) {
+  // L channel
+  gauss_pyramid center_l = center.get_pyramid(COLOR_L);
+  gauss_pyramid surround_l = surround.get_pyramid(COLOR_L);
+
+  // A channel
+  gauss_pyramid center_a = center.get_pyramid(COLOR_A);
+  gauss_pyramid surround_a = surround.get_pyramid(COLOR_A);
+
+  // A channel
+  gauss_pyramid center_b = center.get_pyramid(COLOR_B);
+  gauss_pyramid surround_b = surround.get_pyramid(COLOR_B);
+
+  for (int layer = 0; layer < number_of_layers; layer++) {
+    // L channel
+    cv::Mat center_layer_mat = center_l.get(layer);
+    cv::Mat surround_layer_mat = surround_l.get(layer);
+    cv::Mat dog_raw = center_layer_mat - surround_layer_mat;
+    cv::Mat dog_final;
+    cv::threshold(dog_raw, dog_final, 0, 1, cv::THRESH_TOZERO);
+    _cs_contrast_l.push_back(dog_final);
+    dog_raw = surround_layer_mat - center_layer_mat;
+    cv::threshold(dog_raw, dog_final, 0, 1, cv::THRESH_TOZERO);
+    _sc_contrast_l.push_back(dog_final);
+
+    // A channel
+    center_layer_mat = center_a.get(layer);
+    surround_layer_mat = surround_a.get(layer);
+    dog_raw = center_layer_mat - surround_layer_mat;
+    cv::threshold(dog_raw, dog_final, 0, 1, cv::THRESH_TOZERO);
+    _cs_contrast_a.push_back(dog_final);
+    dog_raw = surround_layer_mat - center_layer_mat;
+    cv::threshold(dog_raw, dog_final, 0, 1, cv::THRESH_TOZERO);
+    _sc_contrast_a.push_back(dog_final);
+
+    // B channel
+    center_layer_mat = center_b.get(layer);
+    surround_layer_mat = surround_b.get(layer);
+    dog_raw = center_layer_mat - surround_layer_mat;
+    cv::threshold(dog_raw, dog_final, 0, 1, cv::THRESH_TOZERO);
+    _cs_contrast_b.push_back(dog_final);
+    dog_raw = surround_layer_mat - center_layer_mat;
+    cv::threshold(dog_raw, dog_final, 0, 1, cv::THRESH_TOZERO);
+    _sc_contrast_b.push_back(dog_final);
+  }
+}
+
+void static lab_pyramid::visualize_dog() {
+
+}

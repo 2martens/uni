@@ -10,6 +10,12 @@ private:
     cv::Mat _inputImage_float;
     cv::Mat _imageChannels[3];
     gauss_pyramid _pyramids[3];
+    static std::vector<cv::Mat> _cs_contrast_l;
+    static std::vector<cv::Mat> _sc_contrast_l;
+    static std::vector<cv::Mat> _cs_contrast_a;
+    static std::vector<cv::Mat> _sc_contrast_a;
+    static std::vector<cv::Mat> _cs_contrast_b;
+    static std::vector<cv::Mat> _sc_contrast_b;
 public:
     const static int COLOR_L = 0;
     const static int COLOR_A = 1;
@@ -44,6 +50,20 @@ public:
      * @return the gaussian_pyramid for the given channel
      */
     gauss_pyramid get_pyramid(int channel);
+
+    /**
+     * Computes the center-surround and surround-center contrasts and stores them for later use.
+     *
+     * @param center the center pyramid
+     * @param surround the surround pyramid
+     * @param number_of_layers the number of layers used to create the two pyramids
+     */
+    void static compute_dog(lab_pyramid center, lab_pyramid surround, int number_of_layers);
+
+    /**
+     * Visualizes the center-surround and surround-center contrasts. They have to be computed first.
+     */
+    void static visualize_dog();
 };
 
 
