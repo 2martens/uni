@@ -7,6 +7,7 @@
 class lab_pyramid {
 private:
     cv::Mat _inputImage_lab;
+    cv::Mat _inputImage_float;
     cv::Mat _imageChannels[3];
     gauss_pyramid _pyramids[3];
 public:
@@ -22,11 +23,19 @@ public:
     lab_pyramid(cv::String image_filename);
 
     /**
+     * Initializes a LAB pyramid.
+     *
+     * @param image the image that should be used
+     */
+    lab_pyramid(cv::Mat image);
+
+    /**
      * Creates the gaussian pyramids for all channels with the given number of layers each.
      *
+     * @param sigma the sigma for the gaussian pyramids
      * @param number_of_layers number of layers for gaussian pyramid
      */
-    void create_pyramids(int number_of_layers);
+    void create_pyramids(float sigma, int number_of_layers);
 
     /**
      * Before this method can be called, pyramids have to be created via create_pyramids.

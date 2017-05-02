@@ -6,11 +6,17 @@ lab_pyramid::lab_pyramid(cv::String image_filename) {
   cv::split(_inputImage_lab ,_imageChannels);
 };
 
-void lab_pyramid::create_pyramids(int number_of_layers)
+lab_pyramid::lab_pyramid(cv::Mat image) {
+  cv::cvtColor(image, _inputImage_lab, cv::COLOR_RGB2Lab);
+  _inputImage_lab.convertTo(_inputImage_float, CV_32F);
+  cv::split(_inputImage_float, _imageChannels);
+}
+
+void lab_pyramid::create_pyramids(float sigma, int number_of_layers)
 {
-  _pyramids[COLOR_L] = gauss_pyramid(_imageChannels[COLOR_L], number_of_layers);
-  _pyramids[COLOR_A] = gauss_pyramid(_imageChannels[COLOR_A], number_of_layers);
-  _pyramids[COLOR_B] = gauss_pyramid(_imageChannels[COLOR_B], number_of_layers);
+  _pyramids[COLOR_L] = gauss_pyramid(_imageChannels[COLOR_L], sigma, number_of_layers);
+  _pyramids[COLOR_A] = gauss_pyramid(_imageChannels[COLOR_A], sigma, number_of_layers);
+  _pyramids[COLOR_B] = gauss_pyramid(_imageChannels[COLOR_B], sigma, number_of_layers);
 }
 
 gauss_pyramid lab_pyramid::get_pyramid(int channel)
