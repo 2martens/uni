@@ -24,6 +24,7 @@ int main(int argc, char** argv) {
   lab_pyramid pyr_surround = lab_pyramid(image);
   pyr_surround.create_pyramids(sigma_surround, layers);
 
-
+  lab_pyramid::compute_dog(pyr_center, pyr_surround, layers);
+  lab_pyramid::visualize_dog();
   return 0;
 }
