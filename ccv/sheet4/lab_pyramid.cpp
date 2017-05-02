@@ -35,6 +35,7 @@ gauss_pyramid lab_pyramid::get_pyramid(int channel)
 }
 
 void static lab_pyramid::compute_dog(lab_pyramid center, lab_pyramid surround, int number_of_layers) {
+  _number_of_layers = number_of_layers;
   // L channel
   gauss_pyramid center_l = center.get_pyramid(COLOR_L);
   gauss_pyramid surround_l = surround.get_pyramid(COLOR_L);
@@ -82,5 +83,19 @@ void static lab_pyramid::compute_dog(lab_pyramid center, lab_pyramid surround, i
 }
 
 void static lab_pyramid::visualize_dog() {
-
+  for (unsigned long layer = 0; layer < _number_of_layers; layer++) {
+    cv::namedWindow("CS L");
+    cv::namedWindow("SC L");
+    cv::namedWindow("CS A");
+    cv::namedWindow("SC A");
+    cv::namedWindow("CS B");
+    cv::namedWindow("SC B");
+    cv::imshow("CS L", _cs_contrast_l.at(layer));
+    cv::imshow("SC L", _sc_contrast_l.at(layer));
+    cv::imshow("CS A", _cs_contrast_a.at(layer));
+    cv::imshow("SC A", _cs_contrast_a.at(layer));
+    cv::imshow("CS B", _cs_contrast_b.at(layer));
+    cv::imshow("SC B", _cs_contrast_b.at(layer));
+    cv::waitKey(0);
+  }
 }

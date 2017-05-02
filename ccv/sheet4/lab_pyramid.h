@@ -16,6 +16,7 @@ private:
     static std::vector<cv::Mat> _sc_contrast_a;
     static std::vector<cv::Mat> _cs_contrast_b;
     static std::vector<cv::Mat> _sc_contrast_b;
+    static int _number_of_layers;
 public:
     const static int COLOR_L = 0;
     const static int COLOR_A = 1;
