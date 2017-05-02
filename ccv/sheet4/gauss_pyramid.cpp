@@ -19,3 +19,8 @@ cv::Mat gauss_pyramid::get(int layer)
 {
   return _layers.at((unsigned long) layer);
 }
+
+unsigned long gauss_pyramid::get_number_of_layers()
+{
+  return _layers.size();
+}
