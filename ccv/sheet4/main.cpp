@@ -13,8 +13,8 @@ int main(int argc, char** argv) {
   image = cv::imread(argv[1], cv::ImreadModes::IMREAD_COLOR);
 
   int layers = 4;
-  float sigma_center = 3;
-  float sigma_surround = 5;
+  float sigma_center = 5;
+  float sigma_surround = 9;
 
   // center
   lab_pyramid pyr_center = lab_pyramid(image);
