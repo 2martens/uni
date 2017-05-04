@@ -67,7 +67,7 @@ void lab_pyramid::compute_dog(lab_pyramid center, lab_pyramid surround, int numb
     _cs_contrast_l.push_back(dog_final);
     dog_raw = surround_layer_mat - center_layer_mat;
     cv::threshold(dog_raw, dog_final, 0, 1, cv::THRESH_TOZERO);
-    _cs_contrast_l.push_back(dog_final);
+    _sc_contrast_l.push_back(dog_final);
 
     // A channel
     center_layer_mat = center_a.get(layer);
