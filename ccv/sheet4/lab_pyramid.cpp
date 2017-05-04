@@ -59,51 +59,56 @@ void lab_pyramid::compute_dog(lab_pyramid center, lab_pyramid surround, int numb
 
   for (int layer = 0; layer < number_of_layers; layer++) {
     // L channel
-    cv::Mat center_layer_mat = center_l.get(layer);
-    cv::Mat surround_layer_mat = surround_l.get(layer);
-    cv::Mat dog_raw = center_layer_mat - surround_layer_mat;
-    cv::Mat dog_final;
-    cv::threshold(dog_raw, dog_final, 0, 1, cv::THRESH_TOZERO);
-    _cs_contrast_l.push_back(dog_final);
-    dog_raw = surround_layer_mat - center_layer_mat;
-    cv::threshold(dog_raw, dog_final, 0, 1, cv::THRESH_TOZERO);
-    _sc_contrast_l.push_back(dog_final);
+    cv::Mat center_layer_mat_L = center_l.get(layer);
+    cv::Mat surround_layer_mat_L = surround_l.get(layer);
+    cv::Mat dog_raw_cs_L = center_layer_mat_L - surround_layer_mat_L;
+    cv::Mat dog_final_cs_L;
+    cv::Mat dog_final_sc_L;
+    cv::threshold(dog_raw_cs_L, dog_final_cs_L, 0, 1, cv::THRESH_TOZERO);
+    _cs_contrast_l.push_back(dog_final_cs_L);
+    cv::Mat dog_raw_sc = surround_layer_mat_L - center_layer_mat_L;
+    cv::threshold(dog_raw_sc, dog_final_sc_L, 0, 1, cv::THRESH_TOZERO);
+    _sc_contrast_l.push_back(dog_final_sc_L);
 
     // A channel
-    center_layer_mat = center_a.get(layer);
-    surround_layer_mat = surround_a.get(layer);
-    dog_raw = center_layer_mat - surround_layer_mat;
-    cv::threshold(dog_raw, dog_final, 0, 1, cv::THRESH_TOZERO);
-    _cs_contrast_a.push_back(dog_final);
-    dog_raw = surround_layer_mat - center_layer_mat;
-    cv::threshold(dog_raw, dog_final, 0, 1, cv::THRESH_TOZERO);
-    _sc_contrast_a.push_back(dog_final);
+    cv::Mat center_layer_mat_a = center_a.get(layer);
+    cv::Mat surround_layer_mat_a = surround_a.get(layer);
+    cv::Mat dog_raw_cs_a = center_layer_mat_a - surround_layer_mat_a;
+    cv::Mat dog_final_cs_a;
+    cv::Mat dog_final_sc_a;
+    cv::threshold(dog_raw_cs_a, dog_final_cs_a, 0, 1, cv::THRESH_TOZERO);
+    _cs_contrast_a.push_back(dog_final_cs_a);
+    cv::Mat dog_raw_sc_a = surround_layer_mat_a - center_layer_mat_a;
+    cv::threshold(dog_raw_sc_a, dog_final_sc_a, 0, 1, cv::THRESH_TOZERO);
+    _sc_contrast_a.push_back(dog_final_sc_a);
 
     // B channel
-    center_layer_mat = center_b.get(layer);
-    surround_layer_mat = surround_b.get(layer);
-    dog_raw = center_layer_mat - surround_layer_mat;
-    cv::threshold(dog_raw, dog_final, 0, 1, cv::THRESH_TOZERO);
-    _cs_contrast_b.push_back(dog_final);
-    dog_raw = surround_layer_mat - center_layer_mat;
-    cv::threshold(dog_raw, dog_final, 0, 1, cv::THRESH_TOZERO);
-    _sc_contrast_b.push_back(dog_final);
+    cv::Mat center_layer_mat_b = center_b.get(layer);
+    cv::Mat surround_layer_mat_b = surround_b.get(layer);
+    cv::Mat dog_raw_cs_b = center_layer_mat_b - surround_layer_mat_b;
+    cv::Mat dog_final_cs_b;
+    cv::Mat dog_final_sc_b;
+    cv::threshold(dog_raw_cs_b, dog_final_cs_b, 0, 1, cv::THRESH_TOZERO);
+    _cs_contrast_b.push_back(dog_final_cs_b);
+    cv::Mat dog_raw_sc_b = surround_layer_mat_b - center_layer_mat_b;
+    cv::threshold(dog_raw_cs_b, dog_final_sc_b, 0, 1, cv::THRESH_TOZERO);
+    _sc_contrast_b.push_back(dog_final_sc_b);
   }
 }
 
 void lab_pyramid::visualize_dog() {
   for (unsigned long layer = 0; layer < _number_of_layers; layer++) {
     cv::namedWindow("CS L");
-    cv::namedWindow("SC L");
-    cv::namedWindow("CS A");
-    cv::namedWindow("SC A");
-    cv::namedWindow("CS B");
-    cv::namedWindow("SC B");
     cv::imshow("CS L", _cs_contrast_l.at(layer));
+    cv::namedWindow("SC L");
     cv::imshow("SC L", _sc_contrast_l.at(layer));
+    cv::namedWindow("CS A");
     cv::imshow("CS A", _cs_contrast_a.at(layer));
+    cv::namedWindow("SC A");
     cv::imshow("SC A", _cs_contrast_a.at(layer));
+    cv::namedWindow("CS B");
     cv::imshow("CS B", _cs_contrast_b.at(layer));
+    cv::namedWindow("SC B");
     cv::imshow("SC B", _cs_contrast_b.at(layer));
     cv::waitKey(0);
   }
