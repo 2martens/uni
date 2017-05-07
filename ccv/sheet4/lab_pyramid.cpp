@@ -7,6 +7,12 @@ std::vector<cv::Mat> lab_pyramid::_cs_contrast_a = std::vector<cv::Mat>();
 std::vector<cv::Mat> lab_pyramid::_sc_contrast_a = std::vector<cv::Mat>();
 std::vector<cv::Mat> lab_pyramid::_cs_contrast_b = std::vector<cv::Mat>();
 std::vector<cv::Mat> lab_pyramid::_sc_contrast_b = std::vector<cv::Mat>();
+cv::Mat lab_pyramid::_cs_F_l;
+cv::Mat lab_pyramid::_sc_F_l;
+cv::Mat lab_pyramid::_cs_F_a;
+cv::Mat lab_pyramid::_sc_F_a;
+cv::Mat lab_pyramid::_cs_F_b;
+cv::Mat lab_pyramid::_sc_F_b;
 
 lab_pyramid::lab_pyramid(cv::String image_filename) {
   cv::Mat image_rgb = cv::imread(image_filename, cv::IMREAD_COLOR);
