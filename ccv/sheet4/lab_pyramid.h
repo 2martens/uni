@@ -68,10 +68,9 @@ public:
     void static compute_dog(lab_pyramid center, lab_pyramid surround, int number_of_layers);
 
     /**
-     * Computes the feature maps.
-     * Has to be called after compute_dog.
+     * Visualizes the center-surround and surround-center contrasts. They have to be computed first.
      */
-    void static compute_feature_maps();
+    void static visualize_dog();
 
     /**
      * Takes the scale images, adds them up and returns the result.
@@ -82,9 +81,10 @@ public:
     cv::Mat static across_scale_addition(const std::vector<cv::Mat>& scale_images);
 
     /**
-     * Visualizes the center-surround and surround-center contrasts. They have to be computed first.
+     * Computes the feature maps.
+     * Has to be called after compute_dog.
      */
-    void static visualize_dog();
+    void static compute_feature_maps();
 };
 
 
