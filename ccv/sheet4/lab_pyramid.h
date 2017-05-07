@@ -85,6 +85,12 @@ public:
      * Has to be called after compute_dog.
      */
     void static compute_feature_maps();
+
+    /**
+     * Visualizes the feature maps.
+     * Has to be called after compute_feature_maps.
+     */
+    void static visualize_feature_maps();
 };
 
 

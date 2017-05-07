@@ -133,3 +133,19 @@ void lab_pyramid::visualize_dog() {
     cv::waitKey(0);
   }
 }
+
+void lab_pyramid::visualize_feature_maps() {
+  cv::namedWindow("CS F L");
+  cv::imshow("CS F L", _cs_F_l);
+  cv::namedWindow("CS F L");
+  cv::imshow("SC F L", _sc_F_l);
+  cv::namedWindow("CS F A");
+  cv::imshow("CS F A", _cs_F_a);
+  cv::namedWindow("SC F A");
+  cv::imshow("SC F A", _sc_F_a);
+  cv::namedWindow("CS F B");
+  cv::imshow("CS F B", _cs_F_b);
+  cv::namedWindow("CS F B");
+  cv::imshow("SC F B", _sc_F_b);
+  cv::waitKey(0);
+}
