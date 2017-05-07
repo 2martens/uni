@@ -26,5 +26,8 @@ int main(int argc, char** argv) {
 
   lab_pyramid::compute_dog(pyr_center, pyr_surround, layers);
   lab_pyramid::visualize_dog();
+
+  lab_pyramid::compute_feature_maps();
+  lab_pyramid::visualize_feature_maps();
   return 0;
 }
