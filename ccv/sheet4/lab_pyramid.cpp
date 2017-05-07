@@ -16,12 +16,12 @@ cv::Mat lab_pyramid::_sc_F_b;
 
 lab_pyramid::lab_pyramid(cv::String image_filename) {
   cv::Mat image_rgb = cv::imread(image_filename, cv::IMREAD_COLOR);
-  cv::cvtColor(image_rgb, _inputImage_lab, cv::COLOR_RGB2Lab);
+  cv::cvtColor(image_rgb, _inputImage_lab, cv::COLOR_BGR2Lab);
   cv::split(_inputImage_lab ,_imageChannels);
 };
 
 lab_pyramid::lab_pyramid(cv::Mat image) {
-  cv::cvtColor(image, _inputImage_lab, cv::COLOR_RGB2Lab);
+  cv::cvtColor(image, _inputImage_lab, cv::COLOR_BGR2Lab);
   _inputImage_lab.convertTo(_inputImage_float, CV_32F);
   cv::split(_inputImage_float, _imageChannels);
 }
