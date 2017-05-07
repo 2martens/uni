@@ -96,6 +96,17 @@ void lab_pyramid::compute_dog(lab_pyramid center, lab_pyramid surround, int numb
   }
 }
 
+cv::Mat lab_pyramid::across_scale_addition(const std::vector<cv::Mat> &scale_images) {
+  cv::Mat result = scale_images.front();
+  cv::Size original_size = scale_images.front().size();
+  for (unsigned long i = 1; i < scale_images.size(); i++) {
+    cv::Mat resized_image;
+    cv::resize(scale_images.at(i), resized_image, original_size, 0, 0, cv::INTER_CUBIC);
+    result += resized_image;
+  }
+  return result;
+}
+
 void lab_pyramid::visualize_dog() {
   for (unsigned long layer = 0; layer < _number_of_layers; layer++) {
     cv::namedWindow("CS L");

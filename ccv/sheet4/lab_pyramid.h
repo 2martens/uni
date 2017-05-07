@@ -62,6 +62,14 @@ public:
     void static compute_dog(lab_pyramid center, lab_pyramid surround, int number_of_layers);
 
     /**
+     * Takes the scale images, adds them up and returns the result.
+     *
+     * @param scale_images the scale images
+     * @return the sum of the scale images
+     */
+    cv::Mat static across_scale_addition(const std::vector<cv::Mat>& scale_images);
+
+    /**
      * Visualizes the center-surround and surround-center contrasts. They have to be computed first.
      */
     void static visualize_dog();
