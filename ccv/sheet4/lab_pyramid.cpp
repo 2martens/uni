@@ -71,10 +71,10 @@ void lab_pyramid::compute_dog(lab_pyramid center, lab_pyramid surround, int numb
     cv::Mat dog_final_cs_L;
     cv::Mat dog_final_sc_L;
     cv::threshold(dog_raw_cs_L, dog_final_cs_L, 0, 1, cv::THRESH_TOZERO);
-    _cs_contrast_l.push_back(dog_final_cs_L);
+    _cs_contrast_l.push_back(dog_final_cs_L.clone());
     cv::Mat dog_raw_sc_L = surround_layer_mat_L - center_layer_mat_L;
     cv::threshold(dog_raw_sc_L, dog_final_sc_L, 0, 1, cv::THRESH_TOZERO);
-    _sc_contrast_l.push_back(dog_final_sc_L);
+    _sc_contrast_l.push_back(dog_final_sc_L.clone());
 
     // A channel
     cv::Mat center_layer_mat_a = center_a.get(layer);
@@ -83,10 +83,10 @@ void lab_pyramid::compute_dog(lab_pyramid center, lab_pyramid surround, int numb
     cv::Mat dog_final_cs_a;
     cv::Mat dog_final_sc_a;
     cv::threshold(dog_raw_cs_a, dog_final_cs_a, 0, 1, cv::THRESH_TOZERO);
-    _cs_contrast_a.push_back(dog_final_cs_a);
+    _cs_contrast_a.push_back(dog_final_cs_a.clone());
     cv::Mat dog_raw_sc_a = surround_layer_mat_a - center_layer_mat_a;
     cv::threshold(dog_raw_sc_a, dog_final_sc_a, 0, 1, cv::THRESH_TOZERO);
-    _sc_contrast_a.push_back(dog_final_sc_a);
+    _sc_contrast_a.push_back(dog_final_sc_a.clone());
 
     // B channel
     cv::Mat center_layer_mat_b = center_b.get(layer);
@@ -95,10 +95,10 @@ void lab_pyramid::compute_dog(lab_pyramid center, lab_pyramid surround, int numb
     cv::Mat dog_final_cs_b;
     cv::Mat dog_final_sc_b;
     cv::threshold(dog_raw_cs_b, dog_final_cs_b, 0, 1, cv::THRESH_TOZERO);
-    _cs_contrast_b.push_back(dog_final_cs_b);
+    _cs_contrast_b.push_back(dog_final_cs_b.clone());
     cv::Mat dog_raw_sc_b = surround_layer_mat_b - center_layer_mat_b;
     cv::threshold(dog_raw_sc_b, dog_final_sc_b, 0, 1, cv::THRESH_TOZERO);
-    _sc_contrast_b.push_back(dog_final_sc_b);
+    _sc_contrast_b.push_back(dog_final_sc_b.clone());
   }
 }
 
