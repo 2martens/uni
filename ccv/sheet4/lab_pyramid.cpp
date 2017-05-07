@@ -96,6 +96,15 @@ void lab_pyramid::compute_dog(lab_pyramid center, lab_pyramid surround, int numb
   }
 }
 
+void lab_pyramid::compute_feature_maps() {
+  _cs_F_l = across_scale_addition(_cs_contrast_l);
+  _sc_F_l = across_scale_addition(_sc_contrast_l);
+  _cs_F_a = across_scale_addition(_cs_contrast_a);
+  _sc_F_a = across_scale_addition(_sc_contrast_a);
+  _cs_F_b = across_scale_addition(_cs_contrast_b);
+  _sc_F_b = across_scale_addition(_sc_contrast_b);
+}
+
 cv::Mat lab_pyramid::across_scale_addition(const std::vector<cv::Mat> &scale_images) {
   cv::Mat result = scale_images.front();
   cv::Size original_size = scale_images.front().size();

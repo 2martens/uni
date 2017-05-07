@@ -16,6 +16,12 @@ private:
     static std::vector<cv::Mat> _sc_contrast_a;
     static std::vector<cv::Mat> _cs_contrast_b;
     static std::vector<cv::Mat> _sc_contrast_b;
+    static cv::Mat _cs_F_l;
+    static cv::Mat _sc_F_l;
+    static cv::Mat _cs_F_a;
+    static cv::Mat _cs_F_b;
+    static cv::Mat _sc_F_a;
+    static cv::Mat _sc_F_b;
     static int _number_of_layers;
 public:
     const static int COLOR_L = 0;
@@ -60,6 +66,12 @@ public:
      * @param number_of_layers the number of layers used to create the two pyramids
      */
     void static compute_dog(lab_pyramid center, lab_pyramid surround, int number_of_layers);
+
+    /**
+     * Computes the feature maps.
+     * Has to be called after compute_dog.
+     */
+    void static compute_feature_maps();
 
     /**
      * Takes the scale images, adds them up and returns the result.
