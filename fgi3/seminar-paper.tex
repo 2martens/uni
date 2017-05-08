@@ -4,6 +4,7 @@
 \usepackage{amsthm}
 \usepackage[ngerman]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage{textcomp}
 \usepackage[T1]{fontenc}
 \usepackage[
 backend=biber,
@@ -47,7 +48,10 @@ citestyle=ieee
 \maketitle
 
 \begin{abstract}
-TODO
+In dieser Arbeit wird die Lösung des Konsensproblems mittels des Medianverfahrens,
+wie von Doerr et al\cite{Doerr2011} beschrieben, aufgezeigt. Ebenfalls wird
+ein Teil des Beweises von Doerr et al erläutert und an vielen Stellen um die
+im Original fehlenden Rechenwege ergänzt.
 \end{abstract}
 
 \tableofcontents
@@ -217,6 +221,11 @@ Doerr et al\cite{Doerr2011} haben folgende Ergebnisse für den worst-case gezeig
 Diese Ergebnisse basieren auf den zugrundeliegenden Theoremen, welche hier ohne
 Beweis vorgestellt werden sollen. Dabei bedeutet "mit hoher Wahrscheinlichkeit"
 stets eine Wahrscheinlichkeit von $1 - n^{-c}$ für eine Konstante $c > 1$.
+Die drei folgenden Theoreme wurden der Version des Papers, wie sie
+von Dagstuhl abrufbar ist\cite{Doerr2010}, entnommen. Dies geschah vor dem
+Hintergrund, dass sie im Grunde das Gleiche aussagen, wie jene in der ansonsten
+verwendeten Paperversion\cite{Doerr2011}, allerdings besser verständlich
+formuliert sind.
 
 \begin{theorem}
 Für jeden Startzustand gilt, dass die Medianregel ohne Gegner mit hoher
@@ -284,7 +293,7 @@ Die Grobstruktur des Beweises für die drei Theoreme ist relativ einfach.
 Zunächst wird der Fall mit nur 2 Werten gezeigt. Anschließend wird der Fall für
 beliebig viele Werte darauf zurückgeführt.
 
-Für den Fall von nur 2 Fällen bzw. Eimern, gilt eine weitere Sache. In diesem
+Für den Fall von nur 2 Werten bzw. Eimern, gilt eine weitere Sache. In diesem
 Fall ist die Anwendung des Median gleichbedeutend mit der Mehrheitsregel. Die
 Mehrheitsregel besagt, dass der neue Eimer des aktuell betrachteten Balls derjenige
 wird, in dem die Mehrheit der drei dafür relevanten Bälle liegt. Diese drei Bälle
@@ -302,19 +311,332 @@ Konsens zu erreichen.
 
 Bei genauerer Betrachtung entspricht dieses Theorem nahezu Theorem 2, nur dass
 hier explizit von zwei möglichen Werten statt von einer konstanten Menge an
-möglichen Werten die Rede ist.
+möglichen Werten die Rede ist. Der folgende Beweis hat zum Ziel dieses Theorem
+zu beweisen.
 
+Zu Beginn des Beweises werden ein paar Notationen bzw. Variablen eingeführt,
+die dann im weiteren Verlauf verwendet werden. Mit $L_t$ wird die Anzahl an Bällen
+im linken Eimer am Ende von Zeitschritt $t$ bezeichnet. $R_t$ ist entsprechend
+das Gleiche für den rechten Eimer. Mit $X_t = min(L_t, R_t)$ wird die geringere
+Anzahl an Bällen bezeichnet. $Y_t = max(L_t, R_t)$ bezeichnet entsprechend die
+höhere Anzahl an Bällen. Wenn der linke Eimer also 10 und der rechte Eimer 20
+Bälle hat, wäre $L_t = 10$, $R_t = 20$, $X_t = 10$ und $Y_t = 20$. Hätte der
+linke Eimer 20 Bälle und rechte nur 10, dann wären die Werte von $L_t$ und $R_t$
+vertauscht, die Werte von $X_t$ und $Y_t$ blieben jedoch identisch. Der Einfachheit
+halber wird nur der Beweis für eine gerade Gesamtanzahl an Bällen ($n$) gezeigt.
+Laut Doerr et al verläuft der Beweis für ungerade $n$ gleichermaßen.
+Außerdem wird noch ein Ungleichgewicht $\Delta_t = \frac{(Y_t - X_t)}{2}$ definiert.
+Mit $\overset{\sim}{\Delta_t}$ und $\overset{\sim}{X_t}$ werden die entsprechenden Werte
+beschrieben, bevor der Gegner am Ende eines Zeitschritts die Bälle in andere Eimer
+werfen kann.
 
+Basierend auf dem Ungleichgewicht, welches immer ein positiver Integer ist,
+werden die bereits angesprochenen drei Fälle unterschieden.
+
+\textbf{Fall 1: \(\Delta_t \geq \frac{n}{4}\)}
+
+Diese Bedingung bedeutet, dass ein Eimer signifikant mehr Bälle enthält als der
+andere. Die Belegung der Eimer mit dem geringst möglichen Ungleichgewicht
+(möglichst nah an $\frac{n}{4}$ dran) wäre die Folgende:
+Der eine Eimer enthält $\frac{3}{4}$ Bälle und der andere $\frac{1}{4}$.
+Das entspräche der Untergrenze dieses Falls.
+
+Der Beweis dieses Falls wird mit einem Lemma begonnen.
+
+\begin{lemma}
+Wenn es einen Zeitschritt $t_0$ mit $\Delta_{t_0} \geq \frac{n}{4}$ gibt,
+dann gibt es einen Zeitschritt $t_1 = t_0 + O(\log \log n)$ in welchem mit
+hoher Wahrscheinlichkeit ohne ein Gegner ein stabiler Konsens und mit einem
+beliebigen $\sqrt{n}$-starken Gegner ein fast stabiler Konsens erreicht wird.
+\end{lemma}
+
+Dieses Lemma besagt, dass wenn die Bedingung für den Eintritt in diesen Fall
+in einem Zeitschritt gegeben ist, nach $O(\log \log n)$ Schritten ein Zeitschritt
+erreicht wird, in dem ein stabiler bzw. fast stabiler Konsens vorhanden ist.
+
+Es wird ohne Einschränkung der Allgemeinheit für den Beweis angenommen, dass im
+linken Eimer weniger Bälle sind, das also $L_t = X_t$ und $R_t = Y_t$ gelten.
+Außerdem gilt aufgrund der Fallbedingung $X_t \leq \frac{n}{4}$. Als Zeitschritt
+$t_0$ aus dem Lemma wird der Einfachheit halber der initiale Zeitschritt $0$
+angenommen. Für jeden Zeitschritt $t$ sei $p_t = \frac{L_t}{n}$ definiert.
+
+Der Beweis wird zunächst für den Fall ohne Gegner geführt. Zuerst wird der
+Erwartungswert für die Anzahl an Bällen im linken Eimer in Abhängigkeit zur Zeit
+berechnet. Dieser Erwartungswert alleine sagt jedoch noch recht wenig darüber aus,
+wie sich die einzelnen Ballmengen zu diesem Wert verhalten. Wenn es nur Ausreißer
+nach unten und oben gibt (minimal bzw. maximal mögliche Anzahl pro Schritt),
+dann käme beim Erwartungswert immer noch der Mittelwert heraus, nur wäre der
+nicht repräsentativ für die tatsächlichen Mengen an Bällen im linken Eimer.
+
+Daher wird mittels einer Chernoff-Schranke gezeigt, wie wahrscheinlich es ist,
+in einem Zeitschritt von dem Erwartungswert um mehr als dessen Hälfte abzuweichen.
+Das Ergebnis dieser Berechnung ist, dass die Wahrscheinlichkeit davon sehr gering
+ist, wenn im vorigen Schritt mindestens $O(\sqrt{n \log n})$ Bälle im linken
+Eimer waren. Somit kann gesagt werden, dass mit einer hohen Wahrscheinlichkeit
+der Erwartungswert auch tatsächlich die einzelnen Werte repräsentiert.
+
+Um zu zeigen, dass tatsächlich $\log \log n$ Schritte nötig sind, bis nur noch
+$O(\sqrt{n \log n})$ Bälle im linken Eimer vorhanden sind, werden die folgenden
+mathematischen Berechnungen herangezogen, die im Paper leider nicht ausgeführt
+werden.
+
+\begin{alignat*}{2}
+    E[L_t] &\leq& \; 3 \cdot \frac{L_{t-1}^2}{n} \\
+    \intertext{Teilen durch $n$, Benutzen der Linearität des Erwartungswerts}
+    \frac{E[L_t]}{n} = E[p_t] &\leq& \; 3 \cdot p_{t-1}^2 =
+        3 \cdot \frac{L_{t-1}^2}{n^2} \\
+    \intertext{Entsprechend der obigen Ausführungen gilt $p_0 = \frac{1}{4}$. Als
+    nächstes gilt es zu berechnen, welchen Wert $p_t$ hat, wenn
+    $L_t \leq O(\sqrt{n \log n})$ gilt. Unter Anwendung der gleichen Umformung
+    ergibt sich Folgendes.}
+    L_t &\leq& O\left(\sqrt{n \log n}\right) \\
+    \frac{L_t}{n} = p_t &\leq& \; O\left(\frac{\sqrt{n}}{n} \cdot \sqrt{\log n} \right)
+        = O\left(\frac{\sqrt{n \log n}}{n} \right) \\
+        &\leq& \; O\left( \frac{\sqrt{n}}{\sqrt{n} \cdot \sqrt{n}}  \cdot \sqrt{\log n} \right) \\
+        &\leq& \; O\left( \frac{\sqrt{\log n}}{\sqrt{n}} \right) \\
+    \intertext{Aufgrund der obigen Beobachtungen zum Erwartungswert von $p_t$
+    ist der nachfolgende Wert immer das Quadrat des vorherigen multipliziert mit
+    einer Konstanten. Daraus folgt Nachstehendes.}
+    p_t &=& O\left(\left(\frac{1}{4}\right)^{2^t}\right) \\
+    \intertext{Die Einbeziehung des vorherigen Ergebnisses für $p_t$ führt zu
+    Folgendem.}
+    p_t = O\left(\left(\frac{1}{4}\right)^{2^t}\right) &\leq& O\left( \frac{\sqrt{\log n}}{\sqrt{n}} \right) \\
+    \intertext{Umstellen nach $t$}
+    2^t &\leq& O\left(\log \left(\frac{\sqrt{\log n}}{\sqrt{n}} \right)\right) \\
+    t &\leq& O\left(\log \log \left(\frac{\sqrt{\log n}}{\sqrt{n}}\right) \right) \\
+    &\leq& O\left(\log \log \left(\sqrt{n^{-1}\log n}\right) \right) \\
+    \intertext{Es bleibt nur noch Folgendes zu zeigen.}
+    \sqrt{n^{-1} \log n} &\leq& n \\
+    n^{-1} \log n &\leq& n^2 \\
+    \log n &\leq& n^3
+\end{alignat*}
+
+An diesem Punkt kann aufgehört werden, da offenkundig ist, dass auch diese letzte
+Ungleichung gilt. Damit ist gezeigt, dass $\log \log n$ Schritte benötigt werden,
+bis nur noch $O(\sqrt{n \log n})$ Bälle im linken Eimer vorhanden sind.
+
+Im Anschluss an diese Feststellung wird im Paper gezeigt, dass ab dem Zeitschritt
+$t$ mit maximal $O(\sqrt{n \log n})$ Bällen im linken Eimer, die Wahrscheinlichkeit
+nach dem nächsten Schritt mindestens $O(\log n)$ Bälle zu haben, sehr gering ist.
+Schließlich wird mit der Markovungleichung gezeigt, dass sobald die Anzahl maximal
+$O(\log n)$ Bälle beträgt, es sehr unwahrscheinlich ist, nach einem Schritt noch
+Bälle im linken Eimer zu haben.
+
+Zusammengefasst ergeben sich also $\log \log n + 1 + 1$ Schritte, um nach Erreichen
+der Fallbedingung alle Bälle im rechten Eimer zu haben, was dann den Konsens
+beschreibt.
+
+\textbf{Fall 2: $c \sqrt{n \ln n} \leq \Delta_t < \frac{n}{4}$ für genügend großes
+ $c$}
+
+Auch in diesem Fall wird mit einem Lemma begonnen.
+
+\begin{lemma}
+Wenn es einen Zeitschritt $t_0$ mit $c\sqrt{n \ln n} \leq \Delta_{t_0} < \frac{n}{4}$
+für eine genügend große Konstante $c$ gibt, dann gibt es mit hoher Wahrscheinlichkeit
+für einen beliebigen $\sqrt{n}$-starken Gegner einen Zeitschritt
+$t_1 = t_0 + O(\log n)$ mit $\Delta_{t_1} \geq \frac{n}{4}$.
+\end{lemma}
+
+Dieses Lemma sagt im Kern aus, dass sobald die Fallbedingung zutrifft, es
+$O(\log n)$ Schritte bedarf, um die Bedingung von Fall 1 zu erfüllen. Der
+anschließende Beweis zeigt dann auch dieses Lemma. Es fällt auf, dass als
+Untergrenze für das Ungleichgewicht (modifiziert durch eine Konstante) der gleiche
+Wert genommen wird, der in Fall 1 für die Ballmenge im linken Eimer nach
+$O(\log \log n)$ Schritten festgestellt wurde. Inwieweit dort ein Zusammenhang
+besteht, ist jedoch aus dem Paper heraus nicht ersichtlich.
+
+Eingangs wird eine einfache mathematische Umformung und Ersetzung gemacht,
+welche $X_t = \frac{n}{2} - \Delta_t$ ergibt. Desweiteren wird
+$\delta_t = \frac{\Delta_t}{n}$ eingeführt und mit
+$\delta_t \in \left[\frac{c\sqrt{\ln n}}{\sqrt{n}}, \frac{1}{4} \right]$
+definiert. $\delta_t$ entspricht dem relativen Ungleichgewicht, wohingegen
+$\Delta_t$ das absolute Ungleichgewicht darstellt. Die Unter- und Obergrenzen
+des Werteintervalls entsprechen den Unter- und Obergrenzen von Fall 2.
+Die Obergrenze des Intervalls kann eigentlich gar nicht
+erreicht werden, da laut Fallbedingung $\frac{n}{4}$ echt größer ist als jeder
+mögliche Wert von $\Delta_t$. Somit müsste es ein nach oben offenes Intervall
+sein.
+
+Im Anschluss wird die Wahrscheinlichkeit dafür angegeben, dass ein Ball, der
+zum Zeitpunkt $t$ im kleineren Eimer ist, dort auch einen Schritt später noch ist.
+Dabei wird nur das Ergebnis ($\frac{3}{4} - \delta_t - \delta_t^2$), nicht aber
+die Herleitung gezeigt. Diese mathematische Herleitung soll hier zum Verständnis
+einmal gezeigt werden. Dafür ist es wichtig, die Funktionsweise des Algorithmus
+vor Augen zu haben. Ein Ball im kleineren (angenommen der linke) Eimer bleibt dort,
+wenn einer der beiden zufällig gezogenen Bälle ebenfalls im linken Eimer ist.
+\begin{alignat*}{2}
+    \intertext{Addition der Wahrscheinlichkeit 2 Bälle aus dem linken
+    Eimer zu ziehen mit Wahrscheinlichkeit einen Ball aus dem linken und einen
+    aus dem rechten Eimer zu ziehen.}
+    P[\text{Ball im kleineren Eimer bleibt dort}] &= \left(\frac{X_t}{n}\right)^2
+        + 2 \cdot \left( \frac{X_t}{n} \cdot \frac{n - X_t}{n} \right) \\
+        &= \frac{X_t^2}{n^2} + 2 \cdot \left( \frac{nX_t - X_t^2}{n^2} \right) \\
+        &= \frac{2nX_t - X_t^2}{n^2} \\
+    \intertext{$X_t$ durch $\frac{n}{2} - \Delta_t$ ersetzen}
+    &= \frac{2n(\frac{n}{2} - \Delta_t) - (\frac{n}{2} - \Delta_t)^2}{n^2} \\
+    &= \frac{n^2 - 2n\Delta_t - (\frac{n^2}{4} - n\Delta_t + \Delta_t^2)}{n^2} \\
+    &= \frac{n^2 - 2n\Delta_t - \frac{n^2}{4} + n\Delta_t - \Delta_t^2}{n^2} \\
+    &= \frac{n^2 - \frac{n^2}{4} - n\Delta_t - \Delta_t^2}{n^2} \\
+    &= \frac{n^2}{n^2} - \frac{\frac{n^2}{4}}{n^2} - \frac{n\Delta_t}{n^2}
+        - \frac{\Delta_t^2}{n^2} \\
+    &= 1 - \frac{1}{4} - \frac{\Delta_t}{n} - \left(\frac{\Delta_t}{n}\right)^2 \\
+    \intertext{Anwenden der Definition von $\delta_t$}
+    &= \frac{3}{4} - \delta_t - \delta_t^2
+\end{alignat*}
+
+Wie zu sehen ist, kommt am Ende das im Paper als Wahrscheinlichkeit angegebene
+Ergebnis heraus. Die Berechnung der Wahrscheinlichkeit dafür, dass ein Ball von
+dem größeren Eimer in den kleineren wechselt kann ähnlich berechnet werden und
+beträgt $\frac{1}{4} - \delta_t + \delta_t^2$.
+
+Es sei erinnert daran, dass $\overset{\sim}{X}_{t+1}$ die Anzahl an Bällen im
+kleineren Eimer am Ende von Schritt $t+1$ bezeichnet, bevor der Gegner aktiv wird.
+Mithilfe der Linearität der Erwartung (engl.: Linearity of expectation) wird
+der Erwartungswert für eben dieses $\overset{\sim}{X}_{t+1}$ berechnet. Dieser
+beträgt $(1 - \frac{\delta_t}{2})X_t$. Anschließend wird unter Berücksichtigung
+der Tatsache, dass die Auswahl der Bälle unabhängig voneinander geschieht, mittels
+Chernoff-Schranken gezeigt, dass die Wahrscheinlichkeit, dass $\overset{\sim}{X}_{t+1}$
+mindestens $(1 - \frac{\delta_t}{4})X_t$ groß ist, sehr gering ist.
+
+Der Gegner kann bis zu $\sqrt{n}$ Bälle manipulieren. Demnach gilt mit hoher
+Wahrscheinlichkeit $X_{t+1} \leq (1 - \frac{\delta_t}{4})X_t + \sqrt{n}$. Einfache
+Ersetzung ergibt $\frac{n}{2} - \Delta_{t+1} \leq (1 - \frac{\delta_t}{4})
+\cdot (\frac{n}{2} - \Delta_t) + \sqrt{n}$. Dies gilt weiterhin mit hoher
+Wahrscheinlichkeit.
+
+Für eine Ersetzung im weiteren Verlauf wird $\sqrt{n}$ abgeschätzt werden müssen.
+Dies lässt sich durch folgende Umformung erreichen.
+\begin{alignat*}{2}
+    c \sqrt{n \log n} = \sqrt{n} \cdot c \sqrt{\log n} &\leq& \Delta_t \\
+    \sqrt{n} &\leq& \frac{\Delta_t}{c \sqrt{\log n}} \leq \frac{\Delta_t}{c \cdot 1}
+\end{alignat*}
+
+Mittels mathematischer Umformungen werden $\Delta_{t+1}$ auf die rechte Seite
+und alles andere auf die linke Seite gebracht.
+
+\begin{alignat*}{2}
+    \frac{n}{2} - \Delta_{t+1} &\leq& \left(1 - \frac{\delta_t}{4} \right)
+        \cdot \left(\frac{n}{2} - \Delta_t \right) + \sqrt{n} \\
+    \frac{n}{2} &\leq& \left(1 - \frac{\delta_t}{4} \right)
+        \cdot \left(\frac{n}{2} - \Delta_t \right) + \sqrt{n} + \Delta_{t+1} \\
+    \intertext{Ausmultiplizieren}
+    \frac{n}{2} &\leq& \frac{n}{2} - \frac{\delta_t n}{8} - \Delta_t +
+        \frac{\delta_t \Delta_t}{4} + \sqrt{n} + \Delta_{t+1} \\
+    \intertext{Definition von $\delta_t$, zusammenfassen}
+    \frac{n}{2} &\leq& \frac{n}{2} - \frac{\Delta_t}{8} - \Delta_t +
+        \frac{\delta_t \Delta_t}{4} + \sqrt{n} + \Delta_{t+1} \\
+    \intertext{auf die andere Seite bringen}
+    \Delta_t + \frac{\Delta_t}{8} - \frac{\delta_t \Delta_t}{4}
+        -\sqrt{n} &\leq& \Delta_{t+1} \\
+    \intertext{Laut Definition gilt $\delta_t \leq \frac{1}{4}$. Daher kann
+    $\delta_t$ mit $\frac{1}{4}$ abgeschätzt werden. $\sqrt{n}$ kann entsprechend
+    oben genannter Umformung durch $\frac{\Delta_t}{c}$ abgeschätzt werden.
+    $c$ kann auf $32$ gesetzt werden.
+    Damit ergibt sich folgender Zustand.}
+    \Delta_t + \frac{\Delta_t}{8} - \frac{\Delta_t}{16}
+        -\frac{\Delta_t}{32} &\leq& \Delta_{t+1} \\
+    \intertext{Auf gleichen Nenner bringen}
+    \Delta_t + \frac{4 \Delta_t}{32} - \frac{2 \Delta_t}{32}
+        -\frac{\Delta_t}{32} &\leq& \Delta_{t+1} \\
+    \Delta_t + \frac{\Delta_t}{32} &\leq& \Delta_{t+1} \\
+    \intertext{Ausklammern}
+    \left(1 + \frac{1}{32} \right)\Delta_t &\leq& \Delta_{t+1} \\
+\end{alignat*}
+
+Das Ergebnis dieser Umformungen gilt weiterhin mit hoher Wahrscheinlichkeit
+und zeigt, dass das Ungleichgewicht von Schritt zu Schritt größer wird. Somit
+ist offenbar, dass irgendwann die obere Grenze dieses Falls erreicht sein wird.
+
+Basierend darauf kann jetzt mittels mathematischer Berechnungen gezeigt werden,
+dass es in der Tat $O(\log n)$ Runden bedarf, bis in den ersten Fall gewechselt
+werden kann. Unter Anwendung der Fallbedingung ergibt sich Folgendes.
+
+\begin{alignat*}{2}
+    \Delta_0 &\geq& c\sqrt{n \ln n} \\
+    \intertext{Daraus folgt unter Verwendung des vorherigen Ergebnisses:}
+    \left(1 + \frac{1}{32} \right)^{t} \cdot c\sqrt{n \ln n} &\leq& \frac{n}{4} \\
+    \left(1 + \frac{1}{32} \right)^{t} &\leq& \frac{1}{4c} \cdot \frac{\sqrt{n}}{\sqrt{\ln n}} \\
+    \intertext{Logarithmus anwenden}
+    t &\leq& \; O\left(\log \left( \frac{\sqrt{n}}{\sqrt{\ln n}} \right) \right) \\
+    \intertext{Es bleibt noch Folgendes zu zeigen.}
+    \frac{\sqrt{n}}{\sqrt{\ln n}} &\leq& n \\
+    \frac{n}{\ln n} &\leq& n^2 \\
+    \frac{1}{\ln n} &\leq& n
+\end{alignat*}
+
+Die letzte Ungleichung gilt offenbar. Damit ist gezeigt, dass tatsächlich nach
+$O(\log n)$ Runden in den ersten Fall gewechselt werden kann. Es ist nicht
+ersichtlich, weswegen im Paper der sog. "union bound" angewendet wird statt dieser
+einleuchtenden mathematischen Herleitung.
+
+Auf den dritten Fall wird hier nicht mehr eingegangen, da dieser deutlich komplexer
+ist und den Umfang dieser Seminarausarbeitung sprengen würde.
 
 \section{Verwandte Arbeiten und Ansätze}
 
-\section{Ausblick und Zusammenfassung}
+Ben-Or\cite{Ben-Or1983} hat das erste Protokoll
+entworfen, welches mittels eines randomisierten Algorithmus das Konsensproblem
+löst. Spätere Literatur baut auf dieser Arbeit auf und erweitert sie maßgeblich
+in zwei Richtungen. Eine Richtung beschäftigt sich mit Protokollen, die
+Nachrichtenweitergabe nutzen (engl.: message passing), und konzentriert sich auf
+das Lösen des Problems mittels kryptographischer Technologien oder privaten Kanälen
+mit einer linearen Grenze an fehlerhaften Prozessen (inklusive byzantinische Fehler).
+Die andere Richtung beschäftigt sich mit "shared memory"
+und benutzt die zugrundeliegende Zuverlässigkeit eines solchen "shared memory"
+Systems, um das Konsensproblem in dem "wait-free" Fall zu lösen.
+Dabei gibt es keine Grenze für die Anzahl an Prozessen, die versagen (engl.: fail)
+dürfen, aber ein Versagen kann nur aufgrund eines Crashs eintreten.
+
+Für die Richtung der Nachrichtenweitergabe sei exemplarisch Rabin\cite{Rabin1983}
+erwähnt, der zeigte,
+dass -- vereinfacht gesagt -- sich das Problem der byzantinischen Armeen durch
+eine für beide Armeen sichtbare Münze erwartbar in konstanter Zeit lösen lässt.
+
+Für die "shared memory" Richtung sei exemplarisch die Arbeit von Chor, Israeli
+und Li\cite{Chor1994} erwähnt, in der das erste Protokoll unter Verwendung von
+randomisierten Algorithmen vorgestellt wurde, welches "shared memory" benutzt
+und das Konsensproblem löst.
+
+\section{Zusammenfassung}
+
+Zum Abschluss der Arbeit wird diese zusammengefasst und der Bezug zum
+Masterstudium aufgezeigt.
 
 \subsection{Zusammenfassung}
 
-\subsection{Ausblick}
+Das untersuchte Paper von Doerr et al\cite{Doerr2011} liefert ein zentrales
+Resultat für den Bereich der Konsensprobleme. Das Medianverfahren ist für die
+Lösung des eingangs beschriebenen Problems gut geeignet und zudem leicht
+verständlich. Der Beweis der aufgestellten Theoreme erfolgt in einer
+nachvollziehbaren und aufeinander aufbauenden Weise. In dieser Arbeit wurde
+der Versuch unternommen die ersten beiden Fälle des Beweises für den Fall von zwei
+Werten zu erläutern und den Ablauf des Beweises verständlich zu machen. Dabei ist
+aufgefallen, dass an etlichen Stellen der Rechenweg bzw. allgemeiner der Weg
+zum Ergebnis im zugrundeliegenden Paper nicht erwähnt oder nur sehr vage
+beschrieben wurde. Diese Zwischenschritte wurden in dieser Arbeit bestmöglich
+nachvollzogen, sodass der Beweis auch für Personen verständlich ist, die sich
+nicht im Bereich der Algorithmik bzw. spezifischer der randomisierten Algorithmen
+heimisch fühlen.
+
+Allerdings ist auch klar, dass diese Arbeit nur einen kleinen Bruchteil des Papers
+bzw. des Beweises erklärt. Offen bleibt der dritte Fall, sowie der gesamte Fall
+von mehr als zwei Werten. Ebenfalls wurde der Bereich zu einem "average case"
+ausgespart.
+
+Ingesamt lässt sich die Einschätzung geben, dass viele Paper, die zum Teil
+wichtige Erkenntnisse beschreiben, durch eine Erläuterung des Rechenweges --
+notfalls im Anhang -- deutlich verständlicher würden.
 
 \subsection{Bezug zum M.Sc. Studium}
+
+Als allgemeine Erkenntnis für das Studium lässt sich entnehmen, dass jedwede
+Annahmen zu erklären und explizit zu machen sind. Man kann sich nie darauf verlassen,
+dass nur Menschen die eigenen Texte lesen, die genau wissen, was womit gemeint
+oder angedeutet ist. Daher sollte ein Text stets so geschrieben werden, dass auch
+jemand, der sich mit der spezifischen Fachmaterie noch nie oder nur rudimentär
+auseinandergesetzt hat, dem Text folgen und ihn verstehen kann.
+
 
 \newpage
 
