@@ -1,0 +1,191 @@
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+%\usepackage{paralist}
+%\useoutertheme{infolines}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage[german=quotes]{csquotes}
+\usetheme{Warsaw}
+\usecolortheme{crane}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setbeamertemplate{navigation symbols}{}
+\graphicspath{ {src/} {/home/jim/Pictures/} }
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\MakeOuterQuote{"}
+
+%\definecolor{craneorange}{RGB}{61,61,61}
+%\definecolor{craneblue}{RGB}{255,255,255}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygray},    % comment style
+  deletekeywords={},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=PHP,                 % the language of the code
+  morekeywords={class, function, return, protected, public, private, const, static, new, extends, namespace, null},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mygreen},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\hypersetup{
+	pdfauthor=Jim Martens,
+	pdfstartview=Fit
+}
+
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+	\raggedleft \insertframenumber\,/\,\inserttotalframenumber\;}
+
+\begin{document}
+\author{Jim 2martens}
+\title{StuPa}
+\date{\today}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \tableofcontents
+\end{frame}
+
+\section{Umgang mit Daten}
+\begin{frame}{Drei Perspektiven}
+    \begin{itemize}
+        \item Anbieterseite
+        \vfill
+        \item Staat
+        \vfill
+        \item Anwender*innen-Seite
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Anbieterseite}
+    \begin{itemize}
+        \item Prinzipien des Datenschutzes verinnerlichen
+        \vfill
+        \item keine unnötigen Daten sammeln (Datensparsamkeit)
+        \vfill
+        \item Erhebung von unnötigen Daten nicht zur Voraussetzung für Nutzung
+              machen
+        \vfill
+        \item Daten gehören den Personen
+        \vfill
+        \item bei Nutzung von Daten für Werbezwecke: Beteiligung der Personen
+              an Werbeeinnahmen
+        \vfill
+        \item alternativ: Nutzer*innen wählen lassen zwischen bezahlen mit Geld
+              oder mit Daten (sorgt für höheres Bewusstsein, dass Daten
+              Zahlungsmittel sind)
+        \vfill
+        \item Website nur auf HTTPS anbieten (z.B. via Lets Encrypt)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Staat}
+    \begin{itemize}
+        \item Verpflichtung zu Interoperabilität gesetzlich festhalten
+        \vfill
+        \item u.a. auch für soziale Netzwerke
+        \vfill
+        \item ermöglicht fairen Wettbewerb durch Features
+        \vfill
+        \item verhindert Vendor Lock-in und damit Monopolbildung durch Datensilos
+        \vfill
+        \item bspw. könnten Nutzer zwischen Facebook und Diaspora kommunizieren
+        \vfill
+        \item nur Verwendung von offenen Dateiformaten in staatlichen
+              Einrichtungen (z.B. an Schulen, die keine Microsoft-Werbepartner
+              sein sollten)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Anwender*innen}
+    \begin{itemize}
+        \item Privatsphäre- und Datenschutzeinstellungen NUTZEN!
+        \vfill
+        \item Ende-zu-Ende-Verschlüsselung bei Emails und Messengern benutzen
+        \vfill
+        \item HTTPS Everywhere von EFF benutzen
+        \vfill
+        \item auf sichere Messenger wie Signal oder Threema umsteigen
+        \vfill
+        \item von Windows auf Linux umsteigen
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Anwender*innen}
+    \begin{itemize}
+        \item keine Daten ins Internet stellen, die nicht öffentlich sind
+        \vfill
+        \item Freie Software nutzen, wo immer möglich (z.B. LibreOffice statt
+              MS Office)
+        \vfill
+        \item offene Dateiformate nutzen
+    \end{itemize}
+\end{frame}
+
+\section{Eigenschaften und Fähigkeiten}
+
+\begin{frame}{Eigenschaften}
+    \begin{itemize}
+        \item Lernbereitschaft
+        \vfill
+        \item Neugierde
+        \vfill
+        \item Affinität zu Technologie
+        \vfill
+        \item Logisches Denkmervögen
+        \vfill
+        \item Ethikverständnis
+        \vfill
+        \item Kreativität
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Fähigkeiten}
+    \begin{itemize}
+        \item selbstständig sich eine Anwendung aneignen können
+        \vfill
+        \item hängt darüber hinaus stark von dem Job ab
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Abschlussthesen}
+    \begin{itemize}
+        \item Digitalisierung bietet eine Chance, wenn Menschen nicht länger als
+              auszubeutende Ressourcen oder "Kunden" angesehen werden, deren
+              Daten einfach genutzt werden können.
+        \vfill
+        \item Soziale Netzwerke müssen unter Einhaltung eines strengen
+              Datenschutzes benutzt werden können.
+    \end{itemize}
+\end{frame}
+\end{document}
