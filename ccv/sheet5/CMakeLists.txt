@@ -5,5 +5,5 @@ set(CMAKE_CXX_STANDARD 11)
 
 find_package( OpenCV REQUIRED )
 
-add_executable(sheet5 main.cpp)
+add_executable(sheet5 gauss_pyramid.cpp laplacian_pyramid.cpp main.cpp)
 target_link_libraries(sheet5 ${OpenCV_LIBS})
