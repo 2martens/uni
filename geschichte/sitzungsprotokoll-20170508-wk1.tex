@@ -1,0 +1,181 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bytefield}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage[german=quotes]{csquotes}
+%\usepackage{algorithmic}
+%\usepackage{minted}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+%\def\thesection{\arabic{section})}
+%\def\thesubsection{(\alph{subsection})}
+%\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\newenvironment{myitemize}{\begin{itemize}\itemsep -9pt}{\end{itemize}} % Zeilenabstand in Aufzählungen geringer
+
+%switch starred and non-starred (auto-size)
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\makeatother
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\MakeOuterQuote{"}
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Vorlesung Osteuropa im 1. Weltkrieg}
+\subtitle{Vorlesungsprotokoll vom 8. Mai 2017}
+\date{8. Mai 2017}
+\maketitle
+
+\section*{Übersicht}
+
+Im Vorfeld des Ersten Weltkriegs lässt sich beobachten, dass bis auf
+Österreich-Ungarn alle Großmächte (Deutschland, Frankreich, Vereinigtes
+Königreich, Russland, Osmanisches Reich, Italien) Vielvölkerstaaten waren.
+Es lässt sich jedoch ebenfalls beobachten, dass in direktem Zusammenhang mit
+dem Ersten Weltkrieg eine nationale Identität heraufbeschworen wurde, die es
+so zu jener Zeit gar nicht gab. Vielmehr befinden sich alle Staaten in einem
+Nationalisierungsprozess, der vielerorts auch auf Widerstände traf und alles
+andere als abgeschlossen war.
+
+Für die Mobilisierung zu einem Krieg gegen andere Nationen war es allerdings
+notwendig zu begründen, warum dieser Krieg so wichtig sei. Dabei lässt sich eine
+charakteristische Komponente erkennen, die sich in allen Großmächten wiederfindet.
+Die Minderheiten in den anzugreifenden Staaten wurden für die eigenen Zwecke
+instrumentalisiert. Man trat an diese Gruppen zu "befreien" von dem Joch der
+Unterdrückung. Dies war auch die Legitimation für den Kriegseintritt. Um die
+Interessen dieser Minderheiten ging es dabei jedoch nicht. Interessanterweise waren
+Minderheiten immer zudem nur in den anderen Staaten unterdrückt - nie im eigenen.
+Diese Instrumentalisierung von Minderheiten wurde diesen nicht selten in ihrem
+eigenen Staat zum Verhängnis, da sie fortan als Verbündete der Gegner galten.
+
+\section*{Nationalismusvarianten}
+
+Zur damaligen Zeit gab es vier Nationalismusansätze. Der "demokratische"
+Nationalismus tolerierte andere Nationen neben der eigenen. Er beinhaltete auch
+einige Bedingungen:
+
+\begin{enumerate}
+    \item Die Nation umfasst alle Bewohner des nationalen Territoriums; denn
+    alle haben den gleichen Anspruch auf Menschen- und Bürgerrechte.
+    \item Alle Mitglieder der Nation sind berechtigt und sollen befähigt sein, an
+    deren politischer Kultur teilzuhaben und die Solidarität der Nation zu erfahren;
+    dazu beizutragen, sind alle gleichermaßen verpflichtet.
+    \item Eine Nation hat das Recht auf politische Selbstverwaltung innerhalb ihres
+    Territoriums; das Prinzip der Volkssouveränität soll die Norm der Staaten sein.
+    \item Alle Völker haben ein gleiches Recht auf Existenz, auf Nationsbildung und
+    auf Selbstbestimmung innerhalb ihres Siedlungsgebiets.
+\end{enumerate}
+
+Diese Form des Nationalismus hat nur eine sehr beschränkte Rolle gespielt. So
+wurde er in den Balkankriegen und im Krieg von Italien gegen Österreich
+verwendet.
+
+Der "integrale" Nationalismus spielte vor dem Ersten Weltkrieg kaum eine Rolle
+gespielt. Er beschreibt "eine kämpferische [...] Sammlungsbewegung von rechts,
+die eine qualitativ andere Nation im Visier hatte". In dieser Nation ging es
+nicht mehr um Menschenrechte und Gleichberechtigung, sondern um ein elitär
+verstandenes Volkstum. Dieser Nationalismus fand seinen Auftrieb in den 1930er
+Jahren u.a. im Deutschen Reich in Form des Nationalsozialismus.
+
+Schließlich gab es noch den inklusiven bzw. exklusiven Nationalismus. Der Erstere
+schließt alle politischen und kulturellen Gruppen ein und entwickelt damit eine
+integrierende Wirkung. Der exklusive Nationalismus grenzt sich zu anderen Staaten
+und Nationen ab und überhöht die eigenen nationalen Elemente. Er verkleinert damit
+im Gegensatz zum inklusiven Nationalismus die eigene Gruppe.
+
+\section*{Unabhängigkeit Polens}
+
+Nach den Befreiungskriegen war Polen dreigeteilt und nicht mehr als unabhängiger
+Staat vorhanden. Russland, Preußen und Österreich-Ungarn kontrollierten je einen
+Teil des ehemals polnischen Gebiets. Entsprechend interessant ist es, dass
+ausgerechnet die polnische Unabhängigkeit in Verbindung mit dem Ersten Weltkrieg
+so eine Relevanz bekam. Es gab Bestrebungen von der österreichischen Seite und
+von der russischen.
+Die österreichische Bewegung verkauft den russischen Teil
+des polnischen Teilungsgebiets als unfrei. Es wird daher zum Befreiungskampf
+gegen die Russen aufgerufen. Dabei wird behauptet, dass Österreich für die
+polnische Sache kämpfe. Die österreichische Seite wird entsprechend als Land der
+Freiheit verkauft. Allerdings hat Österreich 1914 gar kein Interesse am Krieg
+mit Russland und eine Unabhängigkeit Polens will Österreich auch nicht.
+Die Kampagne hat wenig Erfolg.
+
+Die russische Kampagne erreicht eine höhere Verbreitung auch außerhalb des von
+Russland kontrollierten Gebiets. Sie wird auf Russisch und Polnisch veröffentlicht,
+obwohl polnische Veröffentlichungen eigentlich verboten waren. In dem Aufruf
+wird von einer "frohen Botschaft" gesprochen. Dieser Begriff wird eigentlich
+für das Evangelium verwendet. Es wird gefordert, dass sich der russisch-polnische
+Teil mit den anderen Teilen verbindet. Dieses zusammenhängende Polen soll allerdings
+nicht etwa wirklich unabhängig sein, sondern unter der Herrschaft des Zaren stehen.
+Damit ist die frohe Botschaft also die Kontrolle ganz Polens durch Russland.
+Nach der Eroberung soll es Freiheit und Selbstverwaltung geben. Russland hätte
+jedoch bereits seit Jahrzehnten die Möglichkeit gehabt dies in seinem Bereich
+umzusetzen. Tatsächlich erfolgte im russischen Bereich mehr Unterdrückung als
+im österreichischen Teil. Dies schien jedoch egal zu sein, denn bis zur Einnahme
+Warschaus durch die Mittelmächte herrschte dort eine pro-russische Stimmung.
+Dies kann auch als Beginn des integralen Nationalismus gesehen werden. So war
+der Zusammenhang der slawischen Völker wichtiger als die tatsächliche Unterdrückung.
+Es kommt sogar zur Gründung eines polnischen Nationalkommittees im russischen
+Bereich, welches sich für das Zarenreich ausspricht.
+
+Bei der wenig erfolgreichen österreichischen Bewegung kann jedoch davon ausgegangen
+werden, dass eine Trennung von Österreich nach der Einnahme des russischen Teils
+geplant war.
+
+\section*{Befreiung der Juden in Russland}
+
+Von der deutschen Seite gab es Bestrebungen zur "Befreiung" der Juden in Russland.
+Allerdings kommt diese Idee von den Zionisten in Deutschland und nicht von der
+Generalität oder dem Kaiser. Die Idee beinhaltet die Agitation der Juden in
+Russland gegen Russland. In den zu besetzenden Gebieten sei nur auf die Juden
+Verlass. Auch hier geht es um eine "frohe Botschaft". Für diese Kampagne wurde
+eine Zeitschrift auf Hebräisch und Jiddisch verfasst, welche insgesamt zwei
+Ausgaben erhielt. Es ist unklar, ob die Zeitschrift tatsächlich über russischem
+Gebiet abgeworfen wurde. Nach Kriegsbeginn kamen die Deutschen in Polen aber nicht
+sonderlich gut voran, sodass eine eventuelle Wirkung im russischen Teil verpuffte.
+Im deutschen Heer machte sich die Einstellung breit, die Juden würden sich nicht
+genügend für die Kriegszwecke der Deutschen einsetzen. Die antijüdischen Kräfte
+gewannen die Oberhand und es fand die sogenannte Judenzählung statt.
+
+Ein weiterer Effekt der Kampagne sollte ein besseres Verhältnis der Deutschen
+gegenüber den Juden sein. Dieser Effekt stellte sich jedoch nicht ein. Die ganze
+Aktion blieb dennoch nicht ohne Wirkung. Die Juden in Russland wurden von der
+Grenzregion ins Landesinnere deportiert.
+\end{document}
