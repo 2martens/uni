@@ -1,4 +1,9 @@
 #include <opencv2/opencv.hpp>
+#include "gauss_pyramid.h"
+#include "laplacian_pyramid.h"
+#include "oriented_pyramid.h"
+
+void exercise1(cv::Mat& image);
 
 int main(int argc, char** argv) {
   if ( argc != 2 )
@@ -7,6 +12,24 @@ int main(int argc, char** argv) {
     return -1;
   }
 
+  cv::Mat image = cv::imread(argv[1]);
+  //exercise1(image);
+  image.convertTo(image, CV_32F);
+
+  gauss_pyramid gauss_pyramid1 = gauss_pyramid(image, 3.0, 5);
+  laplacian_pyramid laplacian_pyramid1 = laplacian_pyramid(gauss_pyramid1, 2.0);
+  oriented_pyramid oriented_pyramid1 = oriented_pyramid(laplacian_pyramid1, 8);
+  oriented_pyramid1.compute_feature_maps();
+  for (int i = 0; i < 8; i++) {
+    cv::namedWindow("feature map" + std::to_string(i), CV_WINDOW_NORMAL);
+    cv::imshow("feature map" + std::to_string(i), oriented_pyramid1.get_feature_map(i));
+    cv::waitKey(0);
+  }
+
+  return 0;
+}
+
+void exercise1(cv::Mat &image) {
   std::vector<cv::Mat> gabor_filters = std::vector<cv::Mat>();
   cv::Size size = cv::Size(20, 20);
   double wavelength = 3;
@@ -35,7 +58,6 @@ int main(int argc, char** argv) {
   }
 
   // read input image
-  cv::Mat image = cv::imread(argv[1]);
   image.convertTo(image, CV_32F);
 
   for (unsigned long i = 0; i < 8; i++) {
@@ -45,6 +67,4 @@ int main(int argc, char** argv) {
     cv::imshow("filtered_" + std::to_string(i + 1), filtered_image);
     cv::waitKey(0);
   }
-
-  return 0;
 }
