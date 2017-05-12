@@ -14,6 +14,19 @@ public:
      * @param sigma the blur factor
      */
     laplacian_pyramid(const gauss_pyramid& pyramid, float sigma);
+
+    /**
+     * Returns the number of layers.
+     * @return
+     */
+    unsigned long get_number_of_layers() const;
+
+    /**
+     * Returns the pyramid element at given layer.
+     * @param layer the requested pyramid layer
+     * @return pyramid layer
+     */
+    cv::Mat get(int layer) const;
 };
 
 
