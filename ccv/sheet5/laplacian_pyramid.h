@@ -2,7 +2,7 @@
 #define SHEET5_LAPLACIAN_PYRAMID_H
 
 #include <opencv2/opencv.hpp>
-#include "gauss_pyramid.h
+#include "gauss_pyramid.h"
 
 class laplacian_pyramid {
 private:
