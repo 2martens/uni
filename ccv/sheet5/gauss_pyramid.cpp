@@ -14,9 +14,19 @@ gauss_pyramid::gauss_pyramid(cv::Mat img, float sigma, int number_of_layers)
   }
 }
 
+cv::Mat gauss_pyramid::get(int layer) const
+{
+  return _layers.at((unsigned long) layer);
+}
+
 cv::Mat gauss_pyramid::get(int layer)
 {
   return _layers.at((unsigned long) layer);
+}
+
+unsigned long gauss_pyramid::get_number_of_layers() const
+{
+  return _layers.size();
 }
 
 unsigned long gauss_pyramid::get_number_of_layers()

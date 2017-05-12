@@ -10,7 +10,9 @@ private:
 public:
     gauss_pyramid();
     gauss_pyramid(cv::Mat img, float sigma, int number_of_layers);
+    cv::Mat get(int layer) const;
     cv::Mat get(int layer);
+    unsigned long get_number_of_layers() const;
     unsigned long get_number_of_layers();
 };
 
