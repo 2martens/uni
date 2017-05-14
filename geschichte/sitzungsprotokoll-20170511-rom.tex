@@ -1,0 +1,187 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bytefield}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage[german=quotes]{csquotes}
+%\usepackage{algorithmic}
+%\usepackage{minted}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+%\def\thesection{\arabic{section})}
+%\def\thesubsection{(\alph{subsection})}
+%\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\newenvironment{myitemize}{\begin{itemize}\itemsep -9pt}{\end{itemize}} % Zeilenabstand in Aufzählungen geringer
+
+%switch starred and non-starred (auto-size)
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\makeatother
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\MakeOuterQuote{"}
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Vorlesung Römische Kaiserzeit}
+\subtitle{Vorlesungsprotokoll vom 11. Mai 2017}
+\date{11. Mai 2017}
+\maketitle
+
+\section*{Übersicht}
+
+Die römische Sozialstruktur gliedert sich in verschiedene Ebenen. Auf der
+untersten Ebene finden sich die Sklaven. Darüber stehen die Freigelassenen,
+gefolgt von den freien Provinzialen. Die Kinder von Freigelassenen sind jedoch
+römische Bürger und daher freien Provinzialen gegenüber bevorteilt.
+Auf der nächsten Ebene stehen die römischen Bürger. Über ihnen stehen die
+Ritter und schließlich die Senatoren. In der Kaiserzeit folgt ganz oben noch
+der Kaiser.
+
+Die soziale Struktur ändert sich im Laufe der Zeit erstaunlich wenig. Trotz
+zahlreicher politischer Veränderungen bleibt die römische Sozialstruktur
+von der frühen Republik bis weit in die Kaiserzeit relativ stabil. Diese
+Stabilität bedeutet aber auch, dass die mit der Struktur verbundenen
+systematischen Probleme bestehen bleiben. Trotz erheblicher innenpolitischer
+Konflikte wird das System selber nie in Frage gestellt. Stattdessen werden
+die Probleme personalisiert auf die aktuell Herrschenden bezogen.
+
+\section*{Sklaven}
+
+Die Position der Sklaven in der römischen Gesellschaft war nie gut. Allerdings
+hat sich die Situation in der Kaiserzeit im Vergleich zur späten Republik
+etwas gebessert. So kommt es im Prinzipat zu weniger Sklavenaufständen als
+in der späten Republik. Häufiger als ein Aufstand ist die Flucht einzelner
+Sklaven, was eine neue Berufsgruppe der Sklavenfänger entstehen lässt.
+Dies ist auch vor dem Hintergrund zu sehen, dass Magistrate und Statthalter
+entlaufene Sklaven nur halbherzig verfolgen.
+Die Flucht von Sklaven scheint jedoch ein derartiges Problem zu sein, dass
+es unter hohe Strafe gestellt wird einem Sklaven zu helfen.
+
+Im Jahre 61 wurde der Stadtpräfekt Roms durch einen Sklaven aus seinem Haushalt
+ermordet. Alle Sklaven des Hauses (rund 400) sollen hingerichtet werden. Dies
+stößt auch im Senat eine große Diskussion an, da es zum Teil als überzogen
+angesehen wird. Die Hardliner können sich aber durchsetzen und die 400 Sklaven,
+darunter Frauen und Kinder, werden hingerichtet. Es kommt nicht zur
+Ursachenanalyse.
+
+Ab Tiberius wird der Stadtpräfekt zur Appellationsinstanz für Sklaven und diese
+können bei Kaiserstatuen um Asyl bitten und den eigenen Verkauf an einen anderen
+Herrn erreichen, um sich vor den größten Schikanierungen zu schützen. Hadrian
+verbannte sogar eine reiche Dame für 5 Jahre aus Rom, weil sie Sklaven
+misshandelte.
+
+Wenn der Herr es zulässt, können Sklaven ein kleines Vermlgen anhäufen (perculium)
+und sich nach Ersparen der eigenen Kaufsumme freikaufen. Bei einem solchen
+Freikauf oder der Freilassung durch den Herrn werden die Sklaven zu Freigelassenen
+(libertus) und sind noch keine römischen Bürger.
+
+\section*{Freigelassene}
+
+Bei der Freilassung ändert sich das Verhältnis von dominus \(\rightarrow\) servus
+zu patronus \(\rightarrow\) cliens. Der Patron ist nicht mehr für die
+Altersvorsorge der Freigelassenen verantwortlich. Daher rechnet es sich durchaus
+Sklaven freizulassen, da diese einem auf Lebenszeit zu Dank verpflichtet sind,
+häufig weiter für einen arbeiten und sich meistens längst amortisiert haben.
+
+In der Republik gibt es drei Formen von Freilassungen: (1) per Testament,
+(2) durch Zensus (alle 5 Jahre kann vor dem Zensor freigelassen werden) und
+(3) fingierter Freilassungsprozess vor einem Magistrat. Im Kaiserreich gibt
+es zwei weitere Formen: (4) Freilassung unter Freunden (Freunde als Zeugen)
+und (5) schriftliche Freilassung. Hauptsächlich finden (1), (4) und (5) Anwendung.
+
+Die Freigelassenen sind in vielen Bereichen tätig und verewigen ihren Aufstieg
+in Inschriften. Der Leistungsgedanke ist für sie zentral. Denn nach der Freilassung
+stehen sie unter einem gewissen Legitimationsdruck zu zeigen, dass sie zurecht
+freigelassen wurden. Die Freilassung wird aber auch als Machtinstrument verwendet,
+um Sklaven zu Wohlverhalten zu zwingen: Nur gutes Benehmen als Sklave ermöglicht
+Freilassung und die Freigelassenen sind ihrem vormaligen Herrn zu Dank verpflichtet.
+
+Freigelassene sind in den collegia - den Berufsgemeinschaften - aktiv und
+konkurrieren bei Reichtum mit den Stadträten um die meisten Stiftungen. Ehrungen
+bleiben den Freigelassenen jedoch meistens verwehrt. Im Rahmen der collegia
+bekommen sie jedoch Ehrenstatuen.
+
+Unter Claudius regierten sogar Freigelassene. Für den Kaiser waren sie zudem
+nützlich, da es am Hof des Kaisers keine Lobby für sie gab. Im Verlauf des
+Kaiserreichs stammen viele Ritter und Senatoren von Freigelassenen ab. In Rom
+stellen sie die Polizei und die Feuerwehr.
+
+\section*{Leben in den Provinzen}
+
+Um 14 n.Chr. beträgt die Gesamtbevölkerung des Reiches knapp 60 Millionen.
+Der Großteil der Bevölkerung lebt in Asien, Syrien, Palästina und Ägypten.
+Im westlichen Teil des Reichs lebt nur ein kleiner Teil der Bevölkerung.
+Dort bedeutet Romanisierung also im wesentlichen Urbanisierung. Insgesamt
+sind nur knapp 5 Millionen freie römische Bürger. Der überwiegende Teil
+der Bevölkerung sind demnach freie Provinziale (peregrini). Diese Gruppe
+ist sehr heterogen und die Rechte und Pflichten der Provinzialen ergeben sich
+aus den Rechtsverfassungen ihrer Heimatstädte.
+
+Es gibt Kolonien und Municipia mit jeweils römischen oder latinischem Recht.
+Dann gibt es einheimische Städte, die sich in freie Städte ohne Steuerpflicht,
+föderale Städte und steuerpflichtige Städte unterteilen. In latinischen
+Siedlungen gibt es das römische Bürgerrecht nur für Menschen in politischen Ämtern.
+
+Oft bestimmen die einheimischen Kulturen das Alltagsleben und die Statthalter sind
+nur für Streitschlichtung zuständig. Die Eingriffe der römischen Provinzialverwaltung
+beschränken sich auf ein absolutes Minimum, weil ein größeres Engagement mangels
+effizienter Verwaltungsstrukturen schlicht nicht möglich war. Alte Stammes- und
+Stadtverfassungen bleiben in den einheimischen Städten in Kraft. In religiösen
+Fragen mischt sich der römische Staat nicht ein.
+
+Die Aufgaben der Statthalter beschränken sich auf die Aufrechterhaltung von Ruhe
+und Ordnung, dem Schutz von Leben und Eigentum (Schutz der Eliten) und die Garantie
+der Funktion der lokalen Selbstverwaltung und Rechtsprechung.
+
+Einheimische Sprachen bestehen ebenso weiter. In der Spätantike wurde am Kaiserhof
+in Trier noch Keltisch gesprochen. In Syrien und Palästina wurde von der
+Oberschicht Griechisch und von dem allgemeinen Volk Aramäisch gesprochen. In
+Afrika ist Punisch weiterhin in aktiver Benutzung. Mehrsprachigkeit war demnach
+ein häufigeres Phänomen als in der Neuzeit.
+
+Von 600 Senatoren war nur ein kleiner Teil in den Provinzen. Dazu kommen einige
+Tausend Ritter und die Stadträte, welche zusammen für die gesamte Verwaltung
+zuständig waren. Erst Diocletian bläht die Verwaltung auf, was jedoch auch
+wieder Nachteile mit sich bringt. Im gesamten Reichsgebiet gibt es also nur eine
+dünne Suprastruktur, die alles zusammenhält. Und diese Struktur löst sich in der
+sog. Völkerwanderung auf.
+
+
+\end{document}
