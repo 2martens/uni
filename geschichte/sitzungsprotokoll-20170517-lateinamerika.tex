@@ -1,0 +1,182 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bytefield}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage[german=quotes]{csquotes}
+%\usepackage{algorithmic}
+%\usepackage{minted}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+%\def\thesection{\arabic{section})}
+%\def\thesubsection{(\alph{subsection})}
+%\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\newenvironment{myitemize}{\begin{itemize}\itemsep -9pt}{\end{itemize}} % Zeilenabstand in Aufzählungen geringer
+
+%switch starred and non-starred (auto-size)
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\makeatother
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\MakeOuterQuote{"}
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Vorlesung Geschichte der Lateinamerikanerinnen und Lateinamerikaner}
+\subtitle{Vorlesungsprotokoll vom 17. Mai 2017}
+\date{17. Mai 2017}
+\maketitle
+
+\section*{Geschichte der Sklaverei}
+
+Kolumbus hat den Aufbau von Handel zum Ziel. Entsprechend werden die gefundenen
+Gebiete als reich beschrieben. Die Karibik ist für Spanien im 15. Jahrhundert
+jedoch nahezu uninteressant. Die einheimische Bevölkerung stirbt aufgrund der
+aus Europa mitgebrachten Krankheiten fast vollständig aus. Auf dem Festland
+ist die Situation jedoch eine andere. Dort gibt es Gold und Silber, welche
+dann auch der Grund für die Kolonialisierung Südamerikas waren. Nach einer Weile
+wird Zucker entdeckt. Dieser Fund ändert die Geschichte Amerikas grundlegend.
+Denn Zucker ist quasi weißes Gold, da es zur damaligen Zeit nur sehr wenige
+aus Europa bekannte Zuckeranbaugebiete gab. Zucker war also wertvoll.
+
+Es gab jedoch das Problem, dass in den Gebieten, wo einheimische Bevölkerung
+überlebte, kein Zucker angebaut werden konnte und in den Zuckeranbaugebieten
+keine Bevölkerung mehr lebte. Für den Anbau wurden also Menschen benötigt. In
+Europa gab es damals kaum "verfügbare" Menschen. Die Lösung aus Sicht der
+Kolonialmächte waren Sklaven aus Afrika. Die Sklaven wurden nur zur Produktion
+von lukrativen Produkten verwendet. Das ging sogar so weit, dass auf einigen
+Karibikinseln ausschließlich Zucker angebaut wurde und die Nahrung für u.a. die
+Sklaven importiert werden musste. Der Fund von Zucker war demnach der Startpunkt
+des Sklavenhandels.
+
+Über die Dauer des Sklavenhandels kommen insgesamt rund 9,5 Millionen Sklaven
+vom 16. bis 19. Jahrhundert nach Amerika. Dabei kommen die meisten Sklaven im
+18. und 19. Jahrhundert. Zur Zeit der Aufklärung in Europa gibt es also die
+Hochphase des Sklavenhandels. Lediglich während der französischen Revolution
+wurde unter der Herrschaft Robespierres der Sklavenhandel Frankreichs kurzfristig
+ausgesetzt. Die erste Abschaffung des Sklavenhandels geht nicht von Aufklärern aus,
+sondern von einer Sklavenerhebung in Haiti. Ebenso sind die religiösen
+Fundamentalisten gegen den Sklavenhandel und setzen sich im frühen 19. Jahrhundert
+gegen die vernünftigen und rationalen Menschen in Europa durch.
+
+Im britischen Nordamerika kommen "nur" 361.000 Sklaven an, was ungefähr 3\% der
+gesamten Menge aus dem Sklavenhandel sind. In der Karibik landen knapp 34-40\%.
+Die Karibik ist jedoch ein schlechter Ort zum Leben - für Sklaven und Europäer
+gleichermaßen. Die Mortalitätsrate der Sklaven dort ist sehr hoch. Ein ähnlich
+großer Teil der Sklaven kommt nach Brasilien. Die Mortalitätsrate von Sklaven
+und Europäern ist in Brasilien nicht ganz so hoch wie in der Karibik, aber
+deutlich höher als in den USA.
+
+Das Ende der Sklaverei erfolgte in einem dreistufigen Verfahren. Zunächst wurde
+der atlantische Sklavenhandel beendet. Darauf folgte das Ende der Vererbung von
+Sklaverei und schließlich die gänzliche Abschaffung derselben. Der atlantische
+Sklavenhandel bricht weitestgehend zusammen als das britische Parlament beschließt,
+dass die Royal Navy in brasilianische Häfen einfahren darf, um den Handel zu
+stoppen. Diese Drohung reicht aus, damit Brasilien den Handel einstellt. In Folge
+dessen steigen zunehmend Länder aus dem Handel aus.
+
+Mit dem Ende des Sklavenhandels verringert sich die Anzahl der Sklaven in Kuba
+und Brasilien, da aufgrund der hohen Sterblichkeitsrate und ohne externen Nachschub
+kein nachhaltiges Wachstum möglich ist. Ganz anders in den USA: Obwohl der
+atlantische Sklavenhandel relativ früh beendet wird, kann sich die Sklaverei
+noch sehr lange halten. Dies liegt an den guten materiellen Bedingungen und damit
+einem Wachstum der Anzahl der Sklaven durch Geburt, sowie einer Staatlichkeit,
+welche die Sklaverei durchsetzen kann.
+
+Die letztendliche Abschaffung erfolgt erst nach dem Bürgerkrieg, der sich um
+die Frage drehte, ob die USA ein Bundesstaat oder ein Staatenbund sind und ob
+demnach die Sklaverei auf Bundesebene abgeschafft werden kann. Vor Beginn des
+Bürgerkriegs gibt es jahrzehntelang Propaganda gegen die Sklaverei. Die Frage
+der Sklaverei war denn auch eine große Diskussion in der US-amerikanischen
+Öffentlichkeit. Ein Teil der Bewegung gegen die Sklaverei waren die sog.
+slave narratives.
+
+\section*{Slave narratives}
+
+Die slave narratives sind buchlange Erzählungen des eigenen Lebens. Ihre Ursprünge
+liegen in den captivity-narratives und der Erlösungsliteratur. Sie treten
+hauptsächlich im 19. Jahrhundert auf, hatten aber auch schon Vorläufer im 18.
+Jahrhundert. Berühmte slave narratives sind z.B. "Twelve Years a Slave" von
+Solomon Northup aus dem Jahr 1853, "A Narrative of the life of Frederick Douglass,
+an American Slave" von Frederick Douglass aus dem Jahr 1845 sowie "Incidents in
+the Life of a Slave Girl" von Harriet Jacobs aus dem Jahr 1861. Kein eigentlicher
+slave narrative war "Uncle Tom's Cabin" von Harriet Beecher Stove aus dem Jahr
+1852. Dieser Roman war jedoch DER Anti-Sklaverei-Roman des 19. Jahrhunderts.
+
+Bei einem slave narrative ist ein (Ex-)Sklave die erzählende Person. Die vermittelte
+Botschaft ist, dass ein Sklave ein Mensch und Autor seines Lebens ist. Ebenfalls
+zeigen diese narratives, dass sich Sklaven bilden können und Sklaverei daher
+moralisch schlecht und unnatürlich ist. Häufige Vorkommnisse in diesen Erzählungen
+sind die Trennung von Mutter und Kindern, die Trennung von Eheleuten,
+ungerechtfertigte Bestrafungen und der moralische Verfall der Herren. Die
+narratives zeigen in der Essenz die Menschlichkeit der Sklaven.
+
+Diese slave narratives gibt es in der Form nur aus den USA. Die feste
+Institutionalisierung der Sklaverei in den USA ist der Hauptgrund für ihre Existenz.
+Denn mit ihnen soll eine Debatte über die Sklaverei und mittels der Debatte eine
+politische Mehrheit zur Abschaffung der Sklaverei organisiert werden.
+
+In Lateinamerika entsteht eine solche Debatte nicht, da sich die Eliten dort
+einig sind, dass die Sklaverei abgeschafft gehört. Auch das Genre der slave
+narratives ensteht in Lateinamerika nicht. Lediglich drei Werke kommen in die
+Nähe dieser slave narratives. "El Cimarron" soll über das Leben des Esteban Montejo
+handeln. Die Geschichte passt jedoch sehr in die Erzählung der kubanischen
+Revolution. Das Werk "Biography" soll von dem Sklaven Mahommah Gardo Baquaqua
+handeln. Es wurde jedoch von US-Amerikanern für ein US-amerikanisches Publikum
+erstellt und basiert lediglich auf Unterhaltungen mit Baquaqua.
+
+Das dritte
+Werk wurde von Juan Francisco Manzano verfasst und kommt den slave narratives
+ein wenig nahe. Es wurde von einem kubanischen Sklaven geschrieben, welcher
+seit seiner Jugend Gedichte schrieb. Das Verfassen der Autobiografie war die
+Voraussetzung dafür, dass del Monte ihn freikaufte. Das Werk ist sehr nah an
+der Sprechfassung und wurde 1840 zunächst auf Englisch in London veröffentlicht.
+Die Erstveröffentlichung war also kein Text für Kuba. Es wird ebenfalls vermutet,
+dass nur ein Teil der Autobiografie erhalten blieb, da diese nur 45-50 Seiten
+ausmacht. Thematisch wird eine gute Herrin beschrieben, die eines Tages stirbt.
+Der neue Herr ist die Ursache für viele grausame Strafen. Ebenfalls wird die
+besondere Rolle der Mutter beschrieben.
+
+Aktuell gibt es drei Fassungen des Werkes: "Autiobiografie de un esclavo", welche
+1975 in Madrid publiziert wurde, "The autobiography of a slave" aus Detroit im Jahr
+1996 und die jüngste Fassung aus dem Jahr 2007. Man kann sagen, dass Manzano neu
+entdeckt wurde.
+
+\end{document}
