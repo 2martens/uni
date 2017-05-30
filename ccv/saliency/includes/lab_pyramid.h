@@ -69,6 +69,12 @@ public:
     gauss_pyramid get_pyramid(int channel);
 
     /**
+     * Visualizes the gaussian pyramids.
+     * They need to be created first.
+     */
+    void visualize_gaussian_pyrs();
+
+    /**
      * Computes the center-surround and surround-center contrasts and stores them for later use.
      *
      * @param center the center pyramid

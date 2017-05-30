@@ -177,6 +177,21 @@ void lab_pyramid::visualize_dog() {
   }
 }
 
+void lab_pyramid::visualize_gaussian_pyrs() {
+  gauss_pyramid l = _pyramids[COLOR_L];
+  gauss_pyramid a = _pyramids[COLOR_A];
+  gauss_pyramid b = _pyramids[COLOR_B];
+  for (int layer = 0; layer < _number_of_layers; layer++) {
+    cv::namedWindow("gauss L");
+    cv::imshow("gauss L", l.get(layer));
+    cv::namedWindow("gauss A");
+    cv::imshow("gauss A", a.get(layer));
+    cv::namedWindow("gauss B");
+    cv::imshow("gauss B", b.get(layer));
+    cv::waitKey(0);
+  }
+}
+
 void lab_pyramid::visualize_feature_maps() {
   cv::namedWindow("CS F L");
   cv::imshow("CS F L", _cs_F_l);
