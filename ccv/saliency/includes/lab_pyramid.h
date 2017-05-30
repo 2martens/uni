@@ -31,7 +31,7 @@ private:
     // number of layers
     static int _number_of_layers;
 public:
-    const static int COLOR_L = 0
+    const static int COLOR_L = 0;
     const static int COLOR_A = 1;
     const static int COLOR_B = 2;
 
