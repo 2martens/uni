@@ -3,6 +3,8 @@
 
 cv::Mat mean_fusion(cv::Mat f_on_off, cv::Mat f_off_on);
 cv::Mat max_fusion(cv::Mat f_on_off, cv::Mat f_off_on);
+cv::Mat mean_fusion_generic(const std::vector<cv::Mat> feature_maps);
+cv::Mat max_fusion_generic(const std::vector<cv::Mat> feature_maps);
 cv::Mat mean_fusion_saliency(cv::Mat C_l, cv::Mat C_a, cv::Mat C_b);
 cv::Mat max_fusion_saliency(cv::Mat C_l, cv::Mat C_a, cv::Mat C_b);
 
