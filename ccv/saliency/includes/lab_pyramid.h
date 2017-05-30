@@ -69,10 +69,20 @@ public:
     gauss_pyramid get_pyramid(int channel);
 
     /**
-     * Visualizes the gaussian pyramids.
-     * They need to be created first.
+     * Before this method can be called, pyramids have to be created via create_pyramids.
+     *
+     * @param channel the channel you want to get (COLOR_L, COLOR_A or COLOR_B)
+     * @return the gaussian_pyramid for the given channel
      */
-    void visualize_gaussian_pyrs();
+    gauss_pyramid get_pyramid(int channel) const;
+
+    /**
+     * Visualizes the gaussian pyramids.
+     *
+     * @param center center pyramid
+     * @param surround surround pyramid
+     */
+    void static visualize_gaussian_pyrs(const lab_pyramid center, const lab_pyramid surround);
 
     /**
      * Computes the center-surround and surround-center contrasts and stores them for later use.

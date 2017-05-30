@@ -31,10 +31,11 @@ lab_pyramid::lab_pyramid(cv::String image_filename) {
   cv::split(_inputImage_lab ,_imageChannels);
 };
 
-lab_pyramid::lab_pyramid(cv::Mat image) {
-  cv::cvtColor(image, _inputImage_lab, cv::COLOR_BGR2Lab);
-  _inputImage_lab.convertTo(_inputImage_float, CV_32F);
-  cv::split(_inputImage_float, _imageChannels);
+lab_pyramid::lab_pyramid(const cv::Mat image) {
+  image.convertTo(_inputImage_float, CV_32F);
+  _inputImage_float *= 1./255;
+  cv::cvtColor(_inputImage_float, _inputImage_lab, cv::COLOR_BGR2Lab);
+  cv::split(_inputImage_lab, _imageChannels);
 }
 
 void lab_pyramid::create_pyramids(float sigma, int number_of_layers)
@@ -45,6 +46,21 @@ void lab_pyramid::create_pyramids(float sigma, int number_of_layers)
 }
 
 gauss_pyramid lab_pyramid::get_pyramid(int channel)
+{
+  switch (channel)
+  {
+    case COLOR_L:
+      return _pyramids[COLOR_L];
+    case COLOR_A:
+      return _pyramids[COLOR_A];
+    case COLOR_B:
+      return _pyramids[COLOR_B];
+    default:
+      throw std::invalid_argument( "received invalid channel value, use COLOR_L, COLOR_A or COLOR_B" );
+  }
+}
+
+gauss_pyramid lab_pyramid::get_pyramid(int channel) const
 {
   switch (channel)
   {
@@ -177,17 +193,27 @@ void lab_pyramid::visualize_dog() {
   }
 }
 
-void lab_pyramid::visualize_gaussian_pyrs() {
-  gauss_pyramid l = _pyramids[COLOR_L];
-  gauss_pyramid a = _pyramids[COLOR_A];
-  gauss_pyramid b = _pyramids[COLOR_B];
-  for (int layer = 0; layer < _number_of_layers; layer++) {
-    cv::namedWindow("gauss L");
-    cv::imshow("gauss L", l.get(layer));
-    cv::namedWindow("gauss A");
-    cv::imshow("gauss A", a.get(layer));
-    cv::namedWindow("gauss B");
-    cv::imshow("gauss B", b.get(layer));
+void lab_pyramid::visualize_gaussian_pyrs(const lab_pyramid center, const lab_pyramid surround) {
+  gauss_pyramid l_c = center.get_pyramid(COLOR_L);
+  gauss_pyramid l_s = surround.get_pyramid(COLOR_L);
+  gauss_pyramid a_c = center.get_pyramid(COLOR_A);
+  gauss_pyramid a_s = surround.get_pyramid(COLOR_A);
+  gauss_pyramid b_c = center.get_pyramid(COLOR_B);
+  gauss_pyramid b_s = surround.get_pyramid(COLOR_B);
+  int number_of_layers = (int) l_c.get_number_of_layers();
+  for (int layer = 0; layer < number_of_layers; layer++) {
+    cv::namedWindow("L c");
+    cv::imshow("L c", l_c.get(layer) * 1./255);
+    cv::namedWindow("L s");
+    cv::imshow("L s", l_s.get(layer) * 1./255);
+    cv::namedWindow("A c");
+    cv::imshow("A c", a_c.get(layer) * 1./255);
+    cv::namedWindow("A s");
+    cv::imshow("A s", a_s.get(layer) * 1./255);
+    cv::namedWindow("B c");
+    cv::imshow("B c", b_c.get(layer) * 1./255);
+    cv::namedWindow("B s");
+    cv::imshow("B s", b_s.get(layer) * 1./255);
     cv::waitKey(0);
   }
 }
