@@ -75,7 +75,7 @@ gauss_pyramid lab_pyramid::get_pyramid(int channel) const
   }
 }
 
-void lab_pyramid::compute_dog(lab_pyramid center, lab_pyramid surround, int number_of_layers) {
+void lab_pyramid::compute_dog(const lab_pyramid center, const lab_pyramid surround, int number_of_layers) {
   _number_of_layers = number_of_layers;
 
   // L channel
@@ -184,11 +184,11 @@ void lab_pyramid::visualize_dog() {
     cv::namedWindow("CS A");
     cv::imshow("CS A", _cs_contrast_a.at(layer));
     cv::namedWindow("SC A");
-    cv::imshow("SC A", _cs_contrast_a.at(layer));
+    cv::imshow("SC A", _sc_contrast_a.at(layer));
     cv::namedWindow("CS B");
     cv::imshow("CS B", _cs_contrast_b.at(layer));
     cv::namedWindow("SC B");
-    cv::imshow("SC B", _cs_contrast_b.at(layer));
+    cv::imshow("SC B", _sc_contrast_b.at(layer));
     cv::waitKey(0);
   }
 }

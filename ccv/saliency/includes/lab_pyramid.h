@@ -91,7 +91,7 @@ public:
      * @param surround the surround pyramid
      * @param number_of_layers the number of layers used to create the two pyramids
      */
-    void static compute_dog(lab_pyramid center, lab_pyramid surround, int number_of_layers);
+    void static compute_dog(const lab_pyramid center, const lab_pyramid surround, int number_of_layers);
 
     /**
      * Visualizes the center-surround and surround-center contrasts. They have to be computed first.
