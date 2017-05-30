@@ -39,7 +39,6 @@ cv::Mat mean_fusion_generic(const std::vector<cv::Mat> feature_maps) {
  * @return conspicuity map
  */
 cv::Mat max_fusion_generic(const std::vector<cv::Mat> feature_maps) {
-  unsigned long number_of_features = feature_maps.size();
   cv::Mat C;
   bool first_value = true;
 
