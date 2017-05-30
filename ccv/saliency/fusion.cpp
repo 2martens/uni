@@ -51,7 +51,7 @@ cv::Mat max_fusion_generic(const std::vector<cv::Mat> feature_maps) {
     }
 
     if (first_value) {
-      C = f;
+      C = f.clone();
       first_value = false;
     }
     else {
