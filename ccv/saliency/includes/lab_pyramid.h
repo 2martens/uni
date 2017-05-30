@@ -18,6 +18,9 @@ private:
     static std::vector<cv::Mat> _cs_contrast_b;
     static std::vector<cv::Mat> _sc_contrast_b;
     // feature maps
+    static std::vector<cv::Mat> _F_l;
+    static std::vector<cv::Mat> _F_a;
+    static std::vector<cv::Mat> _F_b;
     static cv::Mat _cs_F_l;
     static cv::Mat _sc_F_l;
     static cv::Mat _cs_F_a;

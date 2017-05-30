@@ -11,6 +11,9 @@ std::vector<cv::Mat> lab_pyramid::_sc_contrast_a = std::vector<cv::Mat>();
 std::vector<cv::Mat> lab_pyramid::_cs_contrast_b = std::vector<cv::Mat>();
 std::vector<cv::Mat> lab_pyramid::_sc_contrast_b = std::vector<cv::Mat>();
 // feature maps
+std::vector<cv::Mat> lab_pyramid::_F_l= std::vector<cv::Mat>();
+std::vector<cv::Mat> lab_pyramid::_F_a= std::vector<cv::Mat>();
+std::vector<cv::Mat> lab_pyramid::_F_b= std::vector<cv::Mat>();
 cv::Mat lab_pyramid::_cs_F_l;
 cv::Mat lab_pyramid::_sc_F_l;
 cv::Mat lab_pyramid::_cs_F_a;
@@ -113,16 +116,22 @@ void lab_pyramid::compute_dog(lab_pyramid center, lab_pyramid surround, int numb
 void lab_pyramid::compute_feature_maps() {
   _cs_F_l = across_scale_addition(_cs_contrast_l);
   _sc_F_l = across_scale_addition(_sc_contrast_l);
+  _F_l.push_back(_cs_F_l);
+  _F_l.push_back(_sc_F_l);
   _cs_F_a = across_scale_addition(_cs_contrast_a);
   _sc_F_a = across_scale_addition(_sc_contrast_a);
+  _F_a.push_back(_cs_F_a);
+  _F_a.push_back(_sc_F_a);
   _cs_F_b = across_scale_addition(_cs_contrast_b);
   _sc_F_b = across_scale_addition(_sc_contrast_b);
+  _F_b.push_back(_cs_F_b);
+  _F_b.push_back(_sc_F_b);
 }
 
 void lab_pyramid::compute_conspicuity_maps() {
-  _C_l = max_fusion(_cs_F_l, _sc_F_l);
-  _C_a = max_fusion(_cs_F_a, _sc_F_a);
-  _C_b = max_fusion(_cs_F_b, _sc_F_b);
+  _C_l = max_fusion_generic(_F_l);
+  _C_a = max_fusion_generic(_F_a);
+  _C_b = max_fusion_generic(_F_b);
 }
 
 cv::Mat lab_pyramid::get_conspicuity_map(int channel) {
