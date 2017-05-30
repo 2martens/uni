@@ -2,7 +2,7 @@
 
 gauss_pyramid::gauss_pyramid() {}
 
-gauss_pyramid::gauss_pyramid(cv::Mat img, float sigma, int number_of_layers)
+gauss_pyramid::gauss_pyramid(const cv::Mat img, float sigma, int number_of_layers)
 {
   cv::Mat blurredImage;
   cv::Mat resizedImage = img.clone();
