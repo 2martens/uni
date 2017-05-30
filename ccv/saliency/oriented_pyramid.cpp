@@ -63,6 +63,6 @@ cv::Mat oriented_pyramid::get_conspicuity_map() {
   return _C;
 }
 
-cv::Mat oriented_pyramid::get_feature_map(int orientation) {
-  return _feature_maps.at((unsigned long) orientation);
+cv::Mat oriented_pyramid::get_feature_map(unsigned long orientation) {
+  return _feature_maps.at(orientation).clone();
 }

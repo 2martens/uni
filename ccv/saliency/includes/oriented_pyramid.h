@@ -50,7 +50,7 @@ public:
      * @param orientation the nth orientation
      * @return the feature map
      */
-    cv::Mat get_feature_map(int orientation);
+    cv::Mat get_feature_map(unsigned long orientation);
 };
 
 
