@@ -49,15 +49,22 @@ cv::Mat mean_fusion_generic(const std::vector<cv::Mat> feature_maps) {
   unsigned long number_of_features = feature_maps.size();
   cv::Mat sum_of_features;
   double max = -1;
+  bool first_run = true;
   for (auto& f : feature_maps) {
-    sum_of_features += f;
+    if (first_run) {
+      sum_of_features = f.clone();
+      first_run = false;
+    }
+    else {
+      sum_of_features = sum_of_features + f;
+    }
     double max_value;
     cv::minMaxLoc(f, nullptr, &max_value);
     if (max_value >= max) {
       max = max_value;
     }
   }
-  cv::Mat C = 1/number_of_features * sum_of_features;
+  cv::Mat C = 1./number_of_features * sum_of_features;
   cv::normalize(C, C, 0, max, cv::NORM_MINMAX, -1);
 
   return C.clone();
