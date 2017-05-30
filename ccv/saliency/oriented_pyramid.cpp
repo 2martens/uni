@@ -1,12 +1,13 @@
 #include "includes/oriented_pyramid.h"
 #include "includes/fusion.h"
 
-oriented_pyramid::oriented_pyramid(const laplacian_pyramid &pyramid, int num_orientations) {
+oriented_pyramid::oriented_pyramid(const laplacian_pyramid &pyramid, int num_orientations, int size,
+                                   double wavelength, double standard_deviation) {
   _gabor_filters = std::vector<cv::Mat>();
   _orientation_maps = std::vector<std::vector<cv::Mat>>();
   _feature_maps = std::vector<cv::Mat>();
 
-  initialize_gabor_filters(num_orientations);
+  initialize_gabor_filters(num_orientations, size, wavelength, standard_deviation);
   unsigned long number_of_layers = pyramid.get_number_of_layers();
   for (unsigned long i = 0; i < num_orientations; i++) {
     std::vector<cv::Mat> orientation_vector = std::vector<cv::Mat>();
@@ -20,14 +21,13 @@ oriented_pyramid::oriented_pyramid(const laplacian_pyramid &pyramid, int num_ori
 
 }
 
-void oriented_pyramid::initialize_gabor_filters(float num_orientations) {
-  cv::Size size = cv::Size(20, 20);
-  double wavelength = 3;
-  double standard_deviation = 18;
+void oriented_pyramid::initialize_gabor_filters(float num_orientations, int size,
+                                                double wavelength, double standard_deviation) {
+  cv::Size size_obj = cv::Size(size, size);
 
   double start_level = num_orientations / 2.0;
   for (double level = start_level; level >= 0; level--) {
-    _gabor_filters.push_back(cv::getGaborKernel(size, standard_deviation, (level/num_orientations) * CV_PI, wavelength,
+    _gabor_filters.push_back(cv::getGaborKernel(size_obj, standard_deviation, (level/num_orientations) * CV_PI, wavelength,
                                                 1, 0, CV_32F));
   }
 
@@ -35,7 +35,7 @@ void oriented_pyramid::initialize_gabor_filters(float num_orientations) {
   start_level = num_orientations - 1;
 
   for (double level = start_level; level > end_level; level--) {
-    _gabor_filters.push_back(cv::getGaborKernel(size, standard_deviation, (level/num_orientations) * CV_PI, wavelength,
+    _gabor_filters.push_back(cv::getGaborKernel(size_obj, standard_deviation, (level/num_orientations) * CV_PI, wavelength,
                                                 1, 0, CV_32F));
   }
 }

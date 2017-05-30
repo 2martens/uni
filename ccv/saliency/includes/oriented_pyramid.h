@@ -14,15 +14,22 @@ private:
     /**
      * Initializes the Gabor filters.
      * @param num_orientations the number of orientations to use
+     * @param size the size of the Gabor filter
+     * @param wavelength the wavelength
+     * @param standard_deviation the standard deviation
      */
-    void initialize_gabor_filters(float num_orientations);
+    void initialize_gabor_filters(float num_orientations, int size, double wavelength, double standard_deviation);
 public:
     /**
      * Initializes the oriented pyramid.
      * @param pyramid the laplacian pyramid
      * @param num_orientations the number of Gabor filters to apply
+     * @param size the size of the Gabor filter
+     * @param wavelength the wavelength
+     * @param standard_deviation the standard deviation
      */
-    oriented_pyramid(const laplacian_pyramid& pyramid, int num_orientations);
+    oriented_pyramid(const laplacian_pyramid& pyramid, int num_orientations, int size,
+                     double wavelength, double standard_deviation);
 
     /**
      * Computes the feature maps.
