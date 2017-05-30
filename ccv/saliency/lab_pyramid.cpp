@@ -145,9 +145,9 @@ void lab_pyramid::compute_feature_maps() {
 }
 
 void lab_pyramid::compute_conspicuity_maps() {
-  _C_l = max_fusion_generic(_F_l);
-  _C_a = max_fusion_generic(_F_a);
-  _C_b = max_fusion_generic(_F_b);
+  _C_l = mean_fusion_generic(_F_l);
+  _C_a = mean_fusion_generic(_F_a);
+  _C_b = mean_fusion_generic(_F_b);
 }
 
 cv::Mat lab_pyramid::get_conspicuity_map(int channel) {
