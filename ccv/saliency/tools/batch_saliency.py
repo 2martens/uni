@@ -20,7 +20,7 @@ def batch():
         base_filename, ext = os.path.splitext(filename)
         input_filename = os.path.join(args.input, filename)
         output_filename = os.path.join(args.output, base_filename + "_saliency.png")
-        subprocess.run([args.saliency, input_filename, output_filename, "1"], stderr=subprocess.PIPE, check=True)
+        subprocess.run([args.saliency, input_filename, output_filename, "0"], stderr=subprocess.PIPE, check=True)
         
     
 if __name__ == "__main__":
