@@ -25,8 +25,8 @@ int main(int argc, char** argv) {
   int layers = 4;
   float sigma_center = 3;
   float sigma_surround = 7;
-  float sigma_laplacian = 4;
 
+  float sigma_laplacian = 4;
   int number_orientations = 4;
   int gabor_size = 7;
   double wavelength = 5;
@@ -65,7 +65,8 @@ int main(int argc, char** argv) {
     conspicuity_maps.push_back(oriented_pyr.get_conspicuity_map());
   }
   // get saliency map
-  cv::Mat saliency = max_fusion_generic(conspicuity_maps);
+  cv::Mat saliency = mean_fusion_generic(conspicuity_maps);
+  cv::normalize(saliency, saliency, 0, 255, cv::NORM_MINMAX, -1);
 
   // convert saliency map to correct output format
   cv::Mat output_image;
