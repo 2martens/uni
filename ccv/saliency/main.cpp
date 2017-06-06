@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
   // tweakable factors
   int layers = 4;
   float sigma_center = 3;
-  float sigma_surround = 7;
+  float sigma_surround = 13;
 
   float sigma_laplacian = 4;
   int number_orientations = 4;
