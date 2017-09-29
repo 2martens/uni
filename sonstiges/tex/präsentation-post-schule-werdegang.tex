@@ -1,0 +1,212 @@
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+%\usepackage{paralist}
+%\useoutertheme{infolines}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage[german=quotes]{csquotes}
+\usetheme{Warsaw}
+\usecolortheme{crane}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setbeamertemplate{navigation symbols}{}
+\graphicspath{ {src/} {/home/jim/Pictures/} }
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\MakeOuterQuote{"}
+
+%\definecolor{craneorange}{RGB}{61,61,61}
+%\definecolor{craneblue}{RGB}{255,255,255}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygray},    % comment style
+  deletekeywords={},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=PHP,                 % the language of the code
+  morekeywords={class, function, return, protected, public, private, const, static, new, extends, namespace, null},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mygreen},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\hypersetup{
+	pdfauthor=Jim Martens,
+	pdfstartview=Fit
+}
+
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+	\raggedleft \insertframenumber\,/\,\inserttotalframenumber\;}
+
+\begin{document}
+\author{Jim 2martens}
+\title{Ändern wir die Welt, bevor es andere tun!}
+\date{\today}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \tableofcontents
+\end{frame}
+
+\section{Übersicht}
+\begin{frame}{Highway to University}
+    \begin{itemize}
+        \item Schnupperpraktikum Informatik (Oktober 2010)
+        \vfill
+        \item Abiturzeugnis bekommen (Juni 2012)
+        \vfill
+        \item auf BSc. Informatik bewerben (Juli 2012)
+        \vfill
+        \item Mathevorkurs besuchen (September 2012)
+        \vfill
+        \item Orientierungseinheit und Studienbeginn (Oktober 2012)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Hochschulpolitik}
+    \begin{itemize}
+        \item Fachschaftsrat Informatik (WiSe 2012/13, SoSe14-SoSe16)
+        \vfill
+        \item Studierendenparlament für CampusGrün (ab April 2015)
+        \vfill
+        \item Präsidium des Studierendenparlaments (April 2016-April 2017)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Highway to Master}
+    \begin{itemize}
+        \item Bachelorarbeit schreiben (November 2015-August 2016)
+        \vfill
+        \item für Master bewerben (August 2016)
+        \vfill
+        \item Bachelorzeugnis bekommen (Herbst 2016)
+        \vfill
+        \item Studienbeginn Master (Oktober 2016)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Politisches Engagement}
+    \begin{itemize}
+        \item Mitglied von Diem25 (seit Februar 2016)
+        \vfill
+        \item Landesvorstand GRÜNE JUGEND Hamburg (seit Oktober 2016)
+        \vfill
+        \item Mitglied bei den GRÜNEN (seit Januar/Februar 2017)
+        \vfill
+        \item Delegierter für Bundesparteitag der GRÜNEN (Juni 2017, bis Ende 2017)
+    \end{itemize}
+\end{frame}
+
+\section{Herausforderungen}
+\begin{frame}{Zeit!}
+    \begin{itemize}
+        \item Grundsätzlich: Mehr zu tun als Zeit vorhanden ist.
+        \vfill
+        \item gutes Zeitmanagement nötig
+        \vfill
+        \item gute Terminplanung nötig
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Spaß oder der Mangel daran}
+    \begin{itemize}
+        \item kein Bock auf Bachelorarbeit, Politik viel spannender
+        \vfill
+        \item schlechte Profs
+        \vfill
+        \item Null Bock Tage
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{ungleichmäßiger Arbeitsaufwand}
+    \begin{itemize}
+        \item stellenweise extrem hohe Belastung (Klausurenzeit)
+        \vfill
+        \item gute Planung nötig, damit später noch Zeit bleibt
+        \vfill
+        \item Prinzip: Was du heute kannst besorgen, verschiebe nicht auf morgen,
+                       denn morgen können hundert neue Sachen dazu kommen, die eine
+                       höhere Priorität haben.
+    \end{itemize}
+\end{frame}
+
+\section{Vision}
+\begin{frame}{Für bessere Welt kämpfen}
+    \begin{itemize}
+        \item Verbesserungen von heute basieren auf Kämpfen von gestern
+        \vfill
+        \item gute Welt von morgen benötigt unseren Kampf heute
+        \vfill
+        \item Nicht meckern, machen!
+    \end{itemize}
+\end{frame}
+
+\section{Zukunft}
+
+\begin{frame}{Perspektive Arbeit}
+    \begin{itemize}
+        \item gute Masterarbeit schreiben (WiSe 2018/19, SoSe 2019)
+        \vfill
+        \item gut bezahlten max. 30-Stunden-Job finden
+        \vfill
+        \item Rest der Zeit in Politik, Freizeit, Gesellschaft stecken
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Perspektive Politik}
+    \begin{itemize}
+        \item weiter als Schatzmeister der GRÜNEN JUGEND Hamburg bis Herbst 2018
+        \vfill
+        \item evtl. über Koalitionsverhandlungen und -vertrag abstimmen
+        \vfill
+        \item Mitgliederwachstum für GRÜNE JUGEND Hamburg:
+              1/3 der GRÜNEN Hamburg bis 2020
+        \vfill
+        \item 20\% + x bei unter 30-jährigen Menschen in 2020
+        \vfill
+        \item evtl. Kandidatur für Bürgerschaft in 2020
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Qual der Wahl}
+    Worüber möchtet ihr mehr hören?
+    \begin{itemize}
+        \item Studium
+        \vfill
+        \item Digitalisierung/Informatik
+        \vfill
+        \item Hochschulpolitik
+        \vfill
+        \item Politisches Engagement
+    \end{itemize}
+\end{frame}
+
+\end{document}
