@@ -1,0 +1,184 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bytefield}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage[german=quotes]{csquotes}
+%\usepackage{algorithmic}
+%\usepackage{minted}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+%\def\thesection{\arabic{section})}
+%\def\thesubsection{(\alph{subsection})}
+%\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\newenvironment{myitemize}{\begin{itemize}\itemsep -9pt}{\end{itemize}} % Zeilenabstand in Aufzählungen geringer
+
+%switch starred and non-starred (auto-size)
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\makeatother
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\MakeOuterQuote{"}
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Vorlesung Spätantike}
+\subtitle{Vorlesungsprotokoll vom 09. November 2017}
+\date{09. November 2017}
+\maketitle
+
+\section*{Julian}
+
+Julian wird 331 in Konstantinopel als Flavius Claudius Julianus geboren.
+Als 6-Jähriger wurde er auf ein Landgut verbracht und dort unter Hausarrest
+gestellt. Während des Hausarrests hatte er griechische Lehrer und ist somit
+nicht nur mit Griechisch aufgewachsen, sondern wurde auch ein großer Fan der
+alten Griechen. Julian betrieb intensive Studien über Nauplatoniker, Bibel und
+das Judentum. Im Jahr 351 wurde der Bruder von Julian zum Caesar im Osten.
+Dies bedeutete mehr Bewegungsfreiheit für Julian. Diese wurde von Julian für
+ein vierjähriges Rhetorikstudium genutzt. Er wurde auch in Athen in die Mythologie
+eingeweiht und hatte Kontakt mit Basilius dem Großen.
+
+Im Jahre 355 wurde Julian Caesar für Gallien und bekam einen Heermeister zur
+Seite gestellt. Die Franken hatten Köln eingenommen. Insgesamt waren 40 Städte
+gefallen. Julian erobert Köln zurück und bezwingt die Allemannen und Saalfranken.
+Die Franken werden nach Toxandrien zurückgedrängt, das heutige Belgien. Ebenso
+wird die Schiffsverbindung zwischen Britannien und dem Rhein wieder gesichert
+und die zerstörten Städte werden wieder aufgebaut. Julian geht auch gegen die
+Korruption vor. Durch diese Maßnahmen gelingt ihm eine musterhafte Verwaltung von
+Gallien.
+
+Constantius fordert Truppen für den Osten an. Doch Julian schickt nur einen Teil
+der Truppen. Denn ein gewichtiger Teil der gallischen Truppen besteht aus Föderaten,
+so genannten Wehrbauern, die lokal gebunden sind und nicht nach Persien möchten.
+Von seinen Truppen wird Julian im Jahr 360 zum Augustus ernannt. Um einem Bürgerkrieg
+aus dem Weg zu gehen, bittet er Constantius diplomatisch um den Verzicht auf
+Truppen. Dieser Verzicht wird verweigert. Es droht ein Bürgerkrieg. Kurz darauf
+stirbt jedoch Constantius und benennt kurz vor seinem Tod Julian als seinen
+Nachfolger. Die Machtübergabe erfolgt problemlos und Julian wird von allen
+Stellen anerkannt.
+
+Als Zeichen der Versöhnung wird der Vetter von Constantius konsekriert. Ansonsten
+beginnt Julian umgehend damit seine Reformvorhaben umzusetzen. Der Hof wird
+verkleinert, eine traditionsreiche Polizeitruppe wird aufgelöst und Julian gibt
+sich als Bürgerkaiser - als Primus inter pares. Er möchte nach Leistung befördern,
+senkt Steuern, füllt die Stadträte wieder auf und gibt Tempelland an die Städte
+zurück. Den Städten werden die Schulden bzw. ein Teil dieser erlassen. Konstantinopel
+wird ausgebaut und eine große Bibliothek angelegt.
+
+Religiös wendet sich Julian dem alten Glauben zu. Er lässt sich einen Philosophen-Bart
+wachsen, erlaubt 361 wieder die Verehrung der alten Götter und besetzt alte Priesterstellen
+erneut. Er gibt die Güter den Tempeln zurück, die vorher von den Christen entwendet
+wurden. Die Privilegien des Klerus werden abgeschafft. Insbesondere haben Bischöfe
+keine Rechte im staatlichen Gerichtswesen mehr. Das Ziel ist die Schwächung
+der Amtskirche und eine Zersplitterung der Kirche. Nichtsdestotrotz ist Julian
+tolerant gegenüber Christen und verfolgt diese nicht. Er schützt sogar die bisher
+unterdrückten christlichen Sonderkirchen. Diese Toleranz wird aber nicht von allen
+Heiden geteilt. Es werden teils grausame Racheakte begangen.
+Im Jahr 362 erlässt Julian das umstrittene Rhetorenedikt. Es verlangt, dass Lehrer
+nicht nur eine gute Lehrqualität, sondern auch charakterliche Integrität haben
+müssen.
+
+Julian erklärt sich die Missionserfolge der Christen mit dem sozialen
+Versagen der Heiden. Für ihn sind die Götter die Naturkräfte. Die Naturwissenschaften
+lehnt er indes ab, da diese ihm zu viel erklären. Er verehrt auch den Sonnengott.
+Die übrigen Götter sind für ihn Ausflüsse des Sonnengottes. Julian sieht wenig
+Unterschied zwischen Neuplatonikern und den Christen. Er liebt die neuplatonische
+Theologie und unterscheidet nicht zwischen Philosophie und Theologie. Beides führt
+für ihn zu einem moralisch integrem Leben. Das höchste Fest ist für ihn das
+Weihnachtsfest.
+
+Im Jahr 362 bricht Julian nach Persien auf, um das zu beenden, was Constantius
+nicht mehr schaffte. In Folge der Kämpfe erleidet er jedoch Verletzungen, die
+letztlich 363 tödlich enden. Er wird in Tarsus beigesetzt. Die Heiden waren tief
+bestürzt und Julian wird vom Senat umgehend konsekriert. Seine Schriftwerke werden
+gesammelt. Aufgrund seiner starken literarischen Tätigkeit ist er eine der
+interessantesten Gestalten der Spätantike. Er wurde auch zum Beginn der Faustgestalt
+und war später Liebling der Aufklärer.
+
+Die neuere Forschung bewertet ihn als Mensch sehr gut. Seine Politik als
+Kaiser im Hinblick auf die Religiösität wird aber als aussichtslos beurteilt.
+
+\section*{Valens und Valentinian}
+
+Nach dem Tode Julians wird für kurze Zeit Jovian Kaiser. Er vereinbart einen
+30-jährigen Frieden mit den Persern und tritt dafür Nordmesopotamien mit 15
+Festungen und Armenien an die Perser ab. Er erneuerte sofort die Rechte der
+Christen und kehrte Julians Politik weitgehend um. Jovian stirbt 364.
+
+Valentinian und Valens werden zu Augusti ernannt. Valentinian verwaltet dabei
+den Westen und Valens den Osten. Die Stadt Naissus repräsentierte dabei die
+Grenze der Reichshälften. Alle offiziellen Gesetze wurden im Namen beider
+Kaiser ausgestellt. Valentinian regierte von Mailand aus, Valens in Konstantinopel.
+
+Im Jahr 366 gab es einen verlustreichen Sieg der Römer gegen die Allemannen.
+Valentinian unternimmt einen Rachefeldzug gegen die Allemannen und schließt
+diesen mit einem Frieden ab. Ebenso wird ein Pakt mit Burgund geschlossen.
+Die Franken und Sachsen bleiben hingegen ein Problem. Die Pikten, Sachsen und
+weitere greifen in Britannien von Norden an. In Folge wird der Hadrianswall
+noch einmal ausgebaut und eine neue Provinz eingerichtet.
+
+Es gibt Zaubereiprozesse gegen Senatoren in Rom. Valentinian hat die Stadt
+Rom jedoch nie betreten. Die Heermeister werden befördert und den Prätorianerpräfekten
+gleichgestellt. Valentinian geht gegen die Korruption vor. Den Tempeln werden
+wieder die Tempelgüter weggenommen. Schließlich stirbt Valentinian an einem
+Wutanfall.
+
+Valens befestigt die Donaugrenze und schickt Truppen zur Donau. Diese rufen
+einen Gegenkaiser aus, der aber schnell besiegt werden kann. Die Goten wurden
+vom Gegenkaiser zu Hilfe gerufen, können aber zurückgeschlagen werden. Valens
+unternimmt einen Gegenschlag und überschreitet die Donau. Die Goten spalten sich.
+Wulfius wird als Bischof zu den Goten geschickt.
+
+Die Situation der Heiden ist unter Valens relativ gut. Er schließt einen Frieden
+mit den Katholiken. Es gibt jedoch eine Menge an Majestätsprozessen. Askese wird
+erstmals als Lifestyle gefeiert und das Mönchsleben erstarkt.
+
+Die Goten waren seit dem 3. Jahrhundert am Schwarzen Meer. Die Hunnen greifen
+die Ostgoten an. Diese werden Untertanen der Hunnen. Westgoten erleiden eine große
+Niederlage. Ein großer Teil geht an die Donau und bittet um Aufnahme ins Reich.
+Gotische Boten kommen zu Valens. Dieser ordnet eine Aufnahme der Westgoten an.
+Die Ostgoten schließen sich jedoch an. Es kommt zu Versorgungsproblemen an der
+Donau. Den Goten wird daraufhin der Zugang zum Markt verweigert. Die Folge
+ist ein schicksalsträchtiger Krieg an dessem Ende die gesamte Ostarmee aufgerieben
+sein wird.
+
+
+\end{document}
