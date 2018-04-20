@@ -21,7 +21,7 @@
 % \selectlanguage{german}
 
 % If the thesis is written in English:
-\usepackage[english]{babel}
+\usepackage[spanish,english]{babel}
 \selectlanguage{english}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -43,6 +43,7 @@
 \usepackage{fancybox}                   % Gleichungen einrahmen
 %\usepackage{fancyhdr}										% Packet for nicer headers
 \usepackage[automark]{scrlayer-scrpage}
+\usepackage[hidelinks]{hyperref}\urlstyle{rm}
 %\usepackage{fancyheadings}             % Nicer numbering of headlines
 
 %\usepackage[outer=3.35cm]{geometry} 	  % Type area (size, margins...) !!!Release version
@@ -67,7 +68,9 @@
 \usepackage[
 backend=biber,
 bibstyle=ieee,
-citestyle=ieee
+citestyle=ieee,
+minnames=1,
+maxnames=2
 ]{biblatex}
 
 \addbibresource{bib.bib}
@@ -201,15 +204,67 @@ citestyle=ieee
 \section{Introduction}
 \label{sec:introduction}
 
-Your text here...
+Autonomous robots need to adapt to new situations. They have a need to learn
+for an entire life. In order to do this they need a second environmental feedback
+loop that tells them when to learn.\cite{Toutounji2016}
 
-\cite{Leunen:Scholars:92}
-\cite{Taylor:SIGuide:95}
+The learning poses another problem as well. The previously learned weights
+are usually largely forgotten, which is known as catastrophic forgetting.\cite{French1999}
+
+Since catastrophic forgetting is a key problem for autonomous learning, it is
+crucial to overcome it. In this paper I will present some approaches for
+learning in an autonomous setup to analyse which of them if any can overcome
+catastrophic forgetting. Attempts to overcome that were made by
+Kirkpatrick\cite{Kirkpatrick2017}, Velez\cite{Velez2017} and Shmelkov\cite{Shmelkov2017}.
+
+\section{Neuromodulation}
+\label{sec:neuromodulation}
+
+Neuromodulation is a way to implement the second environmental feedback loop.
+A Modulated Neural Network (MNN) contains neuromodulator cells (NMC), which are
+attached to carrier neurons with a modulatory subnetwork (MSN).
+
+Neuromodulation can also be done based upon Diffusion.
+
+\section{Plasticity}
+\label{sec:plasticity}
+
+Plasticity can be realized by various approaches. Here three approaches are
+presented, Modulated Random Search, Modulated Gaussian Walk and Diffusion based
+neuromodulation.
+
+\subsection{Modulated Random Search}
+\label{subsec:mrs}
+
+Does things.
+
+\subsection{Modulated Gaussian Walk}
+\label{subsec:mgw}
+
+Does things more efficient.
+
+\subsection{Localized learning}
+\label{subsec:diffusion}
+
+Velez describe another approach that employs
+modularity for the learning. Essentially this results in task-specific localized
+learning and functional modules for each subtask.
+
+\section{Comparison regarding catastrophic forgetting}
+\label{sec:comparison}
+
+Modulated Random Search is not at all useful for overcoming catastrophic forgetting.
+Modulated Gaussian Walk improves to that end.
+Localized learning overcomes catastrophic forgetting for small
+networks.
 
 \section{Conclusion}
 \label{sec:concl}
 
-Your text here...
+A second environmental feedback loop is important to tell autonomous systems
+when to learn. But the method to learn is important as well to be any use
+in a practical environment. A comparison has shown that localized learning
+can overcome catastrophic forgetting for small networks.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % hier werden - zum Ende des Textes - die bibliographischen Referenzen
