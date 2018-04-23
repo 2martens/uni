@@ -6,6 +6,7 @@
 *.bbl
 *.bcf
 *.blg
+*.bmp
 *.dvi
 *.exe
 *.fdb_latexmk
