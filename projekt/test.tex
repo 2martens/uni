@@ -1,0 +1,55 @@
+%!TEX encoding = UTF-8 Unicode
+\documentclass[12pt]{scrartcl}
+\usepackage[utf8]{inputenc} % Unicode funktioniert unter Windows, Linux und Mac
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[ngerman]{babel}
+\usepackage[german]{fancyref}
+\usepackage{csquotes}
+\usepackage[
+backend=biber,
+bibstyle=ieee,
+citestyle=ieee
+]{biblatex}
+%\usepackage{ngerman}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}\urlstyle{rm}
+\usepackage{times}
+\usepackage[scaled]{helvet}
+\usepackage{a4wide}
+\usepackage{rotating}
+\usepackage{listings}\lstset{breaklines=true,breakatwhitespace=true,frame=leftline,captionpos=b,xleftmargin=6ex,tabsize=4,numbers=left,numberstyle=\ttfamily\footnotesize,basicstyle=\ttfamily\footnotesize}
+\sloppy
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1.2ex plus 0.5ex minus 0.5ex}
+\pagestyle{plain}
+\addbibresource{/home/jim/Documents/Studium/WS2017_18/Project/literatur.bib}
+
+\begin{document}
+\hyphenation{in-te-res-sant in-te-res-san-te}
+
+\newpage
+\thispagestyle{empty}
+\begin{center}\Large
+Universität Hamburg \par
+Fachbereich Informatik
+\vfill
+Seminararbeit
+\vfill
+{\Large\textsf{\textbf{Vergleich von IPsec und OpenVPN}}\par}
+\vfill
+von
+\par\bigskip
+Mustafa Eris, Jim Martens, Benjamin Scholz \par
+Betreuer: Hannes Federrath \par
+%Matrikelnummern 6420323 \par
+%Studiengang BSc. Informatik
+\end{center}
+
+\cite{Mueller2017}
+
+\newpage
+
+\printbibliography
+
+\end{document}
