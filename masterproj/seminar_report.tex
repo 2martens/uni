@@ -1,0 +1,138 @@
+\documentclass[12pt]{scrartcl}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Languages:
+
+% Falls die Ausarbeitung in Deutsch erfolgt:
+% \usepackage[german]{babel}
+% \usepackage[T1]{fontenc}
+% \usepackage[latin1]{inputenc}
+% \usepackage[latin9]{inputenc}
+% \selectlanguage{german}
+
+% If the thesis is written in English:
+\usepackage[spanish,english]{babel}
+\selectlanguage{english}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bind packages:
+\usepackage[utf8]{inputenc} % Unicode funktioniert unter Windows, Linux und Mac
+\usepackage[T1]{fontenc}
+\usepackage{acronym}                    % Acronyms
+\usepackage{algorithmic}								% Algorithms and Pseudocode
+\usepackage{algorithm}									% Algorithms and Pseudocode
+\usepackage{amsfonts}                   % AMS Math Packet (Fonts)
+\usepackage{amsmath}                    % AMS Math Packet
+\usepackage{amssymb}                    % Additional mathematical symbols
+\usepackage{amsthm}
+\usepackage{booktabs}                   % Nicer tables
+%\usepackage[font=small,labelfont=bf]{caption} % Numbered captions for figures
+\usepackage{color}                      % Enables defining of colors via \definecolor
+\definecolor{uhhRed}{RGB}{254,0,0}		  % Official Uni Hamburg Red
+\definecolor{uhhGrey}{RGB}{122,122,120} % Official Uni Hamburg Grey
+\usepackage{fancybox}                   % Gleichungen einrahmen
+%\usepackage{fancyhdr}										% Packet for nicer headers
+\usepackage[automark]{scrlayer-scrpage}
+\usepackage[hidelinks]{hyperref}\urlstyle{rm}
+%\usepackage{fancyheadings}             % Nicer numbering of headlines
+
+%\usepackage[outer=3.35cm]{geometry} 	  % Type area (size, margins...) !!!Release version
+%\usepackage[outer=2.5cm]{geometry} 		% Type area (size, margins...) !!!Print version
+%\usepackage{geometry} 									% Type area (size, margins...) !!!Proofread version
+\usepackage[outer=3.15cm]{geometry} 	  % Type area (size, margins...) !!!Draft version
+\geometry{a4paper,body={5.8in,9in}}
+
+\usepackage{graphicx}                   % Inclusion of graphics
+%\usepackage{latexsym}                  % Special symbols
+\usepackage{longtable}									% Allow tables over several parges
+\usepackage{listings}                   % Nicer source code listings
+\usepackage{multicol}										% Content of a table over several columns
+\usepackage{multirow}										% Content of a table over several rows
+\usepackage{rotating}										% Alows to rotate text and objects
+\usepackage[hang]{subfigure}            % Allows to use multiple (partial) figures in a fig
+%\usepackage[font=footnotesize,labelfont=rm]{subfig}	% Pictures in a floating environment
+\usepackage{tabularx}										% Tables with fixed width but variable rows
+\usepackage{url,xspace,boxedminipage}   % Accurate display of URLs
+
+\usepackage{csquotes}
+\usepackage[
+backend=biber,
+bibstyle=ieee,
+citestyle=ieee,
+minnames=1,
+maxnames=2
+]{biblatex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configurationen:
+
+\hyphenation{whe-ther} 									% Manually use: "\-" in a word: Staats\-ver\-trag
+
+%\lstloadlanguages{C}                   % Set the default language for listings
+\DeclareGraphicsExtensions{.pdf,.svg,.jpg,.png,.eps} % first try pdf, then eps, png and jpg
+\graphicspath{{./src/}} 								% Path to a folder where all pictures are located
+%\pagestyle{fancy} 											% Use nicer header and footer
+\pagestyle{scrheadings}
+
+\addbibresource{bib.bib}
+
+\begin{document}
+
+\title{Master project: seminar report template}
+\author{Jim Martens}
+
+\maketitle
+\section*{Abstract}
+
+The short abstract (100-150 words) is intended to give the reader an overview of the paper and your general opinion about the paper.
+
+
+% Lists:
+\setcounter{tocdepth}{2} 					% depth of the table of contents (for Seminars 2 is recommented)
+\tableofcontents
+\pagenumbering{arabic}
+\clearpage
+
+\section{Introduction}
+Use this template as a starting point for preparing your seminar report.
+For more information on \LaTeX, please consult, e.g., the online book at \url{https://en.wikibooks.org/wiki/LaTeX}.
+Refer also to material on scientific writing.
+The length of the report should not exceed 10 pages (excluding the reference list).
+
+This part contains the introduction to the topic.
+It introduces the general problem area of the paper, and leads the reader to the next section that provides more details.
+This part should also cite other related work (not only the seminar paper you are working on) and compare the approaches on a high level.
+
+\section{Method description}
+This section describes the proposed approach in the paper in more detail.
+Do not take sections directly from the paper, provide your own understanding and description.
+
+
+\section{Experimental result and evaluation}
+In this section, the evaluation and experimental results of proposed method should be described.
+Also provide some discussion, answering questions such as: when does the method work well, when not? How does it compare to other state-of-the-art works?
+
+\section{Discussion} % (fold)
+\label{sec:discussion}
+After providing the details of the paper, this secion contains your persnal opinion regarding the mothd that was proposed in this paper.
+\subsection{Paper Strengths} % (fold)
+\label{sub:paper_strengths}
+Please discuss, justifying your comments with the appropriate level of details, the strengths of the paper
+% subsection positive_aspect (end)
+
+\subsection{Paper Weaknesses} % (fold)
+\label{sub:paper_weaknesses}
+Please discuss, justifying your comments with the appropriate level of details, the weaknesses of the paper
+% subsection negitive (end)
+
+% section review (end)
+
+\section{Conclusion}
+Summarize your report.
+Provide some concluding discussion about the paper, along with, e.g., suggestions for future work.
+
+
+\newpage
+\printbibliography
+\addcontentsline{toc}{section}{Bibliography}% Add to the TOC
+
+\end{document}
