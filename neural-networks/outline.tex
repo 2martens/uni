@@ -217,14 +217,18 @@ learning in an autonomous setup to analyse which of them if any can overcome
 catastrophic forgetting. Attempts to overcome that were made by
 Kirkpatrick\cite{Kirkpatrick2017}, Velez\cite{Velez2017} and Shmelkov\cite{Shmelkov2017}.
 
-\section{Neuromodulation}
-\label{sec:neuromodulation}
+In the context of this paper plasticity refers to synaptic plasticity as described
+in Citri\cite{Citri2008}. The process of learning itself, changing the weights,
+is already considered plasticity. It is important however that the weights can
+be changed during the lifetime of the neural network. Ordinary neural networks
+trained with backpropagation are not involving plasticity.
 
-Neuromodulation is a way to implement the second environmental feedback loop.
-A Modulated Neural Network (MNN) contains neuromodulator cells (NMC), which are
-attached to carrier neurons with a modulatory subnetwork (MSN).
+\section{Catastrophic Forgetting}
+\label{sec:catastrophicforgetting}
 
-Neuromodulation can also be done based upon Diffusion.
+Catastrophic Forgetting is a key issue for multi-task learning which itself
+is a requirement for any neural network that is capable of solving more than
+one type of problem.
 
 \section{Plasticity}
 \label{sec:plasticity}
