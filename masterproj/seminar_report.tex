@@ -49,6 +49,7 @@
 \usepackage{multicol}										% Content of a table over several columns
 \usepackage{multirow}										% Content of a table over several rows
 \usepackage{rotating}										% Alows to rotate text and objects
+\usepackage{gensymb}
 \usepackage[hang]{subfigure}            % Allows to use multiple (partial) figures in a fig
 %\usepackage[font=footnotesize,labelfont=rm]{subfig}	% Pictures in a floating environment
 \usepackage{tabularx}										% Tables with fixed width but variable rows
@@ -103,9 +104,154 @@ It introduces the general problem area of the paper, and leads the reader to the
 This part should also cite other related work (not only the seminar paper you are working on) and compare the approaches on a high level.
 
 \section{Method description}
-This section describes the proposed approach in the paper in more detail.
-Do not take sections directly from the paper, provide your own understanding and description.
+% This section describes the proposed approach in the paper in more detail.
+% Do not take sections directly from the paper, provide your own understanding and description.
 
+Deep Sliding Shapes\cite{Song2016} is using both a Regional Proposal Network (RPN) and an
+Object Recognition Network (ORN). The raw 3D data is encoded by a directional
+Truncated Signed Distance Function (TSDF) and then presented to the RPN.
+The RPN is working with multiple scales and only a small subset of the overall
+predicted regions (2000 in number) is forwarded to the ORN.
+
+For each of the forwarded proposals the TSDF is used again to encode the geometric
+shape of the object. As part of the ORN the points inside the proposal box
+are projected into 2D and the resulting 2D bounding box is given to VGGnet\cite{Simonyan2015}
+to extract colour features. The results from both the 3D ORN and the 2D part
+are concatenated and via two fully connected layers the object label and 3D box
+are predicted.
+
+\subsection{Encoding 3D Representation and Normalization}
+
+Deep Sliding Shapes do not use the raw 3D data. Instead the raw data is
+encoded in a certain way and then used by the networks. The raw 3D space
+is divided into an equally spaced 3D voxel grid. Each voxel has an associated
+value which is the shortest distance between the center of the voxel and
+the surface from the input depth map. In addition to this relative distance
+the direction of each surface point is encoded as well. To this end the
+aforementioned Truncated Signed Distance Function is used. It stores a
+three-dimensional vector \([dx, dy, dz]\) in each voxel. Each of these
+values records the distance in the respective direction to the closest
+surface point. These values are clipped at \(2\delta\) where \(\delta\) represents
+the grid size in each dimension. Lastly the sign of these values indicates
+whether the cell is in front of or behind the surface.
+
+Furthermore every scene is rotated to align it with the gravity direction.
+In addition only a subset of the 3D space is targeted. Horizontally the range
+is from \(-2.6\) meters to \(2.6\) meters. Vertically it ranges from \(-1.5\)
+meters to \(1\) meter. The depth is limited to the range \(0.4\) to \(5.6\)
+meters. Within this 3D range the scene is encoded by a volumetric TSDF with
+grid size \(0.025\) meters, which results in a \(208 \times 208 \times 100\)
+volume that functions as the input to the 3D Region Proposal Network.
+
+The major directions of the room are used for the orientations of the proposals.
+RANSAC plane fitting is used unter the Manhattan world assumption to calculate
+the proposal box orientations.
+
+\subsection{Multi-scale 3D Region Proposal Network}
+
+At the start of the pipeline stands the 3D Region Proposal network. It uses the
+normalized input and has the high-level task to reduce the number of potential
+regions so that the Joint Amodal Object Recognition Network only has to work on
+a relatively small number of regions.
+
+To this end it utilizes so called anchor boxes. \(N\) region proposals are predicted
+for each sliding window. Each of the region proposals corresponds to one of the
+\(N\) anchor boxes. There are \(N = 19\) anchor boxes. For anchors with non-square
+horizontal aspect ratios another anchor is defined, which is rotated by \(90 \degree\).
+
+The size of the anchor boxes varies quite a bit (from \(0.3\) meters to \(2\)
+meters). A region proposal network on one scale would therefore not really work.
+As a consequence the RPN works with two different scales. The list of anchors
+is split into two lists (one for each scale) based on how close their physical
+sizes are to the receptive fields of the output layers.
+
+A fully 3D convolutional architecture is used for the RPN. The stride for the last
+convolution layer is one, which resembles \(0.1\) meters in 3D. The last layer
+predicts the objectness score and the bounding box regression. For the first level
+of anchors the filter size is 2x2x2 and for the second layer it is 5x5x5. The
+receptive fields are \(0.4 \text{m}^3\) for level one and \(1 \text{m}^3\) for
+level two respectively.
+
+After the anchor boxes have been calculated, the anchor boxes with a point density
+lower than \(0.005\) points per cubic centimeter are removed using the integral
+image technique. On average there are \(107674\) boxes remaining after this step.
+For the remaining anchors an objectness score is calculated, which are essentially
+two probabilities (being an object and not being an object).
+
+In addition to this classification step a box regression is applied to all
+anchor boxes. This regression calculates the center and size of each
+box, whereas the size is given in three major directions of the box.
+The overall output is therefore containing both the objectness score (classification)
+and the 6-element vector describing the center and size of the box.
+
+Lastly 3D non-maximum suppression is used to remove redundancies. It works with
+an Intersection-over-Union (IOU) threshold of \(0.35\). From the remaining
+boxes only the top \(2000\) boxes are selected as input to the next network.
+
+The multi-task loss function is the sum of the classification loss and the
+regression loss. Cross entropy is used for the classification loss.
+The labels for the classification loss are obtained by calculating the 3D
+Intersection-over-Union value of every anchor box with respect to the ground truth.
+If this value is larger than \(0.35\) the anchor box is considered positive. If
+it is below \(0.15\) then the box is considered negative.
+
+The regression loss is only used for all positive examples. It utilizes a smooth
+\(L_1\) loss as it was used by Fast-RCNN\cite{Girshick2015} for 2D box regression.
+At the core of the loss function stands the difference of the centers and sizes
+between the anchor box and the corresponding ground truth. The orientation of
+the box is not used for simplicity. The center offset is represented
+by the difference of the anchor box center and the ground truth center in the
+camera coordinate system. The size difference is a bit more complicated to calculate.
+First the major directions have to be determined by using the closest match of
+the major directions between both boxes. Next the difference is calculated in
+each of the major directions. Lastly the size difference is normalized by the
+anchor size.
+
+\subsection{Joint Amodal Object Recognition Network}
+
+The object recognition network is \(>-<\)-shaped. It starts with both a 3D and a 2D
+object recognition network which are then combined for the joint recognition.
+
+For the 3D object recognition every proposal bounding box is padded with \(12.5\%\)
+of the size in each direction to encode contextual information. The space is divided
+into a 30x30x30 voxel grid and TSDF is used to encode the geometric shape of
+the object. This network part contains two max pooling layers which use stride 2
+and a kernel size of 2x2x2. The three convolution layers use kernel sizes
+5x5x5, 3x3x3 and 3x3x3 respectively with a stride of 1 each. Between the fully connected
+layers are ReLU and dropout layers (dropout ratio 0.5). The fully connected
+layer produces a 4096 dimensional feature vector.
+
+The 2D object recognition part projects the points inside each 3D proposal box
+to the 2D image plane. Afterwards the tightest box that contains all these points
+is determined. A VGGnet that is pre-trained on ImageNet (without fine-tuning)
+is used to extract colour features from the image. The output of VGGnet is then
+funneled into a fully connected layer that results in a 4096 dimensional feature
+vector.
+
+After both object recognition parts the two feature vectors are concatenated.
+Another fully connected layer reduces this feature vector to 1000 dimensions.
+These features are used by two separate fully connected layers to predict the
+object label and the 3D box surrounding the object.
+
+For every detected box the box size in each direction and the aspect ratio of
+each pair of box edges is calculated. These numbers are then compared with a
+distribution collected from all the training examples of the same category.
+If any of the values falls outside the first to 99th percentile the score
+of the box is decreased by \(2\).
+
+The multi-task loss is a sum of classification and regression loss. Cross entropy
+is used for the classification loss. The output of the network consists of 20
+probabilities (one for each object category). For the regression loss nothing
+changes in comparison to the region proposal network. Only difference is the
+element-wise normalization of the labels with the object category specific
+mean and standard deviation.
+
+After the training of the network concluded the features are extracted from the last
+fully connected layer. A Support Vector Machine (SVM) is trained for each object
+category. During the testing of the object recognition network a 3D non-maximum
+suppression is applied on the results with a treshold of \(0.1\) using the SVM
+scores for every box. In case of the box regressions the results from the network
+are used directly.
 
 \section{Experimental result and evaluation}
 In this section, the evaluation and experimental results of proposed method should be described.
