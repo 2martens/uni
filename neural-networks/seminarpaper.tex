@@ -1,0 +1,346 @@
+\documentclass[12pt,twoside]{scrartcl}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Meta informations:
+\newcommand{\trauthor}{Jim Martens}
+\newcommand{\trtype}{Seminar Paper} %{Seminararbeit} %{Proseminararbeit}
+\newcommand{\trcourse}{Neural Networks}
+\newcommand{\trtitle}{Outline - Second Environmental Feedback Loop}
+\newcommand{\trmatrikelnummer}{6420323}
+\newcommand{\tremail}{2martens@informatik.uni-hamburg.de}
+\newcommand{\trarbeitsbereich}{Knowledge Technology, WTM}
+\newcommand{\trdate}{26.04.2018}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Languages:
+
+% Falls die Ausarbeitung in Deutsch erfolgt:
+% \usepackage[german]{babel}
+% \usepackage[T1]{fontenc}
+% \usepackage[latin1]{inputenc}
+% \usepackage[latin9]{inputenc}
+% \selectlanguage{german}
+
+% If the thesis is written in English:
+\usepackage[spanish,english]{babel}
+\selectlanguage{english}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bind packages:
+\usepackage[utf8]{inputenc} % Unicode funktioniert unter Windows, Linux und Mac
+\usepackage[T1]{fontenc}
+\usepackage{acronym}                    % Acronyms
+\usepackage{algorithmic}								% Algorithms and Pseudocode
+\usepackage{algorithm}									% Algorithms and Pseudocode
+\usepackage{amsfonts}                   % AMS Math Packet (Fonts)
+\usepackage{amsmath}                    % AMS Math Packet
+\usepackage{amssymb}                    % Additional mathematical symbols
+\usepackage{amsthm}
+\usepackage{booktabs}                   % Nicer tables
+%\usepackage[font=small,labelfont=bf]{caption} % Numbered captions for figures
+\usepackage{color}                      % Enables defining of colors via \definecolor
+\definecolor{uhhRed}{RGB}{254,0,0}		  % Official Uni Hamburg Red
+\definecolor{uhhGrey}{RGB}{122,122,120} % Official Uni Hamburg Grey
+\usepackage{fancybox}                   % Gleichungen einrahmen
+%\usepackage{fancyhdr}										% Packet for nicer headers
+\usepackage[automark]{scrlayer-scrpage}
+\usepackage[hidelinks]{hyperref}\urlstyle{rm}
+%\usepackage{fancyheadings}             % Nicer numbering of headlines
+
+%\usepackage[outer=3.35cm]{geometry} 	  % Type area (size, margins...) !!!Release version
+%\usepackage[outer=2.5cm]{geometry} 		% Type area (size, margins...) !!!Print version
+%\usepackage{geometry} 									% Type area (size, margins...) !!!Proofread version
+\usepackage[outer=3.15cm]{geometry} 	  % Type area (size, margins...) !!!Draft version
+\geometry{a4paper,body={5.8in,9in}}
+
+\usepackage{graphicx}                   % Inclusion of graphics
+%\usepackage{latexsym}                  % Special symbols
+\usepackage{longtable}									% Allow tables over several parges
+\usepackage{listings}                   % Nicer source code listings
+\usepackage{multicol}										% Content of a table over several columns
+\usepackage{multirow}										% Content of a table over several rows
+\usepackage{rotating}										% Alows to rotate text and objects
+\usepackage[hang]{subfigure}            % Allows to use multiple (partial) figures in a fig
+%\usepackage[font=footnotesize,labelfont=rm]{subfig}	% Pictures in a floating environment
+\usepackage{tabularx}										% Tables with fixed width but variable rows
+\usepackage{url,xspace,boxedminipage}   % Accurate display of URLs
+
+\usepackage{csquotes}
+\usepackage[
+backend=biber,
+bibstyle=ieee,
+citestyle=ieee,
+minnames=1,
+maxnames=2
+]{biblatex}
+
+\addbibresource{bib.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configurationen:
+
+\hyphenation{whe-ther} 									% Manually use: "\-" in a word: Staats\-ver\-trag
+
+%\lstloadlanguages{C}                   % Set the default language for listings
+\DeclareGraphicsExtensions{.pdf,.svg,.jpg,.png,.eps} % first try pdf, then eps, png and jpg
+\graphicspath{{./src/}} 								% Path to a folder where all pictures are located
+%\pagestyle{fancy} 											% Use nicer header and footer
+\pagestyle{scrheadings}
+
+% Redefine the environments for floating objects:
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+\renewcommand{\topfraction}{0.9} 			  %Standard: 0.7
+\renewcommand{\bottomfraction}{0.5}		  %Standard: 0.3
+\renewcommand{\textfraction}{0.1}		  	%Standard: 0.2
+\renewcommand{\floatpagefraction}{0.8} 	%Standard: 0.5
+
+% Tables with a nicer padding:
+\renewcommand{\arraystretch}{1.2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Additional 'theorem' and 'definition' blocks:
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{theorem}{Satz}[section]		% Wenn in Deutsch geschrieben wird.
+\newtheorem{axiom}{Axiom}[section]
+%\newtheorem{axiom}{Fakt}[chapter]			% Wenn in Deutsch geschrieben wird.
+%Usage:%\begin{axiom}[optional description]%Main part%\end{fakt}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+%Additional types of axioms:
+\newtheorem{lemma}[axiom]{Lemma}
+\newtheorem{observation}[axiom]{Observation}
+
+%Additional types of definitions:
+\theoremstyle{remark}
+%\newtheorem{remark}[definition]{Bemerkung} % Wenn in Deutsch geschrieben wird.
+\newtheorem{remark}[definition]{Remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Provides TODOs within the margin:
+\newcommand{\TODO}[1]{\marginpar{\emph{\small{{\bf TODO: } #1}}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abbreviations and mathematical symbols
+\newcommand{\modd}{\text{ mod }}
+\newcommand{\RS}{\mathbb{R}}
+\newcommand{\NS}{\mathbb{N}}
+\newcommand{\ZS}{\mathbb{Z}}
+\newcommand{\dnormal}{\mathit{N}}
+\newcommand{\duniform}{\mathit{U}}
+
+\newcommand{\erdos}{Erd\H{o}s}
+\newcommand{\renyi}{-R\'{e}nyi}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document:
+\begin{document}
+\renewcommand{\headheight}{14.5pt}
+
+%\fancyhead{}
+%\fancyhead[LE]{ \slshape \trauthor}
+%\fancyhead[LO]{}
+%\fancyhead[RE]{}
+%\fancyhead[RO]{ \slshape \trtitle}
+\lehead{\slshape \trauthor}
+\rohead{\slshape \trtitle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cover Header:
+\begin{titlepage}
+	\begin{flushleft}
+		Universit\"at Hamburg\\
+		Department Informatik\\
+		\trarbeitsbereich\\
+	\end{flushleft}
+	\vspace{3.5cm}
+	\begin{center}
+		\huge \trtitle\\
+	\end{center}
+	\vspace{3.5cm}
+	\begin{center}
+		\normalsize\trtype\\
+		[0.2cm]
+		\Large\trcourse\\
+		[1.5cm]
+		\Large \trauthor\\
+		[0.2cm]
+		\normalsize Matr.Nr. \trmatrikelnummer\\
+		[0.2cm]
+		\normalsize\tremail\\
+		[1.5cm]
+		\Large \trdate
+	\end{center}
+	\vfill
+\end{titlepage}
+
+	%backsite of cover sheet is empty!
+\thispagestyle{empty}
+\hspace{1cm}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abstract:
+
+% Abstract gives a brief summary of the main points of a paper:
+\section*{Abstract}
+  Your text here...
+
+% Lists:
+\setcounter{tocdepth}{2} 					% depth of the table of contents (for Seminars 2 is recommented)
+\tableofcontents
+\pagenumbering{arabic}
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Content:
+
+% the actual content, usually separated over a number of sections
+% each section is assigned a label, in order to be able to put a
+% crossreference to it
+
+\section{Introduction}
+\label{sec:introduction}
+
+Autonomous robots need to adapt to new situations. They have a need to learn
+for an entire life. In order to do this they need a second environmental feedback
+loop that tells them when to learn.\cite{Toutounji2016}
+
+The learning poses another problem as well. The previously learned weights
+are usually largely forgotten, which is known as catastrophic forgetting.\cite{French1999},
+\cite{McCloskey1989}
+
+Since catastrophic forgetting is a key problem for autonomous learning, it is
+crucial to overcome it. In this paper I will present some approaches for
+learning in an autonomous setup to analyse which of them if any can overcome
+catastrophic forgetting. Attempts to overcome that were made by
+Kirkpatrick\cite{Kirkpatrick2017}, Velez\cite{Velez2017} and Shmelkov\cite{Shmelkov2017}.
+
+In the context of this paper plasticity refers to synaptic plasticity as described
+in Citri\cite{Citri2008}. The process of learning itself, changing the weights,
+is already considered plasticity. It is important however that the weights can
+be changed during the lifetime of the neural network. Ordinary neural networks
+trained with backpropagation are not involving plasticity.
+
+\section{Catastrophic Forgetting}
+\label{sec:catastrophicforgetting}
+
+This section presents the major research developments related to catastrophic
+forgetting and explains what it actually is. It follows the review of French\cite{French1999}.
+
+McCloskey and Cohen\cite{McCloskey1989} originally discovered the problem of
+catastrophic forgetting, which was referred to as catastrophic interference. This
+discovery of a fundamental limitation of the classic neural network was as
+important as the work of Minsky and Papert\cite{Minsky1969} who described the
+limitations of a perceptron twenty years prior. The key discovery of McCloskey
+and Cohen was that previously learned patterns were completely forgotten after
+a few training cycles of learning a new pattern. The reason behind this
+behaviour was the real problem. They identified the single set of shared
+weights as responsible for it.
+
+If one thinks a few minutes about it this makes absolute sense. The classic
+backpropagation algorithm works by modifying the weights that have contributed
+the most to a bad outcome. When the set of targets is changing then the network
+will perform badly for the new pattern. In order to rectify this the backpropagation
+algorithm will change many of the weights so that the network is delivering a
+good result for the new pattern. This on the other hand results in an increasingly
+worse performance on previously learned patterns. If this worsening was gradual
+it would still be unfortunate but understandable. It is called catastrophic
+because this performance change is not gradual but rather abrupt. Even small
+changes in the weights can have a huge impact on the output.
+
+In fact catastrophic forgetting is only a very radical example of a more general
+problem for all models of memory, the so called "stability-plasticity" problem\cite{Grossberg1982}.
+This problem, sometimes called dilemma, basically puts up the question how to
+design a system in such a way that it is both sensitive to new input and not
+radically disrupted by it. In other words: That it can learn new things
+without largely or completely forgetting already learned things.
+
+Early attempts to alleviate or overcome catastrophic forgetting required a more
+sparse representation. This means that not every weight is responsible for all
+possible inputs. The downside is a worse ability to generalize to new input
+and overall a worse ability to discriminate. In an extreme form this can
+lead to catastrophic remembering\cite{Sharkey1995}.
+The idea here is that a
+network learns the function describing the inputs too well and therefore
+loses its ability to differentiate between new and already learned input.
+This can be understood well with the example given by French\cite{French1999},
+where a network has the task to reproduce the input at the output. It can detect
+a new input if the output is diverging by large margin. It has learned too well
+if it learned the identity function and is therefore able to reproduce any
+input perfectly at the output and hence loses the ability to detect new input.
+
+Significant improvements were made by rehearsing previously learned input.
+Robins\cite{Robins1995} found a way to rehearse prior input if it is no longer
+available and called it "pseudo-patterns". The idea being that the weights
+of the trained network resemble a function. A random input and the predicted
+output together somewhat describe this function and are such a pattern. Robins
+used a bunch of them interleaved with new input and the results were promising
+as the forgetting became more gradual. This insight together with
+the findings of McClelland\cite{McClelland1995} resulted in the development
+of dual-network models.
+In short one network would model and the hippocampus and be able to quickly learn new
+information without disrupting previously learned regularities. This network
+would then serve as teacher for the second network which models the neocortex
+and is responsible for generalizing.
+
+In the time between 1999 and 2018 more work was done with regards to catastrophic
+forgetting. Most recently the work of Kirkpatrick\cite{Kirkpatrick2017},
+Velez\cite{Velez2017} and Shmelkov\cite{Shmelkov2017} has to be named. The main
+focus here was a brief introduction of catastrophic forgetting and therefore
+these newest approaches will not be described here.
+
+\section{Plasticity}
+\label{sec:plasticity}
+
+Plasticity can be realized by various approaches. Here three approaches are
+presented, Modulated Random Search, Modulated Gaussian Walk and Diffusion based
+neuromodulation.
+
+\subsection{Modulated Random Search}
+\label{subsec:mrs}
+
+Does things.
+
+\subsection{Modulated Gaussian Walk}
+\label{subsec:mgw}
+
+Does things more efficient.
+
+\subsection{Localized learning}
+\label{subsec:diffusion}
+
+Velez describe another approach that employs
+modularity for the learning. Essentially this results in task-specific localized
+learning and functional modules for each subtask.
+
+\section{Comparison regarding catastrophic forgetting}
+\label{sec:comparison}
+
+Modulated Random Search is not at all useful for overcoming catastrophic forgetting.
+Modulated Gaussian Walk improves to that end.
+Localized learning overcomes catastrophic forgetting for small
+networks.
+
+\section{Conclusion}
+\label{sec:concl}
+
+A second environmental feedback loop is important to tell autonomous systems
+when to learn. But the method to learn is important as well to be any use
+in a practical environment. A comparison has shown that localized learning
+can overcome catastrophic forgetting for small networks.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% hier werden - zum Ende des Textes - die bibliographischen Referenzen
+% eingebunden
+%
+% Insbesondere stehen die eigentlichen Informationen in der Datei
+% ``bib.bib''
+%
+\newpage
+\printbibliography
+\addcontentsline{toc}{section}{Bibliography}% Add to the TOC
+
+\end{document}
