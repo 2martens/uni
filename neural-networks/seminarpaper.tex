@@ -221,9 +221,9 @@ Kirkpatrick\cite{Kirkpatrick2017}, Velez\cite{Velez2017} and Shmelkov\cite{Shmel
 
 In the context of this paper plasticity refers to synaptic plasticity as described
 in Citri\cite{Citri2008}. The process of learning itself, changing the weights,
-is already considered plasticity. It is important however that the weights can
-be changed during the lifetime of the neural network. Ordinary neural networks
-trained with backpropagation are not involving plasticity.
+is already considered plasticity. This can occur throughout the lifetime of a
+network or during the training phase of networks using for example supervised learning
+and backpropagation.
 
 \section{Catastrophic Forgetting}
 \label{sec:catastrophicforgetting}
@@ -296,26 +296,139 @@ these newest approaches will not be described here.
 \section{Plasticity}
 \label{sec:plasticity}
 
-Plasticity can be realized by various approaches. Here three approaches are
-presented, Modulated Random Search, Modulated Gaussian Walk and Diffusion based
-neuromodulation.
+Every neural network involves a learning aspect and hence plasticity, given our
+definition of it. In this section three approaches for plasticity using diffusion-based
+neuromodulation are presented in more detail. Modulated Random Search and
+Modulated Gaussian Walk are using linearly modulated neural networks. They
+are taken from Toutounji and Pasemann\cite{Toutounji2016}. The third approach
+was introduced by Velez and Clune\cite{Velez2017} uses diffusion-based neuromodulation
+for localized learning hence the name of the subsection here.
 
 \subsection{Modulated Random Search}
 \label{subsec:mrs}
 
-Does things.
+\subsubsection*{Modulated Neural Network}
+
+Since both approaches from Toutounji and Pasemann are using linearly-modulated
+neural networks the structure of these networks is described first. Linearly-modulated
+neural networks (LMNN) are a specific variant of modulated neural
+networks (MNN). Any artifical neural network (ANN) or simply neural network
+in the context of Computer Science can become a modulated neural network by
+adding a neuromodulator layer.
+
+Toutounji and Pasemann describe a variant of this layer that uses neuromodulator
+cells (NMCs). Each NMC produces a specific type of neuromodulator (NM) and
+saves its own concentration level of it. The network wide concentration level at
+a certain point in space and time can be obtained by summing up all concentration
+levels saved in NMCs at the point in space. Produced neuromodulators usually
+impact nearby network parts. This type of spatial impact requires a spatial
+representation in the network where all network elements have a location in
+the space.
+
+There are a production and a reduction mode for the NMCs. During the production
+mode the concentration of neuromodulator can be increased and during reduction
+mode it can be decreased. A cell can enter production mode if it was stimulated
+for some time while it falls back to reduction mode when this stimulation
+does not happen for some time.
+
+\subsubsection*{Linearly-Modulated Neural Network}
+
+A linearly-modulated neural network uses discrete time and stimulates NMCs
+with a simple linear model. Each NMC is connected to a carrier cell or neuron
+which itself is part of a modulatory subnetwork. The NMC is stimulated if the
+output of the carrier neuron is within a specified range
+(\(\text{S}^{\text{min}}\), \(\text{S}^{\text{max}}\)). In every time step
+is checked if the output of the carrier cell is high enough to stimulate the
+NMC. If it is the stimulation level of the NMC increases. Otherwise it decreases.
+Once the stimulation level reaches the threshold \(\text{T}^{\text{prod}}\)
+the cell goes into the production mode. If it falls below \(\text{T}^{\text{red}}\)
+the cell goes back into reduction mode.
+Over time the neuromodulator diffuses to the surrounding control subnetwork
+where it initiates plasticity that is dependent on the concentration of it at
+the respective synapse.
+
+\subsubsection*{Modulated Random Search}
+
+\begin{table}
+    \begin{tabular}{l|l}
+        \textbf{Parameter} & \textbf{Description} \\
+        \(Type\) & The neuromodulator type the synapse is sensitive to \\
+        \(W\) & Weight change probability \\
+        \(D\) & Disable / enable probability \\
+        \(W^{min}, W^{max}\) & Minimum and maximum weight of synapse \\
+        \(M\) & Maximum neuromodulator sensitivity limit of the synapse
+    \end{tabular}
+    \caption{Parameters stored for each synapse.
+    Replication of Table 1 in Toutunji and Pasemann\cite{Toutounji2016}.}
+    \label{tab:mrs-synapse}
+\end{table}
+
+Modulated random search means essentially random weight changes. Each synapse
+has some parameters that are used (see table \ref{tab:mrs-synapse}). The weight
+change probability is the product of the intrinsic weight change probability
+and the concentration of the neuromodulator the synapse is sensitive to
+at its location. Additionally the maximum neuromodulator sensitivity is
+the ceiling for the second part of that product. This means there is a maximum
+weight change probability for each synapse. Should a weight change occur a new
+weight is chosen randomly from the range of values described by the minimum and
+maximum weight of the synapse.
+
+Moreover a synapse can disable or enable itself. The actual disable/enable
+probability is the product of the intrinsic value saved as parameter and
+the neuromodulator concentration. The concentration is again ceiled by the
+maximum sensitivity limit given as parameter. This means there is a maximum
+disable/enable probability as well. A disabled synapse is treated as having
+weight 0 but the actual value is stored so that it can be restored when the
+synapse is enabled again.
+
+Given a so called neural network structure or substrate this makes it easier
+to find different network topologies (structure and weights combined).
 
 \subsection{Modulated Gaussian Walk}
 \label{subsec:mgw}
 
-Does things more efficient.
+Toutounji and Pasemann introduce the modulated gaussian walk. The key differences
+start with the parameters. There is no maximum sensitivity for the neuromodulator
+concentration. When a weight change occurs the new weight is not chosen randomly
+but rather the difference to be added to the current weight is sampled from a
+normal distribution with a mean of zero and \(\sigma^2\)-variance. The sampled
+value could be infinitely large and hence the new weight outside of the given
+bounds for it. Therefore the value is sampled until the sum of the
+current weight and the sampled value are within the range.
+
+Toutunji and Pasemann implemented a mechanism for disabling synapses
+in the modulated gaussian walk as well but did not make use of it later and
+therefore they did not describe how it works.
 
 \subsection{Localized learning}
 \label{subsec:diffusion}
 
-Velez describe another approach that employs
-modularity for the learning. Essentially this results in task-specific localized
-learning and functional modules for each subtask.
+Velez and Clune are using a small network to solve the foraging task. The network
+represents an agent that has a lifetime of three years. Each year consists of
+the seasons summer and winter. During each season the agent is presented with
+food and has to either eat the food or not. Half of the food is nutritious
+and the other poisonous. The target is a fitness value which is best if the
+agent eats all nutritious food and none of the poisonous. The associations of
+nutritious and poisonous are different between summer and winter but within
+a season remain the same during the lifetime. Therefore a nutritious food in
+summer will always be nutritious.
+This setup makes it easy to measure if the agent is able to remember the learned
+associations from the previous seasons.
+
+The initial weights of the network are derived from an evolutionary algorithm.
+All later learning uses neuromodulation. The neurons of the network are spatially
+located and there are two sources of neuromodulators in the network - one on either
+side. The sources are only active in their respective season and encode whether
+the previously eaten food was nutritious (1) or poisonous (-1). If they are
+not active their value is zero. As soon as the sources are activated the neuromodulators
+fill a space within a radius of 1.5 units of distance from the source and potentially
+trigger weight changes of neurons inside the radius. The strength of the neuromodulators
+is decreasing with further distance from the source.
+
+This explanation should suffice for the general understanding of their method.
+The neurons within the vicinity of these sources only update their weights
+in one of the seasons. Therefore they only learn for one season and are unaffected
+by the other season. This results in a localized learning.
 
 \section{Comparison regarding catastrophic forgetting}
 \label{sec:comparison}
