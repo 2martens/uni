@@ -187,7 +187,13 @@ maxnames=2
 
 % Abstract gives a brief summary of the main points of a paper:
 \section*{Abstract}
-  Your text here...
+  Catastrophic forgetting is a huge problem for neural networks, in particular
+  for autonomous systems. This paper will showcase three approaches using
+  diffusion-based neuromodulation and compare them with respect to catastrophic
+  forgetting. The results of the comparison being that modulated random search
+  is not useful to combat catastrophic forgetting, modulated gaussian walk is
+  significantly better on that front and that the localized learning approach of
+  Velez and Clune overcomes catastrophic forgetting for small networks.
 
 % Lists:
 \setcounter{tocdepth}{2} 					% depth of the table of contents (for Seminars 2 is recommented)
@@ -209,21 +215,26 @@ Autonomous robots need to adapt to new situations. They have a need to learn
 for an entire life. In order to do this they need a second environmental feedback
 loop that tells them when to learn.\cite{Toutounji2016}
 
-The learning poses another problem as well. The previously learned weights
-are usually largely forgotten, which is known as catastrophic forgetting.\cite{French1999},
-\cite{McCloskey1989}
+The learning itself is also described as plasticity. In the context of this paper
+the definition of synaptic plasticity given by Citri\cite{Citri2008} will be used.
+In short the process of learning itself, changing the weights, is already
+considered plasticity. This can occur throughout the lifetime of a network or
+during the training phase of networks using for example supervised learning
+and backpropagation.
+
+When a network has to adapt to new situations, it has to learn new tasks. Usually
+the previously learned weights are largely forgotten. This phenomenon is called
+catastrophic forgetting.\cite{French1999,McCloskey1989}
 
 Since catastrophic forgetting is a key problem for autonomous learning, it is
 crucial to overcome it. In this paper I will present some approaches for
 learning in an autonomous setup to analyse which of them if any can overcome
-catastrophic forgetting. Attempts to overcome that were made by
-Kirkpatrick\cite{Kirkpatrick2017}, Velez\cite{Velez2017} and Shmelkov\cite{Shmelkov2017}.
+catastrophic forgetting.
 
-In the context of this paper plasticity refers to synaptic plasticity as described
-in Citri\cite{Citri2008}. The process of learning itself, changing the weights,
-is already considered plasticity. This can occur throughout the lifetime of a
-network or during the training phase of networks using for example supervised learning
-and backpropagation.
+The next section will go into more detail about the history of research about
+catastrophic forgetting. Afterwards the three approached will be explained.
+A comparison of the three approaches with respect to catastrophic forgetting
+will follow, before a conclusion wraps up this paper.
 
 \section{Catastrophic Forgetting}
 \label{sec:catastrophicforgetting}
@@ -433,18 +444,82 @@ by the other season. This results in a localized learning.
 \section{Comparison regarding catastrophic forgetting}
 \label{sec:comparison}
 
-Modulated Random Search is not at all useful for overcoming catastrophic forgetting.
-Modulated Gaussian Walk improves to that end.
-Localized learning overcomes catastrophic forgetting for small
-networks.
+In this section the three presented approaches for plasticity are compared with
+regard to their ability to mitigate or overcome catastrophic forgetting. For both
+the modulated random search and the modulated gaussian walk this aspect was
+analyzed in the experiments conducted by Toutunji and Pasemann\cite{Toutounji2016}.
+Therefore the results of their work will be utilized for this comparison.
+Velez and Clune\cite{Velez2017} introduced the presented approach of localized
+learning to analyze its capability with respect to overcoming catastrophic
+forgetting. Hence their results will be used for the comparison in this section.
+
+Over multiple experiments of increasing difficulty the performance of modulated
+random search and modulated gaussian walk were tested. The difficulty ranged
+from a positive light-tropism task in the first experiment(E1) over an
+obstacle-avoidance task in the second experiment (E2), a combination of E1 and E2
+in the third experiment (E3) to a more difficult variant of E3 in the fourth
+experiment (E4). The fifth experiment (E5) was a pendulum experiment.
+In each experiment a robot had to learn the task from scratch. A pre-designed
+LMNN was given in each case and defined the boundaries in which the learning
+took place. If a temporary solution was discarded the learning started again.
+
+Modulated random search was able to find successful behaviours in almost all
+cases in E1 despite a short training time of only two hours. The slightly
+longer training time for E2 of four hours however was apparently far too short
+to find consistently good solutions. Both in E3 and E4 the number of intermediate
+temporary solutions is significantly higher than the final number of solutions.
+The pendulum experiment was an easier task and therefore many successful
+behaviours were found.
+
+Toutounji and Pasemann note that even almost stable networks are destroyed
+if they have the slightest weakness. Therefore modulated random search
+does not help at all against catastrophic forgetting.
+
+Modulated gaussian walk contrary to the random search tends to improve temporary
+solutions when they have weaknesses. For E3 the random search resulted in 34
+temporary solutions which lasted longer than five minutes, averaging at \(5.7\)
+minutes per solution. The gaussian walk found roughly twice that many temporary
+solutions and averaged at \(12.5\) minutes per solution. This indicates that
+gaussian walk mitigates catastrophic forgetting although it does not completely
+remove it.
+
+The experiment setup for the localized learning approach was already mentioned.
+After performing some tests Velez and Clune discovered that two functional
+modules formed. One set of connections is learning during sommer and the other
+during winter. The connections learning in summer do not change in winter and
+vice versa. This completely removes catastrophic forgetting.
+
+If catastrophic forgetting is the only measurement then localized learning
+seems to be the supreme solution to the problem. But Velez and Clune only
+showed that it works in a very bespoke setup which a priori information about
+the linear separability of the learning areas and correct solution. It has yet
+to be shown that localized learning can be generalized to larger problems.
+Modulated random search can be completely discarded as a potential solution.
+Modulated gaussian walk is a clear improvement compared to the random search
+in the analyzed experiments.
+
+While all three approaches used diffusion-based neuromodulation the first two and
+the third are quite different in their setup. For the future it would be interesting
+to combine localized learning with gaussian walk on the experiments of Toutunji
+and Pasemann. In particular the combined experiment might benefit from this as
+localized learning could separate the learning for one task from the other
+and gaussian walk could then improve the particular part that was problematic.
 
 \section{Conclusion}
 \label{sec:concl}
 
 A second environmental feedback loop is important to tell autonomous systems
 when to learn. But the method to learn is important as well to be any use
-in a practical environment. A comparison has shown that localized learning
-can overcome catastrophic forgetting for small networks.
+in a practical environment. The comparison has shown that localized learning
+can overcome catastrophic forgetting for small networks in a very restricted
+setup. Furthermore the comparison revealed that modulated random search is
+not part of a solution to catastrophic forgetting and modulated gaussian
+walk is significantly better in that regard.
+
+Future work should look into the effects of localized learning on the kind of
+autonomous robot experiments that were conducted by Toutunji and Pasemann and
+in general research the applicability to bigger problems for example in the area
+of deep neural networks.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % hier werden - zum Ende des Textes - die bibliographischen Referenzen
