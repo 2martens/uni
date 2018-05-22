@@ -255,8 +255,66 @@ scores for every box. In case of the box regressions the results from the networ
 are used directly.
 
 \section{Experimental result and evaluation}
-In this section, the evaluation and experimental results of proposed method should be described.
-Also provide some discussion, answering questions such as: when does the method work well, when not? How does it compare to other state-of-the-art works?
+
+The regional proposal network was trained for 10 hours and the object recognition
+network was trained for 17 hours. In both cases an Nvidia K40 GPU was used.
+During testing phase it took the RPN \(5.62\) seconds per image and the ORN
+\(13.93\) seconds per image. Both networks were evaluated on the NYUv2\cite{Silberman2012}
+and SUN RGB-D\cite{Song2015} data sets.
+A threshold of \(0.25\) was used to calculate the average recall for the proposal
+generation and the average precision for the detection. The SUN RGB-D data set
+was used to obtain the ground truth amodal bounding boxes.
+
+For the evaluation of the proposal generation a single-scale RPN, a multi-scale RPN
+and a multi-scale RPN with RGB colour added to the 3D TSDF were compared with
+each other and the baselines using the NYU data set. 3D selective search
+and a naive 2D to 3D conversion were used as baselines. The naive conversion used the
+2D region proposal to retrieve the 3D points within that region. Afterwards the
+outermost 2 percentiles in each direction were removed and a tight 3D bounding
+box calculated. The values of recall averaged over all object categories were
+\(34.4\) for the naive approach, \(74.2\) for 3D selective search, \(75.2\) for
+the single-scale RPN, \(84.4\) for the multi-scale RPN and \(84.9\) for the
+multi-scale RPN with added colour. The last value is used as the final region
+proposal result.
+
+Another experiment tested the detection results for the same ORN architecture
+given different region proposals. Comparing the 3D selective search with
+RPN gave mean average precisions of \(27.4\) and \(32.3\) respectively. Hence
+the RPN provides a better solution. Planar objects (e.g. doors) seem to work
+better with 3D selective search. Boxes, monitors and TVs don't work for the RPN,
+where the presumed reason for boxes is the high variance and for monitors and TVs
+the missing depth information is likely responsible.
+
+The detection evaluation was structured differently. First the feature encodings
+were compared with other (the same experiment that was mentioned in previous
+paragraph), then the design was justified and lastly the results were compared
+with state-of-the-art methods. The feature encoding experiment provided better
+results for encoding the directions directly compared to a single distance.
+An accurate TSDF measured better than a projective one. The usage of the 2D image
+VGGnet proved to be better than the direct encoding of colour on 3D voxels.
+Lastly it didn't help to include HHA (horizontal disparity, height above ground
+and the angle the pixel's local surface normal makes with the inferred gravity
+direction).
+
+The same experiment was used to help with design choices. It was found that
+bounding box regression helps significantly (increase in mAP of 4.4 and 4.1
+for 3D selective search and RPN respectively compared to the case without this
+regression). SVM was found to outperform the softmax slightly (increase of 0.5 mAP)
+which presumably is the case, because it can better handle the unbalanced number of
+training samples for each category in the NYUv2 data set. Size pruning was identified
+as helping (increase of mAP per category of 0.1 up to 7.8).
+
+For the comparison with state-of-the-art methods Song and Xiao used 3D Sliding
+Shapes\cite{Song2014} and 2D Depth-RCNN\cite{Gupta2015} and the same test set
+that was used for the 2D Depth-RCNN (intersection of NYUv2 test set and Sliding
+Shapes test set for the five categories bed, chair, table, sofa/couch and toilet).
+The comparison shows that 3D Deep Sliding Shapes outperforms the chosen state-of-the-art
+methods in all categories. The toilet is the only example where it is relevant
+for the result that the 2D data is used. With only 3D data used the 2D Depth-RCNN
+performs better on the estimated model if it uses 2D and 3D.
+
+All in all 3D Deep Sliding Shapes works well on non-planar objects that have depth
+information. The 2D component helps in distinguishing similar shaped objects.
 
 \section{Discussion} % (fold)
 \label{sec:discussion}
