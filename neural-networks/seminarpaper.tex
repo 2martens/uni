@@ -232,7 +232,7 @@ learning in an autonomous setup to analyse which of them if any can overcome
 catastrophic forgetting.
 
 The next section will go into more detail about the history of research about
-catastrophic forgetting. Afterwards the three approached will be explained.
+catastrophic forgetting. Afterwards the three approaches will be explained.
 A comparison of the three approaches with respect to catastrophic forgetting
 will follow, before a conclusion wraps up this paper.
 
@@ -280,7 +280,7 @@ network learns the function describing the inputs too well and therefore
 loses its ability to differentiate between new and already learned input.
 This can be understood well with the example given by French\cite{French1999},
 where a network has the task to reproduce the input at the output. It can detect
-a new input if the output is diverging by large margin. It has learned too well
+a new input if the output is diverging by a large margin. It has learned too well
 if it learned the identity function and is therefore able to reproduce any
 input perfectly at the output and hence loses the ability to detect new input.
 
@@ -289,11 +289,11 @@ Robins\cite{Robins1995} found a way to rehearse prior input if it is no longer
 available and called it "pseudo-patterns". The idea being that the weights
 of the trained network resemble a function. A random input and the predicted
 output together somewhat describe this function and are such a pattern. Robins
-used a bunch of them interleaved with new input and the results were promising
+used many of them interleaved with new input and the results were promising
 as the forgetting became more gradual. This insight together with
 the findings of McClelland\cite{McClelland1995} resulted in the development
 of dual-network models.
-In short one network would model and the hippocampus and be able to quickly learn new
+In short one network would model the hippocampus and be able to quickly learn new
 information without disrupting previously learned regularities. This network
 would then serve as teacher for the second network which models the neocortex
 and is responsible for generalizing.
