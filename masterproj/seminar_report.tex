@@ -318,23 +318,77 @@ information. The 2D component helps in distinguishing similar shaped objects.
 
 \section{Discussion} % (fold)
 \label{sec:discussion}
-After providing the details of the paper, this secion contains your persnal opinion regarding the mothd that was proposed in this paper.
+
+Deep Sliding Shapes offers a seemingly powerful new approach for object detection
+in a 3D environment.
+
 \subsection{Paper Strengths} % (fold)
 \label{sub:paper_strengths}
-Please discuss, justifying your comments with the appropriate level of details, the strengths of the paper
+
+The paper is written in a clearly structured way and uses sub headlines to
+better guide the reader. The authors apparently tried to minimize repetition
+in the sentences and are using some elements of novelized storytelling like
+rhetorical questions that soften up the paper and make it less dry. The introduction
+in particular is giving a very good motivation for the paper and ends with a cliff
+hanger that creates excitement to continue reading beyond the detour that is
+the section about related works.
+
+Overall the paper provides many illustrating figures that make it far easier
+to imagine the results of the introduced method and quite simply hydrate the
+paper and make it friendlier to the eyes compared to an all text paper.
+
+Lastly the paper provides many evaluation results that are understandable
+largely without the main paper text and give a good overview over the performance
+of the proposed method compared to others.
+
 % subsection positive_aspect (end)
 
 \subsection{Paper Weaknesses} % (fold)
 \label{sub:paper_weaknesses}
-Please discuss, justifying your comments with the appropriate level of details, the weaknesses of the paper
+
+That said there are things to criticize about this paper. The information about
+the network structure is spread over two figures and some sections of the paper
+with no guarantees that no information is missing. Furthermore no information
+regarding the training, validation and testing data split were available. While
+this implementation information does not have to be inside the paper proper it
+should have been inside appendices to make an independent replication of results
+easier. Not directly a problem with the paper itself the decision to implement
+a software framework from scratch rather than using a proven existing one like
+Tensorflow makes it more difficult to utilize the pretrained models which are
+indeed available.
+
+The evaluation sections are inconsistent in their structure. The first section
+about object proposal evaluation follows the rest of the paper and is written
+in continuous text. It describes the compared methods and then discusses the
+results. The second section regarding the object detecion evaluation however
+is written completely different. There is no continuous text and the compared
+methods are not really described. Instead the section is largely used to justify
+the chosen design. This would not even be a problem if there were a introductory
+text explaining their motivations for this kind of evaluation and guiding the
+reader through the process. Currently there is no explanation given why
+the detection evaluation starts with feature encoding and is followed by
+design justification.
+
+Furthermore the motivations for the used data sets NYUv2 and SUN RGB-D are
+not quite clear. Which data set is used for what purpose and why? The text
+mentions in one sentence that the amodal bounding boxes are obtained from
+SUN RGB-D without further explanation. It would have been advantageous
+if the actual process of this "obtaining" were explained.
+
 % subsection negitive (end)
 
 % section review (end)
 
 \section{Conclusion}
-Summarize your report.
-Provide some concluding discussion about the paper, along with, e.g., suggestions for future work.
 
+Deep Sliding Shapes introduces a 3D convolutional network pipeline for
+amodal 3D object detection. This pipeline consists of a regional proposal
+network and a joint 2D and 3D object recognitioin network. Experimental
+results show that this approach delivers better results than previous
+state-of-the-art methods.
+
+In future work this method should be compared to other 3D centric object detection
+approaches like Frustum Point Net\cite{Qi2017}.
 
 \newpage
 \printbibliography
