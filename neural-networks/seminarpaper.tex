@@ -321,7 +321,8 @@ neural networks the structure of these networks is described first. Linearly-mod
 neural networks (LMNN) are a specific variant of modulated neural
 networks (MNN). Any artifical neural network (ANN) or simply neural network
 in the context of Computer Science can become a modulated neural network by
-adding a neuromodulator layer.
+adding a neuromodulator layer. This neuromodulator layer is the second
+environmental feedback loop mentioned earlier.
 
 Toutounji and Pasemann describe a variant of this layer that uses neuromodulator
 cells (NMCs). Each NMC produces a specific type of neuromodulator (NM) and
@@ -380,6 +381,11 @@ of that product. This means there is a maximum weight change probability for eac
 synapse. Weight changes can happen at any time step. Therefore the intrinsic weight
 change probability has to be very small. Should a weight change occur a new weight
 \(w_i\) is chosen randomly from the interval \([W_i^{min}, W_i^{max}]\).
+
+The weight change probability \(p_i^w\) tells the network when to learn and leaves
+room for variation as it is a probability and not a binary learn/do not learn
+situation. Within this example this probability is the so called second environmental
+feedback loop.
 
 
 \[
@@ -445,7 +451,9 @@ the previously eaten food was nutritious (1) or poisonous (-1). If they are
 not active their value is zero. As soon as the sources are activated the neuromodulators
 fill a space within a radius of 1.5 units of distance from the source and potentially
 trigger weight changes of neurons inside the radius. The strength of the neuromodulators
-is decreasing with further distance from the source.
+is decreasing with further distance from the source. The sources are the second
+environmental feedback loop in this example as they tell the network or a part of
+it when to learn.
 
 This explanation should suffice for the general understanding of their method.
 The neurons within the vicinity of these sources only update their weights
