@@ -370,23 +370,34 @@ the respective synapse.
     \label{tab:mrs-synapse}
 \end{table}
 
-Modulated random search means essentially random weight changes. Each synapse
+Modulated random search means essentially random weight changes. Each synapse \(i\)
 has some parameters that are used (see table \ref{tab:mrs-synapse}). The weight
-change probability is the product of the intrinsic weight change probability
-and the concentration of the neuromodulator the synapse is sensitive to
-at its location. Additionally the maximum neuromodulator sensitivity is
-the ceiling for the second part of that product. This means there is a maximum
-weight change probability for each synapse. Should a weight change occur a new
-weight is chosen randomly from the range of values described by the minimum and
-maximum weight of the synapse.
+change probability \(p_i^w\) at time \(t\) is the product of the intrinsic weight
+change probability \(W_i\) and the concentration of the neuromodulator the synapse
+is sensitive to \(c(t, x_i, y_i)\) at its location \((x_i, y_i)\). Additionally
+the maximum neuromodulator sensitivity \(M_i\) is the ceiling for the second part
+of that product. This means there is a maximum weight change probability for each
+synapse. Weight changes can happen at any time step. Therefore the intrinsic weight
+change probability has to be very small. Should a weight change occur a new weight
+\(w_i\) is chosen randomly from the interval \([W_i^{min}, W_i^{max}]\).
+
+
+\[
+    p_i^w = min(M_i, c(t, x_i, y_i)) \cdot W_i,\; 0 < W_i \lll 1
+\]
 
 Moreover a synapse can disable or enable itself. The actual disable/enable
-probability is the product of the intrinsic value saved as parameter and
-the neuromodulator concentration. The concentration is again ceiled by the
-maximum sensitivity limit given as parameter. This means there is a maximum
-disable/enable probability as well. A disabled synapse is treated as having
-weight 0 but the actual value is stored so that it can be restored when the
-synapse is enabled again.
+probability \(p_i^d\) is the product of the intrinsic value \(D_i\) saved as
+parameter and the neuromodulator concentration \(c(t, x_i, y_i)\). The concentration
+is again ceiled by the maximum sensitivity limit \(M_i\) given as parameter.
+This means there is a maximum disable/enable probability as well. The intrinsic
+enable/disable probability must be smaller than the intrinsic weight change probability.
+A disabled synapse is treated as having weight 0 but the actual value is stored
+so that it can be restored when the synapse is enabled again.
+
+\[
+    p_i^d = min(M_i, c(t, x_i, y_i) \cdot D_i,\; 0 \leq D_i < W_i
+\]
 
 Given a so called neural network structure or substrate this makes it easier
 to find different network topologies (structure and weights combined).
@@ -401,7 +412,11 @@ but rather the difference to be added to the current weight is sampled from a
 normal distribution with a mean of zero and \(\sigma^2\)-variance. The sampled
 value could be infinitely large and hence the new weight outside of the given
 bounds for it. Therefore the value is sampled until the sum of the
-current weight and the sampled value are within the range.
+current weight and the sampled value are within the interval \([W_i^{min}, W_i^{max}]\).
+
+\[
+    w_i (t + 1) = w_i (t) + \Delta w_i \;\text{where}\; \Delta w_i \sim \mathcal{N}(0, \sigma^2)
+\]
 
 Toutunji and Pasemann implemented a mechanism for disabling synapses
 in the modulated gaussian walk as well but did not make use of it later and
