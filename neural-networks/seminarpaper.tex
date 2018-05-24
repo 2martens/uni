@@ -215,7 +215,7 @@ maxnames=2
 
 Autonomous robots need to adapt to new situations. They have a need to learn
 for an entire life. In order to do this they need a second environmental feedback
-loop that tells them when to learn.\cite{Toutounji2016}
+loop that tells them when to learn\cite{Toutounji2016}.
 
 The learning itself is also described as plasticity. In the context of this paper
 the definition of synaptic plasticity given by Citri\cite{Citri2008} will be used.
@@ -226,7 +226,9 @@ and backpropagation.
 
 When a network has to adapt to new situations, it has to learn new tasks. Usually
 the previously learned weights are largely forgotten. This phenomenon is called
-catastrophic forgetting.\cite{French1999,McCloskey1989}
+catastrophic forgetting\cite{French1999,McCloskey1989}. It is highly problematic,
+because the weights encode the learning of a network. If they are forgotten or
+rather overwritten the previously learned tasks cannot be fulfilled anymore.
 
 Since catastrophic forgetting is a key problem for autonomous learning, it is
 crucial to overcome it. In this paper I will present some approaches for
@@ -236,8 +238,9 @@ catastrophic forgetting.
 \section{Catastrophic Forgetting}
 \label{sec:catastrophicforgetting}
 
-This section presents the major research developments related to catastrophic
-forgetting and explains what it actually is. It follows the review of French\cite{French1999}.
+French\cite{French1999} did a review of the existing research about catastrophic
+forgetting. The following paragraphs will follow this review and highlight the
+major developments in research related to catastrophic forgetting.
 
 McCloskey and Cohen\cite{McCloskey1989} originally discovered the problem of
 catastrophic forgetting, which was referred to as catastrophic interference. This
@@ -305,12 +308,13 @@ catastrophic forgetting at bay, has to be named.
 \section{Plasticity}
 \label{sec:plasticity}
 
-Every neural network involves a learning aspect and hence plasticity, given our
+Catastrophic forgetting requires learned weights that can be forgotten.
+Every neural network learns and therefore deals with plasticity, given our
 definition of it. In this section three approaches for plasticity using diffusion-based
 neuromodulation are presented in more detail. Modulated Random Search and
 Modulated Gaussian Walk are using linearly modulated neural networks. They
 are taken from Toutounji and Pasemann\cite{Toutounji2016}. The third approach
-was introduced by Velez and Clune\cite{Velez2017} uses diffusion-based neuromodulation
+was introduced by Velez and Clune\cite{Velez2017} and uses diffusion-based neuromodulation
 for localized learning hence the name of the subsection here.
 
 \subsection{Modulated Random Search}
@@ -413,7 +417,7 @@ to find different network topologies (structure and weights combined).
 \subsection{Modulated Gaussian Walk}
 \label{subsec:mgw}
 
-Toutounji and Pasemann introduce the modulated gaussian walk. The key differences
+The modulated gaussian walk is introduced by Toutounji and Pasemann. The key differences
 start with the parameters. There is no maximum sensitivity for the neuromodulator
 concentration. When a weight change occurs the new weight is not chosen randomly
 but rather the difference to be added to the current weight is sampled from a
@@ -473,10 +477,10 @@ by the other season. This results in a localized learning.
 \section{Comparison regarding catastrophic forgetting}
 \label{sec:comparison}
 
-In this section the three presented approaches for plasticity are compared with
-regard to their ability to mitigate or overcome catastrophic forgetting. For both
-the modulated random search and the modulated gaussian walk this aspect was
-analyzed in the experiments conducted by Toutounji and Pasemann\cite{Toutounji2016}.
+Given the presentations of the three approaches it is interesting to compare
+them with regard to their ability to mitigate or overcome catastrophic forgetting.
+For both the modulated random search and the modulated gaussian walk this aspect
+was analyzed in the experiments conducted by Toutounji and Pasemann\cite{Toutounji2016}.
 Therefore the results of their work will be utilized for this comparison.
 Velez and Clune\cite{Velez2017} introduced the presented approach of localized
 learning to analyze its capability with respect to overcoming catastrophic
