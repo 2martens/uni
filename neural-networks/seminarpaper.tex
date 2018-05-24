@@ -455,6 +455,14 @@ is decreasing with further distance from the source. The sources are the second
 environmental feedback loop in this example as they tell the network or a part of
 it when to learn.
 
+How does the actual learning happen? The weight change between two neurons
+is dependent on the activation of both neurons, the learning rate and the concentration
+of neuromodulators. In short Hebbian learning is employed. 
+
+\[
+    \Delta w_{ij} = \eta \cdot m_i \cdot a_i \cdot a_j
+\]
+
 This explanation should suffice for the general understanding of their method.
 The neurons within the vicinity of these sources only update their weights
 in one of the seasons. Therefore they only learn for one season and are unaffected
