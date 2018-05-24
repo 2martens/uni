@@ -367,7 +367,7 @@ the respective synapse.
         \(M\) & Maximum neuromodulator sensitivity limit of the synapse
     \end{tabular}
     \caption{Parameters stored for each synapse.
-    Replication of Table 1 in Toutunji and Pasemann\cite{Toutounji2016}.}
+    Replication of Table 1 in Toutounji and Pasemann\cite{Toutounji2016}.}
     \label{tab:mrs-synapse}
 \end{table}
 
@@ -424,7 +424,7 @@ current weight and the sampled value are within the interval \([W_i^{min}, W_i^{
     w_i (t + 1) = w_i (t) + \Delta w_i \;\text{where}\; \Delta w_i \sim \mathcal{N}(0, \sigma^2)
 \]
 
-Toutunji and Pasemann implemented a mechanism for disabling synapses
+Toutounji and Pasemann implemented a mechanism for disabling synapses
 in the modulated gaussian walk as well but did not make use of it later and
 therefore they did not describe how it works.
 
@@ -457,7 +457,7 @@ it when to learn.
 
 How does the actual learning happen? The weight change between two neurons
 is dependent on the activation of both neurons, the learning rate and the concentration
-of neuromodulators. In short Hebbian learning is employed. 
+of neuromodulators. In short Hebbian learning is employed.
 
 \[
     \Delta w_{ij} = \eta \cdot m_i \cdot a_i \cdot a_j
@@ -474,7 +474,7 @@ by the other season. This results in a localized learning.
 In this section the three presented approaches for plasticity are compared with
 regard to their ability to mitigate or overcome catastrophic forgetting. For both
 the modulated random search and the modulated gaussian walk this aspect was
-analyzed in the experiments conducted by Toutunji and Pasemann\cite{Toutounji2016}.
+analyzed in the experiments conducted by Toutounji and Pasemann\cite{Toutounji2016}.
 Therefore the results of their work will be utilized for this comparison.
 Velez and Clune\cite{Velez2017} introduced the presented approach of localized
 learning to analyze its capability with respect to overcoming catastrophic
@@ -526,27 +526,74 @@ Modulated gaussian walk is a clear improvement compared to the random search
 in the analyzed experiments.
 
 While all three approaches used diffusion-based neuromodulation the first two and
-the third are quite different in their setup. For the future it would be interesting
-to combine localized learning with gaussian walk on the experiments of Toutunji
-and Pasemann. In particular the combined experiment might benefit from this as
-localized learning could separate the learning for one task from the other
-and gaussian walk could then improve the particular part that was problematic.
+the third are quite different in their setup. First the general neuromodulation
+architecture was different (each neuron can diffuse neuromodulators vs. two stationary
+sources) and second the actual weight change was also different. Both modulated
+gaussian walk and the shown localized learning are improving previous weights
+instead of completely changing them. The gaussian walk is using a normal distribution
+to get the weight change while the localized learning uses Hebbian learning and
+therefore is dependent on the activations of two neurons and is directly incorporating
+the neuromodulators in the weight change formula itself.
+
+It is important to note that the advantage of gaussian walk had nothing to do
+with the architecture of the neuromodulation as that was identical for both
+random search and gaussian walk. The improvement originated in the learning
+rule. In the experiments of Toutounji and Pasemann they used a homogenous
+diffusion but it would have been possible to use different diffusion strengths,
+decays and so on for every neuron.
+
+For the future it would be interesting to
+compare the LMNN architecture with the "sources" architecture of localized
+learning to understand the impact of the neuromodulation architecture.
+In addition the gaussian walk learning rule should be compared with the
+Hebbian learning rule used by localized learning.
+
+For the E3 experiment used by Toutounji and Pasemann it is safe to assume that
+the kind of a priori placement of neuromodulator sources won't work. The experiment
+requires the robot to solve two tasks at the same time: It has
+to approach the lights and avoid obstacles. Since both tasks need to be solved
+at the same time and always it is not possible to devise two "seasons" or some
+similar seperation of learning time. Therefore the LMNN architecture is likely
+better suited.
+
+Nevertheless it would make sense to separate the learning for
+these two tasks as a robot might already be very good at approaching lights but
+only mediocre at avoiding obstacles. In that case the improvements for the second
+task should not impact the first task. The Hebbian learning rule is likely
+better suited to achieve this effect as it correlates the weight change with
+the correlation of the connected neurons. Simply using a value sampled from a
+normal distribution as the gaussian walk does it, probably does not result in
+localized learning. On the other hand localized learning will likely only work
+if it is possible to give the robot distinct feedback about its performance in
+each task. If it only receives a combined feedback it is more difficult to
+utilize localized learning as it is then not easy to find out which part (and
+therefore which weights) performed bad.
+
+In situations where there is only one task to solve (E2) or the feedback is only
+given as a total without distinct information about each sub task it is very
+likely that localized learning won't work and therefore gaussian walk is better
+suited than Hebbian learning.
 
 \section{Conclusion}
 \label{sec:concl}
 
 A second environmental feedback loop is important to tell autonomous systems
-when to learn. But the method to learn is important as well to be any use
-in a practical environment. The comparison has shown that localized learning
-can overcome catastrophic forgetting for small networks in a very restricted
-setup. Furthermore the comparison revealed that modulated random search is
-not part of a solution to catastrophic forgetting and modulated gaussian
-walk is significantly better in that regard.
+when to learn. But it is important how this feedback loop is working. Furthermore
+it is important how the learning actually works. The comparison has shown that
+localized learning utilizing neuromodulator sources can overcome catastrophic
+forgetting for small networks in a very restricted setup. Furthermore the
+comparison revealed that modulated random search is not part of a solution to
+catastrophic forgetting. In a more general case it is likely that the LMNN
+architecture is better than the sources architecture and that Hebbian learning
+is better suited for combined tasks and localized learning than modulated gaussian
+walk. For single task environments or those where localized learning is not an
+option modulated gaussian walk is likely better suited than Hebbian learning.
 
-Future work should look into the effects of localized learning on the kind of
-autonomous robot experiments that were conducted by Toutunji and Pasemann and
-in general research the applicability to bigger problems for example in the area
-of deep neural networks.
+Future work should look into the guesses that were taken here and analyze which
+network architecture is better and which learning rule is better for the kind of
+autonomous robot experiments that were conducted by Toutounji and Pasemann. In
+general the applicability of localized learning to bigger problems for example
+in the area of deep neural networks should be researched.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % hier werden - zum Ende des Textes - die bibliographischen Referenzen
