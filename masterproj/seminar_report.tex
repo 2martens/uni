@@ -95,14 +95,29 @@ The short abstract (100-150 words) is intended to give the reader an overview of
 \clearpage
 
 \section{Introduction}
-Use this template as a starting point for preparing your seminar report.
-For more information on \LaTeX, please consult, e.g., the online book at \url{https://en.wikibooks.org/wiki/LaTeX}.
-Refer also to material on scientific writing.
-The length of the report should not exceed 10 pages (excluding the reference list).
 
-This part contains the introduction to the topic.
-It introduces the general problem area of the paper, and leads the reader to the next section that provides more details.
-This part should also cite other related work (not only the seminar paper you are working on) and compare the approaches on a high level.
+Object detection is a central task in the field of neural networks. It is a
+combination of classification and localization tasks and aims to classify
+and locate objects inside an image. It may be restricted to certain classes
+that indicate objects of interest so that not every stone or leaf of a tree
+is detected as an object. The output of object detection networks is usually
+a collection of bounding boxes, one for each detected object, and the corresponding
+classifications.
+
+The area of 2D object detection has matured over many years. Single Shot Multibox
+Detector\cite{Liu2016} uses a convolutional neural network (CNN) and the RGB
+data of an image to detect objects. The result is a 2D bounding box and the
+classification for each object.
+
+With increasing availability of depth cameras, images gain the depth component
+and approaches utilizing the depth are becoming more relevant. Depth RCNN\cite{Gupta2015}
+uses the depth as a fourth channel of a 2D image. After the bounding box
+is calculated they fit a 3D model to the points within the bounding box.
+
+Deep Sliding Shapes\cite{Song2016} is utilizing the depth for actual 3D deep
+learning but also uses the RGB channels of an RGB-D image to benefit from the
+strength of 2D object detectors. The results of both the 3D and 2D parts are
+combined and the result is a 3D bounding box and classification.
 
 \section{Method description}
 % This section describes the proposed approach in the paper in more detail.
