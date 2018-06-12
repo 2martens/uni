@@ -79,7 +79,7 @@ maxnames=2
 
 \begin{document}
 
-\title{Master project: seminar report template}
+\title{Deep Sliding Shapes: A Review}
 \author{Jim Martens}
 
 \maketitle
@@ -91,9 +91,11 @@ recognition network to find the actual objects. In the end it produces 3D
 bounding boxes and outperforms 3D selective search and other state-of-the-art
 solutions.
 
-The paper is presenting the approach in an understandable manner. But the
-reproducibility of Deep Sliding Shapes is suboptimal as key information for
-such an endeavour is missing from the paper.
+The introduced approach has a remarkable high-level structure that is
+used in more recent networks as well. But the code implementation and the
+provided implementation details or the lack thereof makes an independent
+reproduction of the results and an adoption for other problems very difficult
+if not impossible.
 
 
 % Lists:
@@ -360,9 +362,22 @@ Overall the paper provides many illustrating figures that make it far easier
 to imagine the results of the introduced method and quite simply hydrate the
 paper and make it friendlier to the eyes compared to an all text paper.
 
-Lastly the paper provides many evaluation results that are understandable
+Furthermore the paper provides many evaluation results that are understandable
 largely without the main paper text and give a good overview over the performance
 of the proposed method compared to others.
+
+Aside from the paper writing skills the authors clearly posess, the presented
+approach itself is also very good. It is an elegant idea to first reduce the
+search volume by applying a region proposal network and then use an object recognition
+network to do the heavy lifting. The usage of the 2D data is well thought of
+as well. This abstract idea of dealing with 3D data has persisted and is somewhat
+repeated by the Frustum Pointnet\cite{Qi2017}, which uses the results of a 2D
+object detection network to determine the region in which the 3D object detection
+takes place. The object detection network not only provides the region in form
+of bounding boxes but also the classification of the detected objects in form
+of a k vector. Though the specific implementation varies greatly the abstract
+idea of region proposal, usage of 2D data and object detection/recognition at
+the end is visible in both Deep Sliding Shapes and the Frustum Pointnet.
 
 % subsection positive_aspect (end)
 
@@ -371,32 +386,33 @@ of the proposed method compared to others.
 
 That said there are things to criticize about this paper. The information about
 the network structure is spread over two figures and some sections of the paper
-with no guarantees that no information is missing. Furthermore no information
-regarding the training, validation and testing data split were available. While
-this implementation information does not have to be inside the paper proper it
-should have been inside appendices to make an independent replication of results
-easier. Not directly a problem with the paper itself the decision to implement
-a software framework from scratch rather than using a proven existing one like
-Tensorflow makes it more difficult to utilize the pretrained models which are
-indeed available.
-
-The evaluation sections are inconsistent in their structure. The first section
-about object proposal evaluation follows the rest of the paper and is written
-in continuous text. It describes the compared methods and then discusses the
-results. The second section regarding the object detecion evaluation however
-is written completely different. There is no continuous text and the compared
-methods are not really described. Instead the section is largely used to justify
-the chosen design. This would not even be a problem if there were a introductory
-text explaining their motivations for this kind of evaluation and guiding the
-reader through the process. Currently there is no explanation given why
-the detection evaluation starts with feature encoding and is followed by
-design justification.
+with no guarantees that no information is missing. The evaluation sections are
+inconsistent in their structure. The first section about object proposal evaluation
+follows the rest of the paper and is written in continuous text. It describes the
+compared methods and then discusses the results. The second section regarding the
+object detecion evaluation however is written completely different. There is no
+continuous text and the compared methods are not really described. Instead the
+section is largely used to justify the chosen design. This would not even be a
+problem if there were a introductory text explaining their motivations for this
+kind of evaluation and guiding the reader through the process. Currently there
+is no explanation given why the detection evaluation starts with feature encoding
+and is followed by design justification.
 
 Furthermore the motivations for the used data sets NYUv2 and SUN RGB-D are
 not quite clear. Which data set is used for what purpose and why? The text
 mentions in one sentence that the amodal bounding boxes are obtained from
 SUN RGB-D without further explanation. It would have been advantageous
 if the actual process of this "obtaining" was explained.
+
+Lastly no information regarding the training, validation and testing data split were
+available. While this implementation information does not have to be inside the
+paper proper it should have been at least inside appendices to make an independent
+replication of results possible. Not directly a problem with the paper itself the decision to
+implement a software framework from scratch (Marvin framework) rather than using
+a proven existing one like Tensorflow makes it more difficult to utilize the
+pretrained models which are indeed available and more importantly to adapt Deep
+Sliding Shapes to other data sets and problems. To top it all of, the available
+Matlab "glue" code is not well documented.
 
 % subsection negitive (end)
 
@@ -410,8 +426,17 @@ network and a joint 2D and 3D object recognitioin network. Experimental
 results show that this approach delivers better results than previous
 state-of-the-art methods.
 
+The proposed approach introduced an important general structure for networks
+working with 3D data and is roughly and on a high-level visible in more recent
+network utilizing 3D data as well. In the practical sphere the custom code
+framework and the badly documented code makes it very difficult to replicate the
+results independently or even adapt Deep Sliding Shapes to other problems.
+In short: Good theory, bad practical implementation.
+
 In future work this method should be compared to other 3D centric object detection
-approaches like Frustum Point Net\cite{Qi2017}.
+approaches like Frustum Point Net\cite{Qi2017}. Especially a structural comparison
+with other 3D approaches is interesting to see if there is a best practice structure
+emerging for the handling of 3D data.
 
 \newpage
 \printbibliography
