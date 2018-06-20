@@ -383,33 +383,33 @@ change probability \(p_i^w\) at time \(t\) is the product of the intrinsic weigh
 change probability \(W_i\) and the concentration of the neuromodulator the synapse
 is sensitive to \(c(t, x_i, y_i)\) at its location \((x_i, y_i)\). Additionally
 the maximum neuromodulator sensitivity \(M_i\) is the ceiling for the second part
-of that product. This means there is a maximum weight change probability for each
-synapse. Weight changes can happen at any time step. Therefore the intrinsic weight
-change probability has to be very small. Should a weight change occur a new weight
-\(w_i\) is chosen randomly from the interval \([W_i^{min}, W_i^{max}]\).
+of that product \eqref{eq:weightchangeprob}. This means there is a maximum weight
+change probability for each synapse. Weight changes can happen at any time step.
+Therefore the intrinsic weight change probability has to be very small. Should a
+weight change occur a new weight \(w_i\) is chosen randomly from the interval
+\([W_i^{min}, W_i^{max}]\).
 
 The weight change probability \(p_i^w\) tells the network when to learn and leaves
 room for variation as it is a probability and not a binary learn/do not learn
 situation. Within this example this probability is the so called second environmental
 feedback loop.
 
-
-\[
+\begin{equation}\label{eq:weightchangeprob}
     p_i^w = min(M_i, c(t, x_i, y_i)) \cdot W_i,\; 0 < W_i \lll 1
-\]
+\end{equation}
 
 Moreover a synapse can disable or enable itself. The actual disable/enable
 probability \(p_i^d\) is the product of the intrinsic value \(D_i\) saved as
-parameter and the neuromodulator concentration \(c(t, x_i, y_i)\). The concentration
-is again ceiled by the maximum sensitivity limit \(M_i\) given as parameter.
-This means there is a maximum disable/enable probability as well. The intrinsic
-enable/disable probability must be smaller than the intrinsic weight change probability.
-A disabled synapse is treated as having weight 0 but the actual value is stored
-so that it can be restored when the synapse is enabled again.
+parameter and the neuromodulator concentration \(c(t, x_i, y_i)\) \eqref{eq:enableprob}.
+The concentration is again ceiled by the maximum sensitivity limit \(M_i\) given
+as parameter. This means there is a maximum disable/enable probability as well.
+The intrinsic enable/disable probability must be smaller than the intrinsic weight
+change probability. A disabled synapse is treated as having weight 0 but the actual
+value is stored so that it can be restored when the synapse is enabled again.
 
-\[
+\begin{equation}\label{eq:enableprob}
     p_i^d = min(M_i, c(t, x_i, y_i) \cdot D_i,\; 0 \leq D_i < W_i
-\]
+\end{equation}
 
 Given a so called neural network structure or substrate this makes it easier
 to find different network topologies (structure and weights combined).
@@ -421,14 +421,14 @@ The modulated gaussian walk is introduced by Toutounji and Pasemann. The key dif
 start with the parameters. There is no maximum sensitivity for the neuromodulator
 concentration. When a weight change occurs the new weight is not chosen randomly
 but rather the difference to be added to the current weight is sampled from a
-normal distribution with a mean of zero and \(\sigma^2\)-variance. The sampled
-value could be infinitely large and hence the new weight outside of the given
-bounds for it. Therefore the value is sampled until the sum of the
+normal distribution with a mean of zero and \(\sigma^2\)-variance \eqref{eq:gausswalk}.
+The sampled value could be infinitely large and hence the new weight outside of
+the given bounds for it. Therefore the value is sampled until the sum of the
 current weight and the sampled value are within the interval \([W_i^{min}, W_i^{max}]\).
 
-\[
+\begin{equation}\label{eq:gausswalk}
     w_i (t + 1) = w_i (t) + \Delta w_i \;\text{where}\; \Delta w_i \sim \mathcal{N}(0, \sigma^2)
-\]
+\end{equation}
 
 Toutounji and Pasemann implemented a mechanism for disabling synapses
 in the modulated gaussian walk as well but did not make use of it later and
@@ -463,11 +463,11 @@ it when to learn.
 
 How does the actual learning happen? The weight change between two neurons
 is dependent on the activation of both neurons, the learning rate and the concentration
-of neuromodulators. In short Hebbian learning is employed.
+of neuromodulators \eqref{eq:hebbian}. In short Hebbian learning is employed.
 
-\[
+\begin{equation}\label{eq:hebbian}
     \Delta w_{ij} = \eta \cdot m_i \cdot a_i \cdot a_j
-\]
+\end{equation}
 
 This explanation should suffice for the general understanding of their method.
 The neurons within the vicinity of these sources only update their weights
