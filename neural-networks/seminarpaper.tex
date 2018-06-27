@@ -516,6 +516,8 @@ solutions and averaged at \(12.5\) minutes per solution. This indicates that
 gaussian walk mitigates catastrophic forgetting although it does not completely
 remove it.
 
+After the experiments related to modulated random search and modulated gaussian
+walk the experiment related to localized learning is described.
 The experiment setup for the localized learning approach was already mentioned.
 After performing some tests Velez and Clune discovered that two functional
 modules formed. One set of connections is learning during sommer and the other
@@ -583,17 +585,21 @@ suited than Hebbian learning.
 \section{Conclusion}
 \label{sec:concl}
 
-A second environmental feedback loop is important to tell autonomous systems
-when to learn. But it is important how this feedback loop is working. Furthermore
-it is important how the learning actually works. The comparison has shown that
-localized learning utilizing neuromodulator sources can overcome catastrophic
-forgetting for small networks in a very restricted setup. Furthermore the
-comparison revealed that modulated random search is not part of a solution to
-catastrophic forgetting. In a more general case it is likely that the LMNN
-architecture is better than the sources architecture and that Hebbian learning
-is better suited for combined tasks and localized learning than modulated gaussian
-walk. For single task environments or those where localized learning is not an
-option modulated gaussian walk is likely better suited than Hebbian learning.
+The second environmental feedback loop is used to tell autonomous systems
+when to learn. However the mere existence of such a loop is not enough. It matters
+how this feedback loop is working and how it is connected with the rest of the
+network. The weight change probability of both modulated random search and
+modulated gaussian walk is the second environmental feedback loop but it was shown
+that these two approaches are vastly different in their performance.
+Therefore it is equally important how the learning actually works. The comparison
+has shown that localized learning utilizing neuromodulator sources can overcome
+catastrophic forgetting for small networks in a very restricted setup.
+Furthermore the comparison revealed that modulated random search is not part of
+a solution to catastrophic forgetting. In a more general case it is likely that
+the LMNN architecture is better than the sources architecture and that Hebbian
+learning is better suited for combined tasks and localized learning than modulated
+gaussian walk. For single task environments or those where localized learning is
+not an option modulated gaussian walk is likely better suited than Hebbian learning.
 
 Future work should look into the assumptions that were taken here and analyze which
 network architecture is better and which learning rule is better for the kind of
