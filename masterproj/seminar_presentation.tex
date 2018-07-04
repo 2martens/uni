@@ -1,0 +1,228 @@
+\RequirePackage{pdf14}
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+%\usepackage{paralist}
+%\useoutertheme{infolines}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage{csquotes}
+\usetheme{Warsaw}
+\usecolortheme{crane}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setbeamertemplate{navigation symbols}{}
+\graphicspath{ {src/} {/home/jim/Pictures/} }
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\usepackage[
+backend=biber,
+bibstyle=ieee,
+citestyle=ieee,
+minnames=1,
+maxnames=2
+]{biblatex}
+
+\addbibresource{bib.bib}
+
+\MakeOuterQuote{"}
+
+%\definecolor{craneorange}{RGB}{61,61,61}
+%\definecolor{craneblue}{RGB}{255,255,255}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygray},    % comment style
+  deletekeywords={},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=PHP,                 % the language of the code
+  morekeywords={class, function, return, protected, public, private, const, static, new, extends, namespace, null},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mygreen},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\hypersetup{
+	pdfauthor=Jim Martens,
+	pdfstartview=Fit
+}
+
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+	\raggedleft \insertframenumber\,/\,\inserttotalframenumber\;}
+
+\begin{document}
+\author{Jim 2martens}
+\title{Deep Sliding Shapes: A Review}
+\date{\today}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Contents}
+    \tableofcontents
+\end{frame}
+
+\section{Motivation}
+\begin{frame}{Task}
+    \begin{itemize}
+        \item object detecion is central task for neural networks
+        \vfill
+        \item combination of classification and localization tasks
+        \vfill
+        \item output are usually bounding boxes and classifications
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Field}
+    \begin{itemize}
+        \item 2D object detection very mature with Single Shot MultiBox Detector\cite{Liu2016}
+        \vfill
+        \item with more availability of depth data, usage of depth becomes more
+              important
+        \vfill
+        \item early approaches use depth as fourth channel in 2D object detection,
+              for example Depth RCNN\cite{Gupta2015}
+        \vfill
+        \item Deep Sliding Shapes\cite{Song2016} uses 3D data for actual 3D deep
+              learning and uses 2D object detectors
+    \end{itemize}
+\end{frame}
+
+\section{Method}
+\begin{frame}{Method}
+    \begin{enumerate}
+        \item encoding 3D representation and normalization
+        \vfill
+        \item multi-scale 3D region proposal network
+        \vfill
+        \item joint amodal object recognition network
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Representation and Normalization}
+    \begin{itemize}
+        \item raw 3D space divided into equally spaced 3D voxel grid
+        \vfill
+        \item data encoded by Truncated Signed Distance Function
+        \vfill
+        \item each voxel stores distance from its center to surface of input depth
+              map and direction of each surface point
+        \vfill
+        \item every scene is rotated to align with gravity direction
+        \vfill
+        \item major room directions are used for proposal orientations
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Region Proposal Network}
+    \begin{itemize}
+        \item proposes a few interesting regions for the object recognition network
+        \vfill
+        \item each region proposal corresponds to one anchor box
+        \vfill
+        \item two scales are used since anchor box size varies a lot (from 0.3
+              to 2 meters)
+        \vfill
+        \item a full 3D convolutional architecture is used
+        \vfill
+        \item after the calculation of the region proposals multiple bars have
+              to be met for regions for them to be proposed
+        \vfill
+        \item in the end only the top 2000 regions move on (after the convolution
+              with only dropping all regions with point density lower than 0.005
+              points per cubic centimeter a total of 107674 regions remain on average)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Object Recognition Network}
+    \begin{itemize}
+        \item starts with both 3D and 2D object recognition networks
+        \vfill
+        \item VGGnet pretrained on ImageNet is used for extracting colour features
+        \vfill
+        \item resulting feature vectors of both networks are concatenated
+        \vfill
+        \item at the end two separate fully connected layers predict object label
+              and 3D bounding box
+        \vfill
+        \item some outlier protection measures are applied
+    \end{itemize}
+\end{frame}
+
+\section{Experimental Results}
+\begin{frame}{Evaluation}
+    \begin{itemize}
+        \item evaluated on NYUv2\cite{Silberman2012} and SUN RGB-D\cite{Song2015}
+        \vfill
+        \item threshold of 0.25 used for average recall of proposal generation and
+              average precision of detection
+        \vfill
+        \item ground truth bounding boxes obtained from SUN RGB-D
+        \vfill
+        \item single-scale RPN, multi-scale RPN and multi-scale RPN with RGB colour
+              usage (RGB colour encoded in 3D TSDF) were compared against each
+              other and the baselines using the NYU data set
+        \vfill
+        \item 3D selective search and naive 2D to 3D conversion used as baselines
+        \vfill
+        \item second experiment tested ORN with different region proposals
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Results}
+    \begin{itemize}
+        \item works well on non-planar objects with depth information
+        \vfill
+        \item 2D component helps in distinguishing similar shaped objects
+        \vfill
+        \item 3D Deep Sliding Shapes outperforms chosen state-of-the-art methods
+    \end{itemize}
+\end{frame}
+
+\section{Review}
+\begin{frame}{Review}
+    \begin{itemize}
+        \item idea to use 3D data directly very intruiging
+        \vfill
+        \item high-level structure of region proposal followed by object recognition
+              is visible in more recent approaches like Frustum Pointnet\cite{Qi2017}
+              as well
+        \vfill
+        \item motivations for used data sets NYUv2 and SUN RGB-D unclear
+        \vfill
+        \item no information on process of "obtaining" ground truth bounding boxes
+              from SUN RGB-D data set
+        \vfill
+        \item no implementation details provided
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{References}
+    \printbibliography
+\end{frame}
+\end{document}
