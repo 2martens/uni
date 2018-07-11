@@ -1,0 +1,502 @@
+\RequirePackage{pdf14}
+\documentclass[14pt]{beamer}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Meta informations:
+\newcommand{\trauthor}{Jim Martens}
+\newcommand{\trtype}{Seminar} %{Proseminar} %{Seminar} %{Workshop}
+\newcommand{\trcourse}{Knowledge Processing with Neural Networks}
+\newcommand{\trtitle}{Catastrophic Forgetting and Neuromodulation}
+\newcommand{\trmatrikelnummer}{6420323}
+\newcommand{\tremail}{2martens@informatik.uni-hamburg.de}
+\newcommand{\trinstitute}{Dept. Informatik -- Knowledge Technology, WTM}
+\newcommand{\trwebsiteordate}{{http://www.informatik.uni-hamburg.de/WTM/}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Languages:
+
+% Falls die Ausarbeitung in Deutsch erfolgt:
+% \usepackage[german]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+% \usepackage[latin1]{inputenc}
+% \usepackage[latin9]{inputenc}
+% \selectlanguage{german}
+
+% If the thesis is written in English:
+\usepackage[spanish,english]{babel}
+\selectlanguage{english}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bind packages:
+\usepackage{beamerthemesplit}
+\usetheme{Boadilla}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Frankfurt}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Madrid}
+%\usetheme{Warsaw }
+%\usecolortheme{dolphin}
+%\setbeamertemplate{sections/subsections in toc}[sections numbered]
+%\beamertemplatenavigationsymbolsempty
+%\setbeamertemplate{headline}[default] 	% deaktiviert die Kopfzeile
+\setbeamertemplate{navigation symbols}{}% deaktiviert Navigationssymbole
+%\useinnertheme{rounded}
+
+\usepackage{acronym}                    % Acronyms
+\usepackage{algorithmic}								% Algorithms and Pseudocode
+\usepackage{algorithm}									% Algorithms and Pseudocode
+\usepackage{amsfonts}                   % AMS Math Packet (Fonts)
+\usepackage{amsmath}                    % AMS Math Packet
+\usepackage{amssymb}                    % Additional mathematical symbols
+\usepackage{amsthm}
+\usepackage{color}                      % Enables defining of colors via \definecolor
+\usepackage{fancybox}                   % Gleichungen einrahmen
+\usepackage{fancyhdr}										% Paket zur schickeren der Gestaltung der
+\usepackage{graphicx}                   % Inclusion of graphics
+%\usepackage{latexsym}                  % Special symbols
+\usepackage{longtable}									% Allow tables over several parges
+\usepackage{listings}                   % Nicer source code listings
+\usepackage{lmodern}
+\usepackage{multicol}										% Content of a table over several columns
+\usepackage{multirow}										% Content of a table over several rows
+\usepackage{rotating}										% Alows to rotate text and objects
+\usepackage[section]{placeins}          % Ermoeglich \Floatbarrier fuer Gleitobj.
+\usepackage[hang]{subfigure}            % Allows to use multiple (partial) figures in a fig
+%\usepackage[font=footnotesize,labelfont=rm]{subfig}	% Pictures in a floating environment
+\usepackage{tabularx}										% Tables with fixed width but variable rows
+\usepackage{url,xspace,boxedminipage}   % Accurate display of URLs
+\usepackage{csquotes}
+
+\usepackage[
+backend=biber,
+bibstyle=ieee,
+citestyle=ieee,
+minnames=1,
+maxnames=2
+]{biblatex}
+
+\addbibresource{bib.bib}
+
+\MakeOuterQuote{"}
+
+\definecolor{uhhRed}{RGB}{226,0,26}     % Official Uni Hamburg Red
+\definecolor{uhhGrey}{RGB}{136,136,136} % Official Uni Hamburg Grey
+\definecolor{uhhLightGrey}{RGB}{220, 220, 220}
+\setbeamertemplate{itemize items}[ball]
+\setbeamercolor{title}{fg=uhhRed,bg=white}
+\setbeamercolor{title in head/foot}{bg=uhhRed}
+\setbeamercolor{block title}{bg=uhhGrey,fg=white}
+\setbeamercolor{block body}{bg=uhhLightGrey,fg=black}
+\setbeamercolor{section in head/foot}{bg=black}
+\setbeamercolor{frametitle}{bg=white,fg=uhhRed}
+\setbeamercolor{author in head/foot}{bg=black,fg=white}
+\setbeamercolor{author in footline}{bg=white,fg=black}
+\setbeamercolor*{item}{fg=uhhRed}
+\setbeamercolor*{section in toc}{fg=black}
+\setbeamercolor*{separation line}{bg=black}
+\setbeamerfont*{author in footline}{size=\scriptsize,series=\mdseries}
+\setbeamerfont*{institute}{size=\footnotesize}
+
+\newcommand{\opticalseperator}{0.0025\paperwidth}
+
+\institute{Universit\"at Hamburg\\\trinstitute}
+\title{\trtitle}
+\subtitle{\trtype}
+\author{\trauthor}
+\date{}
+\logo{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configurationen:
+%\hypersetup{pdfpagemode=FullScreen}
+
+\hyphenation{whe-ther} 									% Manually use: "\-" in a word: Staats\-ver\-trag
+
+%\lstloadlanguages{C}                   % Set the default language for listings
+\DeclareGraphicsExtensions{.pdf,.svg,.jpg,.png,.eps} % first try pdf, then eps, png and jpg
+\graphicspath{{./src/}} 								% Path to a folder where all pictures are located
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Costom Definitions:
+\setbeamertemplate{bibliography item}{%
+  \ifboolexpr{ test {\ifentrytype{book}} or test {\ifentrytype{mvbook}}
+    or test {\ifentrytype{collection}} or test {\ifentrytype{mvcollection}}
+    or test {\ifentrytype{reference}} or test {\ifentrytype{mvreference}} }
+    {\setbeamertemplate{bibliography item}[book]}
+    {\ifentrytype{online}
+       {\setbeamertemplate{bibliography item}[online]}
+       {\setbeamertemplate{bibliography item}[article]}}%
+  \usebeamertemplate{bibliography item}}
+
+\defbibenvironment{bibliography}
+  {\list{}
+     {\settowidth{\labelwidth}{\usebeamertemplate{bibliography item}}%
+      \setlength{\leftmargin}{\labelwidth}%
+      \setlength{\labelsep}{\biblabelsep}%
+      \addtolength{\leftmargin}{\labelsep}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}}}
+  {\endlist}
+  {\item}
+
+\setbeamertemplate{title page}
+{
+  \vbox{}
+	\vspace{0.4cm}
+  \begin{centering}
+    \begin{beamercolorbox}[sep=8pt,center,colsep=-4bp]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.20em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%
+    \end{beamercolorbox}%
+		\vskip0.4em
+    \begin{beamercolorbox}[sep=8pt,center,colsep=-4bp,rounded=true,shadow=true]{author}
+      \usebeamerfont{author}\insertauthor \\ \insertinstitute
+    \end{beamercolorbox}
+
+	  \vfill
+	  \begin{beamercolorbox}[ht=8ex,center]{}
+		  \includegraphics[width=0.175\paperwidth]{wtmIcon.pdf}
+	  \end{beamercolorbox}%
+    \begin{beamercolorbox}[sep=8pt,center,colsep=-4bp,rounded=true,shadow=true]{institute}
+      \usebeamerfont{institute}\trwebsiteordate
+    \end{beamercolorbox}
+		\vspace{-0.1cm}
+  \end{centering}
+}
+
+\setbeamertemplate{frametitle}
+{
+\begin{beamercolorbox}[wd=\paperwidth,ht=3.8ex,dp=1.2ex,leftskip=0pt,rightskip=4.0ex]{frametitle}%
+		\usebeamerfont*{frametitle}\centerline{\insertframetitle}
+	\end{beamercolorbox}
+	\vspace{0.0cm}
+}
+
+\setbeamertemplate{footline}
+{
+  \leavevmode
+	\vspace{-0.05cm}
+  \hbox{
+	  \begin{beamercolorbox}[wd=.32\paperwidth,ht=4.8ex,dp=2.7ex,center]{author in footline}
+	    \hspace*{2ex}\usebeamerfont*{author in footline}\trauthor
+	  \end{beamercolorbox}%
+	  \begin{beamercolorbox}[wd=.60\paperwidth,ht=4.8ex,dp=2.7ex,center]{author in footline}
+	    \usebeamerfont*{author in footline}\trtitle
+	  \end{beamercolorbox}%
+	  \begin{beamercolorbox}[wd=.07\paperwidth,ht=4.8ex,dp=2.7ex,center]{author in footline}
+	    \usebeamerfont*{author in footline}\insertframenumber{}
+	  \end{beamercolorbox}
+  }
+	\vspace{0.15cm}
+}
+\renewcommand{\footnotesize}{\fontsize{12.4pt}{12.4pt}\selectfont}
+\renewcommand{\small}{\fontsize{13.8pt}{13.8pt}\selectfont}
+\renewcommand{\normalsize}{\fontsize{15.15pt}{15.15pt}\selectfont}
+\renewcommand{\large}{\fontsize{17.7pt}{17.7pt}\selectfont}
+\renewcommand{\Large}{\fontsize{21.3pt}{21.3pt}\selectfont}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Additional 'theorem' and 'definition' blocks:
+\newtheorem{axiom}{Axiom}[section]
+%\newtheorem{axiom}{Fakt}[section]			% Wenn in Deutsch geschrieben wird.
+%Usage:%\begin{axiom}[optional description]%Main part%\end{fakt}
+
+%Additional types of axioms:
+\newtheorem{observation}[axiom]{Observation}
+
+%Additional types of definitions:
+\theoremstyle{remark}
+%\newtheorem{remark}[section]{Bemerkung} % Wenn in Deutsch geschrieben wird.
+\newtheorem{remark}[section]{Remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Provides TODOs within the margin:
+\newcommand{\TODO}[1]{\marginpar{\emph{\small{{\bf TODO: } #1}}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abbreviations and mathematical symbols
+\newcommand{\modd}{\text{ mod }}
+\newcommand{\RS}{\mathbb{R}}
+\newcommand{\NS}{\mathbb{N}}
+\newcommand{\ZS}{\mathbb{Z}}
+\newcommand{\dnormal}{\mathit{N}}
+\newcommand{\duniform}{\mathit{U}}
+
+\newcommand{\erdos}{Erd\H{o}s}
+\newcommand{\renyi}{-R\'{e}nyi}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Display of TOCs:
+\AtBeginSection[]
+{
+	\setcounter{tocdepth}{2}
+	\begin{frame}
+	    \frametitle{Outline}
+		\tableofcontents[currentsection]
+	\end{frame}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document:
+\begin{document}
+\renewcommand{\arraystretch}{1.2}
+
+\begin{frame}[plain] % plain => kein Rahmen
+  \titlepage
+\end{frame}
+%\setcounter{framenumber}{0}
+
+\begin{frame}[t]
+    \frametitle{Motivation}
+    \begin{itemize}
+  	    \item robots need to learn continuously to adapt to new situations
+        \vfill
+        \item need to get feedback when they should learn (2nd environmental
+              feedback loop)
+        \vfill
+        \item must not forget previously learned tasks
+        \vfill
+        \item therefore solution for catastrophic forgetting is required
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Outline}
+	\tableofcontents
+\end{frame}
+
+%%%%%%%%%%%%%%
+% Your Content
+
+\section{Basics and Definition}
+
+\begin{frame}[t]
+    \frametitle{Catastrophic Forgetting}
+    \begin{itemize}
+  	    \item networks completely forgets previously learned tasks
+        \vfill
+        \item originally discovered by McCloskey and
+              Cohen\footnote{M. McCloskey and N. J. Cohen,
+              "Catastrophic Forgetting in connectionist networks: The sequential
+              learning problem"\cite{McCloskey1989}}
+        \vfill
+        \item radical example of "stability-plasticity" problem\cite{Grossberg1982}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Plasticity}
+    \begin{itemize}
+  	    \item learning is described as plasticity
+        \vfill
+        \item definition of synaptic plasticity given by
+        Citri\footnote{A. Citri and R. C. Malenka, "Synaptic plasticity:
+        Multiple forms, functions and mechanisms"\cite{Citri2008}} is used
+        \vfill
+        \item changing weights is already considered plasticity
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Modulated Neural Network}
+    \begin{itemize}
+  	    \item any neural network with neuromodulator layer
+        \vfill
+        \item neuromodulator layer is 2nd environmental feedback loop
+        \vfill
+        \item Toutounji and Pasemann use neuromodulator cells (NMCs)
+        \vfill
+        \item spatial representation in the network
+        \vfill
+        \item production and reduction modes of NMCs
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Linearly Modulated Neural Network\footnote{abbreviation: LMNN}}
+    \begin{itemize}
+  	    \item specific type of Modulated Neural Network (MNN)
+        \vfill
+        \item uses discrete time
+        \vfill
+        \item stimulates NMCs with linear model
+        \vfill
+        \item both random search and gaussian walk use this type of network
+	\end{itemize}
+\end{frame}
+
+\section{Approaches}
+
+\begin{frame}[t]
+    \frametitle{Modulated Random Search}
+    \begin{itemize}
+  	    \item random weight changes
+        \vfill
+        \item maximum weight change probability for each synapse
+        \vfill
+        \item weight change can happen any time
+        \vfill
+        \item new weight chosen randomly from given interval
+        \vfill
+        \item weight change probability is 2nd environmental feedback loop
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Modulated Gaussian Walk}
+    \begin{itemize}
+        \item introduced by Toutounji and Pasemann\footnote{H. Toutounji and
+        F. Pasemann, "Autonomous learning needs a second environmental feedback
+        loop"\cite{Toutounji2016}}
+        \vfill
+  	    \item new weights are sum of old weight and value sampled from normal distribution
+        \vfill
+        \item distribution has mean of zero and \(\sigma^2\) variance
+        \vfill
+        \item sampled value can be infinitely large
+        \vfill
+        \item resampling until old weight + sampled value within interval
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Localized Learning}
+    \begin{itemize}
+        \item introduced by Velez and Clune\footnote{R. Velez and J. Clune,
+        "Diffusion-based neuromodulation can eliminate catastrophic forgetting
+        in simple neural networks"\cite{Velez2017}}
+        \vfill
+  	    \item solves foraging task
+        \begin{itemize}
+            \item agent has lifetime of three years, each year has summer and winter
+            \item in each season agent presented with food
+            \item target is fitness value
+        \end{itemize}
+        \vfill
+        \item initial weights from evolutionary algorithm
+        \vfill
+        \item two sources of neuromodulators (2nd environmental feedback loop)
+	\end{itemize}
+\end{frame}
+
+\section{Results}
+
+\begin{frame}[t]
+    \frametitle{Modulated Random Search}
+    \begin{itemize}
+        \item works well for positive light-tropism task
+        \vfill
+        \item everything else (obstacle avoidance or combination of both) does not
+              work well
+        \vfill
+        \item intermediate temporary solutions significantly higher than final
+              number of solutions
+        \vfill
+        \item even almost stable networks are destroyed if slightest weakness
+              discovered
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Modulated Gaussian Walk}
+    \begin{itemize}
+        \item more likely to improve temporary solutions with weaknesses
+        \vfill
+        \item in combined task: twice as many temporary solutions that last longer
+              than 5 minutes
+        \vfill
+        \item mitigates catastrophic forgetting but does not remove it
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Localized Learning}
+    \begin{itemize}
+        \item two functional modules formed
+        \vfill
+        \item connections which learn in summer do not change in winter and vice
+              versa
+        \vfill
+        \item completely removed catastrophic forgetting
+	\end{itemize}
+\end{frame}
+
+\section{Conclusion}
+
+\begin{frame}[t]
+    \frametitle{Conclusion}
+    \begin{itemize}
+        \item difference between random search and gaussian walk was learning rule
+        \vfill
+        \item localized learning uses Hebbian learning
+        \vfill
+        \item all use some form of diffusion-based neuromodulation
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Conclusion}
+
+    \begin{itemize}
+        \item random search is not useful to solve catastrophic forgetting
+        \vfill
+        \item gaussian walk significantly reduces it
+        \vfill
+        \item localized learning solves it in very bespoke setup
+	\end{itemize}
+
+    Assumptions
+    \begin{itemize}
+        \item LMNN architecture likely better suited for more problems than
+              sources architecture
+        \vfill
+        \item Hebbian learning more useful for localized learning
+        \vfill
+        \item localized learning only works if feedback for all sub-tasks is
+              available
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Conclusion}
+
+    \begin{itemize}
+        \item random search is not useful to solve catastrophic forgetting
+        \vfill
+        \item gaussian walk significantly reduces it
+        \vfill
+        \item localized learning solves it in very bespoke setup
+	\end{itemize}
+
+    Future work:
+    \begin{itemize}
+        \item comparison of LMNN architecture with "sources" architecture of
+              localized learning
+        \vfill
+        \item comparison of Hebbian learning rule with gaussian walk learning rule
+        \vfill
+        \item researching applicability of localized learning to bigger problems
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%
+
+%\begin{frame}[c]
+%    \frametitle{The End}
+%    \begin{center}
+%        Thank you for your attention.\\[1ex]
+%        Any question(s)?\\[5ex]
+%    \end{center}
+%\end{frame}
+
+\begin{frame}[allowframebreaks]{References}
+    \printbibliography
+\end{frame}
+
+\end{document}
