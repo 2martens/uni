@@ -1,0 +1,177 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bytefield}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage[german=quotes]{csquotes}
+%\usepackage{algorithmic}
+%\usepackage{minted}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+%\def\thesection{\arabic{section})}
+%\def\thesubsection{(\alph{subsection})}
+%\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\newenvironment{myitemize}{\begin{itemize}\itemsep -9pt}{\end{itemize}} % Zeilenabstand in Aufzählungen geringer
+
+%switch starred and non-starred (auto-size)
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\makeatother
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\MakeOuterQuote{"}
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Vorlesung Osteuropa im 1. Weltkrieg}
+\subtitle{Vorlesungsprotokoll vom 7. Mai 2018}
+\date{7. Mai 2018}
+\maketitle
+
+\section{Entwicklung im Kaukasus}
+
+Nach dem Ende des Ersten Weltkriegs entstanden die drei kaukasischen Staaten
+Azerbaidschan, Armenien und Georgien. Im kaukasischen Teil Russlands formierte
+sich 1919 die Freiwilligenarmee der "weißen" Gegenbewegung zu den Bolschewiken.
+Azerbaidschan und Georgien schlossen ein Verteidigungsbündnis gegen diese
+Armee, wohingegen Armenien sich mit ihr verbündete. Grund hierfür ist eine
+Auseinandersetzung von Armenien mit Azerbaidschan. Dieser Konflikt besteht
+im Übrigen auch heute noch. Nach dem endgültigen Ende der weißen Kräfte fehlte
+der Partner für Armenien. Dieses wechselte schnell die Seiten und verbündete sich
+mit den Bolschewiken, was weniger ideologisch und mehr geopolitisch begründet
+war.
+
+Im Osmanischen Reich kam 1920 die nationalistische Bewegung an die Macht, verlegte
+die Hauptstadt nach Ankara und nannte den Staat fortan Türkei. Aus Sicht der
+Bolschewiken stellte die kemalistische Türkei das Gegenteil zum reaktionären
+Osmanischen Reich dar, was zu einem Bündnis zwischen beiden Kräften führte.
+In der Folge einigte sich die Türkei mit Russland auf die Eroberung von Azerbaidschan.
+Die Rote Armee marschierte in Azerbaidschan ein. Daraufhin trat am 1. April 1920
+die Regierung von Azerbaidschan zurück und am 28. April wurde die sozialistische
+Sowjetrepublik Azerbaidschan ausgerufen. Die Bolschewiken hatten ein großes
+Interesse an der Kontrolle von Azerbaidschan und damit Baku, weil sich dort
+große Erdölvorkommen befanden. Schon im Zarenreich wurde 1844 eine erste
+Ölquelle dort durch Bohrung erschlossen. Die Nutzung von Öl in Baku
+reicht bis ins 13. Jahrhundert zurück.
+
+Mit der Quasi-Annexion von Azerbaidschan hatte Armenien erneut ein Problem.
+Im Herbst 1920 begann ein Krieg mit der Türkei, in dem die türkischen Truppen
+in Armenien einmarschierten, um ehemals osmanische Gebiete zurückzuerobern.
+Armenien versuchte eine Kriegslist und besetzte zu Georgien gehörendes Gebiet
+im Versuch die türkischen Truppen zu umgehen. Bevor die türkischen Truppen
+die Städte erreichten, wurden Progrome an der türkischen Bevölkerung verübt.
+Knapp einen Monat nach Beginn des Kriegs ersuchte Armenien im Oktober 1920 um die
+Hilfe von Großbritannien, Frankreich und Italien. Sie bekamen allerdings keine
+Unterstützung. Lediglich Griechenland schickte einige hundert Truppen nach
+Armenien. Nachdem vorher georgische Gebiete besetzt wurden, ersuchte Armenien
+nun um die Hilfe Georgiens.
+
+Es folgte auf Vermittlung der Bolschewiken ein türkisch-armenischer Friedensvertrag,
+der allerdings unmittelbar gebrochen wurde. Die türkischen Truppen marschierten
+einfach weiter. Am 8. November übermittelte die Türkei ihre Bedingungen. Der
+Waffenstillstand wurde am 18. November geschlossen. Am 29. November putschten
+sich armenische Bolschewiki an die Macht. Drei Tage später wurde die
+heutige Grenze eingerichtet, die Armee entwaffnet und auf Gebiete verzichtet,
+welche Armenien im Friedensvertrag mit dem Osmanischen Reich zugesichert bekam.
+Im Dezember marschierte dann auch die Rote Armee von Azerbaidschan aus in Armenien
+ein. Kurz darauf wurde die armenische sozialistische Sowjetrepublik ausgerufen.
+Mit Georgien wurde ähnlich verfahren.
+
+Im Jahr 1921 wurde ein Bündnisvertrag zwischen Armenien und Russland geschlossen,
+wodurch sämtliche Kompetenzen an Moskau abgegeben wurden. 1922 wurden Armenien,
+Azerbaidschan und Georgien zur Transkaukasischen sozialistischen föderativen
+Sowjetrepublik. Kurz darauf wurde allerdings der föderative Teil entfernt und
+ein Einheitsstaat gebildet. Im November 1922 trat diese Republik der Union
+der sozialistischen Sowjetrepubliken bei.
+
+\section{Abtrennungsfreiheit}
+
+Nach der sogenannten Oktoberrevolution, die vielmehr eine Machtergreifung
+einer Minderheit darstellte, erließ die neue Regierung Dekrete zur Umsetzung
+ihrer Versprechen. Eine der Deklarationen beinhaltete das Verhältnis zu den Völkern
+Russlands:
+
+\begin{enumerate}
+    \item Gleichheit und Souveranität der Völker Russlands
+    \item Recht der Völker Russlands auf freie Selbstbestimmung, bis hin zur
+    Loslösung und Bildung eines selbstständigen Staates.
+    \item Aufhebung aller und jeglicher nationaler und nationalreligiöser
+    Privilegien und Einschränkungen
+    \item Freie Entfaltung nationaler Minderheiten und ethnographischer Gruppen,
+    die das Gebiet Russlands bewohnen.
+\end{enumerate}
+
+Diese Deklaration klang zwar auf den ersten Blick ganz sympathisch, hatte aber
+einen Haken. Die Abtrennungsfreiheit wurde nur als Übergangsperiode auf dem
+Weg hin zur Verschmelzung der Nationen angesehen. Finnland nahm die Abspaltung
+in Anspruch, was genehmigt wurde. Im Anschluss wurde die sowjetische Revolution
+in Finnland unterstützt. Es gab also zwei Phasen. Die Loslösung in bürgerlicher
+Phase und die Verschmelzung in sowjetischer Phase.
+
+\section{Entwicklung in Ukraine}
+
+In der Ukraine gab es eine linke politische Bewegung, die formale Gleichberechtigung
+mit dem Rest Russlands wollte. Am 17. März 1917 wurde eine Konferenz einberufen,
+um eine politische Vertretung zu schaffen. Erste Beschlüsse des Zentralrats
+der Ukraine gab es am 7. April 1917. Die linke Bewegung möchte für die Autonomie
+der Ukraine mit legalen Mitteln kämpfen. Auf Einladung schlossen sich weitere
+linke Parteien dem Zentralrat an. Das Ziel war Autonomie im Rahmen eines
+demokratischen und föderalen russischen Staates. Die Autonomie wurde am
+23. Juni 1917 proklamiert. Es wurde ein allukrainisches Parlament gefordert,
+welches Gesetze erlassen könnte, die dann später von der allrussischen
+Vertretung bestätigt werden müssten.
+
+Die provisorische Regierung Russlands wusste nicht, wie sie mit der Situation
+umgehen sollte. Entsprechend gingen die Gespräche zwischen dem Zentralrat
+und der Regierung immer hin und her. Schließlich wurde die Zustimmung erteilt
+und dies in einem Universal des Zentralrats verkündet. Die Regionalregierung der
+Ukraine nennt sich "Generalsekretariat". Im dritten Universal wird die
+Selbstständigkeit und im vierten Universal die Unabhängigkeit im Januar 1918
+erklärt. Dies passierte nachdem im Oktober 1917 die Bolschewiken die Macht
+übernahmen. Die Bolschewiken verlangten die gleiche Anerkennung, wie sie
+der provisorischen Regierung entgegengebracht wurde. Dies lehnte die Ukraine
+jedoch ab, welche die sowjetische Regierung einzig als russische Regionalregierung
+ansah.
+
+Aufgrund der linken Politik des Zentralrats, die als revolutionshemmend angesehen wurde,
+konnte sich dieser aus Sicht der Bolschewiken auch nicht auf die Abtrennungsfreiheit
+berufen. Die Erklärung der Unabhängigkeit war daher aus bolschewistischer Sicht
+nicht erlaubt. Es kam zum Krieg Russlands gegen die Ukraine.
+
+\end{document}
