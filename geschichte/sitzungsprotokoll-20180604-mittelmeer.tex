@@ -1,0 +1,168 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bytefield}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage[german=quotes]{csquotes}
+%\usepackage{algorithmic}
+%\usepackage{minted}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+%\def\thesection{\arabic{section})}
+%\def\thesubsection{(\alph{subsection})}
+%\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\newenvironment{myitemize}{\begin{itemize}\itemsep -9pt}{\end{itemize}} % Zeilenabstand in Aufzählungen geringer
+
+%switch starred and non-starred (auto-size)
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\makeatother
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\MakeOuterQuote{"}
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Vorlesung Das Mittelmeer: Ein Binnenmer als globale Drehscheibe im Mittelalter}
+\subtitle{Vorlesungsprotokoll vom 4. Juni 2018}
+\date{4. Juni 2018}
+\maketitle
+
+\section{Rahmenbedingungen des Ersten Kreuzzugs}
+
+In der Zeit vor dem Ersten Kreuzzug gab es keine großen stehenden Heere und daher
+auch keine Logistik für die Versorgung entsprechender Truppen. Fernab der Heimat
+wurde häufig geplündert, um sich zu ernähren. Der Erfolg von militärischen Kampagnen
+hing daher stark von örtlichen Begebenheiten ab.
+
+In diesem Zusammenhang sind im Grunde drei machtpolitische Faktoren besonders
+relevant. Die Expansion der Seldschuken veränderte die nahöstlichen Machtverhältnisse,
+die mediterranen Verhältnisse wurden durch das Auftreten der Normannen neu
+geordnet und die Entwicklung des byzantinischen Reiches spielte eine wesentliche
+Rolle.
+
+Das byzantinische Reich sah sich als legitime Nachfolge des antiken römischen
+Reichs. Die lateinischen Kaiser dagegen nahmen diese Nachfolge für sich in
+Anspruch. Byzanz hielt die lateinischen Kaiser für unterlegen. Faktisch
+sah die Situation im 11. Jahrhundert jedoch anders aus. Nach dem Tode des
+Kaisers Basileus II im Jahre 1025 befand sich das Reich in einer Krise. Seit
+der Mitte des 11. Jahrhunderts gab es zudem kleinere Grenzkonflikte im Balkan
+und mit den Seldschuken im nordöstlichen Kleinasien.
+In der gleichen Zeit erhebt Byzanz Anspruch auf Süditalien und Sizilien. General
+Georgios Maniakes landete in Sizilien und heuerte Normannen aus der Familie
+Hauteville als Söldner an. Es gab militärische Erfolge, die Kampagne scheiterte
+letztlich jedoch an innerbyzantinischen Streitigkeiten. Der Kaiser zweifelte
+an der Loyalität des Generals, berief ihn ab, wodurch die militärische Präsenz
+von Byzanz zusammenbrach. Die Normannen hingegen blieben auf Dauer.
+Der Konflikt mit den Seldschuken breitete sich aus und in der Schlacht von Manzikert
+im Jahre 1071 verlor Byzanz das anatolische Hochland. Byzanz war zur Regionalmacht
+verkommen und das Reich der Rum-Seldschuken wurde etabliert. Der Regierungssitz
+der Seldschuken befand sich in der früheren Kaiserresidenz in Nizäa und damit
+in der Nähe Konstantinopels.
+
+Die Seldschuken waren auch an anderer Front erfolgreich. Sie besiegten das
+Abbasidenreich und konfrontierten die Fatimiden in Syrien und Ägypten. Letztlich
+stabilisierte sich die Front in einer Weise, dass sie im Bereich der Levante
+verlief, letztlich also im Bereich der zukünftigen Kreuzfahrerstaaaten.
+
+Die Normannen etablierten sich als starke Macht in Süditalien. Es fanden
+Eroberungen durch Robert Guiscard statt. Der Enkel von Robert Guiscard begründete
+später das Königreich Süditalien. In den 1080er Jahren griff Robert Guiscard
+zusammen mit seinem Sohn das byzantinische Reich auf dem Balkan an. Das byzantinische
+Reich schloss ein Bündnis mit Venedig zum Schutz vor den Normannen.
+
+Unter Alexios Komnenos wurde das byzantinische Reich reorganisiert und konnte
+sich selbst behaupten. Die fatimidische und seldschukische Herrschaft war
+in den 1090ern instabil. Im Jahr 1095 richtete Alexios ein Hilfeersuchen
+an den Papst Urban II mit der Bitte Söldner für den Krieg gegen die Seldschuken
+zu schicken.
+
+\section{Erster Kreuzzug}
+
+Der Papst rief in Clermont zum Kreuzzug auf. Allerdings handelte es sich um mehr
+als lediglich einen Aufruf Byzanz zu unterstützen. Auch die heiligen Stätten
+sollten erobert werden. Dies kann wahrscheinlich aber als PR abgetan werden
+und vermutlich dachte niemand daran, dass dies tatsächlich gelingen könnte.
+
+In Folge des Aufrufs zogen mehrere Kontingente los. Zunächst ein "Volkskreuzzug"
+unter Peter von Amiens im Jahr 1096, der Progrome im Rheinland an Juden durchführte.
+Das war der Beginn der Gewalttradition gegen Juden für den Rest des Mittelalters
+und darüber hinaus. Später zogen adlige Kontingente aus Nordfrankreich/Flandern,
+Südfrankreich/Provence und von den Normannen in Süditalien los. Der Treffpunkt
+sollte Konstantinopel zwischen Herbst 1096 und Frühjahr 1097 sein.
+
+Byzanz war überrascht über die zehntausenden Kämpfer statt der geforderten
+Söldner. Denn all diese Truppen wollten versorgt werden und mussten auf die
+asiatische Seite übergesetzt werden. Der Kaiser setzte einen Loyalitätseid durch,
+nach dem alle neu eroberten Gebiete unter die Oberhoheit des Kaisers fallen
+sollten, sofern diese vorher schon einmal zu Byzanz gehörten. Der Kaiser
+achtete ferner auf eine getrennte Überfahrt und Unterbringung, sodass ein Treffen
+erst auf der asiatischen Seite erfolgte.
+
+Als erste Aktion wurde zusammen mit den Byzantinern Nizäa erobert, wobei die
+Byzantiner eine friedliche Übergabe unter Wahrung von Besitz und Leben vereinbarten.
+Die Kreuzfahrer wollten hingegen plündern. Es folgte ein mehrjähriger
+Eroberungszug von 1097 bis 1099 mit der Eroberung von Antiochia im Jahr 1098
+und Jerusalem im Jahr 1099. Es wurden vier Kreuzfahrerherrschaften etabliert:
+
+\begin{itemize}
+    \item Königreich Jerusalem (Gottfried von Bouillon)
+    \item Fürstentum Antiochia (Bohemund von Tarent, Sohn von Robert Guiscard)
+    \item Grafschaft Edessa (Balduin von Boulogne)
+    \item Grafschaft Tripolis (Raimund von Toulouse)
+\end{itemize}
+
+\section{Folgen des Ersten Kreuzzugs}
+
+Aus der Sicht von Byzanz war der Kreuzzug ein Schalg ins Wasser ohne den
+erhofften Erfolg. Außerdem bekamen sie dadurch einen neuen problematischen, unruhigen
+und militärisch potenten Nachbarn im Südosten. Die lateinischen Kreuzfahrer
+erreichten hingegen ihr Ziel. Das Ziel war die politische Kontrolle der Pilgerwege
+nach Jerusalem. Die Gegend war multireligiös und blieb es auch, da der Kreuzzug
+kein Missionskrieg war. Letztlich wurde die Herrschaftsebene ausgetauscht, die
+Gesellschaft blieb weitgehend bestehen.
+
+Die Kreuzfahrerstaaaten stellten einen neuen Machtfaktor in der Levante dar.
+Sie standen in enger Kommunikation mit den europäischen Heimatregionen der
+"Franchi". Aus der Perspektive der Seldschuken, Fatimiden und später der
+Ayyubiden bedeuteten diese Staaten eine neue Herrschaftsbildung an der Peripherie
+der Einflussbereiche dieser Großreiche, welche bei militärischem Druck nicht
+dauerhaft widerstandsfähig sein würden.
+
+\end{document}
