@@ -1,0 +1,142 @@
+\begin{figure}
+    \DisableQuotes
+    \centering
+    \begin{tikzpicture}[
+        every node/.style={
+            outer sep=0,
+            inner sep=0,
+            node distance=0.2cm
+        },
+        layerconv/.style={
+            % The shape:
+            rectangle,
+            % The size:
+            minimum height=3mm,
+            minimum width={width("ReLU + Pool") - 2em},
+            % The border:
+            % The filling:
+            fill=conv,
+            font=\sffamily,
+            rotate=90,
+        },
+        layerrelu/.style={
+            % The shape:
+            rectangle,
+            % The size:
+            minimum height=3mm,
+            minimum width={width("ReLU + Pool") - 2em},
+            % The filling:
+            fill=relu,
+            font=\sffamily,
+            rotate=90,
+        },
+        layerfc/.style={
+            % The shape:
+            rectangle,
+            % The size:
+            minimum height=3mm,
+            minimum width={width("ReLU + Pool") - 2em},
+            % The filling:
+            fill=fc,
+            font=\sffamily,
+            rotate=90,
+        },
+        layerfc2/.style={
+            % The shape:
+            rectangle,
+            % The size:
+            minimum height=3mm,
+            minimum width={width("FC 3D Box") - 1.7em},
+            % The filling:
+            fill=fc,
+            font=\sffamily,
+            rotate=90,
+        },
+        layerfclarge/.style={
+            % The shape:
+            rectangle,
+            % The size:
+            minimum height=3mm,
+            minimum width={width("Concatenation") + 1.5em},
+            % The filling:
+            fill=fc,
+            font=\sffamily,
+            rotate=90,
+        },
+        layersoftmax/.style={
+            % The shape:
+            rectangle,
+            % The size:
+            minimum height=3mm,
+            minimum width={width("ReLU + Pool") - 2em},
+            % The filling:
+            fill=softmax,
+            font=\sffamily,
+            rotate=90,
+        },
+        layersmooth/.style={
+            % The shape:
+            rectangle,
+            % The size:
+            minimum height=3mm,
+            minimum width={width("FC 3D Box") - 1.7em},
+            % The filling:
+            fill=softmax,
+            font=\sffamily,
+            rotate=90,
+        },
+        layergray/.style={
+            % The shape:
+            rectangle,
+            % The size:
+            minimum width={width("2D VGG on ImageNet") - 3em},
+            minimum height={width("FC 3D Box") - 1.7em},
+            % The filling:
+            fill=gray2,
+            font=\sffamily,
+            anchor=south west,
+        }]
+        \node (bedB) at (0,0) {\includegraphics[scale=0.12]{upperbed}};
+        \node (bedT) [above=of bedB] {\includegraphics[scale=0.15]{lowerbed}};
+        \node (conv1) [right=0.35 of bedT] {\begin{tikzpicture} \node [layerconv] {\tiny Conv 1}; \end{tikzpicture}};
+        \node (relu1) [right= of conv1] {\begin{tikzpicture} \node [layerrelu] {\tiny ReLU + Pool}; \end{tikzpicture}};
+        \node (conv2) [right= of relu1] {\begin{tikzpicture} \node [layerconv] {\tiny Conv 2}; \end{tikzpicture}};
+        \node (relu2) [right= of conv2] {\begin{tikzpicture} \node [layerrelu] {\tiny ReLU + Pool}; \end{tikzpicture}};
+        \node (conv3) [right= of relu2] {\begin{tikzpicture} \node [layerconv] {\tiny Conv 3}; \end{tikzpicture}};
+        \node (relu3) [right= of conv3] {\begin{tikzpicture} \node [layerrelu] {\tiny ReLU}; \end{tikzpicture}};
+        \node (vgg) [below right=-0.01 and 0.4 of bedB,layergray] {\scriptsize 2D VGG on ImageNet};
+        \node (fc1) [right= of vgg] {\begin{tikzpicture} \node [layerfc2] {\tiny FC 1}; \end{tikzpicture}};
+        \node (fc2) [right= of relu3] {\begin{tikzpicture} \node [layerfc] {\tiny FC 2}; \end{tikzpicture}};
+        \node (concat) [above right=0.25 and 0.3 of fc1.north east,anchor=west] {\begin{tikzpicture} \node [layerfclarge] {\tiny Concatenation}; \end{tikzpicture}};
+        \node (fc3) [right=0.3 of concat] {\begin{tikzpicture} \node [layerfclarge] {\tiny FC 3}; \end{tikzpicture}};
+        \node (fcclass) [right=0.3 of fc3.north east,anchor=north west] {\begin{tikzpicture} \node [layerfc] {\tiny FC Class}; \end{tikzpicture}};
+        \node (fc3dbox) [right=0.3 of fc3.south east,anchor=south west] {\begin{tikzpicture} \node [layerfc2] {\tiny FC 3D Box}; \end{tikzpicture}};
+        \node (softmax) [right=of fcclass] {\begin{tikzpicture} \node [layersoftmax] {\tiny Softmax}; \end{tikzpicture}};
+        \node (smooth) [right=of fc3dbox] {\begin{tikzpicture} \node [layersmooth] {\tiny L1 Smooth}; \end{tikzpicture}};
+
+        \draw  (vgg.east) edge (fc1.west)
+               (conv1) edge (relu1)
+               (relu1) edge (conv2)
+               (conv2) edge (relu2)
+               (relu2) edge (conv3)
+               (conv3) edge (relu3)
+               (relu3) edge (fc2)
+               ;
+        \draw[->] (bedB) edge (bedB -| vgg.west)
+                   (bedT) edge (conv1)
+                   (fc1) edge (fc1 -| concat.west)
+                   (fc2) edge (fc2 -| concat.west)
+                   (concat) edge (fc3)
+                   (fcclass) edge (softmax)
+                   (fc3dbox) edge (smooth)
+                   (fc3.east |- fcclass) edge (fcclass)
+                   (fc3.east |- fc3dbox) edge (fc3dbox)
+                   ;
+    \end{tikzpicture}
+    \EnableQuotes
+    \caption{\textbf{Joint Object Recognition Network:} For each 3D region proposal,
+    the 3D volume from depth is fed to a 3D ConvNet and the 2D projection of the
+    3D proposal is fed to a 2D ConvNet. Jointly they learn the object category
+    and 3D box regression.}
+    \label{fig:system}
+\end{figure}
