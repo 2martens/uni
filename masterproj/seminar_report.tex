@@ -28,8 +28,14 @@
 \usepackage{booktabs}                   % Nicer tables
 %\usepackage[font=small,labelfont=bf]{caption} % Numbered captions for figures
 \usepackage{color}                      % Enables defining of colors via \definecolor
+\usepackage{xcolor}
 \definecolor{uhhRed}{RGB}{254,0,0}		  % Official Uni Hamburg Red
 \definecolor{uhhGrey}{RGB}{122,122,120} % Official Uni Hamburg Grey
+\definecolor{conv}{RGB}{160,206,31}
+\definecolor{relu}{RGB}{102,136,205}
+\definecolor{fc}{RGB}{212,71,87}
+\definecolor{softmax}{RGB}{191,178,144}
+\definecolor{gray2}{RGB}{211,210,210}
 \usepackage{fancybox}                   % Gleichungen einrahmen
 %\usepackage{fancyhdr}										% Packet for nicer headers
 \usepackage[automark]{scrlayer-scrpage}
@@ -42,6 +48,8 @@
 \usepackage[outer=3.15cm]{geometry} 	  % Type area (size, margins...) !!!Draft version
 \geometry{a4paper,body={5.8in,9in}}
 
+\usepackage{tikz}
+\usetikzlibrary{backgrounds,calc,positioning,quotes}
 \usepackage{graphicx}                   % Inclusion of graphics
 %\usepackage{latexsym}                  % Special symbols
 \usepackage{longtable}									% Allow tables over several parges
@@ -49,12 +57,12 @@
 \usepackage{multicol}										% Content of a table over several columns
 \usepackage{multirow}										% Content of a table over several rows
 \usepackage{rotating}										% Alows to rotate text and objects
+\usepackage{textcomp}
 \usepackage{gensymb}
 \usepackage[hang]{subfigure}            % Allows to use multiple (partial) figures in a fig
 %\usepackage[font=footnotesize,labelfont=rm]{subfig}	% Pictures in a floating environment
 \usepackage{tabularx}										% Tables with fixed width but variable rows
 \usepackage{url,xspace,boxedminipage}   % Accurate display of URLs
-
 \usepackage{csquotes}
 \usepackage[
 backend=biber,
@@ -63,14 +71,18 @@ citestyle=ieee,
 minnames=1,
 maxnames=2
 ]{biblatex}
+
+\usepackage{epstopdf}
+\epstopdfDeclareGraphicsRule{.tif}{png}{.png}{convert #1 \OutputFile}
+\AppendGraphicsExtensions{.tif}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Configurationen:
 
 \hyphenation{whe-ther} 									% Manually use: "\-" in a word: Staats\-ver\-trag
 
 %\lstloadlanguages{C}                   % Set the default language for listings
-\DeclareGraphicsExtensions{.pdf,.svg,.jpg,.png,.eps} % first try pdf, then eps, png and jpg
-\graphicspath{{./src/}} 								% Path to a folder where all pictures are located
+\DeclareGraphicsExtensions{.pdf,.svg,.jpg,.png,.eps,.tif} % first try pdf, then eps, png and jpg
+\graphicspath{{./images/}} 								% Path to a folder where all pictures are located
 %\pagestyle{fancy} 											% Use nicer header and footer
 \pagestyle{scrheadings}
 
@@ -99,9 +111,9 @@ if not impossible.
 
 
 % Lists:
-\setcounter{tocdepth}{2} 					% depth of the table of contents (for Seminars 2 is recommented)
-\tableofcontents
-\pagenumbering{arabic}
+%\setcounter{tocdepth}{2} 					% depth of the table of contents (for Seminars 2 is recommented)
+%\tableofcontents
+%\pagenumbering{arabic}
 \clearpage
 
 \section{Introduction}
@@ -129,22 +141,24 @@ learning but also uses the RGB channels of an RGB-D image to benefit from the
 strength of 2D object detectors. The results of both the 3D and 2D parts are
 combined and the result is a 3D bounding box and classification.
 
+Section 2 explains the method used by Deep Sliding Shapes. The experimental
+results are presented and evaluated in section 3. Strengths and weaknesses
+of the paper are discussed in section 4 before concluding in section 5.
+
 \section{Method description}
 % This section describes the proposed approach in the paper in more detail.
 % Do not take sections directly from the paper, provide your own understanding and description.
 
-Deep Sliding Shapes\cite{Song2016} is using both a Regional Proposal Network (RPN) and an
-Object Recognition Network (ORN). The raw 3D data is encoded by a directional
-Truncated Signed Distance Function (TSDF) and then presented to the RPN.
-The RPN is working with multiple scales and only a small subset of the overall
-predicted regions (2000 in number) is forwarded to the ORN.
+Deep Sliding Shapes\cite{Song2016} is using both a Regional Proposal Network (RPN)
+and an Object Recognition Network (ORN). The raw 3D data is encoded and then
+presented to the RPN. The proposed regions of the RPN are filtered and the remaining
+regions given to the ORN.
 
-For each of the forwarded proposals the TSDF is used again to encode the geometric
-shape of the object. As part of the ORN the points inside the proposal box
-are projected into 2D and the resulting 2D bounding box is given to VGGnet\cite{Simonyan2015}
-to extract colour features. The results from both the 3D ORN and the 2D part
-are concatenated and via two fully connected layers the object label and 3D box
-are predicted.
+The ORN is projecting the points inside the proposal box into 2D and gives the
+resulting 2D bounding box to VGGnet\cite{Simonyan2015} to extract colour
+features. In parallel the depth data is used by the 3D ORN. The results from both
+the 3D ORN and the 2D part are concatenated and via two fully connected layers
+the object label and 3D box are predicted.
 
 \subsection{Encoding 3D Representation and Normalization}
 
@@ -170,7 +184,7 @@ grid size \(0.025\) meters, which results in a \(208 \times 208 \times 100\)
 volume that functions as the input to the 3D Region Proposal Network.
 
 The major directions of the room are used for the orientations of the proposals.
-RANSAC plane fitting is used unter the Manhattan world assumption to calculate
+RANSAC plane fitting is used under the Manhattan world assumption to calculate
 the proposal box orientations.
 
 \subsection{Multi-scale 3D Region Proposal Network}
@@ -227,16 +241,26 @@ At the core of the loss function stands the difference of the centers and sizes
 between the anchor box and the corresponding ground truth. The orientation of
 the box is not used for simplicity. The center offset is represented
 by the difference of the anchor box center and the ground truth center in the
-camera coordinate system. The size difference is a bit more complicated to calculate.
-First the major directions have to be determined by using the closest match of
-the major directions between both boxes. Next the difference is calculated in
-each of the major directions. Lastly the size difference is normalized by the
-anchor size.
+camera coordinate system. To calculate the size difference first the major directions
+have to be determined by using the closest match of the major directions between
+both boxes. Next the difference is calculated in each of the major directions.
+Lastly the size difference is normalized by the anchor size.
 
 \subsection{Joint Amodal Object Recognition Network}
 
-The object recognition network is \(>-<\)-shaped. It starts with both a 3D and a 2D
-object recognition network which are then combined for the joint recognition.
+\begin{figure}
+    \centering
+    \includegraphics{orn-system-drawing}
+    \caption{\textbf{Joint Object Recognition Network:} For each 3D region proposal,
+    the 3D volume from depth is fed to a 3D ConvNet and the 2D projection of the
+    3D proposal is fed to a 2D ConvNet. Jointly they learn the object category
+    and 3D box regression.}
+    \label{fig:system}
+\end{figure}
+
+The structure of the object recognition network can be seen in figure \ref{fig:system}.
+It starts with both a 3D and a 2D object recognition network which are then combined
+for the joint recognition.
 
 For the 3D object recognition every proposal bounding box is padded with \(12.5\%\)
 of the size in each direction to encode contextual information. The space is divided
@@ -275,7 +299,7 @@ mean and standard deviation.
 After the training of the network concluded the features are extracted from the last
 fully connected layer. A Support Vector Machine (SVM) is trained for each object
 category. During the testing of the object recognition network a 3D non-maximum
-suppression is applied on the results with a treshold of \(0.1\) using the SVM
+suppression is applied on the results with a threshold of \(0.1\) using the SVM
 scores for every box. In case of the box regressions the results from the network
 are used directly.
 
@@ -290,11 +314,20 @@ A threshold of \(0.25\) was used to calculate the average recall for the proposa
 generation and the average precision for the detection. The SUN RGB-D data set
 was used to obtain the ground truth amodal bounding boxes.
 
+\begin{table}
+    \includegraphics[scale=0.85]{results-drawing-1}
+    \includegraphics[scale=0.85]{results-table-1}
+    \caption{\textbf{Evaluation for Amodal 3D Object Proposal:} [All Anchors] shows
+    the performance upper bound when using all anchors.}
+    \label{tab:results-object-proposal}
+\end{table}
+
 For the evaluation of the proposal generation a single-scale RPN, a multi-scale RPN
 and a multi-scale RPN with RGB colour added to the 3D TSDF were compared with
 each other and the baselines using the NYU data set. 3D selective search
 and a naive 2D to 3D conversion were used as baselines. The naive conversion used the
-2D region proposal to retrieve the 3D points within that region. Afterwards the
+2D region proposal to retrieve the 3D points within that region. The results can
+be seen in table \ref{tab:results-object-proposal}. Afterwards the
 outermost 2 percentiles in each direction were removed and a tight 3D bounding
 box calculated. The values of recall averaged over all object categories were
 \(34.4\) for the naive approach, \(74.2\) for 3D selective search, \(75.2\) for
@@ -302,8 +335,16 @@ the single-scale RPN, \(84.4\) for the multi-scale RPN and \(84.9\) for the
 multi-scale RPN with added colour. The last value is used as the final region
 proposal result.
 
+\begin{table}
+    \includegraphics[scale=0.85]{results-table-2}
+    \caption{\textbf{Control Experiments on NYUv2 Test Set.} Not working:
+    box (too much variance), door (planar), monitor and tv (no depth).}
+    \label{tab:results-control-experiments}
+\end{table}
+
 Another experiment tested the detection results for the same ORN architecture
-given different region proposals. Comparing the 3D selective search with
+given different region proposals (see table \ref{tab:results-control-experiments}).
+Comparing the 3D selective search with
 RPN gave mean average precisions of \(27.4\) and \(32.3\) respectively. Hence
 the RPN provides a better solution. Planar objects (e.g. doors) seem to work
 better with 3D selective search. Boxes, monitors and TVs don't work for the RPN,
@@ -329,14 +370,22 @@ which presumably is the case, because it can better handle the unbalanced number
 training samples for each category in the NYUv2 data set. Size pruning was identified
 as helping (increase of mAP per category of 0.1 up to 7.8).
 
+\begin{table}
+    \centering
+    \includegraphics{results-table-3}
+    \caption{\textbf{Comparison on 3D Object Detection.}}
+    \label{tab:results-object-detection}
+\end{table}
+
 For the comparison with state-of-the-art methods Song and Xiao used 3D Sliding
 Shapes\cite{Song2014} and 2D Depth-RCNN\cite{Gupta2015} and the same test set
 that was used for the 2D Depth-RCNN (intersection of NYUv2 test set and Sliding
 Shapes test set for the five categories bed, chair, table, sofa/couch and toilet).
-The comparison shows that 3D Deep Sliding Shapes outperforms the chosen state-of-the-art
-methods in all categories. The toilet is the only example where it is relevant
-for the result that the 2D data is used. With only 3D data used the 2D Depth-RCNN
-performs better on the estimated model if it uses 2D and 3D.
+The comparison in table \ref{tab:results-object-detection} shows that 3D Deep
+Sliding Shapes outperforms the chosen state-of-the-art methods in all categories.
+The toilet is the only example where it is relevant for the result that the 2D
+data is used. With only 3D data used the 2D Depth-RCNN performs better on the
+estimated model if it uses 2D and 3D.
 
 All in all 3D Deep Sliding Shapes works well on non-planar objects that have depth
 information. The 2D component helps in distinguishing similar shaped objects.
@@ -385,16 +434,16 @@ the end is visible in both Deep Sliding Shapes and the Frustum Pointnet.
 \label{sub:paper_weaknesses}
 
 That said there are things to criticize about this paper. The information about
-the network structure is spread over two figures and some sections of the paper
+the network structure is spread over two figures and some sections of the paper,
 with no guarantees that no information is missing. The evaluation sections are
 inconsistent in their structure. The first section about object proposal evaluation
 follows the rest of the paper and is written in continuous text. It describes the
-compared methods and then discusses the results. The second section regarding the
-object detecion evaluation however is written completely different. There is no
+compared methods and then discusses the results. However the second section regarding
+the object detection evaluation is written completely different. There is no
 continuous text and the compared methods are not really described. Instead the
-section is largely used to justify the chosen design. This would not even be a
-problem if there were a introductory text explaining their motivations for this
-kind of evaluation and guiding the reader through the process. Currently there
+section is largely used to justify the chosen design. If there was an introductory
+text explaining their motivations for this kind of evaluation and guiding the reader
+through the process it would not even be a problem. However currently there
 is no explanation given why the detection evaluation starts with feature encoding
 and is followed by design justification.
 
@@ -422,7 +471,7 @@ Matlab "glue" code is not well documented.
 
 Deep Sliding Shapes introduces a 3D convolutional network pipeline for
 amodal 3D object detection. This pipeline consists of a regional proposal
-network and a joint 2D and 3D object recognitioin network. Experimental
+network and a joint 2D and 3D object recognition network. Experimental
 results show that this approach delivers better results than previous
 state-of-the-art methods.
 
