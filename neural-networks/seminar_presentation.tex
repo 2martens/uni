@@ -9,7 +9,7 @@
 \newcommand{\trmatrikelnummer}{6420323}
 \newcommand{\tremail}{2martens@informatik.uni-hamburg.de}
 \newcommand{\trinstitute}{Dept. Informatik -- Knowledge Technology, WTM}
-\newcommand{\trwebsiteordate}{{http://www.informatik.uni-hamburg.de/WTM/}}
+\newcommand{\trwebsiteordate}{{https://www.inf.uni-hamburg.de/en/inst/ab/wtm/}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Languages:
@@ -71,8 +71,8 @@
 
 \usepackage[
 backend=biber,
-bibstyle=ieee,
-citestyle=ieee,
+bibstyle=authoryear,
+citestyle=authoryear,
 minnames=1,
 maxnames=2
 ]{biblatex}
@@ -233,14 +233,14 @@ maxnames=2
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Display of TOCs:
-\AtBeginSection[]
-{
-	\setcounter{tocdepth}{2}
-	\begin{frame}
-	    \frametitle{Outline}
-		\tableofcontents[currentsection]
-	\end{frame}
-}
+%\AtBeginSection[]
+%{
+%	\setcounter{tocdepth}{2}
+%	\begin{frame}
+%	    \frametitle{Outline}
+%		\tableofcontents[currentsection]
+%	\end{frame}
+%}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Document:
@@ -251,6 +251,12 @@ maxnames=2
   \titlepage
 \end{frame}
 %\setcounter{framenumber}{0}
+
+\begin{frame}[t]
+    \frametitle{Motivation}
+    \centering
+    \includegraphics[scale=0.8]{robot-motivation}
+\end{frame}
 
 \begin{frame}[t]
     \frametitle{Motivation}
@@ -266,10 +272,10 @@ maxnames=2
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Outline}
-	\tableofcontents
-\end{frame}
+%\begin{frame}
+%    \frametitle{Outline}
+%	\tableofcontents
+%\end{frame}
 
 %%%%%%%%%%%%%%
 % Your Content
@@ -281,12 +287,9 @@ maxnames=2
     \begin{itemize}
   	    \item networks completely forgets previously learned tasks
         \vfill
-        \item originally discovered by McCloskey and
-              Cohen\footnote{M. McCloskey and N. J. Cohen,
-              "Catastrophic Forgetting in connectionist networks: The sequential
-              learning problem"\cite{McCloskey1989}}
+        \item originally discovered by \cite{McCloskey1989}
         \vfill
-        \item radical example of "stability-plasticity" problem\cite{Grossberg1982}
+        \item radical example of "stability-plasticity" problem\footnote{\cite{Grossberg1982}}
 	\end{itemize}
 \end{frame}
 
@@ -295,9 +298,7 @@ maxnames=2
     \begin{itemize}
   	    \item learning is described as plasticity
         \vfill
-        \item definition of synaptic plasticity given by
-        Citri\footnote{A. Citri and R. C. Malenka, "Synaptic plasticity:
-        Multiple forms, functions and mechanisms"\cite{Citri2008}} is used
+        \item definition of synaptic plasticity given in \cite{Citri2008}
         \vfill
         \item changing weights is already considered plasticity
 	\end{itemize}
@@ -305,16 +306,13 @@ maxnames=2
 
 \begin{frame}[t]
     \frametitle{Modulated Neural Network}
+    \centering
+    \includegraphics{mnn-drawing}
+
     \begin{itemize}
-  	    \item any neural network with neuromodulator layer
-        \vfill
-        \item neuromodulator layer is 2nd environmental feedback loop
-        \vfill
-        \item Toutounji and Pasemann use neuromodulator cells (NMCs)
+  	    \item \cite{Toutounji2016} use neuromodulator cells (NMCs)
         \vfill
         \item spatial representation in the network
-        \vfill
-        \item production and reduction modes of NMCs
 	\end{itemize}
 \end{frame}
 
@@ -325,8 +323,6 @@ maxnames=2
         \vfill
         \item uses discrete time
         \vfill
-        \item stimulates NMCs with linear model
-        \vfill
         \item both random search and gaussian walk use this type of network
 	\end{itemize}
 \end{frame}
@@ -336,11 +332,7 @@ maxnames=2
 \begin{frame}[t]
     \frametitle{Modulated Random Search}
     \begin{itemize}
-  	    \item random weight changes
-        \vfill
-        \item maximum weight change probability for each synapse
-        \vfill
-        \item weight change can happen any time
+  	   \item weight change can happen any time
         \vfill
         \item new weight chosen randomly from given interval
         \vfill
@@ -351,9 +343,7 @@ maxnames=2
 \begin{frame}[t]
     \frametitle{Modulated Gaussian Walk}
     \begin{itemize}
-        \item introduced by Toutounji and Pasemann\footnote{H. Toutounji and
-        F. Pasemann, "Autonomous learning needs a second environmental feedback
-        loop"\cite{Toutounji2016}}
+        \item introduced by \cite{Toutounji2016}
         \vfill
   	    \item new weights are sum of old weight and value sampled from normal distribution
         \vfill
@@ -367,12 +357,17 @@ maxnames=2
 
 \begin{frame}[t]
     \frametitle{Localized Learning}
+    \centering
+    \includegraphics[scale=0.75]{sources-drawing}
     \begin{itemize}
-        \item introduced by Velez and Clune\footnote{R. Velez and J. Clune,
-        "Diffusion-based neuromodulation can eliminate catastrophic forgetting
-        in simple neural networks"\cite{Velez2017}}
-        \vfill
-  	    \item solves foraging task
+        \item introduced by \cite{Velez2017}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Localized Learning}
+    \begin{itemize}
+        \item solves foraging task
         \begin{itemize}
             \item agent has lifetime of three years, each year has summer and winter
             \item in each season agent presented with food
@@ -388,16 +383,16 @@ maxnames=2
 \section{Results}
 
 \begin{frame}[t]
+    \frametitle{Experiment Setup}
+    \centering
+    \includegraphics{experiments-drawing}
+\end{frame}
+
+\begin{frame}[t]
     \frametitle{Modulated Random Search}
+    \centering
+    \includegraphics{mrs-results}
     \begin{itemize}
-        \item works well for positive light-tropism task
-        \vfill
-        \item everything else (obstacle avoidance or combination of both) does not
-              work well
-        \vfill
-        \item intermediate temporary solutions significantly higher than final
-              number of solutions
-        \vfill
         \item even almost stable networks are destroyed if slightest weakness
               discovered
 	\end{itemize}
