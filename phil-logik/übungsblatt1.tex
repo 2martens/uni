@@ -1,0 +1,183 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{stmaryrd}
+\usepackage{enumitem}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section}.}
+\def\thesubsection{\thesection\arabic{subsection}}
+\def\thesubsubsection{(\alph{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\addtolength{\parskip}{\baselineskip}
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Prüfungsblatt Nr. 1}
+\maketitle
+
+\section{Argumente} %1.
+
+\begin{enumerate}[label=\thesection\arabic*]
+    \item
+
+Kein Argument entsprechend der Definition. Inhaltlich geht es um eine
+mathematische Wahrheit, die aber ebenfalls nicht vernünftig argumentiert
+wird.
+
+In Standardform sähe es dennoch so aus:
+
+\begin{alignat*}{1}
+    \text{(P1) } 1=1. \\
+    \text{(P2) } 2=2. \\
+    \text{(P3) } 3=3. \\
+    \hline
+    \text{Also (K) } 4=4.
+\end{alignat*}
+
+    \item
+
+Kein Argument entsprechend der Definition, da es keine Konklusion gibt. Es kann
+aber ein argumentativer Inhalt erkannt werden, wenn der letzte Satz zu einer
+Konklusion gemacht wird.
+
+\begin{alignat*}{1}
+    \text{(P1) Die Wirtschaft stagniert.} \\
+    \text{(P2) Die Arbeitslosigkeit steigt stetig.} \\
+    \text{(P3) Das Angebot an Lehrstellen sinkt.} \\
+    \hline
+    \text{Also (K) Die Linke ist nicht mehr, was sie mal war.}
+\end{alignat*}
+
+    \item
+
+%Bernd stellt sich an wie das letzte Rindvieh. Also wirklich, sein Verhalten geht
+% mir mächtig auf den Keks.
+
+Auch wenn die Formulierung sehr allgemeinsprachlich ist, so lässt sich ein
+Argument erkennen.
+
+\begin{alignat*}{1}
+    \text{(P1) Bernd stellt sich an wie das letzte Rindvieh.} \\
+    \hline
+    \text{Also (K) Sein Verhalten geht mir mächtig auf den Keks.}
+\end{alignat*}
+
+    \item
+
+Dieser Dialog enthält ein Argument, auch wenn die Reihenfolge nicht der
+Definition entspricht. In Standardform sieht dies wie folgt aus:
+
+\begin{alignat*}{1}
+    \text{(P1) Die Dame hält eine Bahnkarte in der Innenfläche ihres linken Handschuhs.} \\
+    \text{(P2) Das Datum der Fahrkarte weist den heutigen Tag aus.} \\
+    \hline
+    \text{Also (K) Die Dame ist heute morgen mit der Bahn angereist.}
+\end{alignat*}
+
+    \item
+
+Auch hier findet sich ein Argument, obgleich die Form nicht der Definition
+entspricht.
+
+\begin{alignat*}{1}
+    \text{(P1) Das Zusammengesetzte ist eine Anhäufung oder ein Aggregat vom Einfachen.} \\
+    \text{(P2) Es gibt zusammengesetzte Substanzen.} \\
+    \hline
+    \text{Also (K) Es gibt einfache Substanzen.}
+\end{alignat*}
+
+\end{enumerate}
+
+\section{Modalität} %2.
+
+\begin{enumerate}[label=\thesection\arabic*]
+    \item Notwendig falsch.
+    \item Notwendig wahr.
+    \item Kontingent wahr.
+    \item Notwendig falsch.
+    \item Notwendig wahr, da ein Bild niemals das echte Objekt ist.
+    \item Kontingent falsch, da eine gemalte Pfeife auch ein fiktives Objekt beschreiben kann,
+    zu welchem dann keine Abbildrelation besteht. Dennoch ist eine Welt vorstellbar,
+    wo dieser Satz wahr ist.
+    \item Diese Aussage ist zu unspezifisch, um sie klar zu beantworten. Im Vakuum ist
+    das Licht die absolut schnellste Sache. Dort wäre die Aussage kontingent falsch.
+    Kontingent falsch, weil auch ein Universum vorstellbar ist (siehe Star Trek),
+    wo es Dinge gibt, die schneller als Licht im Vakuum sind.
+
+    In anderen Situationen als dem Vakuum kann es auch auf unserer Welt sein,
+    dass manche Dinge schneller als Licht sind. Dort wäre der Satz also kontingent wahr.
+
+    Insgesamt lässt sich dies nicht eindeutig beantworten. Unter der Annahme, dass
+    auf die allgemeine Regel "Nichts ist schneller als Licht" abgehoben wird,
+    wäre dieser Satz kontingent falsch.
+\end{enumerate}
+
+\section{Wahr oder Falsch?} %3.
+
+\begin{enumerate}[label=\thesection\arabic*]
+    \item In dieser Pauschalität ist das falsch, da die Gültigkeit nur aussagt,
+    dass die Konklusion wahr ist, wenn alle Prämissen wahr sind.
+    \item Falsch, da alle Prämissen wahr sein könnten und die Konklusion falsch.
+    In dem Fall wäre das Argument nicht gültig und somit auch nicht schlüssig.
+    Dennoch wären alle Prämissen wahr.
+    \item Falsch, da die Definition zur Gültigkeit nur etwas über die Konklusion
+    sagt, wenn alle Prämissen wahr sind. Nämlich, dass in diesem Fall auch die
+    Konklusion wahr ist. Daraus folgt aber nicht der Umkehrschluss, dass die
+    Konklusion falsch sein muss, wenn nicht alle Prämissen wahr sind.
+    \item Wahr, da es Argumente mit mehr als einer Prämisse gibt, wo mindestens
+    eine Prämisse falsch ist, sodass auch die Konklusion falsch sein kann, ohne
+    die Gültigkeit des Arguments zu gefährden.
+    \item Wahr, da das Argument nicht schlüssig sein könnte, wenn die Konklusion
+    falsch wäre.
+\end{enumerate}
+
+\section{Schlüssigkeit und Gültigkeit erkennen} % 4.
+
+\begin{enumerate}[label=\thesection\arabic*]
+    \item Schlüssig und somit gültig, da Kant auf jeden Fall einmal Junggeselle
+    war und somit auch in seinem Leben einmal unverheiratet war.
+    \item Schlüssig und somit gültig. Begründung analog zu 4.1
+    \item Nicht gültig und somit nicht schlüssig, da die Prämisse wahr ist,
+    die Konklusion jedoch nicht.
+    \item Gültig und schlüssig, da beide Prämissen wahr sind und die Konklusion
+    aus den Prämissen folgt.
+\end{enumerate}
+
+\section{Wohlgeformtheit} % 5.
+
+\begin{enumerate}[label=\thesection\arabic*]
+    \item Wohlgeformt, da:
+    \begin{alignat*}{1}
+        P \text{ und } Q \text{ sind wohlgeformt.} \\
+        (P \& Q) \text{ ist wohlgeformt.} \\
+        R \text{ ist wohlgeformt.} \\
+        ((P \& Q) \& R) \text{ ist wohlgeformt.}
+    \end{alignat*}
+    \item Nicht wohlgeformt, da bei der Und-Verknüpfung Klammern entstehen
+    und nur die äußeren Klammern weggelassen werden dürfen nach Konvention.
+    In diesem Fall sind gar keine Klammern gesetzt, weswegen die Formel nicht
+    wohlgeformt ist.
+    \item Nicht wohlgeformt, da auch hier die inneren Klammern weggelassen wurden.
+    Aufgrunddessen ist nicht ersichtlich, ob das \(\vee\) oder \(\rightarrow\)
+    Hauptjunktor ist.
+    \item Nicht wohlgeformt, da bei alleiniger Anwendung der Negation keine
+    Klammern entstehen können.
+\end{enumerate}
+
+\end{document}
