@@ -1,0 +1,200 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bytefield}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage[german=quotes]{csquotes}
+%\usepackage{algorithmic}
+%\usepackage{minted}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+%\def\thesection{\arabic{section})}
+%\def\thesubsection{(\alph{subsection})}
+%\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\newenvironment{myitemize}{\begin{itemize}\itemsep -9pt}{\end{itemize}} % Zeilenabstand in Aufzählungen geringer
+
+%switch starred and non-starred (auto-size)
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\makeatother
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\MakeOuterQuote{"}
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Vorlesung Religiöse Konflikte im Mittelalter}
+\subtitle{Essay zu Mönchswesen und Klöstern}
+\date{1. Dezember 2018}
+\maketitle
+
+\section{Konfliktlösung der Gegenwart}
+
+Heutzutage werden unterschiedliche Meinungen in Demokratien gesetzlich geschützt.
+Auch die öffentliche Verneinung der Existenz einer wie auch immer gestalteten
+höheren Instanz ist möglich ohne Repression durch den Staat zu erfahren. Die
+institutionelle Repression von Religionen beschränkt sich auf rein religiöse
+Repressionen für Menschen, welche dieser Religion angehören. Der Papst kann
+weiterhin Katholiken exkommunizieren und sie von religiösen Handlungen ausschließen.
+Allerdings hat diese Exkommunikation keinerlei weltliche Bewandnis mehr und
+exkommunizierte Menschen könnten in der Theorie problemlos staatliche Ämter
+bekleiden.
+Der Prozess für Streitigkeiten ist ebenfalls klar geregelt in Form einer
+Zivil- und Strafprozessordnung im Rahmen einer unabhängigen Justiz. Ebenso gelten
+Menschenrechte auch in Klöstern und Misshandlungen auch im Rahmen religiöser Kontexte
+werden vor weltlichen Gerichten verhandelt.
+Der blutige Konflikt verschiedener Konfessionen innerhalb des Christentums ist
+ebenso beigelegt und es gibt regelmäßig ökumenische Gottesdienste.
+
+Selbstredend beziehe ich mich hier auf eine rechtsstaatliche Demokratie wie
+Deutschland. Auch ist dies der Idealfall. Die Missbrauchsskandale zeigen,
+dass wir auch hier von einem Idealzustand noch entfernt sind und die Positionen
+der katholischen Kirche zu Abtreibung und Homosexualität stellen einen modernen
+Konflikt dar zwischen weltlichem Verfassungsrecht wie den Menschenrechten
+auf der einen Seite und religiösen Überzeugungen auf der anderen Seite.
+
+Eine Auflösung dieses Konfliktes ist bislang nicht absehbar. Aufgrund von
+weiterhin bestehender Einwirkung gerade der katholischen Positionen auf die
+Politik hat diese Position auch einen Einfluss auf Menschen, welche nicht
+der katholischen Kirche angehören. Selbst der "Reform-Papst" Franziskus vermag
+dies nicht zu lösen. Denn hier geht es um die grundlegenden Lehren der Kirche,
+welche wenn überhaupt auf den Synoden/Konzilen überarbeitet werden können. Diese
+sehen aber (meines Wissens nach) bis heute keinen geregelten Prozess zur
+Überwindung von Konflikten vor. Im Zweifel wird es immer einige machtvolle
+Personen in der Kirche gegen Abtreibung und Homosexualität geben. In diesen
+Fällen ist ein Konsens also schwer möglich.
+
+\section{Mönchskonflikte}
+
+Asketische Lebensformen gab es bereits in der Antike. Ein Mönchtum entwickelte
+sich erst im 4. Jahrhundert. Dabei zogen sich Menschen bspw. in die Wüste zurück,
+um ein gottgefälliges Leben zu führen. Diese Art des Mönchtums war sehr
+egoistisch geprägt und es ging weniger darum für das Wohl anderer Menschen
+zu sorgen. Die monastische Lebensform begeisterte viele Leutes, sodass
+sich Einsiedlerkolonien bildeten. Aus diesen Kolonien entstand die Notwendigkeit
+einer Führungsperson. Mangels einer wirklichen beschlossenen Ordnung des
+Zusammenlebens wird dies mit Sicherheit zu dem einen oder anderen Konflikt
+geführt haben.
+
+Im weiteren Verlauf entstanden dann Klöster, bei denen es vielmehr um ein
+kollektives Leben geht. Dort gab es dann eine klare Hierarchie mit dem Abt bzw.
+der Äbtissin, welche nahezu absolute Kontrolle über die Mönche in ihrer Aufsicht
+hatten. Die Mönche dort befanden sich fast immer in der Gemeinschaft, hatten
+einen strikten Zeitplan und es muss eine nahezu militärische Disziplin vorgeherrscht
+haben.
+
+Beide Formen des Mönchtums begannen in Ägypten noch zu Zeit der Herrschaft des
+(west)römischen Reiches. Das christliche Mönchtum breitete sich fortan
+im Herrschaftsbereich des römischen Reiches aus. Es sind ebenso römische Berichte
+zu finden, welche abfällig über Einsiedler berichten.
+
+Im Widerspruch zu diesen Mönchsformen bildete sich auch eine Art Salonaskese,
+wo zwar auf Wiederheirat und Unterhaltung verzichtet wird, ansonsten aber ein
+annehmbarer Lebensstil geführt wird.
+
+Die Klöster bestanden weitgehend autark und das inkludiert die kirchlichen Hierarchien.
+Diese Unabhängigkeit hat nicht selten zu Konflikten mit den religiösen Autoritäten
+geführt. Zu dieser Zeit gibt es noch keine Ordnen, nur einzelne Klöster und Klöstergruppen.
+Regeltexte gab es ebenfalls noch nicht und Anweisungen wurden einzeln gegeben.
+Idealerweise richteten sich die Anweisungen dabei an den individuellen Fähigkeiten
+aus.
+
+Mit der Zeit wurde dann die Benediktregel entworfen. Diese besagt, dass bei
+Fehlverhalten der Abt entscheiden müsse, wie interveniert wird. Dies könne
+bspw. das Überzeugen der fehlerhaft handelnden Person sein, aber auch die Bestrafung
+dieser. Der Regeltext ist allerdings so allgemein gehalten, dass die tatsächlichen
+Abläufe im Kloster sich daraus nicht ergeben.
+
+Es ist jedoch sehr klar, dass der Abt die absolute Schlüsselstellung inne hat.
+Ihm ist die Fürsorge der Untergebenen zugeteilt, ebenso eine hohe Straf-
+und Normierungsgewalt. Er ist zugleich Stellvertreter Christi bzw. Gottes,
+übt ein Regime von Überwachung und Strafen aus und soll regelmäßig überprüfen,
+dass Mönche kein Privateigentum haben, außer Dinge, welche ihnen vom Abt
+gegeben wurden. Aus dieser starken Machtposition ergeben sich einige mögliche
+Konflikte.
+
+Zwar solle ein Abt vor einer Entscheidung alle anhören, die Entscheidung
+trifft aber allein der Abt und alle müssen sich unbedingt daran halten. Es ist
+also gar nicht vorgesehen, dass in einer Art Prozess Meinungsverschiedenheiten
+beigelegt werden.
+Vielmehr gibt es nach Auffassung der Benediktregel gar keine Konflikte,
+sondern nur Fehlverhalten, welches dann zu sanktionieren sei. Mögliche Sanktionen
+sind bspw. Ausschluss vom Gebet oder vom Essen. Die sanktionierten Personen
+sollen sich regelmäßig dem Abt zu Fuße werfen und um Gnade bitten.
+
+Weitere Konflikte entstehen dadurch, dass häufig die nicht-erstgeborenen
+Kinder von Adligen in Klöster gegeben werden, da sie nichts erben und sonst
+nur ein Machtrisiko für die erbenden Geschwister wären. Diese Übergabe
+an Klöster kann aber gegen den Willen der Kinder erfolgen. Kann jemand gezwungen
+werden Mönch zu bleiben, auch wenn keine aktive eigene Entscheidung für das
+Mönchtum vorlag? Ein gewisser Gottschalk ist aus einem Kloster abgehauen mit
+der Argumentation, dass er sich nie selbst für das Kloster entschieden habe.
+Der Abt war anderer Ansicht und ließ Gottschalk durch halb Europa verfolgen.
+
+Außerdem stellt sich natürlich die Frage, wie ein Abt zu dieser Position kommt.
+Dafür ist kein klares Verfahren geregelt. Er solle einmütig von allen gewählt werden,
+von einer klügeren Minderheit oder von außerhalb ausgewählt werden. Daraus
+ergeben sich zwangsläufig Konflikte, gerade vor dem Hintergrund, dass Äbte auf
+Lebenszeit gewählt werden.
+
+\section{Konflikte im Kontext}
+
+Im größeren Kontext der Entwicklungen des Mittelalters spielen Klöster
+und somit ihre Konflikte eine zentrale Rolle. Klöster haben Literatur
+gehütet und verbreitet, waren oftmals die einzigen Orte um das Lesen- und Schreiben
+zu lernen und konnten als Kollektiv große Reichtümer anhäufen. Mit der Zeit
+wurden viele Klöster zu Dienstleistern für professionelles Gebet und somit Ziel
+von großzügigen Spenden.
+
+Aufgrund von Unzufriedenheit mit dem Reichtum der Klöster gründeten sich dann
+auch Orden, die auch für die Gemeinschaft Armut vorschrieben, die sog. Bettelorden.
+Aufgrund ihrer Autarkie konnten diese Orden auch für die Kirche gefährlich werden,
+denn qua Definition lebten Mönche das gottgefälligste Leben. Starke Bettelorden
+widersprachen somit klar und deutlich der gelebten Praxis auch in der katholischen
+Kirche, welche unzählige Reichtümer anhäufte, jedoch für sich in Anspruch nahm
+für Gott zu sprechen. Wer war glaubwürdiger? Ein reicher Kardinal mit Ländereien
+und mächtiger Familie im Hintergrund (z.B. de Medici) oder ein armer Mönch?
+
+Diese Situation führte dann auch zu teilweisen Verboten von Bettelorden. Ebenso
+wurden diese aber auch zeitweise als Machtmittel des Papstes gegen Ortsbischöfe
+eingesetzt. Anders als die früheren Ordensgemeinschaften ließen sich Bettelorden
+bevorzugt in Städten nieder und ihre Mitglieder übten dort Priester- und Lehrtätigkeiten
+aus.
+
+\end{document}
