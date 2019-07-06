@@ -1,0 +1,143 @@
+\documentclass[10pt,a4paper,oneside,ngerman,numbers=noenddot]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bytefield}
+\usepackage{paralist}
+\usepackage{gauss}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage[locale=DE,exponent-product=\cdot,detect-all]{siunitx}
+\usepackage{tikz}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage[german=quotes]{csquotes}
+%\usepackage{algorithmic}
+%\usepackage{minted}
+\usetikzlibrary{automata,matrix,fadings,calc,positioning,decorations.pathreplacing,arrows,decorations.markings}
+\usepackage{polynom}
+\polyset{style=C, div=:,vars=x}
+\pgfplotsset{compat=1.8}
+\pagenumbering{arabic}
+%\def\thesection{\arabic{section})}
+%\def\thesubsection{(\alph{subsection})}
+%\def\thesubsubsection{(\roman{subsubsection})}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\parskip 12pt plus 1pt minus 1pt
+\parindent 0pt
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\newenvironment{myitemize}{\begin{itemize}\itemsep -9pt}{\end{itemize}} % Zeilenabstand in Aufzählungen geringer
+
+%switch starred and non-starred (auto-size)
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\makeatother
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\MakeOuterQuote{"}
+
+\begin{document}
+\author{Jim Martens (6420323)}
+\title{Vorlesung Kalter Krieg}
+\subtitle{Konflikt entsteht}
+\date{24. Juni 2019}
+\maketitle
+
+\section{Erholung versus Demontage}
+
+Direkt nach dem Krieg waren alle Alliierten für eine Demontage Deutschlands. In den USA hat sich diese Meinung
+aber schnell geändert: Europa sollte sich fortan erholen; zu diesem Zweck wurde der Marshall-Plan entworfen.
+Offiziell hieß das Programm "European Recovery Program" und umfasste \$13,4 Milliarden; das entspricht circa \$134 
+Milliarden in der heutigen Zeit. Davon hat die Bundesrepublik Deutschland nur \$1,4 Milliarden bekommen, Frankreich 
+\$2,8 Mrd und das Vereinigte Königreich \$3,4 Mrd; das deutsche Wirtschaftswunder kann daher schlecht alleine
+auf den Marshall-Plan zurückgeführt werden. Zudem besteht die Hilfe hauptsächlich aus Wirtschaftsgütern, die
+in den USA produziert wurden; das Programm war somit auch ein Konjunkturprogramm für die US-Wirtschaft.
+ 
+Die Sowjetunion bekam Ende Juni 1947 auch das Angebot sich am Marshall-Plan zu beteiligen, entschied sich kurz
+darauf aber dagegen; sie untersagte auch allen Staaten im sowjetischen Einflussbereich daran teilzunehmen. Die
+Vertreter\*innen der Tschechoslowakei mussten zurückfahren. Die Sowjetunion vertrat weiterhin eine Politik der
+Demontage und protestierte gegen den Politikwechsel bei den USA; Frankreich war ebenfalls weiter an Demontage 
+interessiert, mussten unter Druck der USA dann aber der Erholung Deutschlands zustimmen.
+
+Die Position der Sowjetunion war gedeckt durch die Beschlüsse der Konferenzen von Jalta und Potsdam. Der alliierte
+Kontrollrat wurde Ende Juli 1945 eingesetzt und sollte Deutschland einstimmig regieren; zu den Aufgaben zählten
+die Aufhebung von Nazi-Gesetzen, eine gemeinsame Organisation der Verwaltung, die Entnazifizierung und
+Demontage und Reparation; eine Erholung war nicht Teil der Aufgaben. Insofern änderte sich die Position der
+USA zu dem Kontrollrat und die Sowjetunion bestand ohne Erfolg darauf die Absprachen einzuhalten. 
+
+Das Vereinigte Königreich hatte enorme wirtschaftliche Probleme in Folge des Krieges, Kolonien wurden unabhängig
+und Lebensmittel waren bis 1954 rationiert. In diesem Umfeld wurde die britische Zone und die us-amerikanische 
+Zone zur Bi-Zone vereinigt; Frankreich schloss sich erst 1947 an und bekam dafür das Saargebiet als Entschädigung.
+In der Folge wurde der Sowjetunion verboten Reperationen aus der Westzone zu bekommen.
+
+\section{Risse bilden sich}
+
+Die USA ist ein föderaler Staat; formal war dies die Sowjetunion auch, aber faktisch wurde zentral in Moskau
+entschieden. Für Deutschland wollte die Sowjetunion eine zentrale Verwaltung. Frankreich ist selber zentral 
+organisiert, wollte für Deutschland aber genauso wie die USA keine zentrale Führung.
+
+In ihrem Einflussbereich annektierte die Sowjetunion die Gebiete, welche ihr im Hitler-Stalin-Pakt zugeschrieben
+worden waren; außerdem sorgte sie für homogenisierte Staaten in ihrem Einflussbereich. Sie versuchte Europa
+sicher zu machen, dazu gehörte ein schwaches Deutschland; dies stand im Widerspruch zur US-Politik der 
+Erholung. Auch wollte sie eine provisorische deutsche Zentralregierung schaffen und Deutschland demokratisieren.
+In der Ostzone wurde im April 1946 die KPD und die SPD zwangsvereinigt unter der Führung der KPD.
+
+Im März 1948 trafen sich die Westalliierten und die Benelux-Staaten zur Sechs-Mächte-Konferenz: Am 6. März
+wurde das Kommuniqué veröffentlicht, welches eine enge Verbindung der Wirtschaftsräume in Westdeutschland mit
+dem Rest von Europa vorsah; am 17. März gründete das Vereinigte Königreich ein Militärbündnis mit Frankreich und 
+den Benelux-Staaten; am 20. März verließ die Sowjetunion den alliierten Kontrollrat. 
+
+\section{Währungsreform und Grundgesetz}
+
+Im Juni 1948 wurde ein Deutschland-Kommuniqué veröffentlicht: Die deutschen Ministerpräsidenten bekommen die
+Vollmacht eine verfassungsgebende Versammlung einzuberufen, die Verfassung soll eine föderative Regierungsform
+festschreiben und die Rechte und Freiheiten der Individuen garantieren. Diese Forderungen richteten
+sich klar gegen die Sowjetunion ohne deren Namen zu nennen, denn diese wollte eine zentrale Verwaltung.
+
+Wenige Tage nach dem Kommuniqué wurde in Westdeutschland eine Währungsreform durchgeführt. Zwar hatte der
+alliierte Kontrollrat sich für eine Währungsreform ausgesprochen, dies sollte aber zu einem unbestimmten Zeitpunkt
+weit in der Zukunft stattfinden. Die Sowjetunion wurde durch diese Reform überrascht und hatte sich nicht
+darauf eingestellt; die Reichsmark im Westen wurde nicht eingesammelt und somit befürchtete die Sowjetunion einen
+Run von Westdeutschen auf die Ostzone. Sie sah sich gezwungen ebenfalls eine Währungsreform durchzuführen:
+alte Reichsmarkscheine wurden lediglich überdruckt. Aufgrund der Politik der Demontage konnte mit der Ostmark fast 
+nichts gekauft werden, die Deutsche Mark genoss im Vergleich deutlich mehr Vertrauen.
+Die Währungsreform in Westen war allerdings auch nicht perfekt: Alle bekamen die gleiche Menge Bargeld, 
+immaterielle Vermögensgegenstände wie Wohnungen blieben aber bei ihren Eigentümern; somit war die Reform
+insbesondere zugunsten der Reichen und Wohlhabenden.
+
+Die Sowjetunion blockierte Berlin und wollte wohl die Westalliierten zwingen sich an Absprachen zu halten,
+diese protestierten gegen die Blockade; im Sommer 1948 trafen sich die Militärgouverneure und im Oktober 
+beschäftigte sich der UN-Sicherheitsrat mit der Thematik. Schließlich wurde im November/Dezember 1948 die
+Trennung von West- und Ostberlin zementiert: die Verwaltung wurde gedoppelt, die Freie Universität Berlin entsteht.
+Am Ende bekommt die Sowjetunion lediglich dieses Zugeständnis: Berlin bleibt unter Kontrolle der vier Mächte;
+dies wurde am 14. Mai 1949 im kleinen Besatzungsstatut festgelegt, am 23. Mai 1949 tritt das Grundgesetz in Kraft.
+
+\section{Fazit}
+
+Die USA haben sich von den Absprachen der Roosevelt-Regierung entfernt, die Sowjetunion bleibt bei diesen.
+Naiv gesehen läge die "Schuld" des Kalten Krieges somit bei den USA, allerdings hat die Sowjetunion mit dem 
+Rücktritt aus dem Kontrollrat und der Blockade Berlins ebenso taktische Fehler begangen und ihren Teil zum Konflikt
+beigetragen. 
+
+\end{document}
