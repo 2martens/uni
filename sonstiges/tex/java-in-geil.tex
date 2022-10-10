@@ -1,0 +1,143 @@
+\RequirePackage{pdf14}
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+%\usepackage{paralist}
+%\useoutertheme{infolines} 
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[outputdir=build]{minted}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage[german=quotes]{csquotes}
+%\usepackage[Latin,Greek,Emoticons]{ucharclasses}
+
+
+
+\usetheme{Warsaw}
+\usecolortheme{crane}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setbeamertemplate{navigation symbols}{}
+\graphicspath{ {src/} {/home/jim/Pictures/} }
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+%\MakeOuterQuote{"}
+
+%\definecolor{craneorange}{RGB}{61,61,61}
+%\definecolor{craneblue}{RGB}{255,255,255}
+
+
+\hypersetup{
+	pdfauthor=Jim Martens,
+	pdfstartview=Fit
+}
+
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+	\raggedleft \insertframenumber\,/\,\inserttotalframenumber\;}
+
+%\newfontfamily\latinfont{Latin Modern Sans}
+%\newfontfamily\emojifont[Renderer=Harfbuzz]{Noto Color Emoji}
+%\setTransitionsFor{Emoticons}{\mydef}{\latinfont}
+
+\newcommand{\emoji}[1]{
+  {\setmainfont{Noto Color Emoji}[Renderer=Harfbuzz]{#1}}
+}
+
+\begin{document}
+\author{Jim 2martens}
+\title{Java in geil}
+\subtitle{Kampf dem Boilerplate}
+\date{\today}
+
+\defverbatim[colored]\stream{
+\begin{minted}[breaklines,fontsize=\footnotesize]{java}
+boolean isInvalidTariff = IntStream.range(0, stationsWithoutExitStations.size())
+  .mapToObj(index -> LineAndStation.builder()
+    .station(getStation(stationsWithoutExitStations.get(index)))
+    .lineKey(lineKeys.get(index))
+    .lastPart(isLastPart(lineKeys.size(), index))
+    .build())
+  .filter(lineAndStation -> lineAndStation.getStation() != null)
+  .filter(lineAndStation -> isNotExemptedFromDuplicateTariffStationCheck(
+      lineAndStation.getStation(), line))
+  .anyMatch(lineAndStation -> isDuplicateStation(lineAndStation, cn, station, line));
+\end{minted}
+}
+
+\defverbatim[colored]\streamCollect{
+\begin{minted}[breaklines,fontsize=\footnotesize]{java}
+tariffStations.stream()
+  .map(TariffLineService::buildTariffStation)
+  .collect(Collectors.toList());
+\end{minted}
+}
+
+\defverbatim[colored]\optional{
+\begin{minted}[breaklines,fontsize=\footnotesize]{java}
+Optional.ofNullable(TarifServerRequest.searchDestination(line, entryStation, exitStation))
+  .map(Station::getKey)
+  .orElse(null);
+\end{minted}
+}
+
+\defverbatim[colored]\data{
+\begin{minted}[breaklines,fontsize=\footnotesize]{java}
+@Builder
+@Data
+public class LineAndStation {
+  private final Station station;
+  private final LineKey lineKey;
+  private final boolean lastPart;
+}
+\end{minted}
+}
+
+\defverbatim[colored]\record{
+\begin{minted}[breaklines,fontsize=\footnotesize]{java}
+@Builder
+public record LineAndStation (Station station, LineKey lineKey, boolean lastPart) {}
+\end{minted}
+}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \tableofcontents
+\end{frame}
+
+\begin{frame}{Disclaimer}
+  Ihr werdet nicht unbedingt jedes Syntaxelement verstehen. Das ist kein Problem.
+\end{frame}
+
+\section{Streaming}
+\begin{frame}{IntStream statt for-Loop}
+    \stream
+\end{frame}
+\begin{frame}{Collection erzeugen mit Stream}
+    \streamCollect
+\end{frame}
+\begin{frame}{Optionals}
+    \optional
+\end{frame}
+
+\section{Lombok}
+\begin{frame}{Data, übernehmen Sie}
+  \data\pause
+  \vfill
+  Mit Java 14+
+  \record
+\end{frame}
+
+
+\end{document}
+
