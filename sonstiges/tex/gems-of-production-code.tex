@@ -1,0 +1,215 @@
+\RequirePackage{pdf14}
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+%\usepackage{paralist}
+%\useoutertheme{infolines} 
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[outputdir=build]{minted}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage[german=quotes]{csquotes}
+%\usepackage[Latin,Greek,Emoticons]{ucharclasses}
+
+
+
+\usetheme{Warsaw}
+\usecolortheme{crane}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setbeamertemplate{navigation symbols}{}
+\graphicspath{ {src/} {/home/jim/Pictures/} }
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+%\MakeOuterQuote{"}
+
+%\definecolor{craneorange}{RGB}{61,61,61}
+%\definecolor{craneblue}{RGB}{255,255,255}
+
+
+\hypersetup{
+	pdfauthor=Jim Martens,
+	pdfstartview=Fit
+}
+
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+	\raggedleft \insertframenumber\,/\,\inserttotalframenumber\;}
+
+%\newfontfamily\latinfont{Latin Modern Sans}
+%\newfontfamily\emojifont[Renderer=Harfbuzz]{Noto Color Emoji}
+%\setTransitionsFor{Emoticons}{\mydef}{\latinfont}
+
+\newcommand{\emoji}[1]{
+  {\setmainfont{Noto Color Emoji}[Renderer=Harfbuzz]{#1}}
+}
+
+\begin{document}
+\author{Jim 2martens}
+\title{Gems of Production Code}
+\date{\today}
+
+\defverbatim[colored]\fixme{
+\begin{minted}{java}
+// FIXME: If Geofox uses Java 8 this method 
+// should return Optional<PenaltyDescription>!
+return penaltyDescription;
+\end{minted}
+}
+
+\defverbatim[colored]\todoRemove{
+\begin{minted}{java}
+// TODO entfernen
+\end{minted}
+}
+
+\defverbatim[colored]\todoIntelliJ{
+\begin{minted}[breaklines]{java}
+/**
+ *
+ * TODO To change the template for this generated type comment go to Window - Preferences - Java - Code Style - Code
+ * Templates
+ */
+\end{minted}
+}
+
+\defverbatim[colored]\emptyStub{
+\begin{minted}{java}
+public static void resetCache() {
+  // TODO Auto-generated method stub
+
+}
+\end{minted}
+}
+
+\defverbatim[colored]\cd{
+\begin{minted}[breaklines]{java}
+        /*
+         version for CD
+         */
+// Ticket addTicket = new Ticket("HVV-Tarif nicht ermittelbar", "", "unbekannt");
+        /*
+         version for internet
+         TODO has to be tested
+         */
+\end{minted}
+}
+
+\defverbatim[colored]\lastPart{
+\begin{minted}[breaklines]{java}
+private static boolean isLastPart(int lineKeySize, int index) {
+    return index == lineKeySize - 2;
+}
+\end{minted}
+}
+
+
+\defverbatim[colored]\offByOne{
+\begin{minted}[breaklines]{java}
+if(arr.size()==3) {
+  double z = arr.get(3).asDouble();
+  return factory.pointXYZ(x, y, z);
+}
+\end{minted}
+}
+
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \tableofcontents
+\end{frame}
+
+\section{Veraltete ToDos}
+\begin{frame}{Veraltete ToDos}
+    \fixme\pause
+    \vfill
+    \includegraphics[scale=0.4]{java8-release}
+\end{frame}
+
+\begin{frame}{Neuland}
+    \cd
+\end{frame}
+
+\section{Unverständlicher Code}
+
+\begin{frame}{Kognitive Komplexität}
+  \lastPart
+  \pause
+  \begin{columns}[c]
+    \column{1.5in}
+    \includegraphics[scale=0.2]{wat-meme}\pause
+    \column{1.5in}
+    \begin{itemize}
+      \item Dafür gibt es git blame \pause
+      \item Außer in bestimmten Fällen: Code ist älter als Umzug nach Git, Codestelle ist neu (aber Fachlichkeit ist alt)
+    \end{itemize}
+  \end{columns}
+
+\end{frame}
+
+\section{Logikfehler}
+
+\begin{frame}{Fehler raten}
+  \offByOne
+  \begin{itemize}
+    \item<2-> Null-basierte Indizes
+    \vfill
+    \item<3-> Magic Numbers: Wofür steht diese 3?
+  \end{itemize}
+\end{frame}
+
+\section{Commits}
+
+\begin{frame}{Commits}
+  \includegraphics[scale=0.5]{removed-goto-marker}\pause
+  \vfill
+  \begin{columns}[c]
+    \column{1.5in}
+    \includegraphics[scale=0.5]{fwr-refactoring}
+    \column{1.5in}
+    \includegraphics[scale=0.5]{fwr-81-files}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Mühsam und Eichhörnchen}
+  \includegraphics[scale=0.4]{tarif-1500-lines}\pause
+  \vfill
+  \begin{itemize}
+    \item vorher: 3381 Zeilen \pause
+    \item nachher: 1939 Zeilen
+  \end{itemize}
+\end{frame}
+
+\section{Fazit}
+\begin{frame}{Fazit}
+  \begin{itemize}
+    \item Code-Qualität matters
+    \item aussagekräftige Commitmessages
+    \item verständlichen Code schreiben (andere und euer zukünftiges Selbst kennen nicht eure Annahmen und Hintergedanken)
+    \item Softwareentwicklung an der Uni bringt euch NUR die absoluten Basics bei
+    \item Ihr seid damit noch keine guten Softwareentwickler*innen!
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Sollte mensch kennen}
+  \begin{itemize}
+    \item Streaming API
+    \item Spring Boot
+    \item Lombok
+    \item Optionals
+    \item Java 17
+  \end{itemize}
+\end{frame}
+	
+\end{document}
+
