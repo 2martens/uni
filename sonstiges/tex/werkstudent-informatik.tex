@@ -1,0 +1,108 @@
+\RequirePackage{pdf14}
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+%\usepackage{paralist}
+%\useoutertheme{infolines} 
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[outputdir=build]{minted}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage[german=quotes]{csquotes}
+%\usepackage[Latin,Greek,Emoticons]{ucharclasses}
+
+
+
+\usetheme{Warsaw}
+\usecolortheme{crane}
+\pagenumbering{arabic}
+\def\thesection{\arabic{section})}
+\def\thesubsection{\alph{subsection})}
+\def\thesubsubsection{(\roman{subsubsection})}
+\setbeamertemplate{navigation symbols}{}
+\graphicspath{ {src/} {/home/jim/Pictures/} }
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+%\MakeOuterQuote{"}
+
+%\definecolor{craneorange}{RGB}{61,61,61}
+%\definecolor{craneblue}{RGB}{255,255,255}
+
+
+\hypersetup{
+	pdfauthor=Jim Martens,
+	pdfstartview=Fit
+}
+
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+	\raggedleft \insertframenumber\,/\,\inserttotalframenumber\;}
+
+%\newfontfamily\latinfont{Latin Modern Sans}
+%\newfontfamily\emojifont[Renderer=Harfbuzz]{Noto Color Emoji}
+%\setTransitionsFor{Emoticons}{\mydef}{\latinfont}
+
+\newcommand{\emoji}[1]{
+  {\setmainfont{Noto Color Emoji}[Renderer=Harfbuzz]{#1}}
+}
+
+\begin{document}
+\author{Jim 2martens}
+\title{Werkstudent*in Informatik}
+\subtitle{Worauf achten?}
+\date{\today}
+
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \tableofcontents
+\end{frame}
+
+\section{Vorbereitung}
+\begin{frame}{Checkliste}
+    \begin{itemize}
+      \item Website der Firma kennen
+      \vfill
+      \item Ansprechpartner*innen kennen
+      \vfill
+      \item Fragen an die Firma vorbereiten
+      \vfill
+      \item Einstiegsgehälter für Vollzeit checken und auf Stundengehalt runterbrechen (z.B. Tarifvertrag Dataport)
+      \vfill
+      \item Anfahrtsweg checken
+    \end{itemize}
+\end{frame}
+
+\section{Gespräch}
+\begin{frame}{Alarmzeichen}
+  \begin{itemize}
+    \item auf Abbruch des Studiums gedrängt werden
+    \vfill
+    \item Stundenlohn auf Mindestlohnniveau
+    \vfill
+    \item studienunfreundliche Arbeitszeiten
+  \end{itemize}
+\end{frame}
+
+\section{Bei der Arbeit}
+\begin{frame}{Gründe zur Kündigung}
+  \begin{itemize}
+    \item die Arbeit macht keinen Spaß
+    \vfill
+    \item ihr habt keine Zeit mehr
+    \vfill
+    \item ihr macht nur lästige Tätigkeiten
+  \end{itemize}
+\end{frame}
+
+
+\end{document}
+
