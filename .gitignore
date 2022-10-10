@@ -48,3 +48,4 @@ build/
 cmake-build-debug/
 env/
 ENV/
+_minted*/
